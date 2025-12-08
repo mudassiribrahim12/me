@@ -787,10 +787,248 @@ body.dark-theme .section-card {
             }
         }
         
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
+@media (max-width: 768px) {
+    /* Fix for name visibility on mobile */
+    h1 {
+        font-size: 2.2rem; /* Reduced from 2.5rem for better fit */
+        line-height: 1.2;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem; /* Specific size for hero name */
+        line-height: 1.3;
+        word-wrap: break-word;
+        hyphens: auto; /* Allow hyphenation for long words */
+        margin-bottom: 10px;
+    }
+    
+    /* Fix for title/subtitle on mobile */
+    .hero-content .title {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        margin-bottom: 15px;
+        color: var(--research-color);
+        font-weight: 600;
+    }
+    
+    /* Make hero paragraph more readable on mobile */
+    .hero-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+    
+    /* Standard section headers */
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    
+    /* Fix navigation for mobile */
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+    
+    .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg);
+        box-shadow: var(--shadow);
+        padding: 20px;
+        z-index: 999;
+    }
+    
+    .mobile-nav.active {
+        display: flex;
+    }
+    
+    .mobile-nav li {
+        margin: 10px 0;
+        width: 100%;
+    }
+    
+    .mobile-nav a {
+        display: block;
+        padding: 12px 15px;
+        border-radius: 5px;
+        background-color: var(--gray-color);
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-nav a:hover {
+        background-color: var(--secondary-color);
+        color: white;
+    }
+    
+    /* Hero section padding adjustment */
+    .hero {
+        padding: 140px 0 60px; /* Reduced padding for mobile */
+    }
+    
+    /* Button adjustments for mobile */
+    .hero-btns .btn {
+        display: block;
+        margin: 10px auto;
+        width: 90%;
+        max-width: 250px;
+    }
+    
+    /* Footer adjustments */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-links {
+        margin-top: 20px;
+        justify-content: center;
+    }
+    
+    /* Hide desktop search */
+    .search-container {
+        display: none;
+    }
+    
+    /* Show mobile search */
+    .mobile-search {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .mobile-search .search-input {
+        width: 100%;
+    }
+    
+    /* Adjust about section for mobile */
+    .about-content {
+        gap: 30px;
+    }
+    
+    .profile-img-container {
+        max-width: 280px;
+        margin: 0 auto 20px;
+    }
+    
+    /* Adjust project cards for mobile */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Adjust contact links for mobile */
+    .contact-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contact-item {
+        justify-content: center;
+        padding: 10px;
+        background-color: var(--gray-color);
+        border-radius: 5px;
+    }
+    
+    /* Timeline adjustments for mobile */
+    .timeline:before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 20px;
+    }
+    
+    .timeline-item:nth-child(even) {
+        left: 0;
+    }
+    
+    /* Publication section adjustments */
+    .section-card {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    /* Button spacing in publications */
+    .btn {
+        margin: 5px;
+    }
+    
+    /* Ensure text doesn't overflow on mobile */
+    p, li, span {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Research interest tags wrap properly */
+    .interest-tags {
+        justify-content: center;
+    }
+    
+    .interest-tag {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    /* Skill items adjustment */
+    .skill-name {
+        font-size: 0.9rem;
+    }
+    
+    /* Social icons in hero */
+    .social-icons {
+        gap: 15px;
+    }
+    
+    .social-icons a {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+    
+    .hero-content .title {
+        font-size: 1.1rem;
+    }
+    
+    h2 {
+        font-size: 1.6rem;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .profile-img-container {
+        max-width: 250px;
+    }
+    
+    .hero-btns .btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+}
+            
+            
             
             h2 {
                 font-size: 2rem;
