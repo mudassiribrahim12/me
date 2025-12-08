@@ -516,11 +516,52 @@ section {
             transform: translateY(-10px);
         }
         
-        .project-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+/* Fix project image/logo sizing */
+.project-img {
+    width: 100%;
+    height: 180px; /* Reduced height for better proportion */
+    object-fit: contain; /* Changed from 'cover' to 'contain' */
+    padding: 15px;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--gray-color);
+}
+
+/* Add background to project cards for better logo visibility */
+.project-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Improve logo container */
+.project-img-container {
+    flex-shrink: 0;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--gray-color);
+    padding: 10px;
+}
+
+/* For modal project cards - adjust for more compact display */
+.all-projects-grid .project-card .project-img {
+    height: 150px;
+    padding: 10px;
+}
+
+/* Ensure logos maintain aspect ratio */
+.project-img {
+    max-width: 80%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Add hover effect to logos */
+.project-img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
         
         .project-info {
             padding: 20px;
@@ -1247,6 +1288,30 @@ section {
         width: 120px;
     }
 }
+
+/* Responsive adjustments for project logos */
+@media (max-width: 768px) {
+    .project-img {
+        height: 150px;
+        padding: 10px;
+    }
+    
+    .all-projects-grid .project-card .project-img {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-img {
+        height: 130px;
+        padding: 8px;
+    }
+    
+    .all-projects-grid .project-card .project-img {
+        height: 100px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -1306,8 +1371,8 @@ section {
         <div class="container hero-content">
      <h1></h1>
 <!-- <h1>Mudasir Mohammed Ibrahim (Dip, BSc, RN)</h1> -->
-            <div class="title">Activities</div>
-            <p>Mudasir Mohammed Ibrahim uses his clinical nursing background and biostatistics skills to develop R Shiny web applications that simplify complex analyses for healthcare professionals, students, and researchers.</p>
+            <div class="title">Personal Projects</div>
+            <p>Mudasir Mohammed Ibrahim uses his clinical nursing background and data analysis skills to develop user-friendly, interactive R Shiny web applications that simplify complex analyses for healthcare professionals, students, and researchers.</p>
             
             <div class="social-icons">
                 <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub">
@@ -1599,7 +1664,7 @@ section {
                 description: "Generate APA formatted tables for research papers and publications",
                 runUrl: "https://newappstesting.shinyapps.io/APATableGenerator/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/apa-table.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA logo.png"
             },
             {
                 id: 2,
@@ -1607,7 +1672,7 @@ section {
                 description: "Systematic sampling tool for research studies with various sampling methods",
                 runUrl: "https://mudassiribrahim2025b.shinyapps.io/SysSampler/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/syssampler.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys Sampler.png"
             },
             {
                 id: 3,
@@ -1615,7 +1680,7 @@ section {
                 description: "Cochran-Armitage test for trend tool",
                 runUrl: "https://newappstesting.shinyapps.io/CATrendAnalyzer/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CATrendAnalyzer.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/catrend.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png"
             },
             {
                 id: 4,
@@ -1623,7 +1688,7 @@ section {
                 description: "Cochran-Mantel-Haenszel analysis tool for stratified data",
                 runUrl: "https://newappstesting.shinyapps.io/CMHAnalyzer/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/cmh.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png"
             },
             {
                 id: 5,
@@ -1631,7 +1696,7 @@ section {
                 description: "Convert datasets in CSV, Excel, Rdata, Stata, or SAS format into SPSS (.sav) files",
                 runUrl: "https://newappstesting.shinyapps.io/Data2SPSS/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/data2spss.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png"
             },
             {
                 id: 6,
@@ -1639,7 +1704,7 @@ section {
                 description: "Comprehensive data analysis software for healthcare research",
                 runUrl: "https://newappstesting.shinyapps.io/NMTCDataLab/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/NMTC%20APP.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/datalab.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TNMTC.png"
             },
             {
                 id: 7,
@@ -1647,7 +1712,7 @@ section {
                 description: "Pharmaceutical calculations for dosage and medication management",
                 runUrl: "https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/pharmacalc.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png"
             },
             {
                 id: 8,
@@ -1655,7 +1720,7 @@ section {
                 description: "Explore regression effects visually with interactive plots",
                 runUrl: "https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/regeffect.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png"
             },
             {
                 id: 9,
@@ -1663,7 +1728,7 @@ section {
                 description: "Data transformation and preprocessing tool for analytics",
                 runUrl: "https://mudassiribrahim2025b.shinyapps.io/DataTransformR/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/transformr.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png"
             },
             {
                 id: 10,
@@ -1671,7 +1736,7 @@ section {
                 description: "Data screening and cleaning tool with visualization",
                 runUrl: "https://mudassiribrahim2025b.shinyapps.io/CleanMyData/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/cleanmydata.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png"
             },
             {
                 id: 11,
@@ -1679,7 +1744,7 @@ section {
                 description: "Kaplan-Meier survival plot generator for clinical studies",
                 runUrl: "https://mudassiribrahim30.shinyapps.io/KMPlotGenie/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/kmplot.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png"
             },
             {
                 id: 12,
@@ -1687,7 +1752,7 @@ section {
                 description: "Publication-ready ggplot2 visualizations with customization",
                 runUrl: "https://mudassiribrahim2025.shinyapps.io/ggPubPlot/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/ggpubplot.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png"
             },
             {
                 id: 13,
@@ -1695,7 +1760,7 @@ section {
                 description: "Epidemiological data analysis suite for public health research",
                 runUrl: "https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/epidem.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png"
             },
             {
                 id: 14,
@@ -1703,7 +1768,7 @@ section {
                 description: "Custom Data Generator for Statistical Practice and Education",
                 runUrl: "https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/quickstats.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png"
             },
             {
                 id: 15,
@@ -1711,7 +1776,7 @@ section {
                 description: "Mediation and moderation analysis tool for research studies",
                 runUrl: "https://mudassiribrahim30.shinyapps.io/MedModr/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/medmodr.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png"
             },
             {
                 id: 16,
@@ -1719,7 +1784,7 @@ section {
                 description: "Robust regression analysis for outlier-resistant modeling",
                 runUrl: "https://mudassiribrahim2025.shinyapps.io/Robustregression/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/robust.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png"
             },
             {
                 id: 17,
@@ -1727,7 +1792,7 @@ section {
                 description: "ROC curve analysis and diagnostic test evaluation",
                 runUrl: "https://mudassiribrahim30.shinyapps.io/ROC_CURVE/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ROC%20Curve%20Builder.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/roc.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png"
             },
             {
                 id: 18,
@@ -1735,7 +1800,7 @@ section {
                 description: "Participant selection tool for research studies",
                 runUrl: "https://mudassiribrahim30.shinyapps.io/Tagselect/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/tagselect.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TagSelect.png"
             },
             {
                 id: 19,
@@ -1743,7 +1808,7 @@ section {
                 description: "Factor analysis and dimensionality reduction tool",
                 runUrl: "https://mudassiribrahim30.shinyapps.io/fanalyzr/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/fanalyzr.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png"
             },
             {
                 id: 20,
@@ -1751,7 +1816,7 @@ section {
                 description: "Tool for sample size calculation, power analysis, and descriptive statistics",
                 runUrl: "https://mudassiribrahim2025.shinyapps.io/CalcuStats/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/images/calcustats.jpg"
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png"
             }
         ];
 
@@ -1823,27 +1888,28 @@ section {
             // Use GitHub image or default
             const imageUrl = project.imageUrl || defaultImage;
             
-            card.innerHTML = `
-                <img src="${imageUrl}" alt="${project.name}" class="project-img" onerror="this.src='${defaultImage}'">
-                <div class="project-info">
-                    <h3>${project.name}</h3>
-                    <p>${project.description}</p>
-                    <div class="project-tags">
-                        <span class="tag research-tag">R Shiny</span>
-                        <span class="tag research-tag">Healthcare</span>
-                        <span class="tag research-tag">Research</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="${project.runUrl}" target="_blank" class="btn btn-research">
-                            <i class="fas fa-play"></i> Run App
-                        </a>
-                        <a href="${project.codeUrl}" target="_blank" class="btn btn-outline">
-                            <i class="fas fa-code"></i> View Code
-                        </a>
-                    </div>
-                </div>
-            `;
-            
+          card.innerHTML = `
+    <div class="project-img-container">
+        <img src="${imageUrl}" alt="${project.name}" class="project-img" onerror="this.src='${defaultImage}'">
+    </div>
+    <div class="project-info">
+        <h3>${project.name}</h3>
+        <p>${project.description}</p>
+        <div class="project-tags">
+            <span class="tag research-tag">R Shiny</span>
+            <span class="tag research-tag">Healthcare</span>
+            <span class="tag research-tag">Research</span>
+        </div>
+        <div class="project-actions">
+            <a href="${project.runUrl}" target="_blank" class="btn btn-research">
+                <i class="fas fa-play"></i> Run App
+            </a>
+            <a href="${project.codeUrl}" target="_blank" class="btn btn-outline">
+                <i class="fas fa-code"></i> View Code
+            </a>
+        </div>
+    </div>
+`;
             return card;
         }
 
