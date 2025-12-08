@@ -15,34 +15,36 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #f9f9f9;
-            --dark-color: #333;
-            --gray-color: #ecf0f1;
-            --text-color: #555;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --health-color: #27ae60;
-            --research-color: #8e44ad;
-            --card-bg: #ffffff;
-        }
+       :root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --middle-name-color: #8e44ad; /* NEW: Purple color for middle name */
+    --light-color: #f9f9f9;
+    --dark-color: #333;
+    --gray-color: #ecf0f1;
+    --text-color: #555;
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --health-color: #27ae60;
+    --research-color: #8e44ad;
+    --card-bg: #ffffff;
+}
 
-        /* Dark Theme Variables */
-        body.dark-theme {
-            --primary-color: #ecf0f1;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #1a1a1a;
-            --dark-color: #f9f9f9;
-            --gray-color: #2c3e50;
-            --text-color: #bdc3c7;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            --health-color: #2ecc71;
-            --research-color: #9b59b6;
-            --card-bg: #2c3e50;
-        }
+/* Dark Theme Variables */
+body.dark-theme {
+    --primary-color: #ecf0f1;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --middle-name-color: #9b59b6; /* NEW: Lighter purple for dark mode */
+    --light-color: #1a1a1a;
+    --dark-color: #f9f9f9;
+    --gray-color: #2c3e50;
+    --text-color: #bdc3c7;
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --health-color: #2ecc71;
+    --research-color: #9b59b6;
+    --card-bg: #2c3e50;
+}
         
         html {
             scroll-behavior: smooth;
@@ -157,111 +159,157 @@
             color: white;
         }
         
-        /* Header & Navigation */
-        header {
-            background-color: var(--card-bg);
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
+    /* Update the header for better spacing */
+header {
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 0 10px; /* Added padding on sides */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0; /* Reduced padding */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Make logo smaller and compact */
 .logo {
-    font-size: 1.5rem; /* Reduced from 1.8rem */
+    font-size: 1.4rem; /* Reduced from 1.5rem */
     font-weight: 700;
     color: var(--primary-color);
     text-decoration: none;
-    white-space: nowrap; /* Prevents wrapping */
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-right: 20px; /* Added padding to separate from nav */
 }
-        
-        .logo span {
-            color: var(--secondary-color);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary-color);
-        }
-        
-        /* Theme Toggle */
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-left: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .theme-toggle:hover {
-            color: var(--secondary-color);
-            transform: rotate(30deg);
-        }
-        
-        /* Search Bar */
-        .search-container {
-            position: relative;
-            margin-left: 20px;
-        }
-        
-        .search-input {
-            padding: 8px 15px 8px 35px;
-            border: 1px solid var(--secondary-color);
-            border-radius: 20px;
-            background-color: var(--card-bg);
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            width: 200px;
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:focus {
-            outline: none;
-            width: 250px;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-        
-        .search-icon {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--secondary-color);
-        }
-        
+
+.logo span {
+    color: var(--secondary-color);
+}
+
+.logo .middle-name {
+    color: var(--middle-name-color);
+}
+
+.hero-content h1 .middle-name {
+    color: var(--middle-name-color);
+}
+
+.hero-content h1 .last-name {
+    color: var(--secondary-color);
+}
+
+.logo .middle-name,
+.hero-content h1 .middle-name,
+.hero-content h1 .last-name {
+    transition: color 0.3s ease;
+}
+
+body.dark-theme .logo .middle-name,
+body.dark-theme .hero-content h1 .middle-name {
+    color: var(--middle-name-color);
+}
+
+/* Navigation container for better spacing */
+nav {
+    flex: 1; /* Takes remaining space */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    flex-wrap: nowrap;
+}
+
+/* Adjust nav items spacing */
+.nav-links li {
+    margin-left: 12px; /* Reduced spacing between items */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.17rem; /* Slightly smaller font */
+    transition: color 0.3s ease;
+    padding: 5px 8px; /* Added padding for better touch */
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+.mobile-menu {
+    display: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    margin-left: 15px;
+}
+
+/* Reduce search container size */
+.search-container {
+    position: relative;
+    margin-left: 10px;
+}
+
+.search-input {
+    padding: 6px 12px 6px 30px; /* Reduced padding */
+    border: 1px solid var(--secondary-color);
+    border-radius: 20px;
+    background-color: var(--card-bg);
+    color: var(--primary-color);
+    font-size: 0.85rem; /* Smaller font */
+    width: 140px; /* Smaller width */
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    width: 160px; /* Smaller expanded width */
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.search-icon {
+    position: absolute;
+    left: 8px; /* Adjusted position */
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* Reduce theme toggle size */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.2rem; /* Smaller icon */
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--secondary-color);
+    transform: rotate(30deg);
+}
+
         .search-results {
             position: absolute;
             top: 100%;
@@ -295,11 +343,11 @@
         }
         
         /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(39, 174, 96, 0.1) 100%);
-            padding: 180px 0 100px;
-            text-align: center;
-        }
+.hero {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(39, 174, 96, 0.1) 100%);
+    padding: 200px 0 100px; /* Changed from 180px to 200px */
+    text-align: center;
+}
         
         .dark-theme .hero {
             background: linear-gradient(135deg, rgba(52, 152, 219, 0.2) 0%, rgba(39, 174, 96, 0.2) 100%);
@@ -310,19 +358,20 @@
             color: var(--health-color);
         }
         
-        .hero-content .title {
-            font-size: 1.8rem;
-            color: var(--research-color);
-            margin-bottom: 20px;
-        }
-        
-        .hero-content p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: var(--text-color);
-        }
-        
+.hero-content .title {
+    font-size: 1.8rem;
+    color: var(--research-color);
+    margin-bottom: 10px; /* Reduced space below title */
+    margin-top: 10px; /* Optional: add some space above if needed */
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto 20px; /* Reduced space below paragraph */
+    color: var(--text-color);
+    line-height: 1.5; /* Optional: adjust line spacing */
+}
         .hero-btns {
             margin-top: 30px;
         }
@@ -330,6 +379,33 @@
         .hero-btns .btn {
             margin: 0 10px;
         }
+        /* Fix for all sections to be visible below fixed header */
+#home,
+#about,
+#education,
+#projects,
+#publications,
+#contact {
+    scroll-margin-top: 100px; /* Adjust based on your header height */
+}
+
+/* Optional: Add extra padding to each section for better spacing */
+.health-section,
+.research-section,
+.projects {
+    position: relative;
+}
+
+/* Ensure timeline in education section is visible */
+.timeline {
+    padding-top: 20px;
+}
+
+/* Adjust section padding if needed */
+section {
+    position: relative;
+    z-index: 1;
+}
         
         /* Social Icons */
         .social-icons {
@@ -356,6 +432,7 @@
             background-color: var(--primary-color);
             transform: translateY(-5px);
         }
+
         
         /* About Section */
         .about-content {
@@ -1085,50 +1162,134 @@
         font-size: 1.2rem;
     }
 }
+
+/* Adjust for medium screens */
+@media (max-width: 1100px) {
+    .nav-links li {
+        margin-left: 10px;
+    }
+    
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 5px 6px;
+    }
+    
+    .search-input {
+        width: 120px;
+        font-size: 0.8rem;
+    }
+    
+    .search-input:focus {
+        width: 140px;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-links {
+        display: none; /* Hide desktop nav on smaller screens */
+    }
+    
+    .mobile-menu {
+        display: block;
+        font-size: 1.3rem;
+        cursor: pointer;
+        color: var(--primary-color);
+        margin-left: 15px;
+    }
+    
+    /* Keep theme toggle visible on mobile */
+    .theme-toggle {
+        position: static;
+        margin-left: 10px;
+    }
+}
+
+/* Adjust for very small screens */
+@media (max-width: 850px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .logo {
+        font-size: 1.1rem;
+        padding-right: 10px;
+    }
+    
+    .search-container {
+        display: none; /* Hide search on very small screens */
+    }
+    
+    .mobile-menu {
+        margin-left: auto;
+    }
+}
+
+/* For screens between 992px and 1100px where nav might overflow */
+@media (min-width: 993px) and (max-width: 1100px) {
+    .nav-links a {
+        font-size: 0.85rem;
+        padding: 5px 4px;
+    }
+    
+    .nav-links li {
+        margin-left: 8px;
+    }
+    
+    .search-input {
+        width: 100px;
+    }
+    
+    .search-input:focus {
+        width: 120px;
+    }
+}
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container nav-container">
-            <a href="#" class="logo">Mudasir-M-<span>Ibrahim</span></a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#education">Education & Work</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li>
-                        <div class="search-container">
-                            <i class="fas fa-search search-icon"></i>
-                            <input type="text" class="search-input" id="searchInput" placeholder="Search...">
-                            <div class="search-results" id="searchResults"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                    </li>
-                </ul>
-                <div class="mobile-menu" id="mobileMenu">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-        <!-- Mobile Navigation -->
-        <ul class="mobile-nav" id="mobileNav">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#education">Education & Work</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#publications">Publications</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </header>
-
+ <!-- Header & Navigation -->
+<header>
+    <div class="container nav-container">
+        <a href="#" class="logo">Mudasir <span class="middle-name">Mohammed</span> <span>Ibrahim</span></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education & Work</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                </li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </div>
+    <!-- Mobile Navigation -->
+    <ul class="mobile-nav" id="mobileNav">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education & Work</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</header>
     <!-- All Projects Modal -->
     <div class="all-projects-modal" id="allProjectsModal">
         <div class="all-projects-content">
@@ -1143,9 +1304,10 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <h1>Mudasir Mohammed Ibrahim (Dip, BSc, RN)</h1>
+     <h1></h1>
+<!-- <h1>Mudasir Mohammed Ibrahim (Dip, BSc, RN)</h1> -->
             <div class="title">Activities</div>
-            <p>Drawing on his clinical nursing background and growing expertise in biostatistics, Mudasir Mohammed Ibrahim develops innovative R Shiny web applications designed to simplify complex analytical processes. His work enhances the accessibility of advanced data analysis for healthcare professionals and researchers worldwide.</p>
+            <p>Drawing on his clinical nursing background and growing expertise in biostatistics, Mudasir Mohammed Ibrahim develops innovative R Shiny web applications that simplify complex analytical processes. His work enhances the accessibility of advanced data analysis for healthcare professionals and researchers worldwide.</p>
             
             <div class="social-icons">
                 <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub">
