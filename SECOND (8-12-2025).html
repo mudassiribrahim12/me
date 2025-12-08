@@ -1,0 +1,3243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mudasir Mohammed Ibrahim - Official</title>
+    <meta name="description" content="Mudasir Mohammed Ibrahim - Official">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EZ6S62R1KF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Replace with your Google Analytics Measurement ID
+        // Example: gtag('config', 'G-XXXXXXXXXX');
+        gtag('config', 'G-EZ6S62R1KF', {
+            'page_title': 'Mudasir Mohammed Ibrahim Official',
+            'page_location': window.location.href,
+            'page_path': window.location.pathname
+        });
+    </script>
+    
+    <style>
+        /* ===== CSS Variables & Base Styles ===== */
+        :root {
+            /* Vibrant Color Palette - Light Theme as Default */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            
+            /* Color Variables - LIGHT THEME COLORS */
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #00f2fe;
+            
+            /* IMPROVED: Text Colors - DARKER TEXT FOR BETTER CONTRAST IN LIGHT THEME */
+            --text-primary: #1a202c;
+            --text-secondary: #2d3748;
+            --text-light: #4a5568;
+            
+            /* Background Colors - LIGHT THEME */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-glass: rgba(255, 255, 255, 0.8);
+            
+            /* Glass Effect - LIGHT THEME */
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(102, 126, 234, 0.1);
+            
+            /* Typography */
+            --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-secondary: 'Inter', Arial, sans-serif;
+            
+            /* Spacing */
+            --section-padding: 6rem 0;
+            --container-padding: 0 2rem;
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            
+            /* Transitions */
+            --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Animation Durations */
+            --animation-slow: 20s;
+            --animation-normal: 15s;
+            --animation-fast: 10s;
+        }
+
+        /* Dark Theme Variables */
+        body.dark-theme {
+            /* Text Colors - WHITE TEXT FOR DARK THEME */
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-light: #a0aec0;
+            
+            /* Background Colors - DARK THEME */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(30, 41, 59, 0.9);
+            --bg-glass: rgba(30, 41, 59, 0.8);
+            
+            /* Glass Effect - DARK THEME */
+            --glass-bg: rgba(30, 41, 59, 0.9);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== Base Reset & Typography ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            /* REMOVED: scroll-behavior: smooth; - Causes performance issues */
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            line-height: 1.6;
+            color: var(--text-secondary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: all var(--transition-normal);
+            position: relative;
+            min-height: 100vh;
+            /* Optimize for scrolling performance */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            /* Hardware acceleration for smooth scrolling */
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+        }
+
+        /* Optimized Animated Background Elements */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            /* Optimize for performance */
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float var(--animation-slow) infinite ease-in-out;
+            /* Optimize animations */
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-gradient);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary-gradient);
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .circle-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent-gradient);
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        .circle-4 {
+            width: 350px;
+            height: 350px;
+            background: var(--warning-gradient);
+            top: 20%;
+            right: 20%;
+            animation-delay: 6s;
+        }
+
+        body.dark-theme .bg-circle {
+            opacity: 0.25;
+            filter: blur(60px);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--container-padding);
+        }
+
+        section {
+            padding: var(--section-padding);
+            position: relative;
+            /* Optimize section rendering */
+            contain: layout style;
+            will-change: transform;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-main);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        /* FIXED: Hero title for mobile display - NOW WITH FIXED COLOR */
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* REMOVED the animation that changes colors */
+            /* animation: textShine 3s ease-in-out infinite alternate; */
+            /* Optimize text rendering */
+            text-rendering: optimizeSpeed;
+            /* Ensure full name displays on mobile */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+
+        /* REMOVED the textShine animation keyframes since we don't want color changes */
+        /* @keyframes textShine {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        } */
+
+        h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--primary-gradient);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* IMPROVED: Increased text size for better readability */
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem; /* Increased from 1.1rem */
+            line-height: 1.7;
+            color: var(--text-secondary);
+            font-weight: 400; /* Added for better readability */
+        }
+
+        /* IMPROVED: Timeline text sizes */
+        .timeline-date, .timeline-title, .timeline-subtitle {
+            font-size: 1.1rem; /* Increased for better visibility */
+        }
+
+        .timeline-title {
+            font-size: 1.4rem; /* Increased from 1.3rem */
+        }
+
+        /* IMPROVED: Project description text */
+        .project-description {
+            font-size: 1.1rem; /* Increased for better readability */
+        }
+
+        /* IMPROVED: Publication text sizes */
+        .publication-title {
+            font-size: 1.4rem; /* Increased from 1.3rem */
+        }
+
+        .publication-authors, .publication-journal {
+            font-size: 1.1rem; /* Increased for better visibility */
+        }
+
+        /* IMPROVED: Footer text */
+        .copyright p {
+            font-size: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all var(--transition-fast);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            /* Optimize image rendering */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 50px;
+            font-family: var(--font-main);
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            /* Optimize button rendering */
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-accent {
+            background: var(--secondary-gradient);
+        }
+
+        .btn-accent:hover {
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .btn-outline:hover::before {
+            opacity: 1;
+        }
+
+        .btn-outline:hover {
+            border-color: transparent;
+            color: white;
+        }
+
+        /* FIX: Dark mode outline button text */
+        body.dark-theme .btn-outline {
+            color: white;
+        }
+        
+        body.dark-theme .btn-outline:hover {
+            color: white !important;
+        }
+
+        /* FIX: Ensure all outline buttons have visible text in dark mode */
+        body.dark-theme .btn-outline,
+        body.dark-theme .btn-outline:hover,
+        body.dark-theme #viewAllProjectsBtn,
+        body.dark-theme #viewAllProjectsBtn:hover,
+        body.dark-theme .project-code-btn,
+        body.dark-theme .project-code-btn:hover,
+        body.dark-theme .table-code-btn,
+        body.dark-theme .table-code-btn:hover,
+        body.dark-theme #sendEmailBtn,
+        body.dark-theme #sendEmailBtn:hover,
+        body.dark-theme #whatsappBtn,
+        body.dark-theme #whatsappBtn:hover,
+        body.dark-theme #viewMapBtn,
+        body.dark-theme #viewMapBtn:hover {
+            color: white !important;
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.3) !important;
+        }
+
+        /* Light mode outline button text */
+        body:not(.dark-theme) .btn-outline:hover {
+            color: black !important;
+        }
+
+        .btn-small {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* ===== Scroll to Top Button ===== */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-normal);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: none;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        body.dark-theme .scroll-to-top {
+            background: var(--secondary-gradient);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== Header & Navigation ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            /* Optimize header for performance */
+            will-change: transform, background, padding;
+            transform: translateZ(0);
+        }
+
+        header.scrolled {
+            padding: 0.8rem 0;
+            box-shadow: var(--glass-shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            padding: 0.5rem 0;
+            color: var(--text-primary);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            bottom: 0;
+            left: 0;
+            transition: width var(--transition-normal);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 0.7rem 1rem 0.7rem 2.8rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            width: 200px;
+            font-size: 0.95rem;
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-input:focus {
+            width: 250px;
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            pointer-events: none;
+        }
+
+        /* Search Results */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--glass-shadow);
+            margin-top: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1001;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .search-result-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            color: var(--text-primary);
+        }
+
+        .search-result-item:hover {
+            background: var(--glass-border);
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-highlight {
+            background: rgba(255, 107, 53, 0.3);
+            padding: 2px 4px;
+            border-radius: 3px;
+            animation: highlightPulse 1.5s;
+        }
+
+        @keyframes highlightPulse {
+            0% { background: rgba(255, 107, 53, 0.1); }
+            50% { background: rgba(255, 107, 53, 0.5); }
+            100% { background: rgba(255, 107, 53, 0.3); }
+        }
+
+        /* Device View Toggle */
+        .device-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(10px);
+        }
+
+        .device-toggle:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: all var(--transition-fast);
+        }
+
+        .menu-toggle:hover {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            padding-top: 15rem;
+            padding-bottom: 10rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-container {
+            position: relative;
+            margin: 0 auto 4rem;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Optimize for performance */
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .profile-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            border: 8px solid var(--bg-primary);
+            box-shadow: 0 0 0 2px var(--primary-color);
+            /* Optimize image rendering */
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* SHINY RING AROUND PROFILE */
+        .shiny-ring {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            z-index: 1;
+            /* Optimize animations */
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .shiny-ring::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                var(--primary-color),
+                var(--secondary-color),
+                var(--accent-color),
+                var(--primary-color),
+                transparent
+            );
+            animation: rotateRing 4s linear infinite;
+            filter: blur(10px);
+        }
+
+        .shiny-ring::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 180deg,
+                transparent,
+                var(--accent-color),
+                var(--primary-color),
+                var(--secondary-color),
+                var(--accent-color),
+                transparent
+            );
+            animation: rotateRing 3s linear infinite reverse;
+            filter: blur(15px);
+            opacity: 0.7;
+        }
+
+        @keyframes rotateRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* FIXED: Hero subtitle for better mobile display */
+        .hero-subtitle {
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            animation: subtitleShine 4s ease-in-out infinite alternate;
+            padding: 0 1rem;
+            line-height: 1.3;
+        }
+
+        @keyframes subtitleShine {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.3); }
+        }
+
+        /* IMPROVED: Hero description with larger font and better contrast */
+        .hero-description {
+            font-size: clamp(1.2rem, 3vw, 1.4rem); /* Increased from 1.1rem/1.3rem */
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            animation: fadeInUp 1s ease-out;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.8; /* Increased line height for better readability */
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .profile-tag {
+            padding: 1rem 2rem;
+            background: var(--glass-bg);
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            animation: tagFloat 3s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.2s);
+            /* Optimize animations */
+            will-change: transform;
+            backface-visibility: hidden;
+            font-size: 1.1rem; /* Added font size for tags */
+        }
+
+        @keyframes tagFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: var(--glass-bg);
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            font-size: 1.5rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            color: var(--text-primary);
+        }
+
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .social-icons a:hover::before {
+            left: 100%;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: white;
+        }
+
+        /* ===== Research Interests Section ===== */
+        .research-interests {
+            margin-top: 2rem;
+        }
+
+        .research-interests h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .interest-tag {
+            padding: 0.8rem 1.5rem;
+            background: var(--glass-bg);
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .interest-tag:hover {
+            background: var(--success-gradient);
+            transform: translateY(-3px);
+            border-color: transparent;
+            color: white;
+        }
+
+        /* ===== Sections Common Styles ===== */
+        .section-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            /* Optimize for performance */
+            will-change: transform;
+            backface-visibility: hidden;
+            contain: layout style;
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+        }
+
+        body.dark-theme .section-card:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== About Section ===== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+        }
+
+        .skill-category {
+            margin-bottom: 2.5rem;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-item {
+            padding: 0.8rem 1.5rem;
+            background: var(--glass-bg);
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            font-size: 1rem; /* Added font size for skill items */
+        }
+
+        .skill-item:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-3px);
+            border-color: transparent;
+            color: white;
+        }
+
+        /* ===== Education & Work History ===== */
+        .timeline-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .timeline-column h3 {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+
+        .timeline-column h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-item {
+            margin-bottom: 2.5rem;
+            padding-left: 2.5rem;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+            animation-delay: calc(var(--i) * 0.1s);
+            animation-fill-mode: both;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: var(--glass-border);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            font-size: 1.4rem; /* Increased from 1.3rem */
+        }
+
+        .timeline-subtitle {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem; /* Increased for better visibility */
+        }
+
+        /* ===== Projects Section ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+            /* Optimize grid rendering */
+            contain: layout;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            /* Optimize for performance */
+            will-change: transform;
+            backface-visibility: hidden;
+            contain: layout style;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        body.dark-theme .project-card:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            transition: all var(--transition-normal);
+        }
+
+        .project-card:hover .project-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* FIX: App names should not have changing colors */
+        .project-title,
+        body.dark-theme .project-title,
+        body:not(.dark-theme) .project-title {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: none !important;
+        }
+
+        .project-description {
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            font-size: 1.1rem; /* Increased for better readability */
+            line-height: 1.6;
+        }
+
+        /* ===== Publications Section ===== */
+        .publications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+        }
+
+        .publication-item {
+            background: var(--glass-bg);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            border-left: 4px solid var(--primary-color);
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 0.8s ease-out;
+            animation-delay: calc(var(--i) * 0.1s);
+            animation-fill-mode: both;
+        }
+
+        .publication-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.1);
+        }
+
+        body.dark-theme .publication-item:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .publication-title {
+            font-size: 1.4rem; /* Increased from 1.3rem */
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .publication-authors {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-style: italic;
+            font-size: 1.1rem; /* Increased for better visibility */
+        }
+
+        .publication-journal {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem; /* Increased for better visibility */
+        }
+
+        /* View More Articles Button */
+        .view-more-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* ===== Contact Section ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--glass-bg);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(20px);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+        }
+
+        body.dark-theme .contact-card:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: white;
+            font-size: 1.8rem;
+            transition: all var(--transition-normal);
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        /* IMPROVED: Contact card text */
+        .contact-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            font-size: 1.2rem; /* Increased for better visibility */
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: var(--bg-secondary);
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            transition: color var(--transition-fast);
+            position: relative;
+            font-size: 1.1rem; /* Increased for better visibility */
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width var(--transition-normal);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .copyright p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Official Website Notice */
+        .official-notice {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .official-notice a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .official-notice a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Analytics Notification */
+        .analytics-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            max-width: 300px;
+            box-shadow: var(--glass-shadow);
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all var(--transition-normal);
+        }
+
+        .analytics-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .analytics-notification h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+
+        .analytics-notification p {
+            font-size: 1rem; /* Increased from 0.9rem */
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .close-analytics-notification {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1rem;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all var(--transition-fast);
+        }
+
+        .close-analytics-notification:hover {
+            background: var(--glass-border);
+            color: var(--text-primary);
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); opacity: 1; }
+            50% { transform: translateY(-50%) scale(1.2); opacity: 0.8; }
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--glass-bg);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                padding: 8rem 2rem 2rem;
+                gap: 2rem;
+                transition: right var(--transition-normal);
+                z-index: 1000;
+                border-left: 1px solid var(--glass-border);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .search-container {
+                display: none;
+            }
+            
+            .mobile-search {
+                display: block;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            .mobile-search .search-input {
+                width: 100%;
+            }
+            
+            .nav-actions {
+                display: none;
+            }
+            
+            .mobile-nav-actions {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+            
+            .hero {
+                padding-top: 12rem;
+                padding-bottom: 6rem;
+            }
+            
+            .profile-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .profile-image {
+                width: 230px;
+                height: 230px;
+            }
+            
+            .shiny-ring {
+                width: 270px;
+                height: 270px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .analytics-notification {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+            
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .section-card {
+                padding: 2rem;
+            }
+            
+            .profile-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .shiny-ring {
+                width: 240px;
+                height: 240px;
+            }
+            
+            /* FIXED: Better name display on very small screens */
+            h1 {
+                font-size: clamp(2rem, 7vw, 3rem);
+                line-height: 1.1;
+                padding: 0 0.5rem;
+                word-break: keep-all;
+                overflow-wrap: normal;
+            }
+            
+            .hero-subtitle {
+                font-size: clamp(1.2rem, 4vw, 1.5rem);
+                padding: 0 0.5rem;
+            }
+            
+            .hero-description {
+                padding: 1.5rem;
+                margin-bottom: 3rem;
+                font-size: 1.1rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-container {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Mobile text size adjustments */
+            p {
+                font-size: 1.1rem;
+            }
+            
+            .contact-card p {
+                font-size: 1.1rem;
+            }
+            
+            .scroll-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* FIXED: Additional media query for very small mobile screens */
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.8rem;
+                line-height: 1.1;
+                padding: 0;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                padding: 0;
+            }
+            
+            .profile-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .profile-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .shiny-ring {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .hero-buttons .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .interests-container {
+                gap: 0.8rem;
+            }
+            
+            .interest-tag {
+                padding: 0.6rem 1.2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-elements">
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="bg-circle circle-3"></div>
+        <div class="bg-circle circle-4"></div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTopBtn" title="Scroll to Top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Analytics Notification -->
+    <div class="analytics-notification" id="analyticsNotification">
+        <button class="close-analytics-notification" id="closeAnalyticsNotification">
+            <i class="fas fa-times"></i>
+        </button>
+        <h4><i class="fas fa-chart-line"></i> Analytics Tracking</h4>
+        <p>This website uses Google Analytics to track visitor engagement and improve user experience. Your privacy is respected.</p>
+        <button class="btn btn-small btn-outline" id="learnMoreAnalytics">Learn More</button>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo" id="portfolioLogo">
+                    <!-- Logo can be added here -->
+                </div>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#education">Education & Work</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    
+                    <!-- Mobile Search -->
+                    <div class="mobile-search" style="display: none;">
+                        <div class="search-container">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" class="search-input" id="mobileSearchInput" placeholder="Search page...">
+                            <div class="search-results" id="mobileSearchResults"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Nav Actions -->
+                    <div class="mobile-nav-actions" style="display: none;">
+                        <button class="device-toggle" id="mobileDeviceToggle" title="Toggle Device View">
+                            <i class="fas fa-desktop"></i>
+                        </button>
+                        <button class="theme-toggle" id="mobileThemeToggle" title="Toggle Theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </ul>
+                
+                <div class="nav-actions">
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search page...">
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                    
+                    <!-- Device View Toggle -->
+                    <button class="device-toggle" id="deviceToggle" title="Toggle Device View">
+                        <i class="fas fa-desktop"></i>
+                    </button>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-container">
+                    <div class="shiny-ring"></div>
+                    <div class="profile-image">
+                        <img src="https://raw.githubusercontent.com/mudassiribrahim30/R-Shiny-Apps/main/0c419848-a7cf-4d99-9c2d-df96dc64f071.jpg" alt="Mudasir Mohammed Ibrahim">
+                    </div>
+                </div>
+                
+                <h1 class="hero-title">Mudasir Mohammed Ibrahim</h1>
+                <div class="hero-subtitle">Registered Nurse</div>
+                <p class="hero-description">
+                    Combining his clinical nursing background with expertise in biostatistics, Mudasir Mohammed Ibrahim develops R Shiny web applications that make complex analytical processes more accessible to healthcare professionals and researchers worldwide.
+                </p>
+                
+                <div class="profile-tags">
+                    <span class="profile-tag" style="--i: 0">R Shiny Developer</span>
+                    <span class="profile-tag" style="--i: 1">Clinical Nurse</span>
+                    <span class="profile-tag" style="--i: 2">Data Analyst</span>
+                    <span class="profile-tag" style="--i: 3">Health Researcher</span>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-accent" id="viewProjectsBtn">
+                        <i class="fas fa-laptop-code"></i> View My Projects
+                    </a>
+                    <a href="https://1drv.ms/b/c/3ce355b70d76f4f7/EVLQatvp5z1DtDgo6AJ71BABo9yhg88zGI06MGl5fizGeQ?e=dlEsAS" class="btn btn-cv" download id="downloadCvBtn">
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub" id="githubLink">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-rn-dip-bsn-16b5141b0" target="_blank" title="LinkedIn" id="linkedinLink">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" title="Google Scholar" id="googleScholarLink">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" title="ORCID" id="orcidLink">
+                        <i class="fab fa-orcid"></i>
+                    </a>
+                    <a href="mailto:mudassiribrahim30@gmail.com" title="Email" id="emailLink">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (NOW SECOND) -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="section-card">
+                    <p>Mudasir Mohammed Ibrahim is a dedicated Ghanaian nurse with extensive experience in clinical practice, committed to delivering high-quality, patient-centered care. He uses he/him pronouns. He serves at the Tamale Teaching Hospital, where he manages a wide range of medical conditions and works to ensure optimal health outcomes for the patients under his care.</p>
+                    
+                    <p>He is also an experienced researcher with a strong background in data analytics. His expertise spans advanced quantitative methods, including Structural Equation Modeling (SEM), factor analysis, and other rigorous statistical techniques. He applies these analytical skills to derive meaningful insights from complex health datasets.</p>
+                    
+                    <p>Beyond his clinical and research responsibilities, he contributes to the global scientific community as a reviewer for several international journals. His commitment to data-driven innovation has inspired the development of multiple open-source R Shiny applications designed to enhance data analysis and streamline research workflows for healthcare professionals, researchers, and students.</p>
+                    
+                    <!-- Research Interests Added Here -->
+                    <div class="research-interests">
+                        <h4>Research Interests</h4>
+                        <div class="interests-container">
+                            <span class="interest-tag">Chronic Diseases Epidemiology</span>
+                            <span class="interest-tag">Maternal and Child Health</span>
+                            <span class="interest-tag">Public Health</span>
+                            <span class="interest-tag">Workplace Issues</span>
+                        </div>
+                        <p>His research focuses on addressing critical health challenges through epidemiological studies, improving maternal and child health outcomes, advancing public health initiatives, and examining workplace factors that influence the wellbeing and performance of healthcare professionals.</p>
+                    </div>
+                    
+                </div>
+                
+                <div class="section-card">
+                    <div class="skill-category">
+                        <h4>Technical Skills</h4>
+                        <div class="skill-items">
+                            <span class="skill-item">Health Research</span>
+                            <span class="skill-item">R Shiny Development</span>
+                            <span class="skill-item">Data Analysis</span>
+                            <span class="skill-item">Statistical Modeling</span>
+                            <span class="skill-item">Biostatistics</span>
+                            <span class="skill-item">R Programming</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Healthcare Expertise</h4>
+                        <div class="skill-items">
+                            <span class="skill-item">Clinical Research</span>
+                            <span class="skill-item">Patient Care</span>
+                            <span class="skill-item">Public Health</span>
+                            <span class="skill-item">Health Informatics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Professional</h4>
+                        <div class="skill-items">
+                            <span class="skill-item">Scientific Writing</span>
+                            <span class="skill-item">Peer Review</span>
+                            <span class="skill-item">Project Management</span>
+                            <span class="skill-item">Team Leadership</span>
+                            <span class="skill-item">Mentoring</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Work History Section (NOW THIRD) -->
+    <section id="education" class="about">
+        <div class="container">
+            <h2>Education & Work History</h2>
+            
+            <div class="section-card">
+                <div class="timeline-container">
+                    <div class="timeline-column">
+                        <h3>Education</h3>
+                        <div class="timeline-item" style="--i: 0">
+                            <div class="timeline-date">2022 - 2024</div>
+                            <div class="timeline-title">University of Cape Coast</div>
+                            <div class="timeline-subtitle">Bachelor of Science in Nursing</div>
+                        </div>
+                        <div class="timeline-item" style="--i: 1">
+                            <div class="timeline-date">2017 - 2020</div>
+                            <div class="timeline-title">Nurses' and Midwives' Training College, Tamale</div>
+                            <div class="timeline-subtitle">Diploma in General Nursing</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-column">
+                        <h3>Work Experience</h3>
+                        <div class="timeline-item" style="--i: 0">
+                            <div class="timeline-date">2025 - Present</div>
+                            <div class="timeline-title">Staff Nurse</div>
+                            <div class="timeline-subtitle">Tamale Teaching Hospital</div>
+                        </div>
+                        <div class="timeline-item" style="--i: 1">
+                            <div class="timeline-date">2021 - 2022</div>
+                            <div class="timeline-title">Rotation Nurse</div>
+                            <div class="timeline-subtitle">Tamale Teaching Hospital</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (NOW FOURTH) -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>My R Shiny Applications</h2>
+            
+            <div class="projects-grid">
+                <!-- Project cards will be dynamically added here -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="#projects-table" class="btn btn-outline" id="viewAllProjectsBtn">
+                    <i class="fas fa-table"></i> View All Apps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section (NOW FIFTH) -->
+    <section id="publications" class="publications">
+        <div class="container">
+            <h2>Publications</h2>
+            <div class="publications-list">
+                <!-- Publications will be dynamically added here -->
+            </div>
+            
+            <div class="view-more-container">
+                <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" class="btn btn-accent" id="viewMoreArticlesBtn">
+                    <i class="fas fa-external-link-alt"></i> View More Articles 
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (NOW SIXTH) -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>mudassiribrahim30@gmail.com</p>
+                    <a href="mailto:mudassiribrahim30@gmail.com" class="btn btn-small btn-outline" id="sendEmailBtn">Send Email</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>(+233) 54 934 3058</p>
+                    <a href="https://wa.me/233549343058" target="_blank" class="btn btn-small btn-outline" id="whatsappBtn">Text Now</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <p>Tamale, <br>Northern Region, Ghana</p>
+                    <a href="https://maps.google.com/?q=Tamale+Ghana" target="_blank" class="btn btn-small btn-outline" id="viewMapBtn">View Map</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Table with ALL 20 Apps -->
+    <section id="projects-table" class="projects" style="display: none;">
+        <div class="container">
+            <h2>All R Shiny Applications</h2>
+            <div class="section-card">
+                <table style="width: 100%; border-collapse: collapse; color: var(--text-secondary);">
+                    <thead>
+                        <tr>
+                            <th style="padding: 1.5rem; text-align: left; border-bottom: 2px solid var(--primary-color);">#</th>
+                            <th style="padding: 1.5rem; text-align: left; border-bottom: 2px solid var(--primary-color);">Application Name</th>
+                            <th style="padding: 1.5rem; text-align: left; border-bottom: 2px solid var(--primary-color);">Description</th>
+                            <th style="padding: 1.5rem; text-align: left; border-bottom: 2px solid var(--primary-color);">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectsTableBody">
+                        <!-- All 20 projects will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mudasir Mohammed Ibrahim</div>
+                <div class="footer-links">
+                    <a href="#home" id="footerHomeLink">Home</a>
+                    <a href="#about" id="footerAboutLink">About Me</a>
+                    <a href="#education" id="footerEducationLink">Education & Work</a>
+                    <a href="#projects" id="footerProjectsLink">Projects</a>
+                    <a href="#publications" id="footerPublicationsLink">Publications</a>
+                    <a href="#contact" id="footerContactLink">Contact</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p id="copyright-year">&copy; <span id="current-year"></span> All rights reserved.</p>
+                <p>Designed and powered by Mudasir Mohammed Ibrahim</p>
+                <div class="official-notice">
+                    <p>This is the official website of Mudasir Mohammed Ibrahim, Registered Nurse and Health Researcher.</p>
+                    <p>For official correspondence, please use the contact information provided above.</p>
+                </div>
+                <p style="font-size: 0.8rem; margin-top: 1rem; color: var(--text-light);">
+                    <i class="fas fa-chart-line"></i> Analytics tracking enabled
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Performance optimizations
+        let isScrolling = false;
+        let scrollTimeout;
+        let lastScrollY = window.scrollY;
+        
+        // ===== GOOGLE ANALYTICS FUNCTIONS =====
+        // Replace 'G-XXXXXXXXXX' with your actual Google Analytics Measurement ID
+        const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+        
+        function trackEvent(category, action, label, value) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    'event_category': category,
+                    'event_label': label,
+                    'value': value
+                });
+            }
+            console.log(`Analytics Event: ${category} - ${action} - ${label}`);
+        }
+        
+        function trackPageView(pageTitle, pagePath) {
+            if (typeof gtag !== 'undefined') {
+                gtag('config', GA_MEASUREMENT_ID, {
+                    'page_title': pageTitle,
+                    'page_location': window.location.href,
+                    'page_path': pagePath
+                });
+            }
+            console.log(`Page View: ${pageTitle} - ${pagePath}`);
+        }
+        
+        function trackButtonClick(buttonId, buttonText) {
+            trackEvent('Button Click', 'click', buttonText, 1);
+            console.log(`Button clicked: ${buttonId} - ${buttonText}`);
+        }
+        
+        function trackExternalLink(linkUrl, linkName) {
+            trackEvent('External Link', 'click', linkName, 1);
+            console.log(`External link clicked: ${linkName} - ${linkUrl}`);
+        }
+        
+        function trackProjectView(projectName, projectType) {
+            trackEvent('Project View', 'view', `${projectType}: ${projectName}`, 1);
+            console.log(`Project viewed: ${projectType} - ${projectName}`);
+        }
+        
+        function trackSectionView(sectionId, sectionName) {
+            trackEvent('Section View', 'scroll', sectionName, 1);
+            console.log(`Section viewed: ${sectionName}`);
+        }
+        
+        function trackPublicationView(publicationTitle) {
+            trackEvent('Publication View', 'view', publicationTitle, 1);
+            console.log(`Publication viewed: ${publicationTitle}`);
+        }
+        
+        function trackSearch(searchQuery, resultsCount) {
+            trackEvent('Search', 'search', searchQuery, resultsCount);
+            console.log(`Search performed: "${searchQuery}" - ${resultsCount} results`);
+        }
+        
+        function trackThemeToggle(isDarkTheme) {
+            trackEvent('Theme', 'toggle', isDarkTheme ? 'Dark Theme' : 'Light Theme', 1);
+            console.log(`Theme toggled: ${isDarkTheme ? 'Dark' : 'Light'}`);
+        }
+        
+        // Debounced scroll handler for better performance
+        function handleScroll() {
+            if (!isScrolling) {
+                isScrolling = true;
+                
+                // Header scroll effect
+                const header = document.getElementById('header');
+                const currentScrollY = window.scrollY;
+                
+                if (currentScrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Show/hide scroll to top button
+                const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+                if (currentScrollY > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+                
+                // Update active nav link with optimized logic
+                updateActiveNavLink(currentScrollY);
+                
+                // Mark scrolling as done
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 10);
+            }
+        }
+        
+        // Optimized function to update active nav link
+        function updateActiveNavLink(scrollY) {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            // Only check if scroll position changed significantly
+            if (Math.abs(scrollY - lastScrollY) < 50 && scrollY !== 0) {
+                return;
+            }
+            
+            lastScrollY = scrollY;
+            
+            let currentSection = '';
+            const scrollPosition = scrollY + 100;
+            
+            // Use for loop instead of forEach for better performance
+            for (let i = 0; i < sections.length; i++) {
+                const section = sections[i];
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                    // Track section view
+                    if (currentSection && currentSection !== lastTrackedSection) {
+                        const sectionName = section.querySelector('h2') ? section.querySelector('h2').textContent : currentSection;
+                        trackSectionView(currentSection, sectionName);
+                        lastTrackedSection = currentSection;
+                    }
+                    break;
+                }
+            }
+            
+            // Update active class
+            for (let i = 0; i < navLinks.length; i++) {
+                const link = navLinks[i];
+                const href = link.getAttribute('href');
+                
+                if (href && href.startsWith('#') && href === `#${currentSection}`) {
+                    if (!link.classList.contains('active')) {
+                        // First remove active from all
+                        for (let j = 0; j < navLinks.length; j++) {
+                            navLinks[j].classList.remove('active');
+                        }
+                        // Then add to current
+                        link.classList.add('active');
+                    }
+                    break;
+                }
+            }
+        }
+        
+        // Track last section to avoid duplicate tracking
+        let lastTrackedSection = '';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // ===== UPDATE COPYRIGHT YEAR AUTOMATICALLY =====
+            const currentYear = new Date().getFullYear();
+            document.getElementById('current-year').textContent = currentYear;
+            
+            // Track initial page view
+            trackPageView('Mudasir Mohammed Ibrahim Portfolio', '/');
+            
+            // Use passive event listeners for better scrolling performance
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            
+            // ===== SCROLL TO TOP FUNCTIONALITY =====
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            
+            scrollToTopBtn.addEventListener('click', function() {
+                // Optimized scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // Track scroll to top click
+                trackEvent('Navigation', 'scroll_to_top', 'Scroll to top clicked', 1);
+                trackButtonClick('scrollToTopBtn', 'Scroll to Top');
+            });
+            
+            // ===== ANALYTICS NOTIFICATION =====
+            const analyticsNotification = document.getElementById('analyticsNotification');
+            const closeAnalyticsNotification = document.getElementById('closeAnalyticsNotification');
+            const learnMoreAnalytics = document.getElementById('learnMoreAnalytics');
+            
+            // Show analytics notification after 3 seconds
+            setTimeout(() => {
+                analyticsNotification.classList.add('show');
+            }, 3000);
+            
+            closeAnalyticsNotification.addEventListener('click', () => {
+                analyticsNotification.classList.remove('show');
+                trackEvent('Analytics Notification', 'close', 'Notification closed', 1);
+            });
+            
+            learnMoreAnalytics.addEventListener('click', () => {
+                trackEvent('Analytics Notification', 'learn_more', 'Learn more clicked', 1);
+                alert('This website uses Google Analytics to track:\n\n1. Visitor numbers and locations\n2. Which projects get the most attention\n3. Publication views\n4. Button clicks and interactions\n\nThis helps improve the website and understand user interests.\n\nYour privacy is respected - no personal data is collected.');
+                analyticsNotification.classList.remove('show');
+            });
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const mobileSearch = navLinks.querySelector('.mobile-search');
+            const mobileNavActions = navLinks.querySelector('.mobile-nav-actions');
+            
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+                
+                // Show/hide mobile elements
+                if (navLinks.classList.contains('active')) {
+                    mobileSearch.style.display = 'block';
+                    mobileNavActions.style.display = 'flex';
+                    trackEvent('Navigation', 'mobile_menu', 'Menu opened', 1);
+                } else {
+                    mobileSearch.style.display = 'none';
+                    mobileNavActions.style.display = 'none';
+                    trackEvent('Navigation', 'mobile_menu', 'Menu closed', 1);
+                }
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        mobileSearch.style.display = 'none';
+                        mobileNavActions.style.display = 'none';
+                    });
+                }
+            });
+            
+            // Initialize header state
+            handleScroll();
+            
+            // Theme Toggle - Start with Light Theme
+            const themeToggle = document.getElementById('themeToggle');
+            const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            const mobileThemeIcon = mobileThemeToggle.querySelector('i');
+            
+            function toggleTheme() {
+                if (document.body.classList.contains('dark-theme')) {
+                    document.body.classList.remove('dark-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    mobileThemeIcon.classList.remove('fa-sun');
+                    mobileThemeIcon.classList.add('fa-moon');
+                    trackThemeToggle(false);
+                } else {
+                    document.body.classList.add('dark-theme');
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    mobileThemeIcon.classList.remove('fa-moon');
+                    mobileThemeIcon.classList.add('fa-sun');
+                    trackThemeToggle(true);
+                }
+            }
+            
+            // Initialize with light theme (default)
+            if (!localStorage.getItem('theme')) {
+                localStorage.setItem('theme', 'light');
+            }
+            
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                mobileThemeIcon.classList.remove('fa-moon');
+                mobileThemeIcon.classList.add('fa-sun');
+            } else {
+                document.body.classList.remove('dark-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                mobileThemeIcon.classList.remove('fa-sun');
+                mobileThemeIcon.classList.add('fa-moon');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                toggleTheme();
+                trackButtonClick('themeToggle', 'Theme Toggle');
+            });
+            
+            mobileThemeToggle.addEventListener('click', () => {
+                toggleTheme();
+                trackButtonClick('mobileThemeToggle', 'Mobile Theme Toggle');
+            });
+            
+            // Device View Toggle
+            const deviceToggle = document.getElementById('deviceToggle');
+            const mobileDeviceToggle = document.getElementById('mobileDeviceToggle');
+            const deviceIcon = deviceToggle.querySelector('i');
+            const mobileDeviceIcon = mobileDeviceToggle.querySelector('i');
+            
+            function toggleDeviceView() {
+                if (deviceIcon.classList.contains('fa-desktop')) {
+                    // Switch to mobile view
+                    deviceIcon.classList.remove('fa-desktop');
+                    deviceIcon.classList.add('fa-mobile-alt');
+                    mobileDeviceIcon.classList.remove('fa-desktop');
+                    mobileDeviceIcon.classList.add('fa-mobile-alt');
+                    
+                    // Apply mobile styles
+                    document.body.style.maxWidth = '480px';
+                    document.body.style.margin = '0 auto';
+                    document.body.style.boxShadow = '0 0 20px rgba(0,0,0,0.1)';
+                    document.body.style.minHeight = '100vh';
+                    localStorage.setItem('deviceView', 'mobile');
+                    trackEvent('Device View', 'toggle', 'Mobile View', 1);
+                } else {
+                    // Switch to desktop view
+                    deviceIcon.classList.remove('fa-mobile-alt');
+                    deviceIcon.classList.add('fa-desktop');
+                    mobileDeviceIcon.classList.remove('fa-mobile-alt');
+                    mobileDeviceIcon.classList.add('fa-desktop');
+                    
+                    // Remove mobile styles
+                    document.body.style.maxWidth = '';
+                    document.body.style.margin = '';
+                    document.body.style.boxShadow = '';
+                    localStorage.setItem('deviceView', 'desktop');
+                    trackEvent('Device View', 'toggle', 'Desktop View', 1);
+                }
+            }
+            
+            // Initialize device view
+            const savedDeviceView = localStorage.getItem('deviceView') || 'desktop';
+            if (savedDeviceView === 'mobile') {
+                deviceIcon.classList.remove('fa-desktop');
+                deviceIcon.classList.add('fa-mobile-alt');
+                mobileDeviceIcon.classList.remove('fa-desktop');
+                mobileDeviceIcon.classList.add('fa-mobile-alt');
+                document.body.style.maxWidth = '480px';
+                document.body.style.margin = '0 auto';
+                document.body.style.boxShadow = '0 0 20px rgba(0,0,0,0.1)';
+                document.body.style.minHeight = '100vh';
+            }
+            
+            deviceToggle.addEventListener('click', () => {
+                toggleDeviceView();
+                trackButtonClick('deviceToggle', 'Device View Toggle');
+            });
+            
+            mobileDeviceToggle.addEventListener('click', () => {
+                toggleDeviceView();
+                trackButtonClick('mobileDeviceToggle', 'Mobile Device View Toggle');
+            });
+            
+            // ===== ALL 20 PROJECTS DATA =====
+            const allProjects = [
+                {
+                    id: 1,
+                    name: "APA Table Generator",
+                    description: "Generate APA formatted tables for research papers and publications",
+                    runUrl: "https://newappstesting.shinyapps.io/APATableGenerator/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R",
+                    icon: "fas fa-table"
+                },
+                {
+                    id: 2,
+                    name: "SysSampler",
+                    description: "Systematic sampling tool for research studies with various sampling methods",
+                    runUrl: "https://mudassiribrahim2025b.shinyapps.io/SysSampler/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler",
+                    icon: "fas fa-filter"
+                },
+                {
+                    id: 3,
+                    name: "CATrend Analyzer",
+                    description: "Cochran-Armitage test for trend tool",
+                    runUrl: "https://newappstesting.shinyapps.io/CATrendAnalyzer/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CATrendAnalyzer.R",
+                    icon: "fas fa-chart-line"
+                },
+                {
+                    id: 4,
+                    name: "CMH Analyzer",
+                    description: "Cochran-Mantel-Haenszel analysis tool for stratified data",
+                    runUrl: "https://newappstesting.shinyapps.io/CMHAnalyzer/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R",
+                    icon: "fas fa-chart-bar"
+                },
+                {
+                    id: 5,
+                    name: "Data2SPSS",
+                    description: "Convert datasets in CSV, Excel, Rdata, Stata, or SAS format into SPSS (.sav) files with ease",
+                    runUrl: "https://newappstesting.shinyapps.io/Data2SPSS/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS",
+                    icon: "fas fa-file-export"
+                },
+                {
+                    id: 6,
+                    name: "TNMTC DataLab",
+                    description: "Comprehensive data analysis software",
+                    runUrl: "https://newappstesting.shinyapps.io/NMTCDataLab/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/NMTC%20APP.R",
+                    icon: "fas fa-flask"
+                },
+                {
+                    id: 7,
+                    name: "PharmaCalc Pro",
+                    description: "Pharmaceutical calculations for dosage",
+                    runUrl: "https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R",
+                    icon: "fas fa-pills"
+                },
+                {
+                    id: 8,
+                    name: "RegEffect Xplorer",
+                    description: "Explore regression effects visually",
+                    runUrl: "https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R",
+                    icon: "fas fa-project-diagram"
+                },
+                {
+                    id: 9,
+                    name: "Data TransformR",
+                    description: "Data transformation tool",
+                    runUrl: "https://mudassiribrahim2025b.shinyapps.io/DataTransformR/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R",
+                    icon: "fas fa-exchange-alt"
+                },
+                {
+                    id: 10,
+                    name: "CleanMyData",
+                    description: "Data screening and cleaning tool",
+                    runUrl: "https://mudassiribrahim2025b.shinyapps.io/CleanMyData/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R",
+                    icon: "fas fa-broom"
+                },
+                {
+                    id: 11,
+                    name: "KMPlot Genie",
+                    description: "Kaplan-Meier survival plot generator",
+                    runUrl: "https://mudassiribrahim30.shinyapps.io/KMPlotGenie/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R",
+                    icon: "fas fa-heartbeat"
+                },
+                {
+                    id: 12,
+                    name: "ggPubPlot",
+                    description: "Publication-ready ggplot2 visualizations with customization",
+                    runUrl: "https://mudassiribrahim2025.shinyapps.io/ggPubPlot/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R",
+                    icon: "fas fa-chart-area"
+                },
+                {
+                    id: 13,
+                    name: "EpiDem Suite",
+                    description: "Epidemiological data analysis suite for public health research",
+                    runUrl: "https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R",
+                    icon: "fas fa-virus"
+                },
+                {
+                    id: 14,
+                    name: "QuickStatsGen",
+                    description: "Custom Data Generator for Statistical Practice",
+                    runUrl: "https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R",
+                    icon: "fas fa-database"
+                },
+                {
+                    id: 15,
+                    name: "MedModr",
+                    description: "Mediation and moderation analysis tool for research",
+                    runUrl: "https://mudassiribrahim30.shinyapps.io/MedModr/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R",
+                    icon: "fas fa-sitemap"
+                },
+                {
+                    id: 16,
+                    name: "Robust Regressor",
+                    description: "Robust regression analysis for outlier-resistant modeling",
+                    runUrl: "https://mudassiribrahim2025.shinyapps.io/Robustregression/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R",
+                    icon: "fas fa-shield-alt"
+                },
+                {
+                    id: 17,
+                    name: "ROC Curve Builder",
+                    description: "ROC curve analysis and diagnostic test evaluation",
+                    runUrl: "https://mudassiribrahim30.shinyapps.io/ROC_CURVE/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ROC%20Curve%20Builder.R",
+                    icon: "fas fa-wave-square"
+                },
+                {
+                    id: 18,
+                    name: "TagSelect",
+                    description: "Participant selection tool for research studies",
+                    runUrl: "https://mudassiribrahim30.shinyapps.io/Tagselect/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R",
+                    icon: "fas fa-users"
+                },
+                {
+                    id: 19,
+                    name: "FAnalyzr",
+                    description: "Factor analysis and dimensionality reduction tool",
+                    runUrl: "https://mudassiribrahim30.shinyapps.io/fanalyzr/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R",
+                    icon: "fas fa-cube"
+                },
+                {
+                    id: 20,
+                    name: "CalcuStats",
+                    description: "Tool for sample size calculation, power analysis, and descriptive statistics",
+                    runUrl: "https://mudassiribrahim2025.shinyapps.io/CalcuStats/",
+                    codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R",
+                    icon: "fas fa-calculator"
+                }
+            ];
+
+            // First 6 projects for the main grid
+            const featuredProjects = allProjects.slice(0, 6);
+            
+            // Load featured projects into grid
+            const projectsGrid = document.querySelector('.projects-grid');
+            featuredProjects.forEach((project, index) => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                projectCard.dataset.projectId = project.id;
+                projectCard.dataset.projectName = project.name;
+                projectCard.innerHTML = `
+                    <div class="project-icon">
+                        <i class="${project.icon}"></i>
+                    </div>
+                    <h3 class="project-title">${project.name}</h3>
+                    <p class="project-description">${project.description}</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="${project.runUrl}" target="_blank" class="btn btn-small btn-accent project-run-btn" data-project-id="${project.id}" data-project-name="${project.name}">
+                            <i class="fas fa-play"></i> Run App
+                        </a>
+                        <a href="${project.codeUrl}" target="_blank" class="btn btn-small btn-outline project-code-btn" data-project-id="${project.id}" data-project-name="${project.name}">
+                            <i class="fas fa-code"></i> View Code
+                        </a>
+                    </div>
+                `;
+                projectsGrid.appendChild(projectCard);
+                
+                // Track project card hover
+                projectCard.addEventListener('mouseenter', () => {
+                    trackProjectView(project.name, 'Featured Project Card');
+                });
+            });
+            
+            // Add click tracking for project buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.project-run-btn')) {
+                    const btn = e.target.closest('.project-run-btn');
+                    const projectId = btn.dataset.projectId;
+                    const projectName = btn.dataset.projectName;
+                    trackEvent('Project Action', 'run_app', projectName, 1);
+                    trackProjectView(projectName, 'Run App Click');
+                }
+                
+                if (e.target.closest('.project-code-btn')) {
+                    const btn = e.target.closest('.project-code-btn');
+                    const projectId = btn.dataset.projectId;
+                    const projectName = btn.dataset.projectName;
+                    trackEvent('Project Action', 'view_code', projectName, 1);
+                    trackProjectView(projectName, 'View Code Click');
+                }
+            });
+            
+            // Load ALL 20 projects into table
+            const projectsTableBody = document.getElementById('projectsTableBody');
+            allProjects.forEach((project, index) => {
+                const row = document.createElement('tr');
+                row.dataset.projectId = project.id;
+                row.dataset.projectName = project.name;
+                row.innerHTML = `
+                    <td style="padding: 1.5rem; border-bottom: 1px solid var(--glass-border);">
+                        <strong>${index + 1}</strong>
+                    </td>
+                    <td style="padding: 1.5rem; border-bottom: 1px solid var(--glass-border);">
+                        <strong>${project.name}</strong>
+                    </td>
+                    <td style="padding: 1.5rem; border-bottom: 1px solid var(--glass-border);">
+                        ${project.description}
+                    </td>
+                    <td style="padding: 1.5rem; border-bottom: 1px solid var(--glass-border);">
+                        <a href="${project.runUrl}" target="_blank" class="btn btn-small btn-accent table-run-btn" data-project-id="${project.id}" data-project-name="${project.name}">
+                            <i class="fas fa-play"></i> Run
+                        </a>
+                        <a href="${project.codeUrl}" target="_blank" class="btn btn-small btn-outline table-code-btn" data-project-id="${project.id}" data-project-name="${project.name}">
+                            <i class="fas fa-code"></i> Code
+                        </a>
+                    </td>
+                `;
+                projectsTableBody.appendChild(row);
+                
+                // Track table row hover
+                row.addEventListener('mouseenter', () => {
+                    trackProjectView(project.name, 'Table Project Row');
+                });
+            });
+            
+            // View All Projects button functionality
+            document.getElementById('viewAllProjectsBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                const projectsTableSection = document.getElementById('projects-table');
+                
+                projectsTableSection.style.display = 'block';
+                
+                // Use optimized scroll
+                scrollToElement(projectsTableSection);
+                
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector('.nav-links a[href="#projects"]').classList.add('active');
+                
+                // Track button click
+                trackButtonClick('viewAllProjectsBtn', 'View All Projects');
+                trackEvent('Navigation', 'view_all_projects', 'All projects table viewed', 1);
+            });
+            
+            // Load publications
+            const publicationsList = document.querySelector('.publications-list');
+            
+            const publications = [
+                {
+                    id: 1,
+                    title: "Determinants and Mitigating Factors of Brain Drain among Ghanaian Nurses: Insights from Nurse Managers in Northern Ghana-A Qualitative Inquiry",
+                    authors: "Ibrahim, M. M., Wuni, A., Salisu, W. J., Abdulai, A. M., Owusua, T., Nyarko, B. A., Mohammed, I. S., et al",
+                    journal: "Journal of Nursing Management",
+                    year: "2024",
+                    link: "https://onlinelibrary.wiley.com/doi/full/10.1155/2024/8862991"
+                },
+                {
+                    id: 2,
+                    title: "Assessing the impact of nurses' patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital: The mediating role of leadership and barriers to competency development",
+                    authors: "Ibrahim, M. M., Abdul-Rahaman, F., Sayibu, M. S., Alhassan, D. N., Awudu, R. T., Mohammed, I. S., Wuni, A., & Abdulai, A.",
+                    journal: "BMC Health Services Research",
+                    year: "2025",
+                    link: "https://link.springer.com/article/10.1186/s12913-025-13384-3"
+                },
+                {
+                    id: 3,
+                    title: "Evaluating Academic Help-Seeking Behavior of Nursing and Midwifery Students in a Nursing Training College",
+                    authors: "Monne, R., Ibrahim, M. M., Tawiah, B. C., Adam, H., Abukari, M. S., Salifu, R., & Wuni, A.",
+                    journal: "Journal of Education and Research in Nursing",
+                    year: "2025",
+                    link: "https://jer-nursing.org/jvi.aspx?un=JERN-98150&volume=22&issue=1"
+                },
+                {
+                    id: 4,
+                    title: "Patterns and temporal trends in childhood cancer incidence in northern Ghana: evidence from medical records, 2016 to 2023",
+                    authors: "Wuni, A., Ibrahim, M. M., Tonlaar, P. S., Sisala, I. M., Awal, I., Nyarko, B. A., Abdulai, A., Mohammed, S., & Salisu, W. J.",
+                    journal: "BMC Pediatrics",
+                    year: "2025",
+                    link: "https://link.springer.com/article/10.1186/s12887-025-06141-2"
+                }
+            ];
+            
+            publications.forEach((pub, index) => {
+                const pubItem = document.createElement('div');
+                pubItem.className = 'publication-item';
+                pubItem.dataset.publicationId = pub.id;
+                pubItem.dataset.publicationTitle = pub.title;
+                pubItem.style.setProperty('--i', index);
+                pubItem.innerHTML = `
+                    <h3 class="publication-title">${pub.title}</h3>
+                    <p class="publication-authors">${pub.authors}</p>
+                    <p class="publication-journal">${pub.journal} • ${pub.year}</p>
+                    <a href="${pub.link}" target="_blank" class="btn btn-small btn-accent publication-link-btn" data-publication-id="${pub.id}" data-publication-title="${pub.title}" style="margin-top: 1rem;">
+                        <i class="fas fa-external-link-alt"></i> View on Journal
+                    </a>
+                `;
+                publicationsList.appendChild(pubItem);
+                
+                // Track publication hover
+                pubItem.addEventListener('mouseenter', () => {
+                    trackPublicationView(pub.title);
+                });
+                
+                // Track publication link click
+                pubItem.querySelector('.publication-link-btn').addEventListener('click', (e) => {
+                    trackEvent('Publication Action', 'view_journal', pub.title, 1);
+                    trackExternalLink(pub.link, `Publication: ${pub.title}`);
+                });
+            });
+            
+            // ===== TRACK BUTTON CLICKS =====
+            // Main buttons
+            document.getElementById('viewProjectsBtn').addEventListener('click', () => {
+                trackButtonClick('viewProjectsBtn', 'View My Projects');
+            });
+            
+            document.getElementById('downloadCvBtn').addEventListener('click', () => {
+                trackButtonClick('downloadCvBtn', 'Download CV');
+                trackExternalLink('https://1drv.ms/b/c/3ce355b70d76f4f7/EeCmbj6MdixPswbcqSrGJD8Bop-wImo5Qc8w9COjUuAkuQ?e=XnHdIn', 'CV Download');
+            });
+            
+            document.getElementById('viewMoreArticlesBtn').addEventListener('click', () => {
+                trackButtonClick('viewMoreArticlesBtn', 'View More Articles');
+                trackExternalLink('https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en', 'Google Scholar');
+            });
+            
+            // Contact buttons
+            document.getElementById('sendEmailBtn').addEventListener('click', () => {
+                trackButtonClick('sendEmailBtn', 'Send Email');
+                trackEvent('Contact', 'email_click', 'Email button clicked', 1);
+            });
+            
+            document.getElementById('whatsappBtn').addEventListener('click', () => {
+                trackButtonClick('whatsappBtn', 'WhatsApp');
+                trackExternalLink('https://wa.me/233549343058', 'WhatsApp');
+            });
+            
+            document.getElementById('viewMapBtn').addEventListener('click', () => {
+                trackButtonClick('viewMapBtn', 'View Map');
+                trackExternalLink('https://maps.google.com/?q=Tamale+Ghana', 'Google Maps');
+            });
+            
+            // Social media links
+            document.getElementById('githubLink').addEventListener('click', () => {
+                trackExternalLink('https://github.com/mudassiribrahim30', 'GitHub');
+            });
+            
+            document.getElementById('linkedinLink').addEventListener('click', () => {
+                trackExternalLink('https://linkedin.com/in/mudasir-mohammed-ibrahim-rn-dip-bsn-16b5141b0', 'LinkedIn');
+            });
+            
+            document.getElementById('googleScholarLink').addEventListener('click', () => {
+                trackExternalLink('https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en', 'Google Scholar');
+            });
+            
+            document.getElementById('orcidLink').addEventListener('click', () => {
+                trackExternalLink('https://orcid.org/0000-0002-9049-8222', 'ORCID');
+            });
+            
+            document.getElementById('emailLink').addEventListener('click', () => {
+                trackEvent('Contact', 'email_social', 'Email from social icons', 1);
+            });
+            
+            // Footer links
+            document.getElementById('footerHomeLink').addEventListener('click', () => {
+                trackButtonClick('footerHomeLink', 'Footer Home');
+            });
+            
+            document.getElementById('footerAboutLink').addEventListener('click', () => {
+                trackButtonClick('footerAboutLink', 'Footer About');
+            });
+            
+            document.getElementById('footerEducationLink').addEventListener('click', () => {
+                trackButtonClick('footerEducationLink', 'Footer Education');
+            });
+            
+            document.getElementById('footerProjectsLink').addEventListener('click', () => {
+                trackButtonClick('footerProjectsLink', 'Footer Projects');
+            });
+            
+            document.getElementById('footerPublicationsLink').addEventListener('click', () => {
+                trackButtonClick('footerPublicationsLink', 'Footer Publications');
+            });
+            
+            document.getElementById('footerContactLink').addEventListener('click', () => {
+                trackButtonClick('footerContactLink', 'Footer Contact');
+            });
+            
+            // Optimized smooth scroll function
+            function scrollToElement(element) {
+                const targetPosition = element.offsetTop - 80;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 500;
+                let start = null;
+                
+                function animation(currentTime) {
+                    if (start === null) start = currentTime;
+                    const timeElapsed = currentTime - start;
+                    const run = ease(timeElapsed, startPosition, distance, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) requestAnimationFrame(animation);
+                }
+                
+                function ease(t, b, c, d) {
+                    t /= d / 2;
+                    if (t < 1) return c / 2 * t * t + b;
+                    t--;
+                    return -c / 2 * (t * (t - 2) - 1) + b;
+                }
+                
+                requestAnimationFrame(animation);
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        scrollToElement(targetElement);
+                        // Track navigation clicks
+                        const linkText = this.textContent || this.querySelector('i')?.className || 'Navigation Link';
+                        trackEvent('Navigation', 'anchor_click', linkText, 1);
+                    }
+                });
+            });
+            
+            // Add animation on scroll with IntersectionObserver
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all section cards and timeline items
+            document.querySelectorAll('.section-card, .timeline-item, .project-card, .publication-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.8s ease-out';
+                observer.observe(el);
+            });
+            
+            // ===== ADVANCED SEARCH FUNCTIONALITY =====
+            const searchInput = document.getElementById('searchInput');
+            const mobileSearchInput = document.getElementById('mobileSearchInput');
+            const searchResults = document.getElementById('searchResults');
+            const mobileSearchResults = document.getElementById('mobileSearchResults');
+            
+            // All searchable content on the page (UPDATED ORDER)
+            const searchableContent = [
+                {
+                    id: 'home',
+                    title: 'Home',
+                    keywords: ['mudasir', 'mohammed', 'ibrahim', 'nurse', 'researcher', 'health', 'clinical', 'epidemiologist', 'data analyst', 'shiny developer', 'profile', 'introduction'],
+                    content: document.querySelector('#home').innerText
+                },
+                {
+                    id: 'about',
+                    title: 'About',
+                    keywords: ['about', 'skills', 'technical', 'healthcare', 'expertise', 'professional', 'biostatistics', 'statistics', 'modeling', 'research', 'clinical', 'experience', 'background', 'research interests', 'chronic diseases', 'epidemiology', 'maternal', 'child health', 'public health', 'workplace issues'],
+                    content: document.querySelector('#about').innerText
+                },
+                {
+                    id: 'education',
+                    title: 'Education & Work',
+                    keywords: ['education', 'university', 'cape coast', 'nursing', 'diploma', 'work', 'experience', 'staff nurse', 'rotation', 'tamale', 'hospital', 'training', 'college'],
+                    content: document.querySelector('#education').innerText
+                },
+                {
+                    id: 'projects',
+                    title: 'Projects',
+                    keywords: ['projects', 'shiny', 'applications', 'apa', 'table', 'generator', 'syssampler', 'catrend', 'analyzer', 'cmh', 'data', 'spss', 'tnmtc', 'datalab', 'r shiny', 'web apps', '20 apps', 'all apps'],
+                    content: document.querySelector('#projects').innerText
+                },
+                {
+                    id: 'publications',
+                    title: 'Publications',
+                    keywords: ['publications', 'research', 'articles', 'journal', 'brain drain', 'nurses', 'ghana', 'patient safety', 'competencies', 'help-seeking', 'cancer', 'academic', 'papers', 'google scholar'],
+                    content: document.querySelector('#publications').innerText
+                },
+                {
+                    id: 'contact',
+                    title: 'Contact',
+                    keywords: ['contact', 'email', 'phone', 'location', 'address', 'tamale', 'ghana', 'hospital', 'get in touch', 'reach', 'connect'],
+                    content: document.querySelector('#contact').innerText
+                }
+            ];
+            
+            // Function to perform search
+            function performSearch(query, resultsContainer) {
+                query = query.toLowerCase().trim();
+                
+                if (query.length < 2) {
+                    resultsContainer.style.display = 'none';
+                    return;
+                }
+                
+                const results = [];
+                
+                // Search through all content
+                searchableContent.forEach(section => {
+                    const sectionContent = section.content.toLowerCase();
+                    const title = section.title.toLowerCase();
+                    
+                    // Check if query matches section title
+                    if (title.includes(query)) {
+                        results.push({
+                            section: section.id,
+                            title: section.title,
+                            type: 'section',
+                            match: 'title'
+                        });
+                    }
+                    
+                    // Check if query matches keywords
+                    const keywordMatch = section.keywords.some(keyword => 
+                        keyword.toLowerCase().includes(query)
+                    );
+                    
+                    if (keywordMatch && !results.some(r => r.section === section.id)) {
+                        results.push({
+                            section: section.id,
+                            title: section.title,
+                            type: 'section',
+                            match: 'keyword'
+                        });
+                    }
+                    
+                    // Check if query appears in content (full-text search)
+                    if (sectionContent.includes(query) && !results.some(r => r.section === section.id)) {
+                        results.push({
+                            section: section.id,
+                            title: section.title,
+                            type: 'section',
+                            match: 'content'
+                        });
+                    }
+                });
+                
+                // Also search project-specific content
+                allProjects.forEach(project => {
+                    const projectName = project.name.toLowerCase();
+                    const projectDesc = project.description.toLowerCase();
+                    
+                    if (projectName.includes(query) || projectDesc.includes(query)) {
+                        results.push({
+                            section: 'projects-table',
+                            title: project.name,
+                            type: 'project',
+                            match: query,
+                            project: project
+                        });
+                    }
+                });
+                
+                // Track search
+                trackSearch(query, results.length);
+                
+                // Display results
+                displaySearchResults(results, query, resultsContainer);
+            }
+            
+            // Function to display search results
+            function displaySearchResults(results, query, resultsContainer) {
+                resultsContainer.innerHTML = '';
+                
+                if (results.length === 0) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'search-result-item';
+                    noResults.textContent = 'No results found for "' + query + '"';
+                    resultsContainer.appendChild(noResults);
+                } else {
+                    // Group results by section
+                    const groupedResults = {};
+                    
+                    results.forEach(result => {
+                        if (!groupedResults[result.section]) {
+                            groupedResults[result.section] = [];
+                        }
+                        groupedResults[result.section].push(result);
+                    });
+                    
+                    // Display grouped results
+                    Object.entries(groupedResults).forEach(([sectionId, sectionResults]) => {
+                        const sectionElement = document.getElementById(sectionId);
+                        const sectionTitle = sectionElement ? 
+                            sectionElement.querySelector('h2') ? 
+                            sectionElement.querySelector('h2').textContent : 
+                            sectionId.charAt(0).toUpperCase() + sectionId.slice(1) : 
+                            sectionId;
+                        
+                        const sectionHeader = document.createElement('div');
+                        sectionHeader.className = 'search-result-item';
+                        sectionHeader.style.fontWeight = 'bold';
+                        sectionHeader.style.backgroundColor = 'var(--glass-border)';
+                        sectionHeader.textContent = sectionTitle;
+                        resultsContainer.appendChild(sectionHeader);
+                        
+                        sectionResults.forEach(result => {
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'search-result-item';
+                            
+                            if (result.type === 'project') {
+                                resultItem.innerHTML = `
+                                    <div style="margin-bottom: 0.5rem;">
+                                        <strong>${result.title}</strong>
+                                    </div>
+                                    <div style="font-size: 0.9rem; color: var(--text-light);">
+                                        ${result.project.description}
+                                    </div>
+                                `;
+                            } else {
+                                resultItem.innerHTML = `
+                                    <div style="margin-bottom: 0.5rem;">
+                                        <strong>${result.title}</strong>
+                                    </div>
+                                    <div style="font-size: 0.9rem; color: var(--text-light);">
+                                        Found in ${result.match === 'title' ? 'title' : result.match === 'keyword' ? 'keywords' : 'content'}
+                                    </div>
+                                `;
+                            }
+                            
+                            resultItem.addEventListener('click', () => {
+                                // Navigate to the section
+                                const targetSection = document.getElementById(result.section);
+                                if (targetSection) {
+                                    scrollToElement(targetSection);
+                                    
+                                    // Highlight the section
+                                    targetSection.style.animation = 'none';
+                                    setTimeout(() => {
+                                        targetSection.style.animation = 'highlightPulse 1.5s';
+                                    }, 10);
+                                    
+                                    // Update active nav link
+                                    document.querySelectorAll('.nav-links a').forEach(link => {
+                                        link.classList.remove('active');
+                                        if (link.getAttribute('href') === `#${result.section}`) {
+                                            link.classList.add('active');
+                                        }
+                                    });
+                                    
+                                    // Track search result click
+                                    trackEvent('Search Result', 'click', result.title, 1);
+                                }
+                                
+                                // Close search results
+                                resultsContainer.style.display = 'none';
+                                searchInput.value = '';
+                                mobileSearchInput.value = '';
+                                
+                                // Close mobile menu if open
+                                if (navLinks.classList.contains('active')) {
+                                    navLinks.classList.remove('active');
+                                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                                    mobileSearch.style.display = 'none';
+                                    mobileNavActions.style.display = 'none';
+                                }
+                            });
+                            
+                            resultsContainer.appendChild(resultItem);
+                        });
+                    });
+                }
+                
+                resultsContainer.style.display = 'block';
+            }
+            
+            // Event listeners for search inputs
+            searchInput.addEventListener('input', () => {
+                performSearch(searchInput.value, searchResults);
+            });
+            
+            mobileSearchInput.addEventListener('input', () => {
+                performSearch(mobileSearchInput.value, mobileSearchResults);
+            });
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+                    searchResults.style.display = 'none';
+                }
+                if (!mobileSearchInput.contains(event.target) && !mobileSearchResults.contains(event.target)) {
+                    mobileSearchResults.style.display = 'none';
+                }
+            });
+            
+            // Initialize search on focus
+            searchInput.addEventListener('focus', () => {
+                if (searchInput.value.trim().length > 1) {
+                    performSearch(searchInput.value, searchResults);
+                }
+            });
+            
+            mobileSearchInput.addEventListener('focus', () => {
+                if (mobileSearchInput.value.trim().length > 1) {
+                    performSearch(mobileSearchInput.value, mobileSearchResults);
+                }
+            });
+            
+            // Track page visibility changes
+            document.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'visible') {
+                    trackEvent('Page', 'visibility', 'Page became visible', 1);
+                } else {
+                    trackEvent('Page', 'visibility', 'Page became hidden', 1);
+                }
+            });
+            
+            // Track page before unload
+            window.addEventListener('beforeunload', function() {
+                const timeSpent = Math.round((Date.now() - window.performance.timing.navigationStart) / 1000);
+                trackEvent('Session', 'duration', 'Time spent on page', timeSpent);
+            });
+            
+            // Track screen size
+            function trackScreenSize() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                const screenSize = `${width}x${height}`;
+                trackEvent('Device', 'screen_size', screenSize, 1);
+            }
+            
+            // Track screen size on load and resize
+            trackScreenSize();
+            window.addEventListener('resize', () => {
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(trackScreenSize, 500);
+            });
+        });
+    </script>
+</body>
+</html>
