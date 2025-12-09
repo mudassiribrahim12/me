@@ -65,6 +65,89 @@
             -moz-osx-font-smoothing: grayscale;
         }
         
+        /* Simple YouTube Section */
+.youtube-section-simple {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    border: 1px solid var(--border);
+}
+
+.youtube-player-simple {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.youtube-player-simple iframe {
+    display: block;
+    border: none;
+}
+.simple-youtube {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    border: 1px solid var(--border);
+}
+
+.youtube-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+/* YouTube Showcase Styles */
+.youtube-showcase {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    border: 1px solid var(--border);
+}
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.youtube-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.youtube-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-description {
+    text-align: center;
+    padding: var(--spacing-md);
+}
+
+.youtube-channel-btn {
+    margin-top: var(--spacing-sm);
+    background-color: #ff0000;
+}
+
+.youtube-channel-btn:hover {
+    background-color: #cc0000;
+}
+        
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', Georgia, serif;
             font-weight: 600;
@@ -545,6 +628,144 @@
             font-size: 1.25rem;
         }
         
+        /* YouTube Section */
+        .youtube-section {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+            border: 1px solid var(--border);
+        }
+        
+        .youtube-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-lg);
+        }
+        
+        .youtube-player-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .youtube-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #000;
+            border: none;
+        }
+        
+        .video-info {
+            padding: var(--spacing-md);
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .video-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-primary);
+        }
+        
+        .video-stats {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .video-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--spacing-md);
+        }
+        
+        .video-timer {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .timer-icon {
+            color: var(--accent);
+        }
+        
+        .playlist {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .playlist-item {
+            display: flex;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .playlist-item:hover {
+            background-color: var(--accent-light);
+            border-color: var(--accent);
+        }
+        
+        .playlist-item.active {
+            background-color: var(--accent-light);
+            border-color: var(--accent);
+        }
+        
+        .playlist-thumbnail {
+            width: 80px;
+            height: 45px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .playlist-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .playlist-info {
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .playlist-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .playlist-channel {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+        
+        .youtube-link {
+            text-align: center;
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border);
+        }
+        
         /* Footer */
         footer {
             background-color: var(--bg-secondary);
@@ -622,6 +843,10 @@
                 grid-template-columns: 1fr;
                 gap: var(--spacing-lg);
             }
+            
+            .youtube-container {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -687,6 +912,12 @@
             .modal-content {
                 margin: var(--spacing-md);
                 padding: var(--spacing-md);
+            }
+            
+            .video-controls {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                align-items: flex-start;
             }
         }
         
@@ -891,7 +1122,7 @@
                     <a href="https://onlinelibrary.wiley.com/doi/full/10.1155/2024/8862991" target="_blank" class="btn btn-outline mt-sm">Read Publication</a>
                 </div>
                 <div class="publication-item">
-                    <h3>Assessing the impact of nurses’ patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital</h3>
+                    <h3>Assessing the impact of nurses' patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital</h3>
                     <p class="publication-meta">BMC Health Services Research, 2025</p>
                     <p><strong>Authors:</strong> <strong><u>Ibrahim, M. M.</u></strong>, Abdul-Rahaman, F., Sayibu, M. S., Alhassan, D. N., Awudu, R. T., Sisala, I. M., Wuni, A., et al</p>
                     <p>The mediating role of leadership and barriers to competency development</p>
@@ -957,6 +1188,30 @@
                     <span>Tamale, Ghana</span>
                 </a>
             </div>
+            
+<!-- YouTube Section -->
+<div class="simple-youtube">
+    <h3 class="text-center mb-md">Watch My Video on YouTube</h3>
+    <div class="youtube-wrapper">
+        <!-- YouTube embed with proper parameters to avoid Error 153 -->
+        <iframe 
+            width="100%" 
+            height="400" 
+            src="https://www.youtube.com/embed/dJbeWr5AyKg?si=CNDbjl1hZKX3m1Rk" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    <div class="text-center mt-md">
+        <a href="https://www.youtube.com/@mudasirmohammedibrahim1026/videos" target="_blank" class="btn" style="background-color: #ff0000;">
+            <i class="fab fa-youtube"></i> Visit My YouTube Channel
+        </a>
+    </div>
+</div>
+
+
             <div class="text-center mt-lg">
                 <a href="https://wa.me/233549343058" target="_blank" class="btn" style="margin-right: 1rem;">
                     <i class="fab fa-whatsapp"></i> WhatsApp
@@ -1013,8 +1268,9 @@
             // Initialize modal
             initModal();
             
-            // Smooth scrolling
+            // Initialize smooth scrolling
             initSmoothScroll();
+            
         });
 
         // All 20 R Shiny Applications Data
