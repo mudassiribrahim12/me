@@ -830,25 +830,7 @@
         }
         
         /* Responsive Design */
-        @media (max-width: 992px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-lg);
-            }
-            
-            .publications-grid {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-lg);
-            }
-            
-            .youtube-container {
-                grid-template-columns: 1fr;
-            }
-        }
-        
+      
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -921,6 +903,86 @@
             }
         }
         
+        /* Add new mobile-first responsive styles */
+@media (max-width: 992px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    
+    /* FIX: Make all grid layouts single column on tablets and phones */
+    .about-grid,
+    .publications-grid,
+    .youtube-container,
+    .projects-grid,
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--spacing-md);
+    }
+    
+    /* FIX: Ensure contact form is single column */
+    .contact-form-container .form-row {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* FIX: Make timeline single column with better spacing */
+    .timeline:before {
+        left: 15px;
+    }
+    
+    .timeline-item {
+        padding-left: 50px;
+    }
+    
+    .timeline-date {
+        width: 40px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Additional fixes for very small screens */
+@media (max-width: 480px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    
+    /* FIX: Reduce padding on sections for small screens */
+    section {
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    /* FIX: Make social icons smaller on mobile */
+    .social-icons a {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    /* FIX: Adjust YouTube iframe height */
+    .youtube-wrapper iframe {
+        height: 250px;
+    }
+    
+    /* FIX: Make contact links stack vertically */
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    /* FIX: Adjust project actions for small screens */
+    .project-actions {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .project-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+        
         /* Utility Classes */
         .text-center { text-align: center; }
         .mb-sm { margin-bottom: var(--spacing-sm); }
@@ -929,6 +991,82 @@
         .mt-sm { margin-top: var(--spacing-sm); }
         .mt-md { margin-top: var(--spacing-md); }
         .mt-lg { margin-top: var(--spacing-lg); }
+        
+        /* Fix for contact form layout */
+.contact-form-container .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .contact-form-container .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Fix for timeline on mobile */
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 20px;
+    }
+    
+    .timeline:before {
+        left: 10px;
+    }
+    
+    .timeline-item {
+        padding-left: 40px;
+    }
+    
+    .timeline-date {
+        width: 30px;
+        font-size: 0.7rem;
+        text-align: left;
+    }
+}
+
+/* Fix for publication grid on mobile */
+.publications-grid {
+    display: block;
+}
+
+@media (min-width: 992px) {
+    .publications-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--spacing-xl);
+    }
+}
+
+/* Fix for YouTube section */
+.youtube-container {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .youtube-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--spacing-lg);
+    }
+}
+
+/* Fix for about section grid */
+.about-grid {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: var(--spacing-xl);
+        align-items: start;
+    }
+}
+        
     </style>
 </head>
 <body>
