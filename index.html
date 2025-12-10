@@ -234,7 +234,7 @@
         
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--text-primary);
             text-decoration: none;
@@ -244,21 +244,23 @@
             color: var(--accent);
         }
         
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: var(--spacing-lg);
-        }
-        
-        .nav-links a {
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: relative;
-            padding: 0.5rem 0;
-        }
+       .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0.75rem; /* Reduced from var(--spacing-lg) = 2rem to 0.75rem */
+    padding: 0 0.5rem; /* Optional: add small horizontal padding */
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.9rem; /* Slightly smaller font */
+    text-transform: uppercase;
+    letter-spacing: 0.3px; /* Reduced letter spacing */
+    position: relative;
+    padding: 0.4rem 0.5rem; /* Reduced vertical padding */
+    white-space: nowrap; /* Prevent text wrapping */
+}
         
         .nav-links a:after {
             content: '';
@@ -335,6 +337,30 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Blog Button Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive blog section */
+@media (max-width: 768px) {
+    #blog .btn {
+        padding: 0.875rem 1.5rem !important;
+        font-size: 1rem !important;
     }
 }
 
@@ -1290,7 +1316,7 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">Mudasir M.<span> Ibrahim</span></a>
+            <a href="#" class="logo">Mr. Mudasir Mohammed <span> Ibrahim</span></a>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
@@ -1298,7 +1324,9 @@
                     <li><a href="#education">Education</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#publications">Publications</a></li>
+                    <li><a href="#blog">Blog</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    
                 </ul>
             </nav>
            
@@ -1335,6 +1363,7 @@
             <a href="#education">Education</a>
             <a href="#projects">Projects</a>
             <a href="#publications">Publications</a>
+            <a href="#blog">Blog</a>
             <a href="#contact">Contact</a>
         </div>
     </header>
@@ -1534,6 +1563,63 @@
                     </a>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section id="blog" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <h2 class="text-center">Blog Posts</h2>
+        <p class="text-center mb-lg" style="max-width: 800px; margin: 0 auto;">
+            I share insights on anything 
+            and on the R Shiny web applications. Visit my blog for regular updates!
+        </p>
+        
+        <div style="text-align: center; padding: var(--spacing-lg); background-color: var(--bg-primary); border-radius: 12px; border: 1px solid var(--border);">
+            <div style="margin-bottom: var(--spacing-md);">
+                <i class="fas fa-blog" style="font-size: 4rem; color: var(--accent); margin-bottom: var(--spacing-md);"></i>
+                <h3>My Google Blogger</h3>
+                <p style="margin-bottom: var(--spacing-md);">
+                    Read my latest blogs on healthcare research, nursing, data analysis, 
+                    and technology in healthcare.
+                </p>
+            </div>
+            
+            <!-- Main Blog Button -->
+            <div style="position: relative; margin-top: var(--spacing-xl);">
+                <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" class="btn" 
+                   style="background: linear-gradient(135deg, #ff5722, #ff9800); color: white; 
+                          padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 600;
+                          box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+                          position: relative; z-index: 1;">
+                    <i class="fas fa-external-link-alt"></i> Visit My Blog
+                </a>
+            </div>
+            
+            <!-- Blog Stats -->
+            <div style="display: flex; justify-content: center; gap: var(--spacing-lg); margin-top: var(--spacing-xl); 
+                      flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Regular</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Updates</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Healthcare</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Focus</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Research</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Insights</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Note -->
+        <div class="text-center mt-lg">
+            <p style="color: var(--text-tertiary); font-style: italic;">
+                (Blog content is powered by Blogger. Click the button above to read all posts.)
+            </p>
         </div>
     </div>
 </section>
@@ -2007,28 +2093,30 @@ function initTheme() {
         }
 
         // Smooth Scroll
-        function initSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetElement.offsetTop - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
+      function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            // Don't prevent default for external links
+            const targetId = this.getAttribute('href');
+            if (targetId.startsWith('http')) return; // Skip external links
+            
+            e.preventDefault();
+            
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
-            });
-        }
-
+            }
+        });
+    });
+}
         // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
@@ -2655,5 +2743,20 @@ function closeSearch() {
         }
         
     </script>
+    
+    <!-- Floating Blog Button -->
+<a href="https://mudasir-ibrahim.blogspot.com" target="_blank" 
+   class="floating-blog-btn"
+   style="position: fixed; bottom: 30px; right: 30px; z-index: 999;
+          background: linear-gradient(135deg, #ff5722, #ff9800);
+          color: white; padding: 1rem 1.5rem; border-radius: 50px;
+          box-shadow: 0 4px 20px rgba(255, 87, 34, 0.4);
+          text-decoration: none; font-weight: 600; display: flex;
+          align-items: center; gap: 0.5rem; transition: all 0.3s ease;
+          animation: pulse 2s infinite;">
+    <i class="fas fa-blog"></i>
+    <span>Blog</span>
+</a>
+    
 </body>
 </html>
