@@ -8,6 +8,8 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%233498db'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='0.35em' font-family='Arial, sans-serif' font-weight='bold' font-size='45' fill='white'%3EMMI%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    
     <style>
         /* Reset & Base Styles */
         * {
@@ -185,12 +187,13 @@
             margin-bottom: var(--spacing-sm);
         }
         
-        p {
-            margin-bottom: var(--spacing-sm);
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            line-height: 1.7;
-        }
+p {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary); /* Use theme variable */
+    font-size: 1.125rem;
+    line-height: 1.7;
+    font-weight: 400;
+}
         
         a {
             color: var(--accent);
@@ -213,18 +216,18 @@
             padding: var(--spacing-xl) 0;
         }
         
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            background-color: var(--bg-primary);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            transition: var(--transition);
-        }
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: #000000; /* Changed to black */
+    border-bottom: 1px solid #333333; /* Darker border for black background */
+    z-index: 1000;
+    transition: var(--transition);
+}
         
 /* Add after existing header styles */
 .header-container {
@@ -248,16 +251,16 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #ffffff; /* Changed to white */
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
     margin: 0;
     padding: 0;
-    margin-left: 0 !important; /* Force no left margin */
+    margin-left: 0 !important;
     position: relative;
-    left: -10px; /* Additional adjustment if needed */
+    left: -10px;
 }
 
 /* NEW: Better header layout with professional spacing */
@@ -306,18 +309,29 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--text-primary);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
     margin: 0;
     padding: 0;
+    margin-left: 0 !important;
+    position: relative;
+    left: -10px;
+    color: #ffffff; /* Set base color to white */
 }
-        
+
+/* Make all parts of the logo white */
+.logo,
 .logo span {
-    color: var(--accent);
-    margin-left: 0.2rem;
+    color: #ffffff !important;
+}
+
+/* Remove hover color change on logo */
+.logo:hover,
+.logo:hover span {
+    color: #ffffff !important;
+    opacity: 0.9; /* Just slightly fade on hover instead of changing color */
 }
         
  .nav-links {
@@ -329,13 +343,13 @@
 }
 
 .nav-links a {
-    color: var(--text-primary);
+    color: #ffffff; /* Changed to white */
     font-weight: 500;
-    font-size: 0.95rem; /* Increased from 0.9rem */
+    font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px; /* Increased from 0.3px */
+    letter-spacing: 0.5px;
     position: relative;
-    padding: 0.5rem 0.75rem; /* Increased padding */
+    padding: 0.5rem 0.75rem;
     white-space: nowrap;
 }
         
@@ -369,7 +383,7 @@
 .search-toggle {
     background: none;
     border: none;
-    color: var(--text-primary);
+    color: #ffffff; /* Changed to white */
     font-size: 1.2rem;
     cursor: pointer;
     padding: 0.5rem;
@@ -383,7 +397,7 @@
 }
 
 .search-toggle:hover {
-    background-color: var(--accent-light);
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter hover for dark background */
 }
 
 .search-dropdown {
@@ -391,7 +405,7 @@
     top: 100%;
     right: 0;
     width: 300px;
-    background-color: var(--bg-primary);
+    background-color: #ffffff; /* Keep white for dropdown */
     border: 1px solid var(--border);
     border-radius: 8px;
     box-shadow: var(--shadow);
@@ -559,28 +573,28 @@
     }
 }
         
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: var(--transition);
-        }
-        
-        .theme-toggle:hover {
-            background-color: var(--accent-light);
-        }
-        
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-primary);
-        }
-        
+      .theme-toggle {
+    background: none;
+    border: none;
+    color: #ffffff; /* Changed to white */
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter hover for dark background */
+}
+
+.mobile-menu {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ffffff; /* Changed to white */
+}
+
         /* Hero Section */
         .hero {
             padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl);
@@ -1125,12 +1139,43 @@
             border-top: 1px solid var(--border);
         }
         
-        /* Footer */
-        footer {
-            background-color: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: var(--spacing-xl) 0;
-        }
+/* Footer */
+footer {
+    background-color: #000000; /* Black background */
+    border-top: 1px solid #333333; /* Dark gray border */
+    padding: var(--spacing-xl) 0;
+}
+
+/* Footer text colors */
+footer .copyright {
+    color: #ffffff !important; /* White text */
+    font-weight: 500;
+}
+
+footer .developer-note {
+    color: #bbbbbb !important; /* Light gray text */
+}
+
+/* Footer links */
+footer .footer-links a {
+    color: #ffffff !important; /* White links */
+    transition: opacity 0.3s ease;
+}
+
+footer .footer-links a:hover {
+    color: #ffffff !important; /* Stay white on hover */
+    opacity: 0.7; /* Slight fade effect */
+    text-decoration: underline;
+}
+
+/* Ensure dark theme doesn't override footer colors */
+body.dark-theme footer {
+    background-color: #000000 !important;
+}
+
+body.dark-theme footer * {
+    color: #ffffff !important;
+}
         
         .footer-content {
             display: flex;
@@ -1199,27 +1244,27 @@
                 display: block;
             }
             
-            .mobile-nav {
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                background-color: var(--bg-primary);
-                border-bottom: 1px solid var(--border);
-                padding: var(--spacing-md);
-                display: none;
-                z-index: 999;
-            }
-            
+           .mobile-nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background-color: #000000; /* Changed to black */
+    border-bottom: 1px solid #333333;
+    padding: var(--spacing-md);
+    display: none;
+    z-index: 999;
+}            
             .mobile-nav.active {
                 display: block;
             }
             
-            .mobile-nav a {
-                display: block;
-                padding: var(--spacing-sm) 0;
-                border-bottom: 1px solid var(--border);
-            }
+.mobile-nav a {
+    display: block;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid #333333;
+    color: #ffffff; /* Changed to white */
+}
             
             .skills-grid {
                 grid-template-columns: 1fr;
@@ -1408,6 +1453,76 @@
     }
 }
 
+/* Enhanced text visibility for magazine-style readability */
+p, .text-tertiary, .skill-description, .publication-meta, .contact-info p {
+    color: var(--text-primary) !important; /* Use theme variable */
+    font-size: 1.125rem !important;
+    line-height: 1.7 !important;
+    font-weight: 400 !important;
+}
+
+/* Make timeline content more prominent */
+.timeline-content h3 {
+    color: #000000 !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.timeline-content .text-tertiary {
+    color: #333333 !important; /* Dark gray instead of light gray */
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+/* Enhanced paragraph visibility */
+.about-grid p {
+    color: #000000 !important;
+    font-size: 1.125rem !important;
+    line-height: 1.7 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* Better contrast for all text elements */
+.hero-description, .personal-intro p, .quote-section blockquote {
+    color: #000000 !important;
+}
+
+/* Publication text improvements */
+.publication-item h3 {
+    color: #000000 !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.publication-meta {
+    color: #333333 !important; /* Darker gray for better visibility */
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.publication-item p {
+    color: #000000 !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+}
+
+/* Contact section text improvements */
+.contact-info p {
+    color: #000000 !important;
+    font-size: 1.125rem !important;
+    line-height: 1.7 !important;
+    max-width: 800px !important;
+    margin: 0 auto 2rem !important;
+}
+
+/* Blog section text improvements */
+#blog p {
+    color: #000000 !important;
+    font-size: 1.125rem !important;
+    line-height: 1.7 !important;
+}
+
 /* Fix for timeline on mobile */
 @media (max-width: 768px) {
     .timeline {
@@ -1541,13 +1656,14 @@ section:not(.hero):hover {
 
 /* Subtle navigation */
 .nav-links a {
-    color: var(--text-secondary);
+    color: #ffffff; /* This is already white, but may be overridden */
     font-weight: 500;
     font-size: 0.95rem;
-    text-transform: none;
-    letter-spacing: 0;
-    padding: 0.5rem 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     position: relative;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -1787,7 +1903,87 @@ section {
     .about-grid {
         gap: var(--spacing-lg);
     }
-}   
+}  
+
+/* Dark Theme Text Color Fixes */
+body.dark-theme {
+    /* Ensure all text uses white/light colors */
+    color: var(--text-primary);
+}
+
+body.dark-theme p,
+body.dark-theme .text-tertiary,
+body.dark-theme .skill-description,
+body.dark-theme .publication-meta,
+body.dark-theme .contact-info p,
+body.dark-theme .hero-description,
+body.dark-theme .personal-intro p,
+body.dark-theme .quote-section blockquote,
+body.dark-theme .quote-section cite,
+body.dark-theme .highlight-item strong,
+body.dark-theme .highlight-item span,
+body.dark-theme .publication-item h3,
+body.dark-theme .publication-item p,
+body.dark-theme #blog p,
+body.dark-theme .timeline-content h3,
+body.dark-theme .timeline-content .text-tertiary,
+body.dark-theme .about-grid p,
+body.dark-theme .sidebar p,
+body.dark-theme .sidebar li,
+body.dark-theme .education-details p,
+body.dark-theme .education-details h3 {
+    color: var(--text-primary) !important;
+}
+
+/* Dark theme for timeline subtitles */
+body.dark-theme .timeline-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+/* Dark theme for hero subtitle */
+body.dark-theme .hero-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+/* Dark theme for publication meta */
+body.dark-theme .publication-meta {
+    color: var(--text-tertiary) !important;
+}
+
+/* Dark theme for blog note */
+body.dark-theme #blog .text-center p {
+    color: var(--text-tertiary) !important;
+}
+
+/* Education grid dark theme */
+body.dark-theme .education-details h3 {
+    color: var(--text-primary) !important;
+}
+
+body.dark-theme .education-details p {
+    color: var(--text-secondary) !important;
+}
+
+body.dark-theme .education-year {
+    color: var(--accent) !important;
+}
+
+/* Hero section dark theme fixes */
+body.dark-theme .hero {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+}
+
+body.dark-theme .hero h1,
+body.dark-theme .hero .hero-subtitle,
+body.dark-theme .hero .hero-description,
+body.dark-theme .hero .professional-badge {
+    color: var(--text-primary) !important;
+}
+
+body.dark-theme .professional-badge {
+    background: linear-gradient(135deg, var(--accent), #4299e1);
+}
+
     </style>
 </head>
 <body>
@@ -1796,7 +1992,7 @@ section {
     <div class="container header-container">
         <!-- Logo container for better positioning -->
         <div class="logo-container">
-          <a href="/" class="logo" id="logoLink">MUDASIR MOHAMMED <span>IBRAHIM</span></a>
+          <a href="/" class="logo" id="logoLink">MUDASIR M. IBRAHIM <span></span></a>
         </div>
         
         <!-- Navigation container -->
@@ -1804,7 +2000,7 @@ section {
             <nav>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#about">About Me</a></li>
                     <li><a href="#education">Education</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#publications">Publications</a></li>
@@ -1843,7 +2039,7 @@ section {
     
     <div class="mobile-nav" id="mobileNav">
         <a href="#home">Home</a>
-        <a href="#about">About</a>
+        <a href="#about">About Me</a>
         <a href="#education">Education</a>
         <a href="#projects">Projects</a>
         <a href="#publications">Publications</a>
@@ -1855,8 +2051,14 @@ section {
         <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <h1 class="mb-sm">Mudasir Mohammed Ibrahim</h1>
-            <div class="hero-subtitle">Registered General Nurse</div>
+<div class="professional-badge" style="background: linear-gradient(135deg, var(--accent), #4299e1); color: white; padding: 0.75rem 2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(26, 95, 180, 0.3);">
+    <i class="fas fa-user-md" style="font-size: 1.2rem;"></i>
+    <div style="text-align: left;">
+
+    </div>
+</div>
+<h1 class="mb-sm">Building open, accessible data tools that advance healthcare for all.</h1>
+<div class="hero-subtitle">Registered General Nurse | R Shiny Developer</div>
             
             <!-- Quote Section -->
             <div class="quote-section" style="margin: var(--spacing-lg) auto; max-width: 700px; text-align: center;">
@@ -1875,7 +2077,7 @@ section {
             <!-- Personal Introduction -->
             <div class="personal-intro" style="max-width: 800px; margin: 0 auto;">
                 <p class="hero-description" style="font-size: 1.2rem; line-height: 1.7;">
-                    During my leisure time, I create accessible R Shiny web applications that simplify complex analyses for healthcare professionals, students, and researchers — bridging clinical practice with data-driven solutions.
+                    Welcome! I’m Mudasir Mohammed Ibrahim, a healthcare professional and data enthusiast. In my free time, I design accessible R Shiny applications to make complex analyses easier and more intuitive for healthcare professionals, students, and researchers.
                 </p>
                 
                 <div class="highlight-points" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm); margin: var(--spacing-md) 0;">
@@ -1919,73 +2121,80 @@ section {
                 </a>
             </div>
             
-            <div class="cta-buttons" style="display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-lg);">
-                <a href="#projects" class="btn" style="padding: 0.875rem 2rem;">
-                    <i class="fas fa-code"></i> View My Projects
-                </a>
-                <a href="#about" class="btn btn-outline" style="padding: 0.875rem 2rem;">
-                    <i class="fas fa-user"></i> Learn More About Me
-                </a>
-            </div>
+<div class="cta-buttons" style="display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-lg);">
+    <a href="#projects" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem;">
+        <i class="fas fa-code"></i> View My Projects
+    </a>
+    <a href="#about" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem;">
+        <i class="fas fa-user"></i> Learn More About Me
+    </a>
+</div>
         </div>
     </section>
     
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2>About</h2>
-            <div class="about-grid">
-                <div class="profile-img-container">
-                    <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my picture.jpg" alt="Mudasir Mohammed Ibrahim" class="profile-img">
+  <!-- About Section -->
+<section id="about">
+    <div class="container">
+        <h2>About Me</h2>
+        <div class="about-grid">
+            <div class="profile-img-container">
+                <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my picture.jpg" alt="Mudasir Mohammed Ibrahim" class="profile-img">
+                
+                <!-- CV Download Button Only -->
+                <div class="cv-download-section" style="margin-top: var(--spacing-md); text-align: center;">
+                    <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" 
+                       target="_blank" 
+                       class="btn" 
+                       style="background: linear-gradient(135deg, #1a5fb4, #4299e1); 
+                              color: white; 
+                              padding: 0.75rem 1.5rem;
+                              border-radius: 8px;
+                              display: inline-flex;
+                              align-items: center;
+                              gap: 0.5rem;
+                              text-decoration: none;
+                              font-weight: 600;
+                              transition: all 0.3s ease;
+                              width: 100%;
+                              max-width: 200px;
+                              justify-content: center;">
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
                 </div>
-                <div>
-                    <p>
-    Mudasir Mohammed Ibrahim is a Ghanaian nurse and researcher whose journey has been shaped by resilience, self-determination, and a deep commitment to improving health outcomes. Inspired by his mother’s tireless work as a market trader, he pursued education against significant obstacles. Although he studied Business (Cost Accounting) in high school, he was determined to become a nurse. He independently taught himself key science subjects, rewrote the necessary exams as a private candidate, earned the required credentials, enrolled in nursing school, and successfully graduated.
-</p>
+            </div>
+            <div>
+                <!-- Rest of your about content remains here -->
+                <p>
+                    Mudasir Mohammed Ibrahim is a Ghanaian nurse and researcher whose journey has been shaped by resilience, self-determination, and a deep commitment to improving health outcomes. Inspired by his mother's tireless work as a market trader, he pursued education against significant obstacles. Although he studied Business (Cost Accounting) in high school, he was determined to become a nurse. He independently taught himself key science subjects, rewrote the necessary exams as a private candidate, earned the required credentials, enrolled in nursing school, and successfully graduated.
+                </p>
 
-<p>
-    He now serves at Tamale Teaching Hospital, providing high-quality, patient-centered care to patients with complex medical conditions. Alongside his clinical work, Mudasir has built a strong research career, beginning as a research assistant and growing into an experienced researcher and lead data analyst on multiple population-health projects. His background in business, coupled with his curiosity and determination, led him to independently master advanced quantitative methods, including regression modeling, Structural Equation Modeling (SEM), factor analysis, and survival analysis.
-</p>
+                <p>
+                    He now serves at Tamale Teaching Hospital, providing high-quality, patient-centered care to patients with complex medical conditions. Alongside his clinical work, Mudasir has built a strong research career, beginning as a research assistant and growing into an experienced researcher and lead data analyst on multiple population-health projects. His background in business, coupled with his curiosity and determination, led him to independently master advanced quantitative methods, including regression modeling, Structural Equation Modeling (SEM), factor analysis, and survival analysis.
+                </p>
 
-<p>
-    Motivated by a passion for biostatistics and data-driven solutions, he has developed several open-source R Shiny web applications to simplify complex analyses for healthcare professionals, students, and researchers. His work bridges clinical practice and data science, reflecting a commitment to both individual patient care and population-level prevention. Mudasir aims to advance his expertise in Epidemiology and Translational Science to better understand disease patterns, strengthen prevention strategies, and contribute to equitable health systems in Ghana and beyond.
-</p>
+                <p>
+                    Motivated by a passion for biostatistics and data-driven solutions, he has developed several open-source R Shiny web applications to simplify complex analyses for healthcare professionals, students, and researchers. His work bridges clinical practice and data science, reflecting a commitment to both individual patient care and population-level prevention. Mudasir aims to advance his expertise in Epidemiology and Translational Science to better understand disease patterns, strengthen prevention strategies, and contribute to equitable health systems in Ghana and beyond.
+                </p>
 
-                    
-                    <div class="research-interests">
-    <h3>Research Interests</h3>
-    <div class="interest-tags">
-        <span class="interest-tag">Chronic Diseases Epidemiology</span>
-        <span class="interest-tag">Maternal and Child Health</span>
-        <span class="interest-tag">Public Health</span>
-        <span class="interest-tag">Workplace Issues</span>
-        <span class="interest-tag">Healthcare Data Analytics</span>
-        <span class="interest-tag">Nursing Informatics</span>
-    </div>
-</div>
+                <div class="research-interests">
+                    <h3>Research Interests</h3>
+                    <div class="interest-tags">
+                        <span class="interest-tag">Chronic Diseases Epidemiology</span>
+                        <span class="interest-tag">Maternal and Child Health</span>
+                        <span class="interest-tag">Public Health</span>
+                        <span class="interest-tag">Workplace Issues</span>
+                        <span class="interest-tag">Healthcare Data Analytics</span>
+                        <span class="interest-tag">Nursing Informatics</span>
+                    </div>
+                </div>
 
-<div class="research-interests" style="margin-top: var(--spacing-lg);">
+             <div class="research-interests" style="margin-top: var(--spacing-lg);">
     <h3>Professional Credentials</h3>
-    <div class="interest-tags">
-        <span class="interest-tag" style="background-color: #1a5fb4; color: white;">
-            <i class="fas fa-id-card"></i> NMC Licensed Nurse
-        </span>
-        <span class="interest-tag" style="background-color: #2a6e2a; color: white;">
-            <i class="fas fa-users"></i> GRNMA Member
-        </span>
-        <span class="interest-tag" style="background-color: #8b4513; color: white;">
-            <i class="fas fa-hospital"></i> Tamale Teaching Hospital
-        </span>
-        <span class="interest-tag" style="background-color: #8a2be2; color: white;">
-            <i class="fas fa-stethoscope"></i> Registered General Nurse
-        </span>
-    </div>
-    <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-secondary);">
-        Fully licensed by the Nursing and Midwifery Council of Ghana (NMC) and an active member of the Ghana Registered Nurses and Midwives Association (GRNMA), maintaining professional standards and continuous development in nursing practice at Tamale Teaching Hospital.
+<p style="margin-top: 1rem; font-size: 1.05rem; color: var(--text-primary); line-height: 1.7; font-weight: 400;">
+        Fully licensed by the <strong>Nursing and Midwifery Council of Ghana (NMC)</strong> and an active member of the <strong>Ghana Registered Nurses and Midwives Association (GRNMA)</strong>, maintaining professional standards and continuous development in nursing practice at Tamale Teaching Hospital.
     </p>
 </div>
-              
- <div class="skills">
+            <div class="skills">
     <h3>Core Competencies</h3>
     <div class="skills-grid">
         <div class="skill-item">
@@ -1993,7 +2202,7 @@ section {
             <div class="skill-bar">
                 <div class="skill-level" style="width: 100%"></div>
             </div>
-            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+            <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
                 Comprehensive nursing care, patient assessment, medication administration, and holistic healthcare delivery
             </p>
         </div>
@@ -2002,7 +2211,7 @@ section {
             <div class="skill-bar">
                 <div class="skill-level" style="width: 100%"></div>
             </div>
-            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+            <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
                 Research design, data collection, ethical considerations, and evidence-based practice implementation
             </p>
         </div>
@@ -2011,7 +2220,7 @@ section {
             <div class="skill-bar">
                 <div class="skill-level" style="width: 100%"></div>
             </div>
-            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+            <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
                 SEM, factor analysis, regression modeling, and complex statistical methods for healthcare data
             </p>
         </div>
@@ -2020,7 +2229,7 @@ section {
             <div class="skill-bar">
                 <div class="skill-level" style="width: 100%"></div>
             </div>
-            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+            <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
                 AI-assisted coding of interactive web applications for healthcare data analysis and visualization
             </p>
         </div>
@@ -2029,7 +2238,7 @@ section {
             <div class="skill-bar">
                 <div class="skill-level" style="width: 100%"></div>
             </div>
-            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+            <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
                 Manuscript preparation, journal submissions, and critical review for international healthcare journals
             </p>
         </div>
@@ -2038,68 +2247,64 @@ section {
             <div class="skill-bar">
                 <div class="skill-level" style="width: 100%"></div>
             </div>
-            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+            <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
                 Data cleaning, preprocessing, analysis, and visualization for healthcare research and decision-making
             </p>
         </div>
     </div>
 </div>
- 
- </div>
-              </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-       <!-- Education & Work Section -->
-    <section id="education" style="background-color: var(--bg-secondary);">
-        <div class="container">
-            <h2>Education & Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2025 - Present</div>
-                    <div class="timeline-content">
-                        <h3>Staff Nurse</h3>
-                        <p class="text-tertiary">Tamale Teaching Hospital</p>
-                        <p>Works in the Internal Medicine Department (Medical 3) at the hospital, providing high-quality, comprehensive nursing care for patients with both chronic and acute medical conditions, including cancer, hypertension, congestive cardiac failure, chronic liver disease, and chronic kidney disease. Performs thorough patient assessments, administers prescribed medications, closely monitors patient outcomes, and provides education to patients and their families to promote understanding, adherence, and overall well-being.</p>
-                    </div>
+<!-- Education & Work Section - Grid Version -->
+<section id="education" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <h2>Education & Experience</h2>
+        <div class="education-grid">
+            <div class="education-item">
+                <div class="education-year">2025 - Present</div>
+                <div class="education-details">
+                    <h3>Staff Nurse</h3>
+                    <p>Tamale Teaching Hospital</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2022 - 2024</div>
-                    <div class="timeline-content">
-                        <h3>Bachelor of Science in Nursing</h3>
-                        <p class="text-tertiary">University of Cape Coast</p>
-                        <p>Completed advanced education in nursing, gaining in-depth knowledge and practical skills in patient care, clinical assessment, and healthcare management. Studies provided a strong foundation in evidence-based practice, critical thinking, and leadership in healthcare settings, preparing for both clinical and research roles in nursing.</p>
-                    </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-year">2022 - 2024</div>
+                <div class="education-details">
+                    <h3>BSc Nursing</h3>
+                    <p>University of Cape Coast</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2021 - 2022</div>
-                    <div class="timeline-content">
-                        <h3>Rotation Nurse</h3>
-                        <p class="text-tertiary">Tamale Teaching Hospital</p>
-                        <p>Gained comprehensive clinical experience across diverse hospital departments, including Public Health, Internal Medicine, Pediatrics, Emergency, and Oncology. Engaged actively in patient care by performing thorough nursing assessments, administering prescribed medications, and closely monitoring patient progress to ensure optimal recovery and safety. Collaborated with the Child Welfare Clinic (CWC) to conduct routine health assessments, provide immunizations, and deliver health education to parents and caregivers. Additionally, offered compassionate emotional support to patients and families, particularly in sensitive areas such as pediatric oncology, fostering trust and promoting holistic care.</p>
-                    </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-year">2021 - 2022</div>
+                <div class="education-details">
+                    <h3>Rotation Nurse</h3>
+                    <p>Tamale Teaching Hospital</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2017 - 2020</div>
-                    <div class="timeline-content">
-                        <h3>Diploma in General Nursing</h3>
-                        <p class="text-tertiary">Nurses' and Midwives' Training College, Tamale</p>
-                        <p>Completed foundational nursing education and clinical training at the college. The training included numerous district clinical practicums, which strengthened practical skills and patient care abilities. Successfully completed studies at Kwame Nkrumah University of Science and Technology (KNUST), graduated from the college, and obtained a license as a registered general nurse from the Nursing and Midwifery Council of Ghana (NMC). This period also marked the beginning of a research journey through involvement with the college research supervisor, Mr. Abubakari Wuni, with continued affiliation with the college until employment at Tamale Teaching Hospital in 2025.</p>
-                    </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-year">2017 - 2020</div>
+                <div class="education-details">
+                    <h3>Diploma in Nursing</h3>
+                    <p>Nurses' & Midwives' Training College, Tamale</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2013 - 2016</div>
-                    <div class="timeline-content">
-                        <h3>Business (Cost Accounting)</h3>
-                        <p class="text-tertiary">Northern School of Business (NOBISCO), Tamale</p>
-                        <p>Completed high school education with a focus on Business (Cost Accounting). This foundational business education provided early exposure to analytical thinking, financial management principles, and problem-solving skills. The business background has proven valuable in understanding healthcare administration, resource management, data analysis, and data-driven decision-making in clinical settings.</p>
-                    </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-year">2013 - 2016</div>
+                <div class="education-details">
+                    <h3>Business (Cost Accounting)</h3>
+                    <p>Northern School of Business (NOBISCO)</p>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
@@ -2107,9 +2312,11 @@ section {
             <div class="projects-grid" id="featuredProjectsGrid">
                 <!-- Featured projects will be loaded here -->
             </div>
-            <div class="view-all">
-                <button id="viewAllProjectsBtn" class="btn btn-outline">View All Applications</button>
-            </div>
+<div class="view-all">
+    <button id="viewAllProjectsBtn" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        <i class="fas fa-layer-group"></i> View All Applications
+    </button>
+</div>
         </div>
     </section>
 
@@ -2124,27 +2331,33 @@ section {
                     <p class="publication-meta">Journal of Nursing Management, 2024</p>
                     <p><strong>Authors:</strong> <strong><u>Ibrahim, M. M.</u></strong>, Wuni, A., Salisu, W. J., Abdulai, A., Owusua, T., Nyarko, B. A., Sayibu, A., et al</p>
                     <p>Insights from Nurse Managers in Northern Ghana—A Qualitative Inquiry</p>
-                    <a href="https://onlinelibrary.wiley.com/doi/full/10.1155/2024/8862991" target="_blank" class="btn btn-outline mt-sm">Read Publication</a>
+                    <a href="https://onlinelibrary.wiley.com/doi/full/10.1155/2024/8862991" target="_blank" class="btn mt-sm" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+    <i class="fas fa-external-link-alt"></i> Read Publication
+</a>
                 </div>
                 <div class="publication-item">
                     <h3>Assessing the impact of nurses' patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital</h3>
                     <p class="publication-meta">BMC Health Services Research, 2025</p>
                     <p><strong>Authors:</strong> <strong><u>Ibrahim, M. M.</u></strong>, Abdul-Rahaman, F., Sayibu, M. S., Alhassan, D. N., Awudu, R. T., Sisala, I. M., Wuni, A., et al</p>
                     <p>The mediating role of leadership and barriers to competency development</p>
-                    <a href="https://link.springer.com/article/10.1186/s12913-025-13384-3" target="_blank" class="btn btn-outline mt-sm">Read Publication</a>
+                    <a href="https://link.springer.com/article/10.1186/s12913-025-13384-3" target="_blank" class="btn mt-sm" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+    <i class="fas fa-external-link-alt"></i> Read Publication
+</a>
                 </div>
                 <div class="publication-item">
                     <h3>Patterns and temporal trends in childhood cancer incidence in northern Ghana</h3>
                     <p class="publication-meta">BMC Pediatrics, 2025</p>
                     <p><strong>Authors:</strong> Wuni, A., <strong><u>Ibrahim, M. M.</u></strong>, Tonlaar, P. S., Sisala, I. M., Awal, I., Nyarko, B. A., Abdulai, A., et al</p>
                     <p>Evidence from medical records, 2016 to 2023</p>
-                    <a href="https://link.springer.com/article/10.1186/s12887-025-06141-2" target="_blank" class="btn btn-outline mt-sm">Read Publication</a>
+                    <a href="https://link.springer.com/article/10.1186/s12887-025-06141-2" target="_blank" class="btn mt-sm" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+    <i class="fas fa-external-link-alt"></i> Read Publication
+</a>
                 </div>
                 
                 <!-- Google Scholar Button -->
                 <div class="publication-item" style="text-align: center; padding-top: var(--spacing-lg);">
                     <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-graduation-cap"></i> View All Publications on Google Scholar
+                        <i class="fas fa-graduation-cap"></i> View More Publications
                     </a>
                 </div>
             </div>
@@ -2160,10 +2373,10 @@ section {
                     <li class="mb-sm">• SSM - Health Systems</li>
                 </ul>
                 <div style="text-align: center; margin-top: var(--spacing-lg);">
-                    <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/Ejkh6TgFPhtNkgsfwRv6_OgBpu9S58AyaqHR_AMPJsR4Rg?e=jU8KMP" target="_blank" class="btn btn-outline">
-                        View Review Certificates
-                    </a>
-                </div>
+    <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/Ejkh6TgFPhtNkgsfwRv6_OgBpu9S58AyaqHR_AMPJsR4Rg?e=jU8KMP" target="_blank" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        <i class="fas fa-certificate"></i> View Review Certificates
+    </a>
+</div>
             </div>
         </div>
     </div>
@@ -2338,33 +2551,23 @@ section {
     </div>
 </div>
 
-
-            <div class="text-center mt-lg">
-                <a href="https://wa.me/233549343058" target="_blank" class="btn" style="margin-right: 1rem;">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" target="_blank" class="btn btn-outline">
-                    <i class="fas fa-download"></i> Download CV
-                </a>
-            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <div>
-                <p class="copyright">&copy; <span id="currentYear"></span> Mudasir Mohammed Ibrahim. All rights reserved.</p>
-                <p class="developer-note">Website designed and powered by Mudasir Mohammed Ibrahim</p>
-            </div>
-            <div class="footer-links">
-                <a href="https://github.com/mudassiribrahim30" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank">LinkedIn</a>
-                <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank">Google Scholar</a>
-            </div>
+ <!-- Footer -->
+<footer style="background-color: #000000; border-top: 1px solid #333333;">
+    <div class="container footer-content">
+        <div>
+            <p class="copyright" style="color: #ffffff;">&copy; <span id="currentYear"></span> Mudasir Mohammed Ibrahim. All rights reserved.</p>
+            <p class="developer-note" style="color: #bbbbbb;">Website designed and powered by Mudasir Mohammed Ibrahim</p>
         </div>
-    </footer>
-
+        <div class="footer-links">
+            <a href="https://github.com/mudassiribrahim30" target="_blank" style="color: #ffffff;">GitHub</a>
+            <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" style="color: #ffffff;">LinkedIn</a>
+            <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" style="color: #ffffff;">Google Scholar</a>
+        </div>
+    </div>
+</footer>
     <!-- All Projects Modal -->
     <div class="modal" id="allProjectsModal">
         <div class="modal-content">
