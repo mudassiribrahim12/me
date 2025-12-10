@@ -282,6 +282,180 @@
             gap: var(--spacing-sm);
         }
         
+        /* Search Button and Dropdown */
+.search-container {
+    position: relative;
+}
+
+.search-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-toggle:hover {
+    background-color: var(--accent-light);
+}
+
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: var(--spacing-md);
+    display: none;
+    z-index: 1001;
+    margin-top: 10px;
+}
+
+.search-dropdown.active {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+.search-button {
+    padding: 0.75rem 1.25rem;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.search-button:hover {
+    background-color: var(--text-primary);
+}
+
+.search-results {
+    margin-top: var(--spacing-md);
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+}
+
+.search-results.active {
+    display: block;
+}
+
+.search-result-item {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background-color: var(--accent-light);
+}
+
+.search-result-title {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.search-result-content {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.search-highlight {
+    background-color: rgba(255, 255, 0, 0.3);
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+.no-results {
+    text-align: center;
+    padding: var(--spacing-md);
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+/* Mobile search adjustments */
+@media (max-width: 768px) {
+    .search-dropdown {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0;
+        margin-top: 0;
+        border-left: none;
+        border-right: none;
+    }
+}
+
+/* Add to existing mobile styles (around line 256) */
+@media (max-width: 768px) {
+    .header-right {
+        gap: 0.5rem;
+    }
+    
+    .search-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+}
+        
         .theme-toggle {
             background: none;
             border: none;
@@ -982,6 +1156,49 @@
         text-align: center;
     }
 }
+
+/* Search Highlight Animation */
+.search-highlight-animation {
+    animation: pulseHighlight 2s ease-in-out 3;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    position: relative;
+}
+
+@keyframes pulseHighlight {
+    0% {
+        box-shadow: 0 0 0 0 rgba(26, 95, 180, 0.7);
+        border-color: var(--accent);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(26, 95, 180, 0);
+        border-color: #ff9900;
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(26, 95, 180, 0);
+        border-color: var(--accent);
+    }
+}
+
+/* Modal project highlight */
+.modal-project-highlight {
+    animation: modalPulse 2s ease-in-out 3;
+    border: 3px solid var(--accent) !important;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+@keyframes modalPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(26, 95, 180, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 20px 10px rgba(26, 95, 180, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(26, 95, 180, 0);
+    }
+}
         
         /* Utility Classes */
         .text-center { text-align: center; }
@@ -1084,15 +1301,34 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <div class="header-right">
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
+           
+           <div class="header-right">
+    <!-- Add search button here -->
+    <div class="search-container">
+        <button class="search-toggle" id="searchToggle" title="Search website">
+            <i class="fas fa-search"></i>
+        </button>
+        <div class="search-dropdown" id="searchDropdown">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for anything...">
+                <button class="search-button" id="searchSubmit">
+                    <i class="fas fa-search"></i>
                 </button>
-                <div class="mobile-menu" id="mobileMenu">
-                    <i class="fas fa-bars"></i>
-                </div>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Search results will appear here -->
             </div>
         </div>
+    </div>
+    
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="mobile-menu" id="mobileMenu">
+        <i class="fas fa-bars"></i>
+    </div>
+</div>
+                   </div>
         <div class="mobile-nav" id="mobileNav">
             <a href="#home">Home</a>
             <a href="#about">About</a>
@@ -1109,7 +1345,7 @@
             <h1 class="mb-sm">Mudasir Mohammed Ibrahim</h1>
             <div class="hero-subtitle">Registered Nurse & Healthcare Researcher</div>
             <p class="hero-description">
-                A dedicated healthcare professional and data analyst developing accessible R Shiny applications 
+                A dedicated healthcare professional, researcher, and data analyst developing accessible R Shiny web applications 
                 to simplify complex analyses for healthcare professionals, students, and researchers.
             </p>
             <div class="social-icons">
@@ -1446,31 +1682,33 @@
     </div>
 
     <script>
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current year (automatic yearly update)
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Load projects
-            loadFeaturedProjects();
-            loadAllProjects();
-            
-            // Initialize theme
-            initTheme();
-            
-            // Initialize mobile menu
-            initMobileMenu();
-            
-            // Initialize modal
-            initModal();
-            
-            // Initialize smooth scrolling
-            initSmoothScroll();
-            
-            // Initialize contact form with AJAX submission
-            initContactForm();
-            
-        });
+    // Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    // Set current year (automatic yearly update)
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // Load projects
+    loadFeaturedProjects();
+    loadAllProjects();
+    
+    // Initialize theme (ONLY CALL THIS ONCE)
+    initTheme();
+    
+    // Initialize mobile menu
+    initMobileMenu();
+    
+    // Initialize modal
+    initModal();
+    
+    // Initialize smooth scrolling
+    initSmoothScroll();
+    
+    // Initialize contact form with AJAX submission
+    initContactForm();
+    
+    // Initialize search functionality
+    initSearch();
+});
 
         // All 20 R Shiny Applications Data
         const allProjects = [
@@ -1688,15 +1926,32 @@
         function initTheme() {
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = themeToggle.querySelector('i');
-            
-            // Check for saved theme or prefer color scheme
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedTheme = localStorage.getItem('theme');
-            
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                document.body.classList.add('dark-theme');
-                themeIcon.className = 'fas fa-sun';
-            }
+          
+          // Theme Toggle - FIXED VERSION
+function initTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Load saved theme or default to light
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Apply saved theme if it exists
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeIcon.className = 'fas fa-sun';
+    } else {
+        // Default to light theme
+        document.body.classList.remove('dark-theme');
+        themeIcon.className = 'fas fa-moon';
+        localStorage.setItem('theme', 'light'); // Set default
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('dark-theme');
+        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+}  
             
             themeToggle.addEventListener('click', () => {
                 const isDark = document.body.classList.toggle('dark-theme');
@@ -1783,6 +2038,8 @@
                 header.style.boxShadow = 'none';
             }
         });
+        
+        
         
                 // Contact Form Submission
         function initContactForm() {
@@ -1876,6 +2133,458 @@
                 }, 1500);
             });
         }
+        
+   // Search functionality
+function initSearch() {
+    const searchToggle = document.getElementById('searchToggle');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchInput = document.getElementById('searchInput');
+    const searchSubmit = document.getElementById('searchSubmit');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    // Toggle search dropdown
+    searchToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchDropdown.classList.toggle('active');
+        
+        // Close mobile menu if open
+        if (mobileNav.classList.contains('active')) {
+            mobileNav.classList.remove('active');
+            mobileMenu.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+        
+        // Focus on input when dropdown opens
+        if (searchDropdown.classList.contains('active')) {
+            setTimeout(() => {
+                searchInput.focus();
+            }, 100);
+        }
+    });
+    
+    // Close search when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchDropdown.contains(e.target) && !searchToggle.contains(e.target)) {
+            searchDropdown.classList.remove('active');
+            const searchResults = document.getElementById('searchResults');
+            searchResults.classList.remove('active');
+            searchResults.innerHTML = '';
+        }
+    });
+    
+    // Prevent closing when clicking inside search dropdown
+    searchDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    
+    // Perform search
+    function performSearch(query) {
+        if (!query.trim()) {
+            const searchResults = document.getElementById('searchResults');
+            searchResults.classList.remove('active');
+            searchResults.innerHTML = '';
+            return;
+        }
+        
+        const results = searchWebsite(query.toLowerCase());
+        displayResults(results, query);
+    }
+    
+    // Search on input with debounce
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            performSearch(e.target.value);
+        }, 300);
+    });
+    
+    // Search on submit
+    searchSubmit.addEventListener('click', () => {
+        performSearch(searchInput.value);
+    });
+    
+    // Search on Enter key
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            performSearch(searchInput.value);
+        }
+    });
+    
+    // Add suggestions on focus
+    searchInput.addEventListener('focus', () => {
+        if (searchInput.value.trim() === '') {
+            const suggestions = [
+                "R Shiny applications",
+                "Healthcare research",
+                "Statistical analysis",
+                "Nursing experience",
+                "Publications"
+            ];
+            
+            const searchResults = document.getElementById('searchResults');
+            let suggestionsHTML = '<div class="no-results" style="text-align: left;">';
+            suggestionsHTML += '<p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Try searching for:</p>';
+            suggestions.forEach(suggestion => {
+                suggestionsHTML += `<div style="padding: 0.25rem 0; color: var(--accent); cursor: pointer;" onclick="document.getElementById('searchInput').value='${suggestion}'; performSearch('${suggestion}')">${suggestion}</div>`;
+            });
+            suggestionsHTML += '</div>';
+            
+            searchResults.innerHTML = suggestionsHTML;
+            searchResults.classList.add('active');
+        }
+    });
+}
+
+// Enhanced searchWebsite function with detailed navigation
+function searchWebsite(query) {
+    const searchableContent = [
+        // Home/Hero section
+        {
+            id: 'home-content',
+            title: 'Home - Mudasir Mohammed Ibrahim',
+            content: 'A dedicated healthcare professional and data analyst developing accessible R Shiny applications to simplify complex analyses for healthcare professionals, students, and researchers. Registered Nurse & Healthcare Researcher.',
+            url: '#home',
+            type: 'section',
+            sectionId: 'home',
+            elementId: 'home'
+        },
+        
+        // About section
+        {
+            id: 'about-content',
+            title: 'About Mudasir',
+            content: 'Mudasir Mohammed Ibrahim is a dedicated Ghanaian nurse with extensive clinical experience at Tamale Teaching Hospital. He is also an experienced researcher with expertise in advanced quantitative methods including Structural Equation Modeling (SEM), factor analysis, and other rigorous statistical techniques.',
+            url: '#about',
+            type: 'section',
+            sectionId: 'about',
+            elementId: 'about'
+        },
+        
+        // Research interests
+        {
+            id: 'research-interests',
+            title: 'Research Interests',
+            content: 'Chronic Diseases Epidemiology, Maternal and Child Health, Public Health, Workplace Issues',
+            url: '#about',
+            type: 'subsection',
+            sectionId: 'about',
+            elementId: 'research-interests'
+        },
+        
+        // Core competencies
+        {
+            id: 'core-competencies',
+            title: 'Core Competencies',
+            content: 'Health/Clinical Research, Advanced Statistical Analysis, R Shiny Development (AI-assisted coding), Scientific Writing & Peer Review',
+            url: '#about',
+            type: 'subsection',
+            sectionId: 'about',
+            elementId: 'skills'
+        },
+        
+        // Education & Experience
+        {
+            id: 'education-content',
+            title: 'Education & Experience',
+            content: 'Staff Nurse at Tamale Teaching Hospital, Bachelor of Science in Nursing from University of Cape Coast, Rotation Nurse at Tamale Teaching Hospital, Diploma in General Nursing from Nurses and Midwives Training College',
+            url: '#education',
+            type: 'section',
+            sectionId: 'education',
+            elementId: 'education'
+        },
+        
+        // Projects/R Shiny Apps - Main section
+        {
+            id: 'projects-content',
+            title: 'R Shiny Applications',
+            content: 'APA Table Generator, SysSampler, CATrend Analyzer, CMH Analyzer, Data2SPSS, TNMTC DataLab, PharmaCalc Pro, RegEffect Xplorer, Data TransformR, CleanMyData, KMPlot Genie, ggPubPlot, EpiDem Suite, QuickStatsGen, MedModr, Robust Regressor, ROC Curve Builder, TagSelect, FAnalyzr, CalcuStats',
+            url: '#projects',
+            type: 'section',
+            sectionId: 'projects',
+            elementId: 'projects'
+        },
+        
+        // Publications
+        {
+            id: 'publications-content',
+            title: 'Publications',
+            content: 'Determinants and Mitigating Factors of Brain Drain among Ghanaian Nurses, Assessing the impact of nurses patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital, Patterns and temporal trends in childhood cancer incidence in northern Ghana',
+            url: '#publications',
+            type: 'section',
+            sectionId: 'publications',
+            elementId: 'publications'
+        },
+        
+        // Contact
+        {
+            id: 'contact-content',
+            title: 'Contact Information',
+            content: 'Email: mudassiribrahim30@gmail.com, Location: Tamale, Northern Region, Ghana, WhatsApp: +233549343058, YouTube channel for tutorials',
+            url: '#contact',
+            type: 'section',
+            sectionId: 'contact',
+            elementId: 'contact'
+        }
+    ];
+    
+    // Add all project details for search - these will open in modal
+    allProjects.forEach(project => {
+        searchableContent.push({
+            id: `project-${project.id}`,
+            title: `R Shiny App: ${project.name}`,
+            content: project.description,
+            url: '#projects',
+            type: 'project',
+            sectionId: 'projects',
+            elementId: `project-${project.id}`,
+            projectId: project.id,
+            projectName: project.name
+        });
+    });
+    
+    // Filter results based on query
+    return searchableContent.filter(item => {
+        const searchText = (item.title + ' ' + item.content).toLowerCase();
+        return searchText.includes(query.toLowerCase());
+    });
+}
+
+// Enhanced function to display search results with click handlers
+function displayResults(results, query) {
+    const searchResults = document.getElementById('searchResults');
+    
+    if (results.length === 0) {
+        searchResults.innerHTML = `
+            <div class="no-results">
+                <p>No results found for "${query}"</p>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem;">Try searching for: research, nursing, R Shiny, publications, contact</p>
+            </div>
+        `;
+        searchResults.classList.add('active');
+        return;
+    }
+    
+    let resultsHTML = '';
+    results.slice(0, 8).forEach(result => {
+        // Highlight search terms in results
+        let highlightedContent = result.content;
+        let highlightedTitle = result.title;
+        
+        // Simple highlighting logic
+        if (query.length > 2) {
+            const regex = new RegExp(`(${query})`, 'gi');
+            highlightedContent = result.content.replace(regex, '<span class="search-highlight">$1</span>');
+            highlightedTitle = result.title.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+        
+        // Add data attributes for enhanced navigation
+        resultsHTML += `
+            <div class="search-result-item" 
+                 data-result-type="${result.type}" 
+                 data-section-id="${result.sectionId}" 
+                 data-element-id="${result.elementId}"
+                 data-project-id="${result.projectId || ''}"
+                 data-project-name="${result.projectName || ''}">
+                <div class="search-result-title">${highlightedTitle}</div>
+                <div class="search-result-content">${highlightedContent}</div>
+                <div style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 0.25rem;">
+                    ${result.type === 'project' ? 'Click to open in "All Applications"' : 'Click to navigate'}
+                </div>
+            </div>
+        `;
+    });
+    
+    if (results.length > 8) {
+        resultsHTML += `
+            <div class="no-results" style="text-align: center; padding: 0.75rem;">
+                <p>+ ${results.length - 8} more results</p>
+            </div>
+        `;
+    }
+    
+    searchResults.innerHTML = resultsHTML;
+    searchResults.classList.add('active');
+    
+    // Add click handlers to search results
+    addSearchResultClickHandlers();
+}
+// Add this helper function to close search
+function closeSearch() {
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchResults = document.getElementById('searchResults');
+    const searchInput = document.getElementById('searchInput');
+    
+    searchDropdown.classList.remove('active');
+    searchResults.classList.remove('active');
+    searchResults.innerHTML = '';
+    searchInput.value = '';
+}
+
+// Function to add click handlers to search results
+function addSearchResultClickHandlers() {
+    const searchResultItems = document.querySelectorAll('.search-result-item');
+    
+    searchResultItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const resultType = this.getAttribute('data-result-type');
+            const sectionId = this.getAttribute('data-section-id');
+            const elementId = this.getAttribute('data-element-id');
+            const projectId = this.getAttribute('data-project-id');
+            const projectName = this.getAttribute('data-project-name');
+            
+            // Close search dropdown
+            closeSearch();
+            
+            // Navigate based on result type
+            if (resultType === 'project') {
+                navigateToProject(projectId, projectName, sectionId);
+            } else {
+                navigateToSection(sectionId, elementId);
+            }
+        });
+    });
+}
+
+// Function to navigate to a section and highlight it
+function navigateToSection(sectionId, elementId) {
+    const targetElement = document.getElementById(elementId);
+    
+    if (targetElement) {
+        // Smooth scroll to section
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const targetPosition = targetElement.offsetTop - headerHeight;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+        
+        // Add highlight animation after scroll
+        setTimeout(() => {
+            highlightElement(targetElement, elementId);
+        }, 500);
+    } else {
+        // Fallback to section navigation
+        const sectionElement = document.getElementById(sectionId);
+        if (sectionElement) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = sectionElement.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            
+            setTimeout(() => {
+                highlightElement(sectionElement, sectionId);
+            }, 500);
+        }
+    }
+}
+
+// Function to navigate to a project (opens modal)
+function navigateToProject(projectId, projectName, sectionId) {
+    // First navigate to projects section
+    const projectsSection = document.getElementById(sectionId);
+    if (projectsSection) {
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const targetPosition = projectsSection.offsetTop - headerHeight;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+    
+    // Open the modal after a short delay
+    setTimeout(() => {
+        const modal = document.getElementById('allProjectsModal');
+        const modalContent = modal.querySelector('.modal-content');
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Find and highlight the specific project in the modal
+        setTimeout(() => {
+            highlightProjectInModal(projectId, projectName);
+        }, 300);
+    }, 500);
+}
+
+// Function to highlight an element with animation
+function highlightElement(element, elementId) {
+    // Remove any previous highlights
+    document.querySelectorAll('.search-highlight-animation').forEach(el => {
+        el.classList.remove('search-highlight-animation');
+    });
+    
+    // Add highlight animation to the target element
+    element.classList.add('search-highlight-animation');
+    
+    // Remove animation after it completes
+    setTimeout(() => {
+        element.classList.remove('search-highlight-animation');
+    }, 6000);
+}
+
+// Function to highlight a specific project in the modal
+function highlightProjectInModal(projectId, projectName) {
+    // Remove any previous modal highlights
+    document.querySelectorAll('.modal-project-highlight').forEach(el => {
+        el.classList.remove('modal-project-highlight');
+    });
+    
+    // Find the project card in the modal
+    const modalProjects = document.querySelectorAll('#allProjectsGrid .project-card');
+    let foundProject = null;
+    
+    // Try to find by project name
+    modalProjects.forEach(projectCard => {
+        const projectTitle = projectCard.querySelector('h3').textContent;
+        if (projectTitle.toLowerCase().includes(projectName.toLowerCase())) {
+            foundProject = projectCard;
+        }
+    });
+    
+    // If found, highlight it
+    if (foundProject) {
+        // Scroll the project into view in the modal
+        foundProject.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+        
+        // Add highlight animation
+        foundProject.classList.add('modal-project-highlight');
+        
+        // Remove animation after it completes
+        setTimeout(() => {
+            foundProject.classList.remove('modal-project-highlight');
+        }, 6000);
+    }
+}
+
+// Enhanced closeSearch function
+function closeSearch() {
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchResults = document.getElementById('searchResults');
+    const searchInput = document.getElementById('searchInput');
+    
+    searchDropdown.classList.remove('active');
+    searchResults.classList.remove('active');
+    searchResults.innerHTML = '';
+    searchInput.value = '';
+    
+    // Remove any active highlights
+    document.querySelectorAll('.search-highlight-animation').forEach(el => {
+        el.classList.remove('search-highlight-animation');
+    });
+    document.querySelectorAll('.modal-project-highlight').forEach(el => {
+        el.classList.remove('modal-project-highlight');
+    });
+}
         
                 // Contact Form Submission with AJAX
         function initContactForm() {
