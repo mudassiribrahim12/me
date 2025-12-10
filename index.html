@@ -65,6 +65,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
         
+        
         /* Simple YouTube Section */
 .youtube-section-simple {
     background-color: var(--bg-secondary);
@@ -1467,7 +1468,326 @@
         align-items: start;
     }
 }
-        
+     
+     /* Enhanced Hapgood-inspired styles */
+
+/* Softer hero section */
+.hero {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-bottom: none;
+}
+
+/* Subtle section dividers */
+section:not(.hero) {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+section:not(.hero):hover {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+/* Enhanced buttons */
+.btn {
+    background: linear-gradient(135deg, var(--accent) 0%, #4299e1 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(44, 82, 130, 0.2);
+    background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    box-shadow: none;
+}
+
+.btn-outline:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(44, 82, 130, 0.2);
+}
+
+/* Enhanced cards */
+.project-card, 
+.timeline-content,
+.skill-item,
+.publication-item {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent);
+}
+
+/* Subtle navigation */
+.nav-links a {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: 0.5rem 0.75rem;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+.nav-links a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: var(--transition);
+}
+
+.nav-links a:hover:after {
+    width: 80%;
+}
+
+/* Enhanced typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), #4299e1);
+    border-radius: 2px;
+}
+
+h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Improved social icons */
+.social-icons a {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: translateY(-3px) scale(1.1);
+}
+
+/* Enhanced interest tags */
+.interest-tag {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid rgba(44, 82, 130, 0.2);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.interest-tag:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(44, 82, 130, 0.2);
+}
+
+/* Better skill bars */
+.skill-level {
+    background: linear-gradient(90deg, var(--accent), #4299e1);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-level:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Enhanced timeline */
+.timeline:before {
+    background: linear-gradient(180deg, var(--border), var(--accent), var(--border));
+}
+
+.timeline-date {
+    color: var(--accent);
+    font-weight: 700;
+    background: var(--bg-primary);
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+/* Improved contact form */
+.contact-form-container form {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.contact-form-container input,
+.contact-form-container textarea {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.contact-form-container input:focus,
+.contact-form-container textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
+    outline: none;
+}
+
+/* Enhanced footer */
+footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+/* Floating blog button enhancement */
+.floating-blog-btn {
+    background: linear-gradient(135deg, #2c5282, #4299e1);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(44, 82, 130, 0.3);
+    transition: all 0.3s ease;
+}
+
+.floating-blog-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(44, 82, 130, 0.4);
+    background: linear-gradient(135deg, #2b6cb0, #3182ce);
+}
+
+/* Smooth section transitions */
+section {
+    scroll-margin-top: var(--header-height);
+}
+
+/* Enhanced profile image */
+.profile-img {
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 3px solid var(--bg-primary);
+}
+
+.profile-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* YouTube section enhancement */
+.simple-youtube {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.youtube-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .hero {
+        padding: calc(var(--header-height) + var(--spacing-lg)) 0 var(--spacing-lg);
+    }
+    
+    .about-grid {
+        gap: var(--spacing-lg);
+    }
+}   
     </style>
 </head>
 <body>
@@ -1476,7 +1796,7 @@
     <div class="container header-container">
         <!-- Logo container for better positioning -->
         <div class="logo-container">
-          <a href="#" class="logo">Mr. Mudasir M. <span>Ibrahim</span></a>
+          <a href="/" class="logo" id="logoLink">Mr. Mudasir Mohammed <span>Ibrahim</span></a>
         </div>
         
         <!-- Navigation container -->
@@ -1531,15 +1851,59 @@
         <a href="#contact">Contact</a>
     </div>
 </header>
-    <!-- Hero Section -->
+    
+        <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
             <h1 class="mb-sm">Mudasir Mohammed Ibrahim</h1>
-            <div class="hero-subtitle">Registered Nurse & Healthcare Researcher</div>
-            <p class="hero-description">
-                A dedicated healthcare professional, researcher, and data analyst developing accessible R Shiny web applications 
-                to simplify complex analyses for healthcare professionals, students, and researchers.
-            </p>
+            <div class="hero-subtitle">Registered General Nurse</div>
+            
+            <!-- Quote Section -->
+            <div class="quote-section" style="margin: var(--spacing-lg) auto; max-width: 700px; text-align: center;">
+                <div class="quote-container" style="position: relative; padding: var(--spacing-md) var(--spacing-lg);">
+                    <i class="fas fa-quote-left" style="position: absolute; top: 0; left: 0; font-size: 1.5rem; color: var(--accent); opacity: 0.3;"></i>
+                    <blockquote style="font-size: 1.4rem; line-height: 1.5; color: var(--text-primary); font-style: italic; margin-bottom: var(--spacing-sm);">
+                        "Innovation distinguishes between a leader and a follower."
+                    </blockquote>
+                    <cite style="font-size: 1rem; color: var(--text-tertiary); font-weight: 500;">
+                        — Steve Jobs
+                    </cite>
+                    <i class="fas fa-quote-right" style="position: absolute; bottom: 0; right: 0; font-size: 1.5rem; color: var(--accent); opacity: 0.3;"></i>
+                </div>
+            </div>
+            
+            <!-- Personal Introduction -->
+            <div class="personal-intro" style="max-width: 800px; margin: 0 auto;">
+                <p class="hero-description" style="font-size: 1.2rem; line-height: 1.7;">
+                    During my leisure time, I create accessible R Shiny web applications that simplify complex analyses for healthcare professionals, students, and researchers — bridging clinical practice with data-driven solutions.
+                </p>
+                
+                <div class="highlight-points" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm); margin: var(--spacing-md) 0;">
+                    <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-stethoscope" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
+                        <div>
+                            <strong style="display: block; color: var(--text-primary);">Clinical Expertise</strong>
+                            <span style="font-size: 0.95rem; color: var(--text-secondary);">Patient care at Tamale Teaching Hospital</span>
+                        </div>
+                    </div>
+                    <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-chart-line" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
+                        <div>
+                            <strong style="display: block; color: var(--text-primary);">Research & Analytics</strong>
+                            <span style="font-size: 0.95rem; color: var(--text-secondary);">Advanced statistical methods & data analysis</span>
+                        </div>
+                    </div>
+                    <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-code" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
+                        <div>
+                            <strong style="display: block; color: var(--text-primary);">Tech Development</strong>
+                            <span style="font-size: 0.95rem; color: var(--text-secondary);">R Shiny applications for healthcare</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Icons and CTA -->
             <div class="social-icons">
                 <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub">
                     <i class="fab fa-github"></i>
@@ -1554,10 +1918,18 @@
                     <i class="fab fa-orcid"></i>
                 </a>
             </div>
-            <a href="#projects" class="btn">View Projects</a>
+            
+            <div class="cta-buttons" style="display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-lg);">
+                <a href="#projects" class="btn" style="padding: 0.875rem 2rem;">
+                    <i class="fas fa-code"></i> View My Projects
+                </a>
+                <a href="#about" class="btn btn-outline" style="padding: 0.875rem 2rem;">
+                    <i class="fas fa-user"></i> Learn More About Me
+                </a>
+            </div>
         </div>
     </section>
-
+    
     <!-- About Section -->
     <section id="about">
         <div class="container">
@@ -1568,15 +1940,17 @@
                 </div>
                 <div>
                     <p>
-                        Mudasir Mohammed Ibrahim is a dedicated Ghanaian nurse with extensive clinical experience 
-                        at Tamale Teaching Hospital, where he provides high-quality, patient-centered care.
-                    </p>
-                    <p>
-                        He is also an experienced researcher with expertise in advanced quantitative methods 
-                        including Structural Equation Modeling (SEM), factor analysis, and other rigorous 
-                        statistical techniques. His commitment to data-driven innovation has inspired the 
-                        development of multiple open-source R Shiny web applications.
-                    </p>
+    Mudasir Mohammed Ibrahim is a Ghanaian nurse and researcher whose journey has been shaped by resilience, self-determination, and a deep commitment to improving health outcomes. Inspired by his mother’s tireless work as a market trader, he pursued education against significant obstacles. Although he studied Business (Cost Accounting) in high school, he was determined to become a nurse. He independently taught himself key science subjects, rewrote the necessary exams as a private candidate, earned the required credentials, enrolled in nursing school, and successfully graduated.
+</p>
+
+<p>
+    He now serves at Tamale Teaching Hospital, providing high-quality, patient-centered care to patients with complex medical conditions. Alongside his clinical work, Mudasir has built a strong research career, beginning as a research assistant and growing into an experienced researcher and lead data analyst on multiple population-health projects. His background in business, coupled with his curiosity and determination, led him to independently master advanced quantitative methods, including regression modeling, Structural Equation Modeling (SEM), factor analysis, and survival analysis.
+</p>
+
+<p>
+    Motivated by a passion for biostatistics and data-driven solutions, he has developed several open-source R Shiny web applications to simplify complex analyses for healthcare professionals, students, and researchers. His work bridges clinical practice and data science, reflecting a commitment to both individual patient care and population-level prevention. Mudasir aims to advance his expertise in Epidemiology and Translational Science to better understand disease patterns, strengthen prevention strategies, and contribute to equitable health systems in Ghana and beyond.
+</p>
+
                     
                     <div class="research-interests">
     <h3>Research Interests</h3>
@@ -1677,7 +2051,7 @@
         </div>
     </section>
 
-    <!-- Education & Work Section -->
+       <!-- Education & Work Section -->
     <section id="education" style="background-color: var(--bg-secondary);">
         <div class="container">
             <h2>Education & Experience</h2>
@@ -1712,7 +2086,18 @@
                         <h3>Diploma in General Nursing</h3>
                         <p class="text-tertiary">Nurses' and Midwives' Training College, Tamale</p>
                         <p>Completed foundational nursing education and clinical training at the college. The training included numerous district clinical practicums, which strengthened practical skills and patient care abilities. Successfully completed studies at Kwame Nkrumah University of Science and Technology (KNUST), graduated from the college, and obtained a license as a registered general nurse from the Nursing and Midwifery Council of Ghana (NMC). This period also marked the beginning of a research journey through involvement with the college research supervisor, Mr. Abubakari Wuni, with continued affiliation with the college until employment at Tamale Teaching Hospital in 2025.</p>
-                        
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2013 - 2016</div>
+                    <div class="timeline-content">
+                        <h3>Business (Cost Accounting)</h3>
+                        <p class="text-tertiary">Northern School of Business (NOBISCO), Tamale</p>
+                        <p>Completed high school education with a focus on Business (Cost Accounting). This foundational business education provided early exposure to analytical thinking, financial management principles, and problem-solving skills. The business background has proven valuable in understanding healthcare administration, resource management, data analysis, and data-driven decision-making in clinical settings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Projects Section -->
@@ -1814,23 +2199,30 @@
                 </a>
             </div>
             
-            <!-- Blog Stats -->
+                     <!-- Blog Stats with R Shiny Tools -->
             <div style="display: flex; justify-content: center; gap: var(--spacing-lg); margin-top: var(--spacing-xl); 
                       flex-wrap: wrap;">
-                <div style="text-align: center;">
+                <div style="text-align: center; padding: var(--spacing-sm); min-width: 120px;">
                     <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Regular</div>
                     <div style="font-size: 0.9rem; color: var(--text-secondary);">Updates</div>
                 </div>
-                <div style="text-align: center;">
+                <div style="text-align: center; padding: var(--spacing-sm); min-width: 120px;">
                     <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Healthcare</div>
                     <div style="font-size: 0.9rem; color: var(--text-secondary);">Focus</div>
                 </div>
-                <div style="text-align: center;">
+                <div style="text-align: center; padding: var(--spacing-sm); min-width: 120px;">
                     <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Research</div>
                     <div style="font-size: 0.9rem; color: var(--text-secondary);">Insights</div>
                 </div>
+                <div style="text-align: center; padding: var(--spacing-sm); min-width: 120px; background: linear-gradient(135deg, rgba(26, 95, 180, 0.1), rgba(98, 160, 234, 0.1)); border-radius: 8px; border: 1px solid var(--accent-light);">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                        <i class="fas fa-tools"></i>
+                        <span>R Shiny</span>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Tools & Apps</div>
+                </div>
             </div>
-        </div>
+                 </div>
         
         <!-- Note -->
         <div class="text-center mt-lg">
@@ -2012,6 +2404,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize search functionality
     initSearch();
+    
+    // Initialize logo click handler for reload
+    initLogoClickHandler();
     
     console.log('Website initialized successfully');
 });
@@ -2586,7 +2981,7 @@ function searchWebsite(query) {
         {
             id: 'home-content',
             title: 'Home - Mudasir Mohammed Ibrahim',
-            content: 'A dedicated healthcare professional and data analyst developing accessible R Shiny applications to simplify complex analyses for healthcare professionals, students, and researchers. Registered Nurse & Healthcare Researcher.',
+            content: 'A healthcare professional, researcher, and data analyst. During my leisure time, when I’m not at work or conducting research, I create accessible R Shiny web applications that simplify complex analyses for healthcare professionals, students, and researchers. Registered Nurse',
             url: '#home',
             type: 'section',
             sectionId: 'home',
@@ -2597,7 +2992,7 @@ function searchWebsite(query) {
         {
             id: 'about-content',
             title: 'About Mudasir',
-            content: 'Mudasir Mohammed Ibrahim is a dedicated Ghanaian nurse with extensive clinical experience at Tamale Teaching Hospital. He is also an experienced researcher with expertise in advanced quantitative methods including Structural Equation Modeling (SEM), factor analysis, and other rigorous statistical techniques.',
+            content: 'Mudasir Mohammed Ibrahim is a Ghanaian nurse with extensive clinical experience at Tamale Teaching Hospital. He is also an experienced researcher with expertise in advanced quantitative methods including Structural Equation Modeling (SEM), factor analysis, and other rigorous statistical techniques.',
             url: '#about',
             type: 'section',
             sectionId: 'about',
@@ -3009,6 +3404,37 @@ function closeSearch() {
                 }
             });
         }
+        
+        // Logo click handler to reload website
+function initLogoClickHandler() {
+    const logoLink = document.getElementById('logoLink');
+    
+    if (logoLink) {
+        logoLink.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default link behavior
+            
+            // Add a small visual feedback
+            logoLink.style.transform = 'scale(0.95)';
+            logoLink.style.transition = 'transform 0.2s ease';
+            
+            // Reset the transform after animation
+            setTimeout(() => {
+                logoLink.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Scroll to top smoothly
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Reload the page after a short delay to show the scroll animation
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
+        });
+    }
+}
         
     </script>
     
