@@ -225,41 +225,117 @@
             transition: var(--transition);
         }
         
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-        }
-        
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-        
-        .logo span {
-            color: var(--accent);
-        }
-        
-       .nav-links {
+/* Add after existing header styles */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* NEW: Enhanced logo positioning for better spacing */
+.logo-container {
+    flex: 1; /* Takes available space to push nav to the right */
+    display: flex;
+    justify-content: flex-start; /* Align logo to extreme left */
+    padding-left: 0; /* Remove any left padding */
+    margin-left: 0;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    margin-left: 0 !important; /* Force no left margin */
+    position: relative;
+    left: -10px; /* Additional adjustment if needed */
+}
+
+/* NEW: Better header layout with professional spacing */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 var(--spacing-md);
+    gap: 2rem; /* Space between logo and nav */
+}
+
+/* NEW: Navigation container with proper spacing */
+.nav-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 2; /* Takes more space to push elements apart */
+}
+
+/* NEW: Adjust nav links for better spacing */
+.nav-links {
     display: flex;
     list-style: none;
-    gap: 0.75rem; /* Reduced from var(--spacing-lg) = 2rem to 0.75rem */
-    padding: 0 0.5rem; /* Optional: add small horizontal padding */
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+    margin-left: auto; /* Push nav links to the right */
+}
+
+/* NEW: Ensure proper spacing on mobile */
+@media (max-width: 768px) {
+    .header-container {
+        gap: 1rem;
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .logo {
+        font-size: 1.1rem;
+        left: 0;
+    }
+}
+        
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+        
+.logo span {
+    color: var(--accent);
+    margin-left: 0.2rem;
+}
+        
+ .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem; /* Increased from 0.75rem to 1.5rem */
+    padding: 0;
+    margin: 0;
 }
 
 .nav-links a {
     color: var(--text-primary);
     font-weight: 500;
-    font-size: 0.9rem; /* Slightly smaller font */
+    font-size: 0.95rem; /* Increased from 0.9rem */
     text-transform: uppercase;
-    letter-spacing: 0.3px; /* Reduced letter spacing */
+    letter-spacing: 0.5px; /* Increased from 0.3px */
     position: relative;
-    padding: 0.4rem 0.5rem; /* Reduced vertical padding */
-    white-space: nowrap; /* Prevent text wrapping */
+    padding: 0.5rem 0.75rem; /* Increased padding */
+    white-space: nowrap;
 }
         
         .nav-links a:after {
@@ -596,15 +672,97 @@
             font-weight: 500;
         }
         
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-lg);
-        }
-        
-        .skill-item h4 {
+     /* Skills Grid - Updated for 3 columns */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Enhanced skill item styling */
+.skill-item {
+    background-color: var(--bg-secondary);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.skill-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+}
+
+.skill-item h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-item h4:before {
+    content: "✓";
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.skill-bar {
+    height: 6px;
+    background-color: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-sm);
+}
+
+.skill-level {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #62a0ea);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-level:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.skill-item h4 {
             font-family: 'Inter', sans-serif;
             font-weight: 600;
             font-size: 1rem;
@@ -1313,10 +1471,16 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo">Mr. Mudasir Mohammed <span> Ibrahim</span></a>
+  
+ <header>
+    <div class="container header-container">
+        <!-- Logo container for better positioning -->
+        <div class="logo-container">
+          <a href="#" class="logo">Mr. Mudasir M. <span>Ibrahim</span></a>
+        </div>
+        
+        <!-- Navigation container -->
+        <div class="nav-container">
             <nav>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
@@ -1326,48 +1490,47 @@
                     <li><a href="#publications">Publications</a></li>
                     <li><a href="#blog">Blog</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    
                 </ul>
             </nav>
-           
-           <div class="header-right">
-    <!-- Add search button here -->
-    <div class="search-container">
-        <button class="search-toggle" id="searchToggle" title="Search website">
-            <i class="fas fa-search"></i>
-        </button>
-        <div class="search-dropdown" id="searchDropdown">
-            <div class="search-box">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search for anything...">
-                <button class="search-button" id="searchSubmit">
-                    <i class="fas fa-search"></i>
+            
+            <div class="header-right">
+                <div class="search-container">
+                    <button class="search-toggle" id="searchToggle" title="Search website">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-dropdown" id="searchDropdown">
+                        <div class="search-box">
+                            <input type="text" class="search-input" id="searchInput" placeholder="Search for anything...">
+                            <button class="search-button" id="searchSubmit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="search-results" id="searchResults">
+                            <!-- Search results will appear here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
                 </button>
-            </div>
-            <div class="search-results" id="searchResults">
-                <!-- Search results will appear here -->
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </div>
     
-    <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-    <div class="mobile-menu" id="mobileMenu">
-        <i class="fas fa-bars"></i>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
     </div>
-</div>
-                   </div>
-        <div class="mobile-nav" id="mobileNav">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#education">Education</a>
-            <a href="#projects">Projects</a>
-            <a href="#publications">Publications</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </header>
-
+</header>
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
@@ -1423,36 +1586,69 @@
                             <span class="interest-tag">Workplace Issues</span>
                         </div>
                     </div>
-                    <div class="skills">
-                        <h3>Core Competencies</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <h4>Health/ Clinical Research</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <h4>Advanced Statistical Analysis</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <h4>R Shiny Development (AI-assisted coding)</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <h4>Scientific Writing & Peer Review</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
+ <div class="skills">
+    <h3>Core Competencies</h3>
+    <div class="skills-grid">
+        <div class="skill-item">
+            <h4>Patient Care & Clinical Nursing</h4>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 100%"></div>
+            </div>
+            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+                Comprehensive nursing care, patient assessment, medication administration, and holistic healthcare delivery
+            </p>
+        </div>
+        <div class="skill-item">
+            <h4>Health/Clinical Research</h4>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 100%"></div>
+            </div>
+            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+                Research design, data collection, ethical considerations, and evidence-based practice implementation
+            </p>
+        </div>
+        <div class="skill-item">
+            <h4>Advanced Statistical Analysis</h4>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 100%"></div>
+            </div>
+            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+                SEM, factor analysis, regression modeling, and complex statistical methods for healthcare data
+            </p>
+        </div>
+        <div class="skill-item">
+            <h4>R Shiny Development</h4>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 100%"></div>
+            </div>
+            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+                AI-assisted coding of interactive web applications for healthcare data analysis and visualization
+            </p>
+        </div>
+        <div class="skill-item">
+            <h4>Scientific Writing & Peer Review</h4>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 100%"></div>
+            </div>
+            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+                Manuscript preparation, journal submissions, and critical review for international healthcare journals
+            </p>
+        </div>
+        <div class="skill-item">
+            <h4>Healthcare Data Management</h4>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 100%"></div>
+            </div>
+            <p class="skill-description" style="font-size: 0.875rem; color: var(--text-tertiary); margin-top: 0.5rem;">
+                Data cleaning, preprocessing, analysis, and visualization for healthcare research and decision-making
+            </p>
+        </div>
+    </div>
+</div>
+ 
+ </div>
+              </div>
             </div>
         </div>
     </section>
@@ -1768,7 +1964,8 @@
     </div>
 
     <script>
-    // Initialize
+
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
     // Set current year (automatic yearly update)
     document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -1794,6 +1991,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize search functionality
     initSearch();
+    
+    console.log('Website initialized successfully');
 });
 
         // All 20 R Shiny Applications Data
@@ -2222,111 +2421,145 @@ function initTheme() {
             });
         }
         
-   // Search functionality
+// Fixed Search functionality
 function initSearch() {
     const searchToggle = document.getElementById('searchToggle');
     const searchDropdown = document.getElementById('searchDropdown');
     const searchInput = document.getElementById('searchInput');
     const searchSubmit = document.getElementById('searchSubmit');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileNav = document.getElementById('mobileNav');
+    
+    // Debug logging
+    console.log('Search elements found:', {
+        searchToggle: !!searchToggle,
+        searchDropdown: !!searchDropdown,
+        searchInput: !!searchInput,
+        searchSubmit: !!searchSubmit
+    });
     
     // Toggle search dropdown
-    searchToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        searchDropdown.classList.toggle('active');
-        
-        // Close mobile menu if open
-        if (mobileNav.classList.contains('active')) {
-            mobileNav.classList.remove('active');
-            mobileMenu.innerHTML = '<i class="fas fa-bars"></i>';
-        }
-        
-        // Focus on input when dropdown opens
-        if (searchDropdown.classList.contains('active')) {
-            setTimeout(() => {
-                searchInput.focus();
-            }, 100);
-        }
-    });
+    if (searchToggle) {
+        searchToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            searchDropdown.classList.toggle('active');
+            console.log('Search toggle clicked, dropdown active:', searchDropdown.classList.contains('active'));
+            
+            // Focus on input when dropdown opens
+            if (searchDropdown.classList.contains('active')) {
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 100);
+            }
+        });
+    }
     
     // Close search when clicking outside
     document.addEventListener('click', (e) => {
         if (!searchDropdown.contains(e.target) && !searchToggle.contains(e.target)) {
             searchDropdown.classList.remove('active');
             const searchResults = document.getElementById('searchResults');
-            searchResults.classList.remove('active');
-            searchResults.innerHTML = '';
+            if (searchResults) {
+                searchResults.classList.remove('active');
+                searchResults.innerHTML = '';
+            }
         }
     });
     
     // Prevent closing when clicking inside search dropdown
-    searchDropdown.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
+    if (searchDropdown) {
+        searchDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
     
     // Perform search
     function performSearch(query) {
+        console.log('Performing search for:', query);
         if (!query.trim()) {
             const searchResults = document.getElementById('searchResults');
-            searchResults.classList.remove('active');
-            searchResults.innerHTML = '';
+            if (searchResults) {
+                searchResults.classList.remove('active');
+                searchResults.innerHTML = '';
+            }
             return;
         }
         
         const results = searchWebsite(query.toLowerCase());
+        console.log('Search results:', results.length);
         displayResults(results, query);
     }
     
     // Search on input with debounce
-    let searchTimeout;
-    searchInput.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            performSearch(e.target.value);
-        }, 300);
-    });
+    if (searchInput) {
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                performSearch(e.target.value);
+            }, 300);
+        });
+    }
     
     // Search on submit
-    searchSubmit.addEventListener('click', () => {
-        performSearch(searchInput.value);
-    });
-    
-    // Search on Enter key
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
+    if (searchSubmit) {
+        searchSubmit.addEventListener('click', (e) => {
             e.preventDefault();
             performSearch(searchInput.value);
-        }
-    });
+        });
+    }
+    
+    // Search on Enter key
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performSearch(searchInput.value);
+            }
+        });
+    }
     
     // Add suggestions on focus
-    searchInput.addEventListener('focus', () => {
-        if (searchInput.value.trim() === '') {
-            const suggestions = [
-                "R Shiny applications",
-                "Healthcare research",
-                "Statistical analysis",
-                "Nursing experience",
-                "Publications"
-            ];
-            
-            const searchResults = document.getElementById('searchResults');
-            let suggestionsHTML = '<div class="no-results" style="text-align: left;">';
-            suggestionsHTML += '<p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Try searching for:</p>';
-            suggestions.forEach(suggestion => {
-                suggestionsHTML += `<div style="padding: 0.25rem 0; color: var(--accent); cursor: pointer;" onclick="document.getElementById('searchInput').value='${suggestion}'; performSearch('${suggestion}')">${suggestion}</div>`;
-            });
-            suggestionsHTML += '</div>';
-            
-            searchResults.innerHTML = suggestionsHTML;
-            searchResults.classList.add('active');
-        }
-    });
+    if (searchInput) {
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value.trim() === '') {
+                const searchResults = document.getElementById('searchResults');
+                if (searchResults) {
+                    const suggestions = [
+                        "R Shiny applications",
+                        "Healthcare research",
+                        "Statistical analysis",
+                        "Nursing experience",
+                        "Publications",
+                        "Patient care",
+                        "Clinical nursing"
+                    ];
+                    
+                    let suggestionsHTML = '<div class="no-results" style="text-align: left;">';
+                    suggestionsHTML += '<p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Try searching for:</p>';
+                    suggestions.forEach(suggestion => {
+                        suggestionsHTML += `<div style="padding: 0.25rem 0; color: var(--accent); cursor: pointer;" class="suggestion-item" data-suggestion="${suggestion}">${suggestion}</div>`;
+                    });
+                    suggestionsHTML += '</div>';
+                    
+                    searchResults.innerHTML = suggestionsHTML;
+                    searchResults.classList.add('active');
+                    
+                    // Add click handlers to suggestions
+                    document.querySelectorAll('.suggestion-item').forEach(item => {
+                        item.addEventListener('click', () => {
+                            searchInput.value = item.getAttribute('data-suggestion');
+                            performSearch(item.getAttribute('data-suggestion'));
+                        });
+                    });
+                }
+            }
+        });
+    }
 }
 
-// Enhanced searchWebsite function with detailed navigation
+// Fixed searchWebsite function
 function searchWebsite(query) {
+    console.log('Searching website for:', query);
+    
     const searchableContent = [
         // Home/Hero section
         {
@@ -2361,11 +2594,11 @@ function searchWebsite(query) {
             elementId: 'research-interests'
         },
         
-        // Core competencies
+        // Core competencies (updated with Patient Care)
         {
             id: 'core-competencies',
             title: 'Core Competencies',
-            content: 'Health/Clinical Research, Advanced Statistical Analysis, R Shiny Development (AI-assisted coding), Scientific Writing & Peer Review',
+            content: 'Patient Care & Clinical Nursing, Health/Clinical Research, Advanced Statistical Analysis, R Shiny Development (AI-assisted coding), Scientific Writing & Peer Review, Healthcare Data Management',
             url: '#about',
             type: 'subsection',
             sectionId: 'about',
@@ -2383,7 +2616,7 @@ function searchWebsite(query) {
             elementId: 'education'
         },
         
-        // Projects/R Shiny Apps - Main section
+        // Projects/R Shiny Apps
         {
             id: 'projects-content',
             title: 'R Shiny Applications',
@@ -2405,11 +2638,22 @@ function searchWebsite(query) {
             elementId: 'publications'
         },
         
+        // Blog
+        {
+            id: 'blog-content',
+            title: 'Blog Posts',
+            content: 'Google Blogger with insights on healthcare research, nursing, data analysis, and technology in healthcare.',
+            url: '#blog',
+            type: 'section',
+            sectionId: 'blog',
+            elementId: 'blog'
+        },
+        
         // Contact
         {
             id: 'contact-content',
             title: 'Contact Information',
-            content: 'Email: mudassiribrahim30@gmail.com, Location: Tamale, Northern Region, Ghana, WhatsApp: +233549343058, YouTube channel for tutorials',
+            content: 'Email: contact@mudasiribrahim.com, Location: Tamale, Northern Region, Ghana, WhatsApp: +233549343058, YouTube channel for tutorials',
             url: '#contact',
             type: 'section',
             sectionId: 'contact',
@@ -2417,20 +2661,22 @@ function searchWebsite(query) {
         }
     ];
     
-    // Add all project details for search - these will open in modal
-    allProjects.forEach(project => {
-        searchableContent.push({
-            id: `project-${project.id}`,
-            title: `R Shiny App: ${project.name}`,
-            content: project.description,
-            url: '#projects',
-            type: 'project',
-            sectionId: 'projects',
-            elementId: `project-${project.id}`,
-            projectId: project.id,
-            projectName: project.name
+    // Add all project details for search
+    if (typeof allProjects !== 'undefined') {
+        allProjects.forEach(project => {
+            searchableContent.push({
+                id: `project-${project.id}`,
+                title: `R Shiny App: ${project.name}`,
+                content: project.description,
+                url: '#projects',
+                type: 'project',
+                sectionId: 'projects',
+                elementId: `project-${project.id}`,
+                projectId: project.id,
+                projectName: project.name
+            });
         });
-    });
+    }
     
     // Filter results based on query
     return searchableContent.filter(item => {
@@ -2439,9 +2685,15 @@ function searchWebsite(query) {
     });
 }
 
-// Enhanced function to display search results with click handlers
+// Fixed function to display search results
 function displayResults(results, query) {
     const searchResults = document.getElementById('searchResults');
+    if (!searchResults) {
+        console.error('Search results container not found');
+        return;
+    }
+    
+    console.log('Displaying results:', results.length);
     
     if (results.length === 0) {
         searchResults.innerHTML = `
@@ -2462,12 +2714,11 @@ function displayResults(results, query) {
         
         // Simple highlighting logic
         if (query.length > 2) {
-            const regex = new RegExp(`(${query})`, 'gi');
+            const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
             highlightedContent = result.content.replace(regex, '<span class="search-highlight">$1</span>');
             highlightedTitle = result.title.replace(regex, '<span class="search-highlight">$1</span>');
         }
         
-        // Add data attributes for enhanced navigation
         resultsHTML += `
             <div class="search-result-item" 
                  data-result-type="${result.type}" 
@@ -2478,7 +2729,7 @@ function displayResults(results, query) {
                 <div class="search-result-title">${highlightedTitle}</div>
                 <div class="search-result-content">${highlightedContent}</div>
                 <div style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 0.25rem;">
-                    ${result.type === 'project' ? 'Click to open in "All Applications"' : 'Click to navigate'}
+                    ${result.type === 'project' ? 'Click to view project details' : 'Click to navigate to section'}
                 </div>
             </div>
         `;
@@ -2498,19 +2749,13 @@ function displayResults(results, query) {
     // Add click handlers to search results
     addSearchResultClickHandlers();
 }
-// Add this helper function to close search
-function closeSearch() {
-    const searchDropdown = document.getElementById('searchDropdown');
-    const searchResults = document.getElementById('searchResults');
-    const searchInput = document.getElementById('searchInput');
-    
-    searchDropdown.classList.remove('active');
-    searchResults.classList.remove('active');
-    searchResults.innerHTML = '';
-    searchInput.value = '';
+
+// Helper function to escape regex special characters
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// Function to add click handlers to search results
+// Fixed function to add click handlers
 function addSearchResultClickHandlers() {
     const searchResultItems = document.querySelectorAll('.search-result-item');
     
@@ -2521,6 +2766,8 @@ function addSearchResultClickHandlers() {
             const elementId = this.getAttribute('data-element-id');
             const projectId = this.getAttribute('data-project-id');
             const projectName = this.getAttribute('data-project-name');
+            
+            console.log('Search result clicked:', { resultType, sectionId, elementId, projectId, projectName });
             
             // Close search dropdown
             closeSearch();
@@ -2535,8 +2782,9 @@ function addSearchResultClickHandlers() {
     });
 }
 
-// Function to navigate to a section and highlight it
+// Fixed navigation functions
 function navigateToSection(sectionId, elementId) {
+    console.log('Navigating to section:', sectionId, elementId);
     const targetElement = document.getElementById(elementId);
     
     if (targetElement) {
@@ -2572,8 +2820,8 @@ function navigateToSection(sectionId, elementId) {
     }
 }
 
-// Function to navigate to a project (opens modal)
 function navigateToProject(projectId, projectName, sectionId) {
+    console.log('Navigating to project:', projectName);
     // First navigate to projects section
     const projectsSection = document.getElementById(sectionId);
     if (projectsSection) {
@@ -2589,19 +2837,18 @@ function navigateToProject(projectId, projectName, sectionId) {
     // Open the modal after a short delay
     setTimeout(() => {
         const modal = document.getElementById('allProjectsModal');
-        const modalContent = modal.querySelector('.modal-content');
-        
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        
-        // Find and highlight the specific project in the modal
-        setTimeout(() => {
-            highlightProjectInModal(projectId, projectName);
-        }, 300);
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Find and highlight the specific project in the modal
+            setTimeout(() => {
+                highlightProjectInModal(projectId, projectName);
+            }, 300);
+        }
     }, 500);
 }
 
-// Function to highlight an element with animation
 function highlightElement(element, elementId) {
     // Remove any previous highlights
     document.querySelectorAll('.search-highlight-animation').forEach(el => {
@@ -2617,7 +2864,6 @@ function highlightElement(element, elementId) {
     }, 6000);
 }
 
-// Function to highlight a specific project in the modal
 function highlightProjectInModal(projectId, projectName) {
     // Remove any previous modal highlights
     document.querySelectorAll('.modal-project-highlight').forEach(el => {
@@ -2654,16 +2900,17 @@ function highlightProjectInModal(projectId, projectName) {
     }
 }
 
-// Enhanced closeSearch function
 function closeSearch() {
     const searchDropdown = document.getElementById('searchDropdown');
     const searchResults = document.getElementById('searchResults');
     const searchInput = document.getElementById('searchInput');
     
-    searchDropdown.classList.remove('active');
-    searchResults.classList.remove('active');
-    searchResults.innerHTML = '';
-    searchInput.value = '';
+    if (searchDropdown) searchDropdown.classList.remove('active');
+    if (searchResults) {
+        searchResults.classList.remove('active');
+        searchResults.innerHTML = '';
+    }
+    if (searchInput) searchInput.value = '';
     
     // Remove any active highlights
     document.querySelectorAll('.search-highlight-animation').forEach(el => {
