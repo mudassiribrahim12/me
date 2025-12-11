@@ -3016,7 +3016,7 @@ body.dark-theme .professional-badge {
     <div class="container header-container">
         <!-- Logo container for better positioning -->
         <div class="logo-container">
-          <a href="/" class="logo" id="logoLink">MUDASIR M. IBRAHIM <span></span></a>
+          <a href="/" class="logo" id="logoLink">My Portfolio <span></span></a>
         </div>
         
         <!-- Navigation container -->
@@ -3074,92 +3074,96 @@ body.dark-theme .professional-badge {
     
         <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="container hero-content">
-<div class="professional-badge" style="background: linear-gradient(135deg, var(--accent), #4299e1); color: white; padding: 0.75rem 2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(26, 95, 180, 0.3);">
-    <i class="fas fa-user-md" style="font-size: 1.2rem;"></i>
-    <div style="text-align: left;">
-
+<div class="container hero-content">
+    <!-- Typing Effect Container -->
+    <div id="typing-container" style="max-width: 800px; margin: 0 auto;">
+        <!-- Professional Badge - Will be typed -->
+        <div id="typing-badge" class="professional-badge" style="background: linear-gradient(135deg, var(--accent), #4299e1); color: white; padding: 0.75rem 2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(26, 95, 180, 0.3); opacity: 0;">
+            <i class="fas fa-user-md" style="font-size: 1.2rem;"></i>
+            <div id="badge-text" style="text-align: left;"></div>
+        </div>
+        
+        <!-- Main Heading - Will be typed -->
+        <h1 id="typing-heading" class="mb-sm" style="opacity: 0;"></h1>
+        
+        <!-- Subtitle - Will be typed -->
+        <div id="typing-subtitle" class="hero-subtitle" style="opacity: 0;"></div>
+        
+        <!-- Quote Section - Will be typed -->
+        <div id="typing-quote" class="quote-section" style="margin: var(--spacing-lg) auto; max-width: 700px; text-align: center; opacity: 0;">
+            <div class="quote-container" style="position: relative; padding: var(--spacing-md) var(--spacing-lg);">
+                <i class="fas fa-quote-left" style="position: absolute; top: 0; left: 0; font-size: 1.5rem; color: var(--accent); opacity: 0.3;"></i>
+                <blockquote id="quote-text" style="font-size: 1.4rem; line-height: 1.5; color: var(--text-primary); font-style: italic; margin-bottom: var(--spacing-sm); min-height: 60px;"></blockquote>
+                <cite id="quote-author" style="font-size: 1rem; color: var(--text-tertiary); font-weight: 500;"></cite>
+                <i class="fas fa-quote-right" style="position: absolute; bottom: 0; right: 0; font-size: 1.5rem; color: var(--accent); opacity: 0.3;"></i>
+            </div>
+        </div>
+        
+<!-- Personal Introduction - Will show immediately after quote -->
+<div id="typing-intro" class="personal-intro" style="max-width: 800px; margin: 0 auto; opacity: 0;">
+    <p id="intro-text" class="hero-description" style="font-size: 1.2rem; line-height: 1.7; opacity: 1;">
+        Hi! I'm Mudasir Mohammed Ibrahim, a healthcare professional and data enthusiast. In my free time, I develop accessible R Shiny web applications to make complex analyses easier and more intuitive for healthcare professionals, students, and researchers. You can find all of them here.
+    </p>
+    
+    <div class="highlight-points" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm); margin: var(--spacing-md) 0;">
+              
+                <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                    <i class="fas fa-stethoscope" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
+                    <div>
+                        <strong style="display: block; color: var(--text-primary);">Clinical Expertise</strong>
+                        <span style="font-size: 0.95rem; color: var(--text-secondary);">Patient care at a tertiary healthcare facility</span>
+                    </div>
+                </div>
+                <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                    <i class="fas fa-chart-line" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
+                    <div>
+                        <strong style="display: block; color: var(--text-primary);">Research & Analytics</strong>
+                        <span style="font-size: 0.95rem; color: var(--text-secondary);">Advanced statistical methods & data analysis</span>
+                    </div>
+                </div>
+                <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                    <i class="fas fa-code" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
+                    <div>
+                        <strong style="display: block; color: var(--text-primary);">Tech Development</strong>
+                        <span style="font-size: 0.95rem; color: var(--text-secondary);">R Shiny web applications for healthcare</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Social Icons (not typed) -->
+        <div class="social-icons" style="opacity: 0;" id="social-icons">
+            <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" title="Google Scholar">
+                <i class="fas fa-graduation-cap"></i>
+            </a>
+            <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" title="ORCID">
+                <i class="fab fa-orcid"></i>
+            </a>
+        </div>
+        
+        <!-- CTA Buttons (not typed) -->
+        <div class="cta-buttons" style="display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-lg); opacity: 0;" id="cta-buttons">
+            <a href="#projects" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem;">
+                <i class="fas fa-code"></i> View My Projects
+            </a>
+            <a href="#about" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem;">
+                <i class="fas fa-user"></i> Learn More About Me
+            </a>
+        </div>
     </div>
 </div>
-<h1 class="mb-sm">Building open, accessible data tools that advance healthcare for all.</h1>
-<div class="hero-subtitle">Registered General Nurse | R Shiny Developer</div>
-            
-            <!-- Quote Section -->
-            <div class="quote-section" style="margin: var(--spacing-lg) auto; max-width: 700px; text-align: center;">
-                <div class="quote-container" style="position: relative; padding: var(--spacing-md) var(--spacing-lg);">
-                    <i class="fas fa-quote-left" style="position: absolute; top: 0; left: 0; font-size: 1.5rem; color: var(--accent); opacity: 0.3;"></i>
-                    <blockquote style="font-size: 1.4rem; line-height: 1.5; color: var(--text-primary); font-style: italic; margin-bottom: var(--spacing-sm);">
-                        "Innovation distinguishes between a leader and a follower."
-                    </blockquote>
-                    <cite style="font-size: 1rem; color: var(--text-tertiary); font-weight: 500;">
-                        — Steve Jobs
-                    </cite>
-                    <i class="fas fa-quote-right" style="position: absolute; bottom: 0; right: 0; font-size: 1.5rem; color: var(--accent); opacity: 0.3;"></i>
-                </div>
-            </div>
-            
-            <!-- Personal Introduction -->
-            <div class="personal-intro" style="max-width: 800px; margin: 0 auto;">
-                <p class="hero-description" style="font-size: 1.2rem; line-height: 1.7;">
-                    Welcome! I’m Mudasir Mohammed Ibrahim, a healthcare professional and data enthusiast. In my free time, I design accessible R Shiny applications to make complex analyses easier and more intuitive for healthcare professionals, students, and researchers.
-                </p>
-                
-                <div class="highlight-points" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm); margin: var(--spacing-md) 0;">
-                    <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
-                        <i class="fas fa-stethoscope" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
-                        <div>
-                            <strong style="display: block; color: var(--text-primary);">Clinical Expertise</strong>
-                            <span style="font-size: 0.95rem; color: var(--text-secondary);">Patient care at Tamale Teaching Hospital</span>
-                        </div>
-                    </div>
-                    <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
-                        <i class="fas fa-chart-line" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
-                        <div>
-                            <strong style="display: block; color: var(--text-primary);">Research & Analytics</strong>
-                            <span style="font-size: 0.95rem; color: var(--text-secondary);">Advanced statistical methods & data analysis</span>
-                        </div>
-                    </div>
-                    <div class="highlight-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
-                        <i class="fas fa-code" style="color: var(--accent); font-size: 1.2rem; margin-top: 0.25rem;"></i>
-                        <div>
-                            <strong style="display: block; color: var(--text-primary);">Tech Development</strong>
-                            <span style="font-size: 0.95rem; color: var(--text-secondary);">R Shiny applications for healthcare</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Social Icons and CTA -->
-            <div class="social-icons">
-                <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" title="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" title="Google Scholar">
-                    <i class="fas fa-graduation-cap"></i>
-                </a>
-                <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" title="ORCID">
-                    <i class="fab fa-orcid"></i>
-                </a>
-            </div>
-            
-<div class="cta-buttons" style="display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-lg);">
-    <a href="#projects" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem;">
-        <i class="fas fa-code"></i> View My Projects
-    </a>
-    <a href="#about" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem;">
-        <i class="fas fa-user"></i> Learn More About Me
-    </a>
-</div>
-        </div>
-    </section>
+</section>
     
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
-            <h2>R Shiny Applications</h2>
+            <h2>R Shiny Web Applications</h2>
             <div class="projects-grid" id="featuredProjectsGrid">
                 <!-- Featured projects will be loaded here -->
             </div>
@@ -3188,8 +3192,10 @@ body.dark-theme .professional-badge {
                 <p>Loading latest blog posts...</p>
             </div>
         </div>
-       <!-- Blog View All Button -->
-<div class="blog-view-all" style="text-align: center; margin-top: var(--spacing-lg); padding: var(--spacing-md) 0; border-top: 1px solid var(--border);">
+
+<!-- Blog View All Button - Conditionally Shown -->
+<div id="blogViewAllButton" class="blog-view-all" 
+     style="text-align: center; margin-top: var(--spacing-lg); padding: var(--spacing-md) 0; border-top: 1px solid var(--border); display: none;">
     <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" class="btn" 
        style="background: linear-gradient(135deg, var(--accent), #4299e1); 
               color: white; padding: 0.875rem 2rem; border-radius: 8px;
@@ -3695,6 +3701,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // Add Minimal Cursor Effect here
 initMinimalCursorEffect();
 
+// Initialize typing effect
+initTypingEffect();
+
     console.log('Website initialized successfully');
 });
 
@@ -4149,6 +4158,7 @@ function loadBlogPosts() {
 
 function displayBlogPosts(posts) {
     const blogPreview = document.getElementById('blogPreview');
+    const blogViewAllButton = document.getElementById('blogViewAllButton'); // Add this
     
     let blogHTML = `
         <div class="blog-preview-grid">
@@ -4199,7 +4209,13 @@ function displayBlogPosts(posts) {
     
     blogHTML += '</div>';
     blogPreview.innerHTML = blogHTML;
+    
+    // Show the "VIEW ALL BLOG POSTS" button when posts are displayed
+    if (blogViewAllButton) {
+        blogViewAllButton.style.display = 'block';
+    }
 }
+
 function extractExcerpt(content, maxLength) {
     // Remove HTML tags
     const text = content.replace(/<[^>]*>/g, '');
@@ -4220,6 +4236,7 @@ function extractExcerpt(content, maxLength) {
 
 function showFallbackBlogPosts() {
     const blogPreview = document.getElementById('blogPreview');
+    const blogViewAllButton = document.getElementById('blogViewAllButton'); // Add this
     
     blogPreview.innerHTML = `
         <div class="blog-error">
@@ -4237,8 +4254,12 @@ function showFallbackBlogPosts() {
             </div>
         </div>
     `;
+    
+    // Hide the "VIEW ALL BLOG POSTS" button when showing error
+    if (blogViewAllButton) {
+        blogViewAllButton.style.display = 'none';
+    }
 }
-
 // Initialize header on page load
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('header');
@@ -4452,7 +4473,7 @@ function initSearch() {
                 const searchResults = document.getElementById('searchResults');
                 if (searchResults) {
                     const suggestions = [
-                        "R Shiny applications",
+                        "R Shiny web applications",
                         "Healthcare research",
                         "Statistical analysis",
                         "Nursing experience",
@@ -5138,6 +5159,193 @@ function initMinimalCursorEffect() {
         }
     }, 1000);
 }
+
+// Typing Effect Functionality - ONLY types up to the quote section
+function initTypingEffect() {
+    // Text content to type (only up to quote section)
+    const typingContent = {
+        badge: "Core Philosophy",
+        heading: "Building open, accessible data tools that advance healthcare for all.",
+        subtitle: "Mudasir Mohammed Ibrahim | Registered General Nurse",
+        quote: {
+            text: "Innovation distinguishes between a leader and a follower.",
+            author: "— Steve Jobs"
+        }
+    };
+    
+    // DOM elements
+    const badgeText = document.getElementById('badge-text');
+    const heading = document.getElementById('typing-heading');
+    const subtitle = document.getElementById('typing-subtitle');
+    const quoteText = document.getElementById('quote-text');
+    const quoteAuthor = document.getElementById('quote-author');
+    const introText = document.getElementById('intro-text');
+    
+    // Typing speed configuration
+    const typingSpeed = {
+        badge: 30,      // ms per character
+        heading: 40,
+        subtitle: 35,
+        quoteText: 30,
+        quoteAuthor: 40
+    };
+    
+    // Delay between sections
+    const sectionDelay = {
+        afterBadge: 300,
+        afterHeading: 400,
+        afterSubtitle: 300,
+        afterQuote: 500
+    };
+    
+    // Typing function
+    function typeText(element, text, speed, callback) {
+        let i = 0;
+        element.innerHTML = '';
+        
+        function typeCharacter() {
+            if (i < text.length) {
+                // Add cursor effect
+                element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor">|</span>';
+                i++;
+                setTimeout(typeCharacter, speed);
+            } else {
+                // Remove cursor when done
+                element.innerHTML = text;
+                if (callback) callback();
+            }
+        }
+        
+        typeCharacter();
+    }
+    
+    // Start the typing sequence - ONLY types up to quote
+    function startTypingSequence() {
+        // Reset typed elements to empty
+        badgeText.innerHTML = '';
+        heading.innerHTML = '';
+        subtitle.innerHTML = '';
+        quoteText.innerHTML = '';
+        quoteAuthor.innerHTML = '';
+        
+        // Show introduction content immediately (no typing)
+        introText.innerHTML = "Hi! I'm Mudasir Mohammed Ibrahim, a healthcare professional and data enthusiast. In my free time, I develop accessible R Shiny web applications to make complex analyses easier and more intuitive for healthcare professionals, students, and researchers. You can find all of them here.";
+        
+        // Show highlight points immediately
+        const highlightItems = document.querySelectorAll('.highlight-item');
+        highlightItems.forEach(item => {
+            item.style.opacity = '1';
+            item.style.transition = 'opacity 0.5s ease';
+        });
+        
+        // Fade in badge container
+        const badgeContainer = document.getElementById('typing-badge');
+        badgeContainer.style.opacity = '1';
+        badgeContainer.style.transition = 'opacity 0.5s ease';
+        
+        // Start typing badge text
+        setTimeout(() => {
+            typeText(badgeText, typingContent.badge, typingSpeed.badge, () => {
+                // Fade in and type heading
+                setTimeout(() => {
+                    const headingElement = document.getElementById('typing-heading');
+                    headingElement.style.opacity = '1';
+                    headingElement.style.transition = 'opacity 0.5s ease';
+                    
+                    typeText(heading, typingContent.heading, typingSpeed.heading, () => {
+                        // Fade in and type subtitle
+                        setTimeout(() => {
+                            const subtitleElement = document.getElementById('typing-subtitle');
+                            subtitleElement.style.opacity = '1';
+                            subtitleElement.style.transition = 'opacity 0.5s ease';
+                            
+                            typeText(subtitle, typingContent.subtitle, typingSpeed.subtitle, () => {
+                                // Fade in and type quote
+                                setTimeout(() => {
+                                    const quoteElement = document.getElementById('typing-quote');
+                                    quoteElement.style.opacity = '1';
+                                    quoteElement.style.transition = 'opacity 0.5s ease';
+                                    
+                                    typeText(quoteText, typingContent.quote.text, typingSpeed.quoteText, () => {
+                                        // Type quote author
+                                        setTimeout(() => {
+                                            typeText(quoteAuthor, typingContent.quote.author, typingSpeed.quoteAuthor, () => {
+                                                // AFTER QUOTE IS DONE, SHOW EVERYTHING ELSE IMMEDIATELY
+                                                setTimeout(() => {
+                                                    // Show introduction section immediately
+                                                    const introElement = document.getElementById('typing-intro');
+                                                    introElement.style.opacity = '1';
+                                                    introElement.style.transition = 'opacity 0.3s ease';
+                                                    
+                                                    // Show social icons immediately
+                                                    const socialIcons = document.getElementById('social-icons');
+                                                    socialIcons.style.opacity = '1';
+                                                    socialIcons.style.transition = 'opacity 0.3s ease';
+                                                    
+                                                    // Show CTA buttons immediately
+                                                    const ctaButtons = document.getElementById('cta-buttons');
+                                                    ctaButtons.style.opacity = '1';
+                                                    ctaButtons.style.transition = 'opacity 0.3s ease';
+                                                }, 300);
+                                            });
+                                        }, 500);
+                                    });
+                                }, sectionDelay.afterSubtitle);
+                            });
+                        }, sectionDelay.afterHeading);
+                    });
+                }, sectionDelay.afterBadge);
+            });
+        }, 500); // Initial delay before starting
+    }
+    
+    // Add CSS for typing cursor
+    const style = document.createElement('style');
+    style.textContent = `
+        .typing-cursor {
+            color: var(--accent);
+            font-weight: bold;
+            animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* Make sure the intro and following sections are initially hidden */
+        #typing-intro,
+        #social-icons,
+        #cta-buttons {
+            opacity: 0;
+        }
+        
+        /* But they should fade in quickly after quote is done */
+        #typing-intro,
+        #social-icons,
+        #cta-buttons {
+            transition: opacity 0.3s ease;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Start typing effect when page loads
+    window.addEventListener('load', startTypingSequence);
+    
+    // Restart typing effect when logo is clicked (page reload)
+    const logoLink = document.getElementById('logoLink');
+    if (logoLink) {
+        logoLink.addEventListener('click', function(e) {
+            // Only restart if we're already on the home page
+            if (window.location.hash === '' || window.location.hash === '#home') {
+                e.preventDefault();
+                startTypingSequence();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+}
+
 </script>
     
     <!-- Floating Blog Button -->
