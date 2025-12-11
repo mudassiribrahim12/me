@@ -216,19 +216,68 @@ p {
             padding: var(--spacing-xl) 0;
         }
         
-/* Header */
+/* Header - Starts solid black, becomes transparent on scroll */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background-color: #000000; /* Changed to black */
-    border-bottom: 1px solid #333333; /* Darker border for black background */
     z-index: 1000;
-    transition: var(--transition);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #000000; /* Solid black at start */
+    backdrop-filter: none; /* No blur at top */
+    border-bottom: 1px solid #333333;
 }
-        
+
+/* Header when scrolled - becomes transparent with blur */
+header.scrolled {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    backdrop-filter: blur(12px); /* Creates the glass effect */
+    -webkit-backdrop-filter: blur(12px); /* For Safari */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Lighter border */
+}
+
+/* Further scroll - even more transparent */
+header.scrolled.more {
+    background-color: rgba(0, 0, 0, 0.5); /* More transparent */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Dark theme adjustments */
+body.dark-theme header {
+    background-color: #000000; /* Solid black at top */
+}
+
+body.dark-theme header.scrolled {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+body.dark-theme header.scrolled.more {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Make sure header content stays visible */
+.header-container,
+.nav-links a,
+.logo,
+.search-toggle,
+.theme-toggle,
+.mobile-menu {
+    transition: color 0.3s ease;
+}
+
+/* When header is transparent, ensure text remains readable */
+header.scrolled .nav-links a,
+header.scrolled .logo,
+header.scrolled .search-toggle,
+header.scrolled .theme-toggle,
+header.scrolled .mobile-menu {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
 /* Add after existing header styles */
 .header-container {
     display: flex;
@@ -595,12 +644,422 @@ header {
     color: #ffffff; /* Changed to white */
 }
 
-        /* Hero Section */
-        .hero {
-            padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl);
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-        }
+/* Adjust the first section (hero) to come up behind header */
+.hero {
+    padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+}
+
+/* Create the illusion of content passing through header */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,0) 0%,
+        var(--bg-secondary) 70%,
+        var(--bg-secondary) 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* When header is transparent, show content shadows/effects */
+header.scrolled ~ .hero::before {
+    opacity: 0.7;
+}
+
+/* Blog Preview Card Styles - Matching Project Cards */
+#blog .blog-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+#blog .blog-post-card {
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#blog .blog-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent);
+}
+
+/* Blog card header with gradient */
+#blog .blog-post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), #62a0ea);
+    border-radius: 12px 12px 0 0;
+}
+
+#blog .blog-post-image {
+    height: 180px;
+    background: linear-gradient(135deg, var(--accent-light), rgba(98, 160, 234, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+}
+
+#blog .blog-post-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 95, 180, 0.1), transparent);
+}
+
+#blog .blog-post-image i {
+    font-size: 3.5rem;
+    color: var(--accent);
+    z-index: 1;
+    opacity: 0.8;
+}
+
+#blog .blog-post-content {
+    padding: var(--spacing-md);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#blog .blog-post-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 3em;
+}
+
+#blog .blog-post-excerpt {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#blog .blog-post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border);
+}
+
+#blog .blog-post-date {
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#blog .blog-post-date::before {
+    content: '📅';
+    font-size: 0.9rem;
+}
+
+#blog .blog-read-more {
+    background-color: var(--accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+#blog .blog-read-more:hover {
+    background-color: var(--text-primary);
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(26, 95, 180, 0.2);
+}
+
+#blog .blog-error {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#blog .blog-error i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: var(--spacing-md);
+    opacity: 0.7;
+}
+
+#blog .blog-error h3 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+#blog .blog-error p {
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-secondary);
+}
+
+#blog .blog-loading {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#blog .blog-loading i {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Blog section header styling */
+#blog h2 {
+    text-align: center;
+    width: 100%;
+}
+
+#blog h2:after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#blog .blog-preview-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    grid-column: 1 / -1;
+}
+
+/* Blog stats section styling */
+#blog .blog-stats {
+    background: linear-gradient(135deg, rgba(26, 95, 180, 0.05), rgba(98, 160, 234, 0.05));
+    border-radius: 12px;
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    border: 1px solid var(--border);
+}
+
+#blog .blog-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-sm);
+}
+
+#blog .stat-item {
+    text-align: center;
+    padding: var(--spacing-sm);
+}
+
+#blog .stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+}
+
+#blog .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Blog visit section styling */
+#blog .blog-visit-section {
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    border: 2px solid var(--border);
+    margin-top: var(--spacing-xl);
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+#blog .blog-visit-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #ff5722, #ff9800);
+}
+
+#blog .blog-visit-section i {
+    font-size: 3.5rem;
+    color: var(--accent);
+    margin-bottom: var(--spacing-md);
+    background: linear-gradient(135deg, var(--accent-light), transparent);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+}
+
+#blog .blog-visit-section h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+#blog .blog-visit-section p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#blog .blog-visit-section .btn {
+    background: linear-gradient(135deg, #ff5722, #ff9800);
+    color: white;
+    padding: 0.875rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+    border: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+#blog .blog-visit-section .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
+}
+
+/* Dark theme adjustments for blog */
+body.dark-theme #blog .blog-post-card {
+    background-color: var(--bg-primary);
+    border-color: var(--border);
+}
+
+body.dark-theme #blog .blog-post-image {
+    background: linear-gradient(135deg, var(--accent-light), rgba(98, 160, 234, 0.1));
+}
+
+body.dark-theme #blog .blog-visit-section {
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+}
+
+body.dark-theme #blog .blog-stats {
+    background: linear-gradient(135deg, rgba(98, 160, 234, 0.05), rgba(98, 160, 234, 0.1));
+}
+
+/* Responsive adjustments for blog */
+@media (max-width: 768px) {
+    #blog .blog-preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--spacing-sm);
+    }
+    
+    #blog .blog-post-image {
+        height: 160px;
+    }
+    
+    #blog .blog-post-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    #blog .blog-preview-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    #blog .blog-post-image {
+        height: 150px;
+    }
+    
+    #blog .blog-visit-section {
+        padding: var(--spacing-md);
+    }
+    
+    #blog .blog-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Floating blog button styling */
+.floating-blog-btn {
+    background: linear-gradient(135deg, #ff5722, #ff9800);
+    color: white;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(255, 87, 34, 0.4);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.floating-blog-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 87, 34, 0.5);
+}
+
+/* Ensure smooth transition for all content */
+section {
+    position: relative;
+    z-index: 1;
+}
         
         .hero-content {
             max-width: 800px;
@@ -687,12 +1146,152 @@ header {
             font-weight: 500;
         }
         
-     /* Skills Grid - Updated for 3 columns */
+/* Skills Grid - Match Research Interests Color Scheme */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
     margin-top: var(--spacing-lg);
+}
+
+.skill-item {
+    background-color: var(--accent-light); /* Matching interest-tag background */
+    padding: var(--spacing-md);
+    border-radius: 12px; /* Slightly more rounded like tags */
+    border: 1px solid rgba(26, 95, 180, 0.2); /* Matching border color */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add gradient accent to top border */
+.skill-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #62a0ea);
+    border-radius: 12px 12px 0 0;
+    opacity: 0.7;
+}
+
+/* Skill item headings to match interest-tag text color */
+.skill-item h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--accent) !important; /* Match interest-tag text color */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-item h4:before {
+    content: "✓";
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Skill description text color */
+.skill-item .skill-description {
+    color: var(--text-primary) !important; /* Ensure good contrast */
+    font-size: 1rem;
+    margin-top: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+/* Hover effects that match interest-tag */
+.skill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(26, 95, 180, 0.15);
+    border-color: var(--accent);
+    background-color: rgba(26, 95, 180, 0.08); /* Slightly darker on hover */
+}
+
+/* Dark theme adjustments */
+body.dark-theme .skill-item {
+    background-color: var(--accent-light);
+    border: 1px solid rgba(98, 160, 234, 0.2);
+}
+
+body.dark-theme .skill-item h4 {
+    color: var(--accent) !important;
+}
+
+body.dark-theme .skill-item:hover {
+    background-color: rgba(98, 160, 234, 0.1);
+    border-color: var(--accent);
+}
+
+/* Update the skill bar to match the color scheme */
+.skill-bar {
+    height: 6px;
+    background-color: rgba(26, 95, 180, 0.1); /* Lighter version of accent */
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-sm);
+}
+
+.skill-level {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #62a0ea); /* Matching gradient */
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-level:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+/* Make sure the interest-tags also use this color scheme consistently */
+.interest-tag {
+    background-color: var(--accent-light);
+    color: var(--accent);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid rgba(26, 95, 180, 0.2);
+    transition: all 0.3s ease;
+}
+
+.interest-tag:hover {
+    background-color: rgba(26, 95, 180, 0.1);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 95, 180, 0.15);
+    border-color: var(--accent);
+}
+
+/* Ensure consistency in dark theme */
+body.dark-theme .interest-tag {
+    background-color: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid rgba(98, 160, 234, 0.2);
+}
+
+body.dark-theme .interest-tag:hover {
+    background-color: rgba(98, 160, 234, 0.1);
+    border-color: var(--accent);
 }
 
 /* Responsive adjustments */
@@ -708,20 +1307,6 @@ header {
     }
 }
 
-/* Enhanced skill item styling */
-.skill-item {
-    background-color: var(--bg-secondary);
-    padding: var(--spacing-md);
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    transition: var(--transition);
-}
-
-.skill-item:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
-    border-color: var(--accent);
-}
 
 .skill-item h4 {
     font-family: 'Inter', sans-serif;
@@ -1182,6 +1767,61 @@ body.dark-theme footer * {
             justify-content: space-between;
             align-items: center;
         }
+        
+  /* Footer Navigation Hover Effects */
+.footer-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.footer-nav-item:hover i {
+    transform: scale(1.2) !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* Footer Social Icons Hover */
+.footer-social .social-icons a:hover {
+    background-color: var(--accent) !important;
+    color: white !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Footer Links Hover */
+.footer-links a:hover {
+    color: var(--accent) !important;
+    text-decoration: underline !important;
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 768px) {
+    .footer-nav-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+    
+    .footer-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: var(--spacing-md) !important;
+    }
+    
+    .footer-links {
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-nav-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .footer-nav-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
         
         .copyright {
             color: var(--text-primary); /* Changed to primary color for better visibility */
@@ -1998,15 +2638,15 @@ body.dark-theme .professional-badge {
         <!-- Navigation container -->
         <div class="nav-container">
             <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+<ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About me</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+</ul>
             </nav>
             
             <div class="header-right">
@@ -2037,15 +2677,15 @@ body.dark-theme .professional-badge {
         </div>
     </div>
     
-    <div class="mobile-nav" id="mobileNav">
-        <a href="#home">Home</a>
-        <a href="#about">About Me</a>
-        <a href="#education">Education</a>
-        <a href="#projects">Projects</a>
-        <a href="#publications">Publications</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
-    </div>
+<div class="mobile-nav" id="mobileNav">
+    <a href="#home">Home</a>
+    <a href="#about">About me</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#publications">Publications</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+</div>
 </header>
     
         <!-- Hero Section -->
@@ -2382,70 +3022,49 @@ body.dark-theme .professional-badge {
     </div>
 </section>
 
-<!-- Blog Section -->
+<!-- Blog Section with Beautiful Card Layout -->
 <section id="blog" style="background-color: var(--bg-secondary);">
     <div class="container">
-        <h2 class="text-center">Blog Posts</h2>
-        <p class="text-center mb-lg" style="max-width: 800px; margin: 0 auto;">
-            I share insights on anything 
-            and on the R Shiny web applications. Visit my blog for regular updates!
+        <h2 class="text-center">Latest Blog Posts</h2>
+        <p class="text-center mb-lg" style="max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
+            I share insights on healthcare research, nursing, data analysis, and my R Shiny web applications. 
+            Here's a preview of my latest posts from Google Blogger.
         </p>
         
-        <div style="text-align: center; padding: var(--spacing-lg); background-color: var(--bg-primary); border-radius: 12px; border: 1px solid var(--border);">
-            <div style="margin-bottom: var(--spacing-md);">
-                <i class="fas fa-blog" style="font-size: 4rem; color: var(--accent); margin-bottom: var(--spacing-md);"></i>
-                <h3>My Google Blogger</h3>
-                <p style="margin-bottom: var(--spacing-md);">
-                    Read my latest blogs on healthcare research, nursing, data analysis, 
-                    and technology in healthcare.
-                </p>
+        <!-- Blog Preview Cards Container -->
+        <div id="blogPreview" style="margin-bottom: var(--spacing-xl);">
+            <!-- Blog posts will be loaded here via JavaScript -->
+            <div class="blog-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading latest blog posts...</p>
             </div>
-            
-            <!-- Main Blog Button -->
-            <div style="position: relative; margin-top: var(--spacing-xl);">
-                <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" class="btn" 
-                   style="background: linear-gradient(135deg, #ff5722, #ff9800); color: white; 
-                          padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 600;
-                          box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
-                          position: relative; z-index: 1;">
-                    <i class="fas fa-external-link-alt"></i> Visit My Blog
-                </a>
-            </div>
-            
-                     <!-- Blog Stats with R Shiny Tools -->
-            <div style="display: flex; justify-content: center; gap: var(--spacing-lg); margin-top: var(--spacing-xl); 
-                      flex-wrap: wrap;">
-                <div style="text-align: center; padding: var(--spacing-sm); min-width: 120px;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Regular</div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Updates</div>
+        </div>
+        
+        <!-- Blog Stats Section -->
+        <div class="blog-stats">
+            <div class="blog-stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">Latest</div>
+                    <div class="stat-label">Posts</div>
                 </div>
-                <div style="text-align: center; padding: var(--spacing-sm); min-width: 120px;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Healthcare</div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Focus</div>
+                <div class="stat-item">
+                    <div class="stat-value">Healthcare</div>
+                    <div class="stat-label">Insights</div>
                 </div>
-                <div style="text-align: center; padding: var(--spacing-sm); min-width: 120px;">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent);">Research</div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Insights</div>
+                <div class="stat-item">
+                    <div class="stat-value">Research</div>
+                    <div class="stat-label">Updates</div>
                 </div>
-                <div style="text-align: center; padding: var(--spacing-sm); min-width: 120px; background: linear-gradient(135deg, rgba(26, 95, 180, 0.1), rgba(98, 160, 234, 0.1)); border-radius: 8px; border: 1px solid var(--accent-light);">
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                <div class="stat-item">
+                    <div class="stat-value" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
                         <i class="fas fa-tools"></i>
                         <span>R Shiny</span>
                     </div>
-                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Tools & Apps</div>
+                    <div class="stat-label">Tools & Apps</div>
                 </div>
             </div>
-                 </div>
-        
-        <!-- Note -->
-        <div class="text-center mt-lg">
-            <p style="color: var(--text-tertiary); font-style: italic;">
-                (Blog content is powered by Blogger. Click the button above to read all posts.)
-            </p>
         </div>
-    </div>
-</section>
-
+        
    <!-- Contact Section -->
 <section id="contact">
     <div class="container">
@@ -2554,20 +3173,89 @@ body.dark-theme .professional-badge {
         </div>
     </section>
 
- <!-- Footer -->
+<!-- Enhanced Footer -->
 <footer style="background-color: #000000; border-top: 1px solid #333333;">
-    <div class="container footer-content">
-        <div>
-            <p class="copyright" style="color: #ffffff;">&copy; <span id="currentYear"></span> Mudasir Mohammed Ibrahim. All rights reserved.</p>
-            <p class="developer-note" style="color: #bbbbbb;">Website designed and powered by Mudasir Mohammed Ibrahim</p>
+    <div class="container">
+        <!-- Footer Navigation -->
+        <div class="footer-navigation" style="padding: var(--spacing-xl) 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+            <h3 style="color: #ffffff; text-align: center; margin-bottom: var(--spacing-lg); font-size: 1.5rem; font-weight: 600;">Quick Navigation</h3>
+            
+           <div class="footer-nav-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-sm); max-width: 800px; margin: 0 auto;">
+    <a href="#home" class="footer-nav-item" style="display: flex; flex-direction: column; align-items: center; padding: var(--spacing-sm); text-decoration: none; color: #ffffff; border-radius: 8px; transition: all 0.3s ease;">
+        <i class="fas fa-home" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+        <span style="font-size: 0.95rem; font-weight: 500;">Home</span>
+    </a>
+    
+    <a href="#about" class="footer-nav-item" style="display: flex; flex-direction: column; align-items: center; padding: var(--spacing-sm); text-decoration: none; color: #ffffff; border-radius: 8px; transition: all 0.3s ease;">
+        <i class="fas fa-user" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+        <span style="font-size: 0.95rem; font-weight: 500;">About me</span>
+    </a>
+    
+    <a href="#education" class="footer-nav-item" style="display: flex; flex-direction: column; align-items: center; padding: var(--spacing-sm); text-decoration: none; color: #ffffff; border-radius: 8px; transition: all 0.3s ease;">
+        <i class="fas fa-graduation-cap" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+        <span style="font-size: 0.95rem; font-weight: 500;">Education</span>
+    </a>
+    
+    <a href="#projects" class="footer-nav-item" style="display: flex; flex-direction: column; align-items: center; padding: var(--spacing-sm); text-decoration: none; color: #ffffff; border-radius: 8px; transition: all 0.3s ease;">
+        <i class="fas fa-code" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+        <span style="font-size: 0.95rem; font-weight: 500;">Projects</span>
+    </a>
+    
+    <a href="#publications" class="footer-nav-item" style="display: flex; flex-direction: column; align-items: center; padding: var(--spacing-sm); text-decoration: none; color: #ffffff; border-radius: 8px; transition: all 0.3s ease;">
+        <i class="fas fa-book" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+        <span style="font-size: 0.95rem; font-weight: 500;">Publications</span>
+    </a>
+    
+    <a href="#blog" class="footer-nav-item" style="display: flex; flex-direction: column; align-items: center; padding: var(--spacing-sm); text-decoration: none; color: #ffffff; border-radius: 8px; transition: all 0.3s ease;">
+        <i class="fas fa-blog" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+        <span style="font-size: 0.95rem; font-weight: 500;">Blog</span>
+    </a>
+    
+    <a href="#contact" class="footer-nav-item" style="display: flex; flex-direction: column; align-items: center; padding: var(--spacing-sm); text-decoration: none; color: #ffffff; border-radius: 8px; transition: all 0.3s ease;">
+        <i class="fas fa-envelope" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+        <span style="font-size: 0.95rem; font-weight: 500;">Contact</span>
+    </a>
+</div>
+            <!-- Social Links -->
+            <div class="footer-social" style="text-align: center; margin-top: var(--spacing-lg);">
+                <h4 style="color: #ffffff; margin-bottom: var(--spacing-sm); font-size: 1.1rem; font-weight: 500;">Connect With Me</h4>
+                <div class="social-icons" style="display: flex; justify-content: center; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+                    <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" title="LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" title="Google Scholar" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" title="ORCID" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                        <i class="fab fa-orcid"></i>
+                    </a>
+                    <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" title="Blog" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                        <i class="fas fa-blog"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="footer-links">
-            <a href="https://github.com/mudassiribrahim30" target="_blank" style="color: #ffffff;">GitHub</a>
-            <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" style="color: #ffffff;">LinkedIn</a>
-            <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" style="color: #ffffff;">Google Scholar</a>
+        
+        <!-- Footer Bottom -->
+        <div class="footer-bottom" style="padding: var(--spacing-lg) 0;">
+            <div class="footer-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-md);">
+                <div>
+                    <p class="copyright" style="color: #ffffff; font-size: 0.95rem; font-weight: 500;">&copy; <span id="currentYear"></span> Mudasir Mohammed Ibrahim. All rights reserved.</p>
+                    <p class="developer-note" style="color: #bbbbbb; font-size: 0.85rem; margin-top: 0.5rem;">Website designed and powered by Mudasir Mohammed Ibrahim</p>
+                </div>
+                <div class="footer-links" style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+                    <a href="https://github.com/mudassiribrahim30" target="_blank" style="color: #ffffff; font-size: 0.9rem; font-weight: 500;">GitHub</a>
+                    <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" style="color: #ffffff; font-size: 0.9rem; font-weight: 500;">LinkedIn</a>
+                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" style="color: #ffffff; font-size: 0.9rem; font-weight: 500;">Google Scholar</a>
+                </div>
+            </div>
         </div>
     </div>
 </footer>
+
     <!-- All Projects Modal -->
     <div class="modal" id="allProjectsModal">
         <div class="modal-content">
@@ -2589,6 +3277,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load projects
     loadFeaturedProjects();
     loadAllProjects();
+    
+        // Load blog posts
+    loadBlogPosts();
     
     // Initialize theme (ONLY CALL THIS ONCE)
     initTheme();
@@ -2613,6 +3304,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Website initialized successfully');
 });
+
 
         // All 20 R Shiny Applications Data
         const allProjects = [
@@ -2935,16 +3627,186 @@ function initTheme() {
         });
     });
 }
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = 'none';
+
+// Header scroll effect - starts solid, becomes transparent on scroll
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    const scrollY = window.scrollY;
+    
+    if (scrollY > 10) {
+        header.classList.add('scrolled');
+        header.classList.remove('not-scrolled');
+        
+        // Adjust transparency based on scroll amount
+        if (scrollY > 100) {
+            header.classList.add('more');
+            // Dynamic opacity - becomes more transparent as you scroll further
+            const opacity = Math.max(0.3, 0.7 - (scrollY / 1000));
+            header.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+        } else {
+            header.classList.remove('more');
+            // Smooth transition from solid to transparent
+            const opacity = 0.9 - (scrollY / 200);
+            header.style.backgroundColor = `rgba(0, 0, 0, ${Math.max(0.5, opacity)})`;
+        }
+        
+        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+    } else {
+        header.classList.remove('scrolled', 'more');
+        header.classList.add('not-scrolled');
+        header.style.backgroundColor = '#000000'; // Solid black
+        header.style.backdropFilter = 'none';
+        header.style.boxShadow = 'none';
+    }
+});
+
+// Load Blog Posts from Google Blogger RSS Feed
+function loadBlogPosts() {
+    const blogPreview = document.getElementById('blogPreview');
+    
+    // Google Blogger RSS feed URL
+    const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=3';
+    
+    // Use CORS proxy to avoid CORS issues (public proxy)
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    const fullUrl = proxyUrl + encodeURIComponent(rssFeedUrl);
+    
+    blogPreview.innerHTML = `
+        <div class="blog-loading" style="text-align: center; padding: var(--spacing-xl); background-color: var(--bg-primary); border-radius: 12px; border: 1px solid var(--border);">
+            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent); margin-bottom: var(--spacing-md);"></i>
+            <p>Loading latest blog posts...</p>
+        </div>
+    `;
+    
+    fetch(fullUrl)
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            const feedData = JSON.parse(data.contents);
+            const posts = feedData.feed.entry || [];
+            
+            if (posts.length === 0) {
+                showFallbackBlogPosts();
+                return;
             }
+            
+            displayBlogPosts(posts);
+        })
+        .catch(error => {
+            console.error('Error fetching blog posts:', error);
+            showFallbackBlogPosts();
+        });
+}
+
+function displayBlogPosts(posts) {
+    const blogPreview = document.getElementById('blogPreview');
+    
+    let blogHTML = `
+        <div class="blog-preview-grid">
+            <h3 class="blog-preview-header">Latest Blog Posts</h3>
+    `;
+    
+    posts.forEach((post, index) => {
+        const title = post.title.$t || 'Untitled Post';
+        const content = post.content.$t || '';
+        const published = post.published.$t || new Date().toISOString();
+        const link = post.link.find(l => l.rel === 'alternate').href || '#';
+        
+        // Extract clean excerpt (remove HTML tags, limit length)
+        const excerpt = extractExcerpt(content, 150);
+        
+        // Format date nicely
+        const date = new Date(published).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         });
         
+        // Get first letter for icon (if you want text-based icons)
+        const firstLetter = title.charAt(0).toUpperCase();
+        
+        // Category based on index (for demo purposes)
+        const categories = ['Healthcare', 'Research', 'Technology', 'Nursing', 'Data Analysis'];
+        const category = categories[index % categories.length];
+        
+        blogHTML += `
+            <div class="blog-post-card">
+                <div class="blog-post-image">
+                    <i class="fas fa-blog"></i>
+                </div>
+                <div class="blog-post-content">
+                    <h4 class="blog-post-title">${title}</h4>
+                    <p class="blog-post-excerpt">${excerpt}</p>
+                    <div class="blog-post-meta">
+                        <span class="blog-post-date">${date}</span>
+                        <a href="${link}" target="_blank" class="blog-read-more">
+                            Read <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    blogHTML += '</div>';
+    blogPreview.innerHTML = blogHTML;
+}
+function extractExcerpt(content, maxLength) {
+    // Remove HTML tags
+    const text = content.replace(/<[^>]*>/g, '');
+    
+    // Decode HTML entities
+    const decoded = text.replace(/&amp;/g, '&')
+                       .replace(/&lt;/g, '<')
+                       .replace(/&gt;/g, '>')
+                       .replace(/&quot;/g, '"')
+                       .replace(/&#39;/g, "'");
+    
+    // Trim and limit length
+    if (decoded.length > maxLength) {
+        return decoded.substring(0, maxLength) + '...';
+    }
+    return decoded;
+}
+
+function showFallbackBlogPosts() {
+    const blogPreview = document.getElementById('blogPreview');
+    
+    blogPreview.innerHTML = `
+        <div class="blog-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3 style="margin-bottom: var(--spacing-sm);">Unable to load blog posts</h3>
+            <p style="margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
+                Please visit my blog directly to read all posts.
+            </p>
+            <div style="text-align: center;">
+                <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" class="btn" 
+                   style="background: linear-gradient(135deg, #ff5722, #ff9800); color: white; 
+                          padding: 0.875rem 1.5rem; font-size: 1rem; font-weight: 600;">
+                    <i class="fas fa-external-link-alt"></i> Visit My Blog
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+// Initialize header on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('header');
+    header.classList.add('not-scrolled');
+    header.style.backgroundColor = '#000000'; // Solid black at start
+    header.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    
+    // Force a small delay to ensure styles are applied
+    setTimeout(() => {
+        if (window.scrollY === 0) {
+            header.style.backgroundColor = '#000000';
+            header.style.backdropFilter = 'none';
+        }
+    }, 100);
+});
         
         
                 // Contact Form Submission
