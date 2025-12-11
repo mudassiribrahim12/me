@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Official Website of Mudasir Mohammed Ibrahim</title>
+    <title>Mudasir Mohammed Ibrahim - Official Website</title>
     
     <!-- App Icon -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%233498db'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='0.35em' font-family='Arial, sans-serif' font-weight='bold' font-size='45' fill='white'%3EMMI%3C/text%3E%3C/svg%3E">
@@ -533,6 +533,212 @@
             position: relative;
             left: -10px;
         }
+
+/* ============================================
+   FIXED LOGO STYLING - WHITE AND BOLD WEBSITE NAME
+   ============================================ */
+.logo {
+    position: relative !important;
+    overflow: visible !important;
+    padding: 0.25rem 0.75rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* BOTH NAMES WHITE AND BOLD */
+.logo .first-part {
+    color: #FFFFFF !important; /* Pure white for Mudasir */
+    font-weight: 800 !important; /* Extra bold */
+    font-size: 1.4rem !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    letter-spacing: 0.3px !important;
+    position: relative !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.logo .last-part {
+    color: #FFFFFF !important; /* Pure white for IBRAHIM */
+    font-weight: 800 !important; /* Extra bold */
+    font-size: 1.4rem !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    letter-spacing: 0.3px !important;
+    position: relative !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Space between names */
+.logo .name-space {
+    width: 0.15rem !important;
+    display: inline-block !important;
+    opacity: 0.5 !important;
+}
+
+/* Remove all gradient backgrounds - keep it simple white */
+.logo .first-part,
+.logo .last-part {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+}
+
+/* Remove underline animations */
+.logo .first-part::after,
+.logo .last-part::after {
+    display: none !important;
+}
+
+/* Remove glow animations */
+.logo {
+    animation: none !important;
+}
+
+/* Enhanced hover effect */
+.logo:hover .first-part,
+.logo:hover .last-part {
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Dark theme adjustments */
+body.dark-theme .logo {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .logo:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-theme .logo .first-part,
+body.dark-theme .logo .last-part {
+    color: #FFFFFF !important; /* Still white in dark theme */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .logo {
+        padding: 0.15rem 0.5rem;
+        font-size: 1.1rem !important;
+        gap: 0.15rem !important;
+    }
+    
+    .logo .first-part,
+    .logo .last-part {
+        font-size: 1.1rem !important;
+        letter-spacing: 0.2px !important;
+        font-weight: 700 !important;
+    }
+    
+    .logo .name-space {
+        width: 0.1rem !important;
+    }
+}
+
+/* Fix for header spacing */
+.logo-container {
+    flex: 0 auto !important;
+    min-width: auto !important;
+}
+
+.logo {
+    margin: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* Animated glow effect for the entire name */
+@keyframes nameGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(52, 152, 219, 0.3)) 
+               drop-shadow(0 0 10px rgba(231, 76, 60, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 8px rgba(52, 152, 219, 0.5)) 
+               drop-shadow(0 0 15px rgba(231, 76, 60, 0.5));
+    }
+}
+
+.logo {
+    animation: nameGlow 3s ease-in-out infinite;
+}
+
+/* Dark theme adjustments */
+body.dark-theme .logo {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.05), 
+        rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .logo:hover {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.08), 
+        rgba(255, 255, 255, 0.04));
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Enhanced color gradients for dark theme */
+body.dark-theme .logo .first-part {
+    background: linear-gradient(135deg, #3498db, #1abc9c) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+body.dark-theme .logo .last-part {
+    background: linear-gradient(135deg, #e74c3c, #e67e22) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .logo {
+        padding: 0.15rem 0.5rem;
+        font-size: 1.1rem !important;
+        gap: 0.15rem !important;
+    }
+    
+    .logo .first-part,
+    .logo .last-part {
+        font-size: 1.1rem !important;
+        letter-spacing: 0.3px !important;
+    }
+    
+    .logo .name-space {
+        width: 0.2rem !important;
+    }
+}
+
+/* Fix for header spacing */
+.logo-container {
+    flex: 0 auto !important;
+    min-width: auto !important;
+}
+
+.logo {
+    margin: 0 !important;
+    padding-left: 0 !important;
+}
 
         /* Remove hover color change on logo */
         .logo:hover,
@@ -2739,7 +2945,7 @@
         <div class="container header-container">
             <!-- Logo container for better positioning -->
             <div class="logo-container">
-                <a href="/" class="logo" id="logoLink">My Portfolio <span></span></a>
+                <a href="/" class="logo" id="logoLink">Mudasir IBRAHIM <span></span></a>
             </div>
             
             <!-- Navigation container -->
@@ -3610,6 +3816,46 @@
                 container.appendChild(createProjectCard(project));
             });
         }
+
+// Function to properly format the white and bold name
+function formatLogoName() {
+    const logo = document.getElementById('logoLink');
+    if (!logo) return;
+    
+    // Get the text content
+    const fullName = logo.textContent.trim();
+    
+    // Find where the space is
+    const spaceIndex = fullName.indexOf(' ');
+    
+    if (spaceIndex > 0) {
+        const firstName = fullName.substring(0, spaceIndex);
+        const lastName = fullName.substring(spaceIndex + 1);
+        
+        // Create colored spans with proper white text
+        logo.innerHTML = `
+            <span class="first-part">${firstName}</span>
+            <span class="name-space"> </span>
+            <span class="last-part">${lastName}</span>
+        `;
+    }
+}
+
+// Call the function when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    formatLogoName();
+    
+    // Also call it when logo is clicked (since you have reload functionality)
+    const logo = document.getElementById('logoLink');
+    if (logo) {
+        const originalClick = logo.onclick;
+        logo.onclick = function(e) {
+            // Reapply formatting after a short delay when logo is clicked
+            setTimeout(formatLogoName, 100);
+            if (originalClick) originalClick.call(this, e);
+        };
+    }
+});
 
         // Create Project Card
         function createProjectCard(project) {
@@ -4959,6 +5205,47 @@
                 });
             }
         }
+        
+        // Function to color the name dynamically
+function colorNameSeparately() {
+    const logo = document.getElementById('logoLink');
+    if (!logo) return;
+    
+    // Get the text content
+    const fullName = logo.textContent.trim();
+    
+    // Find where the space is
+    const spaceIndex = fullName.indexOf(' ');
+    
+    if (spaceIndex > 0) {
+        const firstName = fullName.substring(0, spaceIndex);
+        const lastName = fullName.substring(spaceIndex + 1);
+        
+        // Create colored spans
+        logo.innerHTML = `
+            <span class="first-part">${firstName}</span>
+            <span class="name-space"> </span>
+            <span class="last-part">${lastName}</span>
+        `;
+    }
+}
+
+// Call the function when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    colorNameSeparately();
+    
+    // Also call it when logo is clicked (since you have reload functionality)
+    const logo = document.getElementById('logoLink');
+    if (logo) {
+        const originalClick = logo.onclick;
+        logo.onclick = function(e) {
+            // Reapply coloring after a short delay when logo is clicked
+            setTimeout(colorNameSeparately, 100);
+            if (originalClick) originalClick.call(this, e);
+        };
+    }
+});
+        
     </script>
     
     <!-- Floating Blog Button -->
