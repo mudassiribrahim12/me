@@ -1,0 +1,13 @@
+# Disable Jekyll processing
+theme: null
+plugins: []
+
+# Exclude processing of certain files
+exclude:
+  - node_modules/
+  - vendor/
+  - .git/
+  - .github/
+
+# Custom build settings
+include: []
