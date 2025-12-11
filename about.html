@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Mudasir Mohammed Ibrahim</title>
+    
+    <!-- App Icon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%233498db'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='0.35em' font-family='Arial, sans-serif' font-weight='bold' font-size='45' fill='white'%3EMMI%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <!-- Logo container for better positioning -->
+            <div class="logo-container">
+                <a href="index.html" class="logo" id="logoLink">Mudasir IBRAHIM <span></span></a>
+            </div>
+            
+            <!-- Navigation container -->
+            <div class="nav-container">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html" class="active">About me</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-right">
+                    <div class="search-container">
+                        <button class="search-toggle" id="searchToggle" title="Search website">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="search-dropdown" id="searchDropdown">
+                            <div class="search-box">
+                                <input type="text" class="search-input" id="searchInput" placeholder="Search for anything...">
+                                <button class="search-button" id="searchSubmit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div class="search-results" id="searchResults">
+                                <!-- Search results will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="mobile-menu" id="mobileMenu">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+            <a href="blog.html">Blog</a>
+            <a href="about.html" class="active">About me</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" style="padding-top: calc(var(--header-height) + var(--spacing-xl));">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-grid">
+                <div class="profile-img-container">
+                    <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my picture.jpg" alt="Mudasir Mohammed Ibrahim" class="profile-img">
+                    
+                    <!-- CV Download Button Only -->
+                    <div class="cv-download-section" style="margin-top: var(--spacing-md); text-align: center;">
+                        <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" 
+                           target="_blank" 
+                           class="btn" 
+                           style="background: linear-gradient(135deg, #1a5fb4, #4299e1); 
+                                  color: white; 
+                                  padding: 0.75rem 1.5rem;
+                                  border-radius: 8px;
+                                  display: inline-flex;
+                                  align-items: center;
+                                  gap: 0.5rem;
+                                  text-decoration: none;
+                                  font-weight: 600;
+                                  transition: all 0.3s ease;
+                                  width: 100%;
+                                  max-width: 200px;
+                                  justify-content: center;">
+                            <i class="fas fa-download"></i> Download My CV
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        Mudasir Mohammed Ibrahim is a Ghanaian nurse and researcher whose journey has been shaped by resilience, self-determination, and a deep commitment to improving health outcomes. Inspired by his mother's tireless work as a market trader, he pursued education against significant obstacles. Although he studied Business (Cost Accounting) in high school, he was determined to become a nurse. He independently taught himself key science subjects, rewrote the necessary exams as a private candidate, earned the required credentials, enrolled in nursing school, and successfully graduated.
+                    </p>
+
+                    <p>
+                        He now serves at Tamale Teaching Hospital, providing high-quality, patient-centered care to patients with complex medical conditions. Alongside his clinical work, Mudasir has built a strong research career, beginning as a research assistant and growing into an experienced researcher and lead data analyst on multiple population-health projects. His background in business, coupled with his curiosity and determination, led him to independently master advanced quantitative methods, including regression modeling, Structural Equation Modeling (SEM), factor analysis, and survival analysis.
+                    </p>
+
+                    <p>
+                        Motivated by a passion for biostatistics and data-driven solutions, he has developed several open-source R Shiny web applications to simplify complex analyses for healthcare professionals, students, and researchers. His work bridges clinical practice and data science, reflecting a commitment to both individual patient care and population-level prevention. Mudasir aims to advance his expertise in Epidemiology and Translational Science to better understand disease patterns, strengthen prevention strategies, and contribute to equitable health systems in Ghana and beyond.
+                    </p>
+
+                    <div class="research-interests">
+                        <h3>Research Interests</h3>
+                        <div class="interest-tags">
+                            <span class="interest-tag">Chronic Diseases Epidemiology</span>
+                            <span class="interest-tag">Maternal and Child Health</span>
+                            <span class="interest-tag">Public Health</span>
+                            <span class="interest-tag">Workplace Issues</span>
+                            <span class="interest-tag">Healthcare Data Analytics</span>
+                            <span class="interest-tag">Nursing Informatics</span>
+                        </div>
+                    </div>
+
+                    <div class="research-interests" style="margin-top: var(--spacing-lg);">
+                        <h3>Professional Credentials</h3>
+                        <p style="margin-top: 1rem; font-size: 1.05rem; color: var(--text-primary); line-height: 1.7; font-weight: 400;">
+                            Fully licensed by the <strong>Nursing and Midwifery Council of Ghana (NMC)</strong> and an active member of the <strong>Ghana Registered Nurses and Midwives Association (GRNMA)</strong>, maintaining professional standards and continuous development in nursing practice at Tamale Teaching Hospital.
+                        </p>
+                    </div>
+                    
+                    <div class="skills">
+                        <h3>Core Competencies</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <h4>Patient Care & Clinical Nursing</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%"></div>
+                                </div>
+                                <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
+                                    Comprehensive nursing care, patient assessment, medication administration, and holistic healthcare delivery
+                                </p>
+                            </div>
+                            <div class="skill-item">
+                                <h4>Health/Clinical Research</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%"></div>
+                                </div>
+                                <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
+                                    Research design, data collection, ethical considerations, and evidence-based practice implementation
+                                </p>
+                            </div>
+                            <div class="skill-item">
+                                <h4>Advanced Statistical Analysis</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%"></div>
+                                </div>
+                                <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
+                                    SEM, factor analysis, regression modeling, and complex statistical methods for healthcare data
+                                </p>
+                            </div>
+                            <div class="skill-item">
+                                <h4>R Shiny Development</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%"></div>
+                                </div>
+                                <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
+                                    AI-assisted coding of interactive web applications for healthcare data analysis and visualization
+                                </p>
+                            </div>
+                            <div class="skill-item">
+                                <h4>Scientific Writing & Peer Review</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%"></div>
+                                </div>
+                                <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
+                                    Manuscript preparation, journal submissions, and critical review for international healthcare journals
+                                </p>
+                            </div>
+                            <div class="skill-item">
+                                <h4>Healthcare Data Management</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%"></div>
+                                </div>
+                                <p class="skill-description" style="font-size: 1rem; color: var(--text-primary); margin-top: 0.75rem; font-weight: 500; line-height: 1.5;">
+                                    Data cleaning, preprocessing, analysis, and visualization for healthcare research and decision-making
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Work Section - Grid Version -->
+    <section id="education" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <h2>Education & Experience</h2>
+            <div class="education-grid">
+                <div class="education-item">
+                    <div class="education-year">2025 - Present</div>
+                    <div class="education-details">
+                        <h3>Staff Nurse</h3>
+                        <p>Tamale Teaching Hospital, Tamale, Northern Region, Ghana</p>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-year">2022 - 2024</div>
+                    <div class="education-details">
+                        <h3>BSc Nursing</h3>
+                        <p>University of Cape Coast, Cape Coast, Central Region, Ghana</p>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-year">2021 - 2022</div>
+                    <div class="education-details">
+                        <h3>Rotation Nurse</h3>
+                        <p>Tamale Teaching Hospital, Tamale, Northern Region, Ghana</p>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-year">2017 - 2020</div>
+                    <div class="education-details">
+                        <h3>Diploma in General Nursing</h3>
+                        <p>Nurses' & Midwives' Training College, Tamale, Northern Region, Ghana</p>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-year">2013 - 2016</div>
+                    <div class="education-details">
+                        <h3>Business (Cost Accounting)</h3>
+                        <p>Northern School of Business (NOBISCO), Tamale, Northern Region, Ghana</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <h2>Publications</h2>
+            <div class="publications-grid">
+                <div>
+                    <div class="publication-item">
+                        <h3>Determinants and Mitigating Factors of Brain Drain among Ghanaian Nurses</h3>
+                        <p class="publication-meta">Journal of Nursing Management, 2024</p>
+                        <p><strong>Authors:</strong> <strong><u>Ibrahim, M. M.</u></strong>, Wuni, A., Salisu, W. J., Abdulai, A., Owusua, T., Nyarko, B. A., Sayibu, A., et al</p>
+                        <p>Insights from Nurse Managers in Northern Ghana—A Qualitative Inquiry</p>
+                        <a href="https://onlinelibrary.wiley.com/doi/full/10.1155/2024/8862991" target="_blank" class="btn mt-sm" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-external-link-alt"></i> Read Publication
+                        </a>
+                    </div>
+                    <div class="publication-item">
+                        <h3>Assessing the impact of nurses' patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital</h3>
+                        <p class="publication-meta">BMC Health Services Research, 2025</p>
+                        <p><strong>Authors:</strong> <strong><u>Ibrahim, M. M.</u></strong>, Abdul-Rahaman, F., Sayibu, M. S., Alhassan, D. N., Awudu, R. T., Sisala, I. M., Wuni, A., et al</p>
+                        <p>The mediating role of leadership and barriers to competency development</p>
+                        <a href="https://link.springer.com/article/10.1186/s12913-025-13384-3" target="_blank" class="btn mt-sm" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-external-link-alt"></i> Read Publication
+                        </a>
+                    </div>
+                    <div class="publication-item">
+                        <h3>Patterns and temporal trends in childhood cancer incidence in northern Ghana</h3>
+                        <p class="publication-meta">BMC Pediatrics, 2025</p>
+                        <p><strong>Authors:</strong> Wuni, A., <strong><u>Ibrahim, M. M.</u></strong>, Tonlaar, P. S., Sisala, I. M., Awal, I., Nyarko, B. A., Abdulai, A., et al</p>
+                        <p>Evidence from medical records, 2016 to 2023</p>
+                        <a href="https://link.springer.com/article/10.1186/s12887-025-06141-2" target="_blank" class="btn mt-sm" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-external-link-alt"></i> Read Publication
+                        </a>
+                    </div>
+                    
+                    <!-- Google Scholar Button -->
+                    <div class="publication-item" style="text-align: center; padding-top: var(--spacing-lg);">
+                        <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-graduation-cap"></i> View More Publications
+                        </a>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <h3>Professional Reviewing</h3>
+                    <p class="mb-md">Contributing to the scientific community as a reviewer for several international journals, including:</p>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li class="mb-sm">• BMC Nursing</li>
+                        <li class="mb-sm">• BMC Health Services Research</li>
+                        <li class="mb-sm">• Scientific Reports</li>
+                        <li class="mb-sm">• Discover Public Health</li>
+                        <li class="mb-sm">• Discover Health Systems</li>
+                        <li class="mb-sm">• SSM - Health Systems</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: var(--spacing-lg);">
+                        <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/Ejkh6TgFPhtNkgsfwRv6_OgBpu9S58AyaqHR_AMPJsR4Rg?e=jU8KMP" target="_blank" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-certificate"></i> View Review Certificates
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer style="background-color: #000000; border-top: 1px solid #333333;">
+        <div class="container">
+            <!-- Footer Navigation -->
+            <div class="footer-navigation">
+                <h3 style="color: #ffffff; text-align: center; margin-bottom: var(--spacing-lg); font-size: 1.5rem; font-weight: 600;">Quick Navigation</h3>
+                
+                <div class="footer-nav-grid">
+                    <a href="index.html" class="footer-nav-item">
+                        <i class="fas fa-home" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500;">Home</span>
+                    </a>
+                    
+                    <a href="projects.html" class="footer-nav-item">
+                        <i class="fas fa-code" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500;">Projects</span>
+                    </a>
+                    
+                    <a href="blog.html" class="footer-nav-item">
+                        <i class="fas fa-blog" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500;">Blog</span>
+                    </a>
+                    
+                    <a href="about.html" class="footer-nav-item">
+                        <i class="fas fa-user" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500;">About me</span>
+                    </a>
+                    
+                    <a href="contact.html" class="footer-nav-item">
+                        <i class="fas fa-envelope" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent);"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500;">Contact</span>
+                    </a>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="footer-social">
+                    <h4 style="color: #ffffff; margin-bottom: var(--spacing-sm); font-size: 1.1rem; font-weight: 500;">Connect With Me</h4>
+                    <div class="social-icons" style="display: flex; justify-content: center; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+                        <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" title="LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" title="Google Scholar" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                            <i class="fas fa-graduation-cap"></i>
+                        </a>
+                        <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" title="ORCID" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                            <i class="fab fa-orcid"></i>
+                        </a>
+                        <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" title="Blog" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-radius: 50%; font-size: 1.1rem; transition: all 0.3s ease;">
+                            <i class="fas fa-blog"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-content">
+                    <div>
+                        <p class="copyright">&copy; <span id="currentYear"></span> Mudasir Mohammed Ibrahim. All rights reserved.</p>
+                        <p class="developer-note">Website designed and powered by Mudasir Mohammed Ibrahim</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="https://github.com/mudassiribrahim30" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank">LinkedIn</a>
+                        <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank">Google Scholar</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Back to Top Button -->
+            <div class="back-to-top" style="text-align: center; margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <button id="backToTopBtn" class="btn" 
+                       style="background: linear-gradient(135deg, var(--accent), #4299e1); 
+                              color: white; padding: 0.75rem 1.5rem; border-radius: 50px;
+                              font-weight: 600; text-decoration: none; display: inline-flex;
+                              align-items: center; gap: 0.5rem; transition: all 0.3s ease;
+                              border: none; cursor: pointer; font-size: 0.95rem;">
+                    <i class="fas fa-arrow-up"></i> Back to top
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+</body>
+</html>
