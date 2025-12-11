@@ -480,6 +480,35 @@ header.scrolled .mobile-menu {
     }
 }
 
+/* Dangle/Bounce animation for Back to Top button */
+@keyframes gentleBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+#backToTopBtn:hover {
+    animation: gentleBounce 2s ease-in-out infinite;
+}
+
+/* Arrow icon animation */
+#backToTopBtn i {
+    transition: transform 0.3s ease;
+}
+
+#backToTopBtn:hover i {
+    transform: translateY(-2px);
+}
+
+/* Make the button feel more "alive" */
+#backToTopBtn {
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+}
+
 /* Blog Button Animation */
 @keyframes pulse {
     0% {
@@ -699,6 +728,136 @@ header.scrolled ~ .hero::before {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     border-color: var(--accent);
+}
+
+/* Back to Top Button Hover Styles */
+#backToTopBtn:hover {
+    background: linear-gradient(135deg, #2b6cb0, #3182ce);
+    transform: translateY(-2px) scale(0.98);
+    box-shadow: 0 10px 20px rgba(44, 82, 130, 0.2);
+}
+
+/* Dark theme hover effect for back to top button */
+body.dark-theme #backToTopBtn:hover {
+    background-color: var(--text-primary) !important;
+    color: var(--bg-primary) !important;
+    transform: translateY(-2px) scale(0.98);
+}
+
+/* Make sure all buttons have consistent hover scaling */
+.btn:hover:not(.btn-outline) {
+    transform: translateY(-2px) scale(0.98);
+}
+
+/* Specific scaling for different buttons */
+.btn:hover,
+#viewAllProjectsBtn:hover,
+button[type="submit"]:hover,
+#backToTopBtn:hover {
+    transform: translateY(-2px) scale(0.98);
+}
+
+/* Keep the scale effect consistent across all interactive elements */
+.social-icons a:hover,
+.footer-nav-item:hover,
+.footer-social .social-icons a:hover,
+.project-card:hover {
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* Back to Top Button Hover Text Color */
+#backToTopBtn:hover {
+    color: #000000 !important; /* Black text on hover */
+}
+
+/* Back to Top Button - Improved with better hover effects */
+#backToTopBtn {
+    background: linear-gradient(135deg, var(--accent), #4299e1) !important;
+    color: white !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-size: 0.95rem !important;
+    box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+}
+
+/* Add a shine effect */
+#backToTopBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.7s ease;
+    z-index: -1;
+}
+
+#backToTopBtn:hover::before {
+    left: 100%;
+}
+
+/* Light mode hover effect - text turns black */
+#backToTopBtn:hover:not(.dark-theme *) {
+    color: #000000 !important;
+    background: linear-gradient(135deg, #ffffff, #f0f0f0) !important;
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(44, 82, 130, 0.4) !important;
+}
+
+/* Dark mode hover effect - text stays white */
+body.dark-theme #backToTopBtn:hover {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #2b6cb0, #3182ce) !important;
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(44, 82, 130, 0.4) !important;
+}
+
+/* Button visibility and animations */
+#backToTopBtn {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#backToTopBtn.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Pulse animation for attention */
+@keyframes gentlePulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3);
+    }
+    50% {
+        box-shadow: 0 6px 20px rgba(44, 82, 130, 0.5);
+    }
+}
+
+#backToTopBtn:hover {
+    animation: gentlePulse 1.5s infinite;
+}
+
+/* Dark theme adjustment for hover */
+body.dark-theme #backToTopBtn:hover {
+    color: #ffffff !important; /* Keep white text in dark mode on hover */
+}
+
+/* But for regular buttons, use a slight scale down */
+.btn:not(.social-icons a, .footer-nav-item, .footer-social .social-icons a, .project-card):hover {
+    transform: translateY(-2px) scale(0.98);
 }
 
 /* Blog card header with gradient */
@@ -3039,31 +3198,17 @@ body.dark-theme .professional-badge {
                 <p>Loading latest blog posts...</p>
             </div>
         </div>
-        
-        <!-- Blog Stats Section -->
-        <div class="blog-stats">
-            <div class="blog-stats-grid">
-                <div class="stat-item">
-                    <div class="stat-value">Latest</div>
-                    <div class="stat-label">Posts</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">Healthcare</div>
-                    <div class="stat-label">Insights</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">Research</div>
-                    <div class="stat-label">Updates</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <i class="fas fa-tools"></i>
-                        <span>R Shiny</span>
-                    </div>
-                    <div class="stat-label">Tools & Apps</div>
-                </div>
-            </div>
-        </div>
+       <!-- Blog View All Button -->
+<div class="blog-view-all" style="text-align: center; margin-top: var(--spacing-lg); padding: var(--spacing-md) 0; border-top: 1px solid var(--border);">
+    <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" class="btn" 
+       style="background: linear-gradient(135deg, var(--accent), #4299e1); 
+              color: white; padding: 0.875rem 2rem; border-radius: 8px;
+              font-weight: 600; text-decoration: none; display: inline-flex;
+              align-items: center; gap: 0.5rem; transition: all 0.3s ease;">
+        <i class="fas fa-external-link-alt"></i> VIEW ALL BLOG POSTS
+    </a>
+</div> 
+       
         
    <!-- Contact Section -->
 <section id="contact">
@@ -3254,6 +3399,19 @@ body.dark-theme .professional-badge {
             </div>
         </div>
     </div>
+    
+    <!-- Back to Top Button -->
+<div class="back-to-top" style="text-align: center; margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <button id="backToTopBtn" class="btn" 
+       style="background: linear-gradient(135deg, var(--accent), #4299e1); 
+              color: white; padding: 0.75rem 1.5rem; border-radius: 50px;
+              font-weight: 600; text-decoration: none; display: inline-flex;
+              align-items: center; gap: 0.5rem; transition: all 0.3s ease;
+              border: none; cursor: pointer; font-size: 0.95rem;">
+        <i class="fas fa-arrow-up"></i> Back to top
+    </button>
+</div>
+    
 </footer>
 
     <!-- All Projects Modal -->
@@ -3266,6 +3424,7 @@ body.dark-theme .professional-badge {
             </div>
         </div>
     </div>
+    
 
     <script>
 
@@ -3298,6 +3457,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize search functionality
     initSearch();
+    
+        // Initialize Back to Top Button
+    initBackToTopButton();
     
     // Initialize logo click handler for reload
     initLogoClickHandler();
@@ -3480,7 +3642,61 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.appendChild(createProjectCard(project));
             });
         }
-
+        
+ // Back to Top Button Functionality - Improved
+function initBackToTopButton() {
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    
+    if (!backToTopBtn) return;
+    
+    // Show/hide button based on scroll position with smooth animation
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTopBtn.classList.add('visible');
+            backToTopBtn.style.display = 'inline-flex';
+        } else {
+            backToTopBtn.classList.remove('visible');
+            setTimeout(() => {
+                if (window.scrollY <= 500) {
+                    backToTopBtn.style.display = 'none';
+                }
+            }, 300);
+        }
+    });
+    
+    // Scroll to top when clicked with smooth animation
+    backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Add click animation
+        backToTopBtn.style.transform = 'scale(0.95)';
+        
+        // Scroll to top
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Reset animation after click
+        setTimeout(() => {
+            backToTopBtn.style.transform = '';
+        }, 200);
+    });
+    
+    // Add hover effect for theme-specific text color
+    backToTopBtn.addEventListener('mouseenter', () => {
+        // The CSS handles this, but we add a class for extra control
+        backToTopBtn.classList.add('hovering');
+    });
+    
+    backToTopBtn.addEventListener('mouseleave', () => {
+        backToTopBtn.classList.remove('hovering');
+    });
+    
+    // Initialize button state
+    backToTopBtn.style.display = 'none';
+    backToTopBtn.classList.remove('visible');
+}
         // Load All Projects
         function loadAllProjects() {
             const container = document.getElementById('allProjectsGrid');
