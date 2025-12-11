@@ -394,7 +394,7 @@ header.scrolled .mobile-menu {
 }
 
 @media (max-width: 900px) {
-    /* For smaller laptops */
+    /* For smaller laptops and mobile */
     .nav-links {
         display: none !important; /* Force hide desktop nav */
     }
@@ -487,6 +487,23 @@ header.scrolled .mobile-menu {
         padding: 0.75rem var(--spacing-sm);
         font-size: 0.9rem;
     }
+}
+
+.mobile-menu {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ffffff !important; /* Ensure it's white */
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+    z-index: 1001; /* Ensure it's above other elements */
+}
+
+.mobile-menu:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* FIX: Prevent horizontal scrolling */
