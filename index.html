@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
+    
         /* ============================================
            ANIMATION STYLES
            ============================================ */
@@ -160,6 +161,501 @@
                 box-shadow: 0 0 40px currentColor, 0 0 60px currentColor;
             }
         }
+
+/* Add this to your CSS to make section transitions faster */
+.section-transition {
+    transition: all 0.3s ease !important; /* Reduced from 0.8s */
+}
+
+[data-animate] {
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Make header transitions faster too */
+header {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Make navigation underline animation faster */
+.nav-links a:after {
+    transition: width 0.2s ease !important;
+}
+
+/* Make hover effects faster */
+.project-card,
+.skill-item,
+.blog-post-card {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Make button hover transitions faster */
+.btn {
+    transition: all 0.2s ease !important;
+}
+
+/* Make social icon hover faster */
+.social-icons a {
+    transition: all 0.2s ease !important;
+}
+
+/* Add this to your CSS to ensure proper slide alignment */
+.carousel-slide {
+    flex: 0 0 100%;
+    min-height: 400px;
+}
+
+/* Ensure the track properly wraps slides */
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+/* Make sure each slide takes full width */
+.carousel-slide {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .carousel-slide {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-slide {
+        min-height: 300px;
+    }
+}
+
+/* ============================================
+   GOOGLE TRANSLATE WIDGET STYLES
+   ============================================ */
+
+/* Container for the translation widget */
+#google_translate_element {
+    position: fixed;
+    top: 15px;
+    right: 80px;
+    z-index: 1001;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* When header is scrolled, adjust widget position */
+header.scrolled ~ #google_translate_element {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Hide the default Google branding */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+}
+
+/* Style the dropdown */
+.goog-te-gadget {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0 !important;
+}
+
+/* Style the language selector */
+.goog-te-gadget select {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 6px !important;
+    padding: 6px 12px !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    min-width: 120px !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4.5L6 8.5L10 4.5' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    padding-right: 30px !important;
+    transition: all 0.3s ease !important;
+}
+
+.goog-te-gadget select:hover {
+    border-color: var(--accent) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.goog-te-gadget select:focus {
+    outline: none !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 2px rgba(26, 95, 180, 0.3) !important;
+}
+
+/* Hide Google branding text */
+.goog-te-gadget .goog-te-combo {
+    margin: 0 !important;
+}
+
+.goog-logo-link {
+    display: none !important;
+}
+
+.goog-te-gadget span {
+    display: none !important;
+}
+
+/* Language dropdown arrow */
+.goog-te-gadget::after {
+    content: "🌐";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+/* Fix for mobile view */
+@media (max-width: 768px) {
+    #google_translate_element {
+        position: fixed;
+        top: 10px;
+        right: 60px;
+        background: rgba(0, 0, 0, 0.8);
+    }
+    
+    .goog-te-gadget select {
+        font-size: 0.75rem !important;
+        min-width: 100px !important;
+        padding: 5px 8px !important;
+        padding-right: 25px !important;
+    }
+}
+
+/* Fix for very small screens */
+@media (max-width: 480px) {
+    #google_translate_element {
+        top: 8px;
+        right: 50px;
+    }
+    
+    .goog-te-gadget select {
+        min-width: 90px !important;
+        font-size: 0.7rem !important;
+    }
+}
+
+/* Dark theme adjustments */
+body.dark-theme .goog-te-gadget select {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-primary) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.dark-theme #google_translate_element {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hide the top bar that appears with Google Translate */
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+/* Make sure translated content flows properly */
+.goog-te-spinner-pos {
+    z-index: 100000;
+    position: fixed;
+}
+
+/* Translation progress indicator */
+.translation-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    z-index: 10000;
+    display: none;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.translation-loading.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Adjust header spacing for the translation widget */
+.header-right {
+    margin-right: 50px; /* Make space for the translation widget */
+}
+
+@media (max-width: 768px) {
+    .header-right {
+        margin-right: 40px;
+    }
+}
+
+/* ============================================
+   BLOG CAROUSEL STYLES
+   ============================================ */
+.blog-carousel-container {
+    position: relative;
+    margin: var(--spacing-lg) 0;
+    min-height: 400px;
+}
+
+.carousel-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.carousel-slide-header {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.carousel-slide-header i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+}
+
+.carousel-slide-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.3;
+}
+
+.carousel-slide-date {
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.carousel-slide-excerpt {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel-slide-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border);
+}
+
+/* Navigation Buttons */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, var(--accent), #4299e1);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(26, 95, 180, 0.3);
+    font-size: 1.2rem;
+}
+
+.carousel-nav:hover:not(:disabled) {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(26, 95, 180, 0.4);
+    background: linear-gradient(135deg, #2b6cb0, #3182ce);
+}
+
+.carousel-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.carousel-nav.prev {
+    left: -25px;
+}
+
+.carousel-nav.next {
+    right: -25px;
+}
+
+/* Dots Indicator */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: var(--spacing-lg);
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    background: var(--text-secondary);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: var(--accent);
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px rgba(26, 95, 180, 0.2);
+}
+
+/* Dark theme adjustments */
+body.dark-theme .carousel-track-container {
+    background: var(--bg-primary);
+    border-color: var(--border);
+}
+
+body.dark-theme .carousel-slide {
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+}
+
+body.dark-theme .carousel-nav {
+    background: linear-gradient(135deg, var(--accent), #4299e1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .carousel-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .carousel-nav.prev {
+        left: -15px;
+    }
+    
+    .carousel-nav.next {
+        right: -15px;
+    }
+    
+    .carousel-slide {
+        padding: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .carousel-nav.prev {
+        left: 10px;
+    }
+    
+    .carousel-nav.next {
+        right: 10px;
+    }
+    
+    .carousel-slide {
+        padding: var(--spacing-md);
+    }
+    
+    .carousel-slide-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+    
+    .carousel-nav.prev {
+        left: 5px;
+    }
+    
+    .carousel-nav.next {
+        right: 5px;
+    }
+    
+    .carousel-slide-title {
+        font-size: 1.2rem;
+    }
+    
+    .carousel-slide-excerpt {
+        font-size: 1rem;
+    }
+}
 
         /* ============================================
            BASE STYLES
@@ -766,43 +1262,42 @@ body.dark-theme .logo .last-part {
             flex: 2;
         }
 
-        /* Adjust nav links for better spacing */
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            padding: 0;
-            margin: 0;
-            margin-left: auto;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            font-weight: 500;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: relative;
-            padding: 0.5rem 0.75rem;
-            white-space: nowrap;
-        }
+/* Make nav tabs smaller with initial capitalization */
+.nav-links a {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.82rem; /* Reduced from 0.95rem */
+    text-transform: capitalize; /* Changed from uppercase to capitalize */
+    letter-spacing: 0.4px; /* Slightly reduced */
+    position: relative;
+    padding: 0.4rem 0.6rem; /* Reduced from 0.5rem 0.75rem */
+    white-space: nowrap;
+}
         
+        /* Update the original underline hover effect */
         .nav-links a:after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
             height: 2px;
             background-color: var(--accent);
-            transition: var(--transition);
+            transition: width 0.3s ease, transform 0.3s ease;
         }
         
-        .nav-links a:hover:after,
+        .nav-links a:hover:after {
+            width: 80%;
+        }
+        
+        /* Override for active state - center the underline */
         .nav-links a.active:after {
-            width: 100%;
-        }
-        
+            width: 80% !important;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: underlineGlow 2s ease-in-out infinite;
+        }        
         .header-right {
             display: flex;
             align-items: center;
@@ -1393,6 +1888,190 @@ body.dark-theme .logo .last-part {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
         }
+        
+        /* Fix for "View All Applications" button in projects section */
+#projects .btn:hover {
+    color: white !important;
+}
+
+body.dark-theme #projects .btn:hover {
+    color: white !important;
+}
+
+/* Ensure all buttons maintain contrast in both themes */
+.btn:hover {
+    color: white !important;
+}
+
+body.dark-theme .btn:hover {
+    color: white !important;
+}
+
+/* ============================================
+   BLOG READ BUTTON HOVER FIX - BLUE TO WHITE
+   ============================================ */
+
+/* Blog read-more button - default state (BLUE with WHITE text) */
+#blog .blog-read-more {
+    background-color: var(--accent) !important;
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Blog read-more button - hover state (WHITE with BLACK text) */
+#blog .blog-read-more:hover {
+    background-color: white !important;
+    color: black !important;
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark theme adjustment - same hover effect */
+body.dark-theme #blog .blog-read-more {
+    background-color: var(--accent) !important;
+    color: white !important;
+}
+
+body.dark-theme #blog .blog-read-more:hover {
+    background-color: white !important;
+    color: black !important;
+}
+
+/* ============================================
+   VIEW ALL BLOG POSTS BUTTON FIX
+   ============================================ */
+
+/* View All Blog Posts button - default state (BLUE with WHITE text) */
+#blogViewAllButton .btn {
+    background: linear-gradient(135deg, var(--accent), #4299e1) !important;
+    color: white !important;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+/* View All Blog Posts button - hover state (WHITE with BLACK text) */
+#blogViewAllButton .btn:hover {
+    background: white !important;
+    color: black !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark theme adjustment */
+body.dark-theme #blogViewAllButton .btn {
+    background: linear-gradient(135deg, var(--accent), #4299e1) !important;
+    color: white !important;
+}
+
+body.dark-theme #blogViewAllButton .btn:hover {
+    background: white !important;
+    color: black !important;
+}
+
+/* ============================================
+   VIEW ALL APPLICATIONS BUTTON FIX (Projects section)
+   ============================================ */
+
+/* View All Applications button - default state (BLUE with WHITE text) */
+#projects .btn,
+#viewAllProjectsBtn {
+    background: linear-gradient(135deg, var(--accent), #4299e1) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* View All Applications button - hover state (WHITE with BLACK text) */
+#projects .btn:hover,
+#viewAllProjectsBtn:hover {
+    background: white !important;
+    color: black !important;
+    border: 1px solid var(--border) !important;
+}
+
+/* Dark theme adjustment */
+body.dark-theme #projects .btn,
+body.dark-theme #viewAllProjectsBtn {
+    background: linear-gradient(135deg, var(--accent), #4299e1) !important;
+    color: white !important;
+}
+
+body.dark-theme #projects .btn:hover,
+body.dark-theme #viewAllProjectsBtn:hover {
+    background: white !important;
+    color: black !important;
+}
+
+/* ============================================
+   BLOG VISIT SECTION BUTTON FIX (Orange theme)
+   ============================================ */
+
+/* Blog visit section button - default state (ORANGE with WHITE text) */
+#blog .blog-visit-section .btn {
+    background: linear-gradient(135deg, #ff5722, #ff9800) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Blog visit section button - hover state (WHITE with BLACK text) */
+#blog .blog-visit-section .btn:hover {
+    background: white !important;
+    color: black !important;
+    border: 1px solid var(--border) !important;
+}
+
+/* Dark theme adjustment */
+body.dark-theme #blog .blog-visit-section .btn {
+    background: linear-gradient(135deg, #ff5722, #ff9800) !important;
+    color: white !important;
+}
+
+body.dark-theme #blog .blog-visit-section .btn:hover {
+    background: white !important;
+    color: black !important;
+}
+
+/* ============================================
+   FLOATING BLOG BUTTON FIX
+   ============================================ */
+
+/* Floating blog button - default state (GRADIENT with WHITE text) */
+.floating-blog-btn {
+    background: linear-gradient(135deg, #ff5722, #ff9800) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Floating blog button - hover state (WHITE with BLACK text) */
+.floating-blog-btn:hover {
+    background: white !important;
+    color: black !important;
+    border: 1px solid #ff5722 !important;
+}
+
+/* Dark theme adjustment */
+body.dark-theme .floating-blog-btn {
+    background: linear-gradient(135deg, #ff5722, #ff9800) !important;
+    color: white !important;
+}
+
+body.dark-theme .floating-blog-btn:hover {
+    background: white !important;
+    color: black !important;
+}
 
         /* Dark theme adjustments for blog */
         body.dark-theme #blog .blog-post-card {
@@ -2937,58 +3616,539 @@ body.dark-theme .logo .last-part {
         body.dark-theme .professional-badge {
             background: linear-gradient(135deg, var(--accent), #4299e1);
         }
+        
+         /* ============================================
+           SMOOTH SCROLL ANIMATION STYLES
+           ============================================ */
+        /* Smooth scroll animation for body */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* For browsers that don't support smooth scroll natively */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+        
+        /* Enhanced navigation active state - FIXED UNDERLINE */
+        .nav-links a.active {
+            color: var(--accent) !important;
+            position: relative;
+        }
+        
+        .nav-links a.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100% !important;
+            height: 2px;
+            background-color: var(--accent);
+            animation: underlineGlow 2s ease-in-out infinite;
+            transform-origin: center;
+        }
+        
+        /* Make sure regular hover underline doesn't conflict */
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+        
+        /* Make sure active underline doesn't override hover */
+        .nav-links a.active:hover:after {
+            width: 100% !important;
+            animation: underlineGlow 2s ease-in-out infinite;
+        }
+        
+        .mobile-nav a.active {
+            color: var(--accent) !important;
+            background-color: rgba(26, 95, 180, 0.1);
+        }
+        
+        /* Underline glow animation - UPDATED FOR BETTER CONTROL */
+        @keyframes underlineGlow {
+            0%, 100% {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scaleX(0.95);
+            }
+        }
+        
+        /* Section entry animation */
+        .section-animate {
+            animation: sectionReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes sectionReveal {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+  /* ============================================
+   DANIEL-STOOPENDAAL INSPIRED BACKGROUND EFFECTS - IMPROVED
+   ============================================ */
+   .ds-inspired-section {
+       position: relative;
+       overflow: hidden;
+       background-color: var(--bg-primary);
+   }
+
+ /* IMPROVED BACKGROUND TEXT - More visible */
+.ds-bg-text {
+    position: absolute;
+    font-size: 22vw; /* Slightly smaller for better fit */
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.045; /* Increased visibility */
+    line-height: 1;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    font-family: 'Playfair Display', serif;
+    white-space: nowrap;
+    /* Better centered positioning */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    /* Enhanced visibility */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    filter: blur(0.2px); /* Very subtle blur */
+}
+
+/* Dark theme adjustment */
+body.dark-theme .ds-bg-text {
+    color: var(--text-primary);
+    opacity: 0.035;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+   /* Alternative: Smaller, multiple background words */
+   .ds-bg-text-multiple {
+       position: absolute;
+       font-size: 12vw;
+       font-weight: 700;
+       color: var(--accent);
+       opacity: 0.025;
+       line-height: 1;
+       z-index: 0;
+       pointer-events: none;
+       user-select: none;
+       font-family: 'Inter', sans-serif;
+       letter-spacing: 0.1em;
+       text-transform: uppercase;
+   }
+
+   .ds-bg-text-multiple.word1 {
+       top: 25%;
+       left: 10%;
+       transform: rotate(-5deg);
+   }
+
+   .ds-bg-text-multiple.word2 {
+       top: 65%;
+       left: 75%;
+       transform: rotate(3deg);
+   }
+
+   /* Subtle gradient overlay - refined */
+   .ds-gradient-overlay {
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background: 
+           radial-gradient(circle at 20% 30%, 
+               rgba(26, 95, 180, 0.04) 0%, 
+               transparent 45%),
+           radial-gradient(circle at 80% 70%, 
+               rgba(98, 160, 234, 0.03) 0%, 
+               transparent 45%),
+           linear-gradient(135deg, 
+               transparent 0%, 
+               rgba(255, 255, 255, 0.01) 50%, 
+               transparent 100%);
+       z-index: 0;
+       pointer-events: none;
+   }
+
+   /* Section content wrapper - ensures content stays above background */
+   .ds-content-wrapper {
+       position: relative;
+       z-index: 1;
+   }
+
+   /* For sections without background text but with gradient */
+   .ds-gradient-only {
+       position: relative;
+       overflow: hidden;
+   }
+
+   .ds-gradient-only::before {
+       content: '';
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background: 
+           radial-gradient(circle at 10% 20%, 
+               rgba(26, 95, 180, 0.03) 0%, 
+               transparent 40%),
+           radial-gradient(circle at 90% 80%, 
+               rgba(98, 160, 234, 0.02) 0%, 
+               transparent 40%);
+       z-index: 0;
+       pointer-events: none;
+   }
+
+   .ds-gradient-only .container {
+       position: relative;
+       z-index: 1;
+   }
+
+   /* Dark theme adjustments - enhanced */
+   body.dark-theme .ds-bg-text {
+       color: var(--text-primary);
+       opacity: 0.025;
+       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+   }
+
+   body.dark-theme .ds-bg-text-multiple {
+       color: var(--accent);
+       opacity: 0.02;
+   }
+
+   body.dark-theme .ds-gradient-overlay {
+       background: 
+           radial-gradient(circle at 20% 30%, 
+               rgba(98, 160, 234, 0.025) 0%, 
+               transparent 45%),
+           radial-gradient(circle at 80% 70%, 
+               rgba(66, 153, 225, 0.02) 0%, 
+               transparent 45%),
+           linear-gradient(135deg, 
+               transparent 0%, 
+               rgba(0, 0, 0, 0.02) 50%, 
+               transparent 100%);
+   }
+
+   body.dark-theme .ds-gradient-only::before {
+       background: 
+           radial-gradient(circle at 10% 20%, 
+               rgba(98, 160, 234, 0.02) 0%, 
+               transparent 40%),
+           radial-gradient(circle at 90% 80%, 
+               rgba(66, 153, 225, 0.015) 0%, 
+               transparent 40%);
+   }   
+   
+   /* ============================================
+   FIXED NAVIGATION - SMALLER TABS, MOVED RIGHT
+   ============================================ */
+/* Reduce the gap between nav items and make tabs smaller */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0.8rem; /* Reduced from 1.5rem */
+    padding: 0;
+    margin: 0;
+    margin-right: 20px; /* Move tabs slightly to the right */
+}
+
+/* Make nav tabs smaller */
+.nav-links a {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.82rem; /* Reduced from 0.95rem */
+    text-transform: uppercase;
+    letter-spacing: 0.4px; /* Slightly reduced */
+    position: relative;
+    padding: 0.4rem 0.6rem; /* Reduced from 0.5rem 0.75rem */
+    white-space: nowrap;
+}
+
+/* Adjust header container to create more space between logo and nav */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 var(--spacing-md);
+    gap: 1rem; /* Keep some gap */
+}
+
+/* Adjust the navigation container */
+.nav-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    min-width: 0; /* Allow shrinking */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 0.6rem;
+    }
+    
+    .nav-links a {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+    }
+    
+    .nav-links {
+        margin-right: 10px;
+    }
+}
+
+/* ============================================
+   CENTERED NAVIGATION - NO LOGO
+   ============================================ */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 var(--spacing-md);
+}
+
+.centered-nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-links.centered {
+    display: flex;
+    list-style: none;
+    gap: 1.2rem;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ============================================
+   NAVIGATION UNDERLINE FIX - PROPERLY CENTERED
+   ============================================ */
+
+.nav-links.centered a {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    position: relative;
+    padding: 0.4rem 0.6rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.nav-links.centered a:hover {
+    color: var(--accent);
+}
+
+/* Default hover underline - centered */
+.nav-links.centered a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links.centered a:hover:after {
+    width: 80%;
+}
+
+/* Active state underline - centered and animated */
+.nav-links.centered a.active {
+    color: var(--accent) !important;
+}
+
+.nav-links.centered a.active:after {
+    width: 80% !important;
+    left: 50%;
+    transform: translateX(-50%) !important;
+    animation: underlineGlow 2s ease-in-out infinite;
+}
+
+/* Make sure hover doesn't override active state */
+.nav-links.centered a.active:hover:after {
+    width: 80% !important;
+    animation: underlineGlow 2s ease-in-out infinite;
+}
+
+/* Underline glow animation */
+@keyframes underlineGlow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Adjust header-right positioning */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-left: auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .nav-links.centered {
+        gap: 0.8rem;
+    }
+    
+    .nav-links.centered a {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+    }
+    
+    .centered-nav-container {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+}
+
+/* Desktop adjustments */
+@media (min-width: 1200px) {
+    .nav-links {
+        margin-right: 30px;
+    }
+}
+/* Adjust header-right positioning */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-left: auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .nav-links.centered {
+        gap: 0.8rem;
+    }
+    
+    .nav-links.centered a {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+    }
+    
+    .centered-nav-container {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+}
+
+/* Desktop adjustments */
+@media (min-width: 1200px) {
+    .nav-links {
+        margin-right: 30px;
+    }
+}
+   
     </style>
 </head>
 <body>
+  
+  <!-- Google Translate Widget -->
+<div id="google_translate_element" style="position: fixed; top: 15px; right: 80px; z-index: 1001;">
+    <!-- The widget will be inserted here by Google Translate -->
+</div>
+
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <!-- Logo container for better positioning -->
-            <div class="logo-container">
-                <a href="/" class="logo" id="logoLink">Mudasir M. Ibrahim <span></span></a>
+          
+       <!-- Centered Navigation -->
+<div class="centered-nav-container">
+    <nav>
+        <ul class="nav-links centered">
+            <li><a href="#home">home</a></li>
+            <li><a href="#projects">projects</a></li>
+            <li><a href="#blog">blog</a></li>
+            <li><a href="#about">about me</a></li>
+            <li><a href="#education">education</a></li>
+            <li><a href="#publications">publications</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Right side icons -->
+<div class="header-right">
+    <div class="search-container">
+        <button class="search-toggle" id="searchToggle" title="Search website">
+            <i class="fas fa-search"></i>
+        </button>
+        <div class="search-dropdown" id="searchDropdown">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for anything...">
+                <button class="search-button" id="searchSubmit">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
-            
-            <!-- Navigation container -->
-            <div class="nav-container">
-                <nav>
-                    <ul class="nav-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#about">About me</a></li>
-                        <li><a href="#education">Education</a></li>
-                        <li><a href="#publications">Publications</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="header-right">
-                    <div class="search-container">
-                        <button class="search-toggle" id="searchToggle" title="Search website">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <div class="search-dropdown" id="searchDropdown">
-                            <div class="search-box">
-                                <input type="text" class="search-input" id="searchInput" placeholder="Search for anything...">
-                                <button class="search-button" id="searchSubmit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                            <div class="search-results" id="searchResults">
-                                <!-- Search results will appear here -->
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <div class="mobile-menu" id="mobileMenu">
-                        <i class="fas fa-bars"></i>
-                    </div>
-                </div>
+            <div class="search-results" id="searchResults">
+                <!-- Search results will appear here -->
             </div>
         </div>
+    </div>
+    
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="mobile-menu" id="mobileMenu">
+        <i class="fas fa-bars"></i>
+    </div>
+</div>        
+</div>
         
         <div class="mobile-nav" id="mobileNav">
             <a href="#home">Home</a>
@@ -3088,10 +4248,18 @@ body.dark-theme .logo .last-part {
         </div>
     </section>
     
-    <!-- Projects Section -->
-    <section id="projects">
+ <!-- Projects Section -->
+<section id="projects" class="ds-inspired-section">
+    <!-- Large background text -->
+    <div class="ds-bg-text">ANALYTICS</div>
+    
+    <!-- Subtle gradient overlay -->
+    <div class="ds-gradient-overlay"></div>
+    
+    <!-- Content wrapper -->
+    <div class="ds-content-wrapper">
         <div class="container">
-            <h2>R Shiny Web Applications</h2>
+            <h2>My Projects (R Shiny Web Applications)</h2>
             <div class="projects-grid" id="featuredProjectsGrid">
                 <!-- Featured projects will be loaded here -->
             </div>
@@ -3101,42 +4269,71 @@ body.dark-theme .logo .last-part {
                 </button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Blog Section with Beautiful Card Layout -->
-    <section id="blog" style="background-color: var(--bg-secondary);">
-        <div class="container">
-            <h2 class="text-center">Latest Blog Posts</h2>
-            <p class="text-center mb-lg" style="max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
-                I share insights on healthcare research, nursing, data analysis, and my R Shiny web applications. 
-                Here's a preview of my latest posts from Google Blogger.
-            </p>
-            
-            <!-- Blog Preview Cards Container -->
-            <div id="blogPreview" style="margin-bottom: var(--spacing-xl);">
-                <!-- Blog posts will be loaded here via JavaScript -->
-                <div class="blog-loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading latest blog posts...</p>
-                </div>
+<!-- Blog Section -->
+<section id="blog" class="ds-gradient-only">
+    <div class="container">
+        <h2 class="text-center">Latest Blog Posts</h2>
+        <p class="text-center mb-lg" style="max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
+            I blog about healthcare research, data analysis, and my R Shiny web applications.
+Here's a preview of my latest posts from Google Blogger.
+        </p>
+        
+ <!-- Blog Carousel Section -->
+<div id="blogCarousel" class="blog-carousel-container">
+    <!-- Loading State -->
+    <div class="blog-loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading latest blog posts...</p>
+    </div>
+    
+    <!-- Carousel Content (will be populated by JavaScript) -->
+    <div class="carousel-wrapper" style="display: none;">
+        <div class="carousel-track-container">
+            <div class="carousel-track">
+                <!-- Blog posts will be inserted here -->
             </div>
-
-            <!-- Blog View All Button - Conditionally Shown -->
-            <div id="blogViewAllButton" class="blog-view-all" 
-                 style="text-align: center; margin-top: var(--spacing-lg); padding: var(--spacing-md) 0; border-top: 1px solid var(--border); display: none;">
-                <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" class="btn" 
-                   style="background: linear-gradient(135deg, var(--accent), #4299e1); 
-                          color: white; padding: 0.875rem 2rem; border-radius: 8px;
-                          font-weight: 600; text-decoration: none; display: inline-flex;
-                          align-items: center; gap: 0.5rem; transition: all 0.3s ease;">
-                    <i class="fas fa-external-link-alt"></i> VIEW ALL BLOG POSTS
-                </a>
-            </div> 
         </div>
-    </section>
+        
+        <!-- Navigation Buttons -->
+        <button class="carousel-nav prev" aria-label="Previous post">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-nav next" aria-label="Next post">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <!-- Dots Indicator -->
+        <div class="carousel-dots">
+            <!-- Dots will be added by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Error State -->
+    <div class="blog-error" style="display: none;">
+        <i class="fas fa-exclamation-circle"></i>
+        <h3>Unable to load blog posts</h3>
+        <p>Please visit my blog directly to read all posts.</p>
+        <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" class="btn">
+            <i class="fas fa-external-link-alt"></i> Visit My Blog
+        </a>
+    </div>
+</div>
+    </div>
+</section>
 
-    <!-- About Section -->
-    <section id="about">
+<!-- About Section -->
+<section id="about" class="ds-inspired-section">
+    <!-- Large background text - IMPROVED VISIBILITY -->
+    <div class="ds-bg-text">HEALTHCARE</div>
+    
+    <!-- Subtle gradient overlay -->
+    <div class="ds-gradient-overlay"></div>
+    
+    <!-- Content wrapper -->
+    <div class="ds-content-wrapper">
         <div class="container">
             <h2>About Me</h2>
             <div class="about-grid">
@@ -3259,58 +4456,67 @@ body.dark-theme .logo .last-part {
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Education & Work Section - Grid Version -->
-    <section id="education" style="background-color: var(--bg-secondary);">
-        <div class="container">
-            <h2>Education & Experience</h2>
-            <div class="education-grid">
-                <div class="education-item">
-                    <div class="education-year">2025 - Present</div>
-                    <div class="education-details">
-                        <h3>Staff Nurse</h3>
-                        <p>Tamale Teaching Hospital, Tamale, Northern Region, Ghana</p>
-                    </div>
+<!-- Education Section -->
+<section id="education" class="ds-gradient-only">
+    <div class="container">
+        <h2>Education & Experience</h2>
+        <div class="education-grid">
+            <div class="education-item">
+                <div class="education-year">2025 - Present</div>
+                <div class="education-details">
+                    <h3>Staff Nurse</h3>
+                    <p>Tamale Teaching Hospital, Tamale, Northern Region, Ghana</p>
                 </div>
-                
-                <div class="education-item">
-                    <div class="education-year">2022 - 2024</div>
-                    <div class="education-details">
-                        <h3>BSc Nursing</h3>
-                        <p>University of Cape Coast, Cape Coast, Central Region, Ghana</p>
-                    </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-year">2022 - 2024</div>
+                <div class="education-details">
+                    <h3>BSc Nursing</h3>
+                    <p>University of Cape Coast, Cape Coast, Central Region, Ghana</p>
                 </div>
-                
-                <div class="education-item">
-                    <div class="education-year">2021 - 2022</div>
-                    <div class="education-details">
-                        <h3>Rotation Nurse</h3>
-                        <p>Tamale Teaching Hospital, Tamale, Northern Region, Ghana</p>
-                    </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-year">2021 - 2022</div>
+                <div class="education-details">
+                    <h3>Rotation Nurse</h3>
+                    <p>Tamale Teaching Hospital, Tamale, Northern Region, Ghana</p>
                 </div>
-                
-                <div class="education-item">
-                    <div class="education-year">2017 - 2020</div>
-                    <div class="education-details">
-                        <h3>Diploma in General Nursing</h3>
-                        <p>Nurses' & Midwives' Training College, Tamale, Northern Region, Ghana</p>
-                    </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-year">2017 - 2020</div>
+                <div class="education-details">
+                    <h3>Diploma in General Nursing</h3>
+                    <p>Nurses' & Midwives' Training College, Tamale, Northern Region, Ghana</p>
                 </div>
-                
-                <div class="education-item">
-                    <div class="education-year">2013 - 2016</div>
-                    <div class="education-details">
-                        <h3>Business (Cost Accounting)</h3>
-                        <p>Northern School of Business (NOBISCO), Tamale, Northern Region, Ghana</p>
-                    </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-year">2013 - 2016</div>
+                <div class="education-details">
+                    <h3>Business (Cost Accounting)</h3>
+                    <p>Northern School of Business (NOBISCO), Tamale, Northern Region, Ghana</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Publications Section -->
-    <section id="publications" style="background-color: var(--bg-secondary);">
+<!-- Publications Section -->
+<section id="publications" class="ds-inspired-section">
+    <!-- Large background text -->
+    <div class="ds-bg-text">RESEARCH</div>
+    
+    <!-- Subtle gradient overlay -->
+    <div class="ds-gradient-overlay"></div>
+    
+    <!-- Content wrapper -->
+    <div class="ds-content-wrapper">
         <div class="container">
             <h2>Publications</h2>
             <div class="publications-grid">
@@ -3369,116 +4575,174 @@ body.dark-theme .logo .last-part {
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="text-center">Contact</h2>
-            <div class="contact-info">
-                <p>
-                    I'm always interested in hearing about new opportunities, collaborations, or discussing 
-                    healthcare research and data analytics projects. Fill out the form below to get in touch!
-                </p>
-            </div>
+<!-- Contact Section -->
+<section id="contact" class="ds-gradient-only">
+    <div class="container">
+        <h2 class="text-center">Contact</h2>
+        <div class="contact-info">
+            <p>
+                I'm always interested in hearing about new opportunities, collaborations, or discussing 
+                healthcare research and data analytics projects. Fill out the form below to get in touch!
+            </p>
+        </div>
+        
+        <!-- Integrated Form & Map Container -->
+        <div class="integrated-contact-container" style="max-width: 1200px; margin: 0 auto var(--spacing-lg); background-color: var(--bg-secondary); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden;">
             
-            <!-- Contact Form -->
-            <div class="contact-form-container" style="max-width: 800px; margin: 0 auto var(--spacing-lg);">
-                <form id="contactForm" style="background-color: var(--bg-secondary); padding: var(--spacing-lg); border-radius: 12px; border: 1px solid var(--border);">
-                    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); margin-bottom: var(--spacing-md);">
-                        <div class="form-group">
-                            <label for="fullName" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary);">
-                                Full Name <span style="color: #ff0000;">*</span>
-                            </label>
-                            <input type="text" id="fullName" name="name" required 
-                                   style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 6px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; transition: var(--transition);"
-                                   onfocus="this.style.borderColor='var(--accent)'; this.style.outline='none';"
-                                   onblur="this.style.borderColor='var(--border)';">
+   <!-- Top Row: Contact Details -->
+<div class="contact-details-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md); padding: var(--spacing-lg); border-bottom: 1px solid var(--border); background-color: var(--bg-primary);">
+    <div class="contact-detail-item" style="display: flex; align-items: center; gap: var(--spacing-sm);">
+        <div class="contact-icon" style="width: 44px; height: 44px; background-color: var(--accent-light); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-envelope" style="color: var(--accent); font-size: 1.2rem;"></i>
+        </div>
+        <div>
+            <div class="contact-label" style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: 0.25rem;">Email</div>
+            <a href="mailto:mudassiribrahim30@gmail.com" class="contact-value" style="color: var(--text-primary); font-weight: 500; text-decoration: none; transition: var(--transition);">contact@mudasiribrahim.com</a>
+        </div>
+    </div>
+    
+    <div class="contact-detail-item" style="display: flex; align-items: center; gap: var(--spacing-sm);">
+        <div class="contact-icon" style="width: 44px; height: 44px; background-color: var(--accent-light); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i>
+        </div>
+        <div>
+            <div class="contact-label" style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: 0.25rem;">WhatsApp</div>
+            <a href="https://wa.me/233549343058" target="_blank" class="contact-value" style="color: var(--text-primary); font-weight: 500; text-decoration: none; transition: var(--transition);">Chat on WhatsApp</a>
+        </div>
+    </div>
+</div>            
+            <!-- Main Content: Form + Map Side by Side -->
+            <div class="contact-main-content" style="display: grid; grid-template-columns: 1fr 1fr; min-height: 500px;">
+                
+                <!-- Left Side: Contact Form -->
+                <div class="contact-form-side" style="padding: var(--spacing-xl); background-color: var(--bg-primary); border-right: 1px solid var(--border);">
+                    <h3 style="margin-bottom: var(--spacing-md); color: var(--text-primary); font-size: 1.5rem;">Send me a message</h3>
+                    <form id="contactForm" style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                            <div class="form-group">
+                                <label for="fullName" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary); font-size: 0.95rem;">
+                                    Full Name <span style="color: #ff0000;">*</span>
+                                </label>
+                                <input type="text" id="fullName" name="name" required 
+                                       style="width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--border); border-radius: 8px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; transition: var(--transition);"
+                                       onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 2px var(--accent-light)'; this.style.outline='none';"
+                                       onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none';"
+                                       placeholder="Your name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary); font-size: 0.95rem;">
+                                    Email Address <span style="color: #ff0000;">*</span>
+                                </label>
+                                <input type="email" id="email" name="email" required 
+                                       style="width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--border); border-radius: 8px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; transition: var(--transition);"
+                                       onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 2px var(--accent-light)'; this.style.outline='none';"
+                                       onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none';"
+                                       placeholder="your.email@example.com">
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary);">
-                                Email Address <span style="color: #ff0000;">*</span>
+                            <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary); font-size: 0.95rem;">
+                                Subject
                             </label>
-                            <input type="email" id="email" name="email" required 
-                                   style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 6px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; transition: var(--transition);"
-                                   onfocus="this.style.borderColor='var(--accent)'; this.style.outline='none';"
-                                   onblur="this.style.borderColor='var(--border)';">
+                            <input type="text" id="subject" name="subject" 
+                                   style="width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--border); border-radius: 8px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; transition: var(--transition);"
+                                   onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 2px var(--accent-light)'; this.style.outline='none';"
+                                   onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none';"
+                                   placeholder="What is this regarding?">
                         </div>
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom: var(--spacing-md);">
-                        <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary);">
-                            Subject
-                        </label>
-                        <input type="text" id="subject" name="subject" 
-                               placeholder="What is this regarding?"
-                               style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 6px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; transition: var(--transition);"
-                               onfocus="this.style.borderColor='var(--accent)'; this.style.outline='none';"
-                               onblur="this.style.borderColor='var(--border)';">
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom: var(--spacing-md);">
-                        <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary);">
-                            Message <span style="color: #ff0000;">*</span>
-                        </label>
-                        <textarea id="message" name="message" rows="6" required 
-                                  placeholder="Please describe your reason for contacting, collaboration idea, or project details..."
-                                  style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 6px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; resize: vertical; transition: var(--transition);"
-                                  onfocus="this.style.borderColor='var(--accent)'; this.style.outline='none';"
-                                  onblur="this.style.borderColor='var(--border)';"></textarea>
-                    </div>
-                    
-                    <!-- Hidden field for Formspree -->
-                    <input type="hidden" name="_subject" value="New Contact Form Submission from Website">
-                    
-                    <div id="formMessage" style="display: none; padding: 0.75rem 1rem; margin-bottom: var(--spacing-md); border-radius: 6px; font-weight: 500;"></div>
-                    
-                    <div style="text-align: center;">
-                        <button type="submit" class="btn" style="padding: 0.875rem 2.5rem; font-size: 1.1rem;">
+                        
+                        <div class="form-group">
+                            <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary); font-size: 0.95rem;">
+                                Message <span style="color: #ff0000;">*</span>
+                            </label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      style="width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--border); border-radius: 8px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; resize: vertical; transition: var(--transition); min-height: 120px;"
+                                      onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 2px var(--accent-light)'; this.style.outline='none';"
+                                      onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none';"
+                                      placeholder="Please describe your reason for contacting, collaboration idea, or project details..."></textarea>
+                        </div>
+                        
+                        <!-- Hidden field for Formspree -->
+                        <input type="hidden" name="_subject" value="New Contact Form Submission from Website">
+                        
+                        <div id="formMessage" style="display: none; padding: 0.875rem 1rem; margin-bottom: var(--spacing-md); border-radius: 8px; font-weight: 500; font-size: 0.95rem;"></div>
+                        
+                        <button type="submit" class="btn" style="padding: 0.875rem 2rem; font-size: 1rem; align-self: flex-start; margin-top: var(--spacing-sm);">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
-                    </div>
-                </form>
-            </div>
-            
-            <!-- Contact Information Below Form -->
-            <div class="contact-links">
-                <a href="mailto:mudassiribrahim30@gmail.com" class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>contact@mudasiribrahim.com</span>
-                </a>
-                <a href="https://maps.google.com/?q=Tamale+Northern+Region,Ghana" target="_blank" class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Tamale, Northern Region, Ghana</span>
-                </a>
-            </div>
-            
-            <!-- YouTube Section -->
-            <div class="simple-youtube">
-                <h3 class="text-center mb-md">Watch My Video on YouTube</h3>
-                <div class="youtube-wrapper">
-                    <!-- YouTube embed with proper parameters to avoid Error 153 -->
-                    <iframe 
-                        width="100%" 
-                        height="400" 
-                        src="https://www.youtube.com/embed/dJbeWr5AyKg?si=CNDbjl1hZKX3m1Rk" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                    </form>
                 </div>
-                <div class="text-center mt-md">
-                    <a href="https://www.youtube.com/@mudasirmohammedibrahim1026/videos" target="_blank" class="btn" style="background-color: #ff0000;">
-                        <i class="fab fa-youtube"></i> Visit my YouTube channel for more tutorials
-                    </a>
+                
+                <!-- Right Side: Interactive OpenStreetMap with Leaflet.js -->
+                <div class="map-side" style="position: relative; background-color: var(--bg-primary);">
+                    <!-- Map Loading State -->
+                    <div id="mapLoading" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: var(--bg-primary); z-index: 1; padding: var(--spacing-xl);">
+                        <i class="fas fa-map-marker-alt" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--text-primary); margin-bottom: var(--spacing-sm);">Loading interactive map...</h3>
+                        <p style="color: var(--text-secondary); text-align: center; max-width: 300px;">
+                            Based in Tamale, Ghana. You can explore the map to see my location.
+                        </p>
+                    </div>
+                    
+                    <!-- Map container -->
+                    <div id="map" style="width: 100%; height: 100%; position: relative;"></div>
+                    
+                    <!-- Map Controls - Minimal -->
+                    <div class="map-controls" style="position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.95); padding: 0.5rem 0.75rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; display: flex; gap: 0.5rem; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-search" style="color: var(--accent); font-size: 0.9rem;"></i>
+                            <input type="text" id="mapSearch" placeholder="Search on map..." 
+                                   style="border: 1px solid var(--border); padding: 0.375rem 0.75rem; border-radius: 6px; font-size: 0.9rem; width: 180px; background-color: var(--bg-primary); color: var(--text-primary);">
+                        </div>
+                        <button id="resetLocation" class="btn" style="padding: 0.375rem 0.75rem; font-size: 0.85rem; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.25rem;">
+                            <i class="fas fa-home"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Location Badge -->
+                    <div class="location-badge" style="position: absolute; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); padding: 0.75rem 1rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; max-width: 250px;">
+                        <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <i class="fas fa-map-pin" style="color: var(--accent); font-size: 1.1rem; margin-top: 0.125rem;"></i>
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; font-size: 0.95rem;">Tamale Teaching Hospital Area</div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">Northern Region, Ghana</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+        
+        <!-- YouTube Section -->
+        <div class="simple-youtube" style="margin-top: var(--spacing-xl);">
+            <h3 class="text-center mb-md">Watch My Video on YouTube</h3>
+            <div class="youtube-wrapper">
+                <!-- YouTube embed with proper parameters -->
+                <iframe 
+                    width="100%" 
+                    height="400" 
+                    src="https://www.youtube.com/embed/dJbeWr5AyKg?si=CNDbjl1hZKX3m1Rk" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="text-center mt-md">
+                <a href="https://www.youtube.com/@mudasirmohammedibrahim1026/videos" target="_blank" class="btn" style="background-color: #ff0000;">
+                    <i class="fab fa-youtube"></i> Visit my YouTube channel for more tutorials
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- Enhanced Footer -->
+<!-- Enhanced Footer -->
     <footer style="background-color: #000000; border-top: 1px solid #333333;">
         <div class="container">
             <!-- Footer Navigation -->
@@ -3587,7 +4851,8 @@ body.dark-theme .logo .last-part {
 
     <!-- JavaScript -->
     <script>
-        // Initialize
+ 
+         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             // Set current year (automatic yearly update)
             document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -3608,7 +4873,7 @@ body.dark-theme .logo .last-part {
             // Initialize modal
             initModal();
             
-            // Initialize smooth scrolling
+            // Initialize smooth scrolling with animation
             initSmoothScroll();
             
             // Initialize contact form with AJAX submission
@@ -3629,29 +4894,39 @@ body.dark-theme .logo .last-part {
             // Initialize typing effect
             initTypingEffect();
             
+            // Initialize section highlights on scroll
+            initSectionHighlights();
+            
+            // Initialize interactive map
+    initInteractiveMap();
+    
+    // Initialize Google Translate
+    initGoogleTranslate();
+            
+            // Initialize translation manager
+    translationManager.addMobileLanguageSwitcher();
+    
+    // Detect browser language after a delay
+    setTimeout(() => {
+        translationManager.detectBrowserLanguage();
+    }, 3000);
+            
             console.log('Website initialized successfully');
         });
-
-        // All 20 R Shiny Applications Data
+        
+           // All 20 R Shiny Applications Data - REORDERED with sequential IDs
         const allProjects = [
+            // FIRST SIX APPS (Featured section) - IN YOUR SPECIFIED ORDER
             {
                 id: 1,
-                name: "APA Table Generator",
-                description: "Generate APA formatted tables for research papers and publications",
-                runUrl: "https://newappstesting.shinyapps.io/APATableGenerator/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA logo.png"
+                name: "CalcuStats",
+                description: "Tool for sample size calculation, power analysis, and descriptive statistics",
+                runUrl: "https://mudassiribrahim2025.shinyapps.io/CalcuStats/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png"
             },
             {
                 id: 2,
-                name: "SysSampler",
-                description: "Systematic sampling tool for research studies with various sampling methods",
-                runUrl: "https://mudassiribrahim2025b.shinyapps.io/SysSampler/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys Sampler.png"
-            },
-            {
-                id: 3,
                 name: "CATrend Analyzer",
                 description: "Cochran-Armitage test for trend tool",
                 runUrl: "https://newappstesting.shinyapps.io/CATrendAnalyzer/",
@@ -3659,111 +4934,7 @@ body.dark-theme .logo .last-part {
                 imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png"
             },
             {
-                id: 4,
-                name: "CMH Analyzer",
-                description: "Cochran-Mantel-Haenszel analysis tool for stratified data",
-                runUrl: "https://newappstesting.shinyapps.io/CMHAnalyzer/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png"
-            },
-            {
-                id: 5,
-                name: "Data2SPSS",
-                description: "Convert datasets in CSV, Excel, Rdata, Stata, or SAS format into SPSS (.sav) files",
-                runUrl: "https://newappstesting.shinyapps.io/Data2SPSS/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png"
-            },
-            {
-                id: 6,
-                name: "TNMTC DataLab",
-                description: "Comprehensive data analysis software for healthcare research",
-                runUrl: "https://newappstesting.shinyapps.io/NMTCDataLab/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/NMTC%20APP.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TNMTC.png"
-            },
-            {
-                id: 7,
-                name: "PharmaCalc Pro",
-                description: "Pharmaceutical calculations for dosage and medication management",
-                runUrl: "https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png"
-            },
-            {
-                id: 8,
-                name: "RegEffect Xplorer",
-                description: "Explore regression effects visually with interactive plots",
-                runUrl: "https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png"
-            },
-            {
-                id: 9,
-                name: "Data TransformR",
-                description: "Data transformation and preprocessing tool for analytics",
-                runUrl: "https://mudassiribrahim2025b.shinyapps.io/DataTransformR/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png"
-            },
-            {
-                id: 10,
-                name: "CleanMyData",
-                description: "Data screening and cleaning tool with visualization",
-                runUrl: "https://mudassiribrahim2025b.shinyapps.io/CleanMyData/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png"
-            },
-            {
-                id: 11,
-                name: "KMPlot Genie",
-                description: "Kaplan-Meier survival plot generator for clinical studies",
-                runUrl: "https://mudassiribrahim30.shinyapps.io/KMPlotGenie/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png"
-            },
-            {
-                id: 12,
-                name: "ggPubPlot",
-                description: "Publication-ready ggplot2 visualizations with customization",
-                runUrl: "https://mudassiribrahim2025.shinyapps.io/ggPubPlot/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png"
-            },
-            {
-                id: 13,
-                name: "EpiDem Suite",
-                description: "Epidemiological data analysis suite for public health research",
-                runUrl: "https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png"
-            },
-            {
-                id: 14,
-                name: "QuickStatsGen",
-                description: "Custom Data Generator for Statistical Practice and Education",
-                runUrl: "https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png"
-            },
-            {
-                id: 15,
-                name: "MedModr",
-                description: "Mediation and moderation analysis tool for research studies",
-                runUrl: "https://mudassiribrahim30.shinyapps.io/MedModr/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png"
-            },
-            {
-                id: 16,
-                name: "Robust Regressor",
-                description: "Robust regression analysis for outlier-resistant modeling",
-                runUrl: "https://mudassiribrahim2025.shinyapps.io/Robustregression/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png"
-            },
-            {
-                id: 17,
+                id: 3,
                 name: "ROC Curve Builder",
                 description: "ROC curve analysis and diagnostic test evaluation",
                 runUrl: "https://mudassiribrahim30.shinyapps.io/ROC_CURVE/",
@@ -3771,7 +4942,128 @@ body.dark-theme .logo .last-part {
                 imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png"
             },
             {
+                id: 4,
+                name: "Data2SPSS",
+                description: "Convert datasets in CSV, Excel, Rdata, Stata, or SAS format into SPSS (.sav) files",
+                runUrl: "https://newappstesting.shinyapps.io/Data2SPSS/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png"
+            },
+            {
+                id: 5,
+                name: "MedModr",
+                description: "Mediation and moderation analysis tool for research studies",
+                runUrl: "https://mudassiribrahim30.shinyapps.io/MedModr/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png"
+            },
+            {
+                id: 6,
+                name: "EpiDem Suite",
+                description: "Epidemiological data analysis suite for public health research",
+                runUrl: "https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png"
+            },
+            // REST OF THE APPS (in View All Applications modal)
+            {
+                id: 7,
+                name: "ggPubPlot",
+                description: "Publication-ready ggplot2 visualizations with customization",
+                runUrl: "https://mudassiribrahim2025.shinyapps.io/ggPubPlot/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png"
+            },
+            {
+                id: 8,
+                name: "APA Table Generator",
+                description: "Generate APA formatted tables for research papers and publications",
+                runUrl: "https://newappstesting.shinyapps.io/APATableGenerator/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA logo.png"
+            },
+            {
+                id: 9,
+                name: "SysSampler",
+                description: "Systematic sampling tool for research studies with various sampling methods",
+                runUrl: "https://mudassiribrahim2025b.shinyapps.io/SysSampler/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys Sampler.png"
+            },
+            {
+                id: 10,
+                name: "CMH Analyzer",
+                description: "Cochran-Mantel-Haenszel analysis tool for stratified data",
+                runUrl: "https://newappstesting.shinyapps.io/CMHAnalyzer/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png"
+            },
+            {
+                id: 11,
+                name: "TNMTC DataLab",
+                description: "Comprehensive data analysis software for healthcare research",
+                runUrl: "https://newappstesting.shinyapps.io/NMTCDataLab/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/NMTC%20APP.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TNMTC.png"
+            },
+            {
+                id: 12,
+                name: "PharmaCalc Pro",
+                description: "Pharmaceutical calculations for dosage and medication management",
+                runUrl: "https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png"
+            },
+            {
+                id: 13,
+                name: "RegEffect Xplorer",
+                description: "Explore regression effects visually with interactive plots",
+                runUrl: "https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png"
+            },
+            {
+                id: 14,
+                name: "Data TransformR",
+                description: "Data transformation and preprocessing tool for analytics",
+                runUrl: "https://mudassiribrahim2025b.shinyapps.io/DataTransformR/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png"
+            },
+            {
+                id: 15,
+                name: "CleanMyData",
+                description: "Data screening and cleaning tool with visualization",
+                runUrl: "https://mudassiribrahim2025b.shinyapps.io/CleanMyData/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png"
+            },
+            {
+                id: 16,
+                name: "KMPlot Genie",
+                description: "Kaplan-Meier survival plot generator for clinical studies",
+                runUrl: "https://mudassiribrahim30.shinyapps.io/KMPlotGenie/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png"
+            },
+            {
+                id: 17,
+                name: "QuickStatsGen",
+                description: "Custom Data Generator for Statistical Practice and Education",
+                runUrl: "https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png"
+            },
+            {
                 id: 18,
+                name: "Robust Regressor",
+                description: "Robust regression analysis for outlier-resistant modeling",
+                runUrl: "https://mudassiribrahim2025.shinyapps.io/Robustregression/",
+                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R",
+                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png"
+            },
+            {
+                id: 19,
                 name: "TagSelect",
                 description: "Participant selection tool for research studies",
                 runUrl: "https://mudassiribrahim30.shinyapps.io/Tagselect/",
@@ -3779,20 +5071,12 @@ body.dark-theme .logo .last-part {
                 imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TagSelect.png"
             },
             {
-                id: 19,
+                id: 20,
                 name: "FAnalyzr",
                 description: "Factor analysis and dimensionality reduction tool",
                 runUrl: "https://mudassiribrahim30.shinyapps.io/fanalyzr/",
                 codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R",
                 imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png"
-            },
-            {
-                id: 20,
-                name: "CalcuStats",
-                description: "Tool for sample size calculation, power analysis, and descriptive statistics",
-                runUrl: "https://mudassiribrahim2025.shinyapps.io/CalcuStats/",
-                codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R",
-                imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png"
             }
         ];
 
@@ -3807,6 +5091,7 @@ body.dark-theme .logo .last-part {
             });
         }
         
+        
         // Load All Projects
         function loadAllProjects() {
             const container = document.getElementById('allProjectsGrid');
@@ -3816,6 +5101,339 @@ body.dark-theme .logo .last-part {
                 container.appendChild(createProjectCard(project));
             });
         }
+
+        // Highlight sections on scroll
+        function initSectionHighlights() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
+            
+            // Debounce function for scroll performance
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+            
+            // Function to update active nav based on scroll position
+            function updateActiveNavOnScroll() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    
+                    if (scrollY >= (sectionTop - headerHeight - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                // Update nav links
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Add scroll event listener with debounce
+            window.addEventListener('scroll', debounce(updateActiveNavOnScroll, 100));
+            
+            // Initial call
+            updateActiveNavOnScroll();
+        }
+
+
+// Initialize Google Translate
+function initGoogleTranslate() {
+    // Check if Google Translate is already loaded
+    if (window.google && window.google.translate) {
+        return;
+    }
+    
+    // Create translation loading indicator
+    const translationLoading = document.createElement('div');
+    translationLoading.className = 'translation-loading';
+    translationLoading.innerHTML = '<i class="fas fa-language fa-spin"></i> Translating...';
+    document.body.appendChild(translationLoading);
+    
+    // Function to load Google Translate script
+    function loadGoogleTranslateScript() {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        script.async = true;
+        document.head.appendChild(script);
+    }
+    
+    // Google Translate initialization callback
+    window.googleTranslateElementInit = function() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,es,fr,de,it,pt,ru,zh-CN,ja,ko,ar,hi,bn,sw,ha,yo,ig',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+            disableAutoTranslation: false,
+            multilanguagePage: true
+        }, 'google_translate_element');
+        
+        // Hide Google branding
+        const style = document.createElement('style');
+        style.textContent = `
+            .goog-te-banner-frame.skiptranslate {display: none !important;}
+            body {top: 0px !important;}
+            .goog-logo-link {display: none !important;}
+            .goog-te-gadget span {display: none !important;}
+        `;
+        document.head.appendChild(style);
+        
+        // Add language change event listener
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    const select = document.querySelector('.goog-te-combo');
+                    if (select) {
+                        select.addEventListener('change', function() {
+                            // Show loading indicator
+                            translationLoading.classList.add('show');
+                            
+                            // Hide loading indicator after translation completes
+                            setTimeout(() => {
+                                translationLoading.classList.remove('show');
+                            }, 2000);
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Observe the translate element for changes
+        const translateElement = document.getElementById('google_translate_element');
+        if (translateElement) {
+            observer.observe(translateElement, { attributes: true });
+        }
+        
+        // Fix for translated content layout
+        setTimeout(() => {
+            const frames = document.getElementsByTagName('iframe');
+            for (let i = 0; i < frames.length; i++) {
+                if (frames[i].title === 'Language Translate Widget') {
+                    frames[i].style.display = 'none';
+                }
+            }
+        }, 1000);
+        
+        console.log('Google Translate initialized');
+    };
+    
+    // Load the Google Translate script
+    loadGoogleTranslateScript();
+    
+    // Add event listener for translation errors
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'TRANSLATION_ERROR') {
+            translationLoading.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Translation error. Please try again.';
+            setTimeout(() => {
+                translationLoading.classList.remove('show');
+            }, 3000);
+        }
+    });
+}
+
+// Utility functions for translation management
+function TranslationManager() {
+    // Save selected language to localStorage
+    function saveLanguage(lang) {
+        localStorage.setItem('preferredLanguage', lang);
+    }
+    
+    // Get saved language from localStorage
+    function getSavedLanguage() {
+        return localStorage.getItem('preferredLanguage') || 'en';
+    }
+    
+    // Set language programmatically
+    function setLanguage(lang) {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+            select.value = lang;
+            select.dispatchEvent(new Event('change'));
+            saveLanguage(lang);
+        }
+    }
+    
+    // Detect user's browser language
+    function detectBrowserLanguage() {
+        const browserLang = navigator.language || navigator.userLanguage;
+        const savedLang = getSavedLanguage();
+        
+        // Only auto-translate if no language is saved and browser language is not English
+        if (!savedLang && !browserLang.startsWith('en')) {
+            const supportedLangs = ['es', 'fr', 'de', 'it', 'pt', 'ru', 'zh-CN', 'ja', 'ko', 'ar', 'hi', 'bn', 'sw', 'ha', 'yo', 'ig'];
+            const langCode = browserLang.split('-')[0];
+            
+            if (supportedLangs.includes(langCode)) {
+                setTimeout(() => {
+                    setLanguage(langCode);
+                }, 2000);
+            }
+        }
+    }
+    
+    // Add language switcher to mobile menu
+    function addMobileLanguageSwitcher() {
+        const mobileNav = document.getElementById('mobileNav');
+        if (mobileNav) {
+            const languageOption = document.createElement('a');
+            languageOption.href = '#';
+            languageOption.className = 'language-switcher-mobile';
+            languageOption.innerHTML = '<i class="fas fa-language"></i> Change Language';
+            languageOption.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Show language selection modal or dropdown
+                showLanguageSelection();
+            });
+            mobileNav.appendChild(languageOption);
+        }
+    }
+    
+    // Show language selection
+    function showLanguageSelection() {
+        const languages = [
+            { code: 'en', name: 'English', flag: '🇺🇸' },
+            { code: 'es', name: 'Español', flag: '🇪🇸' },
+            { code: 'fr', name: 'Français', flag: '🇫🇷' },
+            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+            { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+            { code: 'pt', name: 'Português', flag: '🇵🇹' },
+            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+            { code: 'zh-CN', name: '中文', flag: '🇨🇳' },
+            { code: 'ja', name: '日本語', flag: '🇯🇵' },
+            { code: 'ko', name: '한국어', flag: '🇰🇷' },
+            { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+            { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
+            { code: 'bn', name: 'বাংলা', flag: '🇧🇩' },
+            { code: 'sw', name: 'Kiswahili', flag: '🇰🇪' },
+            { code: 'ha', name: 'Hausa', flag: '🇳🇬' },
+            { code: 'yo', name: 'Yorùbá', flag: '🇳🇬' },
+            { code: 'ig', name: 'Igbo', flag: '🇳🇬' }
+        ];
+        
+        // Create modal for language selection
+        const modal = document.createElement('div');
+        modal.className = 'language-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        `;
+        
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = `
+            background: var(--bg-primary);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        `;
+        
+        modalContent.innerHTML = `
+            <h3 style="margin-bottom: var(--spacing-md); text-align: center;">
+                <i class="fas fa-language"></i> Select Language
+            </h3>
+            <div class="language-grid" style="
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: var(--spacing-sm);
+                margin-bottom: var(--spacing-lg);
+            ">
+                ${languages.map(lang => `
+                    <button class="language-option" 
+                            data-lang="${lang.code}"
+                            style="
+                                padding: var(--spacing-sm);
+                                border: 1px solid var(--border);
+                                border-radius: 8px;
+                                background: var(--bg-primary);
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                display: flex;
+                                align-items: center;
+                                gap: 0.5rem;
+                                font-size: 0.9rem;
+                            ">
+                        <span style="font-size: 1.2rem;">${lang.flag}</span>
+                        <span>${lang.name}</span>
+                    </button>
+                `).join('')}
+            </div>
+            <button class="close-language-modal" style="
+                display: block;
+                margin: 0 auto;
+                padding: 0.75rem 1.5rem;
+                background: var(--accent);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+            ">
+                Close
+            </button>
+        `;
+        
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+        
+        // Add click handlers
+        modal.querySelectorAll('.language-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                setLanguage(lang);
+                modal.remove();
+            });
+        });
+        
+        modal.querySelector('.close-language-modal').addEventListener('click', function() {
+            modal.remove();
+        });
+        
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+    }
+    
+    return {
+        saveLanguage,
+        getSavedLanguage,
+        setLanguage,
+        detectBrowserLanguage,
+        addMobileLanguageSwitcher,
+        showLanguageSelection
+    };
+}
+
+// Initialize translation manager
+const translationManager = TranslationManager();
 
 // Function to properly format the white and bold name
 function formatLogoName() {
@@ -3956,33 +5574,93 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Smooth Scroll
-        function initSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    // Don't prevent default for external links
-                    const targetId = this.getAttribute('href');
-                    if (targetId.startsWith('http')) return; // Skip external links
+// Enhanced Smooth Scroll with Animation - FASTER VERSION
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            // Don't prevent default for external links
+            const targetId = this.getAttribute('href');
+            if (targetId.startsWith('http')) return; // Skip external links
+            
+            e.preventDefault();
+            
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Get header height
+                const headerHeight = document.querySelector('header').offsetHeight;
+                
+                // Calculate target position with header offset
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                // FIX: Use a FIXED duration for consistent, faster scrolling
+                // Base duration: 500ms (instead of dynamic calculation)
+                const duration = 500; // Fixed duration for all scrolls
+                
+                // Animation start time
+                let startTime = null;
+                
+                // Custom easing function for smooth but fast deceleration
+                function easeInOutCubic(t) {
+                    return t < 0.5 
+                        ? 4 * t * t * t 
+                        : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+                
+                // Get current scroll position
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                
+                // FIX: Use faster easing for shorter distances
+                function easeInOutQuad(t) {
+                    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+                }
+                
+                // Animation function
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
                     
-                    e.preventDefault();
+                    // Apply faster easing for better feel
+                    const easeProgress = easeInOutQuad(progress);
                     
-                    if (targetId === '#') return;
+                    // Calculate new position
+                    const newPosition = startPosition + distance * easeProgress;
+                    window.scrollTo(0, newPosition);
                     
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetElement.offsetTop - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
+                    // Continue animation if not finished
+                    if (progress < 1) {
+                        requestAnimationFrame(animation);
+                    } else {
+                        // Update active navigation link after animation completes
+                        updateActiveNavLink(targetId);
                     }
-                });
-            });
-        }
+                }
+                
+                // Start animation
+                requestAnimationFrame(animation);
+            }
+        });
+    });
+}
 
-        // Header scroll effect - starts solid, becomes transparent on scroll
+  // Improved function to update active navigation
+function updateActiveNavLink(targetId) {
+    // Remove active class from all nav links
+    document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to clicked link
+    const activeLink = document.querySelector(`.nav-links a[href="${targetId}"], .mobile-nav a[href="${targetId}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+}
+
+// Header scroll effect - starts solid, becomes transparent on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             const scrollY = window.scrollY;
@@ -4014,150 +5692,217 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Load Blog Posts from Google Blogger RSS Feed
-        function loadBlogPosts() {
-            const blogPreview = document.getElementById('blogPreview');
+// Load Blog Posts from Google Blogger RSS Feed
+function loadBlogPosts() {
+    const blogCarousel = document.getElementById('blogCarousel');
+    const loadingEl = blogCarousel.querySelector('.blog-loading');
+    const carouselWrapper = blogCarousel.querySelector('.carousel-wrapper');
+    const errorEl = blogCarousel.querySelector('.blog-error');
+    
+    // Google Blogger RSS feed URL
+    const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=10';
+    
+    // Use CORS proxy to avoid CORS issues
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    const fullUrl = proxyUrl + encodeURIComponent(rssFeedUrl);
+    
+    fetch(fullUrl)
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            const feedData = JSON.parse(data.contents);
+            const posts = feedData.feed.entry || [];
             
-            // Google Blogger RSS feed URL
-            const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=3';
+            if (posts.length === 0) {
+                showFallbackBlogPosts();
+                return;
+            }
             
-            // Use CORS proxy to avoid CORS issues (public proxy)
-            const proxyUrl = 'https://api.allorigins.win/get?url=';
-            const fullUrl = proxyUrl + encodeURIComponent(rssFeedUrl);
-            
-            blogPreview.innerHTML = `
-                <div class="blog-loading" style="text-align: center; padding: var(--spacing-xl); background-color: var(--bg-primary); border-radius: 12px; border: 1px solid var(--border);">
-                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent); margin-bottom: var(--spacing-md);"></i>
-                    <p>Loading latest blog posts...</p>
+            displayBlogCarousel(posts);
+            loadingEl.style.display = 'none';
+            carouselWrapper.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error fetching blog posts:', error);
+            showFallbackBlogPosts();
+        });
+}
+
+function displayBlogCarousel(posts) {
+    const carouselTrack = document.querySelector('.carousel-track');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    
+    // Clear existing content
+    carouselTrack.innerHTML = '';
+    dotsContainer.innerHTML = '';
+    
+    posts.forEach((post, index) => {
+        const title = post.title.$t || 'Untitled Post';
+        const content = post.content.$t || '';
+        const published = post.published.$t || new Date().toISOString();
+        const link = post.link.find(l => l.rel === 'alternate').href || '#';
+        
+        // Extract clean excerpt
+        const excerpt = extractExcerpt(content, 200);
+        
+        // Format date nicely
+        const date = new Date(published).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // Create slide element
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.dataset.index = index;
+        
+        slide.innerHTML = `
+            <div class="carousel-slide-header">
+                <i class="fas fa-blog"></i>
+                <h3 class="carousel-slide-title">${title}</h3>
+                <div class="carousel-slide-date">
+                    <i class="far fa-calendar"></i>
+                    <span>${date}</span>
                 </div>
-            `;
-            
-            fetch(fullUrl)
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(data => {
-                    const feedData = JSON.parse(data.contents);
-                    const posts = feedData.feed.entry || [];
-                    
-                    if (posts.length === 0) {
-                        showFallbackBlogPosts();
-                        return;
-                    }
-                    
-                    displayBlogPosts(posts);
-                })
-                .catch(error => {
-                    console.error('Error fetching blog posts:', error);
-                    showFallbackBlogPosts();
-                });
-        }
+            </div>
+            <p class="carousel-slide-excerpt">${excerpt}</p>
+            <div class="carousel-slide-actions">
+                <a href="${link}" target="_blank" class="btn">
+                    <i class="fas fa-external-link-alt"></i> Read Full Post
+                </a>
+            </div>
+        `;
+        
+        carouselTrack.appendChild(slide);
+        
+        // Create dot for this slide
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+        dot.dataset.index = index;
+        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        dotsContainer.appendChild(dot);
+    });
+    
+    // Initialize carousel functionality with a small delay to ensure DOM is ready
+    setTimeout(() => {
+        initCarousel();
+    }, 100);
+}
 
-        function displayBlogPosts(posts) {
-            const blogPreview = document.getElementById('blogPreview');
-            const blogViewAllButton = document.getElementById('blogViewAllButton');
-            
-            let blogHTML = `
-                <div class="blog-preview-grid">
-                    <h3 class="blog-preview-header">Latest Blog Posts</h3>
-            `;
-            
-            posts.forEach((post, index) => {
-                const title = post.title.$t || 'Untitled Post';
-                const content = post.content.$t || '';
-                const published = post.published.$t || new Date().toISOString();
-                const link = post.link.find(l => l.rel === 'alternate').href || '#';
-                
-                // Extract clean excerpt (remove HTML tags, limit length)
-                const excerpt = extractExcerpt(content, 150);
-                
-                // Format date nicely
-                const date = new Date(published).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-                
-                // Get first letter for icon (if you want text-based icons)
-                const firstLetter = title.charAt(0).toUpperCase();
-                
-                // Category based on index (for demo purposes)
-                const categories = ['Healthcare', 'Research', 'Technology', 'Nursing', 'Data Analysis'];
-                const category = categories[index % categories.length];
-                
-                blogHTML += `
-                    <div class="blog-post-card">
-                        <div class="blog-post-image">
-                            <i class="fas fa-blog"></i>
-                        </div>
-                        <div class="blog-post-content">
-                            <h4 class="blog-post-title">${title}</h4>
-                            <p class="blog-post-excerpt">${excerpt}</p>
-                            <div class="blog-post-meta">
-                                <span class="blog-post-date">${date}</span>
-                                <a href="${link}" target="_blank" class="blog-read-more">
-                                    Read <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            blogHTML += '</div>';
-            blogPreview.innerHTML = blogHTML;
-            
-            // Show the "VIEW ALL BLOG POSTS" button when posts are displayed
-            if (blogViewAllButton) {
-                blogViewAllButton.style.display = 'block';
-            }
-        }
+function extractExcerpt(content, maxLength) {
+    // Remove HTML tags
+    const text = content.replace(/<[^>]*>/g, '');
+    
+    // Decode HTML entities
+    const decoded = text.replace(/&amp;/g, '&')
+                       .replace(/&lt;/g, '<')
+                       .replace(/&gt;/g, '>')
+                       .replace(/&quot;/g, '"')
+                       .replace(/&#39;/g, "'");
+    
+    // Trim and limit length
+    if (decoded.length > maxLength) {
+        return decoded.substring(0, maxLength).trim() + '...';
+    }
+    return decoded.trim();
+}
 
-        function extractExcerpt(content, maxLength) {
-            // Remove HTML tags
-            const text = content.replace(/<[^>]*>/g, '');
-            
-            // Decode HTML entities
-            const decoded = text.replace(/&amp;/g, '&')
-                               .replace(/&lt;/g, '<')
-                               .replace(/&gt;/g, '>')
-                               .replace(/&quot;/g, '"')
-                               .replace(/&#39;/g, "'");
-            
-            // Trim and limit length
-            if (decoded.length > maxLength) {
-                return decoded.substring(0, maxLength) + '...';
-            }
-            return decoded;
-        }
+function showFallbackBlogPosts() {
+    const blogCarousel = document.getElementById('blogCarousel');
+    const loadingEl = blogCarousel.querySelector('.blog-loading');
+    const carouselWrapper = blogCarousel.querySelector('.carousel-wrapper');
+    const errorEl = blogCarousel.querySelector('.blog-error');
+    
+    loadingEl.style.display = 'none';
+    carouselWrapper.style.display = 'none';
+    errorEl.style.display = 'block';
+}
 
-        function showFallbackBlogPosts() {
-            const blogPreview = document.getElementById('blogPreview');
-            const blogViewAllButton = document.getElementById('blogViewAllButton');
-            
-            blogPreview.innerHTML = `
-                <div class="blog-error">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h3 style="margin-bottom: var(--spacing-sm);">Unable to load blog posts</h3>
-                    <p style="margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
-                        Please visit my blog directly to read all posts.
-                    </p>
-                    <div style="text-align: center;">
-                        <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" class="btn" 
-                           style="background: linear-gradient(135deg, #ff5722, #ff9800); color: white; 
-                                  padding: 0.875rem 1.5rem; font-size: 1rem; font-weight: 600;">
-                            <i class="fas fa-external-link-alt"></i> Visit My Blog
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            // Hide the "VIEW ALL BLOG POSTS" button when showing error
-            if (blogViewAllButton) {
-                blogViewAllButton.style.display = 'none';
-            }
+function initCarousel() {
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.carousel-nav.next');
+    const prevButton = document.querySelector('.carousel-nav.prev');
+    const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+    
+    if (slides.length === 0) {
+        console.error('No slides found in carousel');
+        return;
+    }
+    
+    let currentSlide = 0;
+    const slideCount = slides.length;
+    
+    // Function to update carousel position
+    function updateCarousel() {
+        // Calculate the slide width based on the first slide
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        
+        // Move the track
+        track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        
+        // Update active dot
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+        
+        // Update button states
+        prevButton.disabled = currentSlide === 0;
+        nextButton.disabled = currentSlide === slideCount - 1;
+    }
+    
+    // Next button click
+    nextButton.addEventListener('click', () => {
+        if (currentSlide < slideCount - 1) {
+            currentSlide++;
+            updateCarousel();
         }
+    });
+    
+    // Previous button click
+    prevButton.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateCarousel();
+        }
+    });
+    
+    // Dot click
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel();
+        });
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && currentSlide > 0) {
+            currentSlide--;
+            updateCarousel();
+        } else if (e.key === 'ArrowRight' && currentSlide < slideCount - 1) {
+            currentSlide++;
+            updateCarousel();
+        }
+    });
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateCarousel();
+        }, 250);
+    });
+    
+    // Initialize carousel
+    updateCarousel();
+    
+    console.log('Carousel initialized with', slideCount, 'slides');
+}
 
         // Initialize header on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -4346,7 +6091,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const searchResults = document.getElementById('searchResults');
                         if (searchResults) {
                             const suggestions = [
-                                "R Shiny web applications",
+                                "My Projects",
                                 "Healthcare research",
                                 "Statistical analysis",
                                 "Nursing experience",
@@ -5245,7 +6990,191 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 });
+
+// Initialize Free OpenStreetMap with Leaflet
+function initInteractiveMap() {
+    const mapContainer = document.getElementById('map');
+    const loadingElement = document.getElementById('mapLoading');
+    
+    if (!mapContainer) return;
+    
+    // Load Leaflet CSS and JS dynamically
+    function loadLeaflet() {
+        // Check if already loaded
+        if (window.L) {
+            initializeLeafletMap();
+            return;
+        }
         
+        // Load CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+        link.crossOrigin = '';
+        document.head.appendChild(link);
+        
+        // Load JS
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+        script.crossOrigin = '';
+        script.onload = initializeLeafletMap;
+        document.head.appendChild(script);
+    }
+    
+    function initializeLeafletMap() {
+        // Hide loading
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+        }
+        
+        // Coordinates for Tamale, Ghana
+        const tamaleCoords = [9.4048, -0.8399];
+        
+        // Initialize map
+        const map = L.map('map').setView(tamaleCoords, 14);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // Custom icon
+        const customIcon = L.divIcon({
+            html: '<i class="fas fa-map-marker-alt" style="color: #ff0000; font-size: 24px; text-shadow: 0 0 8px rgba(255,255,255,0.8);"></i>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 24],
+            popupAnchor: [0, -24],
+            className: 'custom-marker'
+        });
+        
+        // Add marker
+        const marker = L.marker(tamaleCoords, { icon: customIcon })
+            .addTo(map)
+            .bindPopup(`
+                <div style="padding: 10px; max-width: 200px;">
+                    <h3 style="margin: 0 0 5px 0; color: #333; font-size: 1rem;">Mudasir Mohammed Ibrahim</h3>
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">Based in Tamale, Ghana</p>
+                </div>
+            `);
+        
+        // Open popup by default
+        marker.openPopup();
+        
+        // Add scale control
+        L.control.scale({ imperial: false }).addTo(map);
+        
+        // Add zoom controls
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(map);
+        
+        // Initialize map controls
+        initMapControls(map, tamaleCoords);
+        
+        // Add some styling to the map
+        addMapInstructions(map);
+    }
+    
+    function initMapControls(map, defaultCoords) {
+        const searchInput = document.getElementById('mapSearch');
+        const resetBtn = document.getElementById('resetLocation');
+        
+        if (searchInput) {
+            // Simple location search
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const query = this.value.trim();
+                    if (query.toLowerCase().includes('tamale') || query.toLowerCase().includes('ghana')) {
+                        map.setView(defaultCoords, 14);
+                        this.value = '';
+                    }
+                }
+            });
+        }
+        
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                map.setView(defaultCoords, 14);
+                if (searchInput) searchInput.value = '';
+            });
+        }
+    }
+    
+    function addMapInstructions(map) {
+        const instructions = L.control({ position: 'bottomleft' });
+        
+        instructions.onAdd = function() {
+            const div = L.DomUtil.create('div', 'map-instructions');
+            div.innerHTML = `
+                <div style="background: rgba(255, 255, 255, 0.9); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.1); max-width: 200px;">
+                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                        <i class="fas fa-mouse-pointer" style="color: var(--accent); font-size: 0.7rem;"></i>
+                        <span>Drag to pan</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-search-plus" style="color: var(--accent); font-size: 0.7rem;"></i>
+                        <span>Scroll to zoom</span>
+                    </div>
+                </div>
+            `;
+            return div;
+        };
+        
+        instructions.addTo(map);
+    }
+    
+    // Add custom CSS for Leaflet
+    const leafletStyles = document.createElement('style');
+    leafletStyles.textContent = `
+        .leaflet-container {
+            font-family: 'Inter', sans-serif;
+        }
+        .leaflet-popup-content {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-marker {
+            background: transparent;
+            border: none;
+        }
+        .leaflet-control-zoom a {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin: 2px;
+        }
+        .leaflet-control-zoom a:hover {
+            background-color: var(--text-primary);
+        }
+        .leaflet-control-scale-line {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--accent);
+            border-top: none;
+            color: #333;
+            font-size: 0.8rem;
+        }
+    `;
+    document.head.appendChild(leafletStyles);
+    
+    // Start loading when contact section is visible
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadLeaflet();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(contactSection);
+    }
+}
+
     </script>
     
     <!-- Floating Blog Button -->
