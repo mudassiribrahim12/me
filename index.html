@@ -448,10 +448,11 @@ header {
    ============================================ */
 
 /* Container for the translation widget */
+/* Container for the translation widget */
 #google_translate_element {
     position: fixed;
     top: 15px;
-    right: 80px;
+    right: 80px; /* Keep on right for desktop */
     z-index: 1001;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
@@ -460,6 +461,14 @@ header {
     padding: 4px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.3s ease;
+}
+
+/* Desktop only - keep on right side */
+@media (min-width: 993px) {
+    #google_translate_element {
+        right: 80px !important;
+        left: auto !important;
+    }
 }
 
 /* When header is scrolled, adjust widget position */
@@ -559,46 +568,71 @@ body {
     font-size: 1rem;
 }
 
-/* Fix for mobile view */
+/* ============================================
+   GOOGLE TRANSLATE - MOBILE POSITION FIX
+   ============================================ */
+
+/* For all mobile devices, move Google Translate to LEFT side */
 @media (max-width: 768px) {
     #google_translate_element {
-        position: fixed;
-        top: 12px;
-        right: 70px;
-        background: rgba(0, 0, 0, 0.85);
+        position: fixed !important;
+        top: 15px !important;
+        left: 15px !important; /* CHANGED from right to left */
+        right: auto !important;
+        z-index: 1002 !important; /* Higher than header */
+        background: rgba(0, 0, 0, 0.85) !important;
+        border-radius: 8px !important;
+        padding: 4px !important;
+        max-width: 130px !important;
     }
     
     .goog-te-gadget select {
         font-size: 0.75rem !important;
-        min-width: 100px !important;
-        padding: 5px 8px !important;
+        min-width: 120px !important;
+        max-width: 120px !important;
+        padding: 6px 8px !important;
         padding-right: 25px !important;
     }
 }
 
-@media (max-width: 576px) {
+/* For tablets */
+@media (max-width: 992px) and (min-width: 769px) {
     #google_translate_element {
-        top: 10px;
-        right: 65px;
-    }
-    
-    .goog-te-gadget select {
-        min-width: 90px !important;
-        font-size: 0.7rem !important;
-        padding: 4px 6px !important;
+        top: 15px !important;
+        left: 15px !important;
+        right: auto !important;
     }
 }
 
-@media (max-width: 480px) {
+/* For small phones */
+@media (max-width: 576px) {
     #google_translate_element {
-        top: 8px;
-        right: 60px;
+        top: 12px !important;
+        left: 10px !important;
+        max-width: 110px !important;
     }
     
     .goog-te-gadget select {
-        min-width: 85px !important;
+        font-size: 0.7rem !important;
+        min-width: 100px !important;
+        max-width: 100px !important;
+        padding: 5px 6px !important;
+    }
+}
+
+/* For very small phones */
+@media (max-width: 480px) {
+    #google_translate_element {
+        top: 10px !important;
+        left: 8px !important;
+        max-width: 100px !important;
+    }
+    
+    .goog-te-gadget select {
         font-size: 0.65rem !important;
-        padding: 3px 5px !important;
+        min-width: 90px !important;
+        max-width: 90px !important;
+        padding: 4px 5px !important;
     }
 }
 
@@ -624,8 +658,16 @@ body.dark-theme .goog-te-gadget select {
 
 /* When header is scrolled, adjust widget position */
 header.scrolled ~ #google_translate_element {
-    background: rgba(255, 255, 255, 0.9) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
 }
+
+/* Mobile scrolled state */
+@media (max-width: 768px) {
+    header.scrolled ~ #google_translate_element {
+        background: rgba(0, 0, 0, 0.85) !important;
+    }
+}
+
 
 /* Dark theme adjustments */
 body.dark-theme #google_translate_element {
@@ -1701,7 +1743,6 @@ body.dark-theme .logo .last-part {
             font-style: italic;
         }
 
-   /* Mobile search adjustments */
 @media (max-width: 768px) {
     .search-dropdown {
         position: fixed;
@@ -1718,7 +1759,7 @@ body.dark-theme .logo .last-part {
     }
     
     .header-right {
-        gap: 0.5rem; /* Adjusted for tablets */
+        gap: 0.5rem;
         padding-right: 0.5rem;
     }
     
@@ -1728,12 +1769,6 @@ body.dark-theme .logo .last-part {
         width: 42px;
         height: 42px;
         font-size: 1.1rem;
-    }
-    
-    /* Adjust Google Translate widget position */
-    #google_translate_element {
-        right: 70px;
-        top: 12px;
     }
 }
 
