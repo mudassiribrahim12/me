@@ -563,9 +563,9 @@ body {
 @media (max-width: 768px) {
     #google_translate_element {
         position: fixed;
-        top: 10px;
-        right: 60px;
-        background: rgba(0, 0, 0, 0.8);
+        top: 12px;
+        right: 70px;
+        background: rgba(0, 0, 0, 0.85);
     }
     
     .goog-te-gadget select {
@@ -573,6 +573,32 @@ body {
         min-width: 100px !important;
         padding: 5px 8px !important;
         padding-right: 25px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    #google_translate_element {
+        top: 10px;
+        right: 65px;
+    }
+    
+    .goog-te-gadget select {
+        min-width: 90px !important;
+        font-size: 0.7rem !important;
+        padding: 4px 6px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #google_translate_element {
+        top: 8px;
+        right: 60px;
+    }
+    
+    .goog-te-gadget select {
+        min-width: 85px !important;
+        font-size: 0.65rem !important;
+        padding: 3px 5px !important;
     }
 }
 
@@ -1254,11 +1280,23 @@ body.dark-theme .logo .last-part {
     color: #ffffff;
 }
 
-/* Header right icons positioning */
+/* Header right icons positioning - FIXED SPACING */
 .header-right {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: 0.75rem; /* Changed from var(--spacing-sm) */
+    margin-left: auto;
+}
+
+/* Ensure minimum touch target size */
+.search-toggle,
+.theme-toggle,
+.mobile-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
 }
   
 /* ============================================
@@ -1663,31 +1701,88 @@ body.dark-theme .logo .last-part {
             font-style: italic;
         }
 
-        /* Mobile search adjustments */
-        @media (max-width: 768px) {
-            .search-dropdown {
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                right: 0;
-                width: 100%;
-                border-radius: 0;
-                margin-top: 0;
-                border-left: none;
-                border-right: none;
-            }
-            
-            .header-right {
-                gap: 0.5rem;
-            }
-            
-            .search-toggle {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-            }
-        }
-        
+   /* Mobile search adjustments */
+@media (max-width: 768px) {
+    .search-dropdown {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0;
+        margin-top: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        padding: 1rem;
+    }
+    
+    .header-right {
+        gap: 0.5rem; /* Adjusted for tablets */
+        padding-right: 0.5rem;
+    }
+    
+    .search-toggle,
+    .theme-toggle,
+    .mobile-menu {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+    }
+    
+    /* Adjust Google Translate widget position */
+    #google_translate_element {
+        right: 70px;
+        top: 12px;
+    }
+}
+
+/* For small phones */
+@media (max-width: 576px) {
+    .header-right {
+        gap: 0.4rem;
+    }
+    
+    .search-toggle,
+    .theme-toggle,
+    .mobile-menu {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        padding: 0.4rem;
+    }
+    
+    .header-container {
+        padding: 0 0.75rem;
+    }
+    
+    #google_translate_element {
+        right: 65px;
+        top: 10px;
+    }
+}
+
+/* For very small phones */
+@media (max-width: 480px) {
+    .header-right {
+        gap: 0.3rem;
+    }
+    
+    .search-toggle,
+    .theme-toggle,
+    .mobile-menu {
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+        padding: 0.35rem;
+    }
+    
+    #google_translate_element {
+        right: 60px;
+        top: 8px;
+    }
+}
+
         /* ============================================
            THEME TOGGLE & MOBILE MENU
            ============================================ */
@@ -4566,6 +4661,59 @@ body.dark-theme header.scrolled .nav-links.centered a {
 @media (min-width: 1200px) {
     .nav-links {
         margin-right: 30px;
+    }
+}
+
+/* ============================================
+   TOUCH-FRIENDLY HEADER ICONS
+   ============================================ */
+.search-toggle,
+.theme-toggle,
+.mobile-menu {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+}
+
+/* Active state for touch devices */
+.search-toggle:active,
+.theme-toggle:active,
+.mobile-menu:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+/* Dark theme active state */
+body.dark-theme .search-toggle:active,
+body.dark-theme .theme-toggle:active,
+body.dark-theme .mobile-menu:active {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Better search box on mobile */
+@media (max-width: 768px) {
+    .search-box {
+        display: flex;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    
+    .search-input {
+        flex: 1;
+        min-width: 0;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-box {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .search-input,
+    .search-button {
+        width: 100%;
     }
 }
    
