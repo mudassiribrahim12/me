@@ -443,26 +443,6 @@ header {
     }
 }
 
-/* Add subtle separator between Google Translate and other icons */
-#google_translate_element::after {
-    content: '';
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 60%;
-    background-color: rgba(255, 255, 255, 0.2);
-    display: none; /* Hidden by default */
-}
-
-/* Show separator on larger screens */
-@media (min-width: 769px) {
-    #google_translate_element::after {
-        display: block;
-    }
-}
-
 /* ============================================
    GOOGLE TRANSLATE WIDGET STYLES
    ============================================ */
@@ -1280,134 +1260,6 @@ body.dark-theme .logo .last-part {
     align-items: center;
     gap: var(--spacing-sm);
 }
-
-/* ============================================
-   FIXED HEADER CONTROLS SPACING
-   ============================================ */
-.header-right {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.8rem !important; /* Increased from var(--spacing-sm) */
-    margin-left: auto !important;
-}
-
-/* Adjust individual button spacing */
-.search-toggle,
-.theme-toggle,
-.mobile-menu {
-    margin-left: 0.8rem !important; /* Added spacing */
-    position: relative !important;
-    z-index: 1002 !important; /* Ensure it's above other elements */
-}
-
-/* Improve hover effects for better visibility */
-.search-toggle:hover,
-.theme-toggle:hover,
-.mobile-menu:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    transform: scale(1.05) !important;
-    transition: all 0.2s ease !important;
-}
-
-/* Google Translate widget spacing */
-#google_translate_element {
-    position: fixed !important;
-    top: 15px !important;
-    right: 120px !important; /* Moved further left to create space */
-    z-index: 1001 !important;
-    margin-right: 0.8rem !important;
-}
-
-/* When header is scrolled, adjust position */
-header.scrolled ~ #google_translate_element {
-    right: 115px !important;
-}
-
-/* Mobile spacing adjustments */
-@media (max-width: 768px) {
-    .header-right {
-        gap: 0.6rem !important; /* Slightly more spacing on mobile */
-    }
-    
-    /* Reposition Google Translate widget on mobile */
-    #google_translate_element {
-        position: fixed !important;
-        top: 10px !important;
-        right: 110px !important; /* More space from edge */
-        margin-right: 0.5rem !important;
-        transform: scale(0.9); /* Slightly smaller on mobile */
-        transform-origin: right center;
-    }
-    
-    /* Adjust header right spacing */
-    .header-right {
-        margin-right: 10px !important; /* More space from edge */
-    }
-    
-    /* Make buttons touch-friendly with larger tap area */
-    .search-toggle,
-    .theme-toggle,
-    .mobile-menu {
-        width: 42px !important; /* Larger tap area */
-        height: 42px !important;
-        min-width: 42px !important;
-        min-height: 42px !important;
-        font-size: 1.1rem !important;
-        padding: 0.4rem !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-}
-
-@media (max-width: 480px) {
-    /* Even more spacing for very small screens */
-    .header-right {
-        gap: 0.4rem !important;
-        margin-right: 5px !important;
-    }
-    
-    #google_translate_element {
-        right: 100px !important;
-        transform: scale(0.85);
-        margin-right: 0.3rem !important;
-    }
-    
-    /* Make the Google Translate selector more touch-friendly */
-    .goog-te-gadget select {
-        min-width: 110px !important; /* Wider for easier tapping */
-        padding: 8px 12px !important;
-        font-size: 0.8rem !important;
-        height: 36px !important;
-    }
-}
-
-/* Extra touch-friendly improvements for very small screens */
-@media (max-width: 380px) {
-    .header-right {
-        gap: 0.3rem !important;
-    }
-    
-    #google_translate_element {
-        right: 95px !important;
-        transform: scale(0.8);
-    }
-    
-    /* Even larger tap targets */
-    .search-toggle,
-    .theme-toggle,
-    .mobile-menu {
-        width: 40px !important;
-        height: 40px !important;
-    }
-}
-
-/* Make Google Translate dropdown touch-friendly */
-.goog-te-gadget select {
-    min-height: 34px !important; /* Taller for easier tapping */
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-}
   
 /* ============================================
    FIXED LOGO STYLING - WHITE AND BOLD WEBSITE NAME
@@ -1611,17 +1463,6 @@ body.dark-theme .logo .last-part {
             padding: 0 var(--spacing-md);
             gap: 2rem;
         }
-
-/* Ensure header container has proper spacing */
-.header-container {
-    padding: 0 var(--spacing-md) !important;
-    gap: 1.5rem !important; /* More space between nav and icons */
-}
-
-/* When scrolled, adjust spacing slightly */
-header.scrolled .header-container {
-    padding: 0 calc(var(--spacing-md) + 5px) !important;
-}
 
         /* Navigation container with proper spacing */
         .nav-container {
