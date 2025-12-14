@@ -5742,7 +5742,7 @@ Here's a preview of my posts from Google Blogger.
     <!-- JavaScript -->
     <script>
     
-// Ghana Time Display Function - FIXED VERSION
+// Ghana Time Display - ALWAYS SHOWS GHANA TIME (GMT) - Same everywhere
 function initGhanaTime() {
     const timeElement = document.getElementById('ghanaTimeFooter');
     
@@ -5751,37 +5751,44 @@ function initGhanaTime() {
     function updateGhanaTime() {
         const now = new Date();
         
-        // Format for Ghana time
-        const options = {
-            timeZone: 'Africa/Accra',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: true
-        };
+        // Get UTC time (GMT) - Ghana is in GMT timezone
+        const gmtHours = now.getUTCHours();     // 0-23
+        const gmtMinutes = now.getUTCMinutes(); // 0-59
         
-        try {
-            const ghanaTime = now.toLocaleTimeString('en-GH', options);
-            timeElement.textContent = ghanaTime + " GH";
-            timeElement.title = `Ghana Time (GMT/UTC) - ${now.toLocaleDateString('en-GH', {
-                weekday: 'short',
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-            })}`;
-        } catch (error) {
-            // Fallback
-            const timeString = now.toLocaleTimeString('en-GH');
-            timeElement.textContent = `${timeString} GH`;
-            timeElement.title = `Current Ghana Time`;
-        }
+        // Convert to 12-hour format
+        let displayHours = gmtHours;
+        const ampm = displayHours >= 12 ? 'PM' : 'AM';
+        
+        displayHours = displayHours % 12;
+        displayHours = displayHours === 0 ? 12 : displayHours; // 0 becomes 12
+        
+        // Format with leading zeros
+        const formattedHours = displayHours.toString().padStart(2, '0');
+        const formattedMinutes = gmtMinutes.toString().padStart(2, '0');
+        
+        // Create time string (HH:MM AM/PM)
+        const timeString = `${formattedHours}:${formattedMinutes} ${ampm}`;
+        
+        // Update the display
+        timeElement.textContent = timeString + " GH";
+        
+        // Update tooltip with full date
+        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        const dayName = dayNames[now.getUTCDay()];
+        const monthName = monthNames[now.getUTCMonth()];
+        const day = now.getUTCDate();
+        const year = now.getUTCFullYear();
+        
+        timeElement.title = `Ghana Time (GMT/UTC) - ${dayName}, ${monthName} ${day}, ${year}`;
     }
 
-    // Initial update
+    // Run immediately
     updateGhanaTime();
     
-    // Update every second
-    setInterval(updateGhanaTime, 1000);
+    // Update every 60 seconds (saves resources, still accurate enough)
+    setInterval(updateGhanaTime, 60000);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
