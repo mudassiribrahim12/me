@@ -203,19 +203,14 @@ body.dark-theme .footer-time:hover {
     margin-top: 0.125rem;
 }
 
-/* Footer Social Title - Light mode black, Dark mode white */
+/* Footer Social Title - Always White */
 .footer-social-title {
-    color: #000000 !important;
+    color: #ffffff !important; /* Changed from #000000 to #ffffff */
     margin-bottom: var(--spacing-sm);
     font-size: 1.1rem;
     font-weight: 500;
     text-align: center;
     transition: color 0.3s ease;
-}
-
-/* Dark theme adjustment */
-body.dark-theme .footer-social-title {
-    color: #ffffff !important;
 }
 
 /* Location title - ALWAYS BLACK */
@@ -367,9 +362,9 @@ body.dark-theme .location-badge {
             }
         }
         
-        /* Footer Navigation Title - Theme Aware */
+       /* Footer Navigation Title - Always White */
 .footer-navigation-title {
-    color: #000000 !important; /* Light mode: black */
+    color: #ffffff !important; /* Changed from #000000 to #ffffff */
     text-align: center !important;
     margin-bottom: var(--spacing-lg) !important;
     font-size: 1.5rem !important;
@@ -377,10 +372,6 @@ body.dark-theme .location-badge {
     transition: color 0.3s ease !important;
 }
 
-/* Dark theme adjustment */
-body.dark-theme .footer-navigation-title {
-    color: #ffffff !important; /* Dark mode: white */
-}
 
         /* Floating elements animation */
         .floating-element {
@@ -418,6 +409,65 @@ body.dark-theme .footer-navigation-title {
 [data-animate] {
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
                 transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ============================================
+   HEADER SLIDE UP/DOWN ANIMATION
+   ============================================ */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 1000;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+    transform: translateY(0);
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Header hidden state - slides up */
+header.header-hidden {
+    transform: translateY(-100%);
+    box-shadow: none !important;
+}
+
+/* Header scrolled state - becomes transparent */
+header.scrolled {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme adjustments */
+body.dark-theme header {
+    background-color: #000000 !important;
+    border-bottom: 1px solid #333333;
+}
+
+body.dark-theme header.scrolled {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure header content is visible when header is shown */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 var(--spacing-md);
+    gap: 1rem;
+}
+
+/* Adjust Google Translate widget position when header is hidden */
+header.header-hidden ~ #google_translate_element {
+    top: 15px; /* Adjust as needed */
 }
 
 /* Make header transitions faster too */
@@ -1014,56 +1064,57 @@ body.dark-theme .carousel-nav {
             box-sizing: border-box;
         }
         
-        :root {
-            /* Color palette inspired by Kate Crawford's site */
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f8f8;
-            --text-primary: #111111;
-            --text-secondary: #333333;
-            --text-tertiary: #555555;
-            --accent: #1a5fb4;
-            --accent-light: #e8f1fb;
-            --border: #e0e0e0;
-            --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --max-width: 1200px;
-            --header-height: 70px;
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 4rem;
-            --spacing-xl: 6rem;
-        }
-        
-        body.dark-theme {
-            --bg-primary: #121212;
-            --bg-secondary: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #e0e0e0;
-            --text-tertiary: #bbbbbb;
-            --accent: #62a0ea;
-            --accent-light: #2a2a3a;
-            --border: #333333;
-            --shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-        
-        body {
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-weight: 400;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            transition: var(--transition);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            position: relative;
-            overflow-x: hidden;
-        }
+     :root {
+    /* Color palette - WHITE BACKGROUND THEME */
+    --bg-primary: #ffffff; /* Changed to white */
+    --bg-secondary: #f8f8f8; /* Keep light gray for subtle variations */
+    --text-primary: #111111;
+    --text-secondary: #333333;
+    --text-tertiary: #555555;
+    --accent: #1a5fb4;
+    --accent-light: #e8f1fb;
+    --border: #e0e0e0;
+    --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --max-width: 1200px;
+    --header-height: 70px;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+}
+
+body.dark-theme {
+    --bg-primary: #121212;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-tertiary: #bbbbbb;
+    --accent: #62a0ea;
+    --accent-light: #2a2a3a;
+    --border: #333333;
+    --shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+      html {
+    scroll-behavior: smooth;
+    font-size: 16px; 
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: var(--transition);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+    font-size: 1.0rem; 
+}
 
         /* Small Color Mixing Spread Effect */
         .paint-particle {
@@ -1195,17 +1246,18 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             color: var(--text-primary);
         }
         
-        h1 {
-            font-size: 3rem;
-            letter-spacing: -0.02em;
-        }
+h1 {
+    font-size: 2.5rem; /* Reduced from 3rem */
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
         
-        h2 {
-            font-size: 2.25rem;
-            margin-bottom: var(--spacing-lg);
-            position: relative;
-            display: inline-block;
-        }
+h2 {
+    font-size: 2rem; /* Reduced from 2.25rem */
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    display: inline-block;
+}
         
         h2:after {
             content: '';
@@ -1882,30 +1934,29 @@ body.dark-theme .logo .last-part {
            HERO SECTION
            ============================================ */
         /* Adjust the first section (hero) to come up behind header */
-        .hero {
-            padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl);
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            position: relative;
-            z-index: 1;
-        }
+       .hero {
+    padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl);
+    background: var(--bg-primary); /* Changed from var(--bg-secondary) to var(--bg-primary) */
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+}
 
-        /* Create the illusion of content passing through header */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: 0;
-            right: 0;
-            height: 150px;
-            background: linear-gradient(to bottom, 
-                rgba(0,0,0,0) 0%,
-                var(--bg-secondary) 70%,
-                var(--bg-secondary) 100%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
+/* Update the gradient overlay as well */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,0) 0%,
+        var(--bg-primary) 70%, /* Changed from var(--bg-secondary) */
+        var(--bg-primary) 100%); /* Changed from var(--bg-secondary) */
+    pointer-events: none;
+    z-index: -1;
+}
         /* When header is transparent, show content shadows/effects */
         header.scrolled ~ .hero::before {
             opacity: 0.7;
@@ -1917,19 +1968,19 @@ body.dark-theme .logo .last-part {
             text-align: center;
         }
         
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-md);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .hero-description {
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto var(--spacing-lg);
-        }
+.hero-description {
+    font-size: 1.125rem; /* Reduced from 1.25rem */
+    max-width: 600px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.hero-subtitle {
+    font-size: 1rem; /* Reduced from 1.25rem */
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
         
         .social-icons {
             display: flex;
@@ -2774,7 +2825,7 @@ body.dark-theme .floating-blog-btn:hover {
            PROJECTS SECTION
            ============================================ */
         .projects {
-            background-color: var(--bg-secondary);
+            background-color: var(--bg-primary);
         }
         
         .projects-grid {
@@ -3065,38 +3116,47 @@ body.dark-theme .floating-blog-btn:hover {
             font-size: 1.25rem;
         }
         
- /* ============================================
-   FOOTER - DYNAMIC THEME COLORS
+/* ============================================
+   FOOTER - ALWAYS BLACK WITH WHITE TEXT
    ============================================ */
-/* Footer - dynamic based on theme */
+/* Footer - Always black background */
 footer {
-    background-color: #ffffff; /* Light mode: white */
-    border-top: 1px solid #e0e0e0; /* Light mode: light border */
+    background-color: #000000 !important; /* Always black */
+    border-top: 1px solid #333333 !important; /* Dark border */
     padding: var(--spacing-xl) 0;
 }
 
-/* Footer text colors - dynamic based on theme */
-footer .copyright {
-    color: #000000; /* Light mode: black */
-    font-weight: 500;
-}
-
-footer .developer-note {
-    color: #555555; /* Light mode: dark gray */
-}
-
-/* Footer links - dynamic based on theme */
+/* All footer text - Always white */
+footer .copyright,
+footer .developer-note,
 footer .footer-links a,
 footer .footer-nav-item span,
-footer .footer-nav-item {
-    color: #000000; /* Light mode: black */
-    transition: opacity 0.3s ease;
+footer .footer-nav-item,
+footer .footer-social-title,
+.footer-time {
+    color: #ffffff !important; /* Always white */
 }
 
-/* Footer social icons background */
-footer .social-icons a {
-    background-color: rgba(0, 0, 0, 0.1); /* Light mode: light black */
-    color: #000000; /* Light mode: black */
+/* Footer social icons */
+.footer-social .social-icons a {
+    background-color: rgba(255, 255, 255, 0.2) !important; /* Light white background */
+    color: #ffffff !important; /* White icons */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Footer social icons hover - brighter */
+.footer-social .social-icons a:hover {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2) !important;
 }
 
 /* Footer navigation items */
@@ -3106,21 +3166,16 @@ footer .social-icons a {
     align-items: center;
     padding: var(--spacing-sm);
     text-decoration: none;
-    color: #000000; /* Light mode: black */
+    color: #ffffff !important;
     border-radius: 8px;
     transition: all 0.3s ease;
 }
 
-/* Footer hover effects */
-footer .footer-links a:hover,
-footer .footer-nav-item:hover {
-    opacity: 0.7;
-}
-
-footer .footer-nav-item:hover {
-    background-color: rgba(0, 0, 0, 0.05); /* Light mode: light black */
+/* Footer navigation hover */
+.footer-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
 }
 
 .footer-nav-item:hover i {
@@ -3128,95 +3183,34 @@ footer .footer-nav-item:hover {
     transition: transform 0.3s ease;
 }
 
-/* Footer social icons hover */
-.footer-social .social-icons a:hover {
-    background-color: rgba(0, 0, 0, 0.2); /* Light mode: medium black */
-    color: #000000; /* Light mode: black */
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+/* Footer links hover */
+footer .footer-links a:hover,
+footer .footer-nav-item:hover {
+    opacity: 0.8;
 }
 
-/* Dark theme adjustments for footer */
+/* Footer time display */
+.footer-time {
+    color: #ffffff !important;
+}
+
+.footer-time i {
+    color: #62a0ea !important; /* Accent color for clock icon */
+}
+
+/* No dark theme adjustments needed - footer is always black with white text */
 body.dark-theme footer {
-    background-color: #000000; /* Dark mode: black */
-    border-top: 1px solid #333333; /* Dark mode: dark border */
+    background-color: #000000 !important; /* Still black in dark mode */
 }
 
-body.dark-theme footer .copyright {
-    color: #ffffff; /* Dark mode: white */
-}
-
-body.dark-theme footer .developer-note {
-    color: #bbbbbb; /* Dark mode: light gray */
-}
-
+body.dark-theme footer .copyright,
+body.dark-theme footer .developer-note,
 body.dark-theme footer .footer-links a,
 body.dark-theme footer .footer-nav-item span,
-body.dark-theme footer .footer-nav-item {
-    color: #ffffff; /* Dark mode: white */
-}
-
-body.dark-theme footer .social-icons a {
-    background-color: rgba(255, 255, 255, 0.1); /* Dark mode: light white */
-    color: #ffffff; /* Dark mode: white */
-}
-
-body.dark-theme footer .footer-nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Dark mode: light white */
-}
-
-/* Footer Social Icons - Fixed to always show */
-.footer-social .social-icons {
-    display: flex !important;
-    justify-content: center !important;
-    gap: var(--spacing-sm) !important;
-    margin-top: var(--spacing-md) !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-.footer-social .social-icons a {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 44px !important;
-    height: 44px !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
-    border-radius: 50% !important;
-    font-size: 1.1rem !important;
-    transition: all 0.3s ease !important;
-}
-
-/* Light theme adjustments for footer social icons */
-body:not(.dark-theme) .footer-social .social-icons a {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-    color: #000000 !important;
-}
-
-/* Footer social icons hover */
-.footer-social .social-icons a:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    color: #ffffff !important;
-    transform: translateY(-3px) !important;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Light theme hover adjustments */
-body:not(.dark-theme) .footer-social .social-icons a:hover {
-    background-color: rgba(0, 0, 0, 0.2) !important;
-    color: #000000 !important;
-}
-
-/* Mobile navigation dark theme fix */
-body.dark-theme .mobile-nav {
-    background-color: #000000;
-    border-bottom: 1px solid #333333;
-}
-
-body.dark-theme .mobile-nav a {
-    color: #ffffff;
-    border-bottom: 1px solid #333333;
+body.dark-theme footer .footer-nav-item,
+body.dark-theme .footer-social-title,
+body.dark-theme .footer-time {
+    color: #ffffff !important; /* Still white in dark mode */
 }
 
 
@@ -3631,12 +3625,12 @@ body.dark-theme .mobile-nav a {
         }
 
         /* Enhanced paragraph visibility */
-        .about-grid p {
-            color: #000000 !important;
-            font-size: 1.125rem !important;
-            line-height: 1.7 !important;
-            margin-bottom: 1.5rem !important;
-        }
+.about-grid p {
+    color: #000000 !important;
+    font-size: 1.0625rem; /* Slightly larger than body but not too big */
+    line-height: 1.7 !important;
+    margin-bottom: 1.5rem !important;
+}
 
         /* Better contrast for all text elements */
         .hero-description, .personal-intro p, .quote-section blockquote {
@@ -3664,13 +3658,13 @@ body.dark-theme .mobile-nav a {
         }
 
         /* Contact section text improvements */
-        .contact-info p {
-            color: #000000 !important;
-            font-size: 1.125rem !important;
-            line-height: 1.7 !important;
-            max-width: 800px !important;
-            margin: 0 auto 2rem !important;
-        }
+.contact-info p {
+    color: #000000 !important;
+    font-size: 1.0625rem !important;
+    line-height: 1.7 !important;
+    max-width: 800px !important;
+    margin: 0 auto 2rem !important;
+}
 
         /* Blog section text improvements */
         #blog p {
@@ -3860,12 +3854,12 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-clip: text;
         }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: var(--spacing-lg);
-            position: relative;
-            padding-bottom: var(--spacing-sm);
-        }
+h2 {
+    font-size: 2rem; /* Reduced from 2.25rem */
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    display: inline-block;
+}
 
         h2:after {
             content: '';
@@ -3878,11 +3872,11 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             border-radius: 2px;
         }
 
-        h3 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
+h3 {
+    font-size: 1.5rem; /* Professional standard */
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
 
         /* Improved social icons */
         .social-icons a {
@@ -4308,34 +4302,123 @@ body.dark-theme .ds-bg-text {
        z-index: 1;
    }
 
-   /* For sections without background text but with gradient */
-   .ds-gradient-only {
-       position: relative;
-       overflow: hidden;
-   }
+ /* Blog section and other gradient-only sections */
+.ds-gradient-only {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-primary); /* Added white background */
+}
 
-   .ds-gradient-only::before {
-       content: '';
-       position: absolute;
-       top: 0;
-       left: 0;
-       width: 100%;
-       height: 100%;
-       background: 
-           radial-gradient(circle at 10% 20%, 
-               rgba(26, 95, 180, 0.03) 0%, 
-               transparent 40%),
-           radial-gradient(circle at 90% 80%, 
-               rgba(98, 160, 234, 0.02) 0%, 
-               transparent 40%);
-       z-index: 0;
-       pointer-events: none;
-   }
+.ds-gradient-only::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, 
+            rgba(26, 95, 180, 0.03) 0%, 
+            transparent 40%),
+        radial-gradient(circle at 90% 80%, 
+            rgba(98, 160, 234, 0.02) 0%, 
+            transparent 40%);
+    z-index: 0;
+    pointer-events: none;
+}
 
-   .ds-gradient-only .container {
-       position: relative;
-       z-index: 1;
-   }
+.ds-gradient-only .container {
+    position: relative;
+    z-index: 1;
+}
+
+#education {
+    background-color: var(--bg-primary); /* Add white background */
+}
+
+#education .education-grid {
+    /* Your existing education grid styles remain */
+}
+
+#contact {
+    background-color: var(--bg-primary); /* Add white background */
+}
+
+/* ============================================
+   ALL SECTIONS - WHITE BACKGROUND IN LIGHT MODE
+   ============================================ */
+section {
+    background-color: var(--bg-primary) !important;
+    padding: var(--spacing-xl) 0;
+}
+
+/* Override specific sections that should have different backgrounds */
+.ds-inspired-section {
+    background-color: var(--bg-primary) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ensure gradient overlays still work on white background */
+.ds-inspired-section .ds-gradient-overlay {
+    background: 
+        radial-gradient(circle at 20% 30%, 
+            rgba(26, 95, 180, 0.04) 0%, 
+            transparent 45%),
+        radial-gradient(circle at 80% 70%, 
+            rgba(98, 160, 234, 0.03) 0%, 
+            transparent 45%),
+        linear-gradient(135deg, 
+            transparent 0%, 
+            rgba(255, 255, 255, 0.01) 50%, 
+            transparent 100%);
+}
+
+/* Blog carousel container */
+.blog-carousel-container {
+    position: relative;
+    margin: var(--spacing-lg) 0;
+    min-height: 400px;
+    background-color: var(--bg-primary) !important;
+}
+
+/* Contact integrated container */
+.integrated-contact-container {
+    max-width: 1200px;
+    margin: 0 auto var(--spacing-lg);
+    background-color: var(--bg-secondary) !important; /* Keep as secondary for contrast */
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/* ============================================
+   CARD BACKGROUNDS - SUBTLE CONTRAST
+   ============================================ */
+.project-card,
+.timeline-content,
+.skill-item,
+.publication-item,
+#blog .blog-post-card,
+.carousel-track-container,
+.modal-content,
+.contact-form-side,
+.map-side,
+.privacy-statement > div {
+    background-color: var(--bg-primary) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow) !important;
+}
+
+/* Add subtle background variations for depth */
+.project-card:hover,
+#blog .blog-post-card:hover,
+.skill-item:hover {
+    background-color: var(--bg-secondary) !important;
+}
+
+
 
    /* Dark theme adjustments - enhanced */
    body.dark-theme .ds-bg-text {
@@ -5742,6 +5825,74 @@ Here's a preview of my posts from Google Blogger.
     <!-- JavaScript -->
     <script>
     
+    // Header scroll hide/show functionality
+function initHeaderHideOnScroll() {
+    const header = document.querySelector('header');
+    let lastScrollTop = 0;
+    const headerHeight = header.offsetHeight;
+    const scrollThreshold = 5; // Minimum scroll amount to trigger
+    let isScrollingDown = false;
+    let scrollTimer;
+
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollDirection = scrollTop > lastScrollTop;
+        
+        // Clear any existing timer
+        clearTimeout(scrollTimer);
+        
+        // Determine if we're scrolling down enough to trigger hide
+        if (scrollDirection && scrollTop > headerHeight) {
+            // Only hide if we've scrolled more than threshold
+            if (scrollTop - lastScrollTop > scrollThreshold) {
+                header.classList.add('header-hidden');
+                isScrollingDown = true;
+            }
+        } else {
+            // Show header when scrolling up
+            header.classList.remove('header-hidden');
+            isScrollingDown = false;
+        }
+        
+        // Always show header at the top
+        if (scrollTop < headerHeight) {
+            header.classList.remove('header-hidden');
+        }
+        
+        // Add scrolled class for styling when not at top
+        if (scrollTop > headerHeight) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+
+    // Add touch events for mobile devices
+    let touchStartY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', function(e) {
+        const touchY = e.touches[0].clientY;
+        const touchDiff = touchStartY - touchY;
+        
+        if (Math.abs(touchDiff) > scrollThreshold) {
+            if (touchDiff > 0 && lastScrollTop > headerHeight) {
+                // Scrolling down
+                header.classList.add('header-hidden');
+            } else {
+                // Scrolling up
+                header.classList.remove('header-hidden');
+            }
+        }
+    }, { passive: true });
+}
+
+    
 // Ghana Time Display - ALWAYS SHOWS GHANA TIME (GMT) - Same everywhere
 function initGhanaTime() {
     const timeElement = document.getElementById('ghanaTimeFooter');
@@ -5843,6 +5994,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize Google Translate
     initGoogleTranslate();
+    
+    // Initialize header hide/show functionality
+    initHeaderHideOnScroll();
     
     // Detect browser language after a delay
     setTimeout(() => {
@@ -7687,8 +7841,8 @@ document.addEventListener('DOMContentLoaded', function() {
         function initTypingEffect() {
             // Text content to type (only up to quote section)
             const typingContent = {
-                badge: "Core Philosophy",
-                heading: "Building open, intuitive R Shiny web applications that simplify complex analyses and accelerate meaningful discovery.",
+                badge: "Mission",
+                heading: "Developing open, intuitive R Shiny web applications that simplify complex data analyses for public health research.",
                 subtitle: "Mudasir Mohammed Ibrahim | Registered General Nurse",
                 quote: {
                     text: "Innovation distinguishes between a leader and a follower.",
