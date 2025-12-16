@@ -3317,6 +3317,69 @@ body.dark-theme .footer-time {
             cursor: pointer;
         }
         
+/* ============================================
+   MOBILE PERFORMANCE OVERRIDES
+   ============================================ */
+@media (max-width: 768px) {
+    /* Disable heavy animations */
+    .paint-particle,
+    .minimal-cursor-dot,
+    .minimal-cursor-trail {
+        display: none !important;
+    }
+    
+    /* Reduce animation complexity */
+    .project-card,
+    .skill-item,
+    .blog-post-card {
+        transition: transform 0.2s ease !important;
+    }
+    
+    /* Simplify section transitions */
+    [data-animate] {
+        transition: opacity 0.3s ease !important;
+    }
+    
+    /* Optimize hero section */
+    .hero {
+        min-height: auto !important;
+        padding: calc(var(--header-height) + 2rem) 0 2rem !important;
+    }
+    
+    /* Optimize typing cursor */
+    .typing-cursor {
+        animation: blink 1s infinite !important;
+    }
+    
+    /* Reduce shadow complexity */
+    .project-card:hover,
+    .skill-item:hover,
+    .blog-post-card:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+        transform: translateY(-2px) !important;
+    }
+}
+
+/* VERY small screens */
+@media (max-width: 480px) {
+    /* Further simplify */
+    .ds-bg-text {
+        font-size: 16vw !important;
+        opacity: 0.015 !important;
+    }
+    
+    /* Reduce padding */
+    section {
+        padding: 3rem 0 !important;
+    }
+    
+    /* Simplify cards */
+    .project-card,
+    .skill-item {
+        padding: 1rem !important;
+    }
+}
+        
         /* ============================================
            RESPONSIVE DESIGN
            ============================================ */
