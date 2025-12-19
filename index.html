@@ -572,6 +572,72 @@ header {
     box-sizing: border-box;
 }
 
+/* Ensure search button and translate widget remain visible on mobile */
+@media (max-width: 768px) {
+    .main-header-container {
+        gap: 0.5rem;
+        justify-content: space-between;
+    }
+    
+    .main-nav {
+        gap: 0.5rem;
+    }
+    
+    .search-toggle {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        flex-shrink: 0;
+    }
+    
+    /* Adjust Google Translate position on mobile */
+    #google_translate_element {
+        left: 10px !important;
+        right: auto !important;
+        max-width: 100px !important;
+        top: 50px !important;
+    }
+    
+    .goog-te-gadget select {
+        max-width: 90px !important;
+        min-width: 90px !important;
+        font-size: 0.7rem !important;
+        padding: 4px 6px !important;
+    }
+}
+
+/* Extra small phone adjustments */
+@media (max-width: 480px) {
+    .main-header-container {
+        padding: 0 0.5rem;
+    }
+    
+    .logo {
+        flex-shrink: 1;
+        min-width: auto;
+    }
+    
+    .search-toggle {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 1rem;
+    }
+    
+    #google_translate_element {
+        left: 8px !important;
+        max-width: 85px !important;
+        top: 48px !important;
+    }
+    
+    .goog-te-gadget select {
+        max-width: 75px !important;
+        min-width: 75px !important;
+        font-size: 0.65rem !important;
+        padding: 3px 5px !important;
+    }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .carousel-slide {
@@ -1585,7 +1651,7 @@ body.dark-theme .theme-label {
     margin: 0 auto;
 }
 
-/* Logo - Keep as is */
+/* Logo - Responsive */
 .logo {
     position: relative !important;
     overflow: visible !important;
@@ -1595,13 +1661,84 @@ body.dark-theme .theme-label {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    white-space: nowrap !important;
     display: inline-flex !important;
     align-items: center;
     gap: 0.25rem;
     font-family: 'Playfair Display', serif !important;
     font-weight: 700 !important;
     letter-spacing: 0.5px !important;
+    color: #000000 !important;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Desktop: Show full name */
+.logo .full-name {
+    display: inline;
+    white-space: nowrap;
+}
+
+.logo .short-name {
+    display: none;
+    font-size: 1rem;
+}
+
+/* Mobile: Show abbreviated name */
+@media (max-width: 768px) {
+    .logo {
+        padding: 0.2rem 0.5rem;
+        max-width: 150px; /* Limit width on mobile */
+        overflow: hidden;
+    }
+    
+    .logo .full-name {
+        display: none;
+    }
+    
+    .logo .short-name {
+        display: inline;
+        white-space: nowrap;
+        font-size: 0.95rem;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 576px) {
+    .logo {
+        max-width: 120px;
+        padding: 0.15rem 0.4rem;
+    }
+    
+    .logo .short-name {
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .logo {
+        max-width: 100px;
+        font-size: 0.85rem;
+    }
+    
+    .logo .short-name {
+        font-size: 0.85rem;
+    }
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.logo .first-part,
+.logo .last-part {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
     color: #000000 !important;
 }
 
@@ -4809,11 +4946,14 @@ body.dark-theme .header-time:hover {
     <div class="main-header">
         <div class="main-header-container">
             <!-- Logo -->
-            <a href="#home" id="logoLink" class="logo">
-                <span class="first-part">Mudasir Mohammed</span>
-                <span class="name-space"> </span>
-                <span class="last-part">Ibrahim</span>
-            </a>
+<a href="#home" id="logoLink" class="logo">
+    <span class="full-name">
+        <span class="first-part">Mudasir Mohammed</span>
+        <span class="name-space"> </span>
+        <span class="last-part">Ibrahim</span>
+    </span>
+    <span class="short-name">MM Ibrahim</span>
+</a>
             
             <!-- Navigation -->
             <nav class="main-nav">
@@ -6320,27 +6460,35 @@ function TranslationManager() {
 // Initialize translation manager
 const translationManager = TranslationManager();
 
-// Function to properly format the white and bold name
+// Function to properly format the responsive logo name
 function formatLogoName() {
     const logo = document.getElementById('logoLink');
     if (!logo) return;
     
-    // Get the text content
-    const fullName = logo.textContent.trim();
+    // Get the text content from full name span
+    const fullNameSpan = logo.querySelector('.full-name');
+    if (!fullNameSpan) return;
     
-    // Find where the space is
+    const fullName = fullNameSpan.textContent.trim();
     const spaceIndex = fullName.indexOf(' ');
     
     if (spaceIndex > 0) {
         const firstName = fullName.substring(0, spaceIndex);
         const lastName = fullName.substring(spaceIndex + 1);
         
-        // Create colored spans with proper white text
-        logo.innerHTML = `
+        // Format full name
+        fullNameSpan.innerHTML = `
             <span class="first-part">${firstName}</span>
             <span class="name-space"> </span>
             <span class="last-part">${lastName}</span>
         `;
+        
+        // Format short name (initials + last name)
+        const shortNameSpan = logo.querySelector('.short-name');
+        if (shortNameSpan) {
+            const firstInitial = firstName.charAt(0);
+            shortNameSpan.textContent = `${firstInitial} ${lastName}`;
+        }
     }
 }
 
