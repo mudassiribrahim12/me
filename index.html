@@ -4953,7 +4953,7 @@ body.dark-theme .header-time:hover {
     <div class="main-header">
         <div class="main-header-container">
             <!-- Logo -->
-<a href="#" id="logoLink" class="logo">
+<a href="#home" id="logoLink" class="logo">
     <span class="full-name">
         <span class="first-part">Mudasir Mohammed</span>
         <span class="name-space"> </span>
@@ -7503,27 +7503,31 @@ function initCarousel() {
             });
         }
 
-   // Most aggressive solution - completely override the click
+     // Logo click handler for reload WITHOUT scrolling up
 function initLogoClickHandler() {
     const logoLink = document.getElementById('logoLink');
     
     if (!logoLink) return;
     
-    // Completely replace the onclick handler
-    logoLink.onclick = function(e) {
-        if (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-        }
+    logoLink.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default anchor behavior
         
-        // Force reload without any navigation
-        window.location.reload();
-        return false;
-    };
-    
-    // Also remove any href behavior
-    logoLink.href = "javascript:void(0);";
+        // Check if we're already at the homepage (no hash or hash is #home)
+        const currentHash = window.location.hash;
+        const isHomePage = !currentHash || currentHash === '#home' || currentHash === '#';
+        
+        if (isHomePage) {
+            // If already on homepage, just reload without scrolling
+            window.location.reload();
+        } else {
+            // If on another section, navigate to homepage
+            window.location.hash = '';
+            // Small delay before reload to ensure hash is cleared
+            setTimeout(() => {
+                window.location.reload();
+            }, 50);
+        }
+    });
 }
      
         // Minimal Cursor Effect - Subtle and Non-Interfering
