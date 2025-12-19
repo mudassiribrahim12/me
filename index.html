@@ -7503,26 +7503,26 @@ function initCarousel() {
             });
         }
 
-        // Logo click handler for reload
-        function initLogoClickHandler() {
-            const logoLink = document.getElementById('logoLink');
-            
-            if (!logoLink) return;
-            
-            logoLink.addEventListener('click', function(e) {
-                if (window.location.hash) {
-                    // If we're not at the top, scroll to top
-                    if (window.pageYOffset > 100) {
-                        e.preventDefault();
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        }
-
+     // Simple reload without scroll 
+function initLogoClickHandler() {
+    const logoLink = document.getElementById('logoLink');
+    
+    if (!logoLink) return;
+    
+    // Remove any existing click handler first
+    logoLink.onclick = null;
+    
+    // Add new click handler
+    logoLink.addEventListener('click', function(e) {
+        e.preventDefault(); 
+        e.stopPropagation(); 
+        
+        // Just reload the page from current position
+        window.location.reload();
+        return false; 
+    });
+}
+     
         // Minimal Cursor Effect - Subtle and Non-Interfering
         function initMinimalCursorEffect() {
             // Don't run on mobile devices
