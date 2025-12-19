@@ -4953,7 +4953,7 @@ body.dark-theme .header-time:hover {
     <div class="main-header">
         <div class="main-header-container">
             <!-- Logo -->
-<a href="#home" id="logoLink" class="logo">
+<a href="#" id="logoLink" class="logo">
     <span class="full-name">
         <span class="first-part">Mudasir Mohammed</span>
         <span class="name-space"> </span>
@@ -7503,24 +7503,27 @@ function initCarousel() {
             });
         }
 
-     // Simple reload without scroll 
+   // Most aggressive solution - completely override the click
 function initLogoClickHandler() {
     const logoLink = document.getElementById('logoLink');
     
     if (!logoLink) return;
     
-    // Remove any existing click handler first
-    logoLink.onclick = null;
-    
-    // Add new click handler
-    logoLink.addEventListener('click', function(e) {
-        e.preventDefault(); 
-        e.stopPropagation(); 
+    // Completely replace the onclick handler
+    logoLink.onclick = function(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+        }
         
-        // Just reload the page from current position
+        // Force reload without any navigation
         window.location.reload();
-        return false; 
-    });
+        return false;
+    };
+    
+    // Also remove any href behavior
+    logoLink.href = "javascript:void(0);";
 }
      
         // Minimal Cursor Effect - Subtle and Non-Interfering
