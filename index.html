@@ -40,8 +40,19 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Add this to your <head> section -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+      
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+    
     <!-- Google Translate Script -->
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+      
+    </script>
     
     <!-- Structured Data for Google -->
     <script type="application/ld+json">
@@ -124,6 +135,1105 @@
             --transition-slow: 500ms ease;
         }
         
+        :root {
+    /* Add these variables for map styling */
+    --border: #e0e0e0;
+    --bg-primary: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-tertiary: #6b7280;
+    --accent: #1a56db;
+    --accent-light: rgba(26, 86, 219, 0.1);
+}
+
+body.dark-mode {
+    /* Dark mode variables for map */
+    --border: #444444;
+    --bg-primary: #0f172a;
+    --text-primary: #f0f0f0;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --accent: #60a5fa;
+    --accent-light: rgba(96, 165, 250, 0.1);
+}
+        
+    /* Map specific styles */
+#map {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+#mapLoading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    z-index: 2;
+    padding: var(--spacing-xl);
+}
+
+/* Ensure map looks the same in both themes */
+body.dark-mode #map,
+body.dark-mode #mapLoading {
+    background-color: #ffffff !important; /* Always white background */
+}
+
+/* Ensure hover animations work immediately */
+.project-card:hover {
+    animation: float 0.6s ease, glow 1.5s ease-in-out infinite !important;
+    border-color: var(--primary);
+}
+
+.project-card:hover .project-image {
+    animation: pulse 1.5s ease-in-out !important;
+}
+
+.btn:hover {
+    animation: floatSubtle 0.3s ease !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 20px rgba(26, 86, 219, 0.3) !important;
+}
+
+.interest-tag:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+    animation: floatSubtle 0.3s ease !important;
+}
+
+/* ============================================= */
+/* FLOATING BOTTOM NAVIGATION - SCROLL BEHAVIOR */
+/* ============================================= */
+
+/* Bottom Navigation Container */
+.bottom-nav {
+    position: fixed;
+    bottom: -100px; /* Start hidden below screen */
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 0;
+    z-index: 999;
+    transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .bottom-nav {
+    background: rgba(15, 23, 42, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Show bottom nav when scrolled */
+.bottom-nav.show {
+    bottom: 0;
+}
+
+/* Bottom navigation content */
+.bottom-nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.bottom-nav-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.bottom-nav-links::-webkit-scrollbar {
+    display: none;
+}
+
+.bottom-nav-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    min-width: 70px;
+    white-space: nowrap;
+}
+
+body.dark-mode .bottom-nav-links a {
+    color: var(--gray);
+}
+
+.bottom-nav-links a i {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: var(--primary);
+}
+
+.bottom-nav-links a.active {
+    color: var(--primary);
+    background: rgba(26, 86, 219, 0.1);
+}
+
+body.dark-mode .bottom-nav-links a.active {
+    background: rgba(96, 165, 250, 0.15);
+}
+
+.bottom-nav-links a:hover {
+    background: rgba(26, 86, 219, 0.08);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .bottom-nav-links a:hover {
+    background: rgba(96, 165, 250, 0.1);
+}
+
+/* Header fade-out effect */
+header.fade-out {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+/* Header fade-in effect */
+header.fade-in {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+/* Adjust header position to accommodate bottom nav */
+body.has-bottom-nav {
+    padding-bottom: 70px; /* Space for bottom nav when visible */
+}
+
+/* Mobile-specific bottom nav */
+@media (max-width: 768px) {
+    .bottom-nav {
+        padding: 0.5rem 0;
+    }
+    
+    .bottom-nav-links {
+        gap: 0.25rem;
+    }
+    
+    .bottom-nav-links a {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.5rem;
+        min-width: 60px;
+    }
+    
+    .bottom-nav-links a i {
+        font-size: 1rem;
+    }
+    
+    body.has-bottom-nav {
+        padding-bottom: 60px;
+    }
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 769px) {
+    .bottom-nav {
+        display: none; /* Hide on desktop by default */
+    }
+    
+    /* Show bottom nav on desktop only when scrolled down */
+    .bottom-nav.desktop-show {
+        display: block;
+        max-width: 800px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 20px 20px 0 0;
+        bottom: -120px;
+        padding: 0.5rem 1.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: none;
+        box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    body.dark-mode .bottom-nav.desktop-show {
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .bottom-nav.desktop-show.show {
+        bottom: 0;
+    }
+    
+    .bottom-nav-links {
+        justify-content: center;
+        gap: 1.5rem;
+    }
+    
+    .bottom-nav-links a {
+        font-size: 0.85rem;
+        min-width: auto;
+        padding: 0.5rem 1rem;
+    }
+    
+    .bottom-nav-links a i {
+        font-size: 1.2rem;
+    }
+}
+
+/* ============================================= */
+/* LOADING ANIMATIONS */
+/* ============================================= */
+
+.loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(26, 86, 219, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Skeleton loading animation */
+.skeleton {
+    background: linear-gradient(90deg, 
+        var(--gray-light) 25%, 
+        #e0e0e0 50%, 
+        var(--gray-light) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-md);
+}
+
+/* Remove any filter effects on map tiles */
+.leaflet-layer,
+.leaflet-tile {
+    filter: none !important; /* No filters applied */
+}
+
+/* Dark mode should not affect map tiles */
+body.dark-mode .leaflet-layer,
+body.dark-mode .leaflet-tile {
+    filter: none !important; /* Important: No inversion */
+    background-color: #ffffff !important;
+}
+
+/* Map container in dark mode - keep white background */
+body.dark-mode .map-side {
+    background-color: #ffffff !important;
+    border-color: #e0e0e0 !important;
+}
+
+/* Map controls - keep consistent in both themes */
+.map-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ffffff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+}
+
+/* Map controls stay the same in dark mode */
+body.dark-mode .map-controls {
+    background: #ffffff !important;
+    border-color: #e0e0e0 !important;
+}
+
+.map-controls input {
+    border: 1px solid #ddd;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    width: 180px;
+    background-color: #ffffff;
+    color: #000000;
+    outline: none;
+}
+
+body.dark-mode .map-controls input {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ddd !important;
+}
+
+/* Location badge - same in both themes */
+.location-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-width: 250px;
+    border: 1px solid #e0e0e0;
+}
+
+body.dark-mode .location-badge {
+    background: #ffffff !important;
+    border-color: #e0e0e0 !important;
+}
+
+/* Location badge text - always dark for readability */
+.location-badge div:first-child {
+    font-weight: 700;
+    color: #000000 !important; /* Always black for best contrast */
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+}
+
+.location-badge div:last-child {
+    font-size: 0.85rem;
+    color: #333333 !important; /* Always dark gray */
+    line-height: 1.4;
+}
+
+body.dark-mode .location-badge div:first-child,
+body.dark-mode .location-badge div:last-child {
+    color: #000000 !important; /* Always black in dark mode too */
+}
+
+/* Leaflet attribution - keep readable */
+.leaflet-control-attribution {
+    font-size: 0.7rem !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #000000 !important; /* Black text */
+}
+
+body.dark-mode .leaflet-control-attribution {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #000000 !important;
+}
+
+.map-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ffffff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    border: 1px solid var(--border);
+}
+
+.map-controls input {
+    border: 1px solid #ddd;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    width: 180px;
+    background-color: #ffffff;
+    color: #000000;
+    outline: none;
+}
+
+#resetLocation {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 600;
+}
+
+.location-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-width: 250px;
+    border: 1px solid #e0e0e0;
+}
+
+.leaflet-container {
+    font-family: var(--font-body) !important;
+}
+
+.leaflet-popup-content {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.leaflet-control-attribution {
+    font-size: 0.7rem !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* ============================================= */
+/* BEAUTIFUL ANIMATIONS FOR CARDS & SECTIONS */
+/* ============================================= */
+
+/* 1. Floating Animation for Cards */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes floatSubtle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* 2. Gradient Border Animation */
+@keyframes gradientBorder {
+    0% {
+        border-color: var(--primary);
+        box-shadow: 0 0 15px rgba(26, 86, 219, 0.3);
+    }
+    33% {
+        border-color: var(--secondary);
+        box-shadow: 0 0 15px rgba(13, 148, 136, 0.3);
+    }
+    66% {
+        border-color: var(--accent);
+        box-shadow: 0 0 15px rgba(234, 88, 12, 0.3);
+    }
+    100% {
+        border-color: var(--primary);
+        box-shadow: 0 0 15px rgba(26, 86, 219, 0.3);
+    }
+}
+
+/* 3. Glowing Effect */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 5px 15px rgba(26, 86, 219, 0.2);
+    }
+    50% {
+        box-shadow: 0 5px 25px rgba(26, 86, 219, 0.4);
+    }
+}
+
+/* 4. Pulse Animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* 5. Color Wave Animation */
+@keyframes colorWave {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 6. Fade In with Slide Up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 7. Fade In with Slide Left */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 8. Fade In with Slide Right */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 9. Rotating Gradient Text */
+@keyframes rotateGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 10. Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* ============================================= */
+/* ANIMATED PROJECT CARDS */
+/* ============================================= */
+
+.project-card {
+    animation: fadeInUp 0.8s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.project-card:hover {
+    animation: float 0.6s ease, glow 1.5s ease-in-out infinite;
+    border-color: var(--primary);
+    animation-fill-mode: both;
+}
+
+.project-card:hover .project-image {
+    animation: pulse 1.5s ease-in-out;
+}
+
+/* Animated gradient border on hover */
+.project-card:hover {
+    border: 2px solid;
+    animation: gradientBorder 3s infinite linear;
+}
+
+/* Animated tags */
+.tag {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.tag::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.tag:hover::after {
+    left: 100%;
+}
+
+.tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 86, 219, 0.3);
+}
+
+/* ============================================= */
+/* ANIMATED SKILL ITEMS */
+/* ============================================= */
+
+.skill-item {
+    animation: fadeInLeft 0.8s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-item:hover {
+    animation: floatSubtle 0.6s ease;
+    transform: translateY(-5px);
+}
+
+.skill-level {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-level::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+/* ============================================= */
+/* ANIMATED HERO SECTION */
+/* ============================================= */
+
+.hero-badge {
+    animation: fadeInUp 0.8s ease 0.2s forwards;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 3s infinite;
+}
+
+.hero-text h1 {
+    background: linear-gradient(90deg, 
+        var(--primary) 0%, 
+        var(--secondary) 25%, 
+        var(--accent) 50%, 
+        var(--secondary) 75%, 
+        var(--primary) 100%);
+    background-size: 200% auto;
+    animation: rotateGradient 3s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-stats .stat-item {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.hero-stats .stat-item:nth-child(1) { animation-delay: 0.3s; }
+.hero-stats .stat-item:nth-child(2) { animation-delay: 0.5s; }
+.hero-stats .stat-item:nth-child(3) { animation-delay: 0.7s; }
+
+.stat-number {
+    position: relative;
+    display: inline-block;
+}
+
+.stat-number::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    animation: expandWidth 1.5s ease forwards;
+    animation-delay: 1s;
+}
+
+@keyframes expandWidth {
+    to {
+        width: 100%;
+    }
+}
+
+/* ============================================= */
+/* ANIMATED SECTION HEADERS */
+/* ============================================= */
+
+.section-header {
+    position: relative;
+    padding-bottom: var(--spacing-md);
+}
+
+.section-header h2 {
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+    animation: expandWidth 1s ease forwards;
+}
+
+.section-header h2::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(37, 99, 235, 0.1) 50%, 
+        transparent 100%);
+}
+
+/* ============================================= */
+/* ANIMATED BUTTONS */
+/* ============================================= */
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    animation: floatSubtle 0.3s ease;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(26, 86, 219, 0.3);
+}
+
+/* Button with gradient animation */
+.btn-gradient {
+    background: linear-gradient(90deg, 
+        var(--primary) 0%, 
+        var(--secondary) 50%, 
+        var(--primary) 100%);
+    background-size: 200% auto;
+    animation: colorWave 3s ease infinite;
+    border: none;
+}
+
+/* ============================================= */
+/* ANIMATED INTEREST TAGS */
+/* ============================================= */
+
+.interest-tag {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.interest-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.interest-tag:hover::before {
+    left: 100%;
+}
+
+.interest-tag:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(26, 86, 219, 0.2);
+}
+
+/* Stagger animation for interest tags */
+.interest-tag:nth-child(1) { animation-delay: 0.1s; }
+.interest-tag:nth-child(2) { animation-delay: 0.2s; }
+.interest-tag:nth-child(3) { animation-delay: 0.3s; }
+.interest-tag:nth-child(4) { animation-delay: 0.4s; }
+.interest-tag:nth-child(5) { animation-delay: 0.5s; }
+.interest-tag:nth-child(6) { animation-delay: 0.6s; }
+
+/* ============================================= */
+/* ANIMATED TIMELINE */
+/* ============================================= */
+
+.timeline-item {
+    animation: fadeInRight 0.8s ease forwards;
+    opacity: 0;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.3s; }
+.timeline-item:nth-child(3) { animation-delay: 0.5s; }
+.timeline-item:nth-child(4) { animation-delay: 0.7s; }
+.timeline-item:nth-child(5) { animation-delay: 0.9s; }
+
+.timeline-content {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateX(10px);
+    border-color: var(--primary);
+    box-shadow: 0 5px 15px rgba(26, 86, 219, 0.1);
+}
+
+/* ============================================= */
+/* ANIMATED CONTACT FORM */
+/* ============================================= */
+
+.form-group {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+
+.form-control:focus {
+    animation: glow 1.5s ease-in-out infinite;
+    border-color: var(--primary) !important;
+}
+
+/* ============================================= */
+/* ANIMATED SOCIAL ICONS */
+/* ============================================= */
+
+.social-icons a {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:nth-child(1) { animation-delay: 0.1s; }
+.social-icons a:nth-child(2) { animation-delay: 0.2s; }
+.social-icons a:nth-child(3) { animation-delay: 0.3s; }
+.social-icons a:nth-child(4) { animation-delay: 0.4s; }
+
+.social-icons a:hover {
+    animation: floatSubtle 0.6s ease, pulse 1s ease-in-out;
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* ============================================= */
+/* ANIMATED PROFILE IMAGE */
+/* ============================================= */
+
+.profile-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(26, 86, 219, 0.1) 50%, 
+        transparent 100%);
+    z-index: 1;
+    animation: shimmer 3s infinite;
+}
+
+.profile-image img {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.5s ease;
+}
+
+.profile-image:hover img {
+    transform: scale(1.05);
+}
+
+/* ============================================= */
+/* SCROLL ANIMATIONS */
+/* ============================================= */
+
+/* Elements will animate when they come into view */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Left to right animation */
+.animate-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s ease;
+}
+
+.animate-left.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Right to left animation */
+.animate-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s ease;
+}
+
+.animate-right.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Map controls - ensure text is visible */
+.map-controls input {
+    color: #111827 !important; /* Default black */
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+}
+
+body.dark-mode .map-controls input {
+    color: #ffffff !important; /* White in dark mode */
+    background-color: #2a2a2a;
+    border-color: #444444;
+}
+
+/* Map attribution text */
+.leaflet-control-attribution {
+    font-size: 0.7rem !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    color: #111827 !important; /* Black text */
+}
+
+body.dark-mode .leaflet-control-attribution {
+    background: rgba(26, 26, 26, 0.8) !important;
+    color: #ffffff !important; /* White text */
+}
+
+/* Location badge icon color */
+body:not(.dark-mode) .location-badge i {
+    color: #1a56db !important; /* Blue icon in light mode */
+}
+
+body.dark-mode .location-badge i {
+    color: #60a5fa !important; /* Lighter blue in dark mode */
+}
+
+/* Dark mode styles for map */
+body.dark-mode #map,
+body.dark-mode #mapLoading {
+    background-color: #1a1a1a;
+}
+
+
+body.dark-mode .leaflet-control-attribution {
+    background: rgba(26, 26, 26, 0.8) !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .map-controls {
+    background: #1a1a1a;
+    border-color: #444444;
+}
+
+body.dark-mode .map-controls input {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border-color: #444444;
+}
+
+body.dark-mode .location-badge {
+    background: #1a1a1a;
+    border-color: #444444;
+}
+
+body.dark-mode .location-badge div {
+    color: #ffffff !important;
+}
+        
         /* Right-Aligned Navigation Styles */
 .right-nav-wrapper {
     display: flex;
@@ -142,6 +1252,254 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+}
+
+/* ============================================= */
+/* CONTACT FORM LABELS FIX - LIGHT MODE */
+/* ============================================= */
+
+/* Contact Form Labels - Force black in light mode */
+body:not(.dark-mode) .form-group label,
+body:not(.dark-mode) .contact-form label {
+    color: #111827 !important; /* Pure black */
+    font-weight: 600;
+}
+
+body:not(.dark-mode) .contact-form h3 {
+    color: #111827 !important; /* Black heading */
+}
+
+/* Make the form white in light mode */
+body:not(.dark-mode) .contact-form {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    color: #111827 !important;
+}
+
+/* Form inputs in light mode */
+body:not(.dark-mode) .form-control {
+    background: #ffffff !important;
+    border: 2px solid #d1d5db !important;
+    color: #111827 !important;
+}
+
+body:not(.dark-mode) .form-control::placeholder {
+    color: #6b7280 !important;
+}
+
+.integrated-contact-container {
+    max-width: 1200px;
+    margin: 0 auto var(--spacing-lg);
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* ============================================= */
+/* PRIVACY STATEMENT - ALWAYS WHITE TEXT */
+/* ============================================= */
+
+/* Force white text in privacy statement for both themes */
+.privacy-statement h3,
+.privacy-statement p,
+.privacy-statement span,
+.privacy-statement div,
+.privacy-statement i {
+    color: white !important;
+}
+
+/* Privacy statement container */
+.privacy-statement > div {
+    background: linear-gradient(135deg, #1a56db, #1e40af) !important;
+    border: 2px solid #1a56db !important;
+    box-shadow: 0 8px 25px rgba(26, 95, 180, 0.3) !important;
+}
+
+/* Dark mode - make background slightly different if needed */
+body.dark-mode .privacy-statement > div {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    border-color: #3b82f6 !important;
+}
+
+/* Ensure text remains white in all cases */
+.privacy-statement * {
+    color: white !important;
+}
+
+/* ============================================= */
+/* CONTACT FORM LABELS - BLACK IN LIGHT MODE */
+/* ============================================= */
+
+/* Contact Form Labels - Black in light mode only */
+body:not(.dark-mode) .form-group label,
+body:not(.dark-mode) .contact-form label,
+body:not(.dark-mode) .contact-detail-label,
+body:not(.dark-mode) .contact-value {
+    color: #111827 !important; /* Pure black in light mode */
+}
+
+body:not(.dark-mode) .contact-form h3 {
+    color: #111827 !important; /* Black heading */
+}
+
+body:not(.dark-mode) .contact-detail-item .contact-label {
+    color: #374151 !important; /* Dark gray */
+}
+
+/* Form inputs in light mode */
+body:not(.dark-mode) .form-control {
+    background: #ffffff !important;
+    border: 2px solid #d1d5db !important;
+    color: #111827 !important;
+}
+
+body:not(.dark-mode) .form-control::placeholder {
+    color: #6b7280 !important;
+}
+
+/* Form container in light mode */
+body:not(.dark-mode) .contact-form {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+/* Contact section headings in light mode */
+body:not(.dark-mode) .contact h2,
+body:not(.dark-mode) .contact .section-subtitle {
+    color: white !important; /* Keep these white as per contact section design */
+}
+
+/* Location badge text - dark in light mode */
+body:not(.dark-mode) .location-badge div:first-child {
+    color: #111827 !important; /* Black in light mode */
+    font-weight: 700;
+}
+
+body:not(.dark-mode) .location-badge div:last-child {
+    color: #374151 !important; /* Dark gray in light mode */
+}
+
+/* Map controls text in light mode */
+body:not(.dark-mode) .map-controls input {
+    color: #111827 !important; /* Black text */
+}
+
+/* Leaflet attribution in light mode */
+body:not(.dark-mode) .leaflet-control-attribution {
+    color: #111827 !important; /* Black text */
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Privacy Statement Styles */
+.privacy-statement {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.privacy-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+    background-color: rgba(26, 86, 219, 0.1); /* Light blue background */
+    border-radius: 12px;
+    border: 2px solid #1a56db; /* Blue border */
+    box-shadow: 0 8px 25px rgba(26, 95, 180, 0.15);
+}
+
+body.dark-mode .privacy-content {
+    background-color: rgba(96, 165, 250, 0.1); /* Lighter blue in dark mode */
+    border-color: #60a5fa;
+}
+
+.privacy-icon {
+    color: #1a56db !important; /* Blue icon in light mode */
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+    display: block;
+}
+
+body.dark-mode .privacy-icon {
+    color: #60a5fa !important; /* Lighter blue in dark mode */
+}
+
+.privacy-title {
+    color: #111827 !important; /* Black in light mode */
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+body.dark-mode .privacy-title {
+    color: #ffffff !important; /* White in dark mode */
+}
+
+.privacy-text {
+    font-size: 1.1rem;
+    color: #374151 !important; /* Dark gray in light mode */
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+    font-weight: 500;
+}
+
+body.dark-mode .privacy-text {
+    color: #d1d5db !important; /* Light gray in dark mode */
+}
+
+.privacy-note {
+    font-size: 1rem;
+    color: #6b7280 !important; /* Medium gray in light mode */
+    font-style: italic;
+    font-weight: 500;
+}
+
+body.dark-mode .privacy-note {
+    color: #9ca3af !important; /* Lighter gray in dark mode */
+}
+
+.privacy-note i {
+    margin-right: 5px;
+    color: #1a56db !important; /* Blue in light mode */
+}
+
+body.dark-mode .privacy-note i {
+    color: #60a5fa !important; /* Lighter blue in dark mode */
+}
+
+/* Fix the contact section heading */
+body:not(.dark-mode) .contact h2,
+body:not(.dark-mode) .contact .section-subtitle {
+    color: #111827 !important; /* Black text */
+}
+
+/* Fix the integrated contact container background */
+body:not(.dark-mode) .integrated-contact-container {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+}
+
+/* Fix the contact details row */
+body:not(.dark-mode) .contact-details-row {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+}
+
+/* Fix the contact form side */
+body:not(.dark-mode) .contact-form-side {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+}
+
+body:not(.dark-mode) .contact-form-side h3 {
+    color: #111827 !important; /* Black heading */
+}
+
+/* Fix the map side */
+body:not(.dark-mode) .map-side {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
 }
 
 /* Keep the header controls in line with nav */
@@ -1480,10 +2838,30 @@ body.dark-mode .hero {
             color: var(--primary);
         }
         
-  /* Contact Section - Fixed Dark Mode */
-.contact {
-    background: var(--dark);
-    color: #FFFFFF; /* SOLID WHITE text */
+/* Contact Form - Adjust for light mode visibility */
+body:not(.dark-mode) .contact-form {
+    background: #1a1a2e !important; /* Dark background in light mode too */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+body:not(.dark-mode) .contact-form label,
+body:not(.dark-mode) .contact-form h3,
+body:not(.dark-mode) .contact-form .form-group label {
+    color: #FFFFFF !important; /* White text in light mode too */
+}
+
+/* Form inputs - ensure they're visible in dark form */
+body:not(.dark-mode) .contact-form .form-control,
+body.dark-mode .contact-form .form-control {
+    background: #0f0f1a !important;
+    border: 2px solid rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
+}
+
+body:not(.dark-mode) .contact-form .form-control::placeholder,
+body.dark-mode .contact-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
 body.dark-mode .contact {
@@ -1523,6 +2901,126 @@ body.dark-mode .contact .section-subtitle {
             gap: var(--spacing-xl);
         }
         
+        /* Contact Form - Light Mode Text Fix */
+body:not(.dark-mode) .contact-form label,
+body:not(.dark-mode) .contact-form .form-group label {
+    color: #111827 !important; /* Pure black in light mode */
+    font-weight: 600;
+}
+
+body:not(.dark-mode) .contact-form .form-control,
+body:not(.dark-mode) .contact-form input,
+body:not(.dark-mode) .contact-form textarea {
+    color: #111827 !important; /* Black text */
+    background-color: #ffffff !important; /* White background */
+    border: 2px solid #d1d5db !important; /* Light gray border */
+}
+
+body:not(.dark-mode) .contact-form .form-control::placeholder {
+    color: #6b7280 !important; /* Medium gray placeholder */
+}
+
+/* Location Badge - Light Mode */
+body:not(.dark-mode) .location-badge div {
+    color: #111827 !important; /* Black text */
+}
+
+body:not(.dark-mode) .location-badge div:first-child {
+    color: #111827 !important; /* Black for "Tamale Metropolis" */
+}
+
+body:not(.dark-mode) .location-badge div:last-child {
+    color: #374151 !important; /* Dark gray for "Northern Region, Ghana" */
+}
+
+/* Leaflet Attribution - Light Mode */
+body:not(.dark-mode) .leaflet-control-attribution {
+    color: #111827 !important; /* Black text */
+    background: rgba(255, 255, 255, 0.8) !important; /* White background */
+}
+
+/* Contact form specific - ensure light mode has black text */
+.contact-form .form-group label {
+    color: #111827; /* Default to black */
+    font-weight: 600;
+}
+
+body.dark-mode .contact-form .form-group label {
+    color: #ffffff !important; /* White in dark mode */
+}
+
+/* Location badge text colors */
+.location-badge div:first-child {
+    font-weight: 700;
+    color: #111827; /* Black in light mode */
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+}
+
+.location-badge div:last-child {
+    font-size: 0.85rem;
+    color: #374151; /* Dark gray in light mode */
+    line-height: 1.4;
+}
+
+body.dark-mode .location-badge div:first-child {
+    color: #ffffff !important; /* White in dark mode */
+}
+
+body.dark-mode .location-badge div:last-child {
+    color: #d1d5db !important; /* Light gray in dark mode */
+}
+
+/* Privacy statement text */
+.privacy-statement h3 {
+    color: #111827; /* Black in light mode */
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+}
+
+.privacy-statement p {
+    font-size: 1.1rem;
+    color: #374151; /* Dark gray in light mode */
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+    font-weight: 500;
+}
+
+.privacy-statement p:last-child {
+    font-size: 1rem;
+    color: #6b7280; /* Medium gray in light mode */
+    font-style: italic;
+    font-weight: 500;
+}
+
+body.dark-mode .privacy-statement h3 {
+    color: #ffffff !important; /* White in dark mode */
+}
+
+body.dark-mode .privacy-statement p {
+    color: #d1d5db !important; /* Light gray in dark mode */
+}
+
+body.dark-mode .privacy-statement p:last-child {
+    color: #9ca3af !important; /* Medium gray in dark mode */
+}
+
+/* Map Controls - Light Mode */
+body:not(.dark-mode) .map-controls input {
+    color: #111827 !important; /* Black text */
+    background-color: #ffffff !important; /* White background */
+    border: 1px solid #d1d5db !important; /* Light gray border */
+}
+
+/* Privacy Statement - Light Mode */
+body:not(.dark-mode) .privacy-statement h3 {
+    color: #111827 !important; /* Black heading */
+}
+
+body:not(.dark-mode) .privacy-statement p {
+    color: #374151 !important; /* Dark gray text */
+}
+        
 /* Contact Form - Always Dark Theme */
 .contact-form {
     background: #1a1a2e; /* Dark blue-black background */
@@ -1551,18 +3049,34 @@ body:not(.dark-mode) .contact-form {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Added shadow for better readability */
 }
 
+/* Form controls - light mode */
 .form-control {
     width: 100%;
     padding: 0.875rem 1rem;
-    background: #0f0f1a; /* Darker background for input fields */
-    border: 2px solid rgba(255, 255, 255, 0.15); /* Thicker, more visible border */
+    background: #ffffff !important; /* White background */
+    border: 2px solid #d1d5db !important; /* Light gray border */
     border-radius: var(--radius-md);
-    color: #ffffff !important; /* Pure white text */
+    color: #111827 !important; /* Black text */
     font-family: var(--font-body);
     transition: all var(--transition-fast);
-    font-size: 1rem; /* Slightly larger font */
+    font-size: 1rem;
     font-weight: 400;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+}
+
+/* Override the dark form styling */
+body:not(.dark-mode) .contact-form {
+    background: #ffffff !important; /* White background */
+    border: 1px solid #e5e7eb !important; /* Light border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+}
+
+body:not(.dark-mode) .contact-form .form-group label {
+    color: #111827 !important; /* Black labels */
+}
+
+body:not(.dark-mode) .contact-form h3 {
+    color: #111827 !important; /* Black heading */
 }
 
 /* Remove dark mode overrides - form is always dark */
@@ -2560,6 +4074,56 @@ body.dark-mode .blog-post-title {
     
         </div>
     </header>
+    
+    <!-- Floating Bottom Navigation -->
+<nav class="bottom-nav" id="bottomNav">
+    <div class="bottom-nav-container">
+        <ul class="bottom-nav-links">
+            <li>
+                <a href="#home" class="active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#projects">
+                    <i class="fas fa-code"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="#blog">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="#about">
+                    <i class="fas fa-user"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="#education">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Education</span>
+                </a>
+            </li>
+            <li>
+                <a href="#publications">
+                    <i class="fas fa-book"></i>
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <!-- Floating Google Translate (Globe Icon) -->
 <div class="floating-translate-globe">
@@ -2584,9 +4148,7 @@ body.dark-mode .blog-post-title {
                     <h1>Transforming Healthcare with Data & Innovation</h1>
                     
                     <p class="mb-lg">
-                        Hi! I'm Mudasir Mohammed Ibrahim (other name: Mohammed Mudasir Ibrahim), a healthcare professional and data enthusiast. In my free time, 
-                        I develop accessible R Shiny web applications to make complex analyses easier and more intuitive 
-                        for healthcare professionals, students, and researchers. You can find all of them here.
+                        Hi! I’m Mudasir Mohammed Ibrahim (also known as Mohammed Mudasir Ibrahim), a healthcare professional and data enthusiast. In my free time, I build accessible R Shiny web applications that make complex data analysis simpler and more intuitive for healthcare professionals, students, and researchers. You can explore all of my applications here.
                     </p>
                     
                     <div class="mb-lg">
@@ -2968,121 +4530,199 @@ body.dark-mode .blog-post-title {
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Contact</h2>
-                <p class="section-subtitle">
-                    I'm always open to new opportunities, collaborations, and discussions around healthcare research and data analytics projects.
-                </p>
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-header">
+            <h2>Contact</h2>
+            <p class="section-subtitle" style="color: var(--text-primary); max-width: 800px; margin: 0 auto 2rem;">
+                I'm always open to new opportunities, collaborations, and discussions around healthcare research and data analytics projects.
+                If you've encountered any issues with my projects, have suggestions, or would like to collaborate, please use the form below to get in touch!
+            </p>
+        </div>
+        
+        <!-- Integrated Form & Map Container -->
+<div class="integrated-contact-container">
+            
+            <!-- Top Row: Contact Details -->
+            <div class="contact-details-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md); padding: var(--spacing-lg); border-bottom: 2px solid var(--border); background-color: var(--bg-primary);">
+                <div class="contact-detail-item" style="display: flex; align-items: center; gap: var(--spacing-sm); padding: 0.75rem; border-radius: 8px; background-color: var(--accent-light);">
+                    <div class="contact-icon" style="width: 44px; height: 44px; background-color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-envelope" style="color: white; font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <div class="contact-label" style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: 0.25rem;">Email</div>
+                        <a href="mailto:contact@mudasiribrahim.com" class="contact-value" style="color: var(--text-primary); font-weight: 600; text-decoration: none; transition: var(--transition);">
+                            contact@mudasiribrahim.com
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-detail-item" style="display: flex; align-items: center; gap: var(--spacing-sm); padding: 0.75rem; border-radius: 8px; background-color: var(--accent-light);">
+                    <div class="contact-icon" style="width: 44px; height: 44px; background-color: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fab fa-whatsapp" style="color: white; font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <div class="contact-label" style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: 0.25rem;">WhatsApp</div>
+                        <a href="https://wa.me/233549343058" target="_blank" class="contact-value" style="color: var(--text-primary); font-weight: 600; text-decoration: none; transition: var(--transition);">
+                            +233 549 343 058
+                        </a>
+                    </div>
+                </div>
             </div>
             
-            <div class="contact-content">
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" class="form-control" placeholder="Your name" required>
+            <!-- Main Content: Form + Map Side by Side -->
+            <div class="contact-main-content" style="display: grid; grid-template-columns: 1fr 1fr; min-height: 500px;">
+                
+                <!-- Left Side: Contact Form -->
+                <div class="contact-form-side" style="padding: var(--spacing-xl); background-color: var(--bg-primary); border-right: 2px solid var(--border);">
+                    <h3 style="margin-bottom: var(--spacing-lg); color: var(--text-primary); font-size: 1.75rem; font-weight: 700;">
+                        <i class="fas fa-paper-plane" style="color: var(--accent); margin-right: 0.5rem;"></i>
+                        Send me a message
+                    </h3>
+      <form id="contactForm" action="https://formspree.io/f/xanrpwae" method="POST">
+    <!-- Honeypot field for spam protection -->
+    <input type="hidden" name="_gotcha" style="display:none">
+    
+    <!-- Hidden subject field -->
+    <input type="hidden" name="_subject" value="New Message from Website Contact Form">
+    
+    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg);">
+        <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="name" style="display: block; margin-bottom: 0.75rem; font-weight: 600; color: var(--text-primary); font-size: 1rem;">
+                Full Name *
+            </label>
+            <input type="text" id="name" name="name" required 
+                   style="width: 100%; padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 10px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem;"
+                   placeholder="Your name">
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="email" style="display: block; margin-bottom: 0.75rem; font-weight: 600; color: var(--text-primary); font-size: 1rem;">
+                Email Address *
+            </label>
+            <input type="email" id="email" name="email" required 
+                   style="width: 100%; padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 10px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem;"
+                   placeholder="your.email@example.com">
+        </div>
+    </div>
+    
+    <div class="form-group" style="margin-bottom: 1rem;">
+        <label for="subject" style="display: block; margin-bottom: 0.75rem; font-weight: 600; color: var(--text-primary); font-size: 1rem;">
+            Subject
+        </label>
+        <input type="text" id="subject" name="_subject_secondary" 
+               style="width: 100%; padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 10px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem;"
+               placeholder="What is this regarding?">
+    </div>
+    
+    <div class="form-group" style="margin-bottom: 1rem;">
+        <label for="message" style="display: block; margin-bottom: 0.75rem; font-weight: 600; color: var(--text-primary); font-size: 1rem;">
+            Message *
+        </label>
+        <textarea id="message" name="message" rows="6" required 
+                  style="width: 100%; padding: 1rem 1.25rem; border: 2px solid var(--border); border-radius: 10px; background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; min-height: 150px;"
+                  placeholder="Please describe your reason for contacting..."></textarea>
+    </div>
+    
+    <!-- Success/Error messages -->
+    <div id="formspree-message" style="display: none; padding: 1rem; margin: 1rem 0; border-radius: 10px;"></div>
+    
+    <button type="submit" class="btn" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+        <i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i> Send Message
+    </button>
+</form>
+      
+                </div>
+                
+                <!-- Right Side: Interactive OpenStreetMap with Leaflet.js - WHITE BACKGROUND -->
+                <div class="map-side" style="position: relative; background-color: #ffffff; border-left: 2px solid var(--border);">
+                    <!-- Map Loading State -->
+                    <div id="mapLoading" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #ffffff; z-index: 1; padding: var(--spacing-xl);">
+                        <i class="fas fa-map-marker-alt" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--text-primary); margin-bottom: var(--spacing-sm);">Loading interactive map...</h3>
+                        <p style="color: var(--text-secondary); text-align: center; max-width: 300px;">
+                            Based in Tamale, Ghana. You can explore the map to see my location.
+                        </p>
+                    </div>
+                    
+                    <!-- Map container - Ensured white background -->
+                    <div id="map" style="width: 100%; height: 100%; position: relative; background-color: #ffffff;"></div>
+                    
+                    <!-- Map Controls - With white background -->
+                    <div class="map-controls" style="position: absolute; top: 20px; right: 20px; background: #ffffff; padding: 0.5rem 0.75rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); z-index: 1000; display: flex; gap: 0.75rem; align-items: center; border: 1px solid var(--border);">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-search" style="color: var(--accent); font-size: 0.9rem;"></i>
+                            <input type="text" id="mapSearch" placeholder="Search on map..." 
+                                   style="border: 1px solid #ddd; padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.9rem; width: 180px; background-color: #ffffff; color: #000000; outline: none;">
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" class="form-control" placeholder="your.email@example.com" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" class="form-control" placeholder="What is this regarding?">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" class="form-control" rows="5" placeholder="Please describe your reason for contacting, collaboration idea, or project details..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn">
-                            <i class="fas fa-paper-plane"></i> Send Message
+                        <button id="resetLocation" class="btn" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.25rem; font-weight: 600;">
+                            <i class="fas fa-home"></i>
                         </button>
-                    </form>
-                </div>
-                
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>contact@mudasiribrahim.com</p>
-                        </div>
                     </div>
                     
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                        <div>
-                            <h4>WhatsApp</h4>
-                            <p><a href="https://wa.me/233549343058" target="_blank" style="color: var(--white);">+233 549 343 058</a></p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h4>Location</h4>
-                            <p>Tamale Metropolis, Northern Region, Ghana</p>
+                    <!-- Location Badge - White background -->
+                    <div class="location-badge" style="position: absolute; bottom: 20px; left: 20px; background: #ffffff; padding: 0.75rem 1rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); z-index: 1000; max-width: 250px; border: 1px solid #e0e0e0;">
+                        <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <i class="fas fa-map-pin" style="color: #1a5fb4 !important; font-size: 1.1rem; margin-top: 0.125rem;"></i>
+                            <div>
+                                <div style="font-weight: 700; color: #000000 !important; margin-bottom: 0.25rem; font-size: 0.95rem;">Tamale Metropolis</div>
+                                <div style="font-size: 0.85rem; color: #333333 !important; line-height: 1.4;">Northern Region, Ghana</div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div>
-                            <h4>Response Time</h4>
-                            <p>Within 24 hours</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- YouTube Section -->
-            <div class="youtube-section">
-                <div class="section-header">
-                    <h3>Watch My Video on YouTube</h3>
-                </div>
-                
-                <div class="youtube-wrapper">
-                    <iframe 
-                        width="100%" 
-                        height="400" 
-                        src="https://www.youtube.com/embed/dJbeWr5AyKg?si=CNDbjl1hZKX3m1Rk" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                
-                <div class="text-center mt-md">
-<a href="https://www.youtube.com/@mudasirmohammedibrahim1026/videos" target="_blank" class="btn">
-    <i class="fab fa-youtube"></i> Visit my YouTube channel for more tutorials
-</a>
                 </div>
             </div>
         </div>
-    </section>
+        
+ <!-- Privacy and Confidentiality Statement -->
+<div class="privacy-statement" style="text-align: center; margin-top: var(--spacing-xl); margin-bottom: var(--spacing-lg);">
+    <div style="max-width: 800px; margin: 0 auto; padding: var(--spacing-lg); background: linear-gradient(135deg, #1a56db, #1e40af); border-radius: 12px; border: 2px solid #1a56db; box-shadow: 0 8px 25px rgba(26, 95, 180, 0.3);">
+        <i class="fas fa-shield-alt" style="color: white; font-size: 2.5rem; margin-bottom: var(--spacing-sm); display: block;"></i>
+        <h3 style="color: white !important; margin-bottom: var(--spacing-sm); font-weight: 700;">Privacy & Confidentiality</h3>
+        <p style="font-size: 1.1rem; color: white !important; line-height: 1.7; margin-bottom: var(--spacing-md); font-weight: 500;">
+            All information shared through this contact form will be kept strictly confidential. Your personal details will not be shared with third parties without your explicit consent. I respect your privacy and adhere to professional ethical standards in handling all communications.
+        </p>
+        <p style="font-size: 1rem; color: rgba(255, 255, 255, 0.9) !important; font-style: italic; font-weight: 500;">
+            <i class="fas fa-lock" style="margin-right: 5px; color: white;"></i>
+            Your privacy is protected. For formal research collaborations, additional confidentiality agreements can be discussed.
+        </p>
+    </div>
+</div>    
+        <!-- YouTube Section -->
+        <div class="simple-youtube" style="margin-top: var(--spacing-xl); background-color: var(--bg-primary); border-radius: 12px; padding: var(--spacing-lg); border: 2px solid var(--border); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);">
+            <h3 class="text-center mb-md" style="color: var(--text-primary); font-size: 1.75rem; font-weight: 700;">
+                <i class="fab fa-youtube" style="color: #ff0000; margin-right: 0.5rem;"></i>
+                Watch My Video on YouTube
+            </h3>
+            <div class="youtube-wrapper" style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                <!-- YouTube embed with proper parameters -->
+                <iframe 
+                    width="100%" 
+                    height="400" 
+                    src="https://www.youtube.com/embed/dJbeWr5AyKg?si=CNDbjl1hZKX3m1Rk" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    style="display: block;">
+                </iframe>
+            </div>
+            <div class="text-center mt-lg">
+                <a href="https://www.youtube.com/@mudasirmohammedibrahim1026/videos" target="_blank" class="btn" style="padding: 1rem 2rem; font-size: 1.1rem; background: linear-gradient(135deg, #ff0000, #cc0000); color: white; border: none; border-radius: 10px; font-weight: 700; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); transition: all 0.3s ease;">
+                    <i class="fab fa-youtube" style="margin-right: 0.5rem;"></i> Visit my YouTube channel for more tutorials
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div>
-                    <div class="footer-logo">Mudasir Mohammed<span>Ibrahim</span></div>
+                    <div class="footer-logo">Mudasir M.<span> Ibrahim</span></div>
                     <p>
                         Healthcare professional dedicated to creating intuitive R Shiny tools to simplify complex public health data analysis.
                     </p>
@@ -3166,6 +4806,171 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         navLinks.classList.remove('active');
         navOverlay.classList.remove('active');
         mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    });
+});
+
+// =============================================
+// INTERACTIVE MAP - LEAFLET.JS IMPLEMENTATION
+// =============================================
+
+let map = null;
+let marker = null;
+let searchControl = null;
+
+// Initialize the map
+function initMap() {
+    // Remove loading state
+    const mapLoading = document.getElementById('mapLoading');
+    if (mapLoading) {
+        mapLoading.style.display = 'none';
+    }
+    
+    // Create map with higher zoom for clearer view
+    map = L.map('map', {
+        center: [9.4075, -0.8393], // Tamale, Ghana coordinates
+        zoom: 14,
+        zoomControl: false, // We'll add custom controls
+        attributionControl: false // We'll add custom attribution
+    });
+    
+    // Add OpenStreetMap tile layer with clearer tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+        tileSize: 256,
+        zoomOffset: 0
+    }).addTo(map);
+    
+    // Add custom attribution
+    L.control.attribution({
+        position: 'bottomright',
+        prefix: '<a href="https://leafletjs.com/" target="_blank">Leaflet</a>'
+    }).addTo(map);
+    
+    // Add marker for Tamale Metropolis
+    marker = L.marker([9.4075, -0.8393]).addTo(map)
+        .bindPopup('<b>Tamale Metropolis</b><br>Northern Region, Ghana')
+        .openPopup();
+    
+    // Add custom zoom controls
+    L.control.zoom({
+        position: 'topright'
+    }).addTo(map);
+    
+    // Add scale control
+    L.control.scale({
+        position: 'bottomleft',
+        imperial: false // Use metric only
+    }).addTo(map);
+    
+    // Initialize map search functionality
+    initMapSearch();
+    
+    // Add reset location button functionality
+    document.getElementById('resetLocation').addEventListener('click', function() {
+        map.setView([9.4075, -0.8393], 14);
+        marker.openPopup();
+    });
+    
+    // Add search functionality
+    const mapSearchInput = document.getElementById('mapSearch');
+    mapSearchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchLocation(this.value);
+        }
+    });
+    
+    // Ensure map renders properly
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 100);
+}
+
+// Search for location on map
+function searchLocation(query) {
+    if (!query.trim()) return;
+    
+    // Using OpenStreetMap Nominatim API for geocoding
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                const result = data[0];
+                const lat = parseFloat(result.lat);
+                const lon = parseFloat(result.lon);
+                
+                // Clear previous markers
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                
+                // Add new marker at searched location
+                marker = L.marker([lat, lon]).addTo(map)
+                    .bindPopup(`<b>${result.display_name}</b>`)
+                    .openPopup();
+                
+                // Center map on location
+                map.setView([lat, lon], 14);
+            } else {
+                alert('Location not found. Please try a different search term.');
+            }
+        })
+        .catch(error => {
+            console.error('Search error:', error);
+            alert('Unable to search location. Please check your connection.');
+        });
+}
+
+// Initialize map search
+function initMapSearch() {
+    // Simple search control
+    const searchControl = L.Control.extend({
+        options: {
+            position: 'topright'
+        },
+        
+        onAdd: function(map) {
+            const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+            container.style.backgroundColor = 'white';
+            container.style.padding = '5px';
+            container.style.borderRadius = '5px';
+            
+            const input = L.DomUtil.create('input', 'map-search-input', container);
+            input.type = 'text';
+            input.placeholder = 'Search location...';
+            input.style.width = '200px';
+            input.style.padding = '5px';
+            
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchLocation(this.value);
+                }
+            });
+            
+            L.DomEvent.disableClickPropagation(container);
+            return container;
+        }
+    });
+    
+    map.addControl(new searchControl());
+}
+
+// Initialize map when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize map with a slight delay to ensure container is ready
+    setTimeout(() => {
+        if (document.getElementById('map')) {
+            initMap();
+        }
+    }, 500);
+    
+    // Re-initialize map on window resize
+    window.addEventListener('resize', function() {
+        if (map) {
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+        }
     });
 });
     
@@ -3348,6 +5153,203 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
     });
 });
+
+// =============================================
+// SCROLL-BASED HEADER & BOTTOM NAV BEHAVIOR
+// =============================================
+
+let lastScrollTop = 0;
+const header = document.querySelector('header');
+const bottomNav = document.getElementById('bottomNav');
+const isDesktop = window.innerWidth >= 769;
+
+// Initialize scroll behavior
+function initScrollNavigation() {
+    // Add desktop class if needed
+    if (isDesktop) {
+        bottomNav.classList.add('desktop-show');
+    }
+    
+    // Initial check
+    handleScroll();
+    
+   // =============================================
+// ENHANCED SCROLL EVENT HANDLER (COMBINED)
+// =============================================
+
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            // Existing scroll functionality
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                if (document.body.classList.contains('dark-mode')) {
+                    header.style.background = 'rgba(17, 24, 39, 0.98)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                }
+            } else {
+                header.style.boxShadow = 'none';
+                if (document.body.classList.contains('dark-mode')) {
+                    header.style.background = 'rgba(17, 24, 39, 0.95)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            }
+            
+            // Back to top button
+            const backToTopBtn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+            
+            // NEW: Handle bottom nav and header fade
+            handleScroll();
+            
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
+   
+    // Update on resize
+    window.addEventListener('resize', () => {
+        const newIsDesktop = window.innerWidth >= 769;
+        if (newIsDesktop !== isDesktop) {
+            location.reload(); // Simple reload for demo
+        }
+    });
+}
+
+// Handle scroll behavior
+function handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollThreshold = 200; // When to start hiding header
+    const scrollDelta = 10; // Minimum scroll delta for changes
+    
+    // Show/hide bottom nav based on scroll direction
+    if (scrollTop > scrollThreshold) {
+        // Show bottom nav when scrolled down
+        bottomNav.classList.add('show');
+        document.body.classList.add('has-bottom-nav');
+        
+        // Hide header when scrolling down
+        if (scrollTop > lastScrollTop + scrollDelta && scrollTop > 300) {
+            header.classList.add('fade-out');
+            header.classList.remove('fade-in');
+        } 
+        // Show header when scrolling up
+        else if (lastScrollTop > scrollTop + scrollDelta) {
+            header.classList.remove('fade-out');
+            header.classList.add('fade-in');
+        }
+    } else {
+        // Hide bottom nav when at top
+        bottomNav.classList.remove('show');
+        document.body.classList.remove('has-bottom-nav');
+        
+        // Always show header at top
+        header.classList.remove('fade-out');
+        header.classList.add('fade-in');
+    }
+    
+    lastScrollTop = scrollTop;
+    
+    // Update active nav based on scroll position
+    updateActiveNav();
+}
+
+// Update active nav item in bottom nav
+function updateActiveNav() {
+    const sections = document.querySelectorAll('section');
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
+    
+    let current = '';
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    bottomNavLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href').substring(1);
+        if (href === current) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Also update main nav for consistency
+    const mainNavLinks = document.querySelectorAll('.nav-links a');
+    mainNavLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href').substring(1);
+        if (href === current) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Initialize bottom nav click handlers
+function initBottomNav() {
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
+    
+    bottomNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Update active state
+                bottomNavLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Smooth scroll to target with header offset
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // On mobile, hide bottom nav after clicking
+                if (window.innerWidth < 769) {
+                    setTimeout(() => {
+                        if (window.scrollY > 200) {
+                            bottomNav.classList.add('show');
+                        } else {
+                            bottomNav.classList.remove('show');
+                        }
+                    }, 500);
+                }
+            }
+        });
+    });
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initScrollNavigation();
+    initBottomNav();
+    
+    // Force initial check
+    setTimeout(() => {
+        handleScroll();
+    }, 100);
+});
         
         // Theme Toggle Slider
         const themeToggle = document.getElementById('themeToggle');
@@ -3415,10 +5417,151 @@ document.querySelectorAll('.nav-links a').forEach(link => {
             });
         }
         
+// =============================================
+// ENHANCED SCROLL ANIMATION FUNCTIONALITY
+// =============================================
+
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                // Trigger the defined CSS animations
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    animatedElements.forEach(el => observer.observe(el));
+}
+
+// Function to add animation classes to elements
+function addAnimationClasses() {
+    // Project cards
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+        card.classList.add('animate-on-scroll');
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    // Skill items
+    const skillItems = document.querySelectorAll('.skill-item');
+    skillItems.forEach((skill, index) => {
+        skill.classList.add('animate-on-scroll');
+        skill.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    // Hero stats
+    const statItems = document.querySelectorAll('.stat-item');
+    statItems.forEach((stat, index) => {
+        stat.classList.add('animate-on-scroll');
+        stat.style.animationDelay = `${0.3 + (index * 0.2)}s`;
+        stat.style.opacity = '0'; // Start invisible
+    });
+    
+    // Timeline items
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+        item.classList.add('animate-on-scroll');
+        item.style.animationDelay = `${0.1 + (index * 0.2)}s`;
+        item.style.opacity = '0';
+    });
+    
+    // Interest tags
+    const interestTags = document.querySelectorAll('.interest-tag');
+    interestTags.forEach((tag, index) => {
+        tag.classList.add('animate-on-scroll');
+        tag.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+        tag.style.opacity = '0';
+    });
+    
+    // Form groups
+    const formGroups = document.querySelectorAll('.form-group');
+    formGroups.forEach((group, index) => {
+        group.classList.add('animate-on-scroll');
+        group.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+        group.style.opacity = '0';
+    });
+    
+    // Social icons
+    const socialIcons = document.querySelectorAll('.social-icons a');
+    socialIcons.forEach((icon, index) => {
+        icon.classList.add('animate-on-scroll');
+        icon.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+        icon.style.opacity = '0';
+    });
+}
+
+// Initialize animations when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Add animation classes first
+    addAnimationClasses();
+    
+    // Then initialize scroll animations
+    initScrollAnimations();
+    
+    // Force initial animation for elements already in view
+    setTimeout(() => {
+        const elementsInView = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right');
+        elementsInView.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const isInView = (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+            
+            if (isInView) {
+                el.classList.add('animated');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+    }, 500);
+    
+    // Animate hero badge immediately
+    const heroBadge = document.querySelector('.hero-badge');
+    if (heroBadge) {
+        heroBadge.style.animation = 'fadeInUp 0.8s ease 0.2s forwards';
+    }
+    
+    // Animate hero text
+    const heroText = document.querySelector('.hero-text');
+    if (heroText) {
+        heroText.style.animation = 'fadeInUp 0.8s ease';
+    }
+    
+    // Animate hero image
+    const heroImage = document.querySelector('.hero-image');
+    if (heroImage) {
+        heroImage.style.animation = 'fadeInRight 0.8s ease';
+    }
+});
+
+// Re-run animations when projects are loaded dynamically
+function refreshAnimations() {
+    setTimeout(() => {
+        addAnimationClasses();
+        initScrollAnimations();
+    }, 300);
+}
+
+// Call refreshAnimations when projects are loaded
+window.addEventListener('load', refreshAnimations);
+
   // Create Project Card with proper image handling
 function createProjectCard(project) {
     const card = document.createElement('div');
-    card.className = 'project-card';
+    card.className = 'project-card animate-on-scroll';
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
     
     card.innerHTML = `
         <div class="project-image-container">
@@ -3562,26 +5705,67 @@ document.addEventListener('keydown', function(e) {
             });
         });
         
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            // Show loading state
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate form submission (replace with actual Formspree submission)
-            setTimeout(() => {
-                alert('Thank you for your message! I will get back to you soon.');
-                this.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
+   
+   // Simplified Formspree submission
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const form = this;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    const messageDiv = document.getElementById('formspree-message');
+    
+    // Show loading state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    messageDiv.style.display = 'none';
+    
+    try {
+        const formData = new FormData(form);
+        
+        // Add redirect URL
+        formData.append('_next', 'https://mudasiribrahim.com/thank-you.html');
+        
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
         });
         
+        if (response.ok) {
+            // Show success message
+            messageDiv.style.display = 'block';
+            messageDiv.style.backgroundColor = 'rgba(34, 197, 94, 0.1)';
+            messageDiv.style.border = '1px solid #22c55e';
+            messageDiv.style.color = '#22c55e';
+            messageDiv.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.';
+            
+            // Reset form
+            form.reset();
+            
+            // Redirect after 3 seconds (if you want)
+            // setTimeout(() => {
+            //     window.location.href = 'https://mudasiribrahim.com/thank-you.html';
+            // }, 3000);
+        } else {
+            throw new Error('Submission failed');
+        }
+    } catch (error) {
+        // Show error message
+        messageDiv.style.display = 'block';
+        messageDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+        messageDiv.style.border = '1px solid #ef4444';
+        messageDiv.style.color = '#ef4444';
+        messageDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Sorry, there was an error. Please try again or email directly at mudassiribrahim30@yahoo.com';
+    } finally {
+        // Restore button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+});
+      
         // Search functionality - Fixed
         const searchToggle = document.getElementById('searchToggle');
         const searchDropdown = document.getElementById('searchDropdown');
