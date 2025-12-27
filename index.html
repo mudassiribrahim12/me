@@ -920,13 +920,15 @@ body.dark-mode .sponsor-minimal {
 .sponsor-details {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease;
+    transition: max-height 0.8s ease;
     margin-top: 0;
+    opacity: 0;
 }
 
 .sponsor-details.active {
-    max-height: 500px;
+    max-height: 800px; /* Increased to show all options */
     margin-top: var(--spacing-lg);
+    opacity: 1;
 }
 
 .sponsor-grid {
@@ -2064,23 +2066,34 @@ body.dark-mode .youtube-wrapper {
         }
         
 @media (max-width: 768px) {
+    /* Show mobile menu button */
+    .mobile-menu-btn {
+        display: block;
+        z-index: 1001;
+    }
+    
+    /* Hide regular navigation on mobile */
+    .right-nav {
+        display: none;
+    }
+    
+    /* Mobile menu styling */
     .nav-links {
         position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
+        top: 0;
+        right: -100%; /* Start off-screen to the right */
+        width: 280px; /* Fixed width for mobile menu */
+        height: 100vh;
         background: var(--white);
         flex-direction: column;
-        padding: 1rem;
+        padding: 80px 1rem 1rem;
         box-shadow: var(--shadow-lg);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all var(--transition-normal);
+        transition: right 0.3s ease;
         z-index: 1000;
         gap: 0;
-        margin-left: 0; /* Reset for mobile */
-        justify-content: flex-start; /* Reset for mobile */
+        margin-left: 0;
+        justify-content: flex-start;
+        overflow-y: auto;
     }
     
     body.dark-mode .nav-links {
@@ -2088,15 +2101,15 @@ body.dark-mode .youtube-wrapper {
     }
     
     .nav-links.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
+        right: 0; /* Slide in from right */
     }
     
     .nav-links a {
-        padding: 0.75rem;
-        font-size: 0.95rem; /* Slightly larger for mobile readability */
+        padding: 1rem;
+        font-size: 1rem;
         border-bottom: 1px solid var(--gray-light);
+        width: 100%;
+        text-align: left;
     }
     
     .nav-links a:last-child {
@@ -2104,35 +2117,47 @@ body.dark-mode .youtube-wrapper {
     }
     
     .nav-links a:after {
-        display: none; /* Hide underline on mobile for cleaner look */
+        display: none;
     }
+    
+    /* Mobile overlay background */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .nav-overlay.active {
+        display: block;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-controls {
+        gap: 0.5rem;
+    }
+    
+    #google_translate_element {
+        display: none;
+    }
+    
+    .theme-toggle-text {
+        display: none;
+    }
+}
 
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: var(--spacing-md);
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header-controls {
-                gap: 0.5rem;
-            }
-            
-            #google_translate_element {
-                display: none;
-            }
-            
-            .theme-toggle-text {
-                display: none;
-            }
-        }
-        
         @media (max-width: 576px) {
             h1 {
                 font-size: 1.8rem;
@@ -2502,7 +2527,11 @@ body.dark-mode .blog-post-title {
             </button>
         </div>
     </div>
+    
 </header>
+
+<!-- Mobile Menu Overlay -->
+<div class="nav-overlay" id="navOverlay"></div>
             
     <div class="header-controls">
     <!-- Theme Toggle Switch -->
@@ -3113,10 +3142,33 @@ body.dark-mode .blog-post-title {
 
     <!-- Back to Top Button -->
     <button id="backToTopBtn" class="btn" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;">
-        <i class="fas fa-arrow-up"></i> Back to Top
+        <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
+    
+    // Mobile overlay functionality
+const navOverlay = document.getElementById('navOverlay');
+
+mobileMenuBtn.addEventListener('click', () => {
+    navOverlay.classList.toggle('active');
+});
+
+navOverlay.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    navOverlay.classList.remove('active');
+    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        navOverlay.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    });
+});
+    
         // All 20 R Shiny Applications Data
         const allProjects = [
             {
@@ -3281,15 +3333,12 @@ body.dark-mode .blog-post-title {
             }
         ];
 
- // Mobile Menu Toggle - Updated for right-aligned nav
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
-
-mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        navLinks.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    }
 });
 
 // Close mobile menu when clicking a link
