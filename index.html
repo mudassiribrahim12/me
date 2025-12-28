@@ -303,6 +303,69 @@ body.dark-mode {
 }
 
 /* ============================================= */
+/* FOOTER THEME TOGGLE STYLING */
+/* ============================================= */
+
+/* Footer theme toggle button */
+#footerThemeToggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#footerThemeToggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode #footerThemeToggle {
+    background: rgba(96, 165, 250, 0.1);
+    border-color: rgba(96, 165, 250, 0.3);
+    color: #e5e7eb;
+}
+
+body.dark-mode #footerThemeToggle:hover {
+    background: rgba(96, 165, 250, 0.2);
+    border-color: rgba(96, 165, 250, 0.4);
+}
+
+#footerThemeIcon {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+#footerThemeToggle:hover #footerThemeIcon {
+    transform: rotate(15deg);
+}
+
+/* Light mode specific footer button */
+body:not(.dark-mode) footer #footerThemeToggle {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: white;
+    box-shadow: 0 4px 15px rgba(26, 86, 219, 0.3);
+}
+
+body:not(.dark-mode) footer #footerThemeToggle:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    box-shadow: 0 6px 20px rgba(26, 86, 219, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ============================================= */
 /* AGGRESSIVE MOBILE RESPONSIVENESS - TOUCH SCREEN FIX */
 /* ============================================= */
 
@@ -5097,6 +5160,7 @@ body.dark-mode .blog-post-title {
 }
 
     </style>
+    
 </head>
 <body>
     <!-- Header -->
@@ -6134,57 +6198,66 @@ body.dark-mode .blog-post-title {
     </div>
 </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <div class="footer-logo">Mudasir M.<span> Ibrahim</span></div>
-                    <p>
-                        Healthcare professional dedicated to creating intuitive R Shiny tools to simplify complex public health data analysis.
-                    </p>
-                    <div class="mt-md" id="ghanaTimeFooter">
-                        <small><i class="fas fa-clock"></i> Ghana Time: <span id="timeDisplay">--:--:--</span> 🇬🇭</small>
-                    </div>
+ <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">Mudasir M.<span> Ibrahim</span></div>
+                <p>
+                    Healthcare professional dedicated to creating intuitive R Shiny tools to simplify complex public health data analysis.
+                </p>
+                <div class="mt-md" id="ghanaTimeFooter">
+                    <small><i class="fas fa-clock"></i> Ghana Time: <span id="timeDisplay">--:--:--</span> 🇬🇭</small>
                 </div>
                 
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#about">About Me</a></li>
-                        <li><a href="#education">Education & Experience</a></li>
-                        <li><a href="#publications">Publications</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-social">
-                    <h4>Connect With Me</h4>
-                    <div class="social-icons">
-                        <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" title="Google Scholar">
-                            <i class="fas fa-graduation-cap"></i>
-                        </a>
-                        <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" title="ORCID">
-                            <i class="fab fa-orcid"></i>
-                        </a>
-                    </div>
-                </div>
+<!-- THEME TOGGLE BUTTON IN THE FOOTER -->
+<div class="mt-md">
+    <button id="footerThemeToggle" class="btn" style="padding: 0.75rem 1.5rem; font-size: 0.95rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">
+        <i class="fas fa-moon" id="footerThemeIcon"></i>
+        <span id="footerThemeText">Switch to Dark Mode</span>
+    </button>
+</div>
             </div>
             
-            <div class="copyright">
-                <p>&copy; <span id="currentYear"></span> Mudasir Mohammed Ibrahim. All rights reserved. | Designed and powered by Mudasir Mohammed Ibrahim</p>
+            <!-- Rest of your footer content remains the same -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#education">Education & Experience</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-social">
+                <h4>Connect With Me</h4>
+                <div class="social-icons">
+                    <a href="https://github.com/mudassiribrahim30" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" title="Google Scholar">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" title="ORCID">
+                        <i class="fab fa-orcid"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </footer>
+        
+        <div class="copyright">
+            <p>&copy; <span id="currentYear"></span> Mudasir Mohammed Ibrahim. All rights reserved. | Designed and powered by Mudasir Mohammed Ibrahim</p>
+        </div>
+    </div>
+</footer>
 
     <!-- All Projects Modal -->
     <div class="modal" id="allProjectsModal">
@@ -6215,6 +6288,103 @@ navOverlay.addEventListener('click', () => {
     navLinks.classList.remove('active');
     navOverlay.classList.remove('active');
     mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+});
+
+// =============================================
+// FOOTER THEME TOGGLE FUNCTIONALITY - FIXED
+// =============================================
+
+// Initialize footer theme toggle
+function initFooterThemeToggle() {
+    const footerThemeToggle = document.getElementById('footerThemeToggle');
+    const footerThemeIcon = document.getElementById('footerThemeIcon');
+    const footerThemeText = document.getElementById('footerThemeText');
+    
+    // Check if elements exist
+    if (!footerThemeToggle || !footerThemeIcon || !footerThemeText) {
+        console.log('Footer theme toggle elements not found');
+        return;
+    }
+    
+    console.log('Initializing footer theme toggle...');
+    
+    // Update footer toggle based on current theme
+    function updateFooterToggle() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        
+        if (isDarkMode) {
+            // Currently in dark mode, button should switch to light
+            footerThemeIcon.className = 'fas fa-sun';
+            footerThemeText.textContent = 'Switch to Light Mode';
+            console.log('Updated to: Switch to Light Mode');
+        } else {
+            // Currently in light mode, button should switch to dark
+            footerThemeIcon.className = 'fas fa-moon';
+            footerThemeText.textContent = 'Switch to Dark Mode';
+            console.log('Updated to: Switch to Dark Mode');
+        }
+    }
+    
+    // Initial update
+    updateFooterToggle();
+    
+    // Toggle theme when footer button is clicked
+    footerThemeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Footer theme toggle clicked');
+        
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        const headerThemeToggle = document.getElementById('themeToggle');
+        
+        if (isDarkMode) {
+            // Switch to light mode
+            console.log('Switching to light mode');
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            if (headerThemeToggle) {
+                headerThemeToggle.checked = false;
+            }
+        } else {
+            // Switch to dark mode
+            console.log('Switching to dark mode');
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+            if (headerThemeToggle) {
+                headerThemeToggle.checked = true;
+            }
+        }
+        
+        // Update footer toggle appearance
+        updateFooterToggle();
+        
+        // Add visual feedback
+        footerThemeToggle.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            footerThemeToggle.style.transform = 'scale(1)';
+        }, 150);
+        
+        // Also update Google Translate if needed
+        setTimeout(() => {
+            if (typeof fixGoogleTranslateStyling === 'function') {
+                fixGoogleTranslateStyling();
+            }
+        }, 300);
+    });
+    
+    // Listen for theme changes from header toggle to sync footer
+    const headerThemeToggle = document.getElementById('themeToggle');
+    if (headerThemeToggle) {
+        headerThemeToggle.addEventListener('change', function() {
+            console.log('Header theme changed, updating footer');
+            // Small delay to ensure theme change is applied
+            setTimeout(updateFooterToggle, 100);
+        });
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initFooterThemeToggle();
 });
 
 // Simple snake for all cards
@@ -6874,26 +7044,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-        // Theme Toggle Slider
-        const themeToggle = document.getElementById('themeToggle');
+       // Theme Toggle Slider
+const themeToggle = document.getElementById('themeToggle');
+
+// Check for saved theme or prefer-color-scheme
+const savedTheme = localStorage.getItem('theme') || 'light';
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeToggle.checked = true;
+}
+
+themeToggle.addEventListener('change', () => {
+    if (themeToggle.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+    }
+    
+    // Update footer toggle if it exists
+    setTimeout(() => {
+        const footerThemeToggle = document.getElementById('footerThemeToggle');
+        const footerThemeIcon = document.getElementById('footerThemeIcon');
+        const footerThemeText = document.getElementById('footerThemeText');
         
-        // Check for saved theme or prefer-color-scheme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.checked = true;
-        }
-        
-        themeToggle.addEventListener('change', () => {
+        if (footerThemeToggle && footerThemeIcon && footerThemeText) {
             if (themeToggle.checked) {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
+                footerThemeIcon.className = 'fas fa-sun';
+                footerThemeText.textContent = 'Switch to Light Mode';
             } else {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
+                footerThemeIcon.className = 'fas fa-moon';
+                footerThemeText.textContent = 'Switch to Dark Mode';
             }
-        });
-        
+        }
+    }, 100);
+});
+       
         // Update current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
