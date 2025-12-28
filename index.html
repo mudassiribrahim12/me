@@ -197,6 +197,25 @@ body.dark-mode {
     padding: var(--spacing-xl);
 }
 
+/* Disable most animations for performance */
+.project-card:hover,
+.skill-item:hover,
+.interest-tag:hover,
+.btn:hover {
+    animation: none !important;
+    transform: none !important;
+}
+
+/* Disable snake flow */
+.snake-flow {
+    display: none !important;
+}
+
+/* Simplify map loading */
+#map {
+    transform: translateZ(0); /* GPU acceleration */
+}
+
 /* ============================================= */
 /* BEAUTIFUL ENHANCEMENTS CSS */
 /* ============================================= */
@@ -1877,6 +1896,10 @@ body.dark-mode .leaflet-control-attribution {
     animation: fadeInUp 0.8s ease forwards;
     position: relative;
     overflow: hidden;
+}
+
+.project-card {
+    will-change: transform;
 }
 
 .project-card::before {
@@ -6289,6 +6312,31 @@ navOverlay.addEventListener('click', () => {
     navOverlay.classList.remove('active');
     mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
 });
+
+// Disable heavy animations
+window.addEventListener('load', function() {
+    // Remove snake flow
+    document.querySelectorAll('.snake-flow').forEach(el => el.remove());
+    
+    // Throttle scroll events
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(handleScroll, 100);
+    }, { passive: true });
+});
+
+// Defer map loading until user scrolls to it
+const mapSection = document.querySelector('#contact');
+const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        // Load map only when contact section is visible
+        initMap();
+        observer.disconnect();
+    }
+}, { threshold: 0.3 });
+
+if (mapSection) observer.observe(mapSection);
 
 // =============================================
 // FOOTER THEME TOGGLE FUNCTIONALITY - FIXED
