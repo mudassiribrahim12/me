@@ -49,10 +49,26 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
     
-    <!-- Google Translate Script -->
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-      
-    </script>
+<!-- ============================================= -->
+<!-- REACT + ALPINE.JS + HTMX SCRIPTS -->
+<!-- ============================================= -->
+
+<!-- React 18 with Babel for JSX -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- Alpine.js -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<!-- HTMX -->
+<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+
+<!-- Animate.css for smooth animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+<!-- Animate.css for smooth animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
     <!-- Structured Data for Google -->
     <script type="application/ld+json">
@@ -181,21 +197,1077 @@ body.dark-mode {
     padding: var(--spacing-xl);
 }
 
+/* ============================================= */
+/* BEAUTIFUL ENHANCEMENTS CSS */
+/* ============================================= */
+
+/* Glassmorphism Effects */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .glass-card {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animated Gradient Background */
+.animated-gradient {
+    background: linear-gradient(-45deg, 
+        var(--primary-light), 
+        var(--secondary), 
+        var(--accent), 
+        var(--primary)
+    );
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 3D Card Hover Effects */
+.card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-3d:hover {
+    transform: 
+        translateY(-10px) 
+        rotateX(5deg) 
+        rotateY(5deg);
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 50px rgba(37, 99, 235, 0.3);
+}
+
+/* Neumorphism Design */
+.neumorphism {
+    background: var(--light);
+    border-radius: 20px;
+    box-shadow: 
+        10px 10px 20px rgba(0, 0, 0, 0.1),
+        -10px -10px 20px rgba(255, 255, 255, 0.5);
+}
+
+.dark-mode .neumorphism {
+    background: var(--dark);
+    box-shadow: 
+        10px 10px 20px rgba(0, 0, 0, 0.3),
+        -10px -10px 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Morphing Shape Backgrounds */
+.morphing-shapes {
+    position: relative;
+    overflow: hidden;
+}
+
+.morphing-shapes::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(37, 99, 235, 0.1) 50%,
+        transparent 70%
+    );
+    animation: morph 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes morph {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+
+/* ============================================= */
+/* AGGRESSIVE MOBILE RESPONSIVENESS - TOUCH SCREEN FIX */
+/* ============================================= */
+
+/* Base mobile-first adjustments */
+@media (max-width: 768px) {
+    /* FORCE full-width on mobile */
+    body, .container, section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* Remove all horizontal scrolling */
+    html, body {
+        overflow-x: hidden !important;
+        position: relative !important;
+        -webkit-text-size-adjust: 100% !important;
+        -moz-text-size-adjust: 100% !important;
+        -ms-text-size-adjust: 100% !important;
+    }
+    
+    /* AGGRESSIVE TEXT SCALING - Force readable text */
+    body {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+    }
+    
+    h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+        margin: 1rem 0 !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+        line-height: 1.3 !important;
+        margin: 0.75rem 0 !important;
+    }
+    
+    h3 {
+        font-size: 1.25rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        margin: 0.75rem 0 !important;
+    }
+    
+    /* FORCE SINGLE COLUMN LAYOUT on all sections */
+    .hero-content,
+    .about-content,
+    .contact-content,
+    .publications-grid,
+    .contact-main-content,
+    .contact-details-row,
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        display: block !important;
+        gap: 1rem !important;
+    }
+    
+    /* Force full width images */
+    img, .hero-image img, .profile-image img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+    
+    /* AGGRESSIVE PROJECT CARD RESIZE */
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        padding: 0 0.5rem !important;
+    }
+    
+    .project-card {
+        margin: 0.5rem 0 !important;
+        padding: 0.75rem !important;
+        width: calc(100% - 1rem) !important;
+    }
+    
+    /* TOUCH-FRIENDLY BUTTONS (minimum 44px for touch) */
+    .btn, button, a.btn {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
+        margin: 0.5rem 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Touch-friendly navigation */
+    .nav-links a, .bottom-nav-links a {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        padding: 12px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* FORCE map to be visible and properly sized */
+    #map {
+        height: 300px !important;
+        min-height: 300px !important;
+    }
+    
+    .map-side {
+        height: auto !important;
+        min-height: 350px !important;
+    }
+    
+    .contact-main-content {
+        min-height: auto !important;
+    }
+    
+    /* Remove complex animations on mobile for performance */
+    .project-card:hover,
+    .skill-item:hover,
+    .interest-tag:hover {
+        transform: none !important;
+        animation: none !important;
+    }
+    
+    /* Simplify form elements for touch */
+    input, textarea, select, .form-control {
+        font-size: 16px !important; /* Prevents iOS zoom */
+        min-height: 44px !important;
+        padding: 12px !important;
+    }
+    
+    /* Timeline adjustments */
+    .timeline {
+        padding-left: 0 !important;
+    }
+    
+    .timeline:before {
+        left: 15px !important;
+    }
+    
+    .timeline-item {
+        padding-left: 50px !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .timeline-date {
+        width: 45px !important;
+        font-size: 0.75rem !important;
+    }
+    
+    /* Sponsor grid single column */
+    .sponsor-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* YouTube iframe responsive */
+    .youtube-wrapper iframe {
+        height: 250px !important;
+    }
+    
+    /* Fix header on mobile */
+    header {
+        padding: 0.5rem 0 !important;
+        position: fixed !important;
+        top: 0 !important;
+        width: 100% !important;
+        z-index: 1000 !important;
+    }
+    
+    .header-container {
+        padding: 0 1rem !important;
+    }
+    
+    /* Bottom nav always visible on mobile */
+    .bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        backdrop-filter: blur(10px) !important;
+        border-top: 1px solid var(--gray-light) !important;
+        z-index: 1000 !important;
+    }
+    
+    body.dark-mode .bottom-nav {
+        background: rgba(17, 24, 39, 0.98) !important;
+    }
+    
+    /* Add padding to body for fixed header and bottom nav */
+    body {
+        padding-top: 70px !important;
+        padding-bottom: 60px !important;
+    }
+    
+    /* Hero section mobile optimization */
+    .hero-content {
+        text-align: center !important;
+        padding: 1rem !important;
+    }
+    
+    .hero-stats {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 1rem !important;
+    }
+    
+    .stat-item {
+        flex: 0 0 calc(50% - 0.5rem) !important;
+        text-align: center !important;
+    }
+    
+    /* Interest tags mobile optimization */
+    .interest-tags {
+        justify-content: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    .interest-tag {
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    /* Skills grid single column */
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    /* Modal full screen on mobile */
+    .modal-content {
+        margin: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0 !important;
+        padding: 1rem !important;
+    }
+    
+    /* Fix floating translate on mobile */
+    .floating-translate-globe {
+        top: auto !important;
+        bottom: 70px !important;
+        right: 10px !important;
+    }
+}
+
+/* ============================================= */
+/* EXTREME SMALL PHONE OPTIMIZATION (Below 400px) */
+/* ============================================= */
+@media (max-width: 400px) {
+    /* Even more aggressive text scaling */
+    h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    h2 {
+        font-size: 1.3rem !important;
+    }
+    
+    /* Force smaller padding */
+    .container {
+        padding: 0 0.75rem !important;
+    }
+    
+    /* Stack hero buttons vertically */
+    .hero .mb-lg {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .hero .btn {
+        width: 100% !important;
+    }
+    
+    /* Single column for stats */
+    .hero-stats .stat-item {
+        flex: 0 0 100% !important;
+    }
+    
+    /* Even smaller project cards */
+    .project-card {
+        padding: 0.5rem !important;
+        margin: 0.25rem 0 !important;
+    }
+    
+    /* Stack project action buttons */
+    .project-actions {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .project-actions .btn {
+        width: 100% !important;
+    }
+    
+    /* Bottom nav with smaller icons */
+    .bottom-nav-links {
+        gap: 0.25rem !important;
+    }
+    
+    .bottom-nav-links a {
+        font-size: 0.7rem !important;
+        padding: 0.25rem !important;
+    }
+    
+    /* Smaller map */
+    #map {
+        height: 250px !important;
+    }
+    
+    /* Contact form spacing */
+    .contact-form {
+        padding: 1rem !important;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+    }
+}
+
+/* ============================================= */
+/* TABLET OPTIMIZATION (769px - 1024px) */
+/* ============================================= */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Slightly less aggressive but still mobile-focused */
+    .container {
+        max-width: 95% !important;
+        padding: 0 1rem !important;
+    }
+    
+    /* Two column layouts where appropriate */
+    .hero-content,
+    .about-content {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+    }
+    
+    /* Projects grid 2 columns on tablet */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+    }
+    
+    /* Contact form side by side */
+    .contact-main-content {
+        grid-template-columns: 1fr 1fr !important;
+    }
+    
+    /* Map size adjustment */
+    #map {
+        height: 400px !important;
+    }
+    
+    /* Larger touch targets */
+    .btn {
+        min-height: 44px !important;
+        padding: 14px 24px !important;
+    }
+}
+
+/* ============================================= */
+/* TOUCH DEVICE SPECIFIC FIXES */
+/* ============================================= */
+@media (hover: none) and (pointer: coarse) {
+    /* Disable hover effects on touch devices */
+    .project-card:hover,
+    .skill-item:hover,
+    .interest-tag:hover,
+    .btn:hover,
+    .nav-links a:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        background: none !important;
+    }
+    
+    /* Add active states for touch feedback */
+    .project-card:active,
+    .btn:active,
+    .nav-links a:active {
+        opacity: 0.8 !important;
+        transform: scale(0.98) !important;
+    }
+    
+    /* Larger hit areas for touch */
+    .nav-links a,
+    .bottom-nav-links a,
+    .social-icons a {
+        padding: 12px !important;
+        margin: 4px !important;
+    }
+    
+    /* Prevent text selection on interactive elements */
+    .btn, button, .nav-links a {
+        -webkit-tap-highlight-color: transparent !important;
+        user-select: none !important;
+    }
+}
+
+/* ============================================= */
+/* FORCE VISIBILITY AND READABILITY */
+/* ============================================= */
+@media (max-width: 768px) {
+    /* Ensure all text is readable */
+    * {
+        text-shadow: 0 1px 1px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Improve contrast for mobile */
+    body:not(.dark-mode) .project-card,
+    body:not(.dark-mode) .skill-item {
+        background: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    }
+    
+    /* Ensure form elements are visible */
+    input, textarea, select {
+        background: #ffffff !important;
+        border: 2px solid #d1d5db !important;
+        color: #111827 !important;
+    }
+    
+    /* Map controls visibility */
+    .map-controls {
+        transform: scale(0.9) !important;
+        right: 10px !important;
+        top: 10px !important;
+    }
+    
+    /* Location badge mobile positioning */
+    .location-badge {
+        left: 10px !important;
+        bottom: 10px !important;
+        max-width: calc(100% - 20px) !important;
+    }
+}
+
+/* ============================================= */
+/* PERFORMANCE OPTIMIZATIONS FOR MOBILE */
+/* ============================================= */
+@media (max-width: 768px) {
+    /* Reduce animations for better performance */
+    .animate-on-scroll,
+    .animate-left,
+    .animate-right {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    
+    /* Disable complex gradients on mobile */
+    .hero-badge,
+    .interest-tag,
+    .tag {
+        background: rgba(26, 86, 219, 0.15) !important;
+        backdrop-filter: none !important;
+    }
+    
+    /* Simplify shadows for performance */
+    .project-card,
+    .skill-item,
+    .contact-form {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    }
+}
+
+/* ============================================= */
+/* ORIENTATION SPECIFIC FIXES */
+/* ============================================= */
+@media (max-width: 768px) and (orientation: landscape) {
+    /* Landscape specific fixes */
+    #map {
+        height: 200px !important;
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hero-image {
+        display: none !important;
+    }
+    
+    /* Reduce padding in landscape */
+    section {
+        padding: 1.5rem 0 !important;
+    }
+}
+
+/* ============================================= */
+/* FIX FOR IOS SAFARI VIEWPORT ISSUES */
+/* ============================================= */
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari specific fixes */
+    .hero,
+    section {
+        min-height: -webkit-fill-available !important;
+    }
+    
+    .bottom-nav {
+        padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+    
+    /* Prevent pull-to-refresh overscroll */
+    body {
+        overscroll-behavior-y: contain !important;
+    }
+}
+
+/* ============================================= */
+/* EMERGENCY OVERRIDES - NUCLEAR OPTION */
+/* ============================================= */
+@media (max-width: 768px) {
+    /* If anything is still breaking, these will fix it */
+    * {
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Force all containers to fit */
+    div, section, article, main, aside {
+        float: none !important;
+        clear: both !important;
+        width: 100% !important;
+    }
+    
+    /* Remove any horizontal margins */
+    .ml-auto, .mr-auto, .mx-auto {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Ensure nothing overflows horizontally */
+    img, video, iframe, canvas, svg {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Touch device font size minimum */
+    input, textarea, select, button {
+        font-size: 16px !important;
+    }
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.floating-element {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Text Gradient Animation */
+.animated-gradient-text {
+    background: linear-gradient(90deg, 
+        var(--primary), 
+        var(--secondary), 
+        var(--accent), 
+        var(--primary)
+    );
+    background-size: 300% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGradient 3s ease infinite;
+}
+
+@keyframes textGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Shimmer Loading Effect */
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Staggered Animation Delays */
+.stagger-animation > * {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Enhanced Form Styles */
+.enhanced-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.enhanced-input:focus {
+    border-color: var(--primary);
+    box-shadow: 
+        0 0 0 4px rgba(37, 99, 235, 0.1),
+        inset 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, var(--accent), var(--primary));
+}
+
+/* FAB Container */
+.fab-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.fab-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 
+        0 10px 20px rgba(37, 99, 235, 0.3),
+        0 6px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fab-button:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 
+        0 15px 30px rgba(37, 99, 235, 0.4),
+        0 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.fab-actions {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.fab-action {
+    background: white;
+    color: var(--dark);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(100px);
+    opacity: 0;
+    animation: slideIn 0.3s ease forwards;
+}
+
+.dark-mode .fab-action {
+    background: var(--dark);
+    color: white;
+}
+
+.fab-action:nth-child(1) { animation-delay: 0.1s; }
+.fab-action:nth-child(2) { animation-delay: 0.2s; }
+.fab-action:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.fab-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10000;
+    max-width: 400px;
+}
+
+.toast {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary);
+}
+
+.dark-mode .toast {
+    background: var(--dark);
+    color: white;
+}
+
+.toast-success {
+    border-left-color: #10b981;
+}
+
+.toast-error {
+    border-left-color: #ef4444;
+}
+
+.toast-warning {
+    border-left-color: #f59e0b;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+/* Enhanced Skill Bars */
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skill-track {
+    height: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-level {
+    height: 100%;
+    border-radius: 5px;
+    position: relative;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-level.animate::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+/* Project Filter */
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    background: rgba(37, 99, 235, 0.1);
+    border: 2px solid transparent;
+    border-radius: 50px;
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background: rgba(37, 99, 235, 0.2);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Loading States */
+.loading-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    color: var(--primary);
+}
+
+.loading-spinner i {
+    font-size: 1.5rem;
+}
+
+/* Image Hover Effects */
+.image-hover-zoom {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.image-hover-zoom img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-hover-zoom:hover img {
+    transform: scale(1.05);
+}
+
+/* Gradient Border Cards */
+.gradient-border-card {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2px;
+    background-clip: padding-box;
+}
+
+.gradient-border-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--primary), 
+        var(--secondary), 
+        var(--accent)
+    );
+    border-radius: calc(var(--radius-lg) + 2px);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gradient-border-card:hover::before {
+    opacity: 1;
+}
+
+/* Minimal Snake Tail */
+.snake-flow {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(45deg, #2563eb, #3b82f6);
+    box-shadow: 0 0 8px #2563eb;
+    filter: blur(0.5px);
+    opacity: 0.8;
+}
+
+.snake-flow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
 /* Ensure map looks the same in both themes */
 body.dark-mode #map,
 body.dark-mode #mapLoading {
     background-color: #ffffff !important; /* Always white background */
 }
 
-/* Ensure hover animations work immediately */
-.project-card:hover {
-    animation: float 0.6s ease, glow 1.5s ease-in-out infinite !important;
-    border-color: var(--primary);
-}
-
-.project-card:hover .project-image {
-    animation: pulse 1.5s ease-in-out !important;
-}
 
 .btn:hover {
     animation: floatSubtle 0.3s ease !important;
@@ -765,10 +1837,39 @@ body.dark-mode .leaflet-control-attribution {
     animation: pulse 1.5s ease-in-out;
 }
 
-/* Animated gradient border on hover */
-.project-card:hover {
-    border: 2px solid;
-    animation: gradientBorder 3s infinite linear;
+/* Simple Flowing Snake */
+.simple-snake {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: calc(var(--radius-lg) + 2px);
+    background: linear-gradient(
+        90deg,
+        var(--primary) 0%,
+        var(--secondary) 25%,
+        var(--accent) 50%,
+        var(--secondary) 75%,
+        var(--primary) 100%
+    );
+    background-size: 400% 100%;
+    mask: linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: 2px;
+    animation: snakeFlow 3s linear infinite;
+    filter: drop-shadow(0 0 5px rgba(26, 86, 219, 0.3));
+    opacity: 0.8;
+}
+
+@keyframes snakeFlow {
+    0% {
+        background-position: -400% 0%;
+    }
+    100% {
+        background-position: 400% 0%;
+    }
 }
 
 /* Animated tags */
@@ -2372,12 +3473,10 @@ body.dark-mode .sponsor-option {
 }
 
 
-        /* Hero Section */
-     .hero {
-    padding-top: 120px;
-    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%); /* Brighter gradient */
-    position: relative;
-    overflow: hidden;
+.hero {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 body.dark-mode .hero {
@@ -2447,6 +3546,22 @@ body.dark-mode .hero {
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+        
+        .project-card {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-10px) rotateX(5deg);
+}
+
+h1, h2 {
+    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
         
         /* About Section */
         .about {
@@ -4148,7 +5263,7 @@ body.dark-mode .blog-post-title {
                     <h1>Transforming Healthcare with Data & Innovation</h1>
                     
                     <p class="mb-lg">
-                        Hi! I’m Mudasir Mohammed Ibrahim (also known as Mohammed Mudasir Ibrahim), a healthcare professional and data enthusiast. In my free time, I build accessible R Shiny web applications that make complex data analysis simpler and more intuitive for healthcare professionals, students, and researchers. You can explore all of my applications here.
+                        Hi! My name is Mohammed Mudasir Ibrahim, and professionally I go by Mudasir Mohammed Ibrahim. I am a healthcare professional and data enthusiast who builds accessible R Shiny web applications that make complex data analysis simpler and more intuitive for healthcare professionals, students, and researchers. You can explore all of my projects (R Shiny web applications) here.
                     </p>
                     
                     <div class="mb-lg">
@@ -4295,115 +5410,417 @@ body.dark-mode .blog-post-title {
     </section>
     
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>About Me</h2>
-                <p class="section-subtitle">
-                </p>
-            </div>
-            
-            <div class="about-content">
-               <div class="profile-image-container">
-    <div class="profile-image">
-        <!-- Original picture in About Me section -->
-        <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" alt="Mudasir Mohammed Ibrahim">
+<!-- About Section -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-header">
+            <h2>About Me</h2>
+            <p class="section-subtitle">
+                Healthcare professional bridging clinical practice with data science
+            </p>
+        </div>
+        
+        <div class="about-content">
+            <div class="profile-image-container">
+             <!-- Large Professional Oval Profile Picture Container -->
+<div class="profile-oval-frame" style="
+    width: 380px;
+    height: 420px;
+    margin: 0 auto var(--spacing-lg);
+    border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+    overflow: visible;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+">
+    <!-- ONE THIN border layer only -->
+    <div class="profile-image-full" style="
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+        overflow: hidden;
+        box-shadow: 
+            0 15px 30px rgba(0, 0, 0, 0.15),
+            0 8px 15px rgba(26, 86, 219, 0.2);
+        border: 3px solid var(--primary-light); /* THIN single border */
+        background: white;
+    ">
+        <!-- Large profile image - FULL PICTURE, NO CROP -->
+        <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" 
+             alt="Mudasir Mohammed Ibrahim"
+             style="
+                width: auto;
+                height: auto;
+                max-width: 105%;
+                max-height: 105%;
+                object-fit: contain;
+                object-position: center center;
+                transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+                filter: brightness(1.05) contrast(1.05);
+             "
+             onmouseover="this.style.transform='scale(1.03)'; this.style.filter='brightness(1.08) contrast(1.08)'"
+             onmouseout="this.style.transform='scale(1)'; this.style.filter='brightness(1.05) contrast(1.05)'">
     </div>
     
-    <div class="text-center mt-md">
-<a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" 
-   target="_blank" 
-   class="btn">
-    <i class="fas fa-download"></i> Download My CV
-</a>
+    <!-- Professional badge -->
+    <div class="professional-badge" style="
+        position: absolute;
+        bottom: -15px;
+        right: 30px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        z-index: 5;
+        box-shadow: 0 4px 12px rgba(26, 86, 219, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 2px solid white;
+    ">
+        <i class="fas fa-user-md"></i>
+        <span>Healthcare Professional</span>
     </div>
 </div>
-                
-                <div>
-                    <p>
-                        I am a Ghanaian nurse and researcher whose journey has been shaped by resilience, self-determination, and a deep commitment to improving health outcomes. Inspired by my mother's tireless work as a market trader, I pursued education despite significant obstacles. Although I studied Business (Cost Accounting) in high school, I was determined to become a nurse. I independently taught myself key science subjects, rewrote the required examinations as a private candidate, earned the necessary credentials, enrolled in nursing school, and successfully graduated. 
-                    </p>
+             
+                <!-- Professional info under picture -->
+                <div class="profile-info" style="
+                    text-align: center;
+                    padding: var(--spacing-lg);
+                    background: var(--light);
+                    border-radius: var(--radius-xl);
+                    border: 1px solid var(--gray-light);
+                    max-width: 380px;
+                    margin: 0 auto var(--spacing-md);
+                    box-shadow: 
+                        0 10px 30px rgba(0, 0, 0, 0.08),
+                        0 5px 15px rgba(26, 86, 219, 0.1);
+                    position: relative;
+                    overflow: hidden;
+                ">
+                    <!-- Background pattern -->
+                    <div style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(45deg, 
+                            transparent 0%, 
+                            rgba(26, 86, 219, 0.03) 50%, 
+                            transparent 100%);
+                        z-index: 1;
+                        pointer-events: none;
+                    "></div>
                     
-                    <p>
-                        I currently serve at Tamale Teaching Hospital, where I provide high-quality, patient-centered care to individuals with complex medical conditions. Alongside my clinical work, I have built a strong research profile—beginning as a research assistant and growing into an experienced researcher and lead data analyst on multiple population-health projects. My background in business, combined with curiosity and persistence, led me to independently master advanced quantitative methods, including regression modeling, Structural Equation Modeling (SEM), factor analysis, and survival analysis. 
+                    <div style="position: relative; z-index: 2;">
+                        <h3 style="color: var(--primary); margin-bottom: var(--spacing-xs); font-size: 1.5rem;">
+                            Mudasir Mohammed Ibrahim
+                        </h3>
+                        <div style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: var(--spacing-xs);
+                            margin-bottom: var(--spacing-md);
+                            flex-wrap: wrap;
+                        ">
+                            <span style="
+                                background: rgba(26, 86, 219, 0.1);
+                                color: var(--primary-dark);
+                                padding: 4px 12px;
+                                border-radius: 50px;
+                                font-size: 0.85rem;
+                                font-weight: 600;
+                            ">
+                                <i class="fas fa-stethoscope"></i> Registered General Nurse
+                            </span>
+                            <span style="
+                                background: rgba(13, 148, 136, 0.1);
+                                color: var(--secondary);
+                                padding: 4px 12px;
+                                border-radius: 50px;
+                                font-size: 0.85rem;
+                                font-weight: 600;
+                            ">
+                                <i class="fas fa-chart-line"></i> Healthcare Researcher
+                            </span>
+                        </div>
+                        
+                        <p style="color: var(--gray); font-size: 0.95rem; margin-bottom: var(--spacing-lg); line-height: 1.6;">
+                            Transforming healthcare through data-driven innovation and patient-centered care
                         </p>
-                    
-                    <p>
-                      Driven by a passion for biostatistics and data-driven solutions, I develop open-source R Shiny web applications that simplify complex analyses for healthcare professionals, students, and researchers. My work bridges clinical practice and data science, reflecting a commitment to both individual patient care and population-level prevention. I aim to advance my training in Epidemiology and Translational Science to better understand disease patterns, strengthen prevention strategies, and contribute to more equitable health systems in Ghana and beyond. 
+                        
+                        <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                            <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" 
+                               target="_blank" 
+                               class="btn" 
+                               style="width: 100%; padding: 12px; font-size: 1rem;">
+                                <i class="fas fa-download"></i> Download My CV
+                            </a>
+                            <a href="#contact" class="btn btn-outline" style="width: 100%; padding: 12px; font-size: 1rem;">
+                                <i class="fas fa-envelope"></i> Contact Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social links mini -->
+                <div class="profile-social-mini" style="
+                    display: flex;
+                    justify-content: center;
+                    gap: var(--spacing-md);
+                    margin-top: var(--spacing-lg);
+                    max-width: 380px;
+                    margin-left: auto;
+                    margin-right: auto;
+                ">
+                    <a href="https://github.com/mudassiribrahim30" target="_blank" 
+                       class="social-mini-btn" 
+                       style="
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 50%;
+                            background: var(--light);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: var(--dark);
+                            border: 2px solid var(--gray-light);
+                            transition: all 0.3s ease;
+                            font-size: 1.2rem;
+                            position: relative;
+                            overflow: hidden;
+                       "
+                       onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 8px 20px rgba(0, 0, 0, 0.2)';"
+                       onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none';">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank"
+                       class="social-mini-btn"
+                       style="
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 50%;
+                            background: var(--light);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #0077b5;
+                            border: 2px solid var(--gray-light);
+                            transition: all 0.3s ease;
+                            font-size: 1.2rem;
+                            position: relative;
+                            overflow: hidden;
+                       "
+                       onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 8px 20px rgba(0, 119, 181, 0.3)';"
+                       onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none';">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank"
+                       class="social-mini-btn"
+                       style="
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 50%;
+                            background: var(--light);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #4285f4;
+                            border: 2px solid var(--gray-light);
+                            transition: all 0.3s ease;
+                            font-size: 1.2rem;
+                            position: relative;
+                            overflow: hidden;
+                       "
+                       onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 8px 20px rgba(66, 133, 244, 0.3)';"
+                       onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none';">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank"
+                       class="social-mini-btn"
+                       style="
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 50%;
+                            background: var(--light);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #a6ce39;
+                            border: 2px solid var(--gray-light);
+                            transition: all 0.3s ease;
+                            font-size: 1.2rem;
+                            position: relative;
+                            overflow: hidden;
+                       "
+                       onmouseover="this.style.transform='translateY(-5px) scale(1.1)'; this.style.boxShadow='0 8px 20px rgba(166, 206, 57, 0.3)';"
+                       onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none';">
+                        <i class="fab fa-orcid"></i>
+                    </a>
+                </div>
+            </div>
+                
+                <!-- ============================================= -->
+                <!-- SOFTWARE PROFICIENCY SECTION -->
+                <!-- ============================================= -->
+                <div class="mt-lg">
+                    <h3 class="mb-md">Software Proficiency</h3>
+                    <p class="mb-md">
+                        I have extensive experience with a wide range of statistical and qualitative analysis software, enabling me to conduct comprehensive research across various methodologies:
                     </p>
                     
-                    <div class="mt-lg">
-                        <h3 class="mb-md">Research Interests</h3>
-                        <div class="interest-tags">
-                            <span class="interest-tag">Cancer Epidemiology</span>
-                            <span class="interest-tag">Maternal and Child Health</span>
-                            <span class="interest-tag">Public Health</span>
-                            <span class="interest-tag">Workplace Issues</span>
-                            <span class="interest-tag">Healthcare Data Analytics</span>
-                            <span class="interest-tag">Nursing Informatics</span>
+                    <div class="software-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+                        
+                        <!-- Quantitative Software -->
+                        <div class="software-category" style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-lg); border: 1px solid var(--gray-light);">
+                            <div class="software-header" style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <i class="fas fa-chart-line" style="color: var(--primary); font-size: 1.5rem;"></i>
+                                <h4 style="margin: 0; color: var(--dark);">Quantitative Analysis</h4>
+                            </div>
+                            <div class="software-list" style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    SPSS Statistics
+                                </span>
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    Stata
+                                </span>
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    SPSS AMOS
+                                </span>
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    SmartPLS
+                                </span>
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    Jamovi
+                                </span>
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    JASP
+                                </span>
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    Minitab
+                                </span>
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    R Programming
+                                </span>
+                                <span class="software-tag" style="background: rgba(26, 86, 219, 0.15); color: var(--primary-dark); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(26, 86, 219, 0.3);">
+                                    SAS JMP
+                                </span>
+                            </div>
+                            <p class="software-description" style="margin-top: var(--spacing-sm); color: var(--gray); font-size: 0.9rem;">
+                                Skilled in advanced statistical analysis, SEM, regression modeling, and data visualization
+                            </p>
+                        </div>
+                        
+                        <!-- Qualitative Software -->
+                        <div class="software-category" style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-lg); border: 1px solid var(--gray-light);">
+                            <div class="software-header" style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <i class="fas fa-comment-alt" style="color: var(--secondary); font-size: 1.5rem;"></i>
+                                <h4 style="margin: 0; color: var(--dark);">Qualitative Analysis</h4>
+                            </div>
+                            <div class="software-list" style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                <span class="software-tag" style="background: rgba(13, 148, 136, 0.15); color: var(--secondary); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(13, 148, 136, 0.3);">
+                                    ATLAS.ti
+                                </span>
+                                <span class="software-tag" style="background: rgba(13, 148, 136, 0.15); color: var(--secondary); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(13, 148, 136, 0.3);">
+                                    NVivo
+                                </span>
+                                <span class="software-tag" style="background: rgba(13, 148, 136, 0.15); color: var(--secondary); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(13, 148, 136, 0.3);">
+                                    QDA Miner
+                                </span>
+                            </div>
+                            <p class="software-description" style="margin-top: var(--spacing-sm); color: var(--gray); font-size: 0.9rem;">
+                                Proficient in thematic analysis, coding, and qualitative data management
+                            </p>
                         </div>
                     </div>
                     
-                    <div class="mt-lg">
-                        <h3 class="mb-md">Professional Credentials</h3>
-                        <p>
-                            I am a Registered General Nurse (RGN), fully licensed by the Nursing and Midwifery Council 
-                            of Ghana (NMC) and an active member of the Ghana Registered Nurses and Midwives Association 
-                            (GRNMA), maintaining professional standards and continuous development in nursing practice 
-                            at Tamale Teaching Hospital.
-                        </p>
+                    <p class="mb-md" style="font-style: italic; color: var(--gray);">
+                        This comprehensive software proficiency enables me to conduct mixed-methods research, providing holistic insights that combine quantitative precision with qualitative depth.
+                    </p>
+                </div>
+                
+                <div class="mt-lg">
+                    <h3 class="mb-md">Research Interests</h3>
+                    <div class="interest-tags">
+                        <span class="interest-tag">Cancer Epidemiology</span>
+                        <span class="interest-tag">Maternal and Child Health</span>
+                        <span class="interest-tag">Public Health</span>
+                        <span class="interest-tag">Workplace Issues</span>
+                        <span class="interest-tag">Healthcare Data Analytics</span>
+                        <span class="interest-tag">Nursing Informatics</span>
                     </div>
-                    
-                    <div class="mt-lg">
-                        <h3 class="mb-md">Core Competencies</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <h4>Patient Care & Clinical Nursing</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
-                                </div>
-                                <p class="skill-description">
-                                    Comprehensive nursing care, patient assessment, medication administration, 
-                                    and holistic healthcare delivery
-                                </p>
+                </div>
+                
+                <div class="mt-lg">
+                    <h3 class="mb-md">Professional Credentials</h3>
+                    <p>
+                        I am a Registered General Nurse (RGN), fully licensed by the Nursing and Midwifery Council 
+                        of Ghana (NMC) and an active member of the Ghana Registered Nurses and Midwives Association 
+                        (GRNMA), maintaining professional standards and continuous development in nursing practice 
+                        at Tamale Teaching Hospital.
+                    </p>
+                </div>
+                
+                <div class="mt-lg">
+                    <h3 class="mb-md">Core Competencies</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <h4>Patient Care & Clinical Nursing</h4>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 100%"></div>
                             </div>
-                            <div class="skill-item">
-                                <h4>Health/Clinical Research</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
-                                </div>
-                                <p class="skill-description">
-                                    Research design, data collection, ethical considerations, and 
-                                    evidence-based practice implementation
-                                </p>
+                            <p class="skill-description">
+                                Comprehensive nursing care, patient assessment, medication administration, 
+                                and holistic healthcare delivery
+                            </p>
+                        </div>
+                        <div class="skill-item">
+                            <h4>Health/Clinical Research</h4>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 100%"></div>
                             </div>
-                            <div class="skill-item">
-                                <h4>Advanced Statistical Analysis</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
-                                </div>
-                                <p class="skill-description">
-                                    SEM, factor analysis, regression modeling, and complex statistical 
-                                    methods for healthcare data
-                                </p>
+                            <p class="skill-description">
+                                Research design, data collection, ethical considerations, and 
+                                evidence-based practice implementation
+                            </p>
+                        </div>
+                        <div class="skill-item">
+                            <h4>Advanced Statistical Analysis</h4>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 100%"></div>
                             </div>
-                            <div class="skill-item">
-                                <h4>R Shiny Development</h4>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
-                                </div>
-                                <p class="skill-description">
-                                    AI-assisted coding of interactive web applications for healthcare 
-                                    data analysis and visualization
-                                </p>
+                            <p class="skill-description">
+                                SEM, factor analysis, regression modeling, and complex statistical 
+                                methods for healthcare data
+                            </p>
+                        </div>
+                        <div class="skill-item">
+                            <h4>R Shiny Development</h4>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 100%"></div>
                             </div>
+                            <p class="skill-description">
+                                AI-assisted coding of interactive web applications for healthcare 
+                                data analysis and visualization
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+   
 
     <!-- Education Section -->
     <section id="education" class="education">
@@ -4800,6 +6217,21 @@ navOverlay.addEventListener('click', () => {
     mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
 });
 
+// Simple snake for all cards
+function addSimpleSnake() {
+    document.querySelectorAll('.project-card').forEach(card => {
+        const snake = document.createElement('div');
+        snake.className = 'simple-snake';
+        snake.style.animationDuration = `${3 + Math.random() * 2}s`; // Random speed
+        card.appendChild(snake);
+        card.style.position = 'relative';
+        card.style.overflow = 'visible';
+    });
+}
+
+// Run when page loads
+document.addEventListener('DOMContentLoaded', addSimpleSnake);
+
 // Close mobile menu when clicking a link
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
@@ -4849,7 +6281,6 @@ function initMap() {
     
     // Add marker for Tamale Metropolis
     marker = L.marker([9.4075, -0.8393]).addTo(map)
-        .bindPopup('<b>Tamale Metropolis</b><br>Northern Region, Ghana')
         .openPopup();
     
     // Add custom zoom controls
@@ -5138,6 +6569,158 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         ];
 
+// =============================================
+// BEAUTIFUL UTILITIES & EFFECTS
+// =============================================
+
+// 1. Initialize Lucide Icons
+document.addEventListener('DOMContentLoaded', function() {
+    lucide.createIcons();
+});
+
+// 2. Notification System
+window.showNotification = function(message, type = 'info') {
+    window.dispatchEvent(new CustomEvent('notification', {
+        detail: { message, type }
+    }));
+};
+
+// 3. Smooth Page Transitions
+document.addEventListener('DOMContentLoaded', function() {
+    // Add fade-in effect to all sections
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        section.classList.add('opacity-0', 'transition-all', 'duration-500');
+    });
+    
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-8');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    sections.forEach(section => observer.observe(section));
+});
+
+// 4. Parallax Scrolling Effect
+function initParallax() {
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(scrollY * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+}
+
+// 5. Mouse Trailing Gradient
+function initMouseGradient() {
+    const gradient = document.createElement('div');
+    gradient.className = 'mouse-gradient';
+    gradient.style.cssText = `
+        position: fixed;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s;
+    `;
+    document.body.appendChild(gradient);
+    
+    document.addEventListener('mousemove', (e) => {
+        gradient.style.left = `${e.clientX - 150}px`;
+        gradient.style.top = `${e.clientY - 150}px`;
+        gradient.style.opacity = '1';
+    });
+    
+    document.addEventListener('mouseleave', () => {
+        gradient.style.opacity = '0';
+    });
+}
+
+// 6. Initialize all effects
+document.addEventListener('DOMContentLoaded', function() {
+    initParallax();
+    initMouseGradient();
+    
+    // Add floating animation to random elements
+    const elementsToFloat = document.querySelectorAll('.project-card, .stat-item');
+    elementsToFloat.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.2}s`;
+        el.classList.add('floating-element');
+    });
+});
+
+// 7. Dynamic Background Particles
+function createParticles() {
+    const container = document.createElement('div');
+    container.className = 'particles-container';
+    container.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -2;
+        overflow: hidden;
+    `;
+    document.body.appendChild(container);
+    
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+            position: absolute;
+            width: ${Math.random() * 4 + 1}px;
+            height: ${Math.random() * 4 + 1}px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: ${Math.random() * 0.3 + 0.1};
+            animation: float-particle ${Math.random() * 20 + 10}s infinite linear;
+        `;
+        
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float-particle {
+                0% {
+                    transform: translate(0, 0) rotate(0deg);
+                }
+                100% {
+                    transform: translate(
+                        ${(Math.random() - 0.5) * 200}px,
+                        ${(Math.random() - 0.5) * 200}px
+                    ) rotate(360deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        container.appendChild(particle);
+    }
+}
+
+// Initialize particles
+createParticles();
+
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
@@ -5155,7 +6738,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 });
 
 // =============================================
-// SCROLL-BASED HEADER & BOTTOM NAV BEHAVIOR
+// ENHANCED SCROLL-BASED HEADER & BOTTOM NAV BEHAVIOR
 // =============================================
 
 let lastScrollTop = 0;
@@ -5173,88 +6756,64 @@ function initScrollNavigation() {
     // Initial check
     handleScroll();
     
-   // =============================================
-// ENHANCED SCROLL EVENT HANDLER (COMBINED)
-// =============================================
-
-let ticking = false;
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            // Existing scroll functionality
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-                if (document.body.classList.contains('dark-mode')) {
-                    header.style.background = 'rgba(17, 24, 39, 0.98)';
-                } else {
-                    header.style.background = 'rgba(255, 255, 255, 0.98)';
-                }
-            } else {
-                header.style.boxShadow = 'none';
-                if (document.body.classList.contains('dark-mode')) {
-                    header.style.background = 'rgba(17, 24, 39, 0.95)';
-                } else {
-                    header.style.background = 'rgba(255, 255, 255, 0.95)';
-                }
-            }
-            
-            // Back to top button
-            const backToTopBtn = document.getElementById('backToTopBtn');
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-            
-            // NEW: Handle bottom nav and header fade
-            handleScroll();
-            
-            ticking = false;
-        });
-        ticking = true;
-    }
-}, { passive: true });
-   
+    // Main scroll event handler
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
     // Update on resize
     window.addEventListener('resize', () => {
         const newIsDesktop = window.innerWidth >= 769;
         if (newIsDesktop !== isDesktop) {
-            location.reload(); // Simple reload for demo
+            location.reload();
         }
     });
 }
 
-// Handle scroll behavior
+// Handle scroll behavior with OPPOSITE logic for top and bottom navs
 function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollThreshold = 200; // When to start hiding header
-    const scrollDelta = 10; // Minimum scroll delta for changes
+    const scrollThreshold = 100; // When to start showing/hiding
+    const scrollDelta = 5; // Minimum scroll delta for changes
     
-    // Show/hide bottom nav based on scroll direction
-    if (scrollTop > scrollThreshold) {
-        // Show bottom nav when scrolled down
+    // Get viewport height
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    
+    // HIDE TOP NAV WHEN SCROLLING DOWN, SHOW WHEN SCROLLING UP
+    if (scrollTop > lastScrollTop + scrollDelta && scrollTop > scrollThreshold) {
+        // Scrolling DOWN - Hide top header, show bottom nav
+        header.classList.add('fade-out');
+        header.classList.remove('fade-in');
+        
         bottomNav.classList.add('show');
         document.body.classList.add('has-bottom-nav');
-        
-        // Hide header when scrolling down
-        if (scrollTop > lastScrollTop + scrollDelta && scrollTop > 300) {
-            header.classList.add('fade-out');
-            header.classList.remove('fade-in');
-        } 
-        // Show header when scrolling up
-        else if (lastScrollTop > scrollTop + scrollDelta) {
-            header.classList.remove('fade-out');
-            header.classList.add('fade-in');
-        }
-    } else {
-        // Hide bottom nav when at top
-        bottomNav.classList.remove('show');
-        document.body.classList.remove('has-bottom-nav');
-        
-        // Always show header at top
+    } 
+    else if (lastScrollTop > scrollTop + scrollDelta) {
+        // Scrolling UP - Show top header, hide bottom nav
         header.classList.remove('fade-out');
         header.classList.add('fade-in');
+        
+        // Only hide bottom nav if we're not at the very bottom
+        if (scrollTop + windowHeight < documentHeight - 50) {
+            bottomNav.classList.remove('show');
+            document.body.classList.remove('has-bottom-nav');
+        }
+    }
+    
+    // Special cases:
+    // 1. At the very top - Always show header, hide bottom nav
+    if (scrollTop <= scrollThreshold) {
+        header.classList.remove('fade-out');
+        header.classList.add('fade-in');
+        bottomNav.classList.remove('show');
+        document.body.classList.remove('has-bottom-nav');
+    }
+    
+    // 2. At the very bottom - Show bottom nav, keep header hidden
+    if (scrollTop + windowHeight >= documentHeight - 10) {
+        bottomNav.classList.add('show');
+        document.body.classList.add('has-bottom-nav');
+        header.classList.add('fade-out');
+        header.classList.remove('fade-in');
     }
     
     lastScrollTop = scrollTop;
@@ -5263,10 +6822,11 @@ function handleScroll() {
     updateActiveNav();
 }
 
-// Update active nav item in bottom nav
+// Update active nav item in both navs
 function updateActiveNav() {
     const sections = document.querySelectorAll('section');
     const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
+    const mainNavLinks = document.querySelectorAll('.nav-links a');
     
     let current = '';
     const scrollPosition = window.scrollY + 100;
@@ -5280,6 +6840,7 @@ function updateActiveNav() {
         }
     });
     
+    // Update bottom nav
     bottomNavLinks.forEach(link => {
         link.classList.remove('active');
         const href = link.getAttribute('href').substring(1);
@@ -5288,8 +6849,7 @@ function updateActiveNav() {
         }
     });
     
-    // Also update main nav for consistency
-    const mainNavLinks = document.querySelectorAll('.nav-links a');
+    // Update main nav
     mainNavLinks.forEach(link => {
         link.classList.remove('active');
         const href = link.getAttribute('href').substring(1);
@@ -5299,58 +6859,21 @@ function updateActiveNav() {
     });
 }
 
-// Initialize bottom nav click handlers
-function initBottomNav() {
-    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
-    
-    bottomNavLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                // Update active state
-                bottomNavLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Smooth scroll to target with header offset
-                const headerHeight = header.offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // On mobile, hide bottom nav after clicking
-                if (window.innerWidth < 769) {
-                    setTimeout(() => {
-                        if (window.scrollY > 200) {
-                            bottomNav.classList.add('show');
-                        } else {
-                            bottomNav.classList.remove('show');
-                        }
-                    }, 500);
-                }
-            }
-        });
-    });
-}
-
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Remove existing scroll event listeners first
+    const oldScrollHandler = window.onscroll;
+    window.onscroll = null;
+    
+    // Initialize new scroll behavior
     initScrollNavigation();
-    initBottomNav();
     
     // Force initial check
     setTimeout(() => {
         handleScroll();
     }, 100);
 });
-        
+
         // Theme Toggle Slider
         const themeToggle = document.getElementById('themeToggle');
         
@@ -5649,54 +7172,90 @@ document.addEventListener('keydown', function(e) {
             });
         });
         
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-                if (document.body.classList.contains('dark-mode')) {
-                    header.style.background = 'rgba(17, 24, 39, 0.98)';
-                } else {
-                    header.style.background = 'rgba(255, 255, 255, 0.98)';
-                }
-            } else {
-                header.style.boxShadow = 'none';
-                if (document.body.classList.contains('dark-mode')) {
-                    header.style.background = 'rgba(17, 24, 39, 0.95)';
-                } else {
-                    header.style.background = 'rgba(255, 255, 255, 0.95)';
-                }
-            }
+      // Simplified header background effect (keeps the styling but not the navigation logic)
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 100) {
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+        if (document.body.classList.contains('dark-mode')) {
+            header.style.background = 'rgba(17, 24, 39, 0.98)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+        }
+    } else {
+        header.style.boxShadow = 'none';
+        if (document.body.classList.contains('dark-mode')) {
+            header.style.background = 'rgba(17, 24, 39, 0.95)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+        }
+    }
+    
+    // Show/hide back to top button (keep this separate)
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+});
+
+// Initialize bottom nav click handlers
+function initBottomNav() {
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
+    const header = document.querySelector('header');
+    
+    bottomNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
             
-            // Update active nav based on scroll position
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
             
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - 150) {
-                    current = section.getAttribute('id');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Update active state
+                bottomNavLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Also update main nav for consistency
+                const mainNavLinks = document.querySelectorAll('.nav-links a');
+                mainNavLinks.forEach(mainLink => {
+                    mainLink.classList.remove('active');
+                    if (mainLink.getAttribute('href') === targetId) {
+                        mainLink.classList.add('active');
+                    }
+                });
+                
+                // Smooth scroll to target with header offset
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // On mobile, show header briefly when clicking bottom nav
+                if (window.innerWidth < 769) {
+                    header.classList.remove('fade-out');
+                    header.classList.add('fade-in');
+                    setTimeout(() => {
+                        if (window.scrollY > 100) {
+                            header.classList.add('fade-out');
+                            header.classList.remove('fade-in');
+                        }
+                    }, 1000);
                 }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // Show/hide back to top button
-            const backToTopBtn = document.getElementById('backToTopBtn');
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
             }
         });
-        
+    });
+}
+
+// Call this in your DOMContentLoaded
+initBottomNav();
+
+      
         // Back to top button
         document.getElementById('backToTopBtn').addEventListener('click', () => {
             window.scrollTo({
@@ -6366,7 +7925,65 @@ if (requestBankBtn) {
         }
     });
 }
+     // Minimal Snake Flow
+class SnakeFlow {
+    constructor() {
+        if ('ontouchstart' in window) return;
         
+        this.segments = [];
+        this.maxSegments = 8;
+        this.mouseX = 0;
+        this.mouseY = 0;
+        
+        // Create flowing tail segments
+        for (let i = 0; i < this.maxSegments; i++) {
+            const segment = document.createElement('div');
+            segment.className = 'snake-flow';
+            
+            // Decreasing size
+            const size = 12 - (i * 1);
+            segment.style.width = `${size}px`;
+            segment.style.height = `${size}px`;
+            segment.style.opacity = `${0.9 - (i * 0.1)}`;
+            
+            document.body.appendChild(segment);
+            this.segments.push({
+                element: segment,
+                x: 0,
+                y: 0
+            });
+        }
+        
+        document.addEventListener('mousemove', (e) => {
+            this.mouseX = e.clientX;
+            this.mouseY = e.clientY;
+        });
+        
+        this.animate();
+    }
+    
+    animate() {
+        this.segments.forEach((segment, index) => {
+            const targetX = index === 0 ? this.mouseX : this.segments[index - 1].x;
+            const targetY = index === 0 ? this.mouseY : this.segments[index - 1].y;
+            
+            segment.x += (targetX - segment.x) * 0.3;
+            segment.y += (targetY - segment.y) * 0.3;
+            
+            segment.element.style.left = `${segment.x}px`;
+            segment.element.style.top = `${segment.y}px`;
+            
+            // Rainbow color flow
+            const hue = (Date.now() * 0.001 + index * 0.3) % 360;
+            segment.element.style.filter = `hue-rotate(${hue}deg) blur(0.5px)`;
+        });
+        
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// Start the flow
+new SnakeFlow();   
         
     </script>
 </body>
