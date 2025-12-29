@@ -431,6 +431,200 @@ function animateProgressBar() {
 });
 
 // =============================================
+// BOTTOM NAVIGATION FUNCTIONALITY
+// =============================================
+
+function initBottomNavigation() {
+    const bottomNav = document.getElementById('bottomNav');
+    const mainNavLinks = document.querySelectorAll('.nav-links a');
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
+    const sections = document.querySelectorAll('section');
+    const header = document.querySelector('header');
+    
+    if (!bottomNav) return;
+    
+    // Show/hide bottom nav based on scroll
+    let lastScrollTop = 0;
+    let isScrollingDown = false;
+    let scrollTimeout;
+    
+    function handleBottomNavScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        // Determine scroll direction
+        isScrollingDown = scrollTop > lastScrollTop;
+        
+        // Always show bottom nav on mobile
+        if (window.innerWidth <= 768) {
+            // Show bottom nav after scrolling down a bit
+            if (scrollTop > 100) {
+                bottomNav.classList.add('show');
+                document.body.classList.add('has-bottom-nav');
+            } else {
+                bottomNav.classList.remove('show');
+                document.body.classList.remove('has-bottom-nav');
+            }
+        } else {
+            // On desktop, only show when scrolled down
+            if (scrollTop > 300 && isScrollingDown) {
+                bottomNav.classList.add('show');
+                document.body.classList.add('has-bottom-nav');
+            } else if (scrollTop <= 100) {
+                bottomNav.classList.remove('show');
+                document.body.classList.remove('has-bottom-nav');
+            }
+        }
+        
+        lastScrollTop = scrollTop;
+        
+        // Update active nav item
+        updateActiveNavItem();
+    }
+    
+    // Update active navigation item
+    function updateActiveNavItem() {
+        const scrollPosition = window.scrollY + 100;
+        let currentSection = '';
+        
+        // Find current section
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollPosition >= sectionTop && 
+                scrollPosition < sectionTop + sectionHeight && 
+                sectionId) {
+                currentSection = sectionId;
+            }
+        });
+        
+        // Update main nav links
+        mainNavLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href').substring(1);
+            if (href === currentSection) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Update bottom nav links
+        bottomNavLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href').substring(1);
+            if (href === currentSection) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    // Handle bottom nav clicks
+    bottomNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Update active states
+                bottomNavLinks.forEach(l => l.classList.remove('active'));
+                mainNavLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Also update corresponding main nav link
+                mainNavLinks.forEach(mainLink => {
+                    if (mainLink.getAttribute('href') === targetId) {
+                        mainLink.classList.add('active');
+                    }
+                });
+                
+                // Scroll to section
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // On mobile, hide header briefly when clicking bottom nav
+                if (window.innerWidth <= 768) {
+                    header.style.transform = 'translateY(-100%)';
+                    setTimeout(() => {
+                        header.style.transform = 'translateY(0)';
+                    }, 800);
+                }
+            }
+        });
+    });
+    
+    // Throttle scroll events for performance
+    let scrollThrottleTimeout;
+    window.addEventListener('scroll', function() {
+        if (!scrollThrottleTimeout) {
+            scrollThrottleTimeout = setTimeout(function() {
+                handleBottomNavScroll();
+                scrollThrottleTimeout = null;
+            }, 100); // Update every 100ms
+        }
+    }, { passive: true });
+    
+    // Initial update
+    setTimeout(() => {
+        handleBottomNavScroll();
+        updateActiveNavItem();
+    }, 500);
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            handleBottomNavScroll();
+            updateActiveNavItem();
+        }, 250);
+    });
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initBottomNavigation();
+    
+    // Also initialize any other navigation-related functions
+    initMobileMenu();
+});
+
+// Mobile menu initialization (if not already existing)
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const navOverlay = document.getElementById('navOverlay');
+    
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if (navOverlay) navOverlay.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+    }
+    
+    // Close mobile menu when clicking overlay
+    if (navOverlay) {
+        navOverlay.addEventListener('click', () => {
+            if (navLinks) navLinks.classList.remove('active');
+            navOverlay.classList.remove('active');
+            if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+    }
+}
+
+// =============================================
 // PERFORMANCE OPTIMIZATION ENGINE
 // =============================================
 
@@ -1007,6 +1201,175 @@ body.dark-mode {
 section, .hero, .project-card, .skill-item {
     opacity: 1 !important;
     visibility: visible !important;
+}
+
+/* Bottom Navigation Styles */
+.bottom-nav {
+    position: fixed;
+    bottom: -100px;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    z-index: 999;
+    transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .bottom-nav {
+    background: rgba(15, 23, 42, 0.98);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bottom-nav.show {
+    bottom: 0;
+}
+
+.bottom-nav-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+}
+
+.bottom-nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.bottom-nav-links::-webkit-scrollbar {
+    display: none;
+}
+
+.bottom-nav-links li {
+    flex: 1;
+    text-align: center;
+}
+
+.bottom-nav-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    min-width: 50px;
+    white-space: nowrap;
+}
+
+body.dark-mode .bottom-nav-links a {
+    color: var(--gray);
+}
+
+.bottom-nav-links a i {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: var(--primary);
+}
+
+.bottom-nav-links a.active {
+    color: var(--primary);
+    background: rgba(26, 86, 219, 0.1);
+}
+
+body.dark-mode .bottom-nav-links a.active {
+    background: rgba(96, 165, 250, 0.15);
+}
+
+.bottom-nav-links a:hover {
+    background: rgba(26, 86, 219, 0.08);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .bottom-nav-links a:hover {
+    background: rgba(96, 165, 250, 0.1);
+}
+
+/* Adjust body padding for bottom nav */
+body.has-bottom-nav {
+    padding-bottom: 70px;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .bottom-nav {
+        padding: 0.4rem 0;
+    }
+    
+    .bottom-nav-links a {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.25rem;
+    }
+    
+    .bottom-nav-links a i {
+        font-size: 1rem;
+    }
+    
+    body.has-bottom-nav {
+        padding-bottom: 60px;
+    }
+}
+
+/* Desktop adjustments */
+@media (min-width: 769px) {
+    .bottom-nav {
+        max-width: 800px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 20px 20px 0 0;
+        bottom: -120px;
+        padding: 0.5rem 1.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: none;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    body.dark-mode .bottom-nav {
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .bottom-nav.show {
+        bottom: 0;
+    }
+    
+    .bottom-nav-links {
+        justify-content: space-around;
+        gap: 0.5rem;
+    }
+    
+    .bottom-nav-links a {
+        font-size: 0.75rem;
+        min-width: auto;
+        padding: 0.5rem;
+    }
+    
+    .bottom-nav-links a i {
+        font-size: 1.2rem;
+    }
+}
+
+/* Hide bottom nav on very small screens in landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+    .bottom-nav {
+        display: none;
+    }
+    
+    body.has-bottom-nav {
+        padding-bottom: 0;
+    }
 }
 
 /* ============================================= */
@@ -9301,5 +9664,56 @@ class SnakeFlow {
 new SnakeFlow();   
         
     </script>
+    
+    <!-- Bottom Navigation for Mobile -->
+<div class="bottom-nav" id="bottomNav">
+    <div class="bottom-nav-container">
+        <ul class="bottom-nav-links">
+            <li>
+                <a href="#home" class="active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#projects">
+                    <i class="fas fa-code"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="#blog">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="#about">
+                    <i class="fas fa-user"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="#education">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Education</span>
+                </a>
+            </li>
+            <li>
+                <a href="#publications">
+                    <i class="fas fa-book"></i>
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+    
 </body>
 </html>
