@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     
     <!-- Primary Meta Tags for Google Search Results -->
@@ -137,6 +137,8 @@
 </script>
     
     <script>
+    
+    
 // =============================================
 // DEVICE CAPABILITY DETECTION & PERFORMANCE PROFILE
 // =============================================
@@ -266,16 +268,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Animate progress bar
-    function animateProgressBar() {
-        const interval = 100; // Update every 100ms
-        const steps = loadingDuration / interval;
+  // Animate progress bar
+function animateProgressBar() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Simplified mobile loading
+        const mobileDuration = 2000; // 2 seconds for mobile
+        const interval = 50;
+        const steps = mobileDuration / interval;
         const increment = 100 / steps;
         
         const progressInterval = setInterval(() => {
             currentProgress += increment;
-            
-            // Ensure we don't go over 100%
             currentProgress = Math.min(currentProgress, 100);
             
             loadingBar.style.width = `${currentProgress}%`;
@@ -285,36 +290,54 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (currentProgress >= 100) {
                 clearInterval(progressInterval);
-                
-                // Burst animation effect
                 loadingScreen.style.opacity = '0';
                 
                 setTimeout(() => {
-                    // Hide loading screen
                     loadingScreen.style.display = 'none';
-                    
-                    // Show website content with burst effect
                     websiteContent.style.display = 'block';
+                    document.body.style.overflow = 'auto';
                     
-                    // Add burst animation to the website
+                    // Skip burst effect on mobile
+                    websiteContent.style.opacity = '1';
+                    websiteContent.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }, interval);
+    } else {
+        // Original desktop loading
+        const interval = 100;
+        const steps = loadingDuration / interval;
+        const increment = 100 / steps;
+        
+        const progressInterval = setInterval(() => {
+            currentProgress += increment;
+            currentProgress = Math.min(currentProgress, 100);
+            
+            loadingBar.style.width = `${currentProgress}%`;
+            loadingPercentage.textContent = `${Math.round(currentProgress)}%`;
+            
+            updateTimeCounter();
+            
+            if (currentProgress >= 100) {
+                clearInterval(progressInterval);
+                loadingScreen.style.opacity = '0';
+                
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    websiteContent.style.display = 'block';
                     document.body.style.overflow = 'hidden';
-                    
-                    // Create burst particles effect
                     createBurstEffect();
-                    
-                    // Animate website entrance
                     websiteContent.style.animation = 'burstIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards';
                     
-                    // Restore scroll after animation
                     setTimeout(() => {
                         document.body.style.overflow = 'auto';
                     }, 800);
-                    
                 }, 500);
             }
         }, interval);
     }
-    
+}
+  
     // Create burst particles effect
     function createBurstEffect() {
         const burstColors = ['#1a56db', '#3b82f6', '#60a5fa', '#0ea5e9'];
@@ -851,6 +874,82 @@ body.dark-mode {
     --accent: #60a5fa;
     --accent-light: rgba(96, 165, 250, 0.1);
 }
+       
+       #loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    background: #1a1a2e;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+    overflow: hidden !important;
+    padding: 1rem;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* ============================================= */
+/* MOBILE LOADING SCREEN FIXES */
+/* ============================================= */
+
+@media (max-width: 768px) {
+    #loadingScreen {
+        padding: 1rem !important;
+    }
+    
+    #loadingLogo {
+        width: 80px !important;
+        height: 80px !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    #loadingText h2 {
+        font-size: 1.3rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    #loadingText p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 2rem !important;
+        padding: 0 1rem !important;
+    }
+    
+    /* Loading bar container */
+    #loadingScreen > div:nth-of-type(4) {
+        width: 90% !important;
+        max-width: 300px !important;
+    }
+    
+    .loadingDot {
+        width: 8px !important;
+        height: 8px !important;
+    }
+    
+    /* Loading stats */
+    #loadingScreen > div:nth-of-type(7),
+    #loadingScreen > div:nth-of-type(8) {
+        position: static !important;
+        margin-top: 1rem !important;
+        text-align: center !important;
+        font-size: 0.8rem !important;
+    }
+    
+    #loadingPercentage {
+        font-size: 0.9rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+}
+
         
     /* Map specific styles */
 #map {
