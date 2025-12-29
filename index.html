@@ -1090,6 +1090,21 @@ body.dark-mode {
     -webkit-overflow-scrolling: touch !important;
 }
 
+/* Alternative: Move Translate to top on mobile */
+@media (max-width: 768px) {
+    .floating-translate-globe {
+        top: 80px !important; /* Below header */
+        bottom: auto !important;
+        right: 10px !important;
+        z-index: 999 !important;
+    }
+    
+    /* Ensure it doesn't cover header */
+    header ~ .floating-translate-globe {
+        top: 70px !important;
+    }
+}
+
 /* ============================================= */
 /* MOBILE LOADING SCREEN FIXES */
 /* ============================================= */
@@ -7753,6 +7768,35 @@ navOverlay.addEventListener('click', () => {
     navLinks.classList.remove('active');
     navOverlay.classList.remove('active');
     mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+});
+
+// Handle mobile translate button positioning
+function adjustTranslateButtonForMobile() {
+    const translateBtn = document.querySelector('.floating-translate-globe');
+    const viewAllBtn = document.getElementById('viewAllProjectsBtn');
+    
+    if (!translateBtn || !viewAllBtn || window.innerWidth > 768) return;
+    
+    // Check if buttons overlap
+    const translateRect = translateBtn.getBoundingClientRect();
+    const viewAllRect = viewAllBtn.getBoundingClientRect();
+    
+    // If they overlap, adjust translate button position
+    if (
+        translateRect.top < viewAllRect.bottom &&
+        translateRect.bottom > viewAllRect.top &&
+        translateRect.left < viewAllRect.right &&
+        translateRect.right > viewAllRect.left
+    ) {
+        translateBtn.style.bottom = (viewAllRect.height + 100) + 'px';
+    }
+}
+
+// Run on load and resize
+document.addEventListener('DOMContentLoaded', function() {
+    adjustTranslateButtonForMobile();
+    window.addEventListener('resize', adjustTranslateButtonForMobile);
+    window.addEventListener('scroll', adjustTranslateButtonForMobile);
 });
 
 // =============================================
