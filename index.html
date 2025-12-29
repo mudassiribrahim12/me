@@ -74,6 +74,67 @@
 
 <!-- Animate.css for smooth animations -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+<script>
+// MINIMAL PERFORMANCE FIX - Add this to your existing script
+(function() {
+    'use strict';
+    
+    // Detect device capabilities quickly
+    const isLowEndDevice = 
+        (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
+        /Android.*[0-3]\.|iPhone OS [0-9]|iPad.*OS [0-9]/.test(navigator.userAgent) ||
+        (navigator.connection && (navigator.connection.effectiveType === '2g' || navigator.connection.saveData));
+    
+    // Apply optimizations immediately
+    if (isLowEndDevice || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        console.log('📱 Mobile/Low-end device detected - applying optimizations');
+        
+        // Add CSS optimizations
+        const style = document.createElement('style');
+        style.textContent = `
+            /* Disable heavy animations on mobile/low-end */
+            @media (max-width: 768px), (max-resolution: 150dpi) {
+                * {
+                    animation: none !important;
+                    transition: none !important;
+                }
+                
+                .simple-snake, .particles-container {
+                    display: none !important;
+                }
+                
+                .project-card:hover, .btn:hover {
+                    transform: none !important;
+                }
+                
+                html { scroll-behavior: auto !important; }
+                
+                /* Force GPU on critical elements */
+                .hero-content, .project-card {
+                    transform: translateZ(0);
+                    backface-visibility: hidden;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Simplify scroll handling
+        let lastScrollUpdate = 0;
+        window.addEventListener('scroll', function() {
+            const now = Date.now();
+            if (now - lastScrollUpdate > 100) { // Update every 100ms max
+                const scrollTop = window.pageYOffset;
+                const header = document.querySelector('header');
+                if (header) {
+                    header.style.transform = scrollTop > 100 ? 'translateY(-100%)' : 'translateY(0)';
+                }
+                lastScrollUpdate = now;
+            }
+        }, { passive: true });
+    }
+})();
+</script>
     
     <script>
 // =============================================
