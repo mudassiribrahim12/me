@@ -6,7 +6,7 @@
     
     
     <!-- Primary Meta Tags for Google Search Results -->
-    <title>Mudasir Mohammed Ibrahim - Official Website</title>
+    <title>Mudasir Mohammed Ibrahim</title>
     <meta name="title" content="Mudasir Mohammed Ibrahim - Official Website">
     <meta name="description" content="Official website of Mudasir Mohammed Ibrahim - Registered General Nurse, Healthcare Researcher & R Shiny Developer at Tamale Teaching Hospital, Ghana">
     
@@ -221,6 +221,191 @@ window.deviceProfile = (function() {
     profile.determinePerformanceTier();
     return profile;
 })();
+
+// =============================================
+// LOADING SCREEN FUNCTIONALITY
+// =============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const websiteContent = document.getElementById('websiteContent');
+    const loadingBar = document.getElementById('loadingBar');
+    const loadingPercentage = document.getElementById('loadingPercentage');
+    const loadingStat = document.getElementById('loadingStat');
+    const loadingTime = document.getElementById('loadingTime');
+    
+    // Set random loading time between 5-10 seconds
+    const loadingDuration = 5000 + Math.random() * 5000; // 5000-10000ms
+    let startTime = Date.now();
+    let currentProgress = 0;
+    
+    // Loading tasks simulation
+    const loadingTasks = [
+        "Initializing portfolio...",
+        "Loading healthcare applications...",
+        "Preparing R Shiny projects...",
+        "Setting up interactive elements...",
+        "Optimizing performance...",
+        "Finalizing experience...",
+        "Ready to launch!"
+    ];
+    
+    // Update time counter
+    function updateTimeCounter() {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        loadingTime.textContent = `${elapsed}s`;
+    }
+    
+    // Simulate loading tasks
+    let taskIndex = 0;
+    function updateLoadingTask() {
+        if (taskIndex < loadingTasks.length) {
+            loadingStat.textContent = loadingTasks[taskIndex];
+            taskIndex++;
+            setTimeout(updateLoadingTask, loadingDuration / loadingTasks.length);
+        }
+    }
+    
+    // Animate progress bar
+    function animateProgressBar() {
+        const interval = 100; // Update every 100ms
+        const steps = loadingDuration / interval;
+        const increment = 100 / steps;
+        
+        const progressInterval = setInterval(() => {
+            currentProgress += increment;
+            
+            // Ensure we don't go over 100%
+            currentProgress = Math.min(currentProgress, 100);
+            
+            loadingBar.style.width = `${currentProgress}%`;
+            loadingPercentage.textContent = `${Math.round(currentProgress)}%`;
+            
+            updateTimeCounter();
+            
+            if (currentProgress >= 100) {
+                clearInterval(progressInterval);
+                
+                // Burst animation effect
+                loadingScreen.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Hide loading screen
+                    loadingScreen.style.display = 'none';
+                    
+                    // Show website content with burst effect
+                    websiteContent.style.display = 'block';
+                    
+                    // Add burst animation to the website
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Create burst particles effect
+                    createBurstEffect();
+                    
+                    // Animate website entrance
+                    websiteContent.style.animation = 'burstIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards';
+                    
+                    // Restore scroll after animation
+                    setTimeout(() => {
+                        document.body.style.overflow = 'auto';
+                    }, 800);
+                    
+                }, 500);
+            }
+        }, interval);
+    }
+    
+    // Create burst particles effect
+    function createBurstEffect() {
+        const burstColors = ['#1a56db', '#3b82f6', '#60a5fa', '#0ea5e9'];
+        
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                width: ${Math.random() * 20 + 5}px;
+                height: ${Math.random() * 20 + 5}px;
+                background: ${burstColors[Math.floor(Math.random() * burstColors.length)]};
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9998;
+                opacity: 0;
+            `;
+            
+            document.body.appendChild(particle);
+            
+            // Animate particle
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = Math.random() * 200 + 100;
+            const distanceX = Math.cos(angle) * velocity;
+            const distanceY = Math.sin(angle) * velocity;
+            
+            particle.animate([
+                {
+                    opacity: 1,
+                    transform: 'translate(-50%, -50%) scale(1)'
+                },
+                {
+                    opacity: 0,
+                    transform: `translate(calc(-50% + ${distanceX}px), calc(-50% + ${distanceY}px)) scale(0)`
+                }
+            ], {
+                duration: 800,
+                easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+            });
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                particle.remove();
+            }, 800);
+        }
+    }
+    
+    // Start loading animation
+    updateLoadingTask();
+    animateProgressBar();
+    
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        @keyframes burstIn {
+            0% { 
+                opacity: 0;
+                transform: scale(0.5);
+                filter: blur(20px);
+            }
+            70% { 
+                opacity: 1;
+                transform: scale(1.05);
+                filter: blur(0);
+            }
+            100% { 
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
+        
+        /* Initial state for website content */
+        #websiteContent {
+            opacity: 0;
+            transform-origin: center;
+        }
+    `;
+    document.head.appendChild(style);
+});
 
 // =============================================
 // PERFORMANCE OPTIMIZATION ENGINE
@@ -689,6 +874,40 @@ body.dark-mode {
     background-color: #ffffff;
     z-index: 2;
     padding: var(--spacing-xl);
+}
+
+/* Fix for burst animation conflicting with display */
+#websiteContent {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    filter: blur(0) !important;
+    display: block !important;
+}
+
+/* Remove conflicting animation properties */
+@keyframes burstIn {
+    0% { 
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Force tab visibility */
+.nav-links a,
+.bottom-nav-links a {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+/* Ensure content is visible */
+section, .hero, .project-card, .skill-item {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* ============================================= */
@@ -5840,7 +6059,163 @@ body.dark-mode .blog-post-title {
     </style>
     
 </head>
+
 <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #1a1a2e;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease;
+    ">
+        <!-- Animated Logo -->
+        <div id="loadingLogo" style="
+            width: 120px;
+            height: 120px;
+            position: relative;
+            margin-bottom: 2rem;
+        ">
+            <div style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                border: 3px solid transparent;
+                border-top-color: #1a56db;
+                animation: spin 1.5s linear infinite;
+            "></div>
+            <div style="
+                position: absolute;
+                top: 15%;
+                left: 15%;
+                width: 70%;
+                height: 70%;
+                border-radius: 50%;
+                border: 3px solid transparent;
+                border-top-color: #3b82f6;
+                animation: spin 1s linear infinite reverse;
+            "></div>
+            <div style="
+                position: absolute;
+                top: 30%;
+                left: 30%;
+                width: 40%;
+                height: 40%;
+                border-radius: 50%;
+                background: #1a56db;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                color: white;
+                font-size: 1.2rem;
+            ">MMI</div>
+        </div>
+        
+        <!-- Loading Text -->
+        <div id="loadingText" style="
+            text-align: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        ">
+            <h2 style="
+                margin-bottom: 1rem;
+                background: linear-gradient(90deg, #1a56db, #3b82f6);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            ">Loading Website</h2>
+            <p style="color: #a0aec0; margin-bottom: 2rem;">Transforming Healthcare with Data & Innovation</p>
+        </div>
+        
+        <!-- Loading Bar -->
+        <div style="
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        ">
+            <div id="loadingBar" style="
+                width: 0%;
+                height: 100%;
+                background: linear-gradient(90deg, #1a56db, #3b82f6);
+                transition: width 5s cubic-bezier(0.4, 0, 0.2, 1);
+                border-radius: 2px;
+            "></div>
+        </div>
+        
+        <!-- Loading Percentage -->
+        <div id="loadingPercentage" style="
+            color: #a0aec0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+        ">0%</div>
+        
+        <!-- Loading Dots Animation -->
+        <div style="display: flex; gap: 0.5rem;">
+            <div class="loadingDot" style="
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #1a56db;
+                animation: pulse 1.5s infinite;
+            "></div>
+            <div class="loadingDot" style="
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #3b82f6;
+                animation: pulse 1.5s infinite 0.2s;
+            "></div>
+            <div class="loadingDot" style="
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #60a5fa;
+                animation: pulse 1.5s infinite 0.4s;
+            "></div>
+        </div>
+        
+        <!-- Loading Stats -->
+        <div style="
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            color: #a0aec0;
+            font-size: 0.8rem;
+        ">
+            <div>Loading: <span id="loadingStat">Initializing...</span></div>
+        </div>
+        
+        <!-- Time Counter -->
+        <div style="
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            color: #a0aec0;
+            font-size: 0.8rem;
+        ">
+            <div>Elapsed: <span id="loadingTime">0s</span></div>
+        </div>
+    </div>
+
+    <!-- Website Content (hidden initially) -->
+    <div id="websiteContent" style="display: none;">
+  
+  
     <!-- Header -->
     <header>
         <div class="container header-container">
@@ -5931,58 +6306,8 @@ body.dark-mode .blog-post-title {
     
         </div>
     </header>
-    
-    <!-- Floating Bottom Navigation -->
-<nav class="bottom-nav" id="bottomNav">
-    <div class="bottom-nav-container">
-        <ul class="bottom-nav-links">
-            <li>
-                <a href="#home" class="active">
-                    <i class="fas fa-home"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="#projects">
-                    <i class="fas fa-code"></i>
-                    <span>Projects</span>
-                </a>
-            </li>
-            <li>
-                <a href="#blog">
-                    <i class="fas fa-blog"></i>
-                    <span>Blog</span>
-                </a>
-            </li>
-            <li>
-                <a href="#about">
-                    <i class="fas fa-user"></i>
-                    <span>About</span>
-                </a>
-            </li>
-            <li>
-                <a href="#education">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Education</span>
-                </a>
-            </li>
-            <li>
-                <a href="#publications">
-                    <i class="fas fa-book"></i>
-                    <span>Publications</span>
-                </a>
-            </li>
-            <li>
-                <a href="#contact">
-                    <i class="fas fa-envelope"></i>
-                    <span>Contact</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<!-- Floating Google Translate (Globe Icon) -->
+  
+  <!-- Floating Google Translate (Globe Icon) -->
 <div class="floating-translate-globe">
     <button class="translate-globe-btn" id="translateGlobeBtn" title="Translate Website">
         <i class="fas fa-globe"></i>
@@ -7675,94 +8000,45 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 });
 
 // =============================================
-// ENHANCED SCROLL-BASED HEADER & BOTTOM NAV BEHAVIOR
+// SIMPLIFIED HEADER SCROLL BEHAVIOR
 // =============================================
 
 let lastScrollTop = 0;
 const header = document.querySelector('header');
-const bottomNav = document.getElementById('bottomNav');
-const isDesktop = window.innerWidth >= 769;
 
-// Initialize scroll behavior
-function initScrollNavigation() {
-    // Add desktop class if needed
-    if (isDesktop) {
-        bottomNav.classList.add('desktop-show');
-    }
-    
-    // Initial check
-    handleScroll();
-    
-    // Main scroll event handler
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Update on resize
-    window.addEventListener('resize', () => {
-        const newIsDesktop = window.innerWidth >= 769;
-        if (newIsDesktop !== isDesktop) {
-            location.reload();
-        }
-    });
-}
-
-// Handle scroll behavior with OPPOSITE logic for top and bottom navs
+// Handle scroll behavior - ONLY header
 function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollThreshold = 100; // When to start showing/hiding
-    const scrollDelta = 5; // Minimum scroll delta for changes
+    const scrollThreshold = 100;
+    const scrollDelta = 5;
     
-    // Get viewport height
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    
-    // HIDE TOP NAV WHEN SCROLLING DOWN, SHOW WHEN SCROLLING UP
+    // Only handle header visibility
     if (scrollTop > lastScrollTop + scrollDelta && scrollTop > scrollThreshold) {
-        // Scrolling DOWN - Hide top header, show bottom nav
+        // Scrolling DOWN - Hide header
         header.classList.add('fade-out');
         header.classList.remove('fade-in');
-        
-        bottomNav.classList.add('show');
-        document.body.classList.add('has-bottom-nav');
     } 
-    else if (lastScrollTop > scrollTop + scrollDelta) {
-        // Scrolling UP - Show top header, hide bottom nav
+    else if (lastScrollTop > scrollTop + scrollDelta || scrollTop <= scrollThreshold) {
+        // Scrolling UP or at TOP - Show header
         header.classList.remove('fade-out');
         header.classList.add('fade-in');
-        
-        // Only hide bottom nav if we're not at the very bottom
-        if (scrollTop + windowHeight < documentHeight - 50) {
-            bottomNav.classList.remove('show');
-            document.body.classList.remove('has-bottom-nav');
-        }
     }
     
-    // Special cases:
-    // 1. At the very top - Always show header, hide bottom nav
+    // At the very top - Always show header
     if (scrollTop <= scrollThreshold) {
         header.classList.remove('fade-out');
         header.classList.add('fade-in');
-        bottomNav.classList.remove('show');
-        document.body.classList.remove('has-bottom-nav');
-    }
-    
-    // 2. At the very bottom - Show bottom nav, keep header hidden
-    if (scrollTop + windowHeight >= documentHeight - 10) {
-        bottomNav.classList.add('show');
-        document.body.classList.add('has-bottom-nav');
-        header.classList.add('fade-out');
-        header.classList.remove('fade-in');
     }
     
     lastScrollTop = scrollTop;
     
-    // Update active nav based on scroll position
+    // Update active nav
     updateActiveNav();
 }
 
-// Update active nav item in both navs
+// Update active nav items
 function updateActiveNav() {
     const sections = document.querySelectorAll('section');
-    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
     const mainNavLinks = document.querySelectorAll('.nav-links a');
     
     let current = '';
@@ -7774,15 +8050,6 @@ function updateActiveNav() {
         
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
             current = section.getAttribute('id');
-        }
-    });
-    
-    // Update bottom nav
-    bottomNavLinks.forEach(link => {
-        link.classList.remove('active');
-        const href = link.getAttribute('href').substring(1);
-        if (href === current) {
-            link.classList.add('active');
         }
     });
     
@@ -7798,12 +8065,7 @@ function updateActiveNav() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Remove existing scroll event listeners first
-    const oldScrollHandler = window.onscroll;
-    window.onscroll = null;
-    
-    // Initialize new scroll behavior
-    initScrollNavigation();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Force initial check
     setTimeout(() => {
