@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    
     <!-- Primary Meta Tags for Google Search Results -->
     <title>Mudasir Mohammed Ibrahim - Official Website</title>
     <meta name="title" content="Mudasir Mohammed Ibrahim - Official Website">
     <meta name="description" content="Official website of Mudasir Mohammed Ibrahim - Registered General Nurse, Healthcare Researcher & R Shiny Developer at Tamale Teaching Hospital, Ghana">
+    
+    <!-- Add this with your other meta tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a56db">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -69,6 +74,434 @@
 
 <!-- Animate.css for smooth animations -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <script>
+// =============================================
+// DEVICE CAPABILITY DETECTION & PERFORMANCE PROFILE
+// =============================================
+
+// Detect device capabilities
+window.deviceProfile = (function() {
+    'use strict';
+    
+    const profile = {
+        // Hardware detection
+        cpuCores: navigator.hardwareConcurrency || 4,
+        memory: performance.memory ? (performance.memory.jsHeapSizeLimit / 1024 / 1024 / 1024).toFixed(1) : 4, // GB
+        gpu: false,
+        
+        // Network detection
+        connection: navigator.connection ? navigator.connection.effectiveType : '4g',
+        saveData: navigator.connection ? navigator.connection.saveData : false,
+        
+        // Device type
+        isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+        isTablet: /iPad|Android(?!.*Mobile)|Tablet/i.test(navigator.userAgent),
+        isDesktop: !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+        
+        // Screen capabilities
+        pixelRatio: window.devicePixelRatio || 1,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height,
+        
+        // Performance markers
+        lowEndDevice: false,
+        mediumEndDevice: false,
+        highEndDevice: false,
+        
+        // Determine performance tier
+        determinePerformanceTier: function() {
+            // Check for low-end devices
+            if (this.cpuCores <= 2 || 
+                this.connection === 'slow-2g' || 
+                this.connection === '2g' ||
+                this.screenWidth <= 360 ||
+                this.isMobile && this.memory < 2) {
+                this.lowEndDevice = true;
+                console.log('🔧 Performance: LOW-END device detected');
+            } 
+            // Check for high-end devices
+            else if (this.cpuCores >= 8 && 
+                     (this.connection === '4g' || this.connection === '5g') &&
+                     this.memory >= 8 &&
+                     this.screenWidth >= 1920) {
+                this.highEndDevice = true;
+                console.log('🚀 Performance: HIGH-END device detected');
+            } 
+            // Default to medium
+            else {
+                this.mediumEndDevice = true;
+                console.log('⚡ Performance: MEDIUM-END device detected');
+            }
+            
+            // Check for GPU acceleration
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            this.gpu = !!gl;
+            
+            console.log('📊 Device Profile:', {
+                cores: this.cpuCores,
+                memory: this.memory + 'GB',
+                connection: this.connection,
+                screen: this.screenWidth + 'x' + this.screenHeight,
+                gpu: this.gpu ? 'Available' : 'Not Available',
+                performanceTier: this.lowEndDevice ? 'Low' : this.highEndDevice ? 'High' : 'Medium'
+            });
+        },
+        
+        // Get optimization level
+        getOptimizationLevel: function() {
+            if (this.lowEndDevice) return 'aggressive';
+            if (this.mediumEndDevice) return 'moderate';
+            return 'minimal';
+        }
+    };
+    
+    profile.determinePerformanceTier();
+    return profile;
+})();
+
+// =============================================
+// PERFORMANCE OPTIMIZATION ENGINE
+// =============================================
+
+window.PerformanceOptimizer = (function() {
+    'use strict';
+    
+    const optimizations = {
+        
+        // LOW-END DEVICE OPTIMIZATIONS (Most aggressive)
+        aggressive: {
+            apply: function() {
+                console.log('🔧 Applying AGGRESSIVE optimizations');
+                
+                // 1. Disable ALL animations
+                const style = document.createElement('style');
+                style.id = 'aggressive-optimizations';
+                style.textContent = `
+                    /* Disable ALL animations and transitions */
+                    * {
+                        animation: none !important;
+                        transition: none !important;
+                        transform: none !important;
+                    }
+                    
+                    /* Remove complex effects */
+                    .simple-snake, 
+                    .mouse-gradient, 
+                    .particles-container,
+                    .project-card::before,
+                    .project-card::after,
+                    .snake-flow,
+                    .floating-element,
+                    .shimmer {
+                        display: none !important;
+                    }
+                    
+                    /* Simplify shadows and blurs */
+                    .glass-card,
+                    .neumorphism {
+                        backdrop-filter: none !important;
+                        -webkit-backdrop-filter: none !important;
+                        filter: none !important;
+                    }
+                    
+                    /* Remove hover effects */
+                    .project-card:hover,
+                    .skill-item:hover,
+                    .btn:hover,
+                    .interest-tag:hover {
+                        transform: none !important;
+                        box-shadow: none !important;
+                    }
+                    
+                    /* Use simple shadows */
+                    .project-card,
+                    .skill-item,
+                    .contact-form {
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+                    }
+                    
+                    /* Force simple scroll */
+                    html {
+                        scroll-behavior: auto !important;
+                    }
+                    
+                    /* Optimize images */
+                    img {
+                        image-rendering: -webkit-optimize-contrast;
+                        image-rendering: crisp-edges;
+                    }
+                    
+                    /* Disable parallax */
+                    [data-parallax] {
+                        transform: none !important;
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // 2. Remove heavy JavaScript
+                if (window.snakeFlow) window.snakeFlow = null;
+                if (window.createParticles) window.createParticles = null;
+                
+                // 3. Throttle event listeners
+                this.throttleEventListeners();
+                
+                // 4. Reduce image quality
+                this.reduceImageQuality();
+            },
+            
+            throttleEventListeners: function() {
+                // Replace scroll handler with throttled version
+                let scrollTimeout;
+                window.addEventListener('scroll', function() {
+                    if (!scrollTimeout) {
+                        scrollTimeout = setTimeout(function() {
+                            scrollTimeout = null;
+                            // Simple header handling
+                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                            const header = document.querySelector('header');
+                            if (scrollTop > 100) {
+                                header.style.transform = 'translateY(-100%)';
+                            } else {
+                                header.style.transform = 'translateY(0)';
+                            }
+                        }, 100); // Throttle to 10fps
+                    }
+                }, { passive: true });
+            },
+            
+            reduceImageQuality: function() {
+                // Reduce image quality for low-end devices
+                document.querySelectorAll('img').forEach(img => {
+                    if (img.src.includes('unsplash') || img.src.includes('raw.githubusercontent')) {
+                        img.loading = 'lazy';
+                        img.fetchPriority = 'low';
+                    }
+                });
+            }
+        },
+        
+        // MEDIUM DEVICE OPTIMIZATIONS (Balanced)
+        moderate: {
+            apply: function() {
+                console.log('⚡ Applying MODERATE optimizations');
+                
+                const style = document.createElement('style');
+                style.id = 'moderate-optimizations';
+                style.textContent = `
+                    /* Reduce animation complexity */
+                    * {
+                        animation-duration: 0.5s !important;
+                        transition-duration: 0.2s !important;
+                    }
+                    
+                    /* Limit simultaneous animations */
+                    .stagger-animation > * {
+                        animation-delay: 0s !important;
+                    }
+                    
+                    /* Simplify complex effects */
+                    .simple-snake,
+                    .particles-container {
+                        display: none !important;
+                    }
+                    
+                    /* Reduce shadow complexity */
+                    .project-card:hover,
+                    .skill-item:hover {
+                        transform: translateY(-2px) !important;
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+                    }
+                    
+                    /* Optimize for mobile */
+                    @media (max-width: 768px) {
+                        * {
+                            animation: none !important;
+                            transition: none !important;
+                        }
+                        
+                        .project-card:hover,
+                        .skill-item:hover {
+                            transform: none !important;
+                        }
+                    }
+                    
+                    /* Use will-change sparingly */
+                    .hero-content,
+                    .project-card {
+                        will-change: transform;
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Enable GPU acceleration
+                this.enableGPUAcceleration();
+                
+                // Optimize animations
+                this.optimizeAnimations();
+            },
+            
+            enableGPUAcceleration: function() {
+                // Force GPU acceleration on key elements
+                const elements = document.querySelectorAll('.hero-content, .project-card, .skill-item');
+                elements.forEach(el => {
+                    el.style.transform = 'translateZ(0)';
+                    el.style.backfaceVisibility = 'hidden';
+                });
+            },
+            
+            optimizeAnimations: function() {
+                // Use requestAnimationFrame for smoother animations
+                let lastTime = 0;
+                function optimizedAnimate(timestamp) {
+                    if (timestamp - lastTime > 16) { // ~60fps
+                        // Run animation updates here
+                        lastTime = timestamp;
+                    }
+                    requestAnimationFrame(optimizedAnimate);
+                }
+                requestAnimationFrame(optimizedAnimate);
+            }
+        },
+        
+        // HIGH-END DEVICE OPTIMIZATIONS (Minimal - keep all effects)
+        minimal: {
+            apply: function() {
+                console.log('🚀 Applying MINIMAL optimizations (full experience)');
+                
+                // Just ensure GPU acceleration
+                const style = document.createElement('style');
+                style.id = 'minimal-optimizations';
+                style.textContent = `
+                    /* Ensure GPU acceleration */
+                    .hero-content,
+                    .project-card,
+                    .skill-item,
+                    .interest-tag {
+                        transform: translateZ(0);
+                        backface-visibility: hidden;
+                        -webkit-backface-visibility: hidden;
+                    }
+                    
+                    /* Smooth scrolling */
+                    html {
+                        scroll-behavior: smooth;
+                    }
+                    
+                    /* Keep all animations but ensure they're efficient */
+                    * {
+                        will-change: auto;
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Use native smooth scrolling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+        }
+    };
+    
+    // Public API
+    return {
+        init: function() {
+            const optimizationLevel = window.deviceProfile.getOptimizationLevel();
+            optimizations[optimizationLevel].apply();
+            
+            // Apply additional optimizations based on network
+            this.applyNetworkOptimizations();
+            
+            // Initialize performance monitoring
+            this.monitorPerformance();
+        },
+        
+        applyNetworkOptimizations: function() {
+            const connection = window.deviceProfile.connection;
+            
+            if (connection === 'slow-2g' || connection === '2g' || window.deviceProfile.saveData) {
+                console.log('📶 Slow network detected, applying data-saving optimizations');
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    /* Reduce image quality */
+                    img {
+                        image-rendering: pixelated;
+                    }
+                    
+                    /* Disable background images */
+                    .hero {
+                        background-image: none !important;
+                    }
+                    
+                    /* Remove decorative images */
+                    .hero-image img:not([src*="picture.jpg"]) {
+                        display: none;
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Lazy load everything
+                document.querySelectorAll('img').forEach(img => {
+                    img.loading = 'lazy';
+                });
+            }
+        },
+        
+        monitorPerformance: function() {
+            // Monitor FPS
+            let frameCount = 0;
+            let lastTime = performance.now();
+            let fps = 60;
+            
+            function checkFPS() {
+                frameCount++;
+                const currentTime = performance.now();
+                
+                if (currentTime - lastTime >= 1000) {
+                    fps = frameCount;
+                    frameCount = 0;
+                    lastTime = currentTime;
+                    
+                    // Dynamically adjust if FPS drops
+                    if (fps < 30 && !window.deviceProfile.lowEndDevice) {
+                        console.warn(`⚠️ Low FPS detected: ${fps}. Applying additional optimizations`);
+                        optimizations.moderate.apply();
+                    }
+                }
+                
+                requestAnimationFrame(checkFPS);
+            }
+            
+            checkFPS();
+            
+            // Monitor memory usage
+            if (performance.memory) {
+                setInterval(() => {
+                    const usedMB = performance.memory.usedJSHeapSize / 1024 / 1024;
+                    const limitMB = performance.memory.jsHeapSizeLimit / 1024 / 1024;
+                    
+                    if (usedMB > limitMB * 0.8) {
+                        console.warn(`⚠️ High memory usage: ${usedMB.toFixed(1)}MB/${limitMB.toFixed(1)}MB`);
+                        // Apply aggressive optimizations if memory is high
+                        optimizations.aggressive.apply();
+                    }
+                }, 5000);
+            }
+        }
+    };
+})();
+</script>
     
     <!-- Structured Data for Google -->
     <script type="application/ld+json">
@@ -195,6 +628,118 @@ body.dark-mode {
     background-color: #ffffff;
     z-index: 2;
     padding: var(--spacing-xl);
+}
+
+/* ============================================= */
+/* PERFORMANCE OPTIMIZATION CSS */
+/* ============================================= */
+
+/* Base performance optimizations for all devices */
+.performance-optimized * {
+    /* Containment for better rendering performance */
+    contain: layout style paint;
+}
+
+/* Hardware acceleration layers */
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000;
+    -webkit-perspective: 1000;
+}
+
+/* Performance-critical elements */
+.hero-content,
+.project-card,
+.skill-item,
+.interest-tag {
+    composes: gpu-accelerated;
+}
+
+/* Optimize images */
+img {
+    content-visibility: auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Optimize scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+    html {
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Reduce animation complexity on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Performance tiers - will be overridden by JavaScript */
+body.low-performance * {
+    animation: none !important;
+    transition: none !important;
+}
+
+body.medium-performance * {
+    animation-duration: 0.5s !important;
+    transition-duration: 0.2s !important;
+}
+
+/* Optimize layout shifts */
+.aspect-ratio-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.aspect-ratio-container > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Optimize paint operations */
+.static-background {
+    background-attachment: scroll !important;
+}
+
+/* Reduce composite layers */
+.composite-layer {
+    isolation: isolate;
+    will-change: transform;
+}
+
+/* Touch optimization */
+@media (hover: none) and (pointer: coarse) {
+    .touch-optimized {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    /* Increase touch targets */
+    .btn,
+    .nav-links a,
+    .bottom-nav-links a {
+        min-height: 44px;
+        min-width: 44px;
+    }
 }
 
 /* ============================================= */
