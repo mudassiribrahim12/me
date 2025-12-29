@@ -1090,18 +1090,68 @@ body.dark-mode {
     -webkit-overflow-scrolling: touch !important;
 }
 
-/* Alternative: Move Translate to top on mobile */
+/* ============================================= */
+/* GOOGLE TRANSLATE MOBILE FIX - Projects Button */
+/* ============================================= */
+
 @media (max-width: 768px) {
+    /* Reposition Google Translate button on mobile */
     .floating-translate-globe {
-        top: 80px !important; /* Below header */
-        bottom: auto !important;
+        top: auto !important;
+        bottom: 80px !important; /* Position above bottom nav */
         right: 10px !important;
-        z-index: 999 !important;
+        z-index: 998 !important; /* Lower than bottom nav (999) */
+        transform: scale(0.9);
     }
     
-    /* Ensure it doesn't cover header */
-    header ~ .floating-translate-globe {
-        top: 70px !important;
+    /* Ensure Projects button is visible */
+    #viewAllProjectsBtn {
+        position: relative !important;
+        z-index: 997 !important;
+        margin-bottom: 20px !important; /* Add space below */
+    }
+    
+    /* Projects section extra padding for mobile */
+    #projects {
+        padding-bottom: 30px !important;
+    }
+    
+    /* Adjust when bottom nav is visible */
+    body.has-bottom-nav .floating-translate-globe {
+        bottom: 140px !important; /* Higher up when bottom nav shows */
+    }
+    
+    /* Make Google Translate dropdown smaller on mobile */
+    .translate-dropdown {
+        bottom: 100% !important;
+        top: auto !important;
+        max-width: 280px !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: translateX(0) !important;
+    }
+    
+    /* Ensure dropdown doesn't cover content */
+    .translate-dropdown.active {
+        margin-bottom: 10px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 400px) {
+    .floating-translate-globe {
+        bottom: 70px !important;
+        right: 8px !important;
+        transform: scale(0.85);
+    }
+    
+    .translate-dropdown {
+        max-width: 250px !important;
+    }
+    
+    #viewAllProjectsBtn {
+        padding: 14px 20px !important;
+        font-size: 0.95rem !important;
     }
 }
 
@@ -7768,35 +7818,6 @@ navOverlay.addEventListener('click', () => {
     navLinks.classList.remove('active');
     navOverlay.classList.remove('active');
     mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-});
-
-// Handle mobile translate button positioning
-function adjustTranslateButtonForMobile() {
-    const translateBtn = document.querySelector('.floating-translate-globe');
-    const viewAllBtn = document.getElementById('viewAllProjectsBtn');
-    
-    if (!translateBtn || !viewAllBtn || window.innerWidth > 768) return;
-    
-    // Check if buttons overlap
-    const translateRect = translateBtn.getBoundingClientRect();
-    const viewAllRect = viewAllBtn.getBoundingClientRect();
-    
-    // If they overlap, adjust translate button position
-    if (
-        translateRect.top < viewAllRect.bottom &&
-        translateRect.bottom > viewAllRect.top &&
-        translateRect.left < viewAllRect.right &&
-        translateRect.right > viewAllRect.left
-    ) {
-        translateBtn.style.bottom = (viewAllRect.height + 100) + 'px';
-    }
-}
-
-// Run on load and resize
-document.addEventListener('DOMContentLoaded', function() {
-    adjustTranslateButtonForMobile();
-    window.addEventListener('resize', adjustTranslateButtonForMobile);
-    window.addEventListener('scroll', adjustTranslateButtonForMobile);
 });
 
 // =============================================
