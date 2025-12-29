@@ -1128,6 +1128,145 @@ body.dark-mode {
 }
 
 /* ============================================= */
+/* MOBILE HEADER FIX - Compact Logo */
+/* ============================================= */
+
+@media (max-width: 768px) {
+    /* Fix header container */
+    .header-container {
+        padding: 0.5rem 0 !important;
+        min-height: 60px !important;
+        align-items: center !important;
+    }
+    
+    /* Compact logo on mobile */
+    .logo {
+        font-size: 1rem !important; /* Reduced from 1.5rem */
+        line-height: 1.2 !important;
+        max-width: 150px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Adjust logo spacing */
+    .logo span {
+        font-size: 1rem !important;
+    }
+    
+    /* Right wrapper adjustments */
+    .right-nav-wrapper {
+        gap: 0.5rem !important;
+        align-items: center !important;
+    }
+    
+    /* Header controls spacing */
+    .header-controls {
+        gap: 0.5rem !important;
+        margin-left: auto !important;
+    }
+    
+    /* Search icon smaller */
+    .search-toggle {
+        padding: 0.35rem !important;
+        font-size: 1rem !important;
+        width: 36px !important;
+        height: 36px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Mobile menu button smaller */
+    .mobile-menu-btn {
+        font-size: 1.2rem !important;
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Remove theme text completely on mobile */
+    .theme-toggle-text {
+        display: none !important;
+    }
+    
+    /* Make theme toggle smaller */
+    .theme-toggle-switch {
+        width: 42px !important;
+        height: 20px !important;
+        margin: 0 !important;
+    }
+    
+    .theme-toggle-switch:after {
+        width: 16px !important;
+        height: 16px !important;
+        top: 2px !important;
+        left: 2px !important;
+    }
+    
+    .theme-toggle-checkbox:checked + .theme-toggle-switch:after {
+        transform: translateX(22px) !important;
+    }
+}
+
+/* For very small phones (iPhone SE, etc.) */
+@media (max-width: 400px) {
+    .logo {
+        font-size: 0.9rem !important;
+        max-width: 120px !important;
+    }
+    
+    .logo span {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Even tighter spacing */
+    .right-nav-wrapper {
+        gap: 0.3rem !important;
+    }
+    
+    .header-controls {
+        gap: 0.3rem !important;
+    }
+    
+    .search-toggle,
+    .mobile-menu-btn {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .theme-toggle-switch {
+        width: 38px !important;
+        height: 18px !important;
+    }
+    
+    .theme-toggle-switch:after {
+        width: 14px !important;
+        height: 14px !important;
+    }
+}
+
+/* For landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header-container {
+        min-height: 50px !important;
+    }
+    
+    .logo {
+        font-size: 0.85rem !important;
+        max-width: 130px !important;
+    }
+}
+
+/* ============================================= */
 /* MOBILE LOADING SCREEN FIXES */
 /* ============================================= */
 
