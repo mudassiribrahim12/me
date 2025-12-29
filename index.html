@@ -1091,67 +1091,39 @@ body.dark-mode {
 }
 
 /* ============================================= */
-/* GOOGLE TRANSLATE MOBILE FIX - Projects Button */
+/* HIDE GOOGLE TRANSLATE ON MOBILE COMPLETELY */
 /* ============================================= */
 
 @media (max-width: 768px) {
-    /* Reposition Google Translate button on mobile */
+    /* Hide the floating translate button on mobile */
     .floating-translate-globe {
-        top: auto !important;
-        bottom: 80px !important; /* Position above bottom nav */
-        right: 10px !important;
-        z-index: 998 !important; /* Lower than bottom nav (999) */
-        transform: scale(0.9);
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
     }
     
-    /* Ensure Projects button is visible */
-    #viewAllProjectsBtn {
-        position: relative !important;
-        z-index: 997 !important;
-        margin-bottom: 20px !important; /* Add space below */
-    }
-    
-    /* Projects section extra padding for mobile */
-    #projects {
-        padding-bottom: 30px !important;
-    }
-    
-    /* Adjust when bottom nav is visible */
-    body.has-bottom-nav .floating-translate-globe {
-        bottom: 140px !important; /* Higher up when bottom nav shows */
-    }
-    
-    /* Make Google Translate dropdown smaller on mobile */
+    /* Also hide the dropdown if it exists */
     .translate-dropdown {
-        bottom: 100% !important;
-        top: auto !important;
-        max-width: 280px !important;
-        right: 0 !important;
-        left: auto !important;
-        transform: translateX(0) !important;
+        display: none !important;
     }
     
-    /* Ensure dropdown doesn't cover content */
-    .translate-dropdown.active {
-        margin-bottom: 10px;
+    /* Ensure no Google Translate elements show on mobile */
+    #google_translate_element {
+        display: none !important;
+    }
+    
+    /* Fix any potential layout issues */
+    #viewAllProjectsBtn {
+        margin-bottom: 10px !important;
     }
 }
 
-/* For very small screens */
-@media (max-width: 400px) {
-    .floating-translate-globe {
-        bottom: 70px !important;
-        right: 8px !important;
-        transform: scale(0.85);
-    }
-    
+/* Also hide on landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .floating-translate-globe,
+    #google_translate_element,
     .translate-dropdown {
-        max-width: 250px !important;
-    }
-    
-    #viewAllProjectsBtn {
-        padding: 14px 20px !important;
-        font-size: 0.95rem !important;
+        display: none !important;
     }
 }
 
