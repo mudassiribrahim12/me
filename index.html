@@ -273,10 +273,10 @@ function animateProgressBar() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (isMobile) {
-        // Simplified mobile loading
-        const mobileDuration = 2000; // 2 seconds for mobile
-        const interval = 50;
-        const steps = mobileDuration / interval;
+        // Use same duration as desktop for consistent experience
+        const loadingDuration = 5000 + Math.random() * 5000; // 5000-10000ms for mobile too
+        const interval = 100; // Same as desktop
+        const steps = loadingDuration / interval;
         const increment = 100 / steps;
         
         const progressInterval = setInterval(() => {
@@ -297,14 +297,15 @@ function animateProgressBar() {
                     websiteContent.style.display = 'block';
                     document.body.style.overflow = 'auto';
                     
-                    // Skip burst effect on mobile
+                    // Simplified transition for mobile
                     websiteContent.style.opacity = '1';
                     websiteContent.style.transform = 'scale(1)';
                 }, 300);
             }
         }, interval);
     } else {
-        // Original desktop loading
+        // Original desktop loading (unchanged)
+        const loadingDuration = 5000 + Math.random() * 5000; // 5000-10000ms
         const interval = 100;
         const steps = loadingDuration / interval;
         const increment = 100 / steps;
