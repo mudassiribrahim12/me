@@ -1091,6 +1091,43 @@ body.dark-mode {
 }
 
 /* ============================================= */
+/* HIDE GOOGLE TRANSLATE ON MOBILE COMPLETELY */
+/* ============================================= */
+
+@media (max-width: 768px) {
+    /* Hide the floating translate button on mobile */
+    .floating-translate-globe {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    
+    /* Also hide the dropdown if it exists */
+    .translate-dropdown {
+        display: none !important;
+    }
+    
+    /* Ensure no Google Translate elements show on mobile */
+    #google_translate_element {
+        display: none !important;
+    }
+    
+    /* Fix any potential layout issues */
+    #viewAllProjectsBtn {
+        margin-bottom: 10px !important;
+    }
+}
+
+/* Also hide on landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .floating-translate-globe,
+    #google_translate_element,
+    .translate-dropdown {
+        display: none !important;
+    }
+}
+
+/* ============================================= */
 /* MOBILE LOADING SCREEN FIXES */
 /* ============================================= */
 
