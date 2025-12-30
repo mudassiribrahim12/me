@@ -1129,61 +1129,45 @@ body.dark-mode {
 }
 
 /* ============================================= */
-/* AGGRESSIVE HIDE NAV & SEARCH ON MOBILE */
+/* HIDE NAV TABS & SEARCH ON MOBILE */
 /* ============================================= */
 
 @media (max-width: 768px) {
-    /* Hide navigation completely */
-    .right-nav {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        height: 0 !important;
-        width: 0 !important;
-        overflow: hidden !important;
-    }
-    
-    /* Hide search button */
-    .search-toggle, 
-    .search-container {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
-    }
-    
-    /* Hide mobile menu button if you want it hidden too */
-    .mobile-menu-btn {
+    /* Hide the entire right navigation wrapper (contains tabs) */
+    .right-nav-wrapper .right-nav {
         display: none !important;
     }
     
-    /* Simplify header layout */
+    /* Hide search toggle button on mobile */
+    .header-controls .search-container {
+        display: none !important;
+    }
+    
+    /* Show only logo and theme toggle on mobile */
     .header-container {
-        display: flex !important;
         justify-content: space-between !important;
-        align-items: center !important;
-        width: 100% !important;
     }
     
-    /* Logo on left */
-    .logo {
-        flex: 0 0 auto !important;
-        margin-right: 0 !important;
-    }
-    
-    /* Theme toggle on right */
+    /* Make sure header controls (theme toggle) are visible */
     .header-controls {
-        flex: 0 0 auto !important;
-        margin-left: 0 !important;
         display: flex !important;
-        align-items: center !important;
+        gap: 0.5rem !important;
     }
     
-    /* Remove any right padding/margin */
-    .right-nav-wrapper {
-        margin-left: 0 !important;
-        padding-left: 0 !important;
-        gap: 0 !important;
+    /* Hide theme toggle text, keep only icon */
+    .theme-toggle-text {
+        display: none !important;
+    }
+    
+    /* Adjust header spacing */
+    .header-container {
+        padding: 0.5rem 0 !important;
+    }
+    
+    /* Ensure logo is properly positioned */
+    .logo {
+        font-size: 1.2rem !important;
+        margin-right: auto !important;
     }
 }
 
