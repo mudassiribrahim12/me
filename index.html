@@ -7898,19 +7898,6 @@ function hideMobileNavAndSearch() {
 document.addEventListener('DOMContentLoaded', hideMobileNavAndSearch);
 window.addEventListener('resize', hideMobileNavAndSearch);
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    loadFeaturedProjects();
-    loadAllProjects();
-    loadBlogPosts();
-    
-    // Add this line:
-    hideMobileNavAndSearch();
-    
-    // Initialize Google Translate (pre-load)
-    initializeGoogleTranslateOnDemand();
-});
-
 // =============================================
 // FLOATING CLOSE BUTTON FOR PROJECTS MODAL
 // =============================================
@@ -9685,6 +9672,9 @@ document.addEventListener('DOMContentLoaded', function() {
             loadFeaturedProjects();
             loadAllProjects();
             loadBlogPosts();
+            
+            // Add this line:
+    hideMobileNavAndSearch();
             
             // Initialize Google Translate (pre-load)
 initializeGoogleTranslateOnDemand();
