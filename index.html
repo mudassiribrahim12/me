@@ -1129,6 +1129,65 @@ body.dark-mode {
 }
 
 /* ============================================= */
+/* AGGRESSIVE HIDE NAV & SEARCH ON MOBILE */
+/* ============================================= */
+
+@media (max-width: 768px) {
+    /* Hide navigation completely */
+    .right-nav {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    /* Hide search button */
+    .search-toggle, 
+    .search-container {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    /* Hide mobile menu button if you want it hidden too */
+    .mobile-menu-btn {
+        display: none !important;
+    }
+    
+    /* Simplify header layout */
+    .header-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    /* Logo on left */
+    .logo {
+        flex: 0 0 auto !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Theme toggle on right */
+    .header-controls {
+        flex: 0 0 auto !important;
+        margin-left: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    /* Remove any right padding/margin */
+    .right-nav-wrapper {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        gap: 0 !important;
+    }
+}
+
+/* ============================================= */
 /* MOBILE LOADING SCREEN FIXES */
 /* ============================================= */
 
@@ -7791,6 +7850,65 @@ navOverlay.addEventListener('click', () => {
     navLinks.classList.remove('active');
     navOverlay.classList.remove('active');
     mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+});
+
+// =============================================
+// HIDE NAV & SEARCH ON MOBILE
+// =============================================
+
+function hideMobileNavAndSearch() {
+    if (window.innerWidth <= 768) {
+        // Hide navigation tabs
+        const rightNav = document.querySelector('.right-nav');
+        if (rightNav) {
+            rightNav.style.display = 'none';
+        }
+        
+        // Hide search button
+        const searchContainer = document.querySelector('.search-container');
+        if (searchContainer) {
+            searchContainer.style.display = 'none';
+        }
+        
+        // Hide theme toggle text
+        const themeText = document.querySelector('.theme-toggle-text');
+        if (themeText) {
+            themeText.style.display = 'none';
+        }
+    } else {
+        // Show elements on desktop
+        const rightNav = document.querySelector('.right-nav');
+        if (rightNav) {
+            rightNav.style.display = 'block';
+        }
+        
+        const searchContainer = document.querySelector('.search-container');
+        if (searchContainer) {
+            searchContainer.style.display = 'block';
+        }
+        
+        const themeText = document.querySelector('.theme-toggle-text');
+        if (themeText) {
+            themeText.style.display = 'block';
+        }
+    }
+}
+
+// Run on load and resize
+document.addEventListener('DOMContentLoaded', hideMobileNavAndSearch);
+window.addEventListener('resize', hideMobileNavAndSearch);
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadFeaturedProjects();
+    loadAllProjects();
+    loadBlogPosts();
+    
+    // Add this line:
+    hideMobileNavAndSearch();
+    
+    // Initialize Google Translate (pre-load)
+    initializeGoogleTranslateOnDemand();
 });
 
 // =============================================
