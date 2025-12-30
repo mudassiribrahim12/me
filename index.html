@@ -11,6 +11,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <meta name="theme-color" content="#1a56db">
 
+<!-- Add these to your head section after the viewport meta tag -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mudasiribrahim.com/">
@@ -104,6 +108,28 @@
             margin: 0 auto;
             padding: 0 20px;
         }
+        
+        /* Add hardware acceleration */
+.navbar,
+.mobile-menu-content,
+.glass-card {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Optimize animations for mobile */
+@media (max-width: 768px) {
+    * {
+        transition: transform 0.3s ease, opacity 0.3s ease !important;
+    }
+    
+    /* Reduce animation complexity on mobile */
+    .glass-card:hover,
+    .shiny-app-card:hover,
+    .project-card:hover {
+        transform: translateY(-2px) !important;
+    }
+}
         
         /* Resume Section Styles */
 .resume-intro {
@@ -312,6 +338,25 @@
     font-size: 1rem;
     line-height: 1.6;
     margin: 0;
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+    /* Safari and iOS specific CSS */
+    .glass-card,
+    .navbar {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+    
+    /* Fix for blurry text on iOS */
+    body, 
+    .container,
+    .glass-card,
+    .mobile-menu-content {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 }
 
 /* Responsive Design */
@@ -931,6 +976,30 @@
     font-size: 1rem;
     line-height: 1.6;
     margin: 0;
+}
+
+/* Add this to your CSS */
+@media (max-width: 768px) {
+    .glass-card,
+    .navbar,
+    .mobile-menu-content,
+    .support-card,
+    .resume-card,
+    .contact-form-container,
+    .contact-info-container,
+    .competency-card,
+    .credential-card,
+    .skill-category,
+    .publication-card {
+        backdrop-filter: none !important;
+        background: var(--bg-light) !important;
+    }
+    
+    /* For cards with glass effect, use a solid background */
+    .glass-card {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border) !important;
+    }
 }
 
 /* Responsive Design */
@@ -2170,7 +2239,7 @@
     color: white;
 }
 
-/* Mobile Menu Overlay */
+/* Replace existing mobile-menu-overlay styles */
 .mobile-menu-overlay {
     display: none;
     position: fixed;
@@ -2178,9 +2247,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.85); /* Use solid background instead of blur */
     z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
 }
 
 .mobile-menu-content {
@@ -2188,13 +2262,14 @@
     top: 80px;
     left: 0;
     right: 0;
-    background: var(--bg-card);
+    background: var(--bg-light); /* Solid background */
     border-bottom: 1px solid var(--border);
     border-radius: 0 0 20px 20px;
     padding: 1rem 0;
     transform: translateY(-100%);
     opacity: 0;
     transition: transform 0.3s, opacity 0.3s;
+    backdrop-filter: none; /* Remove backdrop filter */
 }
 
 .mobile-menu-content.active {
@@ -4828,58 +4903,78 @@ useEffect(() => {
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 const mobileMenuContent = document.getElementById('mobileMenuContent');
+
+// Replace the existing mobile menu functions with this:
 let isMobileMenuOpen = false;
 
 function toggleMobileMenu() {
     isMobileMenuOpen = !isMobileMenuOpen;
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuContent = document.getElementById('mobileMenuContent');
+    
     if (isMobileMenuOpen) {
+        mobileMenuOverlay.classList.add('active');
         mobileMenuContent.classList.add('active');
-        mobileMenuOverlay.style.display = 'block';
         document.body.style.overflow = 'hidden';
     } else {
+        mobileMenuOverlay.classList.remove('active');
         mobileMenuContent.classList.remove('active');
         setTimeout(() => {
-            mobileMenuOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }, 300);
-        document.body.style.overflow = 'auto';
     }
 }
 
 function closeMobileMenu() {
     isMobileMenuOpen = false;
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuContent = document.getElementById('mobileMenuContent');
+    
+    mobileMenuOverlay.classList.remove('active');
     mobileMenuContent.classList.remove('active');
     setTimeout(() => {
-        mobileMenuOverlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }, 300);
-    document.body.style.overflow = 'auto';
 }
 
-// Add event listeners
-if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-}
-
-if (mobileMenuOverlay) {
-    mobileMenuOverlay.addEventListener('click', (e) => {
-        if (e.target === mobileMenuOverlay) {
+// Update event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    }
+    
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileMenuOverlay) {
+                closeMobileMenu();
+            }
+        });
+    }
+    
+    // Close menu on link click
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isMobileMenuOpen) {
             closeMobileMenu();
         }
     });
-}
-
-// Close mobile menu when window is resized to desktop size
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && isMobileMenuOpen) {
-        closeMobileMenu();
-    }
+    
+    // Close on resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && isMobileMenuOpen) {
+            closeMobileMenu();
+        }
+    });
 });
 
-// Close mobile menu when ESC key is pressed
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isMobileMenuOpen) {
-        closeMobileMenu();
-    }
-});
         
     </script>
 </body>
