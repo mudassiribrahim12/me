@@ -432,46 +432,42 @@ function animateProgressBar() {
 });
 
 // =============================================
-// INSTANT BOTTOM NAV SCROLL TO ACTIVE TAB
+// BOTTOM NAV HORIZONTAL SCROLL TO ACTIVE TAB
 // =============================================
 
 function scrollBottomNavToActive() {
+    const bottomNav = document.getElementById('bottomNav');
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
     const bottomNavContainer = document.querySelector('.bottom-nav-links');
-    const activeLink = document.querySelector('.bottom-nav-links a.active');
     
-    if (!bottomNavContainer || !activeLink) return;
+    if (!bottomNav || !bottomNavContainer) return;
     
-    // Get the parent li element
-    const activeLi = activeLink.parentElement;
-    
-    // Calculate positions
-    const containerWidth = bottomNavContainer.clientWidth;
-    const containerScrollLeft = bottomNavContainer.scrollLeft;
-    const linkLeft = activeLi.offsetLeft;
-    const linkWidth = activeLi.offsetWidth;
-    const linkRight = linkLeft + linkWidth;
-    
-    // Check if link is NOT fully visible
-    const isFullyVisible = (
-        linkLeft >= containerScrollLeft && 
-        linkRight <= (containerScrollLeft + containerWidth)
-    );
-    
-    // If not fully visible, scroll immediately
-    if (!isFullyVisible) {
-        // If tab is on the right side (like Education, Publications, Contact)
-        // Scroll so it's fully visible on the RIGHT side
-        if (linkLeft > containerScrollLeft) {
-            // Scroll to show tab on RIGHT side
-            bottomNavContainer.scrollLeft = linkRight - containerWidth;
-        } else {
-            // Scroll to show tab on LEFT side
-            bottomNavContainer.scrollLeft = linkLeft;
+    // Find active link
+    let activeLink = null;
+    bottomNavLinks.forEach(link => {
+        if (link.classList.contains('active')) {
+            activeLink = link.parentElement; // Get the li element
         }
-    }
+    });
+    
+    if (!activeLink) return;
+    
+    // Scroll to make active link visible
+    const containerWidth = bottomNavContainer.clientWidth;
+    const linkLeft = activeLink.offsetLeft;
+    const linkWidth = activeLink.offsetWidth;
+    
+    // Calculate scroll position
+    const scrollLeft = linkLeft - (containerWidth / 2) + (linkWidth / 2);
+    
+    // Smooth scroll to position
+    bottomNavContainer.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth'
+    });
 }
 
-// Update updateActiveNavItem to call it immediately
+// Update your existing updateActiveNavItem function to include this:
 function updateActiveNavItem() {
     const scrollPosition = window.scrollY + 100;
     let currentSection = '';
@@ -502,26 +498,16 @@ function updateActiveNavItem() {
     
     // Update bottom nav links
     const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
-    let foundActive = false;
-    
     bottomNavLinks.forEach(link => {
+        link.classList.remove('active');
         const href = link.getAttribute('href').substring(1);
-        
         if (href === currentSection) {
             link.classList.add('active');
-            foundActive = true;
-        } else {
-            link.classList.remove('active');
         }
     });
     
-    // Scroll bottom nav immediately (no delay)
-    if (foundActive) {
-        // Use requestAnimationFrame for instant but smooth update
-        requestAnimationFrame(() => {
-            scrollBottomNavToActive();
-        });
-    }
+    // Scroll bottom nav to show active tab
+    setTimeout(scrollBottomNavToActive, 300);
 }
 
 // =============================================
@@ -814,35 +800,23 @@ window.PerformanceOptimizer = (function() {
             
             throttleEventListeners: function() {
                 // Replace scroll handler with throttled version
-        // Throttled scroll handler for better performance
-let scrollTimeout;
-window.addEventListener('scroll', function() {
-    // Clear previous timeout
-    if (scrollTimeout) {
-        cancelAnimationFrame(scrollTimeout);
-    }
-    
-    // Use requestAnimationFrame for smooth updates
-    scrollTimeout = requestAnimationFrame(() => {
-        updateActiveNavItem();
-        
-        // Also handle bottom nav visibility
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const bottomNav = document.getElementById('bottomNav');
-        
-        if (window.innerWidth <= 768) {
-            if (scrollTop > 100) {
-                bottomNav.classList.add('show');
-                document.body.classList.add('has-bottom-nav');
-            } else {
-                bottomNav.classList.remove('show');
-                document.body.classList.remove('has-bottom-nav');
-            }
-        }
-    });
-}, { passive: true });
-        
-                    },
+                let scrollTimeout;
+                window.addEventListener('scroll', function() {
+                    if (!scrollTimeout) {
+                        scrollTimeout = setTimeout(function() {
+                            scrollTimeout = null;
+                            // Simple header handling
+                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                            const header = document.querySelector('header');
+                            if (scrollTop > 100) {
+                                header.style.transform = 'translateY(-100%)';
+                            } else {
+                                header.style.transform = 'translateY(0)';
+                            }
+                        }, 100); // Throttle to 10fps
+                    }
+                }, { passive: true });
+            },
             
             reduceImageQuality: function() {
                 // Reduce image quality for low-end devices
@@ -1273,86 +1247,6 @@ body.dark-mode {
     .bottom-nav-links::-webkit-scrollbar-thumb {
         background: var(--primary);
         border-radius: 10px;
-    }
-}
-
-/* ============================================= */
-/* INSTANT BOTTOM NAV SNAPPING */
-/* ============================================= */
-
-@media (max-width: 768px) {
-    .bottom-nav-links {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: auto !important; /* Remove smooth scrolling for instant snap */
-        scroll-snap-type: x proximity;
-        scrollbar-width: thin;
-    }
-    
-    .bottom-nav-links li {
-        scroll-snap-align: start;
-        flex-shrink: 0;
-    }
-    
-    .bottom-nav-links a {
-        min-width: 85px;
-        padding: 0.5rem 0.5rem;
-        white-space: nowrap;
-    }
-    
-    /* Active tab styling */
-    .bottom-nav-links a.active {
-        position: relative;
-        background: rgba(26, 86, 219, 0.15);
-        transform: none !important;
-        animation: none !important;
-    }
-    
-    .bottom-nav-links a.active:after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 20px;
-        height: 3px;
-        background: var(--primary);
-        border-radius: 3px;
-    }
-    
-    /* Custom scrollbar styling */
-    .bottom-nav-links::-webkit-scrollbar {
-        height: 4px;
-    }
-    
-    .bottom-nav-links::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.05);
-        border-radius: 2px;
-    }
-    
-    .bottom-nav-links::-webkit-scrollbar-thumb {
-        background: var(--primary);
-        border-radius: 2px;
-    }
-    
-    /* Force active tab to be visible */
-    .bottom-nav-links a.active {
-        box-shadow: 0 0 0 2px rgba(26, 86, 219, 0.2);
-        border-radius: 8px;
-    }
-}
-
-/* On very small screens, make tabs a bit smaller */
-@media (max-width: 400px) {
-    .bottom-nav-links a {
-        min-width: 75px;
-        font-size: 0.7rem;
-        padding: 0.4rem 0.4rem;
-    }
-    
-    .bottom-nav-links a i {
-        font-size: 0.9rem;
-        margin-bottom: 0.15rem;
     }
 }
 
