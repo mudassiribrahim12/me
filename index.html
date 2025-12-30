@@ -105,6 +105,235 @@
             padding: 0 20px;
         }
         
+        /* Resume Section Styles */
+.resume-intro {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.resume-intro p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    max-width: 800px;
+}
+
+.resume-stats {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.resume-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    min-width: 180px;
+}
+
+.resume-stat i {
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.resume-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.resume-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.resume-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.resume-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.resume-icon.file-pdf {
+    background: linear-gradient(135deg, #f56565, #ed8936);
+    color: white;
+}
+
+.resume-icon.file-doc {
+    background: linear-gradient(135deg, #3182ce, #63b3ed);
+    color: white;
+}
+
+.resume-icon.file-web {
+    background: linear-gradient(135deg, #805ad5, #b794f4);
+    color: white;
+}
+
+.resume-title h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+    color: var(--text);
+}
+
+.resume-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.resume-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.resume-features {
+    margin-bottom: 1.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.feature-item:last-child {
+    border-bottom: none;
+}
+
+.feature-item i {
+    color: var(--primary);
+    width: 20px;
+    text-align: center;
+}
+
+.resume-note {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: auto;
+    padding: 1rem;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+.resume-note i {
+    margin-right: 0.5rem;
+    color: var(--primary);
+}
+
+.resume-actions {
+    margin-top: 1.5rem;
+}
+
+.btn-resume {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.btn-resume:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+.btn-resume.secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-resume.secondary:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.resume-footer {
+    margin-top: 3rem;
+}
+
+.resume-note-card {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: left;
+}
+
+.resume-note-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.resume-note-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+}
+
+.resume-note-card p {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .resume-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .resume-stats {
+        justify-content: center;
+    }
+    
+    .resume-stat {
+        min-width: 140px;
+    }
+    
+    .resume-note-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+        
         /* Contact Section Styles */
 .contact-intro {
     max-width: 800px;
@@ -1919,6 +2148,194 @@
             background: var(--primary);
             color: white;
         }
+        
+        /* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 1.5rem;
+    transition: all 0.3s;
+}
+
+.mobile-menu-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+}
+
+.mobile-menu-content {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    border-radius: 0 0 20px 20px;
+    padding: 1rem 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.mobile-menu-content.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mobile-nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 1rem 2rem;
+    border-left: 4px solid transparent;
+    transition: all 0.3s;
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-links a.active {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
+    border-left-color: var(--primary);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu-overlay {
+        display: block;
+    }
+    
+    /* Adjust hero section for mobile */
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .academic-links {
+        justify-content: center;
+    }
+    
+    .academic-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .profile-image {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+    }
+    
+    .profile-badge, .current-affiliation {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        margin: 1rem auto;
+        width: fit-content;
+    }
+    
+    /* Adjust section padding for mobile */
+    .section {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Adjust timeline for mobile */
+    .timeline::before {
+        left: 0;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 2rem !important;
+        text-align: left !important;
+        margin: 0 0 2rem 0 !important;
+    }
+
+    .timeline-item::before {
+        left: -10px !important;
+    }
+    
+    /* Adjust contact form for mobile */
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Adjust blog grid for mobile */
+    .blog-grid,
+    .shiny-apps-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Adjust projects stats for mobile */
+    .projects-stats,
+    .blog-stats,
+    .resume-stats {
+        justify-content: center;
+    }
+    
+    /* Adjust support options for mobile */
+    .support-options {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Adjust resume options for mobile */
+    .resume-options {
+        grid-template-columns: 1fr;
+    }
+}
 
         /* Main Content */
         .main-content {
@@ -2834,6 +3251,21 @@
                 email: '',
                 message: ''
             });
+            
+            const closeMobileMenu = () => {
+    const mobileMenuContent = document.getElementById('mobileMenuContent');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    
+    if (mobileMenuContent) {
+        mobileMenuContent.classList.remove('active');
+    }
+    if (mobileMenuOverlay) {
+        setTimeout(() => {
+            mobileMenuOverlay.style.display = 'none';
+        }, 300);
+    }
+    document.body.style.overflow = 'auto';
+};
 
             useEffect(() => {
                 if (darkMode) {
@@ -3141,36 +3573,76 @@ const shinyApps = [
                 setFormData({ name: '', email: '', message: '' });
             };
 
-const sections = ['home', 'projects', 'blog', 'about', 'education', 'publications', 'support', 'contact'];
+// Update it to include 'resume':
+const sections = ['home', 'projects', 'blog', 'about', 'education', 'publications', 'resume', 'support', 'contact'];
 
             return (
                 <div className="app">
-                    <nav className="navbar">
-                        <div className="container nav-content">
-                            <div className="logo">MMI</div>
-                            <div className="nav-links">
-                                {sections.map(section => (
-                                    <a
-                                        key={section}
-                                        href={`#${section}`}
-                                        className={activeSection === section ? 'active' : ''}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            setActiveSection(section);
-                                        }}
-                                    >
-                                        {section.charAt(0).toUpperCase() + section.slice(1)}
-                                    </a>
-                                ))}
-                                <button 
-                                    className="theme-toggle"
-                                    onClick={() => setDarkMode(!darkMode)}
-                                >
-                                    {darkMode ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
-                                </button>
-                            </div>
-                        </div>
-                    </nav>
+               <nav className="navbar">
+    <div className="container nav-content">
+        <div className="logo">MMI</div>
+        <div className="nav-links">
+            {sections.map(section => (
+                <a
+                    key={section}
+                    href={`#${section}`}
+                    className={activeSection === section ? 'active' : ''}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setActiveSection(section);
+                    }}
+                >
+                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                </a>
+            ))}
+            <button 
+                className="theme-toggle"
+                onClick={() => setDarkMode(!darkMode)}
+            >
+                {darkMode ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
+            </button>
+        </div>
+        {/* Add mobile menu button */}
+        <button className="mobile-menu-btn" id="mobileMenuBtn">
+            <i className="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+{/* Mobile Menu Overlay */}
+<div className="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div className="mobile-menu-content" id="mobileMenuContent">
+        <div className="mobile-nav-links">
+            {sections.map(section => (
+                <a
+                    key={section}
+                    href={`#${section}`}
+                    className={activeSection === section ? 'active' : ''}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setActiveSection(section);
+                        closeMobileMenu();
+                    }}
+                >
+                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                </a>
+            ))}
+            <button 
+                className="theme-toggle"
+                onClick={() => {
+                    setDarkMode(!darkMode);
+                    closeMobileMenu();
+                }}
+                style={{margin: '1rem 2rem', width: 'calc(100% - 4rem)'}}
+            >
+                {darkMode ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
+                <span style={{marginLeft: '0.5rem'}}>
+                    {darkMode ? 'Light Mode' : 'Dark Mode'}
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
 
                     <main className="main-content">
                     
@@ -3191,11 +3663,11 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                         <i className="fab fa-github"></i>
                         <span>GitHub</span>
                     </a>
-                    <a href="orcid.org/0000-0002-9049-8222" target="_blank" className="academic-link">
+<a href="https://orcid.org/0000-0002-9049-8222" target="_blank" className="academic-link">
                         <i className="fas fa-id-card"></i>
                         <span>ORCID</span>
                     </a>
-                    <a href="www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" className="academic-link">
+<a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" className="academic-link">
                         <i className="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>
@@ -3891,6 +4363,93 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
     </div>
 </section>
 
+{/* Resume Section */}
+<section id="resume" className={`section ${activeSection === 'resume' ? 'active' : ''}`}>
+    <div className="container">
+        <h2 className="section-title">My Resume</h2>
+        
+        <div className="resume-intro">
+            <p>
+                Download my resume in an online formats. It includes my complete professional 
+                experience, education, skills, publications, and accomplishments.
+            </p>
+            <div className="resume-stats">
+                <div className="resume-stat">
+                    <div>
+                    </div>
+                </div>
+                <div className="resume-stat">
+                    <div>
+                    </div>
+                </div>
+                <div className="resume-stat">
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div className="resume-options">
+
+            {/* Web Version */}
+            <div className="resume-card glass-card">
+                <div className="resume-header">
+                    <div className="resume-icon file-web">
+                        <i className="fas fa-globe"></i>
+                    </div>
+                    <div className="resume-title">
+                        <h3>View Online</h3>
+                        <p className="resume-subtitle">Preview in your browser</p>
+                    </div>
+                </div>
+                <div className="resume-body">
+                    <div className="resume-features">
+                        <div className="feature-item">
+                            <i className="fas fa-check-circle"></i>
+                            <span>No download required</span>
+                        </div>
+                        <div className="feature-item">
+                            <i className="fas fa-check-circle"></i>
+                            <span>Mobile-friendly view</span>
+                        </div>
+                        <div className="feature-item">
+                            <i className="fas fa-check-circle"></i>
+                            <span>Quick preview</span>
+                        </div>
+                    </div>
+                    <div className="resume-actions">
+                        <a 
+                            href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="btn-resume secondary"
+                        >
+                            <i className="fas fa-eye"></i>
+                            View Resume Online
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div className="resume-footer">
+            <div className="resume-note-card glass-card">
+                <div className="card-content">
+                    <i className="fas fa-info-circle"></i>
+                    <div>
+                        <h3>Resume Information</h3>
+                        <p>
+                            My resume includes complete details about my education, professional experience, 
+                            technical skills, publications, certifications, and accomplishments. For the most 
+                            up-to-date information, you can also view my LinkedIn profile.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {/* Support Section - Add this between Publications and Contact sections */}
 <section id="support" className={`section ${activeSection === 'support' ? 'active' : ''}`}>
     <div className="container">
@@ -4157,7 +4716,7 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                 <div className="social-contact-links">
                     <h4>Connect on Social Media</h4>
                     <div className="social-buttons">
-                        <a href="www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="social-btn linkedin">
+<a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="social-btn linkedin">
                             <i className="fab fa-linkedin"></i>
                             LinkedIn
                         </a>
@@ -4264,6 +4823,63 @@ useEffect(() => {
         };
     }
 }, []);
+
+// Mobile menu functionality
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileMenuContent = document.getElementById('mobileMenuContent');
+let isMobileMenuOpen = false;
+
+function toggleMobileMenu() {
+    isMobileMenuOpen = !isMobileMenuOpen;
+    if (isMobileMenuOpen) {
+        mobileMenuContent.classList.add('active');
+        mobileMenuOverlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    } else {
+        mobileMenuContent.classList.remove('active');
+        setTimeout(() => {
+            mobileMenuOverlay.style.display = 'none';
+        }, 300);
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function closeMobileMenu() {
+    isMobileMenuOpen = false;
+    mobileMenuContent.classList.remove('active');
+    setTimeout(() => {
+        mobileMenuOverlay.style.display = 'none';
+    }, 300);
+    document.body.style.overflow = 'auto';
+}
+
+// Add event listeners
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+}
+
+if (mobileMenuOverlay) {
+    mobileMenuOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileMenuOverlay) {
+            closeMobileMenu();
+        }
+    });
+}
+
+// Close mobile menu when window is resized to desktop size
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && isMobileMenuOpen) {
+        closeMobileMenu();
+    }
+});
+
+// Close mobile menu when ESC key is pressed
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMobileMenuOpen) {
+        closeMobileMenu();
+    }
+});
         
     </script>
 </body>
