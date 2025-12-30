@@ -2239,7 +2239,7 @@
     color: white;
 }
 
-/* Replace existing mobile-menu-overlay styles */
+/* Mobile Menu Styles */
 .mobile-menu-overlay {
     display: none;
     position: fixed;
@@ -2247,7 +2247,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.85); /* Use solid background instead of blur */
+    background: rgba(0, 0, 0, 0.85);
     z-index: 999;
     opacity: 0;
     transition: opacity 0.3s;
@@ -2262,14 +2262,13 @@
     top: 80px;
     left: 0;
     right: 0;
-    background: var(--bg-light); /* Solid background */
+    background: var(--bg-light);
     border-bottom: 1px solid var(--border);
     border-radius: 0 0 20px 20px;
     padding: 1rem 0;
     transform: translateY(-100%);
     opacity: 0;
     transition: transform 0.3s, opacity 0.3s;
-    backdrop-filter: none; /* Remove backdrop filter */
 }
 
 .mobile-menu-content.active {
@@ -3327,20 +3326,62 @@
                 message: ''
             });
             
-            const closeMobileMenu = () => {
-    const mobileMenuContent = document.getElementById('mobileMenuContent');
-    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    
-    if (mobileMenuContent) {
+        // Mobile menu functionality
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileMenuContent = document.getElementById('mobileMenuContent');
+let isMobileMenuOpen = false;
+
+function toggleMobileMenu() {
+    isMobileMenuOpen = !isMobileMenuOpen;
+    if (isMobileMenuOpen) {
+        mobileMenuContent.classList.add('active');
+        mobileMenuOverlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    } else {
         mobileMenuContent.classList.remove('active');
-    }
-    if (mobileMenuOverlay) {
         setTimeout(() => {
             mobileMenuOverlay.style.display = 'none';
         }, 300);
+        document.body.style.overflow = 'auto';
     }
+}
+
+function closeMobileMenu() {
+    isMobileMenuOpen = false;
+    mobileMenuContent.classList.remove('active');
+    setTimeout(() => {
+        mobileMenuOverlay.style.display = 'none';
+    }, 300);
     document.body.style.overflow = 'auto';
-};
+}
+
+// Add event listeners
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+}
+
+if (mobileMenuOverlay) {
+    mobileMenuOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileMenuOverlay) {
+            closeMobileMenu();
+        }
+    });
+}
+
+// Close mobile menu when window is resized to desktop size
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && isMobileMenuOpen) {
+        closeMobileMenu();
+    }
+});
+
+// Close mobile menu when ESC key is pressed
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMobileMenuOpen) {
+        closeMobileMenu();
+    }
+});
 
             useEffect(() => {
                 if (darkMode) {
@@ -3677,16 +3718,17 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                 {darkMode ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
             </button>
         </div>
+      
         {/* Add mobile menu button */}
-        <button className="mobile-menu-btn" id="mobileMenuBtn">
-            <i className="fas fa-bars"></i>
+<button className="mobile-menu-btn" id="mobileMenuBtn" onClick={toggleMobileMenu}>
+    <i className="fas fa-bars"></i>
         </button>
     </div>
 </nav>
 
 {/* Mobile Menu Overlay */}
-<div className="mobile-menu-overlay" id="mobileMenuOverlay">
-    <div className="mobile-menu-content" id="mobileMenuContent">
+<div className="mobile-menu-overlay" id="mobileMenuOverlay" onClick={closeMobileMenu}>
+    <div className="mobile-menu-content" id="mobileMenuContent" onClick={(e) => e.stopPropagation()}>
         <div className="mobile-nav-links">
             {sections.map(section => (
                 <a
