@@ -432,6 +432,85 @@ function animateProgressBar() {
 });
 
 // =============================================
+// BOTTOM NAV HORIZONTAL SCROLL TO ACTIVE TAB
+// =============================================
+
+function scrollBottomNavToActive() {
+    const bottomNav = document.getElementById('bottomNav');
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
+    const bottomNavContainer = document.querySelector('.bottom-nav-links');
+    
+    if (!bottomNav || !bottomNavContainer) return;
+    
+    // Find active link
+    let activeLink = null;
+    bottomNavLinks.forEach(link => {
+        if (link.classList.contains('active')) {
+            activeLink = link.parentElement; // Get the li element
+        }
+    });
+    
+    if (!activeLink) return;
+    
+    // Scroll to make active link visible
+    const containerWidth = bottomNavContainer.clientWidth;
+    const linkLeft = activeLink.offsetLeft;
+    const linkWidth = activeLink.offsetWidth;
+    
+    // Calculate scroll position
+    const scrollLeft = linkLeft - (containerWidth / 2) + (linkWidth / 2);
+    
+    // Smooth scroll to position
+    bottomNavContainer.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth'
+    });
+}
+
+// Update your existing updateActiveNavItem function to include this:
+function updateActiveNavItem() {
+    const scrollPosition = window.scrollY + 100;
+    let currentSection = '';
+    
+    // Find current section
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && 
+            scrollPosition < sectionTop + sectionHeight && 
+            sectionId) {
+            currentSection = sectionId;
+        }
+    });
+    
+    // Update main nav links
+    const mainNavLinks = document.querySelectorAll('.nav-links a');
+    mainNavLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href').substring(1);
+        if (href === currentSection) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Update bottom nav links
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav-links a');
+    bottomNavLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href').substring(1);
+        if (href === currentSection) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Scroll bottom nav to show active tab
+    setTimeout(scrollBottomNavToActive, 300);
+}
+
+// =============================================
 // BOTTOM NAVIGATION FUNCTIONALITY
 // =============================================
 
@@ -449,41 +528,45 @@ function initBottomNavigation() {
     let isScrollingDown = false;
     let scrollTimeout;
     
-    function handleBottomNavScroll() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-        
-        // Determine scroll direction
-        isScrollingDown = scrollTop > lastScrollTop;
-        
-        // Always show bottom nav on mobile
-        if (window.innerWidth <= 768) {
-            // Show bottom nav after scrolling down a bit
-            if (scrollTop > 100) {
-                bottomNav.classList.add('show');
-                document.body.classList.add('has-bottom-nav');
-            } else {
-                bottomNav.classList.remove('show');
-                document.body.classList.remove('has-bottom-nav');
-            }
+  function handleBottomNavScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    
+    // Determine scroll direction
+    isScrollingDown = scrollTop > lastScrollTop;
+    
+    // Always show bottom nav on mobile
+    if (window.innerWidth <= 768) {
+        if (scrollTop > 100) {
+            bottomNav.classList.add('show');
+            document.body.classList.add('has-bottom-nav');
         } else {
-            // On desktop, only show when scrolled down
-            if (scrollTop > 300 && isScrollingDown) {
-                bottomNav.classList.add('show');
-                document.body.classList.add('has-bottom-nav');
-            } else if (scrollTop <= 100) {
-                bottomNav.classList.remove('show');
-                document.body.classList.remove('has-bottom-nav');
-            }
+            bottomNav.classList.remove('show');
+            document.body.classList.remove('has-bottom-nav');
         }
         
-        lastScrollTop = scrollTop;
-        
-        // Update active nav item
-        updateActiveNavItem();
+        // Scroll to active tab when bottom nav is shown
+        if (scrollTop > 100 && !isScrollingDown) {
+            setTimeout(scrollBottomNavToActive, 500);
+        }
+    } else {
+        // On desktop, only show when scrolled down
+        if (scrollTop > 300 && isScrollingDown) {
+            bottomNav.classList.add('show');
+            document.body.classList.add('has-bottom-nav');
+        } else if (scrollTop <= 100) {
+            bottomNav.classList.remove('show');
+            document.body.classList.remove('has-bottom-nav');
+        }
     }
     
+    lastScrollTop = scrollTop;
+    
+    // Update active nav item
+    updateActiveNavItem();
+}
+  
     // Update active navigation item
     function updateActiveNavItem() {
         const scrollPosition = window.scrollY + 100;
@@ -1125,6 +1208,45 @@ body.dark-mode {
     #google_translate_element,
     .translate-dropdown {
         display: none !important;
+    }
+}
+
+/* ============================================= */
+/* BOTTOM NAV SCROLLING IMPROVEMENTS */
+/* ============================================= */
+
+@media (max-width: 768px) {
+    .bottom-nav-links {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding: 0 10px;
+    }
+    
+    .bottom-nav-links li {
+        scroll-snap-align: center;
+        flex: 0 0 auto;
+        width: auto;
+    }
+    
+    .bottom-nav-links a {
+        min-width: 80px;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    /* Hide scrollbar but keep functionality */
+    .bottom-nav-links::-webkit-scrollbar {
+        height: 3px;
+    }
+    
+    .bottom-nav-links::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    
+    .bottom-nav-links::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 10px;
     }
 }
 
@@ -9814,44 +9936,44 @@ new SnakeFlow();
     <!-- Bottom Navigation for Mobile -->
 <div class="bottom-nav" id="bottomNav">
     <div class="bottom-nav-container">
-        <ul class="bottom-nav-links">
-            <li>
+        <ul class="bottom-nav-links" id="bottomNavLinks">
+            <li id="navHome">
                 <a href="#home" class="active">
                     <i class="fas fa-home"></i>
                     <span>Home</span>
                 </a>
             </li>
-            <li>
+            <li id="navProjects">
                 <a href="#projects">
                     <i class="fas fa-code"></i>
                     <span>Projects</span>
                 </a>
             </li>
-            <li>
+            <li id="navBlog">
                 <a href="#blog">
                     <i class="fas fa-blog"></i>
                     <span>Blog</span>
                 </a>
             </li>
-            <li>
+            <li id="navAbout">
                 <a href="#about">
                     <i class="fas fa-user"></i>
                     <span>About</span>
                 </a>
             </li>
-            <li>
+            <li id="navEducation">
                 <a href="#education">
                     <i class="fas fa-graduation-cap"></i>
                     <span>Education</span>
                 </a>
             </li>
-            <li>
+            <li id="navPublications">
                 <a href="#publications">
                     <i class="fas fa-book"></i>
                     <span>Publications</span>
                 </a>
             </li>
-            <li>
+            <li id="navContact">
                 <a href="#contact">
                     <i class="fas fa-envelope"></i>
                     <span>Contact</span>
@@ -9860,6 +9982,6 @@ new SnakeFlow();
         </ul>
     </div>
 </div>
-    
+
 </body>
 </html>
