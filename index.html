@@ -128,6 +128,28 @@
             padding: 0 20px;
         }
         
+        /* Immediate fix - add this to the end of your CSS */
+* { 
+    touch-action: manipulation; 
+}
+
+/* Fix for all interactive elements */
+a, button, [role="button"], input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Remove hover states on mobile */
+@media (hover: none) and (pointer: coarse) {
+    .glass-card:hover,
+    .shiny-app-card:hover,
+    .project-card:hover,
+    .btn:hover,
+    .academic-link:hover {
+        transform: none !important;
+    }
+}
+        
         /* Add hardware acceleration */
 .navbar,
 .mobile-menu-content,
