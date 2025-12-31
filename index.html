@@ -3330,51 +3330,93 @@
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 const mobileMenuContent = document.getElementById('mobileMenuContent');
+// Mobile menu functionality - UPDATED VERSION
 let isMobileMenuOpen = false;
 
 function toggleMobileMenu() {
     isMobileMenuOpen = !isMobileMenuOpen;
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuContent = document.getElementById('mobileMenuContent');
+    
+    if (!mobileMenuOverlay || !mobileMenuContent) return;
+    
     if (isMobileMenuOpen) {
+        mobileMenuOverlay.classList.add('active');
         mobileMenuContent.classList.add('active');
-        mobileMenuOverlay.style.display = 'block';
         document.body.style.overflow = 'hidden';
     } else {
+        mobileMenuOverlay.classList.remove('active');
         mobileMenuContent.classList.remove('active');
         setTimeout(() => {
-            mobileMenuOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }, 300);
-        document.body.style.overflow = 'auto';
     }
 }
 
 function closeMobileMenu() {
     isMobileMenuOpen = false;
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuContent = document.getElementById('mobileMenuContent');
+    
+    if (!mobileMenuOverlay || !mobileMenuContent) return;
+    
+    mobileMenuOverlay.classList.remove('active');
     mobileMenuContent.classList.remove('active');
     setTimeout(() => {
-        mobileMenuOverlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }, 300);
-    document.body.style.overflow = 'auto';
 }
 
-// Add event listeners
-if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-}
-
-if (mobileMenuOverlay) {
-    mobileMenuOverlay.addEventListener('click', (e) => {
+// Initialize mobile menu after React renders
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuContent = document.getElementById('mobileMenuContent');
+    
+    if (!mobileMenuBtn || !mobileMenuOverlay || !mobileMenuContent) {
+        setTimeout(initMobileMenu, 100); // Try again after a short delay
+        return;
+    }
+    
+    // Add event listeners
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMobileMenu();
+    });
+    
+    mobileMenuOverlay.addEventListener('click', function(e) {
         if (e.target === mobileMenuOverlay) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close menu when clicking on mobile links
+    const mobileLinks = mobileMenuContent.querySelectorAll('.mobile-nav-links a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Close menu with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isMobileMenuOpen) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close menu on window resize (for desktop view)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && isMobileMenuOpen) {
             closeMobileMenu();
         }
     });
 }
 
-// Close mobile menu when window is resized to desktop size
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && isMobileMenuOpen) {
-        closeMobileMenu();
-    }
-});
+// Initialize when document is loaded
+document.addEventListener('DOMContentLoaded', initMobileMenu);
+
+// Also initialize when React content might be loaded
+setTimeout(initMobileMenu, 500);
+
 
 // Close mobile menu when ESC key is pressed
 document.addEventListener('keydown', (e) => {
