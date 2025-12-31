@@ -130,6 +130,53 @@
             padding: 0 20px;
         }
         
+        /* External link indicators */
+a[target="_blank"]:not(.no-icon)::after {
+    content: "↗";
+    font-size: 0.8em;
+    margin-left: 3px;
+    opacity: 0.7;
+}
+
+/* For buttons with icons */
+.btn-run-app[target="_blank"]::after,
+.btn-view-code[target="_blank"]::after,
+.btn-read[target="_blank"]::after,
+.btn-pdf[target="_blank"]::after,
+.btn-github[target="_blank"]::after,
+.btn-google-scholar[target="_blank"]::after,
+.btn-blogger[target="_blank"]::after {
+    display: none; /* Hide duplicate icon on buttons */
+}
+
+/* Visual feedback for external links */
+a[target="_blank"]:hover {
+    position: relative;
+}
+
+a[target="_blank"]:hover::before {
+    content: "Opens in new tab";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text);
+    color: var(--bg);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeInTooltip 0.2s forwards;
+    margin-bottom: 5px;
+}
+
+@keyframes fadeInTooltip {
+    from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+        
 /* MOBILE RESPONSIVENESS FIXES */
 @media (max-width: 768px) {
     /* Fix horizontal scrolling */
@@ -4650,6 +4697,39 @@ function initMobileMenu() {
     });
 }
 
+// Function to ensure all external links open in new tabs
+function fixExternalLinks() {
+    // Select all links that are likely external
+    const allLinks = document.querySelectorAll('a');
+    
+    allLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        
+        // Check if it's an external link (starts with http/https and not a relative link)
+        if (href && href.startsWith('http') && !href.includes(window.location.hostname)) {
+            // Ensure it opens in new tab
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+            
+            // Add external link icon for visual indication
+            if (!link.querySelector('.external-icon')) {
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-external-link-alt external-icon';
+                icon.style.marginLeft = '5px';
+                icon.style.fontSize = '0.8em';
+                link.appendChild(icon);
+            }
+        }
+    });
+}
+
+// Run when page loads
+document.addEventListener('DOMContentLoaded', fixExternalLinks);
+
+// Also run after React content loads
+setTimeout(fixExternalLinks, 1000);
+setTimeout(fixExternalLinks, 3000);
+
 // Initialize when document is loaded
 document.addEventListener('DOMContentLoaded', initMobileMenu);
 
@@ -5028,25 +5108,25 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                     top-tier conferences and journals. Passionate about creating technology that makes a difference.
                 </p>
                 
-                <div className="academic-links">
-                    <a href="https://github.com/mudassiribrahim30" target="_blank" className="academic-link">
-                        <i className="fab fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
-<a href="https://orcid.org/0000-0002-9049-8222" target="_blank" className="academic-link">
-                        <i className="fas fa-id-card"></i>
-                        <span>ORCID</span>
-                    </a>
-<a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" className="academic-link">
-                        <i className="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" className="academic-link">
-                        <i className="fas fa-graduation-cap"></i>
-                        <span>Google Scholar</span>
-                    </a>
-                </div>
-
+      <div className="academic-links">
+    <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="academic-link">
+        <i className="fab fa-github"></i>
+        <span>GitHub</span>
+    </a>
+    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="academic-link">
+        <i className="fas fa-id-card"></i>
+        <span>ORCID</span>
+    </a>
+    <a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="academic-link">
+        <i className="fab fa-linkedin"></i>
+        <span>LinkedIn</span>
+    </a>
+    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="academic-link">
+        <i className="fas fa-graduation-cap"></i>
+        <span>Google Scholar</span>
+    </a>
+</div>
+      
             </div>
             <div className="hero-image">
                 <div className="profile-image-container">
@@ -5145,28 +5225,29 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                         <span>Healthcare Analytics</span>
                     </div>
                 </div>
-                
-                <div className="app-actions">
-                    <a 
-                        href={app.runUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="btn-run-app"
-                    >
-                        <i className="fas fa-play-circle"></i>
-                        Run App
-                    </a>
-                    <a 
-                        href={app.codeUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="btn-view-code"
-                    >
-                        <i className="fas fa-code"></i>
-                        View Code
-                    </a>
-                </div>
-            </div>
+           
+           <div className="app-actions">
+    <a 
+        href={app.runUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="btn-run-app"
+    >
+        <i className="fas fa-play-circle"></i>
+        Run App
+    </a>
+    <a 
+        href={app.codeUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="btn-view-code"
+    >
+        <i className="fas fa-code"></i>
+        View Code
+    </a>
+</div>     
+           
+                       </div>
         </div>
     ))}
 </div>
@@ -5185,15 +5266,16 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                         </p>
                     </div>
                 </div>
-                <a 
-                    href="https://github.com/mudassiribrahim30/R-Shiny-Apps" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn-github"
-                >
-                    <i className="fab fa-github"></i>
-                    GitHub Repository
-                </a>
+<a 
+    href="https://github.com/mudassiribrahim30/R-Shiny-Apps" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-github"
+>
+    <i className="fab fa-github"></i>
+    GitHub Repository
+</a>
+
             </div>
         </div>
 
@@ -5370,20 +5452,21 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                     </div>
                     
                     <div className="blog-actions" style={{justifyContent: 'center', marginTop: '2rem'}}>
-                        <a 
-                            href="https://mudasir-ibrahim.blogspot.com" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="btn-read-more"
-                            style={{
-                                padding: '0.9rem 2.5rem',
-                                fontSize: '1.1rem',
-                                fontWeight: '600'
-                            }}
-                        >
-                            <i className="fas fa-external-link-alt"></i> Visit My Blog
-                        </a>
-                    </div>
+                <a 
+    href="https://mudasir-ibrahim.blogspot.com" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-read-more"
+    style={{
+        padding: '0.9rem 2.5rem',
+        fontSize: '1.1rem',
+        fontWeight: '600'
+    }}
+>
+    <i className="fas fa-external-link-alt"></i> Visit My Blog
+</a>
+                
+                                    </div>
                 </div>
             </div>
 
@@ -5437,22 +5520,23 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                     </div>
                     
                     <div className="blog-actions" style={{justifyContent: 'center', marginTop: '1.5rem'}}>
-                        <a 
-                            href="https://www.youtube.com/@mudasirmohammedibrahim1026" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="btn-read-more"
-                            style={{
-                                background: '#FF0000',
-                                borderColor: '#FF0000',
-                                padding: '0.9rem 2.5rem',
-                                fontSize: '1.1rem',
-                                fontWeight: '600'
-                            }}
-                        >
-                            <i className="fab fa-youtube"></i> Subscribe on YouTube
-                        </a>
-                    </div>
+             <a 
+    href="https://www.youtube.com/@mudasirmohammedibrahim1026" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-read-more"
+    style={{
+        background: '#FF0000',
+        borderColor: '#FF0000',
+        padding: '0.9rem 2.5rem',
+        fontSize: '1.1rem',
+        fontWeight: '600'
+    }}
+>
+    <i className="fab fa-youtube"></i> Subscribe on YouTube
+</a>
+             
+                                 </div>
                 </div>
             </div>
         </div>
@@ -5478,23 +5562,25 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                         </p>
                     </div>
                 </div>
-                <a 
-                    href="https://mudasir-ibrahim.blogspot.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn-blogger"
-                    style={{
-                        padding: '1rem 3rem',
-                        fontSize: '1.1rem',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '1rem',
-                        marginTop: '1rem'
-                    }}
-                >
-                    <i className="fab fa-blogger-b" style={{fontSize: '1.3rem'}}></i>
-                    <span>Visit My Blogger Site →</span>
-                </a>
+               
+               <a 
+    href="https://mudasir-ibrahim.blogspot.com" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-blogger"
+    style={{
+        padding: '1rem 3rem',
+        fontSize: '1.1rem',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '1rem',
+        marginTop: '1rem'
+    }}
+>
+    <i className="fab fa-blogger-b" style={{fontSize: '1.3rem'}}></i>
+    <span>Visit My Blogger Site →</span>
+</a>
+               
             </div>
         </div>
     </div>
@@ -5780,28 +5866,29 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                     <p className="publication-abstract">
                         {pub.abstract}
                     </p>
-                    
-                    <div className="publication-actions">
-                        <a 
-                            href={pub.link} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="btn-read"
-                        >
-                            <i className="fas fa-external-link-alt"></i>
-                            Read Article
-                        </a>
-                        {pub.pdf && (
-                            <a 
-                                href={pub.pdf} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="btn-pdf"
-                            >
-                                <i className="fas fa-file-pdf"></i>
-                                Download PDF
-                            </a>
-                        )}
+              
+              <div className="publication-actions">
+    <a 
+        href={pub.link} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="btn-read"
+    >
+        <i className="fas fa-external-link-alt"></i>
+        Read Article
+    </a>
+    {pub.pdf && (
+        <a 
+            href={pub.pdf} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn-pdf"
+        >
+            <i className="fas fa-file-pdf"></i>
+            Download PDF
+        </a>      
+              
+                                      )}
                         {pub.citations > 0 && (
                             <div className="citation-count">
                                 <i className="fas fa-quote-right"></i>
@@ -5827,37 +5914,39 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                         </p>
                     </div>
                 </div>
-                <a 
-                    href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn-google-scholar"
-                >
-                    <i className="fab fa-google-scholar"></i>
-                    View Google Scholar Profile
-                </a>
+              <a 
+    href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-google-scholar"
+>
+    <i className="fab fa-google-scholar"></i>
+    View Google Scholar Profile
+</a>
+              
             </div>
 
             <div className="research-repositories">
                 <h4>Research Profiles</h4>
-                <div className="repository-links">
-                    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer">
-                        <i className="fab fa-orcid"></i>
-                        ORCID
-                    </a>
-                    <a href="https://www.researchgate.net/profile/Mudasir-Ibrahim" target="_blank" rel="noopener noreferrer">
-                        <i className="fab fa-researchgate"></i>
-                        ResearchGate
-                    </a>
-                    <a href="https://www.semanticscholar.org/author/Mudasir-Mohammed-Ibrahim/2098083930" target="_blank" rel="noopener noreferrer">
-                        <i className="fas fa-search"></i>
-                        Semantic Scholar
-                    </a>
-                    <a href="https://www.scopus.com/authid/detail.uri?authorId=57220860049" target="_blank" rel="noopener noreferrer">
-                        <i className="fas fa-database"></i>
-                        Scopus
-                    </a>
-                </div>
+           <div className="repository-links">
+    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer">
+        <i className="fab fa-orcid"></i>
+        ORCID
+    </a>
+    <a href="https://www.researchgate.net/profile/Mudasir-Ibrahim" target="_blank" rel="noopener noreferrer">
+        <i className="fab fa-researchgate"></i>
+        ResearchGate
+    </a>
+    <a href="https://www.semanticscholar.org/author/Mudasir-Mohammed-Ibrahim/2098083930" target="_blank" rel="noopener noreferrer">
+        <i className="fas fa-search"></i>
+        Semantic Scholar
+    </a>
+    <a href="https://www.scopus.com/authid/detail.uri?authorId=57220860049" target="_blank" rel="noopener noreferrer">
+        <i className="fas fa-database"></i>
+        Scopus
+    </a>
+           
+                           </div>
             </div>
         </div>
     </div>
@@ -5932,15 +6021,16 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                         <i className="fas fa-info-circle"></i> The online version is always current and accessible from any device
                     </p>
                     <div className="resume-actions">
-                        <a 
-                            href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="btn-resume secondary"
-                        >
-                            <i className="fas fa-eye"></i>
-                            View Resume Online
-                        </a>
+                      <a 
+    href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-resume secondary"
+>
+    <i className="fas fa-eye"></i>
+    View Resume Online
+</a>
+                      
                     </div>
                 </div>
             </div>
@@ -5990,15 +6080,15 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                 <div className="support-body">
                     <p>Support me with monthly contributions via GitHub Sponsors.</p>
                     <div className="support-actions">
-                        <a 
-                            href="https://github.com/sponsors/mudassiribrahim12" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="btn-support"
-                        >
-                            <i className="fas fa-heart"></i>
-                            Sponsor on GitHub
-                        </a>
+                      <a 
+    href="https://github.com/sponsors/mudassiribrahim12" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-support"
+>
+    <i className="fas fa-heart"></i>
+    Sponsor on GitHub
+</a>
                     </div>
                 </div>
             </div>
@@ -6259,9 +6349,10 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                         <div className="method-content">
                             <h4>WhatsApp</h4>
                             <p>For quick conversations and calls</p>
-                            <a href="https://wa.me/233549343058" target="_blank" rel="noopener noreferrer" className="contact-link">
-                                +233 (54) 934-3058
-                            </a>
+<a href="https://wa.me/233549343058" target="_blank" rel="noopener noreferrer" className="contact-link">
+    +233 (54) 934-3058
+</a>
+
                         </div>
                     </div>
                     
@@ -6279,16 +6370,16 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                 
                 <div className="social-contact-links">
                     <h4>Connect on Social Media</h4>
-                    <div className="social-buttons">
-                        <a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="social-btn linkedin">
-                            <i className="fab fa-linkedin"></i>
-                            LinkedIn
-                        </a>
-                        <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="social-btn github">
-                            <i className="fab fa-github"></i>
-                            GitHub
-                        </a>
-                    </div>
+                   <div className="social-buttons">
+    <a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="social-btn linkedin">
+        <i className="fab fa-linkedin"></i>
+        LinkedIn
+    </a>
+    <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="social-btn github">
+        <i className="fab fa-github"></i>
+        GitHub
+    </a>
+</div>
                 </div>
             </div>
         </div>
