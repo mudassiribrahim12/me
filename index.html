@@ -64,16 +64,16 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-      :root {
+ :root {
     --primary: #6366f1;
     --primary-light: #818cf8;
     --secondary: #f59e0b;
-    --text: #1f2937;
-    --text-light: #6b7280;
+    --text: #111827; /* CHANGE: Darker black for better contrast in light mode */
+    --text-light: #4b5563; /* CHANGE: Darker gray for better readability */
     --bg: #f8fafc;
     --bg-light: #ffffff;
-    --bg-card: rgba(255, 255, 255, 0.7);
-    --border: rgba(255, 255, 255, 0.2);
+    --bg-card: rgba(255, 255, 255, 0.9); /* CHANGE: Less transparency for better contrast */
+    --border: rgba(0, 0, 0, 0.1); /* CHANGE: Darker border for light mode */
     --shadow: rgba(0, 0, 0, 0.1);
     --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --glass: rgba(255, 255, 255, 0.25);
@@ -85,18 +85,22 @@
     --btn-secondary-hover: #fbbf24;
     --btn-text: #ffffff;
     --btn-shadow: rgba(99, 102, 241, 0.3);
+    
+    /* ADD THESE TWO LINES - NEW VARIABLES */
+    --logo-text: #111827; /* CHANGE: Darker black for light mode */
+    --heading-text: #111827; /* CHANGE: Darker black for light mode */
 }
 
 .dark-mode {
     --primary: #818cf8;
     --primary-light: #a5b4fc;
     --secondary: #fbbf24;
-    --text: #f9fafb;
+    --text: #f3f4f6; /* CHANGE: Brighter white for better contrast */
     --text-light: #d1d5db;
     --bg: #0f172a;
     --bg-light: #1e293b;
-    --bg-card: rgba(30, 41, 59, 0.7);
-    --border: rgba(255, 255, 255, 0.1);
+    --bg-card: rgba(30, 41, 59, 0.9); /* CHANGE: Less transparency for better contrast */
+    --border: rgba(255, 255, 255, 0.15); /* CHANGE: Brighter border for dark mode */
     --shadow: rgba(0, 0, 0, 0.3);
     --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --glass: rgba(255, 255, 255, 0.1);
@@ -108,22 +112,91 @@
     --btn-secondary-hover: #fbbf24;
     --btn-text: #ffffff;
     --btn-shadow: rgba(99, 102, 241, 0.3);
+    
+    /* ADD THESE TWO LINES - NEW VARIABLES */
+    --logo-text: #f3f4f6; /* CHANGE: Brighter white for dark mode */
+    --heading-text: #f3f4f6; /* CHANGE: Brighter white for dark mode */
 }
       
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
+     body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text); /* Make sure this says --text, not --text-light */
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-weight: 400; /* ADD: Slightly bolder text */
+}
+     
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
+        
+        /* Add these styles after your existing .navbar styles */
+
+/* Default navbar state */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+/* Scrolled navbar state - smaller and rounded */
+.navbar.scrolled {
+    padding: 0.5rem 0;
+    border-radius: 0 0 20px 20px;
+    margin: 10px 20px 0;
+    width: calc(100% - 40px);
+    max-width: calc(1200px - 40px);
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 10px 30px var(--shadow);
+    border: 1px solid var(--border);
+    border-top: none;
+}
+
+/* Adjust for mobile */
+@media (max-width: 768px) {
+    .navbar.scrolled {
+        margin: 5px 10px 0;
+        width: calc(100% - 20px);
+        border-radius: 0 0 15px 15px;
+    }
+}
+
+/* Make the logo smaller when scrolled */
+.navbar.scrolled .logo {
+    font-size: 1.5rem;
+    transition: font-size 0.3s ease;
+}
+
+/* Make nav links smaller when scrolled */
+.navbar.scrolled .nav-links a {
+    font-size: 0.9rem;
+    padding: 0.4rem 0;
+}
+
+/* Make theme toggle smaller when scrolled */
+.navbar.scrolled .theme-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+}
+
+/* Adjust mobile menu button when scrolled */
+.navbar.scrolled .mobile-menu-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+}
         
         /* Add hardware acceleration */
 .navbar,
@@ -217,6 +290,159 @@
     display: block;
     font-size: 0.9rem;
     color: var(--text-light);
+}
+
+/* Adjust profile picture positioning */
+.profile-image-container {
+    position: relative;
+    margin-top: -50px; /* Move the entire container up */
+}
+
+.profile-image {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 4px solid var(--primary);
+    box-shadow: 0 20px 60px var(--shadow);
+    position: relative;
+    background: var(--bg);
+    transform: translateY(-30px); /* Move the image itself up */
+}
+
+.profile-image img {
+    width: 100%;
+    height: 120%; /* Make the image taller to show when moved up */
+    object-fit: cover;
+    transition: transform 0.5s;
+    object-position: center 30%; /* Adjust which part of the image is visible */
+}
+
+/* When hovering, show more of the image */
+.profile-image:hover img {
+    transform: scale(1.05);
+    object-position: center 40%;
+}
+
+/* Adjust the badges to stay in place */
+.profile-badge {
+    position: absolute;
+    top: 70px; /* Adjusted position */
+    right: -20px;
+    background: var(--gradient);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    animation: float 3s ease-in-out infinite;
+    z-index: 2; /* Ensure it stays above */
+}
+
+.current-affiliation {
+    position: absolute;
+    bottom: 70px; /* Adjusted position */
+    left: -20px;
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 30px var(--shadow);
+    z-index: 2; /* Ensure it stays above */
+}
+
+/* Add a subtle vignette effect to make the partial image look intentional */
+.profile-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, 
+        transparent 30%, 
+        rgba(0, 0, 0, 0.2) 70%, 
+        rgba(0, 0, 0, 0.4) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Optional: Add a frame or container effect */
+.profile-image-container::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary), var(--primary-light));
+    opacity: 0.1;
+    z-index: -1;
+}
+
+/* Adjust for mobile */
+@media (max-width: 768px) {
+    .profile-image-container {
+        margin-top: -30px;
+    }
+    
+    .profile-image {
+        width: 250px;
+        height: 250px;
+        transform: translateY(-20px);
+    }
+    
+    .profile-image img {
+        height: 130%;
+        object-position: center 25%;
+    }
+    
+    .profile-badge {
+        top: 50px;
+        right: -10px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .current-affiliation {
+        bottom: 50px;
+        left: -10px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .profile-image-container::before {
+        width: 270px;
+        height: 270px;
+        top: -30px;
+    }
+}
+
+/* Optional: Add a subtle animation to the container */
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-30px);
+    }
+}
+
+.profile-image-container {
+    animation: slideUp 0.8s ease-out 0.3s both;
 }
 
 /* Single centered resume option */
@@ -1296,6 +1522,319 @@
     transform: translateY(-3px);
     box-shadow: 0 15px 30px var(--btn-shadow);
 }
+
+/* Add to your existing CSS styles */
+
+/* Make borders more visible for all cards */
+.glass-card,
+.shiny-app-card,
+.project-card,
+.blog-card,
+.publication-card,
+.support-card,
+.credential-card,
+.competency-card,
+.resume-card,
+.contact-form-container,
+.contact-info-container,
+.skill-category,
+.mixed-methods-card,
+.research-interests {
+    border: 2px solid rgba(99, 102, 241, 0.4) !important;
+    position: relative;
+    overflow: visible !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Stronger borders on hover */
+.glass-card:hover,
+.shiny-app-card:hover,
+.project-card:hover,
+.blog-card:hover,
+.publication-card:hover,
+.support-card:hover,
+.credential-card:hover,
+.competency-card:hover,
+.resume-card:hover {
+    border: 2px solid var(--primary) !important;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Dangling effect - SIMPLIFIED VERSION */
+.glass-card,
+.shiny-app-card,
+.project-card,
+.blog-card,
+.publication-card,
+.support-card,
+.credential-card,
+.competency-card,
+.resume-card {
+    position: relative;
+}
+
+/* Add dangling string effect */
+.glass-card::before,
+.shiny-app-card::before,
+.project-card::before,
+.blog-card::before,
+.publication-card::before,
+.support-card::before,
+.credential-card::before,
+.competency-card::before,
+.resume-card::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 15px;
+    background: linear-gradient(to bottom, var(--primary), transparent);
+    z-index: 2;
+    opacity: 0.8;
+}
+
+/* Add dangling tag/paper clip */
+.glass-card::after,
+.shiny-app-card::after,
+.project-card::after,
+.blog-card::after,
+.publication-card::after,
+.support-card::after,
+.credential-card::after,
+.competency-card::after,
+.resume-card::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 4px 4px 0 0;
+    z-index: 2;
+    opacity: 0.7;
+}
+
+/* Card-specific border colors */
+.shiny-app-card {
+    border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+.shiny-app-card:hover {
+    border-color: var(--primary) !important;
+}
+
+.shiny-app-card::before {
+    background: linear-gradient(to bottom, var(--primary), transparent);
+}
+
+.shiny-app-card::after {
+    background: var(--primary);
+}
+
+.blog-card {
+    border-color: rgba(255, 87, 34, 0.5) !important;
+}
+
+.blog-card:hover {
+    border-color: #FF5722 !important;
+}
+
+.blog-card::before {
+    background: linear-gradient(to bottom, #FF5722, transparent);
+}
+
+.blog-card::after {
+    background: #FF5722;
+}
+
+.publication-card {
+    border-color: rgba(16, 185, 129, 0.5) !important;
+}
+
+.publication-card:hover {
+    border-color: #10b981 !important;
+}
+
+.publication-card::before {
+    background: linear-gradient(to bottom, #10b981, transparent);
+}
+
+.publication-card::after {
+    background: #10b981;
+}
+
+.support-card {
+    border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+.support-card:hover {
+    border-color: var(--secondary) !important;
+}
+
+.support-card::before {
+    background: linear-gradient(to bottom, var(--secondary), transparent);
+}
+
+.support-card::after {
+    background: var(--secondary);
+}
+
+.credential-card {
+    border-color: rgba(168, 85, 247, 0.5) !important;
+}
+
+.credential-card:hover {
+    border-color: #a855f7 !important;
+}
+
+.credential-card::before {
+    background: linear-gradient(to bottom, #a855f7, transparent);
+}
+
+.credential-card::after {
+    background: #a855f7;
+}
+
+.competency-card {
+    border-color: rgba(59, 130, 246, 0.5) !important;
+}
+
+.competency-card:hover {
+    border-color: #3b82f6 !important;
+}
+
+.competency-card::before {
+    background: linear-gradient(to bottom, #3b82f6, transparent);
+}
+
+.competency-card::after {
+    background: #3b82f6;
+}
+
+/* Remove dangling from certain containers */
+.contact-form-container::before,
+.contact-form-container::after,
+.contact-info-container::before,
+.contact-info-container::after,
+.skill-category::before,
+.skill-category::after,
+.mixed-methods-card::before,
+.mixed-methods-card::after,
+.research-interests::before,
+.research-interests::after,
+.all-projects-card::before,
+.all-projects-card::after,
+.view-all-blog::before,
+.view-all-blog::after,
+.all-publications-card::before,
+.all-publications-card::after,
+.resume-note-card::before,
+.resume-note-card::after,
+.support-note-card::before,
+.support-note-card::after {
+    display: none;
+}
+
+/* Adjust for cards in grids */
+.shiny-apps-grid .shiny-app-card,
+.blog-grid .blog-card,
+.publications-grid .publication-card,
+.support-options .support-card,
+.credentials-cards .credential-card,
+.competencies-cards-grid .competency-card {
+    margin-top: 25px;
+}
+
+/* Profile image border */
+.profile-image-container .profile-image {
+    border: 4px solid var(--primary) !important;
+    box-shadow: 0 20px 60px var(--shadow) !important;
+}
+
+/* Remove dangling from modal and special cards */
+.modal-content,
+.all-apps-grid .all-app-card,
+.all-projects-card,
+.view-all-blog,
+.all-publications-card,
+.resume-note-card,
+.support-note-card {
+    position: relative;
+}
+
+.modal-content::before,
+.modal-content::after,
+.all-apps-grid .all-app-card::before,
+.all-apps-grid .all-app-card::after,
+.all-projects-card::before,
+.all-projects-card::after,
+.view-all-blog::before,
+.view-all-blog::after,
+.all-publications-card::before,
+.all-publications-card::after,
+.resume-note-card::before,
+.resume-note-card::after,
+.support-note-card::before,
+.support-note-card::after {
+    display: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .glass-card::before,
+    .shiny-app-card::before,
+    .project-card::before,
+    .blog-card::before,
+    .publication-card::before,
+    .support-card::before,
+    .credential-card::before,
+    .competency-card::before,
+    .resume-card::before {
+        height: 12px;
+        top: -12px;
+    }
+    
+    .glass-card::after,
+    .shiny-app-card::after,
+    .project-card::after,
+    .blog-card::after,
+    .publication-card::after,
+    .support-card::after,
+    .credential-card::after,
+    .competency-card::after,
+    .resume-card::after {
+        width: 25px;
+        height: 6px;
+        top: -15px;
+    }
+    
+    .shiny-apps-grid .shiny-app-card,
+    .blog-grid .blog-card,
+    .publications-grid .publication-card,
+    .support-options .support-card,
+    .credentials-cards .credential-card,
+    .competencies-cards-grid .competency-card {
+        margin-top: 20px;
+    }
+}
+
+/* Keep the keyframes for other potential use, but remove hover animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
 
 /* All Apps Modal */
 .all-apps-modal {
@@ -2387,14 +2926,14 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--logo-text); /* CHANGE THIS LINE - from 'transparent' to 'var(--logo-text)' */
+}
 
         .nav-links {
             display: flex;
@@ -3167,12 +3706,13 @@
             align-items: center;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--heading-text); /* ADD THIS LINE */
+}
 
         .highlight {
             background: var(--gradient);
@@ -3644,16 +4184,99 @@
             }
         }
         
+        /* TEXT CONTRAST BOOST - Add this at the end of your CSS */
+
+/* Boost main content contrast */
+.container p:not(.text-light) {
+    color: var(--text) !important;
+}
+
+/* Boost card text contrast */
+.glass-card,
+.shiny-app-card,
+.project-card,
+.blog-card,
+.publication-card,
+.support-card,
+.credential-card,
+.competency-card,
+.resume-card {
+    background: var(--bg-card) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Boost form text */
+.form-group input,
+.form-group textarea,
+.form-group label {
+    color: var(--text) !important;
+    font-weight: 500 !important;
+}
+
+/* Boost meta text */
+.blog-date,
+.blog-excerpt,
+.app-description,
+.publication-abstract,
+.publication-meta,
+.detail-label,
+.detail-value,
+.method-content p {
+    color: var(--text) !important;
+    opacity: 0.9 !important;
+}
+
+/* Boost statistics text */
+.stat-number,
+.stat-value,
+.resume-stat .stat-value,
+.blog-stat .stat-number,
+.project-stat .stat-number {
+    color: var(--text) !important;
+    font-weight: 700 !important;
+}
+
+/* Boost footer text */
+.footer {
+    color: var(--text) !important;
+    opacity: 0.8 !important;
+}
+        
     </style>
 </head>
 <body>
     <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+<script type="text/babel">
+// Scroll handler for navbar transformation
+function handleNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    const scrollPosition = window.scrollY;
+    
+    if (scrollPosition > 50) { // Change this number to adjust when the effect triggers
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+}
+
+// Initialize scroll handler when component mounts
+function initNavbarScroll() {
+    // Add scroll event listener
+    window.addEventListener('scroll', handleNavbarScroll);
+    
+    // Check initial scroll position
+    handleNavbarScroll();
+    
+    return () => {
+        window.removeEventListener('scroll', handleNavbarScroll);
+    };
+}
+
+const { useState, useEffect } = React;
 
 function App() {
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
     const [activeSection, setActiveSection] = useState('home');
     const [formData, setFormData] = useState({
         name: '',
@@ -3697,18 +4320,24 @@ function App() {
         }
     }, [activeSection]); // This effect runs when activeSection changes
 
-    // Your existing useEffect for dark mode
-    useEffect(() => {
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-    }, [darkMode]);
+// Your existing useEffect for dark mode
+useEffect(() => {
+    if (darkMode) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+    
+    // Save the user's preference to browser memory
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+}, [darkMode]);
 
-    // ... rest of your component code remains the same
+  // ADD THIS NEW useEffect FOR SCROLL EFFECT
+    useEffect(() => {
+        // Initialize navbar scroll effect
+        initNavbarScroll();
+    }, []);
           
-            
         // Mobile menu functionality
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
@@ -4085,9 +4714,14 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
 
             return (
                 <div className="app">
-               <nav className="navbar">
+        <nav className="navbar">
     <div className="container nav-content">
-        <div className="logo">MMI</div>
+<div 
+    className="logo" 
+    onClick={() => setActiveSection('home')} 
+    style={{cursor: 'pointer'}}
+    title="Click to go to Home"
+>mudasir</div>
         <div className="nav-links">
             {sections.map(section => (
                 <a
@@ -4111,11 +4745,12 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
         </div>
       
         {/* Add mobile menu button */}
-<button className="mobile-menu-btn" id="mobileMenuBtn" onClick={toggleMobileMenu}>
-    <i className="fas fa-bars"></i>
+        <button className="mobile-menu-btn" id="mobileMenuBtn" onClick={toggleMobileMenu}>
+            <i className="fas fa-bars"></i>
         </button>
     </div>
 </nav>
+        
 
 {/* Mobile Menu Overlay */}
 <div className="mobile-menu-overlay" id="mobileMenuOverlay" onClick={closeMobileMenu}>
@@ -4159,10 +4794,10 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
     <div className="container">
         <div className="hero">
             <div className="hero-content">
-                <h1><span className="highlight">Mudasir Mohammed Ibrahim</span></h1>
-                <h2>Registered Nurse | Health Researcher | Data Analyst</h2>
+                <h1><span className="highlight">Hi, I'm Mudasir Mohammed Ibrahim</span></h1>
+                <h2>Registered Nurse | R Shiny Developer</h2>
                 <p>
-                    BSc in Nursing with expertise in patient care & clinical nursing, health/clinical research, advanced statistical analysis, and R Shiny Development (AI-assisted coding). Published researcher with contributions to 
+                    Registered nurse with expertise in patient care & clinical nursing, health/clinical research, advanced statistical analysis, and R Shiny Development (AI-assisted coding). Published researcher with contributions to 
                     top-tier conferences and journals. Passionate about creating technology that makes a difference.
                 </p>
                 
@@ -4184,29 +4819,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                         <span>Google Scholar</span>
                     </a>
                 </div>
-                
-                <div className="academic-stats">
-                    <div className="stat">
-                        <div className="stat-number">15+</div>
-                        <div className="stat-label">Publications</div>
-                    </div>
-                    <div className="stat">
-                        <div className="stat-number">90+</div>
-                        <div className="stat-label">Citations</div>
-                    </div>
-                    <div className="stat">
-                        <div className="stat-number">H-Index: 4</div>
-                        <div className="stat-label">Impact Score</div>
-                    </div>
-                </div>
-                
-                <button 
-                    className="btn"
-                    onClick={() => setActiveSection('publications')}
-                    style={{marginTop: '2rem'}}
-                >
-                    View Publications
-                </button>
+
             </div>
             <div className="hero-image">
                 <div className="profile-image-container">
@@ -4241,104 +4854,95 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
         <h2 className="section-title">Featured R Shiny Applications</h2>
         
         <div className="projects-intro">
-            <p>
-                A collection of interactive statistical and healthcare analysis tools built with R Shiny. 
-                Each application is designed to simplify complex statistical analyses for researchers and healthcare professionals.
-            </p>
-            <div className="projects-stats">
-                <div className="project-stat">
-                    <i className="fas fa-calculator"></i>
-                    <div>
-                        <span className="stat-number">20</span>
-                        <span className="stat-label">Total Apps</span>
+<p>
+    A complete collection of 20 interactive statistical and healthcare analysis tools built with R Shiny. 
+    All applications are designed to simplify complex statistical analyses for researchers and healthcare professionals.
+</p>
+       
+       <div className="projects-stats">
+    <div className="project-stat">
+        <i className="fas fa-calculator"></i>
+        <div>
+            <span className="stat-number">20</span>
+            <span className="stat-label">Total Apps</span>
+        </div>
+    </div>
+    <div className="project-stat">
+        <i className="fas fa-chart-line"></i>
+        <div>
+            <span className="stat-number">20</span>
+            <span className="stat-label">Displayed</span>
+        </div>
+    </div>
+    <div className="project-stat">
+        <i className="fas fa-code"></i>
+        <div>
+            <span className="stat-number">Open</span>
+            <span className="stat-label">Source</span>
+        </div>
+    </div>
+</div>
+       
+               </div>
+
+{/* Display ALL 20 Apps */}
+<div className="shiny-apps-grid">
+    {shinyApps.map((app) => (
+        <div key={app.id} className="shiny-app-card glass-card">
+            <div className="app-image-container">
+                <img 
+                    src={app.imageUrl} 
+                    alt={app.name}
+                    className="app-image"
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%236366f1'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E" + app.name + "%3C/text%3E%3C/svg%3E";
+                    }}
+                />
+                <div className="app-overlay">
+                    <span className="app-type">R Shiny App</span>
+                </div>
+            </div>
+            
+            <div className="app-content">
+                <h3 className="app-title">{app.name}</h3>
+                <p className="app-description">{app.description}</p>
+                
+                <div className="app-meta">
+                    <div className="meta-item">
+                        <i className="fas fa-calculator"></i>
+                        <span>Statistical Tool</span>
+                    </div>
+                    <div className="meta-item">
+                        <i className="fas fa-heartbeat"></i>
+                        <span>Healthcare Analytics</span>
                     </div>
                 </div>
-                <div className="project-stat">
-                    <i className="fas fa-chart-line"></i>
-                    <div>
-                        <span className="stat-number">6</span>
-                        <span className="stat-label">Featured</span>
-                    </div>
-                </div>
-                <div className="project-stat">
-                    <i className="fas fa-code"></i>
-                    <div>
-                        <span className="stat-number">Open</span>
-                        <span className="stat-label">Source</span>
-                    </div>
+                
+                <div className="app-actions">
+                    <a 
+                        href={app.runUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-run-app"
+                    >
+                        <i className="fas fa-play-circle"></i>
+                        Run App
+                    </a>
+                    <a 
+                        href={app.codeUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-view-code"
+                    >
+                        <i className="fas fa-code"></i>
+                        View Code
+                    </a>
                 </div>
             </div>
         </div>
-
-        {/* Featured Apps Grid (First 6 apps) */}
-        <div className="shiny-apps-grid">
-            {shinyApps.slice(0, 6).map((app) => (
-                <div key={app.id} className="shiny-app-card glass-card">
-                    <div className="app-image-container">
-                        <img 
-                            src={app.imageUrl} 
-                            alt={app.name}
-                            className="app-image"
-                            onError={(e) => {
-                                e.target.onerror = null;
-                                e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%236366f1'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E" + app.name + "%3C/text%3E%3C/svg%3E";
-                            }}
-                        />
-                        <div className="app-overlay">
-                            <span className="app-type">R Shiny App</span>
-                        </div>
-                    </div>
-                    
-                    <div className="app-content">
-                        <h3 className="app-title">{app.name}</h3>
-                        <p className="app-description">{app.description}</p>
-                        
-                        <div className="app-meta">
-                            <div className="meta-item">
-                                <i className="fas fa-calculator"></i>
-                                <span>Statistical Tool</span>
-                            </div>
-                            <div className="meta-item">
-                                <i className="fas fa-heartbeat"></i>
-                                <span>Healthcare Analytics</span>
-                            </div>
-                        </div>
-                        
-                        <div className="app-actions">
-                            <a 
-                                href={app.runUrl} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="btn-run-app"
-                            >
-                                <i className="fas fa-play-circle"></i>
-                                Run App
-                            </a>
-                            <a 
-                                href={app.codeUrl} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="btn-view-code"
-                            >
-                                <i className="fas fa-code"></i>
-                                View Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
-
-        {/* View All Apps Button */}
-        <div className="view-all-container">
-            <button 
-                className="btn-view-all-apps"
-                onClick={() => setShowAllApps(true)}
-            >
-                <i className="fas fa-eye"></i>
-                View All 20 R Shiny Applications
-            </button>
-        </div>
+    ))}
+</div>
 
         <div className="projects-footer">
             <div className="all-projects-card glass-card">
@@ -4382,47 +4986,66 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                     </div>
                     
                     <div className="modal-body">
-                        <div className="all-apps-grid">
-                            {shinyApps.map((app) => (
-                                <div key={app.id} className="all-app-card">
-                                    <div className="all-app-image">
-                                        <img 
-                                            src={app.imageUrl} 
-                                            alt={app.name}
-                                            onError={(e) => {
-                                                e.target.onerror = null;
-                                                e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%236366f1'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='16' fill='white' text-anchor='middle' dy='.3em'%3E" + app.name + "%3C/text%3E%3C/svg%3E";
-                                            }}
-                                        />
-                                    </div>
-                                    <div className="all-app-info">
-                                        <h4>{app.name}</h4>
-                                        <p>{app.description}</p>
-                                        <div className="all-app-actions">
-                                            <a 
-                                                href={app.runUrl} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="btn-run-app-small"
-                                            >
-                                                <i className="fas fa-play"></i>
-                                                Run
-                                            </a>
-                                            <a 
-                                                href={app.codeUrl} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="btn-view-code-small"
-                                            >
-                                                <i className="fas fa-code"></i>
-                                                Code
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                 {/* Display ALL 20 Apps - No "View All" needed */}
+<div className="shiny-apps-grid">
+    {shinyApps.map((app) => (
+        <div key={app.id} className="shiny-app-card glass-card">
+            <div className="app-image-container">
+                <img 
+                    src={app.imageUrl} 
+                    alt={app.name}
+                    className="app-image"
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%236366f1'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E" + app.name + "%3C/text%3E%3C/svg%3E";
+                    }}
+                />
+                <div className="app-overlay">
+                    <span className="app-type">R Shiny App</span>
+                </div>
+            </div>
+            
+            <div className="app-content">
+                <h3 className="app-title">{app.name}</h3>
+                <p className="app-description">{app.description}</p>
+                
+                <div className="app-meta">
+                    <div className="meta-item">
+                        <i className="fas fa-calculator"></i>
+                        <span>Statistical Tool</span>
                     </div>
+                    <div className="meta-item">
+                        <i className="fas fa-heartbeat"></i>
+                        <span>Healthcare Analytics</span>
+                    </div>
+                </div>
+                
+                <div className="app-actions">
+                    <a 
+                        href={app.runUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-run-app"
+                    >
+                        <i className="fas fa-play-circle"></i>
+                        Run App
+                    </a>
+                    <a 
+                        href={app.codeUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-view-code"
+                    >
+                        <i className="fas fa-code"></i>
+                        View Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    ))}
+</div>
+                 
+                                     </div>
                     
                     <div className="modal-footer">
                         <button 
@@ -4438,59 +5061,193 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
     </div>
 </section>
                     
-              {/* Blog Section */}
+        {/* Blog Section */}
 <section id="blog" className={`section ${activeSection === 'blog' ? 'active' : ''}`}>
     <div className="container">
-        <h2 className="section-title">Latest Blog Posts</h2>
+        <h2 className="section-title">Blog & Content</h2>
         
         <div className="blog-intro">
             <p>
-                Insights, tutorials, and updates from my Blogger account. 
-                All posts are automatically pulled from my Google Blogger feed.
+                I regularly share insights, tutorials, and updates on healthcare research, 
+                data analysis, R Shiny development, and statistical methods on my blog.
+                Visit my blog to read all my articles and join the discussion.
             </p>
-            <div className="blog-stats">
-                <div className="blog-stat">
-                    <i className="fas fa-rss"></i>
-                    <div>
-                        <span className="stat-number">Live Feed</span>
-                        <span className="stat-label">Auto-updating</span>
+        </div>
+
+        {/* Single Blog Invitation Card */}
+        <div className="blog-grid" style={{gridTemplateColumns: '1fr', maxWidth: '800px', margin: '0 auto'}}>
+            <div className="blog-card glass-card">
+                <div className="blog-image">
+                    <img 
+                        src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/blog-content.jpg" 
+                        alt="Healthcare Research & Data Analysis Blog"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%236366f1'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3EMy%20Blog%20Content%3C/text%3E%3C/svg%3E";
+                        }}
+                    />
+                </div>
+                <div className="blog-content">
+                    <div className="blog-meta">
+                        <div className="blog-date">
+                            <i className="fas fa-newspaper"></i>
+                            Regular Updates
+                        </div>
+                        <div className="blog-category">
+                            Healthcare & Data Analysis
+                        </div>
+                    </div>
+                    <h3 className="blog-title">Visit My Blog for Latest Articles</h3>
+                    <p className="blog-excerpt" style={{fontSize: '1.05rem', lineHeight: '1.7'}}>
+                        Explore my collection of blogs covering healthcare research methodologies, 
+                        statistical analysis techniques, and R Shiny applications. I write about practical applications 
+                        of data analysis in healthcare settings.
+                    </p>
+                    
+                    <div style={{
+                        margin: '1.5rem 0',
+                        padding: '1.25rem',
+                        background: 'rgba(99, 102, 241, 0.1)',
+                        borderRadius: '10px',
+                        borderLeft: '4px solid var(--primary)'
+                    }}>
+                        <h4 style={{marginBottom: '0.5rem', color: 'var(--text)'}}>
+                            <i className="fas fa-bullhorn" style={{color: 'var(--primary)', marginRight: '0.5rem'}}></i>
+                            What You'll Find on My Blog:
+                        </h4>
+                        <ul style={{
+                            listStyle: 'none',
+                            padding: 0,
+                            margin: 0,
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(2, 1fr)',
+                            gap: '0.75rem'
+                        }}>
+                            <li style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                                <i className="fas fa-check-circle" style={{color: '#10b981', fontSize: '0.9rem'}}></i>
+                                <span>Healthcare Research Methods</span>
+                            </li>
+                            <li style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                                <i className="fas fa-check-circle" style={{color: '#10b981', fontSize: '0.9rem'}}></i>
+                                <span>Statistical Analysis Tutorials</span>
+                            </li>
+                            <li style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                                <i className="fas fa-check-circle" style={{color: '#10b981', fontSize: '0.9rem'}}></i>
+                                <span>R Shiny Applications Guides</span>
+                            </li>
+                            <li style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                                <i className="fas fa-check-circle" style={{color: '#10b981', fontSize: '0.9rem'}}></i>
+                                <span>Data Visualization Tips</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div className="blog-actions" style={{justifyContent: 'center', marginTop: '2rem'}}>
+                        <a 
+                            href="https://mudasir-ibrahim.blogspot.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="btn-read-more"
+                            style={{
+                                padding: '0.9rem 2.5rem',
+                                fontSize: '1.1rem',
+                                fontWeight: '600'
+                            }}
+                        >
+                            <i className="fas fa-external-link-alt"></i> Visit My Blog
+                        </a>
                     </div>
                 </div>
-                <div className="blog-stat">
-                    <i className="fas fa-newspaper"></i>
-                    <div>
-                        <span className="stat-number" id="postCount">0</span>
-                        <span className="stat-label">Posts</span>
+            </div>
+
+            {/* YouTube Video Card */}
+            <div className="blog-card glass-card" style={{marginTop: '2rem'}}>
+                <div className="blog-content">
+                    <div className="blog-meta">
+                        <div className="blog-date">
+                            <i className="fab fa-youtube"></i>
+                            Video Tutorials
+                        </div>
+                        <div className="blog-category" style={{background: '#FF0000'}}>
+                            YouTube Channel
+                        </div>
                     </div>
-                </div>
-                <div className="blog-stat">
-                    <i className="fas fa-sync"></i>
-                    <div>
-                        <span className="stat-number">Real-time</span>
-                        <span className="stat-label">Updates</span>
+                    <h3 className="blog-title">Subscribe to My YouTube Channel</h3>
+                    <p className="blog-excerpt" style={{fontSize: '1.05rem', lineHeight: '1.7'}}>
+                        For video tutorials, statistical analysis demonstrations, and practical 
+                        healthcare research discussions, subscribe to my YouTube channel. 
+                        Watch step-by-step guides and stay updated with my latest video content.
+                    </p>
+                    
+                    {/* Embedded YouTube Video */}
+                    <div className="video-container" style={{
+                        position: 'relative',
+                        paddingBottom: '56.25%',
+                        height: 0,
+                        margin: '1.5rem 0',
+                        borderRadius: '10px',
+                        overflow: 'hidden',
+                        border: '2px solid var(--border)',
+                        boxShadow: '0 5px 15px var(--shadow)'
+                    }}>
+                        <iframe 
+                            width="100%" 
+                            height="100%" 
+                            src="https://www.youtube.com/embed/dJbeWr5AyKg?si=CNDbjl1hZKX3m1Rk" 
+                            title="Statistical Analysis Tutorial Series" 
+                            frameBorder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowFullScreen
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                border: 'none'
+                            }}
+                        ></iframe>
+                    </div>
+                    
+                    <div className="blog-actions" style={{justifyContent: 'center', marginTop: '1.5rem'}}>
+                        <a 
+                            href="https://www.youtube.com/@mudasirmohammedibrahim1026" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="btn-read-more"
+                            style={{
+                                background: '#FF0000',
+                                borderColor: '#FF0000',
+                                padding: '0.9rem 2.5rem',
+                                fontSize: '1.1rem',
+                                fontWeight: '600'
+                            }}
+                        >
+                            <i className="fab fa-youtube"></i> Subscribe on YouTube
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        {/* Blog Posts Container */}
-        <div id="blogPostsContainer" className="blog-grid">
-            <div className="loading-posts">
-                <i className="fas fa-spinner fa-spin"></i>
-                <p>Loading blog posts...</p>
-            </div>
-        </div>
-
-        <div className="blog-footer">
-            <div className="view-all-blog glass-card">
-                <div className="card-content">
-                    <div className="icon-container">
-                        <i className="fab fa-blogger"></i>
+        {/* View All Blogs Section */}
+        <div className="blog-footer" style={{marginTop: '3rem'}}>
+            <div className="view-all-blog glass-card" style={{textAlign: 'center'}}>
+                <div className="card-content" style={{justifyContent: 'center', flexDirection: 'column'}}>
+                    <div className="icon-container" style={{margin: '0 auto 1.5rem'}}>
+                        <i className="fas fa-book-open"></i>
                     </div>
                     <div>
-                        <h3>View Full Blog</h3>
-                        <p>
-                            Read all posts, subscribe, and interact with comments on my Google Blogger platform.
+                        <h3 style={{marginBottom: '1rem'}}>Read All My Articles on Blogger</h3>
+                        <p style={{
+                            fontSize: '1.05rem', 
+                            lineHeight: '1.7',
+                            maxWidth: '600px',
+                            margin: '0 auto 1.5rem',
+                            color: 'var(--text-light)'
+                        }}>
+                            All my blog posts are published on my Google Blogger platform. 
+                            Visit to read, comment, and subscribe for regular updates.
                         </p>
                     </div>
                 </div>
@@ -4499,15 +5256,23 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn-blogger"
-                    id="bloggerLink"
+                    style={{
+                        padding: '1rem 3rem',
+                        fontSize: '1.1rem',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                        marginTop: '1rem'
+                    }}
                 >
-                    <i className="fab fa-blogger-b"></i>
-                    Visit Full Blog
+                    <i className="fab fa-blogger-b" style={{fontSize: '1.3rem'}}></i>
+                    <span>Visit My Blogger Site →</span>
                 </a>
             </div>
         </div>
     </div>
 </section>
+        
               
                      {/* About Me Section */}
 <section id="about" className={`section ${activeSection === 'about' ? 'active' : ''}`}>
@@ -4517,7 +5282,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
             
             <div className="professional-intro">
                 <p style={{fontSize: '1.1rem', marginBottom: '2rem', lineHeight: '1.8'}}>
-                    I am a registered nurse with expertise in developing R Shiny web applications that make complex data analysis simpler, more intuitive, and accessible for healthcare professionals, students, and researchers. My journey began after several years of clinical practice and health research experience and has evolved through diverse and challenging roles at the intersection of healthcare and technology. I am passionate about building impactful, web-based statistical applications that drive meaningful change in health research and practice.
+                    Hey there! I'm Mohammed Mudasir Ibrahim, professionally known as Mudasir Mohammed Ibrahim, and currently working at Tamale Teaching Hospital. I am a registered nurse with expertise in advanced data analysis and in developing R Shiny web applications that make complex data analysis simpler, more intuitive, and accessible for healthcare professionals, students, and researchers. My journey began after several years of clinical practice and health research experience and has evolved through diverse and challenging roles at the intersection of healthcare and technology. I am passionate about building impactful, web-based statistical applications that drive meaningful change in health research and practice.
                 </p>
             </div>
 
@@ -5245,8 +6010,18 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                         </div>
                         <div className="method-content">
                             <h4>Location</h4>
-                            <p>Based in Ghana, available worldwide</p>
-                            <span className="contact-detail">Tamale, Ghana</span>
+        <p>Based in Ghana, available worldwide</p>
+        <a 
+            href="https://www.google.com/maps?q=Tamale,Ghana" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="contact-link"
+            style={{display: 'inline-flex', alignItems: 'center', gap: '0.5rem'}}
+        >
+            <i className="fas fa-external-link-alt" style={{fontSize: '0.85rem'}}></i>
+            Tamale, Ghana
+        </a>
+
                         </div>
                     </div>
                     
@@ -5300,7 +6075,7 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                         <div className="container">
                             <p>© {new Date().getFullYear()} Mudasir Mohammed Ibrahim. All rights reserved.</p>
                             <p style={{marginTop: '0.5rem', fontSize: '0.9rem'}}>
-                                Built with ❤️ in Ghana •Designed and powered by Mudasir Mohammed Ibrahim
+                                Built by Mudasir Mohammed Ibrahim.
                             </p>
                         </div>
                     </footer>
