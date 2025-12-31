@@ -138,6 +138,72 @@ a[target="_blank"]:not(.no-icon)::after {
     opacity: 0.7;
 }
 
+/* Add to your existing CSS, preferably in the Navigation section */
+.logo {
+    position: relative;
+    padding-left: 25px; /* Space for the dot */
+}
+
+.logo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: #10b981; /* Green color */
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    animation: pulse 2s infinite;
+    z-index: 1;
+}
+
+/* Pulsing animation for the online dot */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* Dark mode adjustment */
+.dark-mode .logo::before {
+    background-color: #34d399;
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+}
+
+.dark-mode @keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(52, 211, 153, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+    }
+}
+
+/* Adjust for scrolled navbar */
+.navbar.scrolled .logo::before {
+    width: 10px;
+    height: 10px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .logo::before {
+        width: 10px;
+        height: 10px;
+    }
+}
+
 /* For buttons with icons */
 .btn-run-app[target="_blank"]::after,
 .btn-view-code[target="_blank"]::after,
@@ -147,6 +213,157 @@ a[target="_blank"]:not(.no-icon)::after {
 .btn-google-scholar[target="_blank"]::after,
 .btn-blogger[target="_blank"]::after {
     display: none; /* Hide duplicate icon on buttons */
+}
+
+/* Footer Styles - Clean Two Columns */
+.footer {
+    background: var(--bg-light);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 0 1.5rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+/* Left Column - Tabs */
+.footer-column h3 {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.footer-tabs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+}
+
+.footer-links-vertical {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links-vertical li {
+    margin-bottom: 0.7rem;
+}
+
+.footer-links-vertical a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+}
+
+.footer-links-vertical a:hover {
+    color: var(--primary);
+    transform: translateX(3px);
+}
+
+.footer-links-vertical i {
+    width: 18px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Right Column - Social Media */
+.social-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.social-link-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+}
+
+.social-link-item:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+.social-link-item i {
+    font-size: 1.1rem;
+    width: 24px;
+}
+
+.social-link-item span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Platform-specific hover colors */
+.social-link-item.github:hover { background: #333; }
+.social-link-item.linkedin:hover { background: #0a66c2; }
+.social-link-item.youtube:hover { background: #ff0000; }
+.social-link-item.scholar:hover { background: #4285f4; }
+.social-link-item.orcid:hover { background: #a6ce39; }
+.social-link-item.blogger:hover { background: #FF5722; }
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-light);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.footer-bottom p {
+    margin-bottom: 0.4rem;
+}
+
+.footer-heart {
+    color: #e53e3e;
+    margin: 0 0.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-tabs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .social-links-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer {
+        padding: 2rem 0 1rem;
+    }
 }
 
 /* Add this to your existing CSS */
@@ -185,6 +402,78 @@ a[target="_blank"] {
         min-height: 44px;
         min-width: 44px;
     }
+}
+
+/* Add to your existing CSS */
+.rotating-text-container {
+    position: relative;
+    height: 60px; /* Adjust based on your font size */
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.rotating-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--primary);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    text-align: center;
+    transition: none;
+}
+
+.rotating-text.active {
+    opacity: 1;
+    transform: translateY(0);
+    animation: textInOut 4s ease-in-out forwards;
+}
+
+@keyframes textInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* For the hero section subtitle specifically */
+.hero-content h2 {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+/* Make the container fit the text */
+.hero-content h2 .rotating-text-container {
+    display: inline-block;
+    vertical-align: middle;
+    width: 300px; /* Adjust based on your longest text */
+    text-align: left;
+}
+
+.hero-content h2 .rotating-text {
+    text-align: left;
+    white-space: nowrap;
 }
 
 /* TOUCH FIXES FOR MOBILE */
@@ -4683,6 +4972,38 @@ function initNavbarScroll() {
 
 const { useState, useEffect } = React;
 
+// Add this component after your useState, useEffect import
+function RotatingText() {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    
+    const texts = [
+        "Registered Nurse",
+        "Data Enthusiast", 
+        "R Shiny Developer"
+    ];
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+        }, 4000); // Change text every 4 seconds
+        
+        return () => clearInterval(interval);
+    }, [texts.length]);
+    
+    return (
+        <div className="rotating-text-container">
+            {texts.map((text, index) => (
+                <div 
+                    key={index}
+                    className={`rotating-text ${index === currentIndex ? 'active' : ''}`}
+                >
+                    {text}
+                </div>
+            ))}
+        </div>
+    );
+}
+
 function App() {
     const [darkMode, setDarkMode] = useState(true);
     const [activeSection, setActiveSection] = useState('home');
@@ -5161,8 +5482,11 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
     className="logo" 
     onClick={() => setActiveSection('home')} 
     style={{cursor: 'pointer'}}
-    title="Click to go to Home"
->Mudasir</div>
+    title="Click to go to Home - Mudasir Mohammed Ibrahim"
+>
+    mmi
+</div>
+
         <div className="nav-links">
             {sections.map(section => (
                 <a
@@ -5236,10 +5560,10 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
         <div className="hero">
             <div className="hero-content">
                 <h1><span className="highlight">Hi, I'm Mudasir Mohammed Ibrahim</span></h1>
-                <h2>Registered Nurse | R Shiny Developer</h2>
+                <h2> <RotatingText />  </h2>
+                
                 <p>
-                    Registered nurse with expertise in patient care & clinical nursing, health/clinical research, advanced statistical analysis, and R Shiny Development (AI-assisted coding). Published researcher with contributions to 
-                    top-tier conferences and journals. Passionate about creating technology that makes a difference.
+I have expertise in patient care and clinical nursing, health and clinical research, advanced statistical analysis, and R Shiny development (AI-assisted coding). I am a published researcher with contributions to top-tier journals, including Springer Nature, Wiley, and Elsevier. I am passionate about creating technology that makes a difference by developing R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers.
                 </p>
                 
       <div className="academic-links">
@@ -6523,14 +6847,118 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
 
                                        </main>
 
-                    <footer className="footer">
-                        <div className="container">
-                            <p>© {new Date().getFullYear()} Mudasir Mohammed Ibrahim. All rights reserved.</p>
-                            <p style={{marginTop: '0.5rem', fontSize: '0.9rem'}}>
-                                Built by Mudasir Mohammed Ibrahim.
-                            </p>
-                        </div>
-                    </footer>
+                   <footer className="footer">
+    <div className="container">
+        <div className="footer-content">
+            {/* Left Column - Quick Links */}
+            <div className="footer-column">
+                <h3>Quick Links</h3>
+                <div className="footer-tabs-grid">
+                    {/* First Column - 5 Tabs */}
+                    <ul className="footer-links-vertical">
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('home'); }}>
+                                <i className="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('projects'); }}>
+                                <i className="fas fa-project-diagram"></i>
+                                <span>Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('blog'); }}>
+                                <i className="fas fa-blog"></i>
+                                <span>Blog</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('about'); }}>
+                                <i className="fas fa-user"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('education'); }}>
+                                <i className="fas fa-graduation-cap"></i>
+                                <span>Education</span>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    {/* Second Column - 4 Tabs */}
+                    <ul className="footer-links-vertical">
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('publications'); }}>
+                                <i className="fas fa-file-alt"></i>
+                                <span>Publications</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('resume'); }}>
+                                <i className="fas fa-file-pdf"></i>
+                                <span>Resume</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('support'); }}>
+                                <i className="fas fa-hands-helping"></i>
+                                <span>Support</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setActiveSection('contact'); }}>
+                                <i className="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Right Column - Connect With Me */}
+            <div className="footer-column social-column">
+                <h3>Connect With Me</h3>
+                <div className="social-links-grid">
+                    <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="social-link-item github">
+                        <i className="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="social-link-item linkedin">
+                        <i className="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://www.youtube.com/@mudasirmohammedibrahim1026" target="_blank" rel="noopener noreferrer" className="social-link-item youtube">
+                        <i className="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="social-link-item scholar">
+                        <i className="fas fa-graduation-cap"></i>
+                        <span>Google Scholar</span>
+                    </a>
+                    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="social-link-item orcid">
+                        <i className="fab fa-orcid"></i>
+                        <span>ORCID</span>
+                    </a>
+                    <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" rel="noopener noreferrer" className="social-link-item blogger">
+                        <i className="fab fa-blogger-b"></i>
+                        <span>Blogger</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="footer-bottom">
+            <p>© {new Date().getFullYear()}. All rights reserved.</p>
+            <p>Registered Nurse | Data Enthusiast | R Shiny Developer</p>
+            <p>Built with <i className="fas fa-heart footer-heart"></i> by Mudasir Mohammed Ibrahim</p>
+        </div>
+    </div>
+</footer>
+                   
                 </div>
             );
         }
