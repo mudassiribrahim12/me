@@ -149,6 +149,102 @@ a[target="_blank"]:not(.no-icon)::after {
     display: none; /* Hide duplicate icon on buttons */
 }
 
+/* TOUCH FIXES FOR MOBILE */
+@media (max-width: 768px) {
+    /* Increase touch target sizes */
+    .btn-run-app,
+    .btn-view-code,
+    .btn-resume,
+    .btn-support,
+    .btn-submit,
+    .btn-read-more,
+    .btn-github,
+    .btn-google-scholar,
+    .btn-blogger,
+    .academic-link,
+    .nav-links a,
+    .mobile-nav-links a,
+    .social-btn,
+    .contact-link {
+        min-height: 44px; /* Apple's recommended minimum touch target size */
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .btn-run-app:hover,
+    .btn-view-code:hover,
+    .btn-resume:hover,
+    .btn-support:hover,
+    .btn-submit:hover,
+    .btn-read-more:hover,
+    .btn-github:hover,
+    .btn-google-scholar:hover,
+    .btn-blogger:hover,
+    .academic-link:hover,
+    .nav-links a:hover,
+    .mobile-nav-links a:hover,
+    .social-btn:hover,
+    .contact-link:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Add active/tap states */
+    .btn-run-app:active,
+    .btn-view-code:active,
+    .btn-resume:active,
+    .btn-support:active,
+    .btn-submit:active,
+    .btn-read-more:active,
+    .btn-github:active,
+    .btn-google-scholar:active,
+    .btn-blogger:active,
+    .academic-link:active,
+    .nav-links a:active,
+    .mobile-nav-links a:active,
+    .social-btn:active,
+    .contact-link:active {
+        transform: scale(0.98) !important;
+        opacity: 0.9;
+    }
+    
+    /* Fix button text alignment */
+    .app-actions {
+        flex-direction: column !important;
+    }
+    
+    .btn-run-app,
+    .btn-view-code {
+        width: 100% !important;
+        margin: 5px 0 !important;
+    }
+    
+    /* Ensure links are clickable */
+    a, button {
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+        tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Remove any pointer-events blocking */
+    * {
+        pointer-events: auto !important;
+    }
+    
+    /* Fix for buttons inside React components */
+    [role="button"],
+    button,
+    .btn,
+    a[href] {
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+}
+
 /* Visual feedback for external links */
 a[target="_blank"]:hover {
     position: relative;
@@ -6610,6 +6706,191 @@ document.addEventListener('click', function(e) {
         }
     }
 });
+
+// Mobile touch fixes
+document.addEventListener('DOMContentLoaded', function() {
+    // Fix for touch devices
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    if (isTouchDevice) {
+        // Add touch-specific classes
+        document.body.classList.add('touch-device');
+        
+        // Remove hover effects on touch devices
+        const style = document.createElement('style');
+        style.textContent = `
+            .touch-device .btn-run-app:hover,
+            .touch-device .btn-view-code:hover,
+            .touch-device .btn-resume:hover,
+            .touch-device .btn-support:hover,
+            .touch-device .btn-submit:hover,
+            .touch-device .btn-read-more:hover,
+            .touch-device .btn-github:hover,
+            .touch-device .btn-google-scholar:hover,
+            .touch-device .btn-blogger:hover,
+            .touch-device .academic-link:hover,
+            .touch-device .glass-card:hover,
+            .touch-device .shiny-app-card:hover,
+            .touch-device .blog-card:hover,
+            .touch-device .publication-card:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+            
+            .touch-device .btn-run-app:active,
+            .touch-device .btn-view-code:active,
+            .touch-device .btn-resume:active,
+            .touch-device .btn-support:active,
+            .touch-device .btn-submit:active,
+            .touch-device .btn-read-more:active,
+            .touch-device .btn-github:active,
+            .touch-device .btn-google-scholar:active,
+            .touch-device .btn-blogger:active,
+            .touch-device .academic-link:active {
+                transform: scale(0.98) !important;
+                opacity: 0.9;
+                transition: transform 0.1s, opacity 0.1s;
+            }
+            
+            /* Make sure all clickable elements are properly sized */
+            .touch-device a, 
+            .touch-device button,
+            .touch-device [role="button"] {
+                min-height: 44px !important;
+                min-width: 44px !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            
+            /* Remove hover animations on cards */
+            .touch-device .glass-card:hover,
+            .touch-device .shiny-app-card:hover,
+            .touch-device .blog-card:hover,
+            .touch-device .publication-card:hover {
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Add touch event listeners to all buttons and links
+    function addTouchSupport() {
+        const allButtons = document.querySelectorAll('button, .btn, a[href], [role="button"]');
+        
+        allButtons.forEach(element => {
+            // Remove existing listeners to avoid duplicates
+            element.removeEventListener('touchstart', handleTouchStart);
+            element.removeEventListener('touchend', handleTouchEnd);
+            
+            // Add new listeners
+            element.addEventListener('touchstart', handleTouchStart, { passive: true });
+            element.addEventListener('touchend', handleTouchEnd, { passive: true });
+        });
+    }
+    
+    function handleTouchStart(e) {
+        // Add active class
+        this.classList.add('touch-active');
+        
+        // Prevent double-tap zoom
+        if (e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }
+    
+    function handleTouchEnd(e) {
+        // Remove active class
+        this.classList.remove('touch-active');
+        
+        // Handle the click
+        const rect = this.getBoundingClientRect();
+        const touch = e.changedTouches[0];
+        const x = touch.clientX;
+        const y = touch.clientY;
+        
+        // Check if touch ended within the element
+        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+            // Trigger click if it's a button
+            if (this.tagName === 'BUTTON' || this.getAttribute('role') === 'button') {
+                e.preventDefault();
+                this.click();
+            }
+        }
+    }
+    
+    // Initialize touch support
+    addTouchSupport();
+    
+    // Re-initialize after React renders
+    setTimeout(addTouchSupport, 1000);
+    setTimeout(addTouchSupport, 3000);
+    
+    // Also add click handlers for safety
+    document.addEventListener('click', function(e) {
+        // Ensure all clicks work
+        console.log('Click detected on:', e.target.tagName, e.target.className);
+    }, true);
+    
+    // Fix for iOS Safari
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+        // Fix for iOS touch events
+        document.body.style.cursor = 'pointer';
+        
+        // Prevent default touch behaviors that might interfere
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.tagName === 'BUTTON' || 
+                e.target.tagName === 'A' || 
+                e.target.classList.contains('btn')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    }
+});
+
+// Add this useEffect inside your App component
+useEffect(() => {
+    // Mobile touch fixes for React
+    const fixReactTouchIssues = () => {
+        // Add touch-action to all interactive elements
+        const interactiveElements = document.querySelectorAll(
+            'button, a, .btn, .nav-links a, .mobile-nav-links a, .academic-link, .social-btn'
+        );
+        
+        interactiveElements.forEach(el => {
+            el.style.touchAction = 'manipulation';
+            el.style.webkitTapHighlightColor = 'rgba(0, 0, 0, 0.1)';
+            
+            // Ensure proper cursor
+            el.style.cursor = 'pointer';
+            
+            // Add data attribute for debugging
+            el.setAttribute('data-touch-enabled', 'true');
+        });
+        
+        // Fix for buttons that might be overlapped
+        const buttons = document.querySelectorAll('.btn-run-app, .btn-view-code, .btn-resume, .btn-support');
+        buttons.forEach(btn => {
+            // Ensure button is above other elements
+            btn.style.position = 'relative';
+            btn.style.zIndex = '10';
+        });
+    };
+    
+    // Run initially
+    fixReactTouchIssues();
+    
+    // Run after React renders
+    const timer1 = setTimeout(fixReactTouchIssues, 500);
+    const timer2 = setTimeout(fixReactTouchIssues, 1500);
+    const timer3 = setTimeout(fixReactTouchIssues, 3000);
+    
+    return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+    };
+}, []);
 
 // Update event listeners
 document.addEventListener('DOMContentLoaded', function() {
