@@ -149,6 +149,44 @@ a[target="_blank"]:not(.no-icon)::after {
     display: none; /* Hide duplicate icon on buttons */
 }
 
+/* Add this to your existing CSS */
+a, button, .btn, [role="button"] {
+    cursor: pointer !important;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+/* Ensure external links are clearly clickable */
+a[target="_blank"] {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Remove any conflicting styles */
+.btn-run-app,
+.btn-view-code,
+.btn-resume,
+.btn-support,
+.btn-submit,
+.btn-read-more,
+.btn-github,
+.btn-google-scholar,
+.btn-blogger,
+.academic-link,
+.social-btn {
+    pointer-events: auto !important;
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    a[href], button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
 /* TOUCH FIXES FOR MOBILE */
 @media (max-width: 768px) {
     /* Increase touch target sizes */
@@ -5124,7 +5162,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
     onClick={() => setActiveSection('home')} 
     style={{cursor: 'pointer'}}
     title="Click to go to Home"
->mudasir</div>
+>Mudasir</div>
         <div className="nav-links">
             {sections.map(section => (
                 <a
@@ -6621,91 +6659,64 @@ function closeMobileMenu() {
     }, 300);
 }
 
-// Comprehensive external link handler
+// Simplified external link handler - add this at the end of your script section
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to fix all external links
-    const fixAllExternalLinks = () => {
-        console.log('Checking for external links...');
+    // Function to ensure all external links open properly
+    function initializeExternalLinks() {
+        // Select all anchor tags
+        const links = document.querySelectorAll('a');
         
-        // Get all links on the page
-        const links = document.getElementsByTagName('a');
-        
-        for (let link of links) {
-            const href = link.href;
+        links.forEach(link => {
+            const href = link.getAttribute('href');
             
-            // Skip if no href or if it's a mailto or tel link
-            if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) {
-                continue;
-            }
+            // Skip if no href or internal links
+            if (!href) return;
+            if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
             
             // Check if it's an external link
-            const isExternal = 
-                href.startsWith('http://') || 
-                href.startsWith('https://');
-            
-            // Check if it's not pointing to the same domain
-            const isNotSameDomain = !href.includes(window.location.hostname);
+            const isExternal = href.startsWith('http://') || href.startsWith('https://');
+            const isNotSameDomain = href.indexOf(window.location.hostname) === -1;
             
             if (isExternal && isNotSameDomain) {
-                // Ensure it opens in new tab
-                if (!link.target || link.target !== '_blank') {
-                    link.target = '_blank';
-                    console.log('Set target="_blank" for:', href);
-                }
+                // Set target and rel attributes
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
                 
-                // Ensure proper rel attributes for security
-                let rel = link.rel || '';
-                if (!rel.includes('noopener')) rel += ' noopener';
-                if (!rel.includes('noreferrer')) rel += ' noreferrer';
-                link.rel = rel.trim();
+                // Remove any existing click event listeners to prevent conflicts
+                const newLink = link.cloneNode(true);
+                link.parentNode.replaceChild(newLink, link);
                 
-                // Add visual indicator if not already present
-                if (!link.querySelector('.external-indicator')) {
-                    const indicator = document.createElement('span');
-                    indicator.className = 'external-indicator';
-                    indicator.innerHTML = ' ↗';
-                    indicator.style.fontSize = '0.8em';
-                    indicator.style.opacity = '0.7';
-                    indicator.style.marginLeft = '2px';
-                    link.appendChild(indicator);
-                }
+                // Add click handler that directly opens the link
+                newLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.open(href, '_blank', 'noopener,noreferrer');
+                });
             }
-        }
-    };
+        });
+    }
     
     // Run immediately
-    fixAllExternalLinks();
+    initializeExternalLinks();
     
-    // Run after a delay (for React-loaded content)
-    setTimeout(fixAllExternalLinks, 1000);
-    setTimeout(fixAllExternalLinks, 3000);
-    
-    // Run when URL changes (for single page apps)
-    let lastUrl = location.href;
-    new MutationObserver(() => {
-        const url = location.href;
-        if (url !== lastUrl) {
-            lastUrl = url;
-            setTimeout(fixAllExternalLinks, 500);
-        }
-    }).observe(document, {subtree: true, childList: true});
+    // Run again after React content loads
+    setTimeout(initializeExternalLinks, 1000);
+    setTimeout(initializeExternalLinks, 3000);
 });
 
-// Also add a click handler for safety
-document.addEventListener('click', function(e) {
-    const link = e.target.closest('a');
-    if (link && link.href) {
-        const href = link.href;
-        const isExternal = (href.startsWith('http://') || href.startsWith('https://')) &&
-                          !href.includes(window.location.hostname);
-        
-        if (isExternal && (!link.target || link.target !== '_blank')) {
-            // Open in new tab
-            e.preventDefault();
-            window.open(href, '_blank', 'noopener,noreferrer');
-        }
-    }
-});
+// Also, for buttons that should open links, ensure they work
+function initializeButtonLinks() {
+    // Find all buttons with onclick that should open links
+    const buttons = document.querySelectorAll('button[onclick*="window.open"], button[onclick*="location.href"]');
+    
+    buttons.forEach(button => {
+        // Clone and replace to ensure clean event handling
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+    });
+}
+
+// Run this after content loads
+setTimeout(initializeButtonLinks, 1000);
 
 // Mobile touch fixes
 document.addEventListener('DOMContentLoaded', function() {
