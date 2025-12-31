@@ -139,6 +139,26 @@ a, button, [role="button"], input, select, textarea {
     min-width: 44px;
 }
 
+/* Add to your CSS section */
+a[target="_blank"] {
+    position: relative;
+    z-index: 10;
+}
+
+/* Fix for mobile touch issues with external links */
+@media (max-width: 768px) {
+    a[target="_blank"] {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    /* Prevent default behavior on mobile */
+    a[target="_blank"]:active {
+        transform: scale(0.98);
+    }
+}
+
 /* Remove hover states on mobile */
 @media (hover: none) and (pointer: coarse) {
     .glass-card:hover,
@@ -4294,13 +4314,14 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                     </div>
                 </div>
                 
-                <button 
-                    className="btn"
-                    onClick={() => setActiveSection('publications')}
-                    style={{marginTop: '2rem'}}
-                >
-                    View Publications
-                </button>
+<button 
+    className="btn"
+    onClick={() => setActiveSection('publications')}
+    style={{marginTop: '2rem'}}
+>
+    View Publications
+</button>
+
             </div>
             <div className="hero-image">
                 <div className="profile-image-container">
@@ -4929,15 +4950,21 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
                         </p>
                     </div>
                 </div>
-                <a 
-                    href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn-google-scholar"
-                >
-                    <i className="fab fa-google-scholar"></i>
-                    View Google Scholar Profile
-                </a>
+            
+            <a 
+    href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-google-scholar"
+    onClick={(e) => {
+        e.stopPropagation();
+        window.open(this.href, '_blank', 'noopener,noreferrer');
+    }}
+>
+    <i className="fab fa-google-scholar"></i>
+    View Google Scholar Profile
+</a>
+            
             </div>
 
             <div className="research-repositories">
@@ -5488,6 +5515,24 @@ useEffect(() => {
     }
 }, []);
 
+// Update the mobile menu link click handler
+const mobileLinks = mobileMenuContent.querySelectorAll('.mobile-nav-links a');
+mobileLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Don't close menu for external links
+        if (this.getAttribute('target') === '_blank') {
+            // Allow external link to open
+            return;
+        }
+        
+        // Only close menu for internal navigation
+        e.preventDefault();
+        const section = this.getAttribute('href').replace('#', '');
+        setActiveSection(section);
+        closeMobileMenu();
+    });
+});
+
 // Mobile menu functionality
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
@@ -5525,6 +5570,34 @@ function closeMobileMenu() {
         document.body.style.overflow = 'auto';
     }, 300);
 }
+
+// Fix for mobile external links
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle all external links
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Only for external links
+            if (this.hostname !== window.location.hostname) {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(this.href, '_blank', 'noopener,noreferrer');
+            }
+        });
+        
+        // Add touch event for mobile
+        link.addEventListener('touchstart', function(e) {
+            e.stopPropagation();
+        }, { passive: true });
+    });
+    
+    // Fix for buttons that should be links
+    document.querySelectorAll('.btn[onclick*="setActiveSection"]').forEach(btn => {
+        btn.style.cursor = 'pointer';
+        btn.addEventListener('touchstart', function(e) {
+            e.stopPropagation();
+        }, { passive: true });
+    });
+});
 
 // Update event listeners
 document.addEventListener('DOMContentLoaded', function() {
