@@ -77,7 +77,6 @@
     --shadow: rgba(0, 0, 0, 0.1);
     --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --glass: rgba(255, 255, 255, 0.25);
-  
     
     /* Add fixed button colors that won't change with theme */
     --btn-primary: #6366f1;
@@ -145,55 +144,6 @@
     .shiny-app-card:hover,
     .project-card:hover {
         transform: translateY(-2px) !important;
-    }
-}
-        
-/* Add to your existing CSS */
-@media (max-width: 768px) {
-    /* Ensure all interactive elements have proper touch feedback */
-    button, 
-    .btn, 
-    a.btn, 
-    .theme-toggle, 
-    .mobile-menu-btn,
-    .nav-links a,
-    .mobile-nav-links a {
-        -webkit-tap-highlight-color: transparent;
-        cursor: pointer;
-    }
-    
-    /* Prevent sticky hover states on mobile */
-    .btn:hover,
-    button:hover,
-    a.btn:hover {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-    
-    /* Active state for touch feedback */
-    .btn:active,
-    button:active,
-    a.btn:active {
-        transform: scale(0.95) !important;
-        opacity: 0.8 !important;
-        transition: transform 0.1s !important;
-    }
-}
-
-/* Fix for iOS Safari */
-@supports (-webkit-touch-callout: none) {
-    button, 
-    .btn, 
-    a.btn {
-        cursor: pointer;
-    }
-    
-    /* Disable text selection on interactive elements */
-    .btn, button, a[href] {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
     }
 }
         
