@@ -2,13 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mudasir Mohammed Ibrahim </title>
-        <meta name="title" content="Mudasir Mohammed Ibrahim - Official Website">
-    <meta name="description" content="Official website of Mudasir Mohammed Ibrahim - Registered General Nurse, Healthcare Researcher & R Shiny Developer at Tamale Teaching Hospital, Ghana">
-    
-    <!-- Add this with your other meta tags -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="title" content="Mudasir Mohammed Ibrahim - Official Website">
+<meta name="description" content="Official website of Mudasir Mohammed Ibrahim - Registered General Nurse, Healthcare Researcher & R Shiny Developer at Tamale Teaching Hospital, Ghana">
 <meta name="theme-color" content="#1a56db">
 
 <!-- Add these to your head section after the viewport meta tag -->
@@ -134,7 +130,229 @@
             padding: 0 20px;
         }
         
-        /* Add these styles after your existing .navbar styles */
+/* MOBILE RESPONSIVENESS FIXES */
+@media (max-width: 768px) {
+    /* Fix horizontal scrolling */
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+    
+    /* Ensure container fits screen */
+    .container {
+        width: 100%;
+        padding: 0 15px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    /* Fix hero section layout */
+    .hero {
+        display: flex !important;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.2rem !important;
+    }
+    
+    .hero-content p {
+        font-size: 1rem !important;
+    }
+    
+    /* Fix profile image */
+    .profile-image {
+        width: 250px !important;
+        height: 250px !important;
+        margin: 0 auto;
+    }
+    
+    /* Fix badges positioning */
+    .profile-badge, 
+    .current-affiliation {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 1rem auto !important;
+        width: fit-content;
+    }
+    
+    /* Fix grid layouts */
+    .shiny-apps-grid,
+    .blog-grid,
+    .publications-grid,
+    .support-options,
+    .resume-options,
+    .skills-grid,
+    .credentials-cards,
+    .competencies-cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+    
+    /* Fix card widths */
+    .glass-card,
+    .shiny-app-card,
+    .blog-card,
+    .publication-card,
+    .support-card,
+    .resume-card,
+    .contact-form-container,
+    .contact-info-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Fix section padding */
+    .section {
+        padding: 3rem 0 !important;
+    }
+    
+    .section-title {
+        font-size: 1.8rem !important;
+    }
+    
+    /* Fix form layout */
+    .contact-content {
+        display: flex !important;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+    
+    /* Fix timeline */
+    .timeline::before {
+        left: 20px !important;
+    }
+    
+    .timeline-item {
+        width: calc(100% - 40px) !important;
+        margin-left: 40px !important;
+        padding-left: 2rem !important;
+    }
+    
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        margin-left: 40px !important;
+        padding-left: 2rem !important;
+        text-align: left !important;
+    }
+    
+    .timeline-item::before {
+        left: -25px !important;
+    }
+    
+    /* Fix stats layouts */
+    .resume-stats,
+    .blog-stats,
+    .projects-stats,
+    .publication-stats {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem;
+    }
+    
+    .resume-stat,
+    .blog-stat,
+    .project-stat,
+    .stat-box {
+        min-width: auto !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix images */
+    .app-image-container,
+    .blog-image {
+        height: 180px !important;
+    }
+    
+    /* Fix buttons */
+    .btn-resume,
+    .btn-support,
+    .btn-submit,
+    .btn-run-app,
+    .btn-view-code {
+        width: 100% !important;
+        padding: 0.8rem 1rem !important;
+    }
+    
+    .app-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    /* Fix dangling effect on mobile */
+    .glass-card::before,
+    .glass-card::after,
+    .shiny-app-card::before,
+    .shiny-app-card::after,
+    .blog-card::before,
+    .blog-card::after,
+    .publication-card::before,
+    .publication-card::after {
+        display: none !important;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Make everything single column */
+    .resume-stats,
+    .blog-stats,
+    .projects-stats,
+    .publication-stats {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .section-title {
+        font-size: 1.6rem !important;
+    }
+    
+    /* Fix navigation */
+    .navbar.scrolled {
+        margin: 0 !important;
+        width: 100% !important;
+        border-radius: 0 !important;
+    }
+    
+    /* Fix academic links */
+    .academic-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .academic-link {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Fix social buttons */
+    .social-buttons {
+        flex-direction: column;
+    }
+    
+    .social-btn {
+        width: 100%;
+    }
+}
 
 /* Default navbar state */
 .navbar {
@@ -161,6 +379,15 @@
     box-shadow: 0 10px 30px var(--shadow);
     border: 1px solid var(--border);
     border-top: none;
+}
+
+// Add this to your existing CSS
+:root {
+    --vh: 1vh;
+}
+
+body {
+    min-height: calc(var(--vh, 1vh) * 100);
 }
 
 /* Adjust for mobile */
@@ -6460,6 +6687,39 @@ function addRefreshButton() {
 
 // Add refresh button after loading
 setTimeout(addRefreshButton, 2000);
+
+        // Mobile optimization script
+document.addEventListener('DOMContentLoaded', function() {
+    // Prevent zoom on input focus
+    document.addEventListener('focusin', function(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            setTimeout(function() {
+                document.body.style.zoom = "1.0";
+            }, 100);
+        }
+    });
+    
+    // Fix for iOS 100vh issue
+    function setVH() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
+    
+    // Prevent horizontal scroll
+    document.body.style.overflowX = 'hidden';
+    
+    // Fix for iOS rubber band effect
+    document.body.addEventListener('touchmove', function(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            return;
+        }
+        e.preventDefault();
+    }, { passive: false });
+});
 
         
     </script>
