@@ -8,7 +8,10 @@
     <meta name="description" content="Official website of Mudasir Mohammed Ibrahim - Registered General Nurse, Healthcare Researcher & R Shiny Developer at Tamale Teaching Hospital, Ghana">
     
     <!-- Add this with your other meta tags -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#1a56db">
 
 <!-- Add these to your head section after the viewport meta tag -->
@@ -131,6 +134,41 @@
 .glass-card {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
+}
+
+/* Fix for mobile touch events */
+@media (max-width: 768px) {
+    /* Make sure all buttons and clickable elements have proper touch feedback */
+    .btn,
+    .btn-resume,
+    .btn-support,
+    .btn-run-app,
+    .btn-view-code,
+    .btn-read,
+    .btn-pdf,
+    .academic-link,
+    .social-links a,
+    .nav-links a {
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        touch-action: manipulation;
+        min-height: 44px; /* Minimum touch target size for iOS */
+        min-width: 44px;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .glass-card:hover,
+    .shiny-app-card:hover,
+    .project-card:hover {
+        transform: none !important;
+    }
+    
+    /* Fix for iOS Safari */
+    button, a {
+        -webkit-appearance: none;
+        -webkit-touch-callout: none;
+        user-select: none;
+    }
 }
 
 /* Optimize animations for mobile */
@@ -3799,6 +3837,40 @@ document.addEventListener('DOMContentLoaded', initMobileMenu);
 
 // Also initialize when React content might be loaded
 setTimeout(initMobileMenu, 500);
+
+// Add this after your mobile menu initialization code
+function initMobileTouchFix() {
+    // Add touch event listeners to all buttons
+    document.addEventListener('DOMContentLoaded', function() {
+        const allButtons = document.querySelectorAll(
+            '.btn, .btn-resume, .btn-support, .btn-run-app, ' +
+            '.btn-view-code, .btn-read, .btn-pdf, .academic-link, ' +
+            '.mobile-nav-links a, .nav-links a'
+        );
+        
+        allButtons.forEach(button => {
+            // Prevent double-tap zoom
+            button.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+            }, { passive: true });
+            
+            // Add active state for visual feedback
+            button.addEventListener('touchstart', function() {
+                this.style.opacity = '0.7';
+            });
+            
+            button.addEventListener('touchend', function() {
+                this.style.opacity = '';
+            });
+        });
+        
+        // Fix for iOS Safari click delay
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    });
+}
+
+// Call the function
+initMobileTouchFix();
 
 
 // Close mobile menu when ESC key is pressed
