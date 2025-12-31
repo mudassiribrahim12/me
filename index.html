@@ -3652,14 +3652,62 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        function App() {
-            const [darkMode, setDarkMode] = useState(false);
-            const [activeSection, setActiveSection] = useState('home');
-            const [formData, setFormData] = useState({
-                name: '',
-                email: '',
-                message: ''
-            });
+function App() {
+    const [darkMode, setDarkMode] = useState(false);
+    const [activeSection, setActiveSection] = useState('home');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '', // Added subject field
+        message: ''
+    });
+    const [showAllApps, setShowAllApps] = useState(false);
+
+    // Add this useEffect inside the component
+    useEffect(() => {
+        // Check if coming from "Request Bank Details"
+        const isBankRequest = localStorage.getItem('bankDetailsRequest');
+        
+        if (isBankRequest === 'true' && activeSection === 'contact') {
+            // Auto-fill the subject field
+            setFormData(prev => ({
+                ...prev,
+                subject: 'Request for Bank Details - Support Inquiry'
+            }));
+            
+            // Clear the flag
+            localStorage.removeItem('bankDetailsRequest');
+            
+            // Optional: Add a note/message
+            setTimeout(() => {
+                // Add a visual indicator
+                const subjectField = document.getElementById('subject');
+                if (subjectField) {
+                    subjectField.style.borderColor = '#10b981';
+                    subjectField.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.1)';
+                }
+                
+                // Focus on message field
+                const messageField = document.getElementById('message');
+                if (messageField) {
+                    messageField.focus();
+                    messageField.placeholder = "Please provide your contact details and purpose for the bank transfer...";
+                }
+            }, 100);
+        }
+    }, [activeSection]); // This effect runs when activeSection changes
+
+    // Your existing useEffect for dark mode
+    useEffect(() => {
+        if (darkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    }, [darkMode]);
+
+    // ... rest of your component code remains the same
+          
             
         // Mobile menu functionality
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -3760,42 +3808,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-            useEffect(() => {
-                if (darkMode) {
-                    document.body.classList.add('dark-mode');
-                } else {
-                    document.body.classList.remove('dark-mode');
-                }
-            }, [darkMode]);
-
-            const projects = [
-                {
-                    title: "AI-Powered Analytics Dashboard",
-                    description: "Real-time data visualization with machine learning insights",
-                    tags: ["React", "Python", "D3.js", "TensorFlow"],
-                    year: "2023"
-                },
-                {
-                    title: "E-Commerce Platform",
-                    description: "Full-stack e-commerce solution with payment integration",
-                    tags: ["Next.js", "Node.js", "MongoDB", "Stripe"],
-                    year: "2022"
-                },
-                {
-                    title: "Health Monitoring App",
-                    description: "IoT-based health tracking with real-time alerts",
-                    tags: ["React Native", "IoT", "AWS", "GraphQL"],
-                    year: "2023"
-                },
-                {
-                    title: "Blockchain Voting System",
-                    description: "Secure digital voting using blockchain technology",
-                    tags: ["Solidity", "Web3.js", "React", "Ethereum"],
-                    year: "2022"
-                }
-            ];
-
-const [showAllApps, setShowAllApps] = useState(false);
 
 const shinyApps = [
     {
@@ -4971,6 +4983,7 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
         </div>
 
         <div className="support-options">
+         
             {/* GitHub Sponsors */}
             <div className="support-card glass-card">
                 <div className="support-header">
@@ -5026,34 +5039,37 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                 </div>
             </div>
 
-            {/* Bank Transfer */}
-            <div className="support-card glass-card">
-                <div className="support-header">
-                    <div className="support-icon">
-                        <i className="fas fa-university"></i>
-                    </div>
-                    <div className="support-title">
-                        <h3>Bank Transfer</h3>
-                        <p className="support-subtitle">For larger amounts or organizations</p>
-                    </div>
-                </div>
-                <div className="support-body">
-                    <p>Direct bank transfer details available upon request.</p>
-                    <div className="support-actions">
-                        <button 
-                            className="btn-support secondary"
-                            onClick={() => {
-                                setActiveSection('contact');
-                                document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' });
-                            }}
-                        >
-                            <i className="fas fa-envelope"></i>
-                            Request Bank Details
-                        </button>
-                    </div>
-                </div>
-            </div>
+      {/* Bank Transfer Card - Updated with onClick handler */}
+<div className="support-card glass-card">
+    <div className="support-header">
+        <div className="support-icon">
+            <i className="fas fa-university"></i>
         </div>
+        <div className="support-title">
+            <h3>Bank Transfer</h3>
+            <p className="support-subtitle">For larger amounts or organizations</p>
+        </div>
+    </div>
+    <div className="support-body">
+        <p>Direct bank transfer details available upon request.</p>
+        <div className="support-actions">
+            <button 
+                className="btn-support secondary"
+                onClick={() => {
+                    // Set flag for bank details request
+                    localStorage.setItem('bankDetailsRequest', 'true');
+                    setActiveSection('contact');
+                    document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' });
+                }}
+            >
+                <i className="fas fa-envelope"></i>
+                Request Bank Details
+            </button>
+        </div>
+    </div>
+</div>
+      
+              </div>
 
         <div className="support-footer">
             <div className="support-note-card glass-card">
@@ -5096,6 +5112,22 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                     Send me a message
                 </h3>
                 
+                {/* Show message when subject is auto-filled */}
+                {formData.subject === 'Request for Bank Details - Support Inquiry' && (
+                    <div className="formspree-message" style={{
+                        background: 'rgba(59, 130, 246, 0.1)',
+                        border: '1px solid rgba(59, 130, 246, 0.3)',
+                        color: '#3b82f6',
+                        marginBottom: '1.5rem'
+                    }}>
+                        <i className="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Bank Details Request</strong>
+                            <p>The subject has been auto-filled. Please provide your contact information below.</p>
+                        </div>
+                    </div>
+                )}
+                
                 {/* Success Message - Initially Hidden */}
                 <div className="formspree-message success" id="successMessage" style={{display: 'none'}}>
                     <i className="fas fa-check-circle"></i>
@@ -5104,6 +5136,7 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                         <p>Thank you for your message. I'll get back to you as soon as possible.</p>
                     </div>
                 </div>
+                
                 
                 {/* The Form */}
                 <form id="contactForm" onSubmit={handleFormSubmit}>
@@ -5171,7 +5204,9 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                             name="message" 
                             rows="6" 
                             required 
-                            placeholder="Please describe your reason for contacting..."
+                            placeholder={formData.subject === 'Request for Bank Details - Support Inquiry' 
+                                ? "Please provide your contact details and purpose for the bank transfer..." 
+                                : "Please describe your reason for contacting..."}
                             value={formData.message}
                             onChange={handleInputChange}
                         ></textarea>
@@ -5183,7 +5218,7 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                 </form>
             </div>
 
-            {/* Right Side: Contact Information - Keep this part the same */}
+            {/* Right Side: Contact Information */}
             <div className="contact-info-container glass-card">
                 <h3>
                     <i className="fas fa-address-card"></i>
