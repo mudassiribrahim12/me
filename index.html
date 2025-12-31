@@ -6525,6 +6525,92 @@ function closeMobileMenu() {
     }, 300);
 }
 
+// Comprehensive external link handler
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to fix all external links
+    const fixAllExternalLinks = () => {
+        console.log('Checking for external links...');
+        
+        // Get all links on the page
+        const links = document.getElementsByTagName('a');
+        
+        for (let link of links) {
+            const href = link.href;
+            
+            // Skip if no href or if it's a mailto or tel link
+            if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) {
+                continue;
+            }
+            
+            // Check if it's an external link
+            const isExternal = 
+                href.startsWith('http://') || 
+                href.startsWith('https://');
+            
+            // Check if it's not pointing to the same domain
+            const isNotSameDomain = !href.includes(window.location.hostname);
+            
+            if (isExternal && isNotSameDomain) {
+                // Ensure it opens in new tab
+                if (!link.target || link.target !== '_blank') {
+                    link.target = '_blank';
+                    console.log('Set target="_blank" for:', href);
+                }
+                
+                // Ensure proper rel attributes for security
+                let rel = link.rel || '';
+                if (!rel.includes('noopener')) rel += ' noopener';
+                if (!rel.includes('noreferrer')) rel += ' noreferrer';
+                link.rel = rel.trim();
+                
+                // Add visual indicator if not already present
+                if (!link.querySelector('.external-indicator')) {
+                    const indicator = document.createElement('span');
+                    indicator.className = 'external-indicator';
+                    indicator.innerHTML = ' ↗';
+                    indicator.style.fontSize = '0.8em';
+                    indicator.style.opacity = '0.7';
+                    indicator.style.marginLeft = '2px';
+                    link.appendChild(indicator);
+                }
+            }
+        }
+    };
+    
+    // Run immediately
+    fixAllExternalLinks();
+    
+    // Run after a delay (for React-loaded content)
+    setTimeout(fixAllExternalLinks, 1000);
+    setTimeout(fixAllExternalLinks, 3000);
+    
+    // Run when URL changes (for single page apps)
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+        const url = location.href;
+        if (url !== lastUrl) {
+            lastUrl = url;
+            setTimeout(fixAllExternalLinks, 500);
+        }
+    }).observe(document, {subtree: true, childList: true});
+});
+
+// Also add a click handler for safety
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('a');
+    if (link && link.href) {
+        const href = link.href;
+        const isExternal = (href.startsWith('http://') || href.startsWith('https://')) &&
+                          !href.includes(window.location.hostname);
+        
+        if (isExternal && (!link.target || link.target !== '_blank')) {
+            // Open in new tab
+            e.preventDefault();
+            window.open(href, '_blank', 'noopener,noreferrer');
+        }
+    }
+});
+
 // Update event listeners
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
