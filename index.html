@@ -130,6 +130,293 @@
             padding: 0 20px;
         }
         
+        /* ==============================
+   COLORFUL ANIMATIONS
+   ============================== */
+
+/* 1. Floating Gradient Background Animation */
+@keyframes gradientFloat {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.gradient-bg-animation {
+    background: linear-gradient(135deg, 
+        #6366f1, 
+        #8b5cf6, 
+        #ec4899, 
+        #f59e0b,
+        #10b981,
+        #3b82f6
+    );
+    background-size: 400% 400%;
+    animation: gradientFloat 15s ease infinite;
+}
+
+/* 2. Pulse Animation for Interactive Elements */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+/* 3. Color Wave (Rainbow Effect) */
+@keyframes colorWave {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 200% 0%;
+    }
+}
+
+.color-wave-text {
+    background: linear-gradient(90deg, 
+        #ef4444, 
+        #f59e0b, 
+        #10b981, 
+        #3b82f6, 
+        #8b5cf6, 
+        #ec4899, 
+        #ef4444
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: colorWave 3s linear infinite;
+}
+
+/* 4. Bounce Animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.bounce-animation {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+/* 5. Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+.shimmer-effect {
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.2) 50%, 
+        rgba(255,255,255,0) 100%);
+    background-size: 200px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* 6. Color Rotate */
+@keyframes colorRotate {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+.color-rotate {
+    animation: colorRotate 5s linear infinite;
+}
+
+/* 7. Fade In Up with Color */
+@keyframes fadeInUpColor {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        background-position: 0% 50%;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        background-position: 100% 50%;
+    }
+}
+
+.fade-in-up-color {
+    animation: fadeInUpColor 1s ease-out forwards;
+}
+
+/* 8. Confetti Colors */
+@keyframes confettiRain {
+    0% {
+        background-position: 0% 0%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        background-position: 100% 100%;
+        opacity: 0;
+    }
+}
+
+.confetti-bg {
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255,0,0,0.8) 0%, transparent 20%),
+        radial-gradient(circle at 90% 40%, rgba(255,165,0,0.8) 0%, transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(0,255,0,0.8) 0%, transparent 20%),
+        radial-gradient(circle at 30% 60%, rgba(0,0,255,0.8) 0%, transparent 20%),
+        radial-gradient(circle at 70% 30%, rgba(255,0,255,0.8) 0%, transparent 20%);
+    background-size: 300% 300%;
+    animation: confettiRain 15s linear infinite;
+}
+
+/* 9. Neon Glow */
+@keyframes neonGlow {
+    0%, 100% {
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 15px #fff,
+            0 0 20px #ff00de,
+            0 0 35px #ff00de,
+            0 0 40px #ff00de,
+            0 0 50px #ff00de,
+            0 0 75px #ff00de;
+    }
+    50% {
+        text-shadow: 
+            0 0 2px #fff,
+            0 0 5px #fff,
+            0 0 7px #fff,
+            0 0 10px #00ffff,
+            0 0 17px #00ffff,
+            0 0 20px #00ffff,
+            0 0 25px #00ffff,
+            0 0 37px #00ffff;
+    }
+}
+
+.neon-glow {
+    animation: neonGlow 2s ease-in-out infinite alternate;
+}
+
+/* 10. Colorful Border Animation */
+@keyframes borderRainbow {
+    0% {
+        border-color: #6366f1;
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+    }
+    25% {
+        border-color: #10b981;
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+    }
+    50% {
+        border-color: #f59e0b;
+        box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+    }
+    75% {
+        border-color: #ec4899;
+        box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+    }
+    100% {
+        border-color: #6366f1;
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+    }
+}
+
+.border-rainbow {
+    animation: borderRainbow 3s linear infinite;
+    border-width: 2px !important;
+}
+
+/* Animation Classes for React Components */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation delays */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+
+/* Hover effects with animations */
+.hover-glow:hover {
+    animation: pulse 1s;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5) !important;
+}
+
+.hover-color-wave:hover {
+    animation: colorWave 2s linear infinite;
+}
+
+/* Animation utilities */
+.animation-paused {
+    animation-play-state: paused;
+}
+
+.animation-running {
+    animation-play-state: running;
+}
+
+/* Mobile optimization for animations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .gradient-bg-animation,
+    .pulse-animation,
+    .color-wave-text,
+    .bounce-animation,
+    .shimmer-effect,
+    .color-rotate,
+    .neon-glow,
+    .border-rainbow {
+        animation: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .pulse-animation {
+        animation-duration: 3s;
+    }
+    
+    .bounce-animation {
+        animation-duration: 3s;
+    }
+}
 
 /* Add to your existing CSS, preferably in the Navigation section */
 .logo {
@@ -780,7 +1067,7 @@ a[target="_blank"] {
     }
 }
 
-/* Default navbar state */
+/* Default navbar - fully attached to top */
 .navbar {
     position: fixed;
     top: 0;
@@ -790,21 +1077,126 @@ a[target="_blank"] {
     border-bottom: 1px solid var(--border);
     z-index: 1000;
     padding: 1rem 0;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+    border-radius: 0;
 }
 
-/* Scrolled navbar state - smaller and rounded */
+/* When scrolled just a little bit - "detaches" from top */
 .navbar.scrolled {
-    padding: 0.5rem 0;
-    border-radius: 0 0 20px 20px;
-    margin: 10px 20px 0;
-    width: calc(100% - 40px);
-    max-width: calc(1200px - 40px);
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 10px 30px var(--shadow);
+    padding: 0.7rem 0; /* Slightly smaller padding */
+    transform: translateY(0); /* No vertical movement */
+    margin: 10px 20px 0; /* Creates space at top - THIS IS KEY! */
+    width: calc(100% - 40px); /* Adjust width for margins */
+    border-radius: 0 0 15px 15px; /* Rounded bottom edges */
+    box-shadow: 0 5px 20px var(--shadow); /* Subtle shadow */
     border: 1px solid var(--border);
     border-top: none;
+    animation: detachFromTop 0.3s ease-out;
+}
+
+/* Animation for detaching from top */
+@keyframes detachFromTop {
+    0% {
+        margin-top: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    100% {
+        margin-top: 10px;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 5px 20px var(--shadow);
+    }
+}
+
+/* Gentle slide-down animation for the content */
+@keyframes gentleSlideDown {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Add gentle slide to scrolled navbar */
+.navbar.scrolled {
+    animation: detachFromTop 0.3s ease-out, gentleSlideDown 0.3s ease-out 0.1s both;
+}
+
+/* Make the logo and nav links slightly smaller when scrolled */
+.navbar.scrolled .logo {
+    font-size: 1.6rem;
+    transition: font-size 0.3s ease;
+}
+
+.navbar.scrolled .nav-links a {
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+}
+
+.navbar.scrolled .theme-toggle {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .navbar.scrolled {
+        margin: 8px 10px 0; /* Slightly smaller margins on mobile */
+        width: calc(100% - 20px);
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .navbar.scrolled .logo {
+        font-size: 1.4rem;
+    }
+    
+    .navbar.scrolled .mobile-menu-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.4rem;
+    }
+    
+    @keyframes detachFromTop {
+        0% {
+            margin-top: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        100% {
+            margin-top: 8px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+    }
+}
+
+/* Add a subtle floating effect on hover */
+.navbar.scrolled:hover {
+    box-shadow: 0 8px 25px var(--shadow);
+    margin-top: 12px; /* Slightly more space when hovering */
+    transition: all 0.2s ease;
+}
+
+/* Smooth transition for the main content when navbar changes */
+.main-content {
+    padding-top: 80px;
+    transition: padding-top 0.3s ease;
+}
+
+.navbar.scrolled ~ .main-content {
+    padding-top: 90px; /* Adjust this to match navbar height + margin */
+}
+
+/* Mobile adjustment for content padding */
+@media (max-width: 768px) {
+    .navbar.scrolled ~ .main-content {
+        padding-top: 88px;
+    }
 }
 
 // Add this to your existing CSS
@@ -4977,28 +5369,322 @@ button[target="_blank"]:hover::before,
     <div id="root"></div>
 
 <script type="text/babel">
+
 // Scroll handler for navbar transformation
 function handleNavbarScroll() {
     const navbar = document.querySelector('.navbar');
     const scrollPosition = window.scrollY;
     
-    if (scrollPosition > 50) { // Change this number to adjust when the effect triggers
+    // Trigger effect with just a small scroll (20px)
+    if (scrollPosition > 20) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
 }
 
-// Initialize scroll handler when component mounts
+// ==============================
+// ANIMATED COMPONENTS
+// ==============================
+
+// 1. Colorful Floating Particles Background
+function FloatingParticles({ count = 15 }) {
+    const particles = Array.from({ length: count });
+    
+    return (
+        <div className="floating-particles" style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+            zIndex: -1,
+            overflow: 'hidden'
+        }}>
+            {particles.map((_, i) => {
+                const size = Math.random() * 40 + 10;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                const colors = [
+                    'rgba(99, 102, 241, 0.3)',   // Indigo
+                    'rgba(245, 158, 11, 0.3)',   // Amber
+                    'rgba(16, 185, 129, 0.3)',   // Emerald
+                    'rgba(236, 72, 153, 0.3)',   // Pink
+                    'rgba(139, 92, 246, 0.3)',   // Violet
+                    'rgba(59, 130, 246, 0.3)'    // Blue
+                ];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                return (
+                    <div key={i} style={{
+                        position: 'absolute',
+                        width: size,
+                        height: size,
+                        background: color,
+                        borderRadius: '50%',
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        filter: 'blur(5px)',
+                        animation: `float ${duration}s ease-in-out ${delay}s infinite alternate`,
+                        opacity: 0.7
+                    }} />
+                );
+            })}
+            
+            <style>{`
+                @keyframes float {
+                    0%, 100% { 
+                        transform: translate(0, 0) rotate(0deg); 
+                        opacity: 0.5;
+                    }
+                    25% { 
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(90deg); 
+                        opacity: 0.7;
+                    }
+                    50% { 
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(180deg); 
+                        opacity: 0.9;
+                    }
+                    75% { 
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(270deg); 
+                        opacity: 0.7;
+                    }
+                }
+            `}</style>
+        </div>
+    );
+}
+
+// 2. Animated Gradient Button
+function AnimatedButton({ children, onClick, type = 'primary', className = '' }) {
+    const buttonStyles = {
+        primary: 'gradient-bg-animation hover-glow',
+        secondary: 'border-rainbow hover-glow',
+        rainbow: 'color-wave-text border-rainbow'
+    };
+    
+    return (
+        <button
+            onClick={onClick}
+            className={`${buttonStyles[type]} pulse-animation ${className}`}
+            style={{
+                padding: '12px 24px',
+                borderRadius: '10px',
+                border: 'none',
+                color: 'white',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                position: 'relative',
+                overflow: 'hidden'
+            }}
+        >
+            <span className="shimmer-effect" style={{
+                position: 'absolute',
+                top: 0,
+                left: '-100%',
+                width: '100%',
+                height: '100%',
+                transition: 'left 0.3s'
+            }} />
+            {children}
+        </button>
+    );
+}
+
+// 3. Colorful Card with Hover Effects
+function AnimatedCard({ children, className = '', delay = 0 }) {
+    const [isHovered, setIsHovered] = useState(false);
+    
+    return (
+        <div
+            className={`glass-card animate-on-scroll delay-${Math.floor(delay/100)} ${className} ${isHovered ? 'border-rainbow' : ''}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            style={{
+                transition: 'all 0.3s',
+                transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
+                position: 'relative',
+                overflow: 'hidden'
+            }}
+        >
+            <div className={`shimmer-effect ${isHovered ? 'animation-running' : 'animation-paused'}`}
+                 style={{
+                     position: 'absolute',
+                     top: 0,
+                     left: isHovered ? '100%' : '-100%',
+                     width: '100%',
+                     height: '100%',
+                     transition: 'left 0.5s'
+                 }} />
+            {children}
+        </div>
+    );
+}
+
+// 4. Animated Heading with Color Wave
+function AnimatedHeading({ text, level = 1, className = '' }) {
+    const HeadingTag = `h${level}`;
+    
+    return (
+        <HeadingTag 
+            className={`color-wave-text ${className}`}
+            style={{
+                display: 'inline-block',
+                marginBottom: '1rem'
+            }}
+        >
+            {text}
+        </HeadingTag>
+    );
+}
+
+// 5. Colorful Progress Bar
+function ColorfulProgress({ progress = 0, label = '' }) {
+    const [width, setWidth] = useState(0);
+    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setWidth(progress);
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [progress]);
+    
+    return (
+        <div style={{ marginBottom: '1rem' }}>
+            {label && <div style={{ marginBottom: '0.5rem', display: 'flex', justifyContent: 'space-between' }}>
+                <span>{label}</span>
+                <span>{progress}%</span>
+            </div>}
+            <div style={{
+                width: '100%',
+                height: '8px',
+                backgroundColor: 'var(--border)',
+                borderRadius: '4px',
+                overflow: 'hidden'
+            }}>
+                <div 
+                    className="gradient-bg-animation"
+                    style={{
+                        width: `${width}%`,
+                        height: '100%',
+                        transition: 'width 1s ease-in-out',
+                        borderRadius: '4px'
+                    }}
+                />
+            </div>
+        </div>
+    );
+}
+
+// 6. Animated Skill Badge
+function AnimatedSkillBadge({ skill, level = 'intermediate' }) {
+    const levelColors = {
+        beginner: '#10b981',
+        intermediate: '#f59e0b',
+        advanced: '#ef4444',
+        expert: '#8b5cf6'
+    };
+    
+    const [isVisible, setIsVisible] = useState(false);
+    
+    useEffect(() => {
+        const timer = setTimeout(() => setIsVisible(true), 100);
+        return () => clearTimeout(timer);
+    }, []);
+    
+    return (
+        <div 
+            className={`animate-on-scroll ${isVisible ? 'animated' : ''}`}
+            style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.5rem 1rem',
+                backgroundColor: levelColors[level],
+                color: 'white',
+                borderRadius: '20px',
+                fontWeight: '600',
+                margin: '0.25rem',
+                transform: 'scale(0.9)',
+                transition: 'all 0.3s'
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.1)';
+                e.currentTarget.style.boxShadow = '0 0 20px currentColor';
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(0.9)';
+                e.currentTarget.style.boxShadow = 'none';
+            }}
+        >
+            <span>{skill}</span>
+            <div style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                backgroundColor: 'white',
+                animation: 'pulse 2s infinite'
+            }} />
+        </div>
+    );
+}
+
+// 7. Animated Theme Toggle with Colors
+function AnimatedThemeToggle({ darkMode, toggleTheme }) {
+    return (
+        <button 
+            onClick={toggleTheme}
+            className="pulse-animation"
+            style={{
+                width: '50px',
+                height: '50px',
+                borderRadius: '50%',
+                border: 'none',
+                background: darkMode 
+                    ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' 
+                    : 'linear-gradient(135deg, #f59e0b, #ec4899)',
+                color: 'white',
+                fontSize: '1.2rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.5s ease',
+                boxShadow: darkMode 
+                    ? '0 0 20px rgba(59, 130, 246, 0.5)' 
+                    : '0 0 20px rgba(245, 158, 11, 0.5)'
+            }}
+        >
+            {darkMode ? '🌙' : '☀️'}
+        </button>
+    );
+}
+
+// Update the initNavbarScroll function
 function initNavbarScroll() {
+    // Throttle the scroll event for better performance
+    let ticking = false;
+    
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                handleNavbarScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
     // Add scroll event listener
-    window.addEventListener('scroll', handleNavbarScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     
     // Check initial scroll position
     handleNavbarScroll();
     
     return () => {
-        window.removeEventListener('scroll', handleNavbarScroll);
+        window.removeEventListener('scroll', onScroll);
     };
 }
 
@@ -5037,7 +5723,7 @@ function RotatingText() {
 }
 
 function App() {
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
     const [formData, setFormData] = useState({
         name: '',
@@ -7648,41 +8334,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         e.preventDefault();
     }, { passive: false });
-});
-
-// Function to scroll to top of section
-function scrollToSection(section) {
-    const element = document.getElementById(section);
-    if (element) {
-        // Scroll to the top of the section
-        window.scrollTo({
-            top: element.offsetTop - 80, // Adjust for navbar height
-            behavior: 'smooth'
-        });
-    }
-}
-
-// Initialize footer links after page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Update all footer quick links
-    const footerLinks = document.querySelectorAll('.footer-links-vertical a[href="#"]');
-    
-    footerLinks.forEach(link => {
-        // Remove existing click handlers
-        const newLink = link.cloneNode(true);
-        link.parentNode.replaceChild(newLink, link);
-        
-        // Add new click handler
-        newLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const section = this.getAttribute('data-section') || 
-                           this.querySelector('span').textContent.toLowerCase();
-            
-            // Set active section and scroll to top
-            setActiveSection(section);
-            scrollToSection(section);
-        });
-    });
 });
 
         
