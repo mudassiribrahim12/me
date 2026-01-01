@@ -130,91 +130,6 @@
             padding: 0 20px;
         }
         
-        /* Add this to your existing mobile fixes */
-@media (max-width: 768px) {
-    /* Force all interactive elements to be properly clickable */
-    a, button, .btn, [role="button"] {
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-        min-height: 44px;
-        min-width: 44px;
-        position: relative;
-        z-index: 10;
-    }
-    
-    /* Remove hover effects on mobile */
-    .btn-run-app:hover,
-    .btn-view-code:hover,
-    .btn-resume:hover,
-    .btn-support:hover,
-    .btn-submit:hover,
-    .btn-read-more:hover,
-    .btn-github:hover,
-    .btn-google-scholar:hover,
-    .btn-blogger:hover,
-    .academic-link:hover {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-    
-    /* Add active states for mobile */
-    .btn-run-app:active,
-    .btn-view-code:active,
-    .btn-resume:active,
-    .btn-support:active,
-    .btn-submit:active,
-    .btn-read-more:active {
-        transform: scale(0.97) !important;
-        opacity: 0.9;
-        transition: transform 0.1s ease;
-    }
-}
-
-/* iOS specific fixes */
-@supports (-webkit-touch-callout: none) {
-    /* Safari and iOS specific CSS */
-    body.is-mobile {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-    }
-    
-    body.is-mobile a,
-    body.is-mobile button {
-        cursor: pointer !important;
-    }
-    
-    /* Fix for iOS Safari 100vh issue */
-    .hero, .section {
-        min-height: -webkit-fill-available;
-    }
-    
-    /* Remove blue tap highlight on iOS */
-    a, button {
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        tap-highlight-color: rgba(0, 0, 0, 0);
-    }
-}
-
-/* Android fixes */
-@media (hover: none) and (pointer: coarse) {
-    /* Remove hover effects on touch devices */
-    .btn-run-app:hover,
-    .btn-view-code:hover,
-    .btn-resume:hover,
-    .btn-support:hover {
-        transform: none !important;
-    }
-    
-    /* Larger touch targets for mobile */
-    .btn-run-app,
-    .btn-view-code,
-    .btn-resume,
-    .btn-support {
-        padding: 15px 20px !important;
-        margin: 5px !important;
-    }
-}
-        
         
         /* ================= MOBILE FIXES ================= */
 /* Ensure everything is clickable on mobile */
@@ -6361,40 +6276,29 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
 I have expertise in patient care and clinical nursing, health and clinical research, advanced statistical analysis, and R Shiny development (AI-assisted coding). I am a published researcher with contributions to top-tier journals, including Springer Nature, Wiley, and Elsevier. I am passionate about creating technology that makes a difference by developing R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers.
                 </p>
                 
-   <div className="academic-links">
-    <MobileLink 
-        href="https://github.com/mudassiribrahim30"
-        className="academic-link"
-    >
-        <i className="fab fa-github"></i>
-        <span>GitHub</span>
-    </MobileLink>
-    
-    <MobileLink 
-        href="https://orcid.org/0000-0002-9049-8222"
-        className="academic-link"
-    >
+      <div className="academic-links">
+<button
+    className="academic-link"
+    onClick={() => window.open('https://github.com/mudassiribrahim30', '_blank', 'noopener,noreferrer')}
+>
+    <i className="fab fa-github"></i>
+    <span>GitHub</span>
+</button>
+
+    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="academic-link">
         <i className="fas fa-id-card"></i>
         <span>ORCID</span>
-    </MobileLink>
-    
-    <MobileLink 
-        href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0"
-        className="academic-link"
-    >
+    </a>
+    <a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="academic-link">
         <i className="fab fa-linkedin"></i>
         <span>LinkedIn</span>
-    </MobileLink>
-    
-    <MobileLink 
-        href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en"
-        className="academic-link"
-    >
+    </a>
+    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="academic-link">
         <i className="fas fa-graduation-cap"></i>
         <span>Google Scholar</span>
-    </MobileLink>
+    </a>
 </div>
-   
+      
             </div>
             <div className="hero-image">
                 <div className="profile-image-container">
@@ -6494,23 +6398,26 @@ I have expertise in patient care and clinical nursing, health and clinical resea
                     </div>
                 </div>
            
-// Replace this in your shinyApps.map rendering:
-<div className="app-actions">
-    <MobileLink 
-        href={app.runUrl}
+           <div className="app-actions">
+    <a 
+        href={app.runUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
         className="btn-run-app"
     >
         <i className="fas fa-play-circle"></i>
         Run App
-    </MobileLink>
-    <MobileLink 
-        href={app.codeUrl}
+    </a>
+    <a 
+        href={app.codeUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
         className="btn-view-code"
     >
         <i className="fas fa-code"></i>
         View Code
-    </MobileLink>
-</div>
+    </a>
+</div>     
            
                        </div>
         </div>
@@ -7559,15 +7466,9 @@ If you've benefited from any of my R Shiny applications, consider supporting my 
                         ></textarea>
                     </div>
                     
-// In your contact form:
-<MobileButton 
-    type="submit" 
-    className="btn-submit" 
-    id="submitBtn"
->
-    <i className="fas fa-paper-plane"></i> Send Message
-</MobileButton>
-
+                    <button type="submit" className="btn-submit" id="submitBtn">
+                        <i className="fas fa-paper-plane"></i> Send Message
+                    </button>
                 </form>
             </div>
 
@@ -7899,149 +7800,6 @@ function closeMobileMenu() {
         document.body.style.overflow = 'auto';
     }, 300);
 }
-
-// Mobile-optimized Link Component
-function MobileLink({ 
-    href, 
-    target = '_blank', 
-    rel = 'noopener noreferrer',
-    className = '', 
-    children,
-    onClick,
-    type = 'link'
-}) {
-    const handleClick = (e) => {
-        if (onClick) {
-            onClick(e);
-            return;
-        }
-        
-        if (href) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // For mobile devices, use a more reliable method
-            if (/iPad|iPhone|iPod|Android/.test(navigator.userAgent)) {
-                // Create a temporary link and click it
-                const tempLink = document.createElement('a');
-                tempLink.href = href;
-                tempLink.target = target;
-                tempLink.rel = rel;
-                tempLink.style.display = 'none';
-                document.body.appendChild(tempLink);
-                tempLink.click();
-                document.body.removeChild(tempLink);
-            } else {
-                // For desktop, use window.open
-                window.open(href, target, 'noopener,noreferrer');
-            }
-        }
-    };
-
-    return (
-        <a
-            href={href || '#'}
-            className={className}
-            onClick={handleClick}
-            data-mobile-optimized="true"
-            style={{
-                cursor: 'pointer',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                touchAction: 'manipulation'
-            }}
-        >
-            {children}
-        </a>
-    );
-}
-
-// Mobile-optimized Button Component
-function MobileButton({ 
-    onClick, 
-    className = '', 
-    children,
-    type = 'button'
-}) {
-    const handleClick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Add a slight delay for better touch feedback
-        if (onClick) {
-            // Add visual feedback
-            const btn = e.currentTarget;
-            btn.style.transform = 'scale(0.97)';
-            btn.style.opacity = '0.9';
-            
-            setTimeout(() => {
-                onClick(e);
-                btn.style.transform = '';
-                btn.style.opacity = '';
-            }, 150);
-        }
-    };
-
-    return (
-        <button
-            type={type}
-            className={className}
-            onClick={handleClick}
-            data-mobile-optimized="true"
-            style={{
-                cursor: 'pointer',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                touchAction: 'manipulation',
-                WebkitTapHighlightColor: 'transparent'
-            }}
-        >
-            {children}
-        </button>
-    );
-}
-
-// Mobile-specific fixes
-function initializeMobileFixes() {
-    // Check if on mobile
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-        // Add mobile class to body
-        document.body.classList.add('is-mobile');
-        
-        // Fix for iOS Safari
-        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-            // Prevent zoom on double-tap
-            document.addEventListener('touchstart', function(e) {
-                if (e.touches.length > 1) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            // Fix for iOS hover states
-            document.addEventListener('touchstart', function() {}, {passive: true});
-        }
-        
-        // Ensure all links work on mobile
-        document.addEventListener('click', function(e) {
-            const target = e.target;
-            const link = target.closest('a[href^="http"]');
-            
-            if (link && !link.hasAttribute('data-mobile-optimized')) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Open link in new tab
-                const url = link.getAttribute('href');
-                window.open(url, '_blank', 'noopener,noreferrer');
-            }
-        }, true);
-    }
-}
-
-// Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', initializeMobileFixes);
 
 // Simplified external link handler - add this at the end of your script section
 document.addEventListener('DOMContentLoaded', function() {
