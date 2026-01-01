@@ -770,6 +770,81 @@ a[target="_blank"] {
         justify-content: center;
     }
     
+    /* MOBILE TOUCH FIXES - Add this to your existing CSS */
+@media (max-width: 768px) {
+    /* Ensure all interactive elements have proper touch targets */
+    button,
+    .btn,
+    a[role="button"],
+    .nav-links a,
+    .mobile-nav-links a,
+    .academic-link,
+    .social-btn,
+    .social-link-item,
+    .contact-link {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+        z-index: 10 !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3) !important;
+        tap-highlight-color: rgba(99, 102, 241, 0.3) !important;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .touch-device button:hover,
+    .touch-device .btn:hover,
+    .touch-device a:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Add active/tap states */
+    .touch-device button:active,
+    .touch-device .btn:active,
+    .touch-device a:active,
+    .touch-active {
+        transform: scale(0.98) !important;
+        opacity: 0.9 !important;
+        transition: transform 0.1s, opacity 0.1s !important;
+    }
+    
+    /* Fix button spacing in grids */
+    .app-actions,
+    .publication-actions,
+    .blog-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 10px !important;
+    }
+    
+    .app-actions a,
+    .publication-actions a,
+    .blog-actions a {
+        flex: 1 !important;
+        text-align: center !important;
+        padding: 12px !important;
+    }
+    
+    /* Ensure buttons are clickable in modals */
+    .modal-content button,
+    .modal-content a {
+        pointer-events: auto !important;
+        position: relative !important;
+        z-index: 1000 !important;
+    }
+    
+    /* Fix for cards with nested buttons */
+    .glass-card *,
+    .shiny-app-card *,
+    .blog-card * {
+        pointer-events: auto !important;
+    }
+}
+    
     /* Remove hover effects on touch devices */
     .btn-run-app:hover,
     .btn-view-code:hover,
@@ -5662,6 +5737,88 @@ function AnimatedThemeToggle({ darkMode, toggleTheme }) {
     );
 }
 
+// iOS Safari specific fixes
+function fixIOSIssues() {
+    // Check if iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    
+    if (isIOS) {
+        // Fix for iOS touch delay
+        document.addEventListener('touchstart', function() {}, { passive: true });
+        
+        // Fix for iOS click events
+        document.addEventListener('click', function(e) {
+            // Ensure all clicks work
+            console.log('iOS click:', e.target.tagName, e.target.className);
+        }, true);
+        
+        // Add iOS-specific styles
+        const style = document.createElement('style');
+        style.textContent = `
+            /* iOS specific fixes */
+            @supports (-webkit-touch-callout: none) {
+                button, .btn, a {
+                    cursor: pointer !important;
+                    -webkit-user-select: none !important;
+                    user-select: none !important;
+                }
+                
+                /* Fix for sticky hover states */
+                .btn-run-app:hover,
+                .btn-view-code:hover,
+                .btn-resume:hover {
+                    opacity: 1 !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Run iOS fixes
+fixIOSIssues();
+
+// Update all button event listeners
+function updateAllButtonListeners() {
+    // Get all buttons and links
+    const allInteractiveElements = document.querySelectorAll(`
+        .btn-run-app, 
+        .btn-view-code, 
+        .btn-resume, 
+        .btn-support, 
+        .btn-submit,
+        .btn-read-more,
+        .btn-github,
+        .btn-google-scholar,
+        .btn-blogger,
+        .academic-link,
+        .social-btn,
+        .social-link-item,
+        [role="button"]
+    `);
+    
+    allInteractiveElements.forEach(element => {
+        // Clone and replace to remove all existing event listeners
+        const newElement = element.cloneNode(true);
+        element.parentNode.replaceChild(newElement, element);
+        
+        // Add proper event listeners
+        newElement.addEventListener('click', function(e) {
+            console.log('Button clicked:', this.className);
+        });
+        
+        // Add touch support
+        newElement.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.click();
+        }, { passive: false });
+    });
+}
+
+// Run after page loads
+document.addEventListener('DOMContentLoaded', updateAllButtonListeners);
+setTimeout(updateAllButtonListeners, 1000);
+
 // Update the initNavbarScroll function
 function initNavbarScroll() {
     // Throttle the scroll event for better performance
@@ -5869,6 +6026,126 @@ function initMobileMenu() {
         }
     });
 }
+
+// Add this function to fix mobile touch events
+function initializeMobileTouchSupport() {
+    // List of all button classes in your website
+    const buttonSelectors = [
+        '.btn-run-app',
+        '.btn-view-code',
+        '.btn-resume',
+        '.btn-support',
+        '.btn-submit',
+        '.btn-read-more',
+        '.btn-github',
+        '.btn-google-scholar',
+        '.btn-blogger',
+        '.academic-link',
+        '.nav-links a',
+        '.mobile-nav-links a',
+        '.social-btn',
+        '.contact-link',
+        '.social-link-item',
+        '.theme-toggle',
+        '.mobile-menu-btn',
+        '.modal-close',
+        '.btn-close-modal',
+        '.btn-run-app-small',
+        '.btn-view-code-small',
+        '.btn-read',
+        '.btn-pdf'
+    ];
+
+    // Function to add proper touch/click handlers
+    function addButtonHandlers() {
+        buttonSelectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            
+            elements.forEach(element => {
+                // Remove any existing conflicting listeners
+                element.removeEventListener('click', handleButtonClick);
+                element.removeEventListener('touchstart', handleTouchStart);
+                element.removeEventListener('touchend', handleTouchEnd);
+                
+                // Add proper event listeners
+                element.addEventListener('click', handleButtonClick, true);
+                element.addEventListener('touchstart', handleTouchStart, { passive: true });
+                element.addEventListener('touchend', handleTouchEnd, { passive: true });
+                
+                // Ensure pointer events are enabled
+                element.style.pointerEvents = 'auto';
+                element.style.cursor = 'pointer';
+                
+                // Add touch-specific class for CSS targeting
+                if ('ontouchstart' in window) {
+                    element.classList.add('touch-device');
+                }
+            });
+        });
+    }
+
+    function handleButtonClick(e) {
+        // Prevent multiple clicks
+        if (this.classList.contains('processing')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        
+        // Add processing class
+        this.classList.add('processing');
+        
+        // For links with href, ensure they work
+        if (this.href && this.href !== '#') {
+            setTimeout(() => {
+                window.open(this.href, this.target || '_self');
+                this.classList.remove('processing');
+            }, 100);
+        }
+        
+        // Remove processing class after 500ms
+        setTimeout(() => {
+            this.classList.remove('processing');
+        }, 500);
+    }
+
+    function handleTouchStart(e) {
+        // Add active state for visual feedback
+        this.classList.add('touch-active');
+        this.style.transform = 'scale(0.98)';
+        
+        // Prevent default only if it's not a link
+        if (this.tagName !== 'A' || this.href === '#') {
+            e.preventDefault();
+        }
+    }
+
+    function handleTouchEnd(e) {
+        // Remove active state
+        this.classList.remove('touch-active');
+        this.style.transform = 'scale(1)';
+        
+        // For iOS, ensure the click is triggered
+        if (!this.href || this.href === '#') {
+            e.preventDefault();
+            this.click();
+        }
+    }
+
+    // Initialize immediately
+    addButtonHandlers();
+    
+    // Re-initialize after React renders
+    setTimeout(addButtonHandlers, 500);
+    setTimeout(addButtonHandlers, 1000);
+    setTimeout(addButtonHandlers, 3000);
+    
+    // Re-initialize on window resize
+    window.addEventListener('resize', addButtonHandlers);
+}
+
+// Initialize mobile touch support
+initializeMobileTouchSupport();
 
 // Function to ensure all external links open in new tabs
 function fixExternalLinks() {
