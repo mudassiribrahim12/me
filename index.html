@@ -130,86 +130,6 @@
             padding: 0 20px;
         }
         
-        /* Add this to your existing CSS - iOS specific fixes */
-@supports (-webkit-touch-callout: none) {
-    /* iOS Safari specific fixes */
-    body {
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    /* Make sure all buttons are tappable */
-    a[href], button, .btn, [role="button"] {
-        min-height: 44px !important;
-        min-width: 44px !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-    
-    /* Fix for hover states interfering with taps */
-    .btn-run-app:hover,
-    .btn-view-code:hover,
-    .btn-resume:hover,
-    .btn-support:hover,
-    .btn-submit:hover,
-    .btn-read-more:hover,
-    .btn-github:hover,
-    .btn-google-scholar:hover,
-    .btn-blogger:hover,
-    .academic-link:hover,
-    .social-btn:hover {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-    
-    /* Active states for feedback */
-    .btn-run-app:active,
-    .btn-view-code:active,
-    .btn-resume:active,
-    .btn-support:active,
-    .btn-submit:active,
-    .btn-read-more:active,
-    .btn-github:active,
-    .btn-google-scholar:active,
-    .btn-blogger:active,
-    .academic-link:active,
-    .social-btn:active {
-        transform: scale(0.98) !important;
-        opacity: 0.9 !important;
-        transition: transform 0.1s, opacity 0.1s !important;
-    }
-}
-
-/* Additional universal fixes */
-* {
-    -webkit-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
-}
-
-/* Ensure all interactive elements have proper cursor */
-a, button, .btn, [role="button"], .nav-links a, .mobile-nav-links a {
-    cursor: pointer !important;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-
-/* Remove any potential blocking styles */
-.glass-card, .shiny-app-card, .blog-card, .publication-card {
-    pointer-events: auto !important;
-}
-
-/* Fix for form elements */
-input, textarea, select {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
-}
-
-/* Fix for iframe interactions */
-iframe {
-    pointer-events: auto !important;
-}
-        
         /* ==============================
    COLORFUL ANIMATIONS
    ============================== */
@@ -8620,21 +8540,7 @@ if (typeof FastClick === 'undefined') {
         
     })();
 }
-
-// Emergency fix - add this as a bookmarklet or run in console on iOS
-javascript:(function(){
-    var elements = document.querySelectorAll('*');
-    elements.forEach(function(el){
-        el.style.pointerEvents = 'auto';
-        el.style.cursor = 'pointer';
-        el.style.userSelect = 'none';
-        el.style.webkitUserSelect = 'none';
-    });
-})();
-
 </script>
     
 </body>
 </html>
-
-
