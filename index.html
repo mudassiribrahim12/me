@@ -130,6 +130,86 @@
             padding: 0 20px;
         }
         
+        /* Add this to your existing CSS - iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari specific fixes */
+    body {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Make sure all buttons are tappable */
+    a[href], button, .btn, [role="button"] {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Fix for hover states interfering with taps */
+    .btn-run-app:hover,
+    .btn-view-code:hover,
+    .btn-resume:hover,
+    .btn-support:hover,
+    .btn-submit:hover,
+    .btn-read-more:hover,
+    .btn-github:hover,
+    .btn-google-scholar:hover,
+    .btn-blogger:hover,
+    .academic-link:hover,
+    .social-btn:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Active states for feedback */
+    .btn-run-app:active,
+    .btn-view-code:active,
+    .btn-resume:active,
+    .btn-support:active,
+    .btn-submit:active,
+    .btn-read-more:active,
+    .btn-github:active,
+    .btn-google-scholar:active,
+    .btn-blogger:active,
+    .academic-link:active,
+    .social-btn:active {
+        transform: scale(0.98) !important;
+        opacity: 0.9 !important;
+        transition: transform 0.1s, opacity 0.1s !important;
+    }
+}
+
+/* Additional universal fixes */
+* {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}
+
+/* Ensure all interactive elements have proper cursor */
+a, button, .btn, [role="button"], .nav-links a, .mobile-nav-links a {
+    cursor: pointer !important;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+/* Remove any potential blocking styles */
+.glass-card, .shiny-app-card, .blog-card, .publication-card {
+    pointer-events: auto !important;
+}
+
+/* Fix for form elements */
+input, textarea, select {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+}
+
+/* Fix for iframe interactions */
+iframe {
+    pointer-events: auto !important;
+}
+        
         /* ==============================
    COLORFUL ANIMATIONS
    ============================== */
@@ -8337,5 +8417,210 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
     </script>
+    
+    <script>
+// iOS Touch Fix - Add this after your existing script
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. Fix for iOS Safari touch issues
+    function fixIOSButtons() {
+        console.log('Applying iOS touch fixes...');
+        
+        // Select all interactive elements
+        const allClickableElements = document.querySelectorAll(
+            'button, a, .btn, [role="button"], .nav-links a, .mobile-nav-links a, ' +
+            '.btn-run-app, .btn-view-code, .btn-resume, .btn-support, .btn-submit, ' +
+            '.btn-read-more, .btn-github, .btn-google-scholar, .btn-blogger, ' +
+            '.academic-link, .social-btn, .contact-link'
+        );
+        
+        allClickableElements.forEach(element => {
+            // Remove any existing event listeners to prevent conflicts
+            element.replaceWith(element.cloneNode(true));
+        });
+        
+        // 2. Force cursor style
+        const style = document.createElement('style');
+        style.textContent = `
+            /* Force pointer cursor for all interactive elements */
+            button, a, .btn, [role="button"] {
+                cursor: pointer !important;
+            }
+            
+            /* iOS-specific touch fixes */
+            @supports (-webkit-touch-callout: none) {
+                /* Make sure buttons are tappable */
+                button, .btn, a[href] {
+                    min-height: 44px !important;
+                    min-width: 44px !important;
+                }
+                
+                /* Prevent text selection on tap */
+                * {
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    user-select: none;
+                }
+                
+                /* Allow text selection in inputs */
+                input, textarea {
+                    -webkit-user-select: text;
+                    user-select: text;
+                }
+            }
+            
+            /* Remove any transform delays that might interfere */
+            .btn-run-app, .btn-view-code, .btn-resume, .btn-support,
+            .btn-submit, .btn-read-more, .academic-link {
+                transition: opacity 0.2s !important;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // 3. Add direct click handlers as fallback
+        setTimeout(() => {
+            const allButtons = document.querySelectorAll('button, .btn, [role="button"]');
+            
+            allButtons.forEach(button => {
+                // Add a simple click handler that ensures action
+                button.addEventListener('click', function(e) {
+                    console.log('Button clicked:', this.textContent || this.className);
+                    
+                    // If it's a link button, ensure navigation
+                    if (this.tagName === 'A' || this.hasAttribute('href')) {
+                        const href = this.getAttribute('href');
+                        if (href && href.startsWith('http')) {
+                            e.preventDefault();
+                            window.open(href, '_blank');
+                        }
+                    }
+                }, true); // Use capture phase to ensure it runs first
+            });
+        }, 500);
+    }
+    
+    // 4. Fix for iOS viewport height issue
+    function fixIOSViewport() {
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            window.addEventListener('resize', () => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            });
+        }
+    }
+    
+    // 5. Fix for :hover states on touch devices
+    function fixHoverStates() {
+        if ('ontouchstart' in window) {
+            // Remove all hover effects that might interfere
+            document.body.classList.add('touch-device');
+            
+            const hoverFixStyle = document.createElement('style');
+            hoverFixStyle.textContent = `
+                .touch-device a:hover,
+                .touch-device button:hover,
+                .touch-device .btn:hover {
+                    opacity: 1 !important;
+                    transform: none !important;
+                    box-shadow: none !important;
+                }
+                
+                .touch-device a:active,
+                .touch-device button:active,
+                .touch-device .btn:active {
+                    opacity: 0.8 !important;
+                    transform: scale(0.98) !important;
+                }
+            `;
+            document.head.appendChild(hoverFixStyle);
+        }
+    }
+    
+    // Run all fixes
+    fixIOSButtons();
+    fixIOSViewport();
+    fixHoverStates();
+    
+    // Re-run after React loads (with delays to catch dynamic content)
+    setTimeout(fixIOSButtons, 1000);
+    setTimeout(fixIOSButtons, 3000);
+    
+    // 6. Emergency fallback: Add global click handler
+    document.body.addEventListener('click', function(e) {
+        // If something isn't responding, log it
+        if (e.target.matches('button, .btn, a') && e.target.disabled !== true) {
+            console.log('Global click caught on:', e.target.tagName, e.target.className);
+        }
+    }, true);
+    
+    console.log('iOS touch fixes applied');
+});
+
+// 7. Prevent iOS text size adjustment on orientation change
+if (navigator.userAgent.match(/iPhone|iPad|iPod/)) {
+    document.addEventListener('touchmove', function(e) {
+        if(e.scale !== 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+}
+
+// 8. Fix for fast clicks (300ms delay removal)
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+
+// Simple FastClick polyfill if not available
+if (typeof FastClick === 'undefined') {
+    (function() {
+        'use strict';
+        
+        var lastTouchEnd = 0;
+        var now = Date.now || function() { return new Date().getTime(); };
+        
+        document.addEventListener('touchend', function(event) {
+            var target = event.target;
+            
+            // Only handle clicks on interactive elements
+            if (target.disabled === true || 
+                target.getAttribute('disabled') === 'disabled' ||
+                target.classList.contains('disabled')) {
+                return;
+            }
+            
+            // Prevent double-tap zoom
+            var currentTime = now();
+            if (currentTime - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = currentTime;
+            
+            // Programmatically click the element
+            setTimeout(function() {
+                if (!event.defaultPrevented && target && !target.disabled) {
+                    target.click();
+                }
+            }, 0);
+            
+        }, false);
+        
+        // Also handle touchstart to prevent some iOS quirks
+        document.addEventListener('touchstart', function(event) {
+            var target = event.target;
+            if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) {
+                // Don't prevent default on form elements
+                return;
+            }
+        }, { passive: true });
+        
+    })();
+}
+</script>
+    
 </body>
 </html>
