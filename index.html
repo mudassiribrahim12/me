@@ -5606,7 +5606,7 @@ function App() {
                                 <h2> <RotatingText />  </h2>
                                 
                                 <p>
-I have expertise in patient care and clinical nursing, health and clinical research, advanced statistical analysis, and R Shiny development (AI-assisted coding). I am a published researcher with contributions to top-tier journals, including Springer Nature, Wiley, and Elsevier. I am passionate about creating technology that makes a difference by developing R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers.
+I have expertise in patient care and clinical nursing, health and clinical research, advanced statistical analysis, and R Shiny development (AI-assisted coding). I am a published researcher with contributions to top-tier journals, including Springer Nature, Wiley, and Elsevier. I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers.
                                 </p>
                                 
                                 <div className="academic-links">
