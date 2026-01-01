@@ -130,6 +130,73 @@
             padding: 0 20px;
         }
         
+        
+        /* ================= MOBILE FIXES ================= */
+/* Ensure everything is clickable on mobile */
+button, a, .btn, [role="button"] {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Fix touch targets for mobile */
+@media (max-width: 768px) {
+    .btn-run-app,
+    .btn-view-code,
+    .btn-resume,
+    .btn-support,
+    .btn-submit,
+    .btn-read-more,
+    .btn-github,
+    .btn-google-scholar,
+    .btn-blogger,
+    .academic-link,
+    .nav-links a,
+    .mobile-nav-links a,
+    .social-btn,
+    .contact-link,
+    button {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .btn-run-app:hover,
+    .btn-view-code:hover,
+    .btn-resume:hover,
+    .btn-support:hover,
+    .btn-submit:hover,
+    .btn-read-more:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Add active state for touch */
+    .btn-run-app:active,
+    .btn-view-code:active,
+    .btn-resume:active,
+    .btn-support:active {
+        transform: scale(0.98) !important;
+        opacity: 0.9;
+    }
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    body {
+        min-height: -webkit-fill-available;
+    }
+    
+    /* Prevent text size adjustment */
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+}
+        
         /* ==============================
    COLORFUL ANIMATIONS
    ============================== */
@@ -5732,6 +5799,41 @@ function App() {
         message: ''
     });
     const [showAllApps, setShowAllApps] = useState(false);
+    
+    // ADD THIS LINE - Mobile menu state
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    
+        // Simple mobile menu toggle - ADD THIS
+    const toggleMobileMenu = (e) => {
+        if (e) e.stopPropagation();
+        const newState = !isMobileMenuOpen;
+        setIsMobileMenuOpen(newState);
+        document.body.style.overflow = newState ? 'hidden' : 'auto';
+    };
+
+    // Close mobile menu - ADD THIS
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+        document.body.style.overflow = 'auto';
+    };
+    
+        // Simple external link handler - ADD THIS
+    useEffect(() => {
+        // Handle external links
+        const handleLinkClick = (e) => {
+            const link = e.target.closest('a[href^="http"]');
+            if (link && !link.href.includes(window.location.hostname)) {
+                e.preventDefault();
+                window.open(link.href, '_blank', 'noopener,noreferrer');
+            }
+        };
+        
+        document.addEventListener('click', handleLinkClick);
+        
+        return () => {
+            document.removeEventListener('click', handleLinkClick);
+        };
+    }, []);
 
     // Add this useEffect inside the component
     useEffect(() => {
@@ -5789,125 +5891,6 @@ useEffect(() => {
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 const mobileMenuContent = document.getElementById('mobileMenuContent');
-// Mobile menu functionality - UPDATED VERSION
-let isMobileMenuOpen = false;
-
-function toggleMobileMenu() {
-    isMobileMenuOpen = !isMobileMenuOpen;
-    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    const mobileMenuContent = document.getElementById('mobileMenuContent');
-    
-    if (!mobileMenuOverlay || !mobileMenuContent) return;
-    
-    if (isMobileMenuOpen) {
-        mobileMenuOverlay.classList.add('active');
-        mobileMenuContent.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    } else {
-        mobileMenuOverlay.classList.remove('active');
-        mobileMenuContent.classList.remove('active');
-        setTimeout(() => {
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-}
-
-function closeMobileMenu() {
-    isMobileMenuOpen = false;
-    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    const mobileMenuContent = document.getElementById('mobileMenuContent');
-    
-    if (!mobileMenuOverlay || !mobileMenuContent) return;
-    
-    mobileMenuOverlay.classList.remove('active');
-    mobileMenuContent.classList.remove('active');
-    setTimeout(() => {
-        document.body.style.overflow = 'auto';
-    }, 300);
-}
-
-// Initialize mobile menu after React renders
-function initMobileMenu() {
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    const mobileMenuContent = document.getElementById('mobileMenuContent');
-    
-    if (!mobileMenuBtn || !mobileMenuOverlay || !mobileMenuContent) {
-        setTimeout(initMobileMenu, 100); // Try again after a short delay
-        return;
-    }
-    
-    // Add event listeners
-    mobileMenuBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleMobileMenu();
-    });
-    
-    mobileMenuOverlay.addEventListener('click', function(e) {
-        if (e.target === mobileMenuOverlay) {
-            closeMobileMenu();
-        }
-    });
-    
-    // Close menu when clicking on mobile links
-    const mobileLinks = mobileMenuContent.querySelectorAll('.mobile-nav-links a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
-    });
-    
-    // Close menu with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isMobileMenuOpen) {
-            closeMobileMenu();
-        }
-    });
-    
-    // Close menu on window resize (for desktop view)
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && isMobileMenuOpen) {
-            closeMobileMenu();
-        }
-    });
-}
-
-// Function to ensure all external links open in new tabs
-function fixExternalLinks() {
-    // Select all links that are likely external
-    const allLinks = document.querySelectorAll('a');
-    
-    allLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        
-        // Check if it's an external link (starts with http/https and not a relative link)
-        if (href && href.startsWith('http') && !href.includes(window.location.hostname)) {
-            // Ensure it opens in new tab
-            link.setAttribute('target', '_blank');
-            link.setAttribute('rel', 'noopener noreferrer');
-            
-            // Add external link icon for visual indication
-            if (!link.querySelector('.external-icon')) {
-                const icon = document.createElement('i');
-                icon.className = 'fas fa-external-link-alt external-icon';
-                icon.style.marginLeft = '5px';
-                icon.style.fontSize = '0.8em';
-                link.appendChild(icon);
-            }
-        }
-    });
-}
-
-// Run when page loads
-document.addEventListener('DOMContentLoaded', fixExternalLinks);
-
-// Also run after React content loads
-setTimeout(fixExternalLinks, 1000);
-setTimeout(fixExternalLinks, 3000);
-
-// Initialize when document is loaded
-document.addEventListener('DOMContentLoaded', initMobileMenu);
-
-// Also initialize when React content might be loaded
-setTimeout(initMobileMenu, 500);
 
 
 // Close mobile menu when ESC key is pressed
@@ -6207,18 +6190,19 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
 
         <div className="nav-links">
             {sections.map(section => (
-                <a
-                    key={section}
-                    href={`#${section}`}
-                    className={activeSection === section ? 'active' : ''}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        setActiveSection(section);
-                    }}
-                >
-                    {section.charAt(0).toUpperCase() + section.slice(1)}
-                </a>
-            ))}
+       <a
+    key={section}
+    href={`#${section}`}
+    className={activeSection === section ? 'active' : ''}
+    onClick={(e) => {
+        e.preventDefault();
+        setActiveSection(section);
+        closeMobileMenu(); // This closes the menu
+    }}
+>
+    {section.charAt(0).toUpperCase() + section.slice(1)}
+</a>
+))}
             <button 
                 className="theme-toggle"
                 onClick={() => setDarkMode(!darkMode)}
@@ -6236,8 +6220,17 @@ const sections = ['home', 'projects', 'blog', 'about', 'education', 'publication
         
 
 {/* Mobile Menu Overlay */}
-<div className="mobile-menu-overlay" id="mobileMenuOverlay" onClick={closeMobileMenu}>
-    <div className="mobile-menu-content" id="mobileMenuContent" onClick={(e) => e.stopPropagation()}>
+<div 
+    className={`mobile-menu-overlay ${isMobileMenuOpen ? 'active' : ''}`}
+    id="mobileMenuOverlay" 
+    onClick={closeMobileMenu}
+>
+    <div 
+        className={`mobile-menu-content ${isMobileMenuOpen ? 'active' : ''}`}
+        id="mobileMenuContent" 
+        onClick={(e) => e.stopPropagation()}
+    >
+
         <div className="mobile-nav-links">
             {sections.map(section => (
                 <a
