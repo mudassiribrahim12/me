@@ -130,7 +130,53 @@
             padding: 0 20px;
         }
         
-        /* EMERGENCY MOBILE CLICK FIX */
+        /* =====================================================
+   COMPLETE AGGRESSIVE MOBILE FIX FOR ENTIRE WEBSITE
+   ===================================================== */
+
+/* 1. RESET ALL POINTER-EVENTS FIRST */
+@media (max-width: 768px) {
+    /* Remove all pointer-events restrictions on EVERYTHING */
+    body, body *, 
+    .container, .container *,
+    #root, #root *,
+    .app, .app *,
+    .main-content, .main-content *,
+    .section, .section *,
+    .hero, .hero *,
+    .navbar, .navbar *,
+    .footer, .footer *,
+    .glass-card, .glass-card *,
+    .shiny-app-card, .shiny-app-card *,
+    .blog-card, .blog-card *,
+    .publication-card, .publication-card *,
+    .support-card, .support-card *,
+    .resume-card, .resume-card *,
+    .contact-form-container, .contact-form-container *,
+    .contact-info-container, .contact-info-container *,
+    .skills-grid, .skills-grid *,
+    .credentials-section, .credentials-section *,
+    .core-competencies, .core-competencies *,
+    .timeline, .timeline *,
+    .shiny-apps-grid, .shiny-apps-grid *,
+    .blog-grid, .blog-grid *,
+    .publications-grid, .publications-grid *,
+    .support-options, .support-options *,
+    .academic-links, .academic-links *,
+    .social-links, .social-links *,
+    .footer-content, .footer-content *,
+    .footer-column, .footer-column *,
+    .footer-links-vertical, .footer-links-vertical *,
+    .social-links-grid, .social-links-grid *,
+    .mobile-menu-content, .mobile-menu-content *,
+    .mobile-nav-links, .mobile-nav-links *,
+    .modal-content, .modal-content *,
+    .all-apps-grid, .all-apps-grid * {
+        pointer-events: auto !important;
+    }
+}
+
+/* 2. FIX ALL CLICKABLE ELEMENTS */
 @media (max-width: 768px) {
     /* Make EVERYTHING clickable */
     * {
@@ -138,27 +184,280 @@
         tap-highlight-color: rgba(99, 102, 241, 0.5) !important;
     }
     
-    /* Override all pointer-events */
-    body, body * {
-        pointer-events: auto !important;
-    }
-    
-    /* Force all buttons and links to respond */
-    a[href], button, [role="button"], .btn, .btn-run-app, .btn-view-code, 
-    .btn-resume, .btn-support, .btn-submit, .btn-read-more, .btn-github, 
-    .btn-google-scholar, .btn-blogger, .academic-link, .social-btn {
+    /* ALL LINKS - Full coverage */
+    a, a[href], 
+    a[href*="http"], 
+    a[href*="mailto"], 
+    a[href*="tel"],
+    a[target="_blank"],
+    a[rel*="noopener"],
+    a[rel*="noreferrer"],
+    .nav-links a,
+    .mobile-nav-links a,
+    .academic-link,
+    .social-btn,
+    .contact-link,
+    .social-link-item,
+    .repository-links a,
+    .footer-links-vertical a,
+    .method-content a,
+    .blog-actions a,
+    .publication-actions a,
+    .app-actions a,
+    .resume-actions a,
+    .support-actions a,
+    .view-all-blog a,
+    .all-projects-card a,
+    .all-publications-card a,
+    .projects-footer a,
+    .blog-footer a,
+    .publications-footer a,
+    .resume-footer a,
+    .support-footer a,
+    .contact-method a {
         position: relative !important;
-        z-index: 9999 !important;
+        z-index: 1000 !important;
         cursor: pointer !important;
         user-select: none !important;
         -webkit-user-select: none !important;
         touch-action: manipulation !important;
+        min-height: 48px !important;
+        min-width: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-decoration: none !important;
+        -webkit-touch-callout: none !important;
     }
     
-    /* Remove any transforms on parent elements that might interfere */
-    .shiny-app-card, .blog-card, .publication-card, .support-card, 
-    .resume-card, .glass-card {
+    /* ALL BUTTONS - Full coverage */
+    button, 
+    button[type="button"],
+    button[type="submit"],
+    .btn,
+    .btn-run-app,
+    .btn-view-code,
+    .btn-resume,
+    .btn-support,
+    .btn-submit,
+    .btn-read-more,
+    .btn-read,
+    .btn-pdf,
+    .btn-github,
+    .btn-google-scholar,
+    .btn-blogger,
+    .theme-toggle,
+    .mobile-menu-btn,
+    .modal-close,
+    .btn-close-modal,
+    .btn-run-app-small,
+    .btn-view-code-small,
+    .btn-support.secondary {
+        position: relative !important;
+        z-index: 1001 !important;
+        cursor: pointer !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+        touch-action: manipulation !important;
+        min-height: 48px !important;
+        min-width: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        -webkit-touch-callout: none !important;
+        outline: none !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    /* FIX FOR FOOTER SPECIFICALLY */
+    .footer {
+        position: relative !important;
+        z-index: 999 !important;
+    }
+    
+    .social-link-item,
+    .footer-links-vertical a {
+        padding: 12px 16px !important;
+        margin: 4px 0 !important;
+        background: var(--glass) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 8px !important;
+    }
+    
+    /* FIX NAVIGATION MENU */
+    .nav-links a,
+    .mobile-nav-links a {
+        padding: 14px 20px !important;
+        margin: 2px 0 !important;
+    }
+    
+    /* FIX ACADEMIC LINKS */
+    .academic-link {
+        padding: 12px 20px !important;
+        margin: 6px 0 !important;
+    }
+    
+    /* FIX CARD ACTIONS */
+    .app-actions,
+    .blog-actions,
+    .publication-actions,
+    .resume-actions,
+    .support-actions {
+        gap: 8px !important;
+    }
+    
+    .btn-run-app,
+    .btn-view-code,
+    .btn-read-more,
+    .btn-read,
+    .btn-pdf {
+        flex: 1 !important;
+        padding: 12px !important;
+        font-size: 14px !important;
+    }
+    
+    /* REMOVE ALL TRANSFORMS THAT MIGHT INTERFERE */
+    .shiny-app-card:hover,
+    .blog-card:hover,
+    .publication-card:hover,
+    .support-card:hover,
+    .resume-card:hover,
+    .glass-card:hover,
+    .credential-card:hover,
+    .competency-card:hover,
+    .skill-category:hover {
         transform: none !important;
+    }
+    
+    /* FIX Z-INDEX STACKING */
+    .navbar {
+        z-index: 1100 !important;
+    }
+    
+    .mobile-menu-content {
+        z-index: 1099 !important;
+    }
+    
+    .modal-content {
+        z-index: 1200 !important;
+    }
+    
+    /* FIX FORM ELEMENTS */
+    input, textarea, select {
+        min-height: 48px !important;
+        font-size: 16px !important; /* Prevents iOS zoom */
+        padding: 12px 16px !important;
+    }
+    
+    /* FIX TOUCH SCROLLING */
+    .mobile-nav-links,
+    .modal-body {
+        -webkit-overflow-scrolling: touch !important;
+        overflow-y: auto !important;
+    }
+}
+
+/* 3. EXTREME FIX FOR iOS SAFARI */
+@supports (-webkit-touch-callout: none) {
+    /* iOS-specific fixes */
+    body {
+        cursor: pointer !important;
+        -webkit-touch-callout: none !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+    }
+    
+    a, button, [role="button"] {
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.5) !important;
+        cursor: pointer !important;
+    }
+    
+    /* Fix for Safari's 300ms click delay */
+    a, button, input, textarea {
+        touch-action: manipulation !important;
+    }
+    
+    /* Fix for Safari's hover states */
+    .btn-run-app:hover,
+    .btn-view-code:hover,
+    .btn-resume:hover,
+    .btn-support:hover,
+    .btn-submit:hover,
+    .btn-read-more:hover,
+    .btn-github:hover,
+    .btn-google-scholar:hover,
+    .btn-blogger:hover,
+    .academic-link:hover,
+    .social-btn:hover {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+    
+    /* Active state instead of hover */
+    .btn-run-app:active,
+    .btn-view-code:active,
+    .btn-resume:active,
+    .btn-support:active,
+    .btn-submit:active,
+    .btn-read-more:active,
+    .btn-github:active,
+    .btn-google-scholar:active,
+    .btn-blogger:active,
+    .academic-link:active,
+    .social-btn:active {
+        transform: scale(0.98) !important;
+        opacity: 0.9 !important;
+    }
+}
+
+/* 4. ANDROID SPECIFIC FIXES */
+@media (hover: none) and (pointer: coarse) {
+    /* Remove all hover effects for touch devices */
+    *:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: inherit !important;
+    }
+    
+    /* Make sure everything is tap-friendly */
+    a, button, .btn, [role="button"] {
+        min-height: 48px !important;
+        min-width: 48px !important;
+    }
+    
+    /* Improve scrolling */
+    html, body {
+        -webkit-overflow-scrolling: touch !important;
+        overflow-scrolling: touch !important;
+    }
+}
+
+/* 5. FORCE ALL EXTERNAL LINKS TO OPEN */
+@media (max-width: 768px) {
+    /* Ensure ALL external links are forced to open */
+    a[href^="http://"],
+    a[href^="https://"],
+    a[href^="mailto:"],
+    a[href^="tel:"],
+    a[href^="https://github.com"],
+    a[href^="https://orcid.org"],
+    a[href^="https://www.linkedin.com"],
+    a[href^="https://scholar.google.com"],
+    a[href^="https://mudasir-ibrahim.blogspot.com"],
+    a[href^="https://www.youtube.com"],
+    a[href^="https://www.researchgate.net"],
+    a[href^="https://www.semanticscholar.org"],
+    a[href^="https://www.scopus.com"],
+    a[href^="https://wa.me"],
+    a[href^="https://formspree.io"],
+    a[href^="https://1drv.ms"],
+    a[href^="https://newappstesting.shinyapps.io"],
+    a[href^="https://mudassiribrahim30.shinyapps.io"],
+    a[href^="https://mudassiribrahim2025.shinyapps.io"] {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.5) !important;
     }
 }
         
@@ -5708,6 +6007,289 @@ function initNavbarScroll() {
             ticking = true;
         }
     }
+    
+    // =====================================================
+// NUCLEAR JAVASCRIPT FIX FOR ALL MOBILE CLICKS
+// =====================================================
+
+// Wait for everything to load
+window.addEventListener('load', function() {
+    console.log('Applying NUCLEAR mobile click fix...');
+    
+    // Function to force all elements to be clickable
+    function nuclearMobileFix() {
+        // 1. FIX ALL LINKS
+        const allLinks = document.querySelectorAll('a');
+        allLinks.forEach(link => {
+            // Clone and replace to remove any event listener conflicts
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+            
+            // Add direct click handler that WILL work
+            newLink.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                console.log('NUCLEAR: Link clicked:', href);
+                
+                if (!href) return true;
+                
+                // Handle external links
+                if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    e.stopPropagation();
+                    
+                    if (href.startsWith('http')) {
+                        window.open(href, '_blank', 'noopener,noreferrer');
+                    } else if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+                        window.location.href = href;
+                    }
+                    return false;
+                }
+                
+                // Handle internal section links
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const sectionId = href.substring(1);
+                    if (window.setActiveSection) {
+                        window.setActiveSection(sectionId);
+                    }
+                    return false;
+                }
+                
+                return true;
+            }, true); // Use capture phase to beat React
+            
+            // Force mobile-friendly styling
+            newLink.style.cursor = 'pointer';
+            newLink.style.pointerEvents = 'auto';
+            newLink.style.webkitTapHighlightColor = 'rgba(99, 102, 241, 0.5)';
+            if (window.innerWidth <= 768) {
+                newLink.style.minHeight = '48px';
+                newLink.style.minWidth = '48px';
+                newLink.style.display = 'inline-flex';
+                newLink.style.alignItems = 'center';
+                newLink.style.justifyContent = 'center';
+            }
+        });
+        
+        // 2. FIX ALL BUTTONS
+        const allButtons = document.querySelectorAll('button, .btn, [role="button"]');
+        allButtons.forEach(button => {
+            // Clone and replace
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+            
+            // Add click handler
+            newButton.addEventListener('click', function(e) {
+                console.log('NUCLEAR: Button clicked:', this.className);
+                e.stopPropagation();
+                
+                // Check if it has an onclick already
+                const onclickAttr = this.getAttribute('onclick');
+                if (onclickAttr) {
+                    try {
+                        eval(onclickAttr);
+                    } catch (err) {
+                        console.error('Error executing onclick:', err);
+                    }
+                }
+                
+                // Check if it contains a link
+                const link = this.querySelector('a');
+                if (link && link.href) {
+                    e.preventDefault();
+                    window.open(link.href, '_blank', 'noopener,noreferrer');
+                    return false;
+                }
+                
+                return true;
+            }, true);
+            
+            // Force mobile styling
+            newButton.style.cursor = 'pointer';
+            newButton.style.pointerEvents = 'auto';
+            newButton.style.webkitTapHighlightColor = 'rgba(99, 102, 241, 0.5)';
+            if (window.innerWidth <= 768) {
+                newButton.style.minHeight = '48px';
+                newButton.style.minWidth = '48px';
+                newButton.style.padding = '12px 16px';
+            }
+        });
+        
+        // 3. FIX NAVIGATION SPECIFICALLY
+        const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    const sectionId = href.substring(1);
+                    if (window.setActiveSection) {
+                        window.setActiveSection(sectionId);
+                    }
+                    // Close mobile menu if open
+                    if (window.closeMobileMenu && document.querySelector('.mobile-menu-overlay.active')) {
+                        window.closeMobileMenu();
+                    }
+                    return false;
+                }
+            }, true);
+        });
+        
+        // 4. FIX FOOTER LINKS SPECIFICALLY
+        const footerLinks = document.querySelectorAll('.footer-links-vertical a, .social-link-item');
+        footerLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    e.preventDefault();
+                    const section = this.textContent.trim().toLowerCase();
+                    if (window.setActiveSection) {
+                        window.setActiveSection(section);
+                    }
+                    return false;
+                }
+            }, true);
+        });
+        
+        // 5. FIX FORM SUBMISSION
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Show success message
+                const successMessage = document.getElementById('successMessage');
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                }
+                // Reset form
+                this.reset();
+                // Reset React state
+                if (window.setFormData) {
+                    window.setFormData({
+                        name: '',
+                        email: '',
+                        subject: '',
+                        message: ''
+                    });
+                }
+                return false;
+            }, true);
+        }
+        
+        console.log('NUCLEAR fix applied to:', {
+            links: allLinks.length,
+            buttons: allButtons.length,
+            navLinks: navLinks.length,
+            footerLinks: footerLinks.length
+        });
+    }
+    
+    // Run immediately
+    nuclearMobileFix();
+    
+    // Run again after delays to catch React-rendered content
+    setTimeout(nuclearMobileFix, 500);
+    setTimeout(nuclearMobileFix, 1000);
+    setTimeout(nuclearMobileFix, 2000);
+    setTimeout(nuclearMobileFix, 4000);
+    
+    // Run on every section change
+    if (window.setActiveSection) {
+        const originalSetActiveSection = window.setActiveSection;
+        window.setActiveSection = function(section) {
+            originalSetActiveSection(section);
+            setTimeout(nuclearMobileFix, 100);
+        };
+    }
+    
+    // Run on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth <= 768) {
+            setTimeout(nuclearMobileFix, 100);
+        }
+    });
+    
+    // Run on orientation change
+    window.addEventListener('orientationchange', function() {
+        setTimeout(nuclearMobileFix, 300);
+    });
+});
+
+// =====================================================
+// GLOBAL OVERRIDE FOR ALL CLICK EVENTS
+// =====================================================
+
+// This will catch ANY click that wasn't handled by other handlers
+document.addEventListener('click', function(e) {
+    // Only intervene on mobile
+    if (window.innerWidth > 768) return true;
+    
+    let target = e.target;
+    let handled = false;
+    
+    // Walk up the DOM tree to find clickable element
+    while (target && target !== document.documentElement) {
+        // Check if it's a link
+        if (target.tagName === 'A' && target.href) {
+            const href = target.getAttribute('href');
+            
+            // Handle external links
+            if (href && (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:'))) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                
+                if (href.startsWith('http')) {
+                    window.open(href, '_blank', 'noopener,noreferrer');
+                } else {
+                    window.location.href = href;
+                }
+                
+                handled = true;
+                break;
+            }
+            
+            // Handle internal section links
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const sectionId = href.substring(1);
+                if (window.setActiveSection) {
+                    window.setActiveSection(sectionId);
+                }
+                handled = true;
+                break;
+            }
+        }
+        
+        // Check if it's a button
+        if (target.tagName === 'BUTTON' || 
+            target.classList.contains('btn') || 
+            target.getAttribute('role') === 'button') {
+            
+            // Try to find a link inside the button
+            const link = target.querySelector('a');
+            if (link && link.href) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                window.open(link.href, '_blank', 'noopener,noreferrer');
+                handled = true;
+                break;
+            }
+        }
+        
+        target = target.parentNode;
+    }
+    
+    if (handled) {
+        return false;
+    }
+    
+    return true;
+}, true); // Use capture phase - THIS IS KEY!
+
+console.log('Global mobile click override installed');
     
     // Add scroll event listener
     window.addEventListener('scroll', onScroll, { passive: true });
