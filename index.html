@@ -140,8 +140,9 @@ button, a, .btn, [role="button"] {
     tap-highlight-color: rgba(0, 0, 0, 0.1);
 }
 
-/* Fix touch targets for mobile */
+/* TOUCH FIXES FOR MOBILE */
 @media (max-width: 768px) {
+    /* Increase touch target sizes */
     .btn-run-app,
     .btn-view-code,
     .btn-resume,
@@ -155,31 +156,29 @@ button, a, .btn, [role="button"] {
     .nav-links a,
     .mobile-nav-links a,
     .social-btn,
-    .contact-link,
-    button {
-        min-height: 44px !important;
-        min-width: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+    .contact-link {
+        min-height: 44px; /* Apple's recommended minimum touch target size */
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    
-    /* Remove hover effects on touch devices */
-    .btn-run-app:hover,
-    .btn-view-code:hover,
-    .btn-resume:hover,
-    .btn-support:hover,
-    .btn-submit:hover,
-    .btn-read-more:hover {
-        transform: none !important;
-        box-shadow: none !important;
-    }
-    
-    /* Add active state for touch */
+
+/* Keep the active states */
     .btn-run-app:active,
     .btn-view-code:active,
     .btn-resume:active,
-    .btn-support:active {
+    .btn-support:active,
+    .btn-submit:active,
+    .btn-read-more:active,
+    .btn-github:active,
+    .btn-google-scholar:active,
+    .btn-blogger:active,
+    .academic-link:active,
+    .nav-links a:active,
+    .mobile-nav-links a:active,
+    .social-btn:active,
+    .contact-link:active {
         transform: scale(0.98) !important;
         opacity: 0.9;
     }
@@ -8031,48 +8030,406 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: false });
 });
 
-// SIMPLE FIX FOR EXTERNAL LINKS - Add this at the very end
-document.addEventListener('click', function(e) {
-    // Only handle anchor tags
-    if (e.target.tagName === 'A' || e.target.closest('a')) {
-        const link = e.target.tagName === 'A' ? e.target : e.target.closest('a');
-        const href = link.getAttribute('href');
+// MOBILE TOUCH FIXES - Add this at the end of your script
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Mobile fix initialized');
+    
+    // 1. FIX TOUCH EVENTS FOR ALL BUTTONS AND LINKS
+    function fixTouchEvents() {
+        // Select all interactive elements
+        const interactiveElements = [
+            'a[href]',
+            'button',
+            '.btn-run-app',
+            '.btn-view-code',
+            '.btn-resume',
+            '.btn-support',
+            '.btn-submit',
+            '.btn-read-more',
+            '.btn-read',
+            '.btn-pdf',
+            '.btn-github',
+            '.btn-google-scholar',
+            '.btn-blogger',
+            '.academic-link',
+            '.social-btn',
+            '.contact-link',
+            '.social-link-item',
+            '.mobile-nav-links a',
+            '.nav-links a',
+            '.footer-links-vertical a',
+            '.form-group input',
+            '.form-group textarea',
+            '.modal-close',
+            '.btn-close-modal',
+            '.theme-toggle',
+            '.mobile-menu-btn'
+        ].join(',');
         
-        // Check if it's an external link
-        if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
-            // Check if it's not the same domain
-            if (!href.includes(window.location.hostname)) {
-                // Allow the default behavior (link will open)
-                // Just make sure target and rel are set
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                
-                // DON'T prevent default - let the browser handle it
-                // e.preventDefault(); // REMOVE THIS LINE if it exists
-                
-                console.log('External link clicked:', href);
+        const elements = document.querySelectorAll(interactiveElements);
+        
+        elements.forEach(element => {
+            // Remove any existing problematic event listeners
+            element.removeEventListener('touchstart', handleTouchStart);
+            element.removeEventListener('touchend', handleTouchEnd);
+            
+            // Add proper touch event listeners
+            element.addEventListener('touchstart', handleTouchStart, { passive: true });
+            element.addEventListener('touchend', handleTouchEnd, { passive: true });
+            element.addEventListener('touchcancel', handleTouchCancel, { passive: true });
+            
+            // Ensure cursor pointer
+            element.style.cursor = 'pointer';
+            
+            // Ensure proper touch target size on mobile
+            if (window.innerWidth <= 768) {
+                const rect = element.getBoundingClientRect();
+                if (rect.height < 44 || rect.width < 44) {
+                    element.style.minHeight = '44px';
+                    element.style.minWidth = '44px';
+                    element.style.display = 'flex';
+                    element.style.alignItems = 'center';
+                    element.style.justifyContent = 'center';
+                }
             }
+        });
+    }
+    
+    // 2. TOUCH EVENT HANDLERS
+    function handleTouchStart(e) {
+        // Add visual feedback
+        this.style.opacity = '0.9';
+        this.style.transform = 'scale(0.98)';
+        
+        // Prevent text selection
+        e.preventDefault();
+    }
+    
+    function handleTouchEnd(e) {
+        // Remove visual feedback
+        this.style.opacity = '1';
+        this.style.transform = 'scale(1)';
+        
+        // For anchor tags, ensure navigation happens
+        if (this.tagName === 'A' && this.href) {
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 100);
         }
     }
     
-    // Also handle buttons that should act like links
-    if (e.target.classList.contains('btn-run-app') || 
-        e.target.classList.contains('btn-view-code') ||
-        e.target.classList.contains('btn-resume') ||
-        e.target.classList.contains('btn-support') ||
-        e.target.classList.contains('btn-read-more') ||
-        e.target.classList.contains('btn-read') ||
-        e.target.classList.contains('btn-pdf') ||
-        e.target.classList.contains('btn-github') ||
-        e.target.classList.contains('btn-google-scholar') ||
-        e.target.classList.contains('btn-blogger') ||
-        e.target.classList.contains('academic-link') ||
-        e.target.classList.contains('social-btn')) {
-        
-        // These buttons should work normally - don't interfere
-        console.log('Button clicked:', e.target.className);
+    function handleTouchCancel(e) {
+        // Reset visual feedback if touch is cancelled
+        this.style.opacity = '1';
+        this.style.transform = 'scale(1)';
     }
-}, true);
+    
+    // 3. REMOVE CONFLICTING EVENT LISTENERS
+    function removeConflictingListeners() {
+        // Remove problematic touchmove prevention
+        document.body.removeEventListener('touchmove', preventTouchMove);
+        
+        // Remove any global click handlers that might interfere
+        document.removeEventListener('click', globalClickHandler);
+    }
+    
+    function preventTouchMove(e) {
+        // Don't prevent touchmove - this was causing issues
+        return true;
+    }
+    
+    // 4. FIX FORMS ON MOBILE
+    function fixForms() {
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                // Prevent zoom on iOS
+                document.body.style.zoom = "1.0";
+                // Ensure viewport doesn't zoom
+                this.style.fontSize = '16px'; // Prevents iOS zoom
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.fontSize = '';
+            });
+        });
+    }
+    
+    // 5. FIX EXTERNAL LINKS
+    function fixExternalLinks() {
+        document.addEventListener('click', function(e) {
+            let target = e.target;
+            
+            // Find the closest anchor or button
+            while (target && target !== document) {
+                if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.classList.contains('btn')) {
+                    break;
+                }
+                target = target.parentElement;
+            }
+            
+            if (!target) return;
+            
+            // For external links
+            if (target.tagName === 'A' && target.href) {
+                const href = target.getAttribute('href');
+                
+                if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+                    if (!href.includes(window.location.hostname)) {
+                        // Ensure proper attributes
+                        target.target = '_blank';
+                        target.rel = 'noopener noreferrer';
+                        
+                        // Allow default behavior - DON'T prevent it
+                        console.log('External link opened:', href);
+                    }
+                }
+            }
+            
+            // For buttons with data-href
+            if (target.getAttribute('data-href')) {
+                window.open(target.getAttribute('data-href'), '_blank', 'noopener,noreferrer');
+            }
+        }, true); // Use capture phase
+    }
+    
+    // 6. FIX MOBILE MENU
+    function fixMobileMenu() {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                const isOpen = mobileMenuOverlay.classList.contains('active');
+                
+                if (isOpen) {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                } else {
+                    mobileMenuOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }, true);
+        }
+        
+        // Close menu when clicking links
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }, true);
+        });
+        
+        // Close menu when clicking overlay
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', function(e) {
+                if (e.target === mobileMenuOverlay) {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }, true);
+        }
+    }
+    
+    // 7. INITIALIZE ALL FIXES
+    function initializeMobileFixes() {
+        console.log('Initializing mobile fixes...');
+        
+        // Remove conflicting listeners first
+        removeConflictingListeners();
+        
+        // Apply fixes
+        fixTouchEvents();
+        fixForms();
+        fixExternalLinks();
+        fixMobileMenu();
+        
+        // Fix viewport on mobile
+        fixViewport();
+        
+        // Ensure CSS is applied
+        ensureMobileCSS();
+        
+        console.log('Mobile fixes applied successfully');
+    }
+    
+    // 8. FIX VIEWPORT FOR MOBILE
+    function fixViewport() {
+        // Set proper viewport height
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
+        
+        // Prevent horizontal scroll
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.overflowX = 'hidden';
+    }
+    
+    // 9. ENSURE MOBILE CSS IS APPLIED
+    function ensureMobileCSS() {
+        // Add mobile-specific class to body
+        if (window.innerWidth <= 768) {
+            document.body.classList.add('is-mobile');
+        } else {
+            document.body.classList.remove('is-mobile');
+        }
+        
+        // Listen for resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                document.body.classList.add('is-mobile');
+            } else {
+                document.body.classList.remove('is-mobile');
+            }
+        });
+    }
+    
+    // 10. FIX FOR IOS SAFARI
+    function fixIOS() {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
+        if (isIOS) {
+            // Fix for iOS backdrop-filter
+            document.querySelectorAll('.glass-card, .navbar').forEach(el => {
+                el.style.backdropFilter = 'none';
+                el.style.WebkitBackdropFilter = 'none';
+            });
+            
+            // Fix for iOS click delays
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            
+            // Fix for iOS 100vh
+            document.documentElement.style.height = '-webkit-fill-available';
+            document.body.style.height = '-webkit-fill-available';
+        }
+    }
+    
+    // Run initialization
+    initializeMobileFixes();
+    fixIOS();
+    
+    // Re-apply fixes after React renders
+    setTimeout(initializeMobileFixes, 1000);
+    setTimeout(initializeMobileFixes, 3000);
+    
+    // Re-apply on section changes
+    const originalSetActiveSection = window.setActiveSection;
+    if (originalSetActiveSection) {
+        window.setActiveSection = function(section) {
+            originalSetActiveSection(section);
+            setTimeout(initializeMobileFixes, 100);
+        };
+    }
+    
+    // Add global error handler for touch events
+    window.addEventListener('error', function(e) {
+        if (e.message.includes('touch') || e.message.includes('click')) {
+            console.log('Touch/click error detected, reinitializing...');
+            setTimeout(initializeMobileFixes, 100);
+        }
+    });
+});
+
+// Add this CSS to your existing styles for additional mobile fixes
+const mobileFixCSS = `
+/* ADDITIONAL MOBILE FIXES */
+@media (max-width: 768px) {
+    /* Ensure all buttons and links are tappable */
+    a, button, [role="button"], .btn, .academic-link, .social-btn, .contact-link {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.3) !important;
+        tap-highlight-color: rgba(99, 102, 241, 0.3) !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+        touch-action: manipulation !important;
+    }
+    
+    /* Remove hover effects on touch devices */
+    a:hover, button:hover, .btn:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Add active states */
+    a:active, button:active, .btn:active {
+        transform: scale(0.98) !important;
+        opacity: 0.9 !important;
+        transition: transform 0.1s !important;
+    }
+    
+    /* Fix for iOS */
+    @supports (-webkit-touch-callout: none) {
+        body {
+            min-height: -webkit-fill-available !important;
+        }
+        
+        /* Prevent text size adjustment */
+        html {
+            -webkit-text-size-adjust: 100% !important;
+            text-size-adjust: 100% !important;
+        }
+        
+        /* Fix for click delays */
+        a, button {
+            touch-action: manipulation !important;
+            cursor: pointer !important;
+        }
+    }
+    
+    /* Ensure form elements are tappable */
+    input, textarea, select {
+        font-size: 16px !important; /* Prevents iOS zoom */
+        min-height: 44px !important;
+    }
+    
+    /* Remove any pointer-events blocking */
+    * {
+        pointer-events: auto !important;
+    }
+}
+
+/* Fix for very small screens */
+@media (max-width: 480px) {
+    .btn-run-app, .btn-view-code, .btn-resume, .btn-support {
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+    }
+    
+    .app-actions, .publication-actions {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+}
+
+/* Emergency fix for completely unresponsive elements */
+.fix-touch {
+    position: relative;
+    z-index: 9999 !important;
+}
+`;
+
+// Inject the CSS
+const style = document.createElement('style');
+style.textContent = mobileFixCSS;
+document.head.appendChild(style);
+
+console.log('Mobile touch fixes loaded');
+
         
     </script>
 </body>
