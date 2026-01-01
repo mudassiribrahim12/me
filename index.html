@@ -196,6 +196,124 @@ button, a, .btn, [role="button"] {
         -webkit-text-size-adjust: 100%;
     }
 }
+
+/* Fix z-index issues */
+.navbar {
+    z-index: 1000 !important;
+}
+
+.glass-card,
+.shiny-app-card,
+.blog-card,
+.publication-card,
+.support-card,
+.resume-card {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fix mobile menu overlay */
+.mobile-menu-overlay {
+    z-index: 9999 !important;
+}
+
+.mobile-menu-content {
+    z-index: 10000 !important;
+}
+
+/* Remove any pointer-events blocking on mobile */
+@media (max-width: 768px) {
+    * {
+        pointer-events: auto !important;
+    }
+    
+    /* Specifically fix form inputs */
+    input, textarea, select {
+        pointer-events: auto !important;
+        -webkit-user-select: auto !important;
+        user-select: auto !important;
+    }
+}
+
+/* Fix form input responsiveness on iOS */
+input, textarea, select {
+    font-size: 16px !important; /* Prevents iOS zoom */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Prevent text size adjustment on iOS */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* Ensure buttons are above other content */
+.btn-run-app,
+.btn-view-code,
+.btn-resume,
+.btn-support,
+.btn-submit,
+.btn-read-more,
+.btn-github,
+.btn-google-scholar,
+.btn-blogger {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Fix for links inside cards */
+.shiny-app-card a,
+.blog-card a,
+.publication-card a,
+.support-card a {
+    position: relative;
+    z-index: 5;
+}
+
+/* Prevent parent elements from blocking clicks */
+.glass-card > *,
+.shiny-app-card > *,
+.blog-card > * {
+    pointer-events: auto;
+}
+
+/* EMERGENCY FIX FOR MOBILE TOUCH ISSUES */
+@media (max-width: 768px) {
+    /* Make absolutely sure everything is clickable */
+    body * {
+        pointer-events: auto !important;
+    }
+    
+    /* Fix for React components */
+    #root * {
+        pointer-events: auto !important;
+    }
+    
+    /* Remove any transform/translate that might cause issues */
+    .navbar,
+    .glass-card,
+    .shiny-app-card,
+    .blog-card,
+    .publication-card,
+    .support-card,
+    .resume-card {
+        transform: none !important;
+        will-change: auto !important;
+    }
+    
+    /* Ensure form is fully accessible */
+    .contact-form-container input,
+    .contact-form-container textarea,
+    .contact-form-container button {
+        -webkit-user-select: text !important;
+        user-select: text !important;
+        touch-action: manipulation !important;
+    }
+}
+
+
         
         /* ==============================
    COLORFUL ANIMATIONS
@@ -7796,6 +7914,61 @@ function closeMobileMenu() {
         document.body.style.overflow = 'auto';
     }, 300);
 }
+
+// Mobile touch fixes
+document.addEventListener('DOMContentLoaded', function() {
+    // Force clickable elements to work on touch
+    const makeElementsClickable = () => {
+        const clickableElements = document.querySelectorAll(
+            'a, button, .btn, [role="button"], input[type="submit"], input[type="button"]'
+        );
+        
+        clickableElements.forEach(element => {
+            // Remove any existing listeners
+            element.removeEventListener('touchstart', handleTouch);
+            element.removeEventListener('click', handleClick);
+            
+            // Add new listeners
+            element.addEventListener('touchstart', handleTouch, { passive: true });
+            element.addEventListener('click', handleClick, true);
+        });
+    };
+    
+    function handleTouch(e) {
+        // Add visual feedback
+        this.style.opacity = '0.8';
+        setTimeout(() => {
+            this.style.opacity = '1';
+        }, 200);
+    }
+    
+    function handleClick(e) {
+        // Ensure click goes through
+        e.stopPropagation();
+        return true;
+    }
+    
+    // Run initially and after delays
+    makeElementsClickable();
+    setTimeout(makeElementsClickable, 1000);
+    setTimeout(makeElementsClickable, 3000);
+    
+    // Fix for contact form specifically
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('touchstart', function(e) {
+            e.stopPropagation();
+        }, { passive: true });
+        
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                this.focus();
+            }, { passive: true });
+        });
+    }
+});
 
 // Simplified external link handler - add this at the end of your script section
 document.addEventListener('DOMContentLoaded', function() {
