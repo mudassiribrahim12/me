@@ -6008,289 +6008,6 @@ function initNavbarScroll() {
         }
     }
     
-    // =====================================================
-// NUCLEAR JAVASCRIPT FIX FOR ALL MOBILE CLICKS
-// =====================================================
-
-// Wait for everything to load
-window.addEventListener('load', function() {
-    console.log('Applying NUCLEAR mobile click fix...');
-    
-    // Function to force all elements to be clickable
-    function nuclearMobileFix() {
-        // 1. FIX ALL LINKS
-        const allLinks = document.querySelectorAll('a');
-        allLinks.forEach(link => {
-            // Clone and replace to remove any event listener conflicts
-            const newLink = link.cloneNode(true);
-            link.parentNode.replaceChild(newLink, link);
-            
-            // Add direct click handler that WILL work
-            newLink.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                console.log('NUCLEAR: Link clicked:', href);
-                
-                if (!href) return true;
-                
-                // Handle external links
-                if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    e.stopPropagation();
-                    
-                    if (href.startsWith('http')) {
-                        window.open(href, '_blank', 'noopener,noreferrer');
-                    } else if (href.startsWith('mailto:') || href.startsWith('tel:')) {
-                        window.location.href = href;
-                    }
-                    return false;
-                }
-                
-                // Handle internal section links
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const sectionId = href.substring(1);
-                    if (window.setActiveSection) {
-                        window.setActiveSection(sectionId);
-                    }
-                    return false;
-                }
-                
-                return true;
-            }, true); // Use capture phase to beat React
-            
-            // Force mobile-friendly styling
-            newLink.style.cursor = 'pointer';
-            newLink.style.pointerEvents = 'auto';
-            newLink.style.webkitTapHighlightColor = 'rgba(99, 102, 241, 0.5)';
-            if (window.innerWidth <= 768) {
-                newLink.style.minHeight = '48px';
-                newLink.style.minWidth = '48px';
-                newLink.style.display = 'inline-flex';
-                newLink.style.alignItems = 'center';
-                newLink.style.justifyContent = 'center';
-            }
-        });
-        
-        // 2. FIX ALL BUTTONS
-        const allButtons = document.querySelectorAll('button, .btn, [role="button"]');
-        allButtons.forEach(button => {
-            // Clone and replace
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-            
-            // Add click handler
-            newButton.addEventListener('click', function(e) {
-                console.log('NUCLEAR: Button clicked:', this.className);
-                e.stopPropagation();
-                
-                // Check if it has an onclick already
-                const onclickAttr = this.getAttribute('onclick');
-                if (onclickAttr) {
-                    try {
-                        eval(onclickAttr);
-                    } catch (err) {
-                        console.error('Error executing onclick:', err);
-                    }
-                }
-                
-                // Check if it contains a link
-                const link = this.querySelector('a');
-                if (link && link.href) {
-                    e.preventDefault();
-                    window.open(link.href, '_blank', 'noopener,noreferrer');
-                    return false;
-                }
-                
-                return true;
-            }, true);
-            
-            // Force mobile styling
-            newButton.style.cursor = 'pointer';
-            newButton.style.pointerEvents = 'auto';
-            newButton.style.webkitTapHighlightColor = 'rgba(99, 102, 241, 0.5)';
-            if (window.innerWidth <= 768) {
-                newButton.style.minHeight = '48px';
-                newButton.style.minWidth = '48px';
-                newButton.style.padding = '12px 16px';
-            }
-        });
-        
-        // 3. FIX NAVIGATION SPECIFICALLY
-        const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-links a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    const sectionId = href.substring(1);
-                    if (window.setActiveSection) {
-                        window.setActiveSection(sectionId);
-                    }
-                    // Close mobile menu if open
-                    if (window.closeMobileMenu && document.querySelector('.mobile-menu-overlay.active')) {
-                        window.closeMobileMenu();
-                    }
-                    return false;
-                }
-            }, true);
-        });
-        
-        // 4. FIX FOOTER LINKS SPECIFICALLY
-        const footerLinks = document.querySelectorAll('.footer-links-vertical a, .social-link-item');
-        footerLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') {
-                    e.preventDefault();
-                    const section = this.textContent.trim().toLowerCase();
-                    if (window.setActiveSection) {
-                        window.setActiveSection(section);
-                    }
-                    return false;
-                }
-            }, true);
-        });
-        
-        // 5. FIX FORM SUBMISSION
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Show success message
-                const successMessage = document.getElementById('successMessage');
-                if (successMessage) {
-                    successMessage.style.display = 'block';
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                }
-                // Reset form
-                this.reset();
-                // Reset React state
-                if (window.setFormData) {
-                    window.setFormData({
-                        name: '',
-                        email: '',
-                        subject: '',
-                        message: ''
-                    });
-                }
-                return false;
-            }, true);
-        }
-        
-        console.log('NUCLEAR fix applied to:', {
-            links: allLinks.length,
-            buttons: allButtons.length,
-            navLinks: navLinks.length,
-            footerLinks: footerLinks.length
-        });
-    }
-    
-    // Run immediately
-    nuclearMobileFix();
-    
-    // Run again after delays to catch React-rendered content
-    setTimeout(nuclearMobileFix, 500);
-    setTimeout(nuclearMobileFix, 1000);
-    setTimeout(nuclearMobileFix, 2000);
-    setTimeout(nuclearMobileFix, 4000);
-    
-    // Run on every section change
-    if (window.setActiveSection) {
-        const originalSetActiveSection = window.setActiveSection;
-        window.setActiveSection = function(section) {
-            originalSetActiveSection(section);
-            setTimeout(nuclearMobileFix, 100);
-        };
-    }
-    
-    // Run on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth <= 768) {
-            setTimeout(nuclearMobileFix, 100);
-        }
-    });
-    
-    // Run on orientation change
-    window.addEventListener('orientationchange', function() {
-        setTimeout(nuclearMobileFix, 300);
-    });
-});
-
-// =====================================================
-// GLOBAL OVERRIDE FOR ALL CLICK EVENTS
-// =====================================================
-
-// This will catch ANY click that wasn't handled by other handlers
-document.addEventListener('click', function(e) {
-    // Only intervene on mobile
-    if (window.innerWidth > 768) return true;
-    
-    let target = e.target;
-    let handled = false;
-    
-    // Walk up the DOM tree to find clickable element
-    while (target && target !== document.documentElement) {
-        // Check if it's a link
-        if (target.tagName === 'A' && target.href) {
-            const href = target.getAttribute('href');
-            
-            // Handle external links
-            if (href && (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:'))) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                
-                if (href.startsWith('http')) {
-                    window.open(href, '_blank', 'noopener,noreferrer');
-                } else {
-                    window.location.href = href;
-                }
-                
-                handled = true;
-                break;
-            }
-            
-            // Handle internal section links
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const sectionId = href.substring(1);
-                if (window.setActiveSection) {
-                    window.setActiveSection(sectionId);
-                }
-                handled = true;
-                break;
-            }
-        }
-        
-        // Check if it's a button
-        if (target.tagName === 'BUTTON' || 
-            target.classList.contains('btn') || 
-            target.getAttribute('role') === 'button') {
-            
-            // Try to find a link inside the button
-            const link = target.querySelector('a');
-            if (link && link.href) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                window.open(link.href, '_blank', 'noopener,noreferrer');
-                handled = true;
-                break;
-            }
-        }
-        
-        target = target.parentNode;
-    }
-    
-    if (handled) {
-        return false;
-    }
-    
-    return true;
-}, true); // Use capture phase - THIS IS KEY!
-
-console.log('Global mobile click override installed');
-    
     // Add scroll event listener
     window.addEventListener('scroll', onScroll, { passive: true });
     
@@ -8418,6 +8135,8 @@ function closeMobileMenu() {
     }, 300);
 }
 
+
+
 // Simplified external link handler - add this at the end of your script section
 document.addEventListener('DOMContentLoaded', function() {
     // Function to ensure all external links open properly
@@ -8700,6 +8419,289 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// =====================================================
+// NUCLEAR JAVASCRIPT FIX FOR ALL MOBILE CLICKS
+// =====================================================
+
+// Wait for everything to load
+window.addEventListener('load', function() {
+    console.log('Applying NUCLEAR mobile click fix...');
+    
+    // Function to force all elements to be clickable
+    function nuclearMobileFix() {
+        // 1. FIX ALL LINKS
+        const allLinks = document.querySelectorAll('a');
+        allLinks.forEach(link => {
+            // Clone and replace to remove any event listener conflicts
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+            
+            // Add direct click handler that WILL work
+            newLink.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                console.log('NUCLEAR: Link clicked:', href);
+                
+                if (!href) return true;
+                
+                // Handle external links
+                if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    e.stopPropagation();
+                    
+                    if (href.startsWith('http')) {
+                        window.open(href, '_blank', 'noopener,noreferrer');
+                    } else if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+                        window.location.href = href;
+                    }
+                    return false;
+                }
+                
+                // Handle internal section links
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const sectionId = href.substring(1);
+                    if (window.setActiveSection) {
+                        window.setActiveSection(sectionId);
+                    }
+                    return false;
+                }
+                
+                return true;
+            }, true); // Use capture phase to beat React
+            
+            // Force mobile-friendly styling
+            newLink.style.cursor = 'pointer';
+            newLink.style.pointerEvents = 'auto';
+            newLink.style.webkitTapHighlightColor = 'rgba(99, 102, 241, 0.5)';
+            if (window.innerWidth <= 768) {
+                newLink.style.minHeight = '48px';
+                newLink.style.minWidth = '48px';
+                newLink.style.display = 'inline-flex';
+                newLink.style.alignItems = 'center';
+                newLink.style.justifyContent = 'center';
+            }
+        });
+        
+        // 2. FIX ALL BUTTONS
+        const allButtons = document.querySelectorAll('button, .btn, [role="button"]');
+        allButtons.forEach(button => {
+            // Clone and replace
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+            
+            // Add click handler
+            newButton.addEventListener('click', function(e) {
+                console.log('NUCLEAR: Button clicked:', this.className);
+                e.stopPropagation();
+                
+                // Check if it has an onclick already
+                const onclickAttr = this.getAttribute('onclick');
+                if (onclickAttr) {
+                    try {
+                        eval(onclickAttr);
+                    } catch (err) {
+                        console.error('Error executing onclick:', err);
+                    }
+                }
+                
+                // Check if it contains a link
+                const link = this.querySelector('a');
+                if (link && link.href) {
+                    e.preventDefault();
+                    window.open(link.href, '_blank', 'noopener,noreferrer');
+                    return false;
+                }
+                
+                return true;
+            }, true);
+            
+            // Force mobile styling
+            newButton.style.cursor = 'pointer';
+            newButton.style.pointerEvents = 'auto';
+            newButton.style.webkitTapHighlightColor = 'rgba(99, 102, 241, 0.5)';
+            if (window.innerWidth <= 768) {
+                newButton.style.minHeight = '48px';
+                newButton.style.minWidth = '48px';
+                newButton.style.padding = '12px 16px';
+            }
+        });
+        
+        // 3. FIX NAVIGATION SPECIFICALLY
+        const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    const sectionId = href.substring(1);
+                    if (window.setActiveSection) {
+                        window.setActiveSection(sectionId);
+                    }
+                    // Close mobile menu if open
+                    if (window.closeMobileMenu && document.querySelector('.mobile-menu-overlay.active')) {
+                        window.closeMobileMenu();
+                    }
+                    return false;
+                }
+            }, true);
+        });
+        
+        // 4. FIX FOOTER LINKS SPECIFICALLY
+        const footerLinks = document.querySelectorAll('.footer-links-vertical a, .social-link-item');
+        footerLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    e.preventDefault();
+                    const section = this.textContent.trim().toLowerCase();
+                    if (window.setActiveSection) {
+                        window.setActiveSection(section);
+                    }
+                    return false;
+                }
+            }, true);
+        });
+        
+        // 5. FIX FORM SUBMISSION
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Show success message
+                const successMessage = document.getElementById('successMessage');
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                }
+                // Reset form
+                this.reset();
+                // Reset React state
+                if (window.setFormData) {
+                    window.setFormData({
+                        name: '',
+                        email: '',
+                        subject: '',
+                        message: ''
+                    });
+                }
+                return false;
+            }, true);
+        }
+        
+        console.log('NUCLEAR fix applied to:', {
+            links: allLinks.length,
+            buttons: allButtons.length,
+            navLinks: navLinks.length,
+            footerLinks: footerLinks.length
+        });
+    }
+    
+    // Run immediately
+    nuclearMobileFix();
+    
+    // Run again after delays to catch React-rendered content
+    setTimeout(nuclearMobileFix, 500);
+    setTimeout(nuclearMobileFix, 1000);
+    setTimeout(nuclearMobileFix, 2000);
+    setTimeout(nuclearMobileFix, 4000);
+    
+    // Run on every section change
+    if (window.setActiveSection) {
+        const originalSetActiveSection = window.setActiveSection;
+        window.setActiveSection = function(section) {
+            originalSetActiveSection(section);
+            setTimeout(nuclearMobileFix, 100);
+        };
+    }
+    
+    // Run on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth <= 768) {
+            setTimeout(nuclearMobileFix, 100);
+        }
+    });
+    
+    // Run on orientation change
+    window.addEventListener('orientationchange', function() {
+        setTimeout(nuclearMobileFix, 300);
+    });
+});
+
+// =====================================================
+// GLOBAL OVERRIDE FOR ALL CLICK EVENTS
+// =====================================================
+
+// This will catch ANY click that wasn't handled by other handlers
+document.addEventListener('click', function(e) {
+    // Only intervene on mobile
+    if (window.innerWidth > 768) return true;
+    
+    let target = e.target;
+    let handled = false;
+    
+    // Walk up the DOM tree to find clickable element
+    while (target && target !== document.documentElement) {
+        // Check if it's a link
+        if (target.tagName === 'A' && target.href) {
+            const href = target.getAttribute('href');
+            
+            // Handle external links
+            if (href && (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:'))) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                
+                if (href.startsWith('http')) {
+                    window.open(href, '_blank', 'noopener,noreferrer');
+                } else {
+                    window.location.href = href;
+                }
+                
+                handled = true;
+                break;
+            }
+            
+            // Handle internal section links
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const sectionId = href.substring(1);
+                if (window.setActiveSection) {
+                    window.setActiveSection(sectionId);
+                }
+                handled = true;
+                break;
+            }
+        }
+        
+        // Check if it's a button
+        if (target.tagName === 'BUTTON' || 
+            target.classList.contains('btn') || 
+            target.getAttribute('role') === 'button') {
+            
+            // Try to find a link inside the button
+            const link = target.querySelector('a');
+            if (link && link.href) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                window.open(link.href, '_blank', 'noopener,noreferrer');
+                handled = true;
+                break;
+            }
+        }
+        
+        target = target.parentNode;
+    }
+    
+    if (handled) {
+        return false;
+    }
+    
+    return true;
+}, true); // Use capture phase - THIS IS KEY!
+
+console.log('Global mobile click override installed');
+
 // Blogger Feed Integration - FIXED VERSION
 function loadBlogPosts() {
     const container = document.getElementById('blogPostsContainer');
@@ -8949,6 +8951,76 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: false });
 });
 
+// =====================================================
+// FINAL NUCLEAR OVERRIDE - This WILL work
+// =====================================================
+
+// Override React's event system completely for mobile
+(function() {
+    if (window.innerWidth <= 768) {
+        // Store original event listeners
+        const originalAddEventListener = EventTarget.prototype.addEventListener;
+        const originalRemoveEventListener = EventTarget.prototype.removeEventListener;
+        
+        // Override addEventListener to ensure clicks work
+        EventTarget.prototype.addEventListener = function(type, listener, options) {
+            // For click events on mobile, add our own that fires first
+            if (type === 'click' && (this.tagName === 'A' || this.tagName === 'BUTTON' || this.classList.contains('btn'))) {
+                const wrappedListener = function(e) {
+                    // Prevent React from blocking our handler
+                    e.stopImmediatePropagation = function() {
+                        Event.prototype.stopImmediatePropagation.call(this);
+                        console.log('Prevented React from blocking click');
+                    };
+                    
+                    // Call original listener
+                    if (listener) {
+                        listener.call(this, e);
+                    }
+                    
+                    // Ensure external links open
+                    if (this.href && this.href.startsWith('http') && !this.href.includes(window.location.hostname)) {
+                        window.open(this.href, '_blank', 'noopener,noreferrer');
+                    }
+                };
+                
+                // Call original with our wrapped listener
+                return originalAddEventListener.call(this, type, wrappedListener, options);
+            }
+            
+            // For other events, call original
+            return originalAddEventListener.call(this, type, listener, options);
+        };
+        
+        console.log('Event listener override installed for mobile');
+    }
+})();
+
+// Force all buttons and links to have onclick
+setTimeout(function() {
+    if (window.innerWidth <= 768) {
+        // Add onclick to EVERYTHING clickable
+        document.querySelectorAll('a, button, .btn, [role="button"]').forEach(el => {
+            if (!el.onclick) {
+                el.onclick = function(e) {
+                    console.log('Forced onclick fired for:', this.tagName, this.className);
+                    
+                    // Handle links
+                    if (this.href) {
+                        if (this.href.startsWith('http') && !this.href.includes(window.location.hostname)) {
+                            e.preventDefault();
+                            window.open(this.href, '_blank', 'noopener,noreferrer');
+                        }
+                    }
+                    
+                    return true;
+                };
+            }
+        });
+        
+        console.log('Forced onclick handlers added');
+    }
+}, 3000);
         
     </script>
 </body>
