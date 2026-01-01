@@ -130,13 +130,6 @@
             padding: 0 20px;
         }
         
-        /* External link indicators */
-a[target="_blank"]:not(.no-icon)::after {
-    content: "↗";
-    font-size: 0.8em;
-    margin-left: 3px;
-    opacity: 0.7;
-}
 
 /* Add to your existing CSS, preferably in the Navigation section */
 .logo {
@@ -204,16 +197,6 @@ a[target="_blank"]:not(.no-icon)::after {
     }
 }
 
-/* For buttons with icons */
-.btn-run-app[target="_blank"]::after,
-.btn-view-code[target="_blank"]::after,
-.btn-read[target="_blank"]::after,
-.btn-pdf[target="_blank"]::after,
-.btn-github[target="_blank"]::after,
-.btn-google-scholar[target="_blank"]::after,
-.btn-blogger[target="_blank"]::after {
-    display: none; /* Hide duplicate icon on buttons */
-}
 
 /* Footer Styles - Clean Two Columns */
 .footer {
@@ -572,33 +555,6 @@ a[target="_blank"] {
     }
 }
 
-/* Visual feedback for external links */
-a[target="_blank"]:hover {
-    position: relative;
-}
-
-a[target="_blank"]:hover::before {
-    content: "Opens in new tab";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--text);
-    color: var(--bg);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    z-index: 1000;
-    opacity: 0;
-    animation: fadeInTooltip 0.2s forwards;
-    margin-bottom: 5px;
-}
-
-@keyframes fadeInTooltip {
-    from { opacity: 0; transform: translateX(-50%) translateY(5px); }
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
         
 /* MOBILE RESPONSIVENESS FIXES */
 @media (max-width: 768px) {
@@ -4938,6 +4894,82 @@ body {
     color: var(--text) !important;
     opacity: 0.8 !important;
 }
+
+/* ============================================================
+   REMOVE ALL "OPEN IN NEW TAB" INDICATORS FROM ENTIRE WEBSITE
+   ============================================================ */
+
+/* Remove ↗ arrow from ALL links, buttons, and elements */
+a[target="_blank"]::after,
+button[target="_blank"]::after,
+[target="_blank"]::after,
+.btn-run-app[target="_blank"]::after,
+.btn-view-code[target="_blank"]::after,
+.btn-resume[target="_blank"]::after,
+.btn-support[target="_blank"]::after,
+.btn-submit[target="_blank"]::after,
+.btn-read-more[target="_blank"]::after,
+.btn-read[target="_blank"]::after,
+.btn-pdf[target="_blank"]::after,
+.btn-github[target="_blank"]::after,
+.btn-google-scholar[target="_blank"]::after,
+.btn-blogger[target="_blank"]::after,
+.academic-link[target="_blank"]::after,
+.social-btn[target="_blank"]::after,
+.contact-link[target="_blank"]::after,
+.social-link-item[target="_blank"]::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Remove "Opens in new tab" tooltip from ALL elements on hover */
+a[target="_blank"]:hover::before,
+button[target="_blank"]:hover::before,
+[target="_blank"]:hover::before,
+.btn-run-app[target="_blank"]:hover::before,
+.btn-view-code[target="_blank"]:hover::before,
+.btn-resume[target="_blank"]:hover::before,
+.btn-support[target="_blank"]:hover::before,
+.btn-submit[target="_blank"]:hover::before,
+.btn-read-more[target="_blank"]:hover::before,
+.btn-read[target="_blank"]:hover::before,
+.btn-pdf[target="_blank"]:hover::before,
+.btn-github[target="_blank"]:hover::before,
+.btn-google-scholar[target="_blank"]:hover::before,
+.btn-blogger[target="_blank"]:hover::before,
+.academic-link[target="_blank"]:hover::before,
+.social-btn[target="_blank"]:hover::before,
+.contact-link[target="_blank"]:hover::before,
+.social-link-item[target="_blank"]:hover::before {
+    display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+    animation: none !important;
+}
+
+/* Also remove tooltips on touch devices (mobile/tablet) */
+@media (max-width: 768px) {
+    a[target="_blank"]:hover::before,
+    button[target="_blank"]:hover::before,
+    [target="_blank"]:hover::before,
+    .btn-run-app[target="_blank"]:hover::before,
+    .btn-view-code[target="_blank"]:hover::before,
+    .btn-resume[target="_blank"]:hover::before,
+    .btn-support[target="_blank"]:hover::before,
+    .btn-submit[target="_blank"]:hover::before,
+    .btn-read-more[target="_blank"]:hover::before,
+    .btn-read[target="_blank"]:hover::before,
+    .btn-pdf[target="_blank"]:hover::before,
+    .btn-github[target="_blank"]:hover::before,
+    .btn-google-scholar[target="_blank"]:hover::before,
+    .btn-blogger[target="_blank"]:hover::before,
+    .academic-link[target="_blank"]:hover::before,
+    .social-btn[target="_blank"]:hover::before,
+    .contact-link[target="_blank"]:hover::before,
+    .social-link-item[target="_blank"]:hover::before {
+        display: none !important;
+    }
+}
         
     </style>
 </head>
@@ -7616,6 +7648,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         e.preventDefault();
     }, { passive: false });
+});
+
+// Function to scroll to top of section
+function scrollToSection(section) {
+    const element = document.getElementById(section);
+    if (element) {
+        // Scroll to the top of the section
+        window.scrollTo({
+            top: element.offsetTop - 80, // Adjust for navbar height
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Initialize footer links after page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Update all footer quick links
+    const footerLinks = document.querySelectorAll('.footer-links-vertical a[href="#"]');
+    
+    footerLinks.forEach(link => {
+        // Remove existing click handlers
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+        
+        // Add new click handler
+        newLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const section = this.getAttribute('data-section') || 
+                           this.querySelector('span').textContent.toLowerCase();
+            
+            // Set active section and scroll to top
+            setActiveSection(section);
+            scrollToSection(section);
+        });
+    });
 });
 
         
