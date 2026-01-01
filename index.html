@@ -130,38 +130,6 @@
             padding: 0 20px;
         }
         
-        /* EMERGENCY MOBILE CLICK FIX */
-@media (max-width: 768px) {
-    /* Make EVERYTHING clickable */
-    * {
-        -webkit-tap-highlight-color: rgba(99, 102, 241, 0.5) !important;
-        tap-highlight-color: rgba(99, 102, 241, 0.5) !important;
-    }
-    
-    /* Override all pointer-events */
-    body, body * {
-        pointer-events: auto !important;
-    }
-    
-    /* Force all buttons and links to respond */
-    a[href], button, [role="button"], .btn, .btn-run-app, .btn-view-code, 
-    .btn-resume, .btn-support, .btn-submit, .btn-read-more, .btn-github, 
-    .btn-google-scholar, .btn-blogger, .academic-link, .social-btn {
-        position: relative !important;
-        z-index: 9999 !important;
-        cursor: pointer !important;
-        user-select: none !important;
-        -webkit-user-select: none !important;
-        touch-action: manipulation !important;
-    }
-    
-    /* Remove any transforms on parent elements that might interfere */
-    .shiny-app-card, .blog-card, .publication-card, .support-card, 
-    .resume-card, .glass-card {
-        transform: none !important;
-    }
-}
-        
         /* ==============================
    COLORFUL ANIMATIONS
    ============================== */
@@ -8367,29 +8335,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: false });
 });
 
+        
     </script>
-    
-    <script>
-// NUCLEAR OPTION - Force all links to work
-document.addEventListener('click', function(e) {
-    let target = e.target;
-    
-    // Find the nearest anchor tag
-    while (target && target !== document) {
-        if (target.tagName === 'A' && target.href) {
-            // If it's an external link
-            if (target.href.startsWith('http') && !target.href.includes(window.location.hostname)) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                window.open(target.href, '_blank');
-                return false;
-            }
-            break;
-        }
-        target = target.parentElement;
-    }
-}, true);
-</script>
-    
 </body>
 </html>
