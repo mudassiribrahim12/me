@@ -130,6 +130,1147 @@
             padding: 0 20px;
         }
         
+/* Core Competencies Horizontal Scroll - FIXED */
+.competencies-scroll-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.competencies-scroll-track {
+    display: flex;
+    gap: 2rem;
+    animation: scrollCards 120s linear infinite; /* Very slow - 2 minutes */
+    animation-play-state: running;
+    width: max-content;
+    min-width: 100%;
+}
+
+/* Pause on hover for better readability */
+.competencies-scroll-track:hover {
+    animation-play-state: paused;
+}
+
+/* Keyframes for horizontal scrolling */
+@keyframes scrollCards {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 1rem)); /* Adjusted for duplicated set */
+    }
+}
+
+/* Ensure all competency cards have EXACT same size */
+.competency-card {
+    flex: 0 0 auto;
+    width: 320px; /* Fixed width */
+    height: 380px; /* Fixed height */
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Ensure card content doesn't overflow */
+.competency-card .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    min-height: 80px; /* Fixed header height */
+}
+
+.competency-card .card-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.competency-card .card-icon i {
+    font-size: 1.3rem;
+    color: white;
+}
+
+.competency-card .card-header h4 {
+    color: var(--text);
+    font-size: 1.2rem;
+    margin: 0;
+    line-height: 1.4;
+    flex: 1;
+    min-height: 56px; /* Fixed title height */
+    display: flex;
+    align-items: center;
+}
+
+/* Competency list fixed height */
+.competency-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.competency-list li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    min-height: 48px; /* Fixed list item height */
+}
+
+.competency-list li:last-child {
+    border-bottom: none;
+}
+
+.competency-list i {
+    color: var(--primary);
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.competency-list li span {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.4;
+}
+
+/* Edge fade gradients for smooth appearance */
+.competencies-scroll-container::before,
+.competencies-scroll-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.competencies-scroll-container::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--bg-light), transparent);
+}
+
+.competencies-scroll-container::after {
+    right: 0;
+    background: linear-gradient(90deg, transparent, var(--bg-light));
+}
+
+/* Dark mode adjustments */
+.dark-mode .competencies-scroll-container::before {
+    background: linear-gradient(90deg, var(--bg-light), transparent);
+}
+
+.dark-mode .competencies-scroll-container::after {
+    background: linear-gradient(90deg, transparent, var(--bg-light));
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .competency-card {
+        width: 280px;
+        height: 360px;
+        padding: 1.5rem;
+    }
+    
+    .competencies-scroll-track {
+        gap: 1.5rem;
+        animation: scrollCards 100s linear infinite;
+    }
+    
+    .competency-card .card-header h4 {
+        font-size: 1.1rem;
+        min-height: 50px;
+    }
+    
+    .competency-list li {
+        min-height: 44px;
+        padding: 0.6rem 0;
+    }
+    
+    .competency-card .card-header {
+        min-height: 70px;
+    }
+}
+
+/* Touch device adjustments */
+@media (max-width: 480px) {
+    .competency-card {
+        width: 260px;
+        height: 340px;
+        padding: 1.25rem;
+    }
+    
+    .competencies-scroll-track {
+        gap: 1rem;
+        animation: scrollCards 80s linear infinite;
+    }
+    
+    .competency-card .card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .competency-card .card-header h4 {
+        min-height: auto;
+    }
+    
+    .competency-card .card-icon {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+    }
+    
+    .competency-list li {
+        min-height: 40px;
+        padding: 0.5rem 0;
+    }
+}
+
+/* Competency Levels for Skills Section */
+.software-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.software-with-level {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 10px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.software-with-level:hover {
+    background: rgba(99, 102, 241, 0.15);
+    transform: translateY(-2px);
+}
+
+.software-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+/* Competency Level Progress */
+.competency-level {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 150px;
+}
+
+.level-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.level-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transition: width 1.5s ease-out;
+    position: relative;
+}
+
+.level-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    animation: shimmer 3s infinite;
+}
+
+.level-percentage {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 40px;
+    text-align: right;
+}
+
+/* Competency Level Classes */
+.level-95 { width: 95%; }
+.level-90 { width: 90%; }
+.level-88 { width: 88%; }
+.level-85 { width: 85%; }
+.level-82 { width: 82%; }
+.level-80 { width: 80%; }
+.level-78 { width: 78%; }
+.level-75 { width: 75%; }
+.level-72 { width: 72%; }
+.level-70 { width: 70%; }
+.level-96 { width: 96%; }
+.level-94 { width: 94%; }
+.level-92 { width: 92%; }
+.level-87 { width: 87%; }
+.level-98 { width: 98%; }
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Shining Star Icons for Credentials */
+.credential-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(255, 255, 255, 0.7) 25%, 
+        rgba(255, 255, 255, 0.9) 50%, 
+        rgba(255, 255, 255, 0.7) 75%, 
+        rgba(255, 255, 255, 0.9) 100%);
+    background-size: 200% 200%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    position: relative;
+    overflow: visible;
+    animation: starShine 2s linear infinite;
+    box-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.8),
+        0 0 60px rgba(255, 255, 255, 0.4),
+        0 0 90px rgba(255, 255, 255, 0.2);
+    border: none;
+}
+
+.credential-icon i {
+    font-size: 1.8rem;
+    color: #1e40af;
+    z-index: 2;
+    position: relative;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Create multiple shining star rays */
+.credential-icon::before,
+.credential-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    animation: starPulse 3s ease-in-out infinite;
+}
+
+.credential-icon::before {
+    animation-delay: 0.5s;
+    opacity: 0.7;
+}
+
+.credential-icon::after {
+    animation-delay: 1s;
+    opacity: 0.5;
+}
+
+/* Add star points (rays) */
+.star-ray {
+    position: absolute;
+    width: 20px;
+    height: 4px;
+    background: white;
+    border-radius: 2px;
+    opacity: 0.8;
+    filter: blur(1px);
+    animation: rayTwinkle 4s infinite;
+}
+
+.star-ray:nth-child(1) {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0.1s;
+}
+
+.star-ray:nth-child(2) {
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    animation-delay: 0.2s;
+}
+
+.star-ray:nth-child(3) {
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0.3s;
+}
+
+.star-ray:nth-child(4) {
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    animation-delay: 0.4s;
+}
+
+/* Diagonal rays */
+.star-ray:nth-child(5) {
+    top: 15%;
+    left: 15%;
+    transform: rotate(45deg);
+    animation-delay: 0.5s;
+}
+
+.star-ray:nth-child(6) {
+    top: 15%;
+    right: 15%;
+    transform: rotate(-45deg);
+    animation-delay: 0.6s;
+}
+
+.star-ray:nth-child(7) {
+    bottom: 15%;
+    left: 15%;
+    transform: rotate(-45deg);
+    animation-delay: 0.7s;
+}
+
+.star-ray:nth-child(8) {
+    bottom: 15%;
+    right: 15%;
+    transform: rotate(45deg);
+    animation-delay: 0.8s;
+}
+
+/* Animations */
+@keyframes starShine {
+    0%, 100% {
+        background-position: 0% 50%;
+        box-shadow: 
+            0 0 30px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(255, 255, 255, 0.4),
+            0 0 90px rgba(255, 255, 255, 0.2);
+        transform: scale(1);
+    }
+    50% {
+        background-position: 100% 50%;
+        box-shadow: 
+            0 0 40px rgba(255, 255, 255, 0.9),
+            0 0 80px rgba(255, 255, 255, 0.6),
+            0 0 120px rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes starPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.4;
+    }
+}
+
+@keyframes rayTwinkle {
+    0%, 100% {
+        opacity: 0.3;
+        width: 20px;
+    }
+    50% {
+        opacity: 0.9;
+        width: 25px;
+    }
+}
+
+/* Different colors for each credential icon */
+.credential-card:nth-child(1) .credential-icon {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(173, 216, 230, 0.8) 50%, 
+        rgba(255, 255, 255, 0.9) 100%);
+}
+
+.credential-card:nth-child(1) .credential-icon i {
+    color: #1e3a8a;
+}
+
+.credential-card:nth-child(2) .credential-icon {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(144, 238, 144, 0.8) 50%, 
+        rgba(255, 255, 255, 0.9) 100%);
+}
+
+.credential-card:nth-child(2) .credential-icon i {
+    color: #166534;
+}
+
+.credential-card:nth-child(3) .credential-icon {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(255, 215, 0, 0.8) 50%, 
+        rgba(255, 255, 255, 0.9) 100%);
+}
+
+.credential-card:nth-child(3) .credential-icon i {
+    color: #854d0e;
+}
+
+/* Hover effect - make star shine brighter */
+.credential-card:hover .credential-icon {
+    animation: starShine 0.8s linear infinite;
+}
+
+.credential-card:hover .star-ray {
+    animation: rayTwinkle 1s infinite;
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .credential-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .credential-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .star-ray {
+        width: 15px;
+        height: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .credential-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .credential-icon i {
+        font-size: 1.3rem;
+    }
+    
+    .star-ray {
+        width: 12px;
+        height: 2px;
+    }
+}
+
+/* Developer Code Presentation Styles */
+.developer-code-container {
+    background: var(--bg-light);
+    border: 2px solid var(--border);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 3rem 0;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.developer-code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.code-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.code-title i {
+    color: var(--primary);
+}
+
+.code-language {
+    font-size: 0.9rem;
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.developer-code {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text);
+    position: relative;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.code-line {
+    display: flex;
+    margin-bottom: 0.25rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.line-number {
+    position: absolute;
+    left: 0;
+    color: var(--text-light);
+    opacity: 0.6;
+    font-size: 0.9rem;
+    min-width: 1.5rem;
+    text-align: right;
+    user-select: none;
+}
+
+.code-keyword {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.code-operator {
+    color: #4ecdc4;
+}
+
+.code-string {
+    color: #1dd1a1;
+}
+
+.code-number {
+    color: #ff9ff3;
+}
+
+.code-comment {
+    color: #8395a7;
+    font-style: italic;
+}
+
+.code-function {
+    color: #54a0ff;
+}
+
+.code-object {
+    color: #5f27cd;
+}
+
+.code-property {
+    color: #feca57;
+}
+
+.code-boolean {
+    color: #ff9f43;
+}
+
+.code-array {
+    color: #00d2d3;
+}
+
+.code-output {
+    background: rgba(99, 102, 241, 0.05);
+    border-left: 4px solid var(--primary);
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.code-output h4 {
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.code-output h4 i {
+    color: var(--primary);
+}
+
+.code-output pre {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    color: var(--text);
+    overflow-x: auto;
+    font-size: 0.9rem;
+}
+
+.code-output .output-value {
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* Terminal-like blinking cursor */
+.developer-code::after {
+    content: '▋';
+    color: var(--primary);
+    animation: blink 1s infinite;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .developer-code-container {
+        padding: 1.5rem;
+    }
+    
+    .developer-code {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .code-line {
+        padding-left: 1.25rem;
+    }
+    
+    .line-number {
+        min-width: 1.25rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Dark mode adjustments */
+.dark-mode .code-output {
+    background: rgba(99, 102, 241, 0.08);
+}
+
+.dark-mode .code-output pre {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* FIX CARDS EXTENDING BEYOND PHONE SCREEN */
+@media (max-width: 768px) {
+    /* Fix container width */
+    .container {
+        width: 100%;
+        padding: 0 15px;
+        overflow-x: hidden;
+    }
+    
+    /* Fix glass cards */
+    .glass-card,
+    .shiny-app-card,
+    .project-card,
+    .blog-card,
+    .publication-card,
+    .support-card,
+    .credential-card,
+    .competency-card,
+    .resume-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box;
+    }
+    
+    /* Fix grid layouts */
+    .shiny-apps-grid,
+    .blog-grid,
+    .publications-grid,
+    .support-options,
+    .resume-options,
+    .skills-grid,
+    .credentials-cards,
+    .competencies-cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* Fix developer code container */
+    .developer-code-container {
+        width: 100%;
+        overflow-x: auto;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .developer-code {
+        font-size: 0.85rem;
+        min-width: auto;
+        max-width: 100%;
+        word-break: break-word;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+    }
+    
+    /* Fix code lines */
+    .code-line {
+        word-break: break-all;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+        max-width: 100%;
+    }
+    
+    /* Fix contact form */
+    .contact-form-container,
+    .contact-info-container {
+        width: 100% !important;
+        padding: 1.25rem !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Fix form inputs */
+    .form-group input,
+    .form-group textarea {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+    
+    /* Fix form rows */
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    /* Fix buttons */
+    .btn-run-app,
+    .btn-view-code,
+    .btn-resume,
+    .btn-support,
+    .btn-submit {
+        width: 100% !important;
+        padding: 0.8rem 1rem !important;
+        box-sizing: border-box;
+    }
+    
+    /* Fix app actions */
+    .app-actions {
+        flex-direction: column !important;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    
+    /* Fix modal content */
+    .modal-content {
+        width: 95% !important;
+        margin: 0 2.5% !important;
+    }
+    
+    /* Fix all apps grid in modal */
+    .all-apps-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+    
+    .all-app-card {
+        flex-direction: column;
+        width: 100% !important;
+    }
+    
+    .all-app-image {
+        width: 100% !important;
+        height: 150px !important;
+    }
+    
+    /* Fix timeline */
+    .timeline::before {
+        left: 20px !important;
+    }
+    
+    .timeline-item {
+        width: calc(100% - 40px) !important;
+        margin-left: 40px !important;
+        padding-left: 1.5rem !important;
+    }
+    
+    /* Fix footer */
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+        width: 100%;
+    }
+    
+    .footer-tabs-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Fix social links grid */
+    .social-links-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Fix stats layouts */
+    .resume-stats,
+    .blog-stats,
+    .projects-stats,
+    .publication-stats {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .resume-stat,
+    .blog-stat,
+    .project-stat,
+    .stat-box {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix hero section */
+    .hero {
+        display: flex !important;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+    }
+    
+    .hero-content {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Fix profile image */
+    .profile-image {
+        width: 250px !important;
+        height: 250px !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Fix badges positioning */
+    .profile-badge,
+    .current-affiliation {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        margin: 1rem auto !important;
+        width: 90% !important;
+        text-align: center;
+    }
+    
+    /* Fix academic links */
+    .academic-links {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+    }
+    
+    .academic-link {
+        min-width: auto !important;
+        padding: 0.6rem 1rem !important;
+    }
+    
+    /* Fix skills dashboard */
+    .skills-dashboard {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+    }
+    
+    .skill-category-card {
+        width: 100% !important;
+        padding: 1.25rem !important;
+    }
+    
+    /* Fix software with level */
+    .software-with-level {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .competency-level {
+        width: 100%;
+        min-width: 100%;
+    }
+    
+    /* Prevent horizontal scrolling */
+    body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+    
+    /* Fix mobile menu */
+    .mobile-menu-content {
+        width: 100% !important;
+        border-radius: 0 !important;
+    }
+}
+
+/* EXTRA SMALL DEVICES (Phones) */
+@media (max-width: 480px) {
+    /* Even smaller padding */
+    .container {
+        padding: 0 10px !important;
+    }
+    
+    /* Make everything fit */
+    .glass-card,
+    .shiny-app-card,
+    .project-card,
+    .blog-card,
+    .publication-card,
+    .support-card,
+    .credential-card,
+    .competency-card,
+    .resume-card {
+        padding: 1rem !important;
+    }
+    
+    /* Fix hero text */
+    .hero-content h1 {
+        font-size: 1.6rem !important;
+    }
+    
+    .hero-content p {
+        font-size: 0.95rem !important;
+        line-height: 1.6;
+    }
+    
+    /* Fix buttons */
+    .btn {
+        padding: 0.75rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Fix form inputs */
+    .form-group input,
+    .form-group textarea {
+        padding: 0.75rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Fix section titles */
+    .section-title {
+        font-size: 1.5rem !important;
+        word-wrap: break-word;
+    }
+    
+    /* Fix code lines */
+    .code-line {
+        font-size: 0.8rem !important;
+    }
+    
+    .line-number {
+        font-size: 0.75rem !important;
+    }
+    
+    /* Fix app images */
+    .app-image-container {
+        height: 160px !important;
+    }
+    
+    .blog-image {
+        height: 160px !important;
+    }
+    
+    /* Fix publication cards */
+    .publication-title {
+        font-size: 1.1rem !important;
+        line-height: 1.4;
+    }
+}
+
+/* HORIZONTAL SCROLLING PREVENTION */
+@media (max-width: 768px) {
+    /* Add this to prevent any element from causing overflow */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Specifically target problematic elements */
+    .glass-card::before,
+    .glass-card::after,
+    .shiny-app-card::before,
+    .shiny-app-card::after,
+    .blog-card::before,
+    .blog-card::after {
+        display: none !important; /* Remove dangling effects on mobile */
+    }
+    
+    /* Fix images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Fix tables if any */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* SPECIFIC FIX FOR DEVELOPER CODE ON SMALL PHONES */
+@media (max-width: 360px) {
+    .developer-code {
+        font-size: 0.75rem !important;
+    }
+    
+    .code-line {
+        padding-left: 1rem !important;
+    }
+    
+    .line-number {
+        min-width: 1rem !important;
+        font-size: 0.7rem !important;
+    }
+}
 
 /* Add to your existing CSS, preferably in the Navigation section */
 .logo {
@@ -197,35 +1338,36 @@
     }
 }
 
-
-/* Footer Styles - Clean Two Columns */
+/* COMPACT FOOTER STYLES */
 .footer {
     background: var(--bg-light);
     border-top: 1px solid var(--border);
-    padding: 2.5rem 0 1.5rem;
-    margin-top: 4rem;
+    padding: 2rem 0 1rem;
+    margin-top: 3rem;
+    font-size: 0.85rem;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 2rem;
+    grid-template-columns: 2fr 1fr; /* More space for links, less for social */
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    align-items: start;
 }
 
-/* Left Column - Tabs */
+/* Left Column - Quick Links in horizontal grid */
 .footer-column h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
 
 .footer-tabs-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1.5rem;
 }
 
 .footer-links-vertical {
@@ -235,17 +1377,18 @@
 }
 
 .footer-links-vertical li {
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.6rem;
 }
 
 .footer-links-vertical a {
     color: var(--text-light);
     text-decoration: none;
     transition: all 0.2s;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    font-size: 0.95rem;
+    gap: 0.5rem;
+    white-space: nowrap;
 }
 
 .footer-links-vertical a:hover {
@@ -254,98 +1397,179 @@
 }
 
 .footer-links-vertical i {
-    width: 18px;
+    width: 16px;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    color: var(--primary);
 }
 
-/* Right Column - Social Media */
+/* Right Column - Social Media Icons only (no text) */
 .social-column {
     display: flex;
     flex-direction: column;
 }
 
-.social-links-grid {
+.social-icons-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
 }
 
-.social-link-item {
+.social-icon-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
     background: var(--glass);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 50%;
     text-decoration: none;
     color: var(--text);
     transition: all 0.3s;
+    font-size: 1.1rem;
 }
 
-.social-link-item:hover {
+.social-icon-item:hover {
     background: var(--primary);
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     border-color: var(--primary);
 }
 
-.social-link-item i {
-    font-size: 1.1rem;
-    width: 24px;
-}
+/* Platform-specific colors on hover */
+.social-icon-item.github:hover { background: #333; }
+.social-icon-item.linkedin:hover { background: #0a66c2; }
+.social-icon-item.youtube:hover { background: #ff0000; }
+.social-icon-item.scholar:hover { background: #4285f4; }
+.social-icon-item.orcid:hover { background: #a6ce39; }
+.social-icon-item.blogger:hover { background: #FF5722; }
 
-.social-link-item span {
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-/* Platform-specific hover colors */
-.social-link-item.github:hover { background: #333; }
-.social-link-item.linkedin:hover { background: #0a66c2; }
-.social-link-item.youtube:hover { background: #ff0000; }
-.social-link-item.scholar:hover { background: #4285f4; }
-.social-link-item.orcid:hover { background: #a6ce39; }
-.social-link-item.blogger:hover { background: #FF5722; }
-
-/* Footer Bottom */
+/* Footer Bottom - Single line */
 .footer-bottom {
     text-align: center;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     border-top: 1px solid var(--border);
     color: var(--text-light);
-    font-size: 0.85rem;
-    line-height: 1.5;
+    font-size: 0.75rem;
+    line-height: 1.4;
 }
 
 .footer-bottom p {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
 }
 
 .footer-heart {
     color: #e53e3e;
     margin: 0 0.2rem;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.5rem 0 1rem;
     }
     
-    .footer-tabs-grid {
+    .footer-content {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     
-    .social-links-grid {
-        grid-template-columns: 1fr;
+    .footer-tabs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem 1rem;
     }
     
+    .footer-links-vertical a {
+        font-size: 0.75rem;
+    }
+    
+    .social-icons-grid {
+        grid-template-columns: repeat(6, 1fr);
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .social-icon-item {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
     .footer {
-        padding: 2rem 0 1rem;
+        padding: 1.25rem 0 0.75rem;
+    }
+    
+    .footer-tabs-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .social-icons-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        max-width: 200px;
+    }
+    
+    .footer-bottom {
+        font-size: 0.7rem;
+    }
+}
+
+/* HORIZONTAL LAYOUT OPTION (Single row) */
+@media (min-width: 769px) {
+    .footer-horizontal-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    
+    .footer-horizontal-layout .footer-column:first-child {
+        flex: 2;
+    }
+    
+    .footer-horizontal-layout .footer-tabs-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    
+    .footer-horizontal-layout .footer-links-vertical {
+        display: flex;
+        gap: 1.5rem;
+        margin-right: 1rem;
+    }
+    
+    .footer-horizontal-layout .footer-links-vertical li {
+        margin-bottom: 0;
+    }
+    
+    .footer-horizontal-layout .social-column {
+        flex: 1;
+        max-width: 200px;
+    }
+    
+    .footer-horizontal-layout .social-icons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: flex-end;
     }
 }
 
@@ -5030,6 +6254,7 @@ function handleNavbarScroll() {
     }
 }
 
+
 // Update the initNavbarScroll function
 function initNavbarScroll() {
     // Throttle the scroll event for better performance
@@ -5064,8 +6289,9 @@ function RotatingText() {
     
     const texts = [
         "Registered Nurse",
-        "Data Enthusiast", 
-        "R Shiny Developer"
+        "Health Researcher",
+        "Data Enthusiast",
+        "Data Analyst"
     ];
     
     useEffect(() => {
@@ -5091,7 +6317,7 @@ function RotatingText() {
 }
 
 function App() {
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
     const [activeSection, setActiveSection] = useState('home');
     const [formData, setFormData] = useState({
         name: '',
@@ -5528,7 +6754,7 @@ function App() {
                         style={{cursor: 'pointer'}}
                         title="Click to go to Home - Mudasir Mohammed Ibrahim"
                     >
-                        mmi
+                        Mudasir
                     </div>
 
                     <div className="nav-links">
@@ -6095,50 +7321,255 @@ I have expertise in patient care and clinical nursing, health and clinical resea
                                 </p>
                             </div>
 
-                            <div className="skills-grid">
-                                {/* Quantitative Analysis Section */}
-                                <div className="skill-category">
-                                    <div className="category-header">
-                                        <i className="fas fa-chart-line"></i>
-                                        <h3>Quantitative Analysis</h3>
-                                    </div>
-                                    <div className="software-list">
-                                        {['SPSS Statistics', 'Stata', 'SPSS AMOS', 'SmartPLS', 'Jamovi', 'JASP', 
-                                          'Minitab', 'R Programming', 'SAS', 'JMP'].map(software => (
-                                            <span key={software} className="software-tag">{software}</span>
-                                        ))}
-                                    </div>
-                                    <p className="skill-description">
-                                        Skilled in advanced statistical analysis, SEM, regression modeling, and data visualization
-                                    </p>
-                                </div>
+        <div className="skills-grid">
+    {/* Quantitative Analysis Section */}
+    <div className="skill-category">
+        <div className="category-header">
+            <i className="fas fa-chart-line"></i>
+            <h3>Quantitative Analysis</h3>
+        </div>
+        <div className="software-list">
+            <div className="software-with-level">
+                <span className="software-name">SPSS Statistics</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-95"></div>
+                    </div>
+                    <span className="level-percentage">95%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">Stata</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-90"></div>
+                    </div>
+                    <span className="level-percentage">80%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">SPSS AMOS</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-85"></div>
+                    </div>
+                    <span className="level-percentage">85%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">SmartPLS</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-80"></div>
+                    </div>
+                    <span className="level-percentage">80%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">Jamovi</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-88"></div>
+                    </div>
+                    <span className="level-percentage">90%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">JASP</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-82"></div>
+                    </div>
+                    <span className="level-percentage">90%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">Minitab</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-75"></div>
+                    </div>
+                    <span className="level-percentage">90%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">R Programming</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-92"></div>
+                    </div>
+                    <span className="level-percentage">80%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">SAS JMP</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-72"></div>
+                    </div>
+                    <span className="level-percentage">95%</span>
+                </div>
+            </div>
+        </div>
+        <p className="skill-description">
+            Skilled in advanced statistical analysis, SEM, regression modeling, and data visualization
+        </p>
+    </div>
 
-                                {/* Qualitative Analysis Section */}
-                                <div className="skill-category">
-                                    <div className="category-header">
-                                        <i className="fas fa-comments"></i>
-                                        <h3>Qualitative Analysis</h3>
-                                    </div>
-                                    <div className="software-list">
-                                        {['ATLAS.ti', 'NVivo', 'QDA Miner'].map(software => (
-                                            <span key={software} className="software-tag">{software}</span>
-                                        ))}
-                                    </div>
-                                    <p className="skill-description">
-                                        Proficient in thematic analysis, coding, and qualitative data management
-                                    </p>
-                                </div>
+    {/* Qualitative Analysis Section */}
+    <div className="skill-category">
+        <div className="category-header">
+            <i className="fas fa-comments"></i>
+            <h3>Qualitative Analysis</h3>
+        </div>
+        <div className="software-list">
+            <div className="software-with-level">
+                <span className="software-name">ATLAS.ti</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-88"></div>
+                    </div>
+                    <span className="level-percentage">98%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">NVivo</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-85"></div>
+                    </div>
+                    <span className="level-percentage">85%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">QDA Miner</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-80"></div>
+                    </div>
+                    <span className="level-percentage">95%</span>
+                </div>
+            </div>
+        </div>
+        <p className="skill-description">
+            Proficient in thematic analysis, coding, and qualitative data management
+        </p>
+    </div>
 
-                                {/* Mixed Methods */}
-                                <div className="mixed-methods-card">
-                                    <i className="fas fa-blender-phone"></i>
-                                    <h4>Mixed-Methods Research Approach</h4>
-                                    <p>
-                                        This comprehensive software proficiency enables me to conduct mixed-methods research, 
-                                        providing holistic insights that combine quantitative precision with qualitative depth.
-                                    </p>
-                                </div>
+    {/* R Shiny Development Section */}
+    <div className="skill-category">
+        <div className="category-header">
+            <i className="fas fa-laptop-code"></i>
+            <h3>R Shiny Development</h3>
+        </div>
+        <div className="software-list">
+            <div className="software-with-level">
+                <span className="software-name">Interactive Dashboards</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-95"></div>
+                    </div>
+                    <span className="level-percentage">95%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">Data Visualization</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-92"></div>
+                    </div>
+                    <span className="level-percentage">92%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">Healthcare Analytics Apps</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-96"></div>
+                    </div>
+                    <span className="level-percentage">96%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">Statistical Calculators</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-98"></div>
+                    </div>
+                    <span className="level-percentage">98%</span>
+                </div>
+            </div>
+        </div>
+        <p className="skill-description">
+            Expert in developing interactive web applications for healthcare analytics and statistical analysis
+        </p>
+    </div>
 
+    {/* Research Tools Section */}
+    <div className="skill-category">
+        <div className="category-header">
+            <i className="fas fa-code"></i>
+            <h3>Research Tools</h3>
+        </div>
+        <div className="software-list">
+            <div className="software-with-level">
+                <span className="software-name">Zotero</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-90"></div>
+                    </div>
+                    <span className="level-percentage">100%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">Mendeley</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-95"></div>
+                    </div>
+                    <span className="level-percentage">100%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">Microsoft Office</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-96"></div>
+                    </div>
+                    <span className="level-percentage">100%</span>
+                </div>
+            </div>
+            
+            <div className="software-with-level">
+                <span className="software-name">ConceptDraw DIAGRAM</span>
+                <div className="competency-level">
+                    <div className="level-bar">
+                        <div className="level-fill level-94"></div>
+                    </div>
+                    <span className="level-percentage">60%</span>
+                </div>
+            </div>
+        </div>
+        <p className="skill-description">
+            Proficient in documentation, and productivity tools for research workflows
+        </p>
+    </div>
+        
                                 {/* Research Interests */}
                                 <div className="research-interests">
                                     <div className="category-header">
@@ -6162,114 +7593,198 @@ I have expertise in patient care and clinical nursing, health and clinical resea
                                 <div className="section-header">
                                     <h3>Professional Credentials</h3>
                                 </div>
-                                <div className="credentials-cards">
-                                    <div className="credential-card">
-                                        <div className="credential-icon">
-                                            <i className="fas fa-shield-alt"></i>
-                                        </div>
-                                        <h4>Registered General Nurse (RGN)</h4>
-                                        <p>Nursing and Midwifery Council of Ghana (NMC)</p>
-                                        <span className="credential-status">Licensed</span>
-                                    </div>
-                                    
-                                    <div className="credential-card">
-                                        <div className="credential-icon">
-                                            <i className="fas fa-users"></i>
-                                        </div>
-                                        <h4>Active Member</h4>
-                                        <p>Ghana Registered Nurses and Midwives Association (GRNMA)</p>
-                                        <span className="credential-status">Active</span>
-                                    </div>
-                                    
-                                    <div className="credential-card">
-                                        <div className="credential-icon">
-                                            <i className="fas fa-hospital"></i>
-                                        </div>
-                                        <h4>Current Practice</h4>
-                                        <p>Tamale Teaching Hospital</p>
-                                        <span className="credential-status">Practicing</span>
-                                    </div>
-                                </div>
-                                <p className="practice-note">
+          
+          <div className="credentials-cards">
+    <div className="credential-card">
+        <div className="credential-icon">
+            <i className="fas fa-shield-alt"></i>
+            {/* Star rays */}
+            {[...Array(8)].map((_, i) => (
+                <div key={i} className="star-ray"></div>
+            ))}
+        </div>
+        <h4>Registered General Nurse (RGN)</h4>
+        <p>Nursing and Midwifery Council of Ghana (NMC)</p>
+        <span className="credential-status">Licensed</span>
+    </div>
+    
+    <div className="credential-card">
+        <div className="credential-icon">
+            <i className="fas fa-users"></i>
+            {/* Star rays */}
+            {[...Array(8)].map((_, i) => (
+                <div key={i} className="star-ray"></div>
+            ))}
+        </div>
+        <h4>Active Member</h4>
+        <p>Ghana Registered Nurses and Midwives Association (GRNMA)</p>
+        <span className="credential-status">Active</span>
+    </div>
+    
+    <div className="credential-card">
+        <div className="credential-icon">
+            <i className="fas fa-hospital"></i>
+            {/* Star rays */}
+            {[...Array(8)].map((_, i) => (
+                <div key={i} className="star-ray"></div>
+            ))}
+        </div>
+        <h4>Current Practice</h4>
+        <p>Tamale Teaching Hospital</p>
+        <span className="credential-status">Practicing</span>
+    </div>
+</div>
+                                          <p className="practice-note">
                                     Maintaining professional standards and continuous development in nursing practice
                                 </p>
                             </div>
 
-                            {/* Core Competencies Cards */}
-                            <div className="core-competencies">
-                                <div className="section-header">
-                                    <h3>Core Competencies</h3>
-                                    <p>Key areas of expertise and professional capabilities</p>
-                                </div>
-                                
-                                <div className="competencies-cards-grid">
-                                    <div className="competency-card">
-                                        <div className="card-header">
-                                            <div className="card-icon">
-                                                <i className="fas fa-hand-holding-medical"></i>
-                                            </div>
-                                            <h4>Patient Care & Clinical Nursing</h4>
-                                        </div>
-                                        <ul className="competency-list">
-                                            <li><i className="fas fa-check-circle"></i> Comprehensive nursing care</li>
-                                            <li><i className="fas fa-check-circle"></i> Patient assessment & diagnosis</li>
-                                            <li><i className="fas fa-check-circle"></i> Medication administration</li>
-                                            <li><i className="fas fa-check-circle"></i> Holistic healthcare delivery</li>
-                                            <li><i className="fas fa-check-circle"></i> Emergency response & care</li>
-                                        </ul>
-                                    </div>
-                                    
-                                    <div className="competency-card">
-                                        <div className="card-header">
-                                            <div className="card-icon">
-                                                <i className="fas fa-flask"></i>
-                                            </div>
-                                            <h4>Health/Clinical Research</h4>
-                                        </div>
-                                        <ul className="competency-list">
-                                            <li><i className="fas fa-check-circle"></i> Research design & methodology</li>
-                                            <li><i className="fas fa-check-circle"></i> Data collection & management</li>
-                                            <li><i className="fas fa-check-circle"></i> Ethical considerations & IRB</li>
-                                            <li><i className="fas fa-check-circle"></i> Evidence-based practice</li>
-                                            <li><i className="fas fa-check-circle"></i> Publication & dissemination</li>
-                                        </ul>
-                                    </div>
-                                    
-                                    <div className="competency-card">
-                                        <div className="card-header">
-                                            <div className="card-icon">
-                                                <i className="fas fa-chart-bar"></i>
-                                            </div>
-                                            <h4>Advanced Statistical Analysis</h4>
-                                        </div>
-                                        <ul className="competency-list">
-                                            <li><i className="fas fa-check-circle"></i> Structural Equation Modeling (SEM)</li>
-                                            <li><i className="fas fa-check-circle"></i> Factor & regression analysis</li>
-                                            <li><i className="fas fa-check-circle"></i> Complex statistical methods</li>
-                                            <li><i className="fas fa-check-circle"></i> Healthcare data analytics</li>
-                                            <li><i className="fas fa-check-circle"></i> Data visualization & reporting</li>
-                                        </ul>
-                                    </div>
-                                    
-                                    <div className="competency-card">
-                                        <div className="card-header">
-                                            <div className="card-icon">
-                                                <i className="fas fa-laptop-code"></i>
-                                            </div>
-                                            <h4>R Shiny Development</h4>
-                                        </div>
-                                        <ul className="competency-list">
-                                            <li><i className="fas fa-check-circle"></i> Interactive web applications</li>
-                                            <li><i className="fas fa-check-circle"></i> Healthcare data visualization</li>
-                                            <li><i className="fas fa-check-circle"></i> AI-assisted coding</li>
-                                            <li><i className="fas fa-check-circle"></i> Data analysis tools & dashboards</li>
-                                            <li><i className="fas fa-check-circle"></i> User interface design</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                 {/* Core Competencies Cards */}
+<div className="core-competencies">
+    <div className="section-header">
+        <h3>Core Competencies</h3>
+        <p>Key areas of expertise and professional capabilities</p>
+    </div>
+    
+    <div className="competencies-scroll-container">
+        <div className="competencies-scroll-track">
+            {[...Array(3)].map((_, setIndex) => (
+                <React.Fragment key={setIndex}>
+                    {/* Card 1 */}
+                    <div className="competency-card">
+                        <div className="card-header">
+                            <div className="card-icon">
+                                <i className="fas fa-hand-holding-medical"></i>
                             </div>
+                            <h4>Patient Care & Clinical Nursing</h4>
                         </div>
+                        <ul className="competency-list">
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Comprehensive nursing care</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Patient assessment & diagnosis</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Medication administration</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Holistic healthcare delivery</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Emergency response & care</span>
+                            </li>
+                        </ul>
                     </div>
+                    
+                    {/* Card 2 */}
+                    <div className="competency-card">
+                        <div className="card-header">
+                            <div className="card-icon">
+                                <i className="fas fa-flask"></i>
+                            </div>
+                            <h4>Health/Clinical Research</h4>
+                        </div>
+                        <ul className="competency-list">
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Research design & methodology</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Data collection & management</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Ethical considerations & IRB</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Evidence-based practice</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Publication & dissemination</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    {/* Card 3 */}
+                    <div className="competency-card">
+                        <div className="card-header">
+                            <div className="card-icon">
+                                <i className="fas fa-chart-bar"></i>
+                            </div>
+                            <h4>Advanced Statistical Analysis</h4>
+                        </div>
+                        <ul className="competency-list">
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Structural Equation Modeling (SEM)</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Factor & regression analysis</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Complex statistical methods</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Healthcare data analytics</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Data visualization & reporting</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    {/* Card 4 */}
+                    <div className="competency-card">
+                        <div className="card-header">
+                            <div className="card-icon">
+                                <i className="fas fa-laptop-code"></i>
+                            </div>
+                            <h4>R Shiny Development</h4>
+                        </div>
+                        <ul className="competency-list">
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Interactive web applications</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Healthcare data visualization</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>AI-assisted coding</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>Data analysis tools & dashboards</span>
+                            </li>
+                            <li>
+                                <i className="fas fa-check-circle"></i>
+                                <span>User interface design</span>
+                            </li>
+                        </ul>
+                    </div>
+                </React.Fragment>
+            ))}
+        </div>
+    </div>
+</div>
+</div>
+</div>
+                 
                 </section>
 
                 {/* Education & Experience Section */}
@@ -6866,118 +8381,65 @@ I have expertise in patient care and clinical nursing, health and clinical resea
           
             </main>
 
-            <footer className="footer">
-                <div className="container">
-                    <div className="footer-content">
-                        {/* Left Column - Quick Links */}
-                        <div className="footer-column">
-                            <h3>Quick Links</h3>
-                            <div className="footer-tabs-grid">
-                                {/* First Column - 5 Tabs */}
-                                <ul className="footer-links-vertical">
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('home'); }}>
-                                            <i className="fas fa-home"></i>
-                                            <span>Home</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('projects'); }}>
-                                            <i className="fas fa-project-diagram"></i>
-                                            <span>Projects</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('blog'); }}>
-                                            <i className="fas fa-blog"></i>
-                                            <span>Blog</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('about'); }}>
-                                            <i className="fas fa-user"></i>
-                                            <span>About</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('education'); }}>
-                                            <i className="fas fa-graduation-cap"></i>
-                                            <span>Education</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                
-                                {/* Second Column - 4 Tabs */}
-                                <ul className="footer-links-vertical">
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('publications'); }}>
-                                            <i className="fas fa-file-alt"></i>
-                                            <span>Publications</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('resume'); }}>
-                                            <i className="fas fa-file-pdf"></i>
-                                            <span>Resume</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('support'); }}>
-                                            <i className="fas fa-hands-helping"></i>
-                                            <span>Support</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('contact'); }}>
-                                            <i className="fas fa-envelope"></i>
-                                            <span>Contact</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        {/* Right Column - Connect With Me */}
-                        <div className="footer-column social-column">
-                            <h3>Connect With Me</h3>
-                            <div className="social-links-grid">
-                                <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="social-link-item github">
-                                    <i className="fab fa-github"></i>
-                                    <span>GitHub</span>
-                                </a>
-                                <a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="social-link-item linkedin">
-                                    <i className="fab fa-linkedin"></i>
-                                    <span>LinkedIn</span>
-                                </a>
-                                <a href="https://www.youtube.com/@mudasirmohammedibrahim1026" target="_blank" rel="noopener noreferrer" className="social-link-item youtube">
-                                    <i className="fab fa-youtube"></i>
-                                    <span>YouTube</span>
-                                </a>
-                                <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="social-link-item scholar">
-                                    <i className="fas fa-graduation-cap"></i>
-                                    <span>Google Scholar</span>
-                                </a>
-                                <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="social-link-item orcid">
-                                    <i className="fab fa-orcid"></i>
-                                    <span>ORCID</span>
-                                </a>
-                                <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" rel="noopener noreferrer" className="social-link-item blogger">
-                                    <i className="fab fa-blogger-b"></i>
-                                    <span>Blogger</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Footer Bottom */}
-                    <div className="footer-bottom">
-                        <p>© {new Date().getFullYear()}. All rights reserved.</p>
-                        <p>Registered Nurse | Data Enthusiast | R Shiny Developer</p>
-                        <p>Built with <i className="fas fa-heart footer-heart"></i> by Mudasir Mohammed Ibrahim</p>
-                    </div>
+    <footer className="footer">
+    <div className="container">
+        <div className="footer-content footer-horizontal-layout">
+            {/* Left Column - Quick Links */}
+            <div className="footer-column">
+                <h3>Quick Navigation</h3>
+                <div className="footer-tabs-grid">
+                    <ul className="footer-links-vertical">
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('home'); }}><i className="fas fa-home"></i>Home</a></li>
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('projects'); }}><i className="fas fa-project-diagram"></i>Projects</a></li>
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('blog'); }}><i className="fas fa-blog"></i>Blog</a></li>
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('about'); }}><i className="fas fa-user"></i>About</a></li>
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('education'); }}><i className="fas fa-graduation-cap"></i>Education</a></li>
+                    </ul>
+                    
+                    <ul className="footer-links-vertical">
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('publications'); }}><i className="fas fa-file-alt"></i>Publications</a></li>
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('resume'); }}><i className="fas fa-file-pdf"></i>Resume</a></li>
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('support'); }}><i className="fas fa-hands-helping"></i>Support</a></li>
+                        <li><a href="#" onClick={(e) => { e.preventDefault(); handleSectionChange('contact'); }}><i className="fas fa-envelope"></i>Contact</a></li>
+                    </ul>
                 </div>
-            </footer>
+            </div>
+
+            {/* Right Column - Social Media Icons */}
+            <div className="footer-column social-column">
+                <h3>Connect</h3>
+                <div className="social-icons-grid">
+                    <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="social-icon-item github" title="GitHub">
+                        <i className="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="social-icon-item linkedin" title="LinkedIn">
+                        <i className="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@mudasirmohammedibrahim1026" target="_blank" rel="noopener noreferrer" className="social-icon-item youtube" title="YouTube">
+                        <i className="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="social-icon-item scholar" title="Google Scholar">
+                        <i className="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="social-icon-item orcid" title="ORCID">
+                        <i className="fab fa-orcid"></i>
+                    </a>
+                    <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" rel="noopener noreferrer" className="social-icon-item blogger" title="Blogger">
+                        <i className="fab fa-blogger-b"></i>
+                    </a>
+                </div>
+            </div>
         </div>
+
+        {/* Footer Bottom - Single line */}
+        <div className="footer-bottom">
+            <p>© {new Date().getFullYear()} - Present. All rights reserved.</p>
+            <p>Built with <i className="fas fa-heart footer-heart"></i> in Ghana. Powered by Mudasir Mohammed Ibrahim</p>
+        </div>
+    </div>
+</footer>
+    
+            </div>
     );
 }
 
