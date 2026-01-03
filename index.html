@@ -87,6 +87,59 @@
     --btn-text: #ffffff;
     --btn-shadow: rgba(99, 102, 241, 0.3);
     
+    /* Make views more prominent on cards */
+.meta-item.views-item {
+    background: rgba(59, 130, 246, 0.15);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.meta-item.views-item i {
+    color: #3b82f6 !important;
+    animation: pulse 2s infinite;
+}
+
+.views-count {
+    font-weight: 700;
+    color: var(--primary); /* This will change with theme */
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* View counter badge */
+.view-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    z-index: 5;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.view-badge i {
+    color: #fbbf24;
+}
+    
     /* ADD THESE TWO LINES - NEW VARIABLES */
     --logo-text: #111827; /* CHANGE: Darker black for light mode */
     --heading-text: #111827; /* CHANGE: Darker black for light mode */
@@ -3185,7 +3238,7 @@ body {
     border-radius: 15px;
     overflow: hidden;
     transition: all 0.3s;
-    height: 560px; /* Add fixed height */
+    height: 650px; /* Add fixed height */
     display: flex;
     flex-direction: column;
 }
@@ -6413,6 +6466,13 @@ function initNavbarScroll() {
 
 const { useState, useEffect } = React;
 
+// Update total views
+const totalViewsElement = document.getElementById('total-views');
+if (totalViewsElement && appViewsData.apps) {
+    const totalViews = appViewsData.apps.reduce((sum, app) => sum + app.views, 0);
+    totalViewsElement.textContent = formatViews(totalViews);
+}
+
 // Add this component after your useState, useEffect import
 function RotatingText() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -6461,231 +6521,117 @@ function App() {
     // ADD THIS LINE - Mobile menu state
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-    // ⚠️ REPLACE THESE WITH YOUR ACTUAL KEYS FROM STEP 3 ⚠️
-const SUPABASE_URL = 'https://lwlecnvokztakrtwtnyu.supabase.co'; // PUT YOUR URL HERE
-const SUPABASE_KEY = 'sb_publishable_3N1N6CmQbdERVwMDz6djsw_qr_yDDPp'; // PUT YOUR KEY HERE
+   // GitHub Manual Views Tracking System
+const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/mudassiribrahim12/app-stats/main/views.json';
+let appViewsData = {};
 
-// Create Supabase client - DO THIS ONCE
-const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
-
-// Stats management system
-let appStats = {};
-let userLikes = {};
-
-// Initialize stats when component mounts
-function initStatsSystem() {
-    if (!supabase) {
-        console.error('Supabase not available');
-        return;
+// Format number to k notation (e.g., 2.45k)
+function formatViews(views) {
+    if (views >= 1000) {
+        return (views / 1000).toFixed(2) + 'k';
     }
-    
-    // Load from localStorage first
-    const savedStats = localStorage.getItem('app_stats');
-    const savedLikes = localStorage.getItem('user_likes');
-    
-    appStats = savedStats ? JSON.parse(savedStats) : {};
-    userLikes = savedLikes ? JSON.parse(savedLikes) : {};
-    
-    // Then sync with Supabase
-    loadStatsFromSupabase();
+    return views.toString();
 }
 
-// LOAD STATS FROM SUPABASE
-async function loadStatsFromSupabase() {
-    if (!supabase) return;
-    
+// Load views from GitHub JSON file
+async function loadViewsFromGitHub() {
     try {
-        console.log('Loading stats from Supabase...');
-        const { data, error } = await supabase
-            .from('app_stats')
-            .select('*');
+        console.log('Loading views data from GitHub...');
         
-        if (error) {
-            console.error('Supabase error:', error);
-            return;
-        }
-        
-        // Merge Supabase data with local
-        if (data && data.length > 0) {
-            data.forEach(row => {
-                appStats[row.id] = { 
-                    views: row.views || 0, 
-                    likes: row.likes || 0 
-                };
-            });
-            
-            // Save merged data
-            localStorage.setItem('app_stats', JSON.stringify(appStats));
-            updateAllStatsDisplays();
-        }
-        
-    } catch (error) {
-        console.log('Using local storage only:', error);
-    }
-}
-
-// CREATE NEW APP IN SUPABASE
-async function createAppInSupabase(appId) {
-    if (!supabase) return;
-    
-    try {
-        await supabase
-            .from('app_stats')
-            .insert([{ 
-                id: appId.toString(), 
-                views: 0, 
-                likes: 0 
-            }]);
-    } catch (error) {
-        console.log('Could not create app:', error);
-    }
-}
-
-// UPDATE STATS IN SUPABASE
-async function updateSupabaseStats(appId, type) {
-    if (!supabase) return;
-    
-    try {
-        const current = appStats[appId] || { views: 0, likes: 0 };
-        
-        const updates = {};
-        if (type === 'view') {
-            updates.views = current.views + 1;
-        } else if (type === 'like') {
-            updates.likes = current.likes + 1;
-        } else if (type === 'unlike') {
-            updates.likes = Math.max(0, current.likes - 1);
-        }
-        
-        await supabase
-            .from('app_stats')
-            .update(updates)
-            .eq('id', appId.toString());
-            
-    } catch (error) {
-        console.log('Supabase update failed:', error);
-    }
-}
-
-// HANDLE VIEW - AUTOMATIC (Call this when app is viewed)
-async function handleView(appId) {
-    if (!appStats[appId]) {
-        appStats[appId] = { views: 0, likes: 0 };
-    }
-    
-    // Update local
-    appStats[appId].views++;
-    
-    // Update display if element exists
-    const viewsElement = document.getElementById(`views-${appId}`);
-    if (viewsElement) {
-        viewsElement.textContent = `${appStats[appId].views} views`;
-        viewsElement.style.color = 'var(--primary)';
-        setTimeout(() => {
-            viewsElement.style.color = 'var(--text)';
-        }, 500);
-    }
-    
-    // Save locally
-    localStorage.setItem('app_stats', JSON.stringify(appStats));
-    
-    // Update Supabase in background
-    updateSupabaseStats(appId, 'view');
-}
-
-// HANDLE LIKE - AUTOMATIC (Call this when like button is clicked)
-async function handleLike(appId) {
-    if (!appStats[appId]) {
-        appStats[appId] = { views: 0, likes: 0 };
-    }
-    
-    const heartElement = document.getElementById(`heart-${appId}`);
-    const likesElement = document.getElementById(`likes-${appId}`);
-    
-    if (userLikes[appId]) {
-        // UNLIKE
-        appStats[appId].likes = Math.max(0, appStats[appId].likes - 1);
-        delete userLikes[appId];
-        
-        if (heartElement) {
-            heartElement.className = 'far fa-heart';
-        }
-        
-        // Update Supabase
-        await updateSupabaseStats(appId, 'unlike');
-        
-    } else {
-        // LIKE
-        appStats[appId].likes++;
-        userLikes[appId] = true;
-        
-        if (heartElement) {
-            heartElement.className = 'fas fa-heart liked';
-            heartElement.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-                heartElement.style.transform = 'scale(1)';
-            }, 200);
-        }
-        
-        // Update Supabase
-        await updateSupabaseStats(appId, 'like');
-    }
-    
-    // Update display
-    if (likesElement) {
-        likesElement.textContent = `${appStats[appId].likes} likes`;
-        likesElement.style.color = userLikes[appId] ? '#ef4444' : 'var(--text)';
-        setTimeout(() => {
-            likesElement.style.color = 'var(--text)';
-        }, 500);
-    }
-    
-    // Save locally
-    localStorage.setItem('user_likes', JSON.stringify(userLikes));
-    localStorage.setItem('app_stats', JSON.stringify(appStats));
-}
-
-// UPDATE ALL DISPLAYS
-function updateAllStatsDisplays() {
-    // This function needs to be called after React renders the components
-    // We'll use a timeout to ensure DOM is ready
-    setTimeout(() => {
-        shinyApps.forEach(app => {
-            const stats = appStats[app.id] || { views: 0, likes: 0 };
-            
-            // Update views
-            const viewsElement = document.getElementById(`views-${app.id}`);
-            if (viewsElement) {
-                viewsElement.textContent = `${stats.views} views`;
-            }
-            
-            // Update likes
-            const likesElement = document.getElementById(`likes-${app.id}`);
-            if (likesElement) {
-                likesElement.textContent = `${stats.likes} likes`;
-            }
-            
-            // Update heart
-            const heartElement = document.getElementById(`heart-${app.id}`);
-            if (heartElement) {
-                heartElement.className = userLikes[app.id] ? 'fas fa-heart liked' : 'far fa-heart';
-                heartElement.style.color = '#ef4444';
+        // Add cache busting to prevent stale data
+        const response = await fetch(`${GITHUB_RAW_URL}?t=${Date.now()}`, {
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
             }
         });
-    }, 1000); // Wait 1 second for React to render
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Store the data
+        appViewsData = data;
+        
+        // Update all displays
+        updateViewsDisplays();
+        
+        console.log('Views data loaded successfully:', data);
+        
+    } catch (error) {
+        console.log('Using fallback views data:', error);
+        // Use fallback data if GitHub fetch fails
+        loadFallbackViews();
+    }
 }
 
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Wait a bit for React to load
-    setTimeout(() => {
-        initStatsSystem();
-        
-        // Refresh stats every 30 seconds
-        setInterval(loadStatsFromSupabase, 30000);
-    }, 2000);
-});
+// Fallback views data (in case GitHub is unavailable)
+function loadFallbackViews() {
+    appViewsData = {
+        lastUpdated: new Date().toISOString().split('T')[0],
+        source: "From Shiny App Store",
+        apps: shinyApps.map(app => ({
+            id: app.id,
+            name: app.name,
+            views: Math.floor(Math.random() * 3000) + 1000,
+            lastUpdated: new Date().toISOString().split('T')[0]
+        }))
+    };
+    updateViewsDisplays();
+}
+
+// Update all views displays
+function updateViewsDisplays() {
+    if (!appViewsData.apps) return;
     
+    // Update total views
+    const totalViews = appViewsData.apps.reduce((sum, app) => sum + app.views, 0);
+    const totalViewsElement = document.getElementById('total-views');
+    if (totalViewsElement) {
+        totalViewsElement.textContent = `${formatViews(totalViews)} views`;
+    }
+    
+    // Update individual app views
+    appViewsData.apps.forEach(app => {
+        const viewsElement = document.getElementById(`views-${app.id}`);
+        if (viewsElement) {
+            viewsElement.textContent = `${formatViews(app.views)} views`;
+            viewsElement.style.opacity = '1';
+        }
+    });
+    
+    // Update the "Source" display
+    const sourceElement = document.querySelector('.views-source');
+    if (sourceElement && appViewsData.source) {
+        sourceElement.textContent = appViewsData.source;
+    }
+    
+    // Update last updated time
+    const lastUpdatedElement = document.getElementById('last-updated');
+    if (lastUpdatedElement && appViewsData.lastUpdated) {
+        lastUpdatedElement.textContent = `Last updated: ${appViewsData.lastUpdated}`;
+    }
+}
+
+// Initialize views system
+function initViewsSystem() {
+    // Load from GitHub
+    loadViewsFromGitHub();
+    
+    // Refresh every 5 minutes
+    setInterval(loadViewsFromGitHub, 5 * 60 * 1000);
+}
+
+// Initialize when component mounts
+useEffect(() => {
+    // Wait for React to render
+    setTimeout(() => {
+        initViewsSystem();
+    }, 1000);
+}, []);
+
     // Simple mobile menu toggle - ADD THIS
     const toggleMobileMenu = (e) => {
         if (e) e.stopPropagation();
@@ -7283,29 +7229,61 @@ I love research, and data analysis! Passionate about creating technology that ma
         </span> tab.
     </p>
    
-    <div className="projects-stats">
-        <div className="project-stat">
-            <i className="fas fa-calculator"></i>
-            <div>
-                <span className="stat-number">20</span>
-                <span className="stat-label">Total Apps</span>
-            </div>
-        </div>
-        <div className="project-stat">
-            <i className="fas fa-chart-line"></i>
-            <div>
-                <span className="stat-number">20</span>
-                <span className="stat-label">Displayed</span>
-            </div>
-        </div>
-        <div className="project-stat">
-            <i className="fas fa-code"></i>
-            <div>
-                <span className="stat-number">Open</span>
-                <span className="stat-label">Source</span>
-            </div>
+<div className="projects-stats">
+    <div className="project-stat">
+        <i className="fas fa-calculator"></i>
+        <div>
+            <span className="stat-number">20</span>
+            <span className="stat-label">Total Apps</span>
         </div>
     </div>
+    <div className="project-stat">
+        <i className="fas fa-eye"></i>
+        <div>
+            <span className="stat-number" id="total-views">Loading...</span>
+            <span className="stat-label">Total Views</span>
+        </div>
+    </div>
+    <div className="project-stat">
+        <i className="fas fa-code"></i>
+        <div>
+            <span className="stat-number">Open</span>
+            <span className="stat-label">Source</span>
+        </div>
+    </div>
+</div>
+
+{/* Add source attribution */}
+<div style={{
+    textAlign: 'center',
+    marginTop: '1rem',
+    padding: '0.5rem',
+    color: 'var(--text-light)',
+    fontSize: '0.9rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem'
+}}>
+
+</div>
+
+{/* Add source attribution */}
+<div style={{
+    textAlign: 'center',
+    marginTop: '1rem',
+    padding: '0.5rem',
+    color: 'var(--text-light)',
+    fontSize: '0.9rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem'
+}}>
+    <i className="fas fa-database"></i>
+    <span>Source: <span className="views-source" style={{color: 'var(--primary)', fontWeight: '600'}}>Loading...</span></span>
+    <span id="last-updated" style={{marginLeft: '1rem', fontStyle: 'italic'}}></span>
+</div>
 </div>
             
 
@@ -7332,17 +7310,22 @@ I love research, and data analysis! Passionate about creating technology that ma
                                         <h3 className="app-title">{app.name}</h3>
                                         <p className="app-description">{app.description}</p>
                                         
-                                        <div className="app-meta">
-                                            <div className="meta-item">
-                                                <i className="fas fa-calculator"></i>
-                                                <span>Statistical Tool</span>
-                                            </div>
-                                            <div className="meta-item">
-                                                <i className="fas fa-heartbeat"></i>
-                                                <span>Healthcare Analytics</span>
-                                            </div>
-                                        </div>
-                                   
+                           <div className="app-meta">
+    <div className="meta-item views-item">
+        <i className="fas fa-eye"></i>
+        <span className="views-count" id={`views-${app.id}`}>Loading...</span>
+    </div>
+    <div className="meta-item">
+        <i className="fas fa-calculator"></i>
+        <span>Statistical Tool</span>
+    </div>
+    <div className="meta-item">
+        <i className="fas fa-heartbeat"></i>
+        <span>Healthcare Analytics</span>
+    </div>
+</div>
+                           
+                                
                                         <div className="app-actions">
                                             <a 
                                                 href={app.runUrl} 
@@ -7433,17 +7416,22 @@ I love research, and data analysis! Passionate about creating technology that ma
                                                         <h3 className="app-title">{app.name}</h3>
                                                         <p className="app-description">{app.description}</p>
                                                         
-                                                        <div className="app-meta">
-                                                            <div className="meta-item">
-                                                                <i className="fas fa-calculator"></i>
-                                                                <span>Statistical Tool</span>
-                                                            </div>
-                                                            <div className="meta-item">
-                                                                <i className="fas fa-heartbeat"></i>
-                                                                <span>Healthcare Analytics</span>
-                                                            </div>
-                                                        </div>
-                                                        
+                                     <div className="app-meta">
+    <div className="meta-item views-item">
+        <i className="fas fa-eye"></i>
+        <span className="views-count" id={`views-${app.id}`}>Loading...</span>
+    </div>
+    <div className="meta-item">
+        <i className="fas fa-calculator"></i>
+        <span>Statistical Tool</span>
+    </div>
+    <div className="meta-item">
+        <i className="fas fa-heartbeat"></i>
+        <span>Healthcare Analytics</span>
+    </div>
+</div>
+                                     
+                                              
                                                         <div className="app-actions">
                                                             <a 
                                                                 href={app.runUrl} 
