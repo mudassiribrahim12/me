@@ -6464,6 +6464,20 @@ function handleNavbarScroll() {
     }
 }
 
+// Add this function to handle clicking the name in footer
+function scrollToTopOfActiveSection() {
+    const activeSection = document.querySelector('.section.active');
+    if (activeSection) {
+        const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 80;
+        const elementPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - navbarHeight;
+        
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+}
 
 // Update the initNavbarScroll function
 function initNavbarScroll() {
@@ -6505,9 +6519,9 @@ function RotatingText() {
     const [currentIndex, setCurrentIndex] = useState(0);
     
     const texts = [
-        "Registered Nurse",
-        "Health Researcher",
-        "Data Enthusiast",
+        "Research. Data. Innovation.",
+        "Building Insightful Applications",
+        "Simplifying Data Analytics",
     ];
     
     useEffect(() => {
@@ -7204,7 +7218,7 @@ const handleSectionChange = (section) => {
                 <h2> <RotatingText />  </h2>
                 
                 <p>
-I love research, and data analysis! Passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers.
+I am a registered nurse and I love research, and data analytics! I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers. Thank you for visiting, and I hope you enjoy exploring my projects.
                 </p>
                 
                 <div className="academic-links" style={{ marginTop: '2rem', justifyContent: 'flex-start' }}>
@@ -7272,7 +7286,7 @@ I love research, and data analysis! Passionate about creating technology that ma
                         
             <div className="projects-intro">
     <p>
-        The open-source R Shiny projects featured here were originally developed to address my own practical challenges and have gradually evolved into tools used by a broad community of researchers, students, and healthcare professionals. To support their ongoing development, please consider donating by visiting the <span 
+        The open-source R Shiny projects featured here were originally developed to address my own practical challenges and have gradually evolved into tools used by a broad community of researchers, students, and healthcare professionals. To support their ongoing development, please consider donating by clicking <span 
             className="support-link" 
             onClick={() => handleSectionChange('support')}
             style={{
@@ -7285,7 +7299,7 @@ I love research, and data analysis! Passionate about creating technology that ma
             }}
         >
             Support
-        </span> tab.
+        </span> 
     </p>
    
 <div className="projects-stats">
@@ -7783,7 +7797,7 @@ I love research, and data analysis! Passionate about creating technology that ma
                             
                             <div className="professional-intro">
                                 <p style={{fontSize: '1.1rem', marginBottom: '2rem', lineHeight: '1.8'}}>
-                                    Hey there! I'm Mohammed Mudasir Ibrahim, professionally known as Mudasir Mohammed Ibrahim, and currently working at Tamale Teaching Hospital. I am a registered nurse with expertise in advanced data analysis and in developing R Shiny web applications that make complex data analysis simpler, more intuitive, and accessible for healthcare professionals, students, and researchers. My journey began after several years of clinical practice and health research experience and has evolved through diverse and challenging roles at the intersection of healthcare and technology. I am passionate about building impactful, web-based statistical applications that drive meaningful change in health research and practice.
+                                    Greetings! I'm Mohammed Mudasir Ibrahim, professionally known as Mudasir Mohammed Ibrahim, and currently working at Tamale Teaching Hospital. I am a registered nurse with expertise in advanced data analysis and in developing R Shiny web applications that make complex data analysis simpler, more intuitive, and accessible for healthcare professionals, students, and researchers. My journey began after several years of clinical practice and health research experience and has evolved through diverse and challenging roles at the intersection of healthcare and technology. I am passionate about building impactful, web-based statistical applications that drive meaningful change in health research and practice.
                                 </p>
                             </div>
 
@@ -9056,10 +9070,26 @@ I love research, and data analysis! Passionate about creating technology that ma
         </div>
 
         {/* Footer Bottom - Single line */}
-        <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} All rights reserved.</p>
-            <p>Built with <i className="fas fa-heart footer-heart"></i> in Ghana. Powered by Mudasir Mohammed Ibrahim</p>
-        </div>
+<div className="footer-bottom">
+    <p>© {new Date().getFullYear()} All rights reserved.</p>
+    <p>Built with <i className="fas fa-heart footer-heart"></i> in Ghana. Powered by 
+        <span 
+            onClick={() => scrollToTopOfActiveSection()}
+            style={{
+                cursor: 'pointer',
+                color: 'var(--primary)',
+                fontWeight: '600',
+                marginLeft: '0.3rem',
+                textDecoration: 'underline',
+                textDecorationColor: 'var(--primary)',
+                textUnderlineOffset: '2px'
+            }}
+            title="Click to scroll to top of current section"
+        >
+            Mudasir Mohammed Ibrahim
+        </span>
+    </p>
+</div>
     </div>
 </footer>
     
