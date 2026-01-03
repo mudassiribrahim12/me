@@ -8,6 +8,11 @@
     <meta name="description" content="Official website of Mudasir Mohammed Ibrahim - Registered General Nurse, Healthcare Researcher & R Shiny Developer at Tamale Teaching Hospital, Ghana">
 <meta name="theme-color" content="#1a56db">
 
+<!-- Add these meta tags for cache control -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <!-- Add these to your head section after the viewport meta tag -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -104,11 +109,33 @@
     animation: pulse 2s infinite;
 }
 
+/* Ensure view counters are visible */
 .views-count {
     font-weight: 700;
-    color: var(--primary); /* This will change with theme */
+    color: var(--primary);
     font-size: 1.1rem;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    opacity: 1 !important;
+    transition: opacity 0.3s ease;
+}
+
+/* Loading state */
+.views-count.loading {
+    opacity: 0.7;
+    color: var(--text-light);
+}
+
+/* Error state */
+.views-count.error {
+    color: #ef4444;
+}
+
+/* Source indicator */
+.views-source {
+    color: #10b981 !important;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(16, 185, 129, 0.1);
 }
 
 @keyframes pulse {
@@ -6521,117 +6548,149 @@ function App() {
     // ADD THIS LINE - Mobile menu state
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-   // GitHub Manual Views Tracking System
-const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/mudassiribrahim12/app-stats/main/views.json';
-let appViewsData = {};
+ // ============================================
+// MANUAL VIEWS TRACKING SYSTEM
+// ============================================
+
+// MANUAL VIEWS DATA - Enter your view counts here for each app
+const manualViewsData = {
+    lastUpdated: new Date().toISOString().split('T')[0],
+    source: "From Shiny App Store",
+    apps: [
+        { id: 1, name: "CalcuStats", views: 16629 },
+        { id: 2, name: "CATrend Analyzer", views: 7553 },
+        { id: 3, name: "ROC Curve Builder", views: 15973 },
+        { id: 4, name: "Data2SPSS", views: 12800 },
+        { id: 5, name: "MedModr", views: 15999 },
+        { id: 6, name: "EpiDem Suite", views: 17052 },
+        { id: 7, name: "ggPubPlot", views: 14517 },
+        { id: 8, name: "APA Table Generator", views: 3283 },
+        { id: 9, name: "SysSampler", views: 3578 },
+        { id: 10, name: "CMH Analyzer", views: 6822 },
+        { id: 11, name: "TNMTC DataLab", views: 14348 },
+        { id: 12, name: "PharmaCalc Pro", views: 15441 },
+        { id: 13, name: "RegEffect Xplorer", views: 15344 },
+        { id: 14, name: "Data TransformR", views: 16828 },
+        { id: 15, name: "CleanMyData", views: 14636 },
+        { id: 16, name: "KMPlot Genie", views: 16829 },
+        { id: 17, name: "QuickStatsGen", views: 15061 },
+        { id: 18, name: "Robust Regressor", views: 15527 },
+        { id: 19, name: "TagSelect", views: 16679 },
+        { id: 20, name: "FAnalyzr", views: 16840 }
+    ]
+};
 
 // Format number to k notation (e.g., 2.45k)
 function formatViews(views) {
+    if (typeof views !== 'number') return '0';
     if (views >= 1000) {
         return (views / 1000).toFixed(2) + 'k';
     }
     return views.toString();
 }
 
-// Load views from GitHub JSON file
-async function loadViewsFromGitHub() {
-    try {
-        console.log('Loading views data from GitHub...');
-        
-        // Add cache busting to prevent stale data
-        const response = await fetch(`${GITHUB_RAW_URL}?t=${Date.now()}`, {
-            headers: {
-                'Cache-Control': 'no-cache',
-                'Pragma': 'no-cache'
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        // Store the data
-        appViewsData = data;
-        
-        // Update all displays
-        updateViewsDisplays();
-        
-        console.log('Views data loaded successfully:', data);
-        
-    } catch (error) {
-        console.log('Using fallback views data:', error);
-        // Use fallback data if GitHub fetch fails
-        loadFallbackViews();
-    }
+// Calculate total views from all apps
+function calculateTotalViews() {
+    return manualViewsData.apps.reduce((sum, app) => sum + (app.views || 0), 0);
 }
 
-// Fallback views data (in case GitHub is unavailable)
-function loadFallbackViews() {
-    appViewsData = {
-        lastUpdated: new Date().toISOString().split('T')[0],
-        source: "From Shiny App Store",
-        apps: shinyApps.map(app => ({
-            id: app.id,
-            name: app.name,
-            views: Math.floor(Math.random() * 3000) + 1000,
-            lastUpdated: new Date().toISOString().split('T')[0]
-        }))
-    };
-    updateViewsDisplays();
-}
-
-// Update all views displays
-function updateViewsDisplays() {
-    if (!appViewsData.apps) return;
-    
+// Update view display
+function updateViewsDisplay() {
     // Update total views
-    const totalViews = appViewsData.apps.reduce((sum, app) => sum + app.views, 0);
+    const totalViews = calculateTotalViews();
     const totalViewsElement = document.getElementById('total-views');
     if (totalViewsElement) {
         totalViewsElement.textContent = `${formatViews(totalViews)} views`;
+        totalViewsElement.style.opacity = '1';
     }
-    
+
     // Update individual app views
-    appViewsData.apps.forEach(app => {
+    manualViewsData.apps.forEach(app => {
         const viewsElement = document.getElementById(`views-${app.id}`);
         if (viewsElement) {
             viewsElement.textContent = `${formatViews(app.views)} views`;
             viewsElement.style.opacity = '1';
         }
     });
-    
-    // Update the "Source" display
+
+    // Update source display
     const sourceElement = document.querySelector('.views-source');
-    if (sourceElement && appViewsData.source) {
-        sourceElement.textContent = appViewsData.source;
+    if (sourceElement) {
+        sourceElement.textContent = manualViewsData.source;
+        sourceElement.style.color = '#10b981';
+        sourceElement.style.fontWeight = '600';
     }
-    
+
     // Update last updated time
     const lastUpdatedElement = document.getElementById('last-updated');
-    if (lastUpdatedElement && appViewsData.lastUpdated) {
-        lastUpdatedElement.textContent = `Last updated: ${appViewsData.lastUpdated}`;
+    if (lastUpdatedElement) {
+        lastUpdatedElement.textContent = `Last updated: ${manualViewsData.lastUpdated}`;
+        lastUpdatedElement.style.fontStyle = 'italic';
+        lastUpdatedElement.style.color = 'var(--text-light)';
+    }
+}
+
+// Function to manually update view counts
+function updateAppViews(appId, newViews) {
+    const appIndex = manualViewsData.apps.findIndex(app => app.id === appId);
+    if (appIndex !== -1) {
+        manualViewsData.apps[appIndex].views = parseInt(newViews) || 0;
+        manualViewsData.lastUpdated = new Date().toISOString().split('T')[0];
+        updateViewsDisplay();
+        
+        // Optional: Save to localStorage
+        try {
+            localStorage.setItem('appViewsData', JSON.stringify(manualViewsData));
+        } catch (error) {
+            console.log('Could not save to localStorage:', error);
+        }
+    }
+}
+
+// Load saved views from localStorage
+function loadSavedViews() {
+    try {
+        const savedData = localStorage.getItem('appViewsData');
+        if (savedData) {
+            const parsedData = JSON.parse(savedData);
+            // Update each app's views from saved data
+            parsedData.apps.forEach(savedApp => {
+                const app = manualViewsData.apps.find(a => a.id === savedApp.id);
+                if (app) {
+                    app.views = savedApp.views || 0;
+                }
+            });
+            if (parsedData.lastUpdated) {
+                manualViewsData.lastUpdated = parsedData.lastUpdated;
+            }
+        }
+    } catch (error) {
+        console.log('Could not load from localStorage:', error);
     }
 }
 
 // Initialize views system
-function initViewsSystem() {
-    // Load from GitHub
-    loadViewsFromGitHub();
-    
-    // Refresh every 5 minutes
-    setInterval(loadViewsFromGitHub, 5 * 60 * 1000);
-}
-
-// Initialize when component mounts
 useEffect(() => {
-    // Wait for React to render
+    // Load any saved view counts
+    loadSavedViews();
+    
+    // Wait for DOM to render, then update displays
     setTimeout(() => {
-        initViewsSystem();
-    }, 1000);
+        updateViewsDisplay();
+    }, 500);
+    
+    // Optional: Set up periodic auto-save
+    const autoSaveInterval = setInterval(() => {
+        try {
+            localStorage.setItem('appViewsData', JSON.stringify(manualViewsData));
+        } catch (error) {
+            // Ignore storage errors
+        }
+    }, 30000); // Save every 30 seconds
+    
+    return () => clearInterval(autoSaveInterval);
 }, []);
-
+ 
     // Simple mobile menu toggle - ADD THIS
     const toggleMobileMenu = (e) => {
         if (e) e.stopPropagation();
@@ -7267,22 +7326,94 @@ I love research, and data analysis! Passionate about creating technology that ma
 }}>
 
 </div>
-
-{/* Add source attribution */}
 <div style={{
     textAlign: 'center',
-    marginTop: '1rem',
-    padding: '0.5rem',
-    color: 'var(--text-light)',
-    fontSize: '0.9rem',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '0.5rem'
+    marginTop: '1.5rem',
+    padding: '1rem',
+    background: 'rgba(99, 102, 241, 0.08)',
+    borderRadius: '10px',
+    border: '1px solid rgba(99, 102, 241, 0.2)'
 }}>
-    <i className="fas fa-database"></i>
-    <span>Source: <span className="views-source" style={{color: 'var(--primary)', fontWeight: '600'}}>Loading...</span></span>
-    <span id="last-updated" style={{marginLeft: '1rem', fontStyle: 'italic'}}></span>
+    <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '1rem',
+        flexWrap: 'wrap',
+        marginBottom: '0.5rem'
+    }}>
+        <i className="fas fa-server" style={{color: 'var(--primary)'}}></i>
+        <span style={{color: 'var(--text-light)'}}>Apps hosted on:</span>
+        <a 
+            href="https://www.shinyapps.io/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+                color: 'var(--primary)', 
+                fontWeight: '700',
+                textDecoration: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '6px',
+                background: 'rgba(99, 102, 241, 0.1)',
+                border: '1px solid rgba(99, 102, 241, 0.3)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                transition: 'all 0.3s ease'
+            }}
+            onMouseOver={(e) => {
+                e.target.style.background = 'rgba(99, 102, 241, 0.2)';
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 4px 12px rgba(99, 102, 241, 0.15)';
+            }}
+            onMouseOut={(e) => {
+                e.target.style.background = 'rgba(99, 102, 241, 0.1)';
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = 'none';
+            }}
+        >
+            <i className="fas fa-external-link-alt" style={{fontSize: '0.85rem'}}></i>
+            ShinyApps.io Platform
+        </a>
+    </div>
+    <div style={{
+        fontSize: '0.85rem',
+        color: 'var(--text-light)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '0.5rem',
+        flexWrap: 'wrap'
+    }}>
+        <span>View counts sourced from:</span>
+        <a 
+            href="https://shinyappstore.com/search/user/1732" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+                color: 'var(--primary)', 
+                fontWeight: '600',
+                textDecoration: 'none',
+                borderBottom: '1px dotted var(--primary)',
+                padding: '2px 4px',
+                borderRadius: '3px',
+                transition: 'all 0.3s ease'
+            }}
+            onMouseOver={(e) => {
+                e.target.style.background = 'rgba(99, 102, 241, 0.1)';
+                e.target.style.borderBottom = '1px solid var(--primary)';
+            }}
+            onMouseOut={(e) => {
+                e.target.style.background = 'transparent';
+                e.target.style.borderBottom = '1px dotted var(--primary)';
+            }}
+        >
+            <i className="fas fa-chart-line" style={{marginRight: '4px', fontSize: '0.8rem'}}></i>
+            Shiny App Store 
+        </a>
+        <span style={{opacity: 0.7}}>•</span>
+        <span id="last-updated">Last updated: {new Date().toLocaleDateString()}</span>
+    </div>
 </div>
 </div>
             
