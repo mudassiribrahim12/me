@@ -50,6 +50,9 @@
       crossorigin=""/>
     
     
+    <!-- Add this line right before </head> -->
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -62,7 +65,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
- :root {
+:root {
     --primary: #6366f1;
     --primary-light: #818cf8;
     --secondary: #f59e0b;
@@ -74,7 +77,7 @@
     --border: rgba(0, 0, 0, 0.1); /* CHANGE: Darker border for light mode */
     --shadow: rgba(0, 0, 0, 0.1);
     --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --glass: rgba(255, 255, 255, 0.25);
+    --glass: rgba(255, 255, 255, 0.95); /* CHANGED: More opaque for light mode */
     
     /* Add fixed button colors that won't change with theme */
     --btn-primary: #6366f1;
@@ -87,6 +90,10 @@
     /* ADD THESE TWO LINES - NEW VARIABLES */
     --logo-text: #111827; /* CHANGE: Darker black for light mode */
     --heading-text: #111827; /* CHANGE: Darker black for light mode */
+    
+    /* ADD NAVBAR SPECIFIC VARIABLES */
+    --navbar-bg: rgba(255, 255, 255, 0.95); /* White header */
+    --navbar-border: rgba(0, 0, 0, 0.08); /* Light border */
 }
 
 .dark-mode {
@@ -147,6 +154,63 @@
     animation-play-state: running;
     width: max-content;
     min-width: 100%;
+}
+
+/* Improve scrolling performance */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Match navbar height */
+}
+
+/* Hardware acceleration for smoother animations */
+* {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Optimize for scrolling performance */
+body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Section transitions */
+.section {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Optimize fadeIn animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Publisher card floating animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Publisher card hover effects */
+.publisher-card {
+    transition: all 0.3s ease;
+}
+
+.publisher-card:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+    z-index: 10;
 }
 
 /* Pause on hover for better readability */
@@ -1257,6 +1321,7 @@
         white-space: nowrap;
     }
 }
+
 
 /* SPECIFIC FIX FOR DEVELOPER CODE ON SMALL PHONES */
 @media (max-width: 360px) {
@@ -4853,57 +4918,89 @@ body {
     color: var(--logo-text); /* CHANGE THIS LINE - from 'transparent' to 'var(--logo-text)' */
 }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+     .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-        }
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
 
-        .nav-links a:hover {
-            color: var(--primary);
-        }
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
 
-        .nav-links a.active {
-            color: var(--primary);
-        }
+.nav-links a:hover {
+    color: var(--primary);
+}
 
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--primary);
-        }
+.nav-links a.active {
+    color: var(--primary);
+}
 
-        .theme-toggle {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text);
-            font-size: 1.2rem;
-        }
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+}
 
-        .theme-toggle:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
+.theme-toggle {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+}
+
+.theme-toggle:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* Support link styling */
+.support-link {
+    color: var(--primary) !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    text-decoration: underline !important;
+    text-decoration-color: var(--primary) !important;
+    text-underline-offset: 3px !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+}
+
+.support-link:hover {
+    color: var(--primary-light) !important;
+    text-decoration-color: var(--primary-light) !important;
+    transform: translateY(-1px);
+}
+
+.support-link:active {
+    transform: translateY(0);
+}
+     
+     
         /* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
@@ -6293,7 +6390,6 @@ function RotatingText() {
         "Registered Nurse",
         "Health Researcher",
         "Data Enthusiast",
-        "Data Analyst"
     ];
     
     useEffect(() => {
@@ -6318,8 +6414,10 @@ function RotatingText() {
     );
 }
 
+
+
 function App() {
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
     const [formData, setFormData] = useState({
         name: '',
@@ -6332,6 +6430,276 @@ function App() {
     // ADD THIS LINE - Mobile menu state
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
+// ⚠️ REPLACE THESE WITH YOUR ACTUAL KEYS FROM STEP 3 ⚠️
+const SUPABASE_URL = 'https://lwlecnvokztakrtwtnyu.supabase.co'; // PUT YOUR URL HERE
+const SUPABASE_KEY = 'sb_publishable_3N1N6CmQbdERVwMDz6djsw_qr_yDDPp'; // PUT YOUR KEY HERE
+
+// Create Supabase client - DO THIS ONCE
+const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+
+// Stats management system
+let appStats = {};
+let userLikes = {};
+
+// Initialize stats when component mounts
+function initStatsSystem() {
+    if (!supabase) {
+        console.error('Supabase not available');
+        return;
+    }
+    
+    // Load from localStorage first
+    const savedStats = localStorage.getItem('app_stats');
+    const savedLikes = localStorage.getItem('user_likes');
+    
+    if (savedStats) {
+        try {
+            appStats = JSON.parse(savedStats);
+        } catch (e) {
+            appStats = {};
+            console.error('Failed to parse saved stats:', e);
+        }
+    }
+    
+    if (savedLikes) {
+        try {
+            userLikes = JSON.parse(savedLikes);
+        } catch (e) {
+            userLikes = {};
+            console.error('Failed to parse saved likes:', e);
+        }
+    }
+    
+    // Then sync with Supabase
+    loadStatsFromSupabase();
+}
+
+// LOAD STATS FROM SUPABASE
+async function loadStatsFromSupabase() {
+    if (!supabase) return;
+    
+    try {
+        console.log('Loading stats from Supabase...');
+        const { data, error } = await supabase
+            .from('app_stats')
+            .select('*');
+        
+        if (error) {
+            console.error('Supabase error:', error);
+            return;
+        }
+        
+        // Merge Supabase data with local
+        if (data && data.length > 0) {
+            data.forEach(row => {
+                appStats[row.id] = { 
+                    views: row.views || 0, 
+                    likes: row.likes || 0 
+                };
+            });
+            
+            // Save merged data
+            localStorage.setItem('app_stats', JSON.stringify(appStats));
+            
+            // Update all displays after React renders
+            setTimeout(updateAllStatsDisplays, 500);
+        } else {
+            // No data in Supabase, create initial entries
+            console.log('No data in Supabase, creating initial entries...');
+            createInitialStats();
+        }
+        
+    } catch (error) {
+        console.log('Using local storage only:', error);
+    }
+}
+
+// CREATE INITIAL STATS FOR ALL APPS
+async function createInitialStats() {
+    if (!supabase) return;
+    
+    try {
+        const initialStats = shinyApps.map(app => ({
+            id: app.id.toString(),
+            views: 0,
+            likes: 0
+        }));
+        
+        const { error } = await supabase
+            .from('app_stats')
+            .upsert(initialStats);
+        
+        if (error) {
+            console.error('Error creating initial stats:', error);
+        } else {
+            console.log('Initial stats created in Supabase');
+            // Reload stats after creation
+            setTimeout(loadStatsFromSupabase, 1000);
+        }
+    } catch (error) {
+        console.error('Failed to create initial stats:', error);
+    }
+}
+
+// UPDATE STATS IN SUPABASE
+async function updateSupabaseStats(appId, type) {
+    if (!supabase) return;
+    
+    try {
+        // First ensure the app exists in Supabase
+        const { data: existing } = await supabase
+            .from('app_stats')
+            .select('*')
+            .eq('id', appId.toString())
+            .single();
+        
+        let updates = {};
+        
+        if (existing) {
+            if (type === 'view') {
+                updates.views = (existing.views || 0) + 1;
+            } else if (type === 'like') {
+                updates.likes = (existing.likes || 0) + 1;
+            } else if (type === 'unlike') {
+                updates.likes = Math.max(0, (existing.likes || 0) - 1);
+            }
+            
+            await supabase
+                .from('app_stats')
+                .update(updates)
+                .eq('id', appId.toString());
+        } else {
+            // App doesn't exist, create it
+            await supabase
+                .from('app_stats')
+                .insert([{ 
+                    id: appId.toString(), 
+                    views: type === 'view' ? 1 : 0,
+                    likes: type === 'like' ? 1 : 0
+                }]);
+        }
+        
+    } catch (error) {
+        console.log('Supabase update failed:', error);
+    }
+}
+
+// HANDLE VIEW - AUTOMATIC (Call this when app is viewed)
+async function handleView(appId) {
+    if (!appStats[appId]) {
+        appStats[appId] = { views: 0, likes: 0 };
+    }
+    
+    // Update local
+    appStats[appId].views++;
+    
+    // Update display if element exists
+    const viewsElement = document.getElementById(`views-${appId}`);
+    if (viewsElement) {
+        viewsElement.textContent = `${appStats[appId].views} views`;
+        viewsElement.style.color = 'var(--primary)';
+        setTimeout(() => {
+            viewsElement.style.color = 'var(--text)';
+        }, 500);
+    }
+    
+    // Save locally
+    localStorage.setItem('app_stats', JSON.stringify(appStats));
+    
+    // Update Supabase in background
+    updateSupabaseStats(appId, 'view');
+}
+
+// HANDLE LIKE - AUTOMATIC (Call this when like button is clicked)
+async function handleLike(appId) {
+    if (!appStats[appId]) {
+        appStats[appId] = { views: 0, likes: 0 };
+    }
+    
+    const heartElement = document.getElementById(`heart-${appId}`);
+    const likesElement = document.getElementById(`likes-${appId}`);
+    
+    if (userLikes[appId]) {
+        // UNLIKE
+        appStats[appId].likes = Math.max(0, appStats[appId].likes - 1);
+        delete userLikes[appId];
+        
+        if (heartElement) {
+            heartElement.className = 'far fa-heart';
+        }
+        
+        // Update Supabase
+        await updateSupabaseStats(appId, 'unlike');
+        
+    } else {
+        // LIKE
+        appStats[appId].likes++;
+        userLikes[appId] = true;
+        
+        if (heartElement) {
+            heartElement.className = 'fas fa-heart liked';
+            heartElement.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                heartElement.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Update Supabase
+        await updateSupabaseStats(appId, 'like');
+    }
+    
+    // Update display
+    if (likesElement) {
+        likesElement.textContent = `${appStats[appId].likes} likes`;
+        likesElement.style.color = userLikes[appId] ? '#ef4444' : 'var(--text)';
+        setTimeout(() => {
+            likesElement.style.color = 'var(--text)';
+        }, 500);
+    }
+    
+    // Save locally
+    localStorage.setItem('user_likes', JSON.stringify(userLikes));
+    localStorage.setItem('app_stats', JSON.stringify(appStats));
+}
+
+// UPDATE ALL DISPLAYS
+function updateAllStatsDisplays() {
+    shinyApps.forEach(app => {
+        const stats = appStats[app.id] || { views: 0, likes: 0 };
+        
+        // Update views
+        const viewsElement = document.getElementById(`views-${app.id}`);
+        if (viewsElement) {
+            viewsElement.textContent = `${stats.views} views`;
+        }
+        
+        // Update likes
+        const likesElement = document.getElementById(`likes-${app.id}`);
+        if (likesElement) {
+            likesElement.textContent = `${stats.likes} likes`;
+        }
+        
+        // Update heart
+        const heartElement = document.getElementById(`heart-${app.id}`);
+        if (heartElement) {
+            heartElement.className = userLikes[app.id] ? 'fas fa-heart liked' : 'far fa-heart';
+            heartElement.style.color = '#ef4444';
+        }
+    });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait for React to render
+    setTimeout(() => {
+        console.log('Initializing stats system...');
+        initStatsSystem();
+        
+        // Refresh stats every 30 seconds
+        setInterval(loadStatsFromSupabase, 30000);
+    }, 1000);
+});
+
     // Simple mobile menu toggle - ADD THIS
     const toggleMobileMenu = (e) => {
         if (e) e.stopPropagation();
@@ -6344,20 +6712,29 @@ function App() {
         document.body.style.overflow = 'auto';
     };
     
-    // Handle section change with scroll
-    const handleSectionChange = (section) => {
-        setActiveSection(section);
-        closeMobileMenu();
-        
-        // Scroll to section after a small delay
-        setTimeout(() => {
-            const element = document.getElementById(section);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 50);
-    };
+ // Handle section change with scroll
+const handleSectionChange = (section) => {
+    setActiveSection(section);
+    closeMobileMenu();
     
+    // Use requestAnimationFrame for smoother scrolling
+    requestAnimationFrame(() => {
+        const element = document.getElementById(section);
+        if (element) {
+            // Calculate the exact position considering navbar height
+            const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 80;
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - navbarHeight;
+            
+            // Use window.scrollTo for better performance
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+};
+ 
     // Add this useEffect to handle body overflow:
     useEffect(() => {
         if (isMobileMenuOpen) {
@@ -6748,45 +7125,48 @@ function App() {
 
     return (
         <div className="app">
-            <nav className="navbar">
-                <div className="container nav-content">
-                    <div 
-                        className="logo" 
-                        onClick={() => handleSectionChange('home')} 
-                        style={{cursor: 'pointer'}}
-                        title="Click to go to Home - Mudasir Mohammed Ibrahim"
-                    >
-                        Mudasir
-                    </div>
+<nav className="navbar">
+    <div className="container nav-content">
+        <div 
+            className="logo" 
+            onClick={() => handleSectionChange('home')} 
+            style={{cursor: 'pointer'}}
+            title="Click to go to Home - Mudasir Mohammed Ibrahim"
+        >
+            Mudasir
+        </div>
 
-                    <div className="nav-links">
-                        {sections.map(section => (
-                            <a
-                                key={section}
-                                href="#"
-                                className={activeSection === section ? 'active' : ''}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleSectionChange(section);
-                                }}
-                            >
-                                {section.charAt(0).toUpperCase() + section.slice(1)}
-                            </a>
-                        ))}
-                        <button 
-                            className="theme-toggle"
-                            onClick={() => setDarkMode(!darkMode)}
-                        >
-                            {darkMode ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
-                        </button>
-                    </div>
-                    
-                    {/* Add mobile menu button */}
-                    <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
-                        <i className="fas fa-bars"></i>
-                    </button>
-                </div>
-            </nav>
+        <div className="nav-right">
+            <div className="nav-links">
+                {sections.map(section => (
+                    <a
+                        key={section}
+                        href="#"
+                        className={activeSection === section ? 'active' : ''}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleSectionChange(section);
+                        }}
+                    >
+                        {section.charAt(0).toUpperCase() + section.slice(1)}
+                    </a>
+                ))}
+                <button 
+                    className="theme-toggle"
+                    onClick={() => setDarkMode(!darkMode)}
+                >
+                    {darkMode ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
+                </button>
+            </div>
+            
+            {/* Add mobile menu button */}
+            <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
+                <i className="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
             
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
@@ -6825,162 +7205,234 @@ function App() {
 
             <main className="main-content">
                 
-                {/* Home Section */}
-                <section id="home" className={`section ${activeSection === 'home' ? 'active' : ''}`}>
-                    <div className="container">
-                        <div className="hero">
-                            <div className="hero-content">
-                                <h1><span className="highlight">Hi, I'm Mudasir Mohammed Ibrahim</span></h1>
-                                <h2> <RotatingText />  </h2>
-                                
-                                <p>
-I have expertise in patient care and clinical nursing, health and clinical research, advanced statistical analysis, and R Shiny development (AI-assisted coding). I am a published researcher with contributions to top-tier journals, including Springer Nature, Wiley, and Elsevier, and I also serve as a peer reviewer for journals within these publishers. I am passionate about creating technology that makes a difference and develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers.
-                                </p>
-                                
-                                <div className="academic-links">
-                                    <button
-                                        className="academic-link"
-                                        onClick={() => window.open('https://github.com/mudassiribrahim30', '_blank', 'noopener,noreferrer')}
-                                    >
-                                        <i className="fab fa-github"></i>
-                                        <span>GitHub</span>
-                                    </button>
+          <section id="home" className={`section ${activeSection === 'home' ? 'active' : ''}`}>
+    <div className="container">
+        <div className="hero">
+            <div className="hero-content">
+                <h1><span className="highlight">Hi, I'm Mudasir Mohammed Ibrahim</span></h1>
+                <h2> <RotatingText />  </h2>
+                
+                <p>
+I love research, and data analysis! Passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers.
+                </p>
+                
+                <div className="academic-links" style={{ marginTop: '2rem', justifyContent: 'flex-start' }}>
+                    <button
+                        className="academic-link"
+                        onClick={() => handleSectionChange('projects')}
+                        style={{ 
+                            background: 'linear-gradient(135deg, var(--btn-primary), var(--btn-primary-hover))',
+                            color: 'var(--btn-text)',
+                            border: 'none',
+                            padding: '0.9rem 1.8rem',
+                            fontSize: '1rem'
+                        }}
+                    >
+                        <i className="fas fa-project-diagram"></i>
+                        <span>View My Work</span>
+                    </button>
 
-                                    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="academic-link">
-                                        <i className="fas fa-id-card"></i>
-                                        <span>ORCID</span>
-                                    </a>
-                                    <a href="https://www.linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="academic-link">
-                                        <i className="fab fa-linkedin"></i>
-                                        <span>LinkedIn</span>
-                                    </a>
-                                    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="academic-link">
-                                        <i className="fas fa-graduation-cap"></i>
-                                        <span>Google Scholar</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="hero-image">
-                                <div className="profile-image-container">
-                                    <div className="profile-image">
-                                        {/* Replace with your actual image */}
-                                        <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" 
-                                             alt="Your Profile" 
-                                             onError={(e) => {
-                                                 e.target.onerror = null;
-                                                 e.target.style.display = 'none';
-                                                 e.target.parentElement.innerHTML = '<i class="fas fa-user-graduate"></i>';
-                                             }}
-                                        />
-                                    </div>
-                                    <div className="profile-badge">
-                                        <i className="fas fa-award"></i>
-                                        <span>BSc Nursing</span>
-                                    </div>
-                                    <div className="current-affiliation">
-                                        <i className="fas fa-university"></i>
-                                        <span>University of Cape Coast</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <button
+                        className="academic-link"
+                        onClick={() => handleSectionChange('about')}
+                        style={{ 
+                            background: 'transparent',
+                            color: 'var(--btn-primary)',
+                            border: '2px solid var(--btn-primary)',
+                            padding: '0.9rem 1.8rem',
+                            fontSize: '1rem'
+                        }}
+                    >
+                        <i className="fas fa-user"></i>
+                        <span>Learn More About Me</span>
+                    </button>
+                </div>
+            </div>
+            <div className="hero-image">
+                <div className="profile-image-container">
+                    <div className="profile-image">
+                        <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" 
+                             alt="Your Profile" 
+                             onError={(e) => {
+                                 e.target.onerror = null;
+                                 e.target.style.display = 'none';
+                                 e.target.parentElement.innerHTML = '<i class="fas fa-user-graduate"></i>';
+                             }}
+                        />
                     </div>
-                </section>
+                    <div className="profile-badge">
+                        <i className="fas fa-award"></i>
+                        <span>BSc Nursing</span>
+                    </div>
+                    <div className="current-affiliation">
+                        <i className="fas fa-university"></i>
+                        <span>University of Cape Coast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
                 
                 {/* Projects Section */}
                 <section id="projects" className={`section ${activeSection === 'projects' ? 'active' : ''}`}>
                     <div className="container">
                         <h2 className="section-title">R Shiny Applications</h2>
                         
-                        <div className="projects-intro">
-                            <p>
-                                A complete collection of 20 interactive statistical and healthcare analysis tools built with R Shiny. 
-                                All applications are designed to simplify complex statistical analyses for researchers and healthcare professionals.
-                            </p>
-                           
-                            <div className="projects-stats">
-                                <div className="project-stat">
-                                    <i className="fas fa-calculator"></i>
-                                    <div>
-                                        <span className="stat-number">20</span>
-                                        <span className="stat-label">Total Apps</span>
-                                    </div>
-                                </div>
-                                <div className="project-stat">
-                                    <i className="fas fa-chart-line"></i>
-                                    <div>
-                                        <span className="stat-number">20</span>
-                                        <span className="stat-label">Displayed</span>
-                                    </div>
-                                </div>
-                                <div className="project-stat">
-                                    <i className="fas fa-code"></i>
-                                    <div>
-                                        <span className="stat-number">Open</span>
-                                        <span className="stat-label">Source</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div className="projects-intro">
+    <p>
+        The open-source R Shiny projects featured here were originally developed to address my own practical challenges and have gradually evolved into tools used by a broad community of researchers, students, and healthcare professionals. To support their ongoing development, please consider donating by visiting the <span 
+            className="support-link" 
+            onClick={() => handleSectionChange('support')}
+            style={{
+                color: 'var(--primary)',
+                fontWeight: '700',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                textDecorationColor: 'var(--primary)',
+                textUnderlineOffset: '3px'
+            }}
+        >
+            Support
+        </span> tab.
+    </p>
+   
+    <div className="projects-stats">
+        <div className="project-stat">
+            <i className="fas fa-calculator"></i>
+            <div>
+                <span className="stat-number">20</span>
+                <span className="stat-label">Total Apps</span>
+            </div>
+        </div>
+        <div className="project-stat">
+            <i className="fas fa-chart-line"></i>
+            <div>
+                <span className="stat-number">20</span>
+                <span className="stat-label">Displayed</span>
+            </div>
+        </div>
+        <div className="project-stat">
+            <i className="fas fa-code"></i>
+            <div>
+                <span className="stat-number">Open</span>
+                <span className="stat-label">Source</span>
+            </div>
+        </div>
+    </div>
+</div>
+            
+{/* Display ALL 20 Apps */}
+<div className="shiny-apps-grid">
+    {shinyApps.map((app) => (
+        <div key={app.id} className="shiny-app-card glass-card">
+            <div className="app-image-container">
+                <img 
+                    src={app.imageUrl} 
+                    alt={app.name}
+                    className="app-image"
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%236366f1'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E" + app.name + "%3C/text%3E%3C/svg%3E";
+                    }}
+                />
+                <div className="app-overlay">
+                    <span className="app-type">R Shiny App</span>
+                </div>
+            </div>
+            
+            <div className="app-content">
+                <h3 className="app-title">{app.name}</h3>
+                <p className="app-description">{app.description}</p>
+                
+                <div className="app-meta">
+                    <div className="meta-item">
+                        <i className="fas fa-calculator"></i>
+                        <span>Statistical Tool</span>
+                    </div>
+                    <div className="meta-item">
+                        <i className="fas fa-heartbeat"></i>
+                        <span>Healthcare Analytics</span>
+                    </div>
+                </div>
+                
+                {/* ========== ADDED: Views and Likes Section ========== */}
+                <div className="app-stats" style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1.25rem',
+                    padding: '0.75rem',
+                    background: 'rgba(99, 102, 241, 0.08)',
+                    borderRadius: '10px',
+                    border: '1px solid rgba(99, 102, 241, 0.2)'
+                }}>
+                    {/* Views Counter */}
+                    <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                        <i className="fas fa-eye" style={{color: 'var(--primary)'}}></i>
+                        <span id={`views-${app.id}`} style={{
+                            fontSize: '0.9rem',
+                            fontWeight: '600',
+                            color: 'var(--text)'
+                        }}>
+                            0 views
+                        </span>
+                    </div>
+                    
+                    {/* Likes Counter */}
+                    <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                        <i 
+                            id={`heart-${app.id}`}
+                            className="far fa-heart"
+                            onClick={() => handleLike(app.id)}
+                            style={{
+                                color: '#ef4444',
+                                cursor: 'pointer',
+                                fontSize: '1.1rem'
+                            }}
+                        ></i>
+                        <span id={`likes-${app.id}`} style={{
+                            fontSize: '0.9rem',
+                            fontWeight: '600',
+                            color: 'var(--text)'
+                        }}>
+                            0 likes
+                        </span>
+                    </div>
+                </div>
+                {/* ========== END OF ADDED SECTION ========== */}
+           
+                <div className="app-actions">
+<a 
+    href={app.runUrl} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-run-app"
+    onClick={(e) => {
+        handleView(app.id);
+        // Optional: open in new tab
+        window.open(app.runUrl, '_blank');
+        e.preventDefault();
+    }}
+>
+    <i className="fas fa-play-circle"></i>
+    Run App
+</a>
 
-                        {/* Display ALL 20 Apps */}
-                        <div className="shiny-apps-grid">
-                            {shinyApps.map((app) => (
-                                <div key={app.id} className="shiny-app-card glass-card">
-                                    <div className="app-image-container">
-                                        <img 
-                                            src={app.imageUrl} 
-                                            alt={app.name}
-                                            className="app-image"
-                                            onError={(e) => {
-                                                e.target.onerror = null;
-                                                e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%236366f1'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E" + app.name + "%3C/text%3E%3C/svg%3E";
-                                            }}
-                                        />
-                                        <div className="app-overlay">
-                                            <span className="app-type">R Shiny App</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="app-content">
-                                        <h3 className="app-title">{app.name}</h3>
-                                        <p className="app-description">{app.description}</p>
-                                        
-                                        <div className="app-meta">
-                                            <div className="meta-item">
-                                                <i className="fas fa-calculator"></i>
-                                                <span>Statistical Tool</span>
-                                            </div>
-                                            <div className="meta-item">
-                                                <i className="fas fa-heartbeat"></i>
-                                                <span>Healthcare Analytics</span>
-                                            </div>
-                                        </div>
-                                   
-                                        <div className="app-actions">
-                                            <a 
-                                                href={app.runUrl} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="btn-run-app"
-                                            >
-                                                <i className="fas fa-play-circle"></i>
-                                                Run App
-                                            </a>
-                                            <a 
-                                                href={app.codeUrl} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="btn-view-code"
-                                            >
-                                                <i className="fas fa-code"></i>
-                                                View Code
-                                            </a>
-                                        </div>     
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                    <a 
+                        href={app.codeUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-view-code"
+                    >
+                        <i className="fas fa-code"></i>
+                        View Code
+                    </a>
+                </div>     
+            </div>
+        </div>
+    ))}
+</div>
 
                         <div className="projects-footer">
                             <div className="all-projects-card glass-card">
@@ -7024,64 +7476,120 @@ I have expertise in patient care and clinical nursing, health and clinical resea
                                     </div>
                                     
                                     <div className="modal-body">
-                                        {/* Display ALL 20 Apps - No "View All" needed */}
-                                        <div className="shiny-apps-grid">
-                                            {shinyApps.map((app) => (
-                                                <div key={app.id} className="shiny-app-card glass-card">
-                                                    <div className="app-image-container">
-                                                        <img 
-                                                            src={app.imageUrl} 
-                                                            alt={app.name}
-                                                            className="app-image"
-                                                            onError={(e) => {
-                                                                e.target.onerror = null;
-                                                                e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%236366f1'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E" + app.name + "%3C/text%3E%3C/svg%3E";
-                                                            }}
-                                                        />
-                                                        <div className="app-overlay">
-                                                            <span className="app-type">R Shiny App</span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div className="app-content">
-                                                        <h3 className="app-title">{app.name}</h3>
-                                                        <p className="app-description">{app.description}</p>
-                                                        
-                                                        <div className="app-meta">
-                                                            <div className="meta-item">
-                                                                <i className="fas fa-calculator"></i>
-                                                                <span>Statistical Tool</span>
-                                                            </div>
-                                                            <div className="meta-item">
-                                                                <i className="fas fa-heartbeat"></i>
-                                                                <span>Healthcare Analytics</span>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div className="app-actions">
-                                                            <a 
-                                                                href={app.runUrl} 
-                                                                target="_blank" 
-                                                                rel="noopener noreferrer"
-                                                                className="btn-run-app"
-                                                            >
-                                                                <i className="fas fa-play-circle"></i>
-                                                                Run App
-                                                            </a>
-                                                            <a 
-                                                                href={app.codeUrl} 
-                                                                target="_blank" 
-                                                                rel="noopener noreferrer"
-                                                                className="btn-view-code"
-                                                            >
-                                                                <i className="fas fa-code"></i>
-                                                                View Code
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
+           
+                   
+                   {/* Display ALL 20 Apps - No "View All" needed */}
+<div className="shiny-apps-grid">
+    {shinyApps.map((app) => (
+        <div key={app.id} className="shiny-app-card glass-card">
+            <div className="app-image-container">
+                <img 
+                    src={app.imageUrl} 
+                    alt={app.name}
+                    className="app-image"
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%236366f1'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3E" + app.name + "%3C/text%3E%3C/svg%3E";
+                    }}
+                />
+                <div className="app-overlay">
+                    <span className="app-type">R Shiny App</span>
+                </div>
+            </div>
+            
+            <div className="app-content">
+                <h3 className="app-title">{app.name}</h3>
+                <p className="app-description">{app.description}</p>
+                
+                <div className="app-meta">
+                    <div className="meta-item">
+                        <i className="fas fa-calculator"></i>
+                        <span>Statistical Tool</span>
+                    </div>
+                    <div className="meta-item">
+                        <i className="fas fa-heartbeat"></i>
+                        <span>Healthcare Analytics</span>
+                    </div>
+                </div>
+                
+                {/* ========== ADDED: Views and Likes Section ========== */}
+                <div className="app-stats" style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1.25rem',
+                    padding: '0.75rem',
+                    background: 'rgba(99, 102, 241, 0.08)',
+                    borderRadius: '10px',
+                    border: '1px solid rgba(99, 102, 241, 0.2)'
+                }}>
+                    {/* Views Counter */}
+                    <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                        <i className="fas fa-eye" style={{color: 'var(--primary)'}}></i>
+                        <span id={`views-modal-${app.id}`} style={{
+                            fontSize: '0.9rem',
+                            fontWeight: '600',
+                            color: 'var(--text)'
+                        }}>
+                            0 views
+                        </span>
+                    </div>
+                    
+                    {/* Likes Counter */}
+                    <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                        <i 
+                            id={`heart-modal-${app.id}`}
+                            className="far fa-heart"
+                            onClick={() => handleLike(app.id)}
+                            style={{
+                                color: '#ef4444',
+                                cursor: 'pointer',
+                                fontSize: '1.1rem'
+                            }}
+                        ></i>
+                        <span id={`likes-modal-${app.id}`} style={{
+                            fontSize: '0.9rem',
+                            fontWeight: '600',
+                            color: 'var(--text)'
+                        }}>
+                            0 likes
+                        </span>
+                    </div>
+                </div>
+                {/* ========== END OF ADDED SECTION ========== */}
+                
+                <div className="app-actions">
+<a 
+    href={app.runUrl} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-run-app"
+    onClick={(e) => {
+        handleView(app.id);
+        // Optional: open in new tab
+        window.open(app.runUrl, '_blank');
+        e.preventDefault();
+    }}
+>
+    <i className="fas fa-play-circle"></i>
+    Run App
+</a>
+
+                    <a 
+                        href={app.codeUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-view-code"
+                    >
+                        <i className="fas fa-code"></i>
+                        View Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    ))}
+</div>
+                   
                                     </div>
                                     
                                     <div className="modal-footer">
@@ -7266,49 +7774,8 @@ I have expertise in patient care and clinical nursing, health and clinical resea
                                 </div>
                             </div>
                         </div>
-
-                        {/* View All Blogs Section */}
-                        <div className="blog-footer" style={{marginTop: '3rem'}}>
-                            <div className="view-all-blog glass-card" style={{textAlign: 'center'}}>
-                                <div className="card-content" style={{justifyContent: 'center', flexDirection: 'column'}}>
-                                    <div className="icon-container" style={{margin: '0 auto 1.5rem'}}>
-                                        <i className="fas fa-book-open"></i>
-                                    </div>
-                                    <div>
-                                        <h3 style={{marginBottom: '1rem'}}>Read All My Articles on Blogger</h3>
-                                        <p style={{
-                                            fontSize: '1.05rem', 
-                                            lineHeight: '1.7',
-                                            maxWidth: '600px',
-                                            margin: '0 auto 1.5rem',
-                                            color: 'var(--text-light)'
-                                        }}>
-                                            All my blog posts are published on my Google Blogger platform. 
-                                            Visit to read, comment, and subscribe for regular updates.
-                                        </p>
-                                    </div>
-                                </div>
-                               
-                                <a 
-                                    href="https://mudasir-ibrahim.blogspot.com" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="btn-blogger"
-                                    style={{
-                                        padding: '1rem 3rem',
-                                        fontSize: '1.1rem',
-                                        display: 'inline-flex',
-                                        alignItems: 'center',
-                                        gap: '1rem',
-                                        marginTop: '1rem'
-                                    }}
-                                >
-                                    <i className="fab fa-blogger-b" style={{fontSize: '1.3rem'}}></i>
-                                    <span>Visit My Blogger Site →</span>
-                                </a>
-                            </div>
                         </div>
-                    </div>
+
                 </section>
                 
                 {/* About Me Section */}
@@ -7590,7 +8057,7 @@ I have expertise in patient care and clinical nursing, health and clinical resea
                                 </div>
                             </div>
 
-                            {/* Professional Credentials Card */}
+                                                 {/* Professional Credentials Card */}
                             <div className="credentials-section">
                                 <div className="section-header">
                                     <h3>Professional Credentials</h3>
@@ -7641,6 +8108,164 @@ I have expertise in patient care and clinical nursing, health and clinical resea
                                 </p>
                             </div>
 
+                            {/* Peer Reviewer Section - NEW */}
+                            <div className="credentials-section" style={{marginTop: '3rem'}}>
+                                <div className="section-header">
+                                    <h3>Peer Reviewer</h3>
+                                    <p>Certified reviewer for top academic publishers</p>
+                                </div>
+                                
+                                <div className="publishers-grid" style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                                    gap: '2rem',
+                                    margin: '2rem 0'
+                                }}>
+                                    {/* Springer Nature */}
+                                    <div className="publisher-card" style={{
+                                        background: 'linear-gradient(135deg, #008cff, #0066cc)',
+                                        borderRadius: '15px',
+                                        padding: '2rem',
+                                        textAlign: 'center',
+                                        color: 'white',
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        animation: 'float 6s ease-in-out infinite',
+                                        animationDelay: '0s'
+                                    }}>
+                                        <div style={{
+                                            fontSize: '3rem',
+                                            marginBottom: '1rem',
+                                            filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+                                        }}>
+                                            <i className="fas fa-book"></i>
+                                        </div>
+                                        <h4 style={{marginBottom: '0.5rem', fontSize: '1.3rem'}}>Springer Nature</h4>
+                                        <p style={{opacity: '0.9', fontSize: '0.9rem'}}>Nature Portfolio Journals</p>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '-50px',
+                                            right: '-50px',
+                                            width: '100px',
+                                            height: '100px',
+                                            background: 'rgba(255,255,255,0.1)',
+                                            borderRadius: '50%'
+                                        }}></div>
+                                    </div>
+                                    
+                                    {/* Wiley */}
+                                    <div className="publisher-card" style={{
+                                        background: 'linear-gradient(135deg, #0c7cba, #095a8a)',
+                                        borderRadius: '15px',
+                                        padding: '2rem',
+                                        textAlign: 'center',
+                                        color: 'white',
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        animation: 'float 6s ease-in-out infinite',
+                                        animationDelay: '2s'
+                                    }}>
+                                        <div style={{
+                                            fontSize: '3rem',
+                                            marginBottom: '1rem',
+                                            filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+                                        }}>
+                                            <i className="fas fa-newspaper"></i>
+                                        </div>
+                                        <h4 style={{marginBottom: '0.5rem', fontSize: '1.3rem'}}>Wiley</h4>
+                                        <p style={{opacity: '0.9', fontSize: '0.9rem'}}>Wiley Online Library</p>
+                                        <div style={{
+                                            position: 'absolute',
+                                            bottom: '-50px',
+                                            left: '-50px',
+                                            width: '100px',
+                                            height: '100px',
+                                            background: 'rgba(255,255,255,0.1)',
+                                            borderRadius: '50%'
+                                        }}></div>
+                                    </div>
+                                    
+                                    {/* Elsevier */}
+                                    <div className="publisher-card" style={{
+                                        background: 'linear-gradient(135deg, #ff6b6b, #ff4757)',
+                                        borderRadius: '15px',
+                                        padding: '2rem',
+                                        textAlign: 'center',
+                                        color: 'white',
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        animation: 'float 6s ease-in-out infinite',
+                                        animationDelay: '4s'
+                                    }}>
+                                        <div style={{
+                                            fontSize: '3rem',
+                                            marginBottom: '1rem',
+                                            filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+                                        }}>
+                                            <i className="fas fa-file-alt"></i>
+                                        </div>
+                                        <h4 style={{marginBottom: '0.5rem', fontSize: '1.3rem'}}>Elsevier</h4>
+                                        <p style={{opacity: '0.9', fontSize: '0.9rem'}}>ScienceDirect Journals</p>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '-30px',
+                                            left: '50%',
+                                            transform: 'translateX(-50%)',
+                                            width: '80px',
+                                            height: '80px',
+                                            background: 'rgba(255,255,255,0.1)',
+                                            borderRadius: '50%'
+                                        }}></div>
+                                    </div>
+                                </div>
+                                
+                                <div style={{
+                                    textAlign: 'center',
+                                    marginTop: '2.5rem',
+                                    paddingTop: '1.5rem',
+                                    borderTop: '1px solid var(--border)'
+                                }}>
+                                    <a 
+                                        href="https://1drv.ms/f/c/3ce355b70d76f4f7/Ejkh6TgFPhtNkgsfwRv6_OgBpu9S58AyaqHR_AMPJsR4Rg?e=jU8KMP" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '0.75rem',
+                                            padding: '0.9rem 2rem',
+                                            background: 'var(--primary)',
+                                            color: 'white',
+                                            borderRadius: '10px',
+                                            textDecoration: 'none',
+                                            fontWeight: '600',
+                                            fontSize: '1rem',
+                                            transition: 'all 0.3s'
+                                        }}
+                                        onMouseOver={(e) => {
+                                            e.target.style.background = 'var(--primary-light)';
+                                            e.target.style.transform = 'translateY(-3px)';
+                                            e.target.style.boxShadow = '0 10px 25px var(--btn-shadow)';
+                                        }}
+                                        onMouseOut={(e) => {
+                                            e.target.style.background = 'var(--primary)';
+                                            e.target.style.transform = 'translateY(0)';
+                                            e.target.style.boxShadow = 'none';
+                                        }}
+                                    >
+                                        <i className="fas fa-certificate"></i>
+                                        View My Reviewer Certificates
+                                    </a>
+                                    <p style={{
+                                        marginTop: '1rem',
+                                        color: 'var(--text-light)',
+                                        fontSize: '0.9rem'
+                                    }}>
+                                        Access verification certificates 
+                                    </p>
+                                </div>
+                            </div>
+                     
                  {/* Core Competencies Cards */}
 <div className="core-competencies">
     <div className="section-header">
