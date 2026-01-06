@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Add this to your <head> section -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -74,12 +74,12 @@
     --primary: #6366f1;
     --primary-light: #818cf8;
     --secondary: #f59e0b;
-    --text: #111827; /* CHANGE: Darker black for better contrast in light mode */
-    --text-light: #4b5563; /* CHANGE: Darker gray for better readability */
-    --bg: #f8fafc;
+--text: #000000;          /* PURE BLACK - not faded */
+--text-light: #000000;    /* Also pure black for all text */
+--bg: #ffffff;            /* PURE WHITE background */
     --bg-light: #ffffff;
-    --bg-card: rgba(255, 255, 255, 0.9); /* CHANGE: Less transparency for better contrast */
-    --border: rgba(0, 0, 0, 0.1); /* CHANGE: Darker border for light mode */
+--bg-card: #ffffff;       /* Solid white cards too */
+--border: rgba(0, 0, 0, 0.2);  /* Darker borders for better contrast */
     --shadow: rgba(0, 0, 0, 0.1);
     --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --glass: rgba(255, 255, 255, 0.95); /* CHANGED: More opaque for light mode */
@@ -678,15 +678,17 @@
     --heading-text: #f3f4f6; /* CHANGE: Brighter white for dark mode */
 }
       
-     body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
-    color: var(--text); /* Make sure this says --text, not --text-light */
+    color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
-    font-weight: 400; /* ADD: Slightly bolder text */
+    font-size: 15px; /* Slightly smaller base font */
+    font-weight: 400;
 }
+    
      
         .container {
             max-width: 1200px;
@@ -1922,26 +1924,65 @@ body {
     }
 }
 
-/* Add to your existing CSS, preferably in the Navigation section */
 .logo {
     position: relative;
-    padding-left: 25px; /* Space for the dot */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Space between dot and text */
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--logo-text);
 }
 
 .logo::before {
     content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    display: inline-block;
     width: 12px;
     height: 12px;
-    background-color: #10b981; /* Green color */
+    background-color: #10b981;
     border-radius: 50%;
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
     animation: pulse 2s infinite;
-    z-index: 1;
+    flex-shrink: 0;
 }
+
+/* Remove the padding-left since we're using flex gap */
+.logo {
+    padding-left: 0;
+}
+
+/* Adjust for scrolled navbar */
+.navbar.scrolled .logo {
+    font-size: 1.5rem;
+    gap: 6px;
+}
+
+.navbar.scrolled .logo::before {
+    width: 10px;
+    height: 10px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.6rem;
+        gap: 6px;
+    }
+    
+    .logo::before {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .navbar.scrolled .logo {
+        font-size: 1.4rem;
+        gap: 5px;
+    }
+}
+
 
 /* Pulsing animation for the online dot */
 @keyframes pulse {
@@ -4717,6 +4758,382 @@ body {
     max-width: 600px;
 }
 
+/* ========== FONT SIZE OPTIMIZATION ========== */
+/* Base font sizes for better readability */
+.section-title {
+    font-size: 2rem !important; /* Reduced from 2.5rem */
+}
+
+.hero-content h1 {
+    font-size: 2.8rem !important; /* Reduced from 3.5rem */
+}
+
+.hero-content h2 {
+    font-size: 1.2rem !important; /* Reduced from 1.2rem */
+}
+
+.hero-content p {
+    font-size: 1rem !important; /* Reduced from 1.2rem */
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+}
+
+/* Card text sizes */
+.glass-card,
+.shiny-app-card,
+.project-card,
+.blog-card,
+.publication-card,
+.support-card,
+.credential-card,
+.competency-card,
+.resume-card,
+.contact-form-container,
+.contact-info-container {
+    font-size: 0.95rem !important;
+}
+
+/* Button text */
+.btn,
+.btn-run-app,
+.btn-view-code,
+.btn-resume,
+.btn-support,
+.btn-submit,
+.btn-read-more,
+.btn-read,
+.btn-pdf {
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+}
+
+/* Navigation font */
+.nav-links a,
+.mobile-nav-links a {
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+}
+
+/* Form labels and inputs */
+.form-group label {
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+}
+
+.form-group input,
+.form-group textarea {
+    font-size: 0.95rem !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* Footer text */
+.footer {
+    font-size: 0.85rem !important;
+}
+
+.footer-links-vertical a {
+    font-size: 0.85rem !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem !important;
+    }
+    
+    .section-title {
+        font-size: 1.6rem !important;
+    }
+    
+    .hero-content p {
+        font-size: 0.95rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 13px !important;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .section-title {
+        font-size: 1.4rem !important;
+    }
+}
+
+/* ========== SCROLL NAVIGATION INDICATOR ========== */
+.scroll-navigation {
+    position: fixed;
+    right: 30px;
+    bottom: 40px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.scroll-indicator {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+    border: 2px solid white;
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-indicator.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.scroll-indicator:hover {
+    background: var(--primary-light);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+}
+
+.scroll-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+    transform: translateX(-100%);
+}
+
+.scroll-indicator:hover::before {
+    animation: shine 1s ease-out;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Next section indicator */
+.scroll-indicator.next-section i {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+/* Previous section indicator (for scrolling up) */
+.scroll-indicator.prev-section {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    background: rgba(99, 102, 241, 0.9);
+}
+
+.scroll-indicator.prev-section i {
+    animation: bounceUp 2s infinite;
+}
+
+@keyframes bounceUp {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Section progress indicator */
+.section-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.section-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px;
+    background: var(--bg-card); /* Changed from fixed white */
+    border-radius: 25px;
+    border: 1px solid var(--border);
+    box-shadow: 0 5px 15px var(--shadow); /* Changed to use theme variable */
+    backdrop-filter: blur(10px);
+}
+
+.section-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border); /* Changed to use theme variable */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.section-dot:hover {
+    transform: scale(1.3);
+    background: var(--primary-light); /* Changed to use theme variable */
+}
+
+.section-dot.active {
+    background: var(--primary); /* Changed to use theme variable */
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+.section-dot.active::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--primary); /* Changed to use theme variable */
+    animation: pulse 2s infinite;
+}
+
+.section-dot.completed {
+    background: #10b981; /* Keep this green color as it works in both themes */
+}
+
+/* Tooltip for section names */
+.section-dot::before {
+    content: attr(data-section);
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-card); /* Changed to use theme variable */
+    color: var(--text); /* Changed to use theme variable */
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border); /* Changed to use theme variable */
+    box-shadow: 0 3px 10px var(--shadow); /* Changed to use theme variable */
+    pointer-events: none;
+}
+
+.section-dot:hover::before {
+    opacity: 1;
+    visibility: visible;
+    right: 30px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+.section-dot.completed {
+    background: #10b981;
+}
+
+/* Tooltip for section names */
+.section-dot::before {
+    content: attr(data-section);
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-card);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+.section-dot:hover::before {
+    opacity: 1;
+    visibility: visible;
+    right: 30px;
+}
+
+/* Hide on mobile initially */
+@media (max-width: 768px) {
+    .scroll-navigation {
+        right: 15px;
+        bottom: 20px;
+    }
+    
+    .scroll-indicator {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    .scroll-indicator.prev-section {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+    
+    .section-dots {
+        display: none;
+    }
+}
+
+/* Show section dots on desktop hover */
+@media (min-width: 769px) {
+    .scroll-navigation:hover .section-dots {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 /* GitHub button - keeps black/gray theme */
 .btn-github {
     display: inline-flex;
@@ -7013,6 +7430,202 @@ function CurrentProjectTypewriter() {
             </div>
         </div>
     );
+}
+
+// ========== SCROLL NAVIGATION FUNCTIONALITY ==========
+function initScrollNavigation() {
+    const scrollNavigation = document.getElementById('scrollNavigation');
+    if (!scrollNavigation) return;
+    
+    const sections = ['home', 'projects', 'blog', 'about', 'education', 'publications', 'resume', 'support', 'contact'];
+    
+    // Update navigation visibility based on scroll position
+    function updateNavigationVisibility() {
+        const scrollPosition = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        // Show/hide next/prev buttons based on position
+        const nextBtn = scrollNavigation.querySelector('.next-section');
+        const prevBtn = scrollNavigation.querySelector('.prev-section');
+        
+        // Calculate if we're at bottom
+        const atBottom = scrollPosition + windowHeight >= documentHeight - 100;
+        
+        if (nextBtn) {
+            if (atBottom) {
+                nextBtn.classList.remove('visible');
+            } else {
+                nextBtn.classList.add('visible');
+            }
+        }
+        
+        // Show prev button when not at top
+        if (prevBtn) {
+            if (scrollPosition > 300) {
+                prevBtn.classList.add('visible');
+            } else {
+                prevBtn.classList.remove('visible');
+            }
+        }
+        
+        // Update section dots
+        updateSectionDots();
+    }
+    
+    // Update active section dot
+    function updateSectionDots() {
+        const dots = scrollNavigation.querySelectorAll('.section-dot');
+        const sections = document.querySelectorAll('.section');
+        
+        // Find which section is most visible
+        let mostVisibleSection = null;
+        let maxVisibility = 0;
+        
+        sections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+            const visibility = visibleHeight / window.innerHeight;
+            
+            if (visibility > maxVisibility && visibility > 0.3) {
+                maxVisibility = visibility;
+                mostVisibleSection = section.id;
+            }
+        });
+        
+        // Update dots
+        dots.forEach(dot => {
+            dot.classList.remove('active', 'completed');
+            
+            const sectionName = dot.getAttribute('data-section').toLowerCase();
+            
+            if (sectionName === mostVisibleSection) {
+                dot.classList.add('active');
+            } else if (sections.indexOf(mostVisibleSection) > sections.indexOf(sectionName)) {
+                dot.classList.add('completed');
+            }
+        });
+    }
+    
+    // Keyboard navigation
+    function handleKeyboardNavigation(e) {
+        // Only handle arrow keys when not focused in form
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        
+        const currentIndex = sections.indexOf(window.currentActiveSection || 'home');
+        
+        switch(e.key) {
+            case 'ArrowDown':
+            case 'PageDown':
+                e.preventDefault();
+                if (currentIndex < sections.length - 1) {
+                    handleSectionChange(sections[currentIndex + 1]);
+                }
+                break;
+                
+            case 'ArrowUp':
+            case 'PageUp':
+                e.preventDefault();
+                if (currentIndex > 0) {
+                    handleSectionChange(sections[currentIndex - 1]);
+                }
+                break;
+                
+            case 'Home':
+                e.preventDefault();
+                handleSectionChange('home');
+                break;
+                
+            case 'End':
+                e.preventDefault();
+                handleSectionChange('contact');
+                break;
+        }
+    }
+    
+    // Add hover effect to show section names
+    function initTooltips() {
+        const dots = scrollNavigation.querySelectorAll('.section-dot');
+        
+        dots.forEach(dot => {
+            dot.addEventListener('mouseenter', () => {
+                dot.style.zIndex = '1001';
+            });
+            
+            dot.addEventListener('mouseleave', () => {
+                dot.style.zIndex = '';
+            });
+        });
+    }
+    
+    // Initialize
+    updateNavigationVisibility();
+    initTooltips();
+    
+    // Add event listeners
+    window.addEventListener('scroll', updateNavigationVisibility);
+    window.addEventListener('resize', updateNavigationVisibility);
+    window.addEventListener('keydown', handleKeyboardNavigation);
+    
+    // Update on section change
+    const sectionObserver = new MutationObserver(() => {
+        setTimeout(updateNavigationVisibility, 100);
+    });
+    
+    const sectionsContainer = document.querySelector('.main-content');
+    if (sectionsContainer) {
+        sectionObserver.observe(sectionsContainer, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    }
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(initScrollNavigation, 500);
+    
+    // Also add to React component mount
+    setTimeout(() => {
+        // Store active section globally for keyboard navigation
+        window.currentActiveSection = document.querySelector('.section.active')?.id || 'home';
+        
+        // Observe for section changes
+        const observer = new MutationObserver(() => {
+            const activeSection = document.querySelector('.section.active')?.id;
+            if (activeSection) {
+                window.currentActiveSection = activeSection;
+            }
+        });
+        
+        const sectionsContainer = document.querySelector('.main-content');
+        if (sectionsContainer) {
+            observer.observe(sectionsContainer, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        }
+    }, 1000);
+});
+
+// Add smooth scrolling to sections
+function smoothScrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    
+    const navbar = document.querySelector('.navbar');
+    const navbarHeight = navbar ? navbar.offsetHeight : 80;
+    
+    const targetPosition = section.offsetTop - navbarHeight;
+    
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
 }
 
 // Add this function to handle clicking the name in footer
@@ -9570,6 +10183,52 @@ I am a registered nurse and I love research, and data analytics! I am passionate
 </section>
           
             </main>
+            
+                {/* SCROLL NAVIGATION - ADD THIS HERE */}
+            <div className="scroll-navigation" id="scrollNavigation">
+                {/* Section progress dots */}
+                <div className="section-progress">
+                    <div className="section-dots">
+                        {sections.map((section, index) => (
+                            <div
+                                key={section}
+                                className={`section-dot ${activeSection === section ? 'active' : ''} ${index < sections.indexOf(activeSection) ? 'completed' : ''}`}
+                                data-section={section.charAt(0).toUpperCase() + section.slice(1)}
+                                onClick={() => handleSectionChange(section)}
+                                title={`Go to ${section}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+                
+                {/* Previous section button */}
+                <div 
+                    className={`scroll-indicator prev-section ${activeSection !== 'home' ? 'visible' : ''}`}
+                    onClick={() => {
+                        const currentIndex = sections.indexOf(activeSection);
+                        if (currentIndex > 0) {
+                            handleSectionChange(sections[currentIndex - 1]);
+                        }
+                    }}
+                    title="Previous section"
+                >
+                    <i className="fas fa-chevron-up"></i>
+                </div>
+                
+                {/* Next section button */}
+                <div 
+                    className={`scroll-indicator next-section ${activeSection !== sections[sections.length - 1] ? 'visible' : ''}`}
+                    onClick={() => {
+                        const currentIndex = sections.indexOf(activeSection);
+                        if (currentIndex < sections.length - 1) {
+                            handleSectionChange(sections[currentIndex + 1]);
+                        }
+                    }}
+                    title="Next section"
+                >
+                    <i className="fas fa-chevron-down"></i>
+                </div>
+            </div>
 
    <footer className="footer">
     <div className="container">
@@ -9670,6 +10329,8 @@ I am a registered nurse and I love research, and data analytics! I am passionate
         </div>
     </div>
 </footer>
+    
+    
     
             </div>
     );
