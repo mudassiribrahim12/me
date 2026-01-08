@@ -1038,6 +1038,19 @@
     text-align: center;
 }
 
+/* Light mode footer - SOLID WHITE */
+:root .footer,
+body:not(.dark-mode) .footer {
+    background-color: #ffffff !important; /* Pure white */
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Light border */
+}
+
+/* Dark mode footer - keep dark */
+.dark-mode .footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+}
+
 /* Social Icons in Footer */
 .social-icons {
     display: flex;
@@ -2194,12 +2207,26 @@
     --text-tertiary: #707070;
 }
 
-/* Add to your existing body styles */
+/* ========== BACKGROUND PATTERNS ========== */
+/* Light Mode: Colored background with faded grid */
+:root, body:not(.dark-mode) {
+    background-image: 
+        linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: -1px -1px;
+    background-attachment: fixed;
+    background-color: #f8fafc; /* Very light blue tint instead of pure white */
+    color: var(--text);
+}
+
+/* Dark Mode: Keep existing Next.js style background */
 body.dark-mode {
     background-image: 
         radial-gradient(circle at 15% 50%, rgba(0, 112, 243, 0.05) 0%, transparent 55%),
         radial-gradient(circle at 85% 30%, rgba(50, 145, 255, 0.05) 0%, transparent 55%);
     background-attachment: fixed;
+    background-color: var(--bg);
 }
 
 /* Next.js-style glass effect for navbar */
