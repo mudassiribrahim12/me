@@ -607,6 +607,129 @@
     color: var(--primary);
 }
 
+/* Add this to your CSS section */
+#animated-code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    position: relative;
+    min-height: 180px;
+}
+
+/* Typewriter cursor */
+.typewriter-cursor {
+    display: inline-block;
+    font-weight: bold;
+    color: var(--primary);
+    animation: blink 0.8s infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Syntax highlighting to match your original website */
+.code-line {
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.25rem;
+    transition: none;
+}
+
+.code-line .keyword {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.code-line .string {
+    color: #1dd1a1;
+}
+
+.code-line .function {
+    color: #54a0ff;
+}
+
+.code-line .comment {
+    color: #8395a7;
+    font-style: italic;
+}
+
+.code-line .operator {
+    color: #4ecdc4;
+}
+
+.code-line .bracket {
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+.code-line .tag {
+    color: #ff6b6b;
+}
+
+/* Character typing animation */
+.code-line span {
+    display: inline-block;
+    animation: characterAppear 0.1s ease-out;
+}
+
+@keyframes characterAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(-1px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Make sure the code container has proper spacing */
+#animated-code {
+    padding: 1.5rem;
+    white-space: pre;
+    overflow: hidden;
+}
+
+/* Keep the window styling from your original */
+.code-window {
+    position: relative;
+    width: 90%;
+    height: 80%;
+    background: var(--bg-surface);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    z-index: 2;
+}
+
+/* Ensure the original colors work in both themes */
+:root {
+    --text-secondary: #000000; /* Black for light mode */
+}
+
+.dark-mode {
+    --text-secondary: #a1a1a1; /* Light gray for dark mode */
+}
+
+.dark-mode .code-line .keyword {
+    color: #ff6b6b; /* Same red for both modes */
+}
+
+.dark-mode .code-line .string {
+    color: #f1fa8c; /* Yellow for dark mode strings */
+}
+
+.dark-mode .code-line .function {
+    color: #54a0ff; /* Same blue for both modes */
+}
+
+.dark-mode .code-line .comment {
+    color: #707070; /* Dark gray for dark mode */
+}
+
 /* ===== DIFFERENT COLOR FOR "Hi! I'm Mudasir" ===== */
 .colorful-greeting {
     font-size: 2.8rem;
@@ -2910,16 +3033,12 @@ body {
     font-weight: bold;
 }
 
-.code-operator {
-    color: #4ecdc4;
-}
-
 .code-string {
     color: #1dd1a1;
 }
 
-.code-number {
-    color: #ff9ff3;
+.code-function {
+    color: #54a0ff;
 }
 
 .code-comment {
@@ -2927,60 +3046,17 @@ body {
     font-style: italic;
 }
 
-.code-function {
-    color: #54a0ff;
+.code-bracket {
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+.code-tag {
+    color: #ff6b6b;
 }
 
 .code-object {
     color: #5f27cd;
-}
-
-.code-property {
-    color: #feca57;
-}
-
-.code-boolean {
-    color: #ff9f43;
-}
-
-.code-array {
-    color: #00d2d3;
-}
-
-.code-output {
-    background: rgba(99, 102, 241, 0.05);
-    border-left: 4px solid var(--primary);
-    padding: 1rem;
-    margin-top: 1.5rem;
-    border-radius: 0 8px 8px 0;
-    font-family: 'Inter', sans-serif;
-}
-
-.code-output h4 {
-    color: var(--text);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.code-output h4 i {
-    color: var(--primary);
-}
-
-.code-output pre {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 1rem;
-    border-radius: 8px;
-    font-family: 'Courier New', monospace;
-    color: var(--text);
-    overflow-x: auto;
-    font-size: 0.9rem;
-}
-
-.code-output .output-value {
-    color: #10b981;
-    font-weight: 600;
 }
 
 /* Terminal-like blinking cursor */
@@ -8848,6 +8924,7 @@ function handleNavbarScroll() {
     }
 }
 
+
 function CurrentProjectTypewriter() {
     const [displayText, setDisplayText] = useState('');
     const [isTyping, setIsTyping] = useState(true);
@@ -9075,34 +9152,6 @@ const sections = ['home', 'about', 'projects', 'blog', 'support', 'contact'];
     }
 }
 
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(initScrollNavigation, 500);
-    
-    // Also add to React component mount
-    setTimeout(() => {
-        // Store active section globally for keyboard navigation
-        window.currentActiveSection = document.querySelector('.section.active')?.id || 'home';
-        
-        // Observe for section changes
-        const observer = new MutationObserver(() => {
-            const activeSection = document.querySelector('.section.active')?.id;
-            if (activeSection) {
-                window.currentActiveSection = activeSection;
-            }
-        });
-        
-        const sectionsContainer = document.querySelector('.main-content');
-        if (sectionsContainer) {
-            observer.observe(sectionsContainer, {
-                childList: true,
-                subtree: true,
-                attributes: true,
-                attributeFilter: ['class']
-            });
-        }
-    }, 1000);
-});
 
 // Add smooth scrolling to sections
 function smoothScrollToSection(sectionId) {
@@ -9119,6 +9168,94 @@ function smoothScrollToSection(sectionId) {
         behavior: 'smooth'
     });
 }
+
+// Add this after the ReactDOM.render() call
+function startTypewriterAnimation() {
+    const fullCode = [
+        '<span class="code-keyword">import</span> { <span class="code-function">Shiny</span> } <span class="code-keyword">from</span> <span class="code-string">\'@r/apps\'</span>',
+        '<span class="code-keyword">import</span> { <span class="code-function">Healthcare</span>, <span class="code-function">Analytics</span> } <span class="code-keyword">from</span> <span class="code-string">\'@research/tools\'</span>',
+        '',
+        '<span class="code-keyword">export default function</span> <span class="code-function">Portfolio</span>() {',
+        '  <span class="code-keyword">return</span> (',
+        '    <span class="code-tag">&lt;Shiny</span> <span class="code-keyword">apps</span>=<span class="code-string">"Healthcare Analytics"</span><span class="code-tag">&gt;</span>',
+        '      <span class="code-comment">// Interactive data tools</span>',
+        '    <span class="code-tag">&lt;/Shiny&gt;</span>',
+        '  )',
+        '}'
+    ];
+    
+    const codeContainer = document.getElementById('animated-code');
+    let currentLine = 0;
+    let currentChar = 0;
+    let isTyping = true;
+    let lines = [];
+    
+    function typeNext() {
+        if (currentLine < fullCode.length) {
+            if (currentChar < fullCode[currentLine].length) {
+                if (lines.length <= currentLine) {
+                    lines.push(fullCode[currentLine].slice(0, currentChar + 1));
+                } else {
+                    lines[currentLine] = fullCode[currentLine].slice(0, currentChar + 1);
+                }
+                currentChar++;
+                renderCode();
+                setTimeout(typeNext, 20 + Math.random() * 20);
+            } else {
+                currentLine++;
+                currentChar = 0;
+                setTimeout(typeNext, 20);
+            }
+        } else {
+            // Finished typing, wait 10 seconds then erase
+            setTimeout(() => {
+                isTyping = false;
+                eraseNext();
+            }, 10000);
+        }
+    }
+    
+    function eraseNext() {
+        if (lines.length > 0) {
+            const lastLineIndex = lines.length - 1;
+            if (lines[lastLineIndex].length > 0) {
+                lines[lastLineIndex] = lines[lastLineIndex].slice(0, -1);
+            } else {
+                lines.pop();
+            }
+            renderCode();
+            
+            if (lines.length === 0) {
+                // All erased, restart typing
+                currentLine = 0;
+                currentChar = 0;
+                isTyping = true;
+                setTimeout(typeNext, 500);
+            } else {
+                setTimeout(eraseNext, 30);
+            }
+        }
+    }
+    
+    function renderCode() {
+        const html = lines.map((line, index) => 
+            `<div class="code-line">${line}</div>`
+        ).join('');
+        
+        // Add cursor if typing
+        if (isTyping) {
+            codeContainer.innerHTML = html + '<div class="typewriter-cursor">▋</div>';
+        } else {
+            codeContainer.innerHTML = html;
+        }
+    }
+    
+    // Start the animation
+    typeNext();
+}
+
+// Start when page loads
+setTimeout(startTypewriterAnimation, 1000);
 
 // Add this function to handle clicking the name in footer
 function scrollToTopOfActiveSection() {
@@ -9371,27 +9508,31 @@ useEffect(() => {
         document.body.style.overflow = 'auto';
     };
     
- // Handle section change with scroll
+// Handle section change with scroll - OPTIMIZED VERSION
 const handleSectionChange = (section) => {
+    // Cancel any previous scroll animations
+    if (window.activeScrollAnimation) {
+        cancelAnimationFrame(window.activeScrollAnimation);
+    }
+    
     setActiveSection(section);
     closeMobileMenu();
     
-    // Use requestAnimationFrame for smoother scrolling
-    requestAnimationFrame(() => {
+    // Debounce to prevent multiple rapid calls
+    clearTimeout(handleSectionChange.debounceTimer);
+    
+    handleSectionChange.debounceTimer = setTimeout(() => {
         const element = document.getElementById(section);
         if (element) {
-            // Calculate the exact position considering navbar height
             const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 80;
-            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - navbarHeight;
+            const offsetPosition = element.offsetTop - navbarHeight;
             
-            // Use window.scrollTo for better performance
             window.scrollTo({
                 top: offsetPosition,
                 behavior: 'smooth'
             });
         }
-    });
+    }, 50); // 50ms debounce
 };
  
     // Add this useEffect to handle body overflow:
@@ -9995,17 +10136,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                         <div className="window-dot dot-yellow"></div>
                         <div className="window-dot dot-green"></div>
                     </div>
-                    <div className="window-content">
-                        <div className="code-line"><span className="code-keyword">import</span> {`{ Shiny }`} <span className="code-keyword">from</span> <span className="code-string">'@r/apps'</span></div>
-                        <div className="code-line"><span className="code-keyword">import</span> {`{ Healthcare, Analytics }`} <span className="code-keyword">from</span> <span className="code-string">'@research/tools'</span></div>
-                        <div className="code-line"></div>
-                        <div className="code-line"><span className="code-keyword">export default function</span> <span className="code-function">Portfolio</span>() {`{`}</div>
-                        <div className="code-line">&nbsp;&nbsp;<span className="code-keyword">return</span> (</div>
-                        <div className="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span className="code-keyword">Shiny</span> <span className="code-function">apps</span>=<span class="code-string">"Healthcare Analytics"</span>&gt;</div>
-                        <div className="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="code-comment">// Interactive data tools</span></div>
-                        <div className="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span className="code-keyword">Shiny</span>&gt;</div>
-                        <div className="code-line">&nbsp;&nbsp;)</div>
-                        <div className="code-line">{`}`}</div>
+                    <div className="window-content" id="animated-code">
                     </div>
                 </div>
             </div>
@@ -10603,7 +10734,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                     </div>
                     <div className="phase-content">
                         <h4>Clinical Foundation</h4>
-                        <p>Started as a registered nurse with extensive clinical experience across various healthcare departments.</p>
+                        <p>Started as a registered nurse and gained extensive clinical experience across various healthcare departments in both primary and tertiary care settings.</p>
                     </div>
                 </div>
                 
@@ -10696,13 +10827,13 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
             
             <div className="proficiency-grid">
                 {/* Quantitative Analysis Card */}
-                <div className="proficiency-category-card">
-                    <div className="category-header">
-                        <div className="category-icon">
-                            <i className="fas fa-chart-line"></i>
-                        </div>
-                        <h4>Quantitative Analysis Software</h4>
-                    </div>
+<div className="proficiency-category-card">
+    <div className="category-header">
+        <div className="category-icon" style={{background: 'linear-gradient(135deg, #3B82F6, #60A5FA)'}}>
+            <i className="fas fa-chart-line" style={{color: 'white'}}></i>
+        </div>
+        <h4>Quantitative Analysis Software</h4>
+    </div>
                     <div className="skills-list">
                         <div className="skill-item">
                             <span className="skill-name">SPSS Statistics</span>
@@ -10771,13 +10902,13 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                 </div>
 
                 {/* Qualitative Analysis Card */}
-                <div className="proficiency-category-card">
-                    <div className="category-header">
-                        <div className="category-icon">
-                            <i className="fas fa-comment-dots"></i>
-                        </div>
-                        <h4>Qualitative Analysis Software</h4>
-                    </div>
+<div className="proficiency-category-card">
+    <div className="category-header">
+        <div className="category-icon" style={{background: 'linear-gradient(135deg, #10B981, #34D399)'}}>
+            <i className="fas fa-comment-dots" style={{color: 'white'}}></i>
+        </div>
+        <h4>Qualitative Analysis Software</h4>
+    </div>
                     <div className="skills-list">
                         <div className="skill-item">
                             <span className="skill-name">ATLAS.ti</span>
@@ -10804,13 +10935,13 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                 </div>
 
                 {/* R Shiny Development Card */}
-                <div className="proficiency-category-card">
-                    <div className="category-header">
-                        <div className="category-icon">
-                            <i className="fab fa-r-project"></i>
-                        </div>
-                        <h4>R Shiny Development</h4>
-                    </div>
+<div className="proficiency-category-card">
+    <div className="category-header">
+        <div className="category-icon" style={{background: 'linear-gradient(135deg, #8B5CF6, #A78BFA)'}}>
+            <i className="fab fa-r-project" style={{color: 'white'}}></i>
+        </div>
+        <h4>R Shiny Development</h4>
+    </div>
                     <div className="skills-list">
                         <div className="skill-item">
                             <span className="skill-name">Interactive Dashboards</span>
@@ -10844,13 +10975,13 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                 </div>
 
                 {/* Research Tools Card */}
-                <div className="proficiency-category-card">
-                    <div className="category-header">
-                        <div className="category-icon">
-                            <i className="fas fa-tools"></i>
-                        </div>
-                        <h4>Research Tools</h4>
-                    </div>
+ <div className="proficiency-category-card">
+    <div className="category-header">
+        <div className="category-icon" style={{background: 'linear-gradient(135deg, #F59E0B, #FBBF24)'}}>
+            <i className="fas fa-tools" style={{color: 'white'}}></i>
+        </div>
+        <h4>Research Tools</h4>
+    </div>
                     <div className="skills-list">
                         <div className="skill-item">
                             <span className="skill-name">Zotero</span>
