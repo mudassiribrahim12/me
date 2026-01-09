@@ -9410,15 +9410,7 @@ if (totalViewsElement && appViewsData.apps) {
 }
 
 function App() {
-    // Set dark mode as DEFAULT
-    const [darkMode, setDarkMode] = useState(() => {
-        // Check if user has a saved preference
-        const saved = localStorage.getItem('darkMode');
-        // If no saved preference, default to dark mode (true)
-        return saved ? JSON.parse(saved) : true;
-    });
-    
-    // Rest of your state variables
+    const [darkMode, setDarkMode] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
     const [formData, setFormData] = useState({
         name: '',
@@ -9427,37 +9419,10 @@ function App() {
         message: ''
     });
     const [showAllApps, setShowAllApps] = useState(false);
+    
+    // ADD THIS LINE - Mobile menu state
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-    // Apply dark mode immediately on component mount
-    useEffect(() => {
-        // Apply dark mode class immediately
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-        
-        // Prevent transitions on initial load
-        document.body.style.transition = 'none';
-        setTimeout(() => {
-            document.body.style.transition = '';
-        }, 100);
-    }, []);
-    
-    // Your existing useEffect for dark mode
-    useEffect(() => {
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-        
-        // Save the user's preference to browser memory
-        localStorage.setItem('darkMode', JSON.stringify(darkMode));
-    }, [darkMode]);
-
-
  // ============================================
 // MANUAL VIEWS TRACKING SYSTEM
 // ============================================
