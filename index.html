@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>Mudasir Mohammed Ibrahim </title>
+    <title>Mudasir Mohammed Ibrahim</title>
         <meta name="title" content="Mudasir Mohammed Ibrahim">
-    <meta name="description" content="Official website of Mudasir Mohammed Ibrahim - Registered General Nurse, Healthcare Researcher & R Shiny Developer at Tamale Teaching Hospital, Ghana">
+    <meta name="description" content="Official portfolio website of Mudasir Mohammed Ibrahim – Registered General Nurse, Healthcare Researcher, and R Shiny Developer in Tamale, Ghana">
 <meta name="theme-color" content="#1a56db">
 
 <!-- Add these meta tags for cache control -->
@@ -38,6 +38,23 @@
 <!-- App Icon (Round) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%232563eb'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='0.35em' font-family='Arial, sans-serif' font-weight='bold' font-size='45' fill='white'%3EMMI%3C/text%3E%3C/svg%3E">
 
+<!-- ADD THESE NEW FAVICON LINKS -->
+<!-- ICO format (for older browsers) -->
+<link rel="shortcut icon" href="https://mudasiribrahim.com/favicon.ico" type="image/x-icon">
+
+<!-- PNG format (multiple sizes) -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://mudasiribrahim.com/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://mudasiribrahim.com/favicon-16x16.png">
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://mudasiribrahim.com/apple-touch-icon.png">
+
+<!-- Android Chrome -->
+<link rel="icon" type="image/png" sizes="192x192" href="https://mudasiribrahim.com/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="https://mudasiribrahim.com/android-chrome-512x512.png">
+
+<!-- Web Manifest -->
+<link rel="manifest" href="https://mudasiribrahim.com/site.webmanifest">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -363,38 +380,6 @@
     font-size: 0.9rem;
 }
 
-/* ========== ELEGANT SIGNATURE ========== */
-.logo-elegant-signature {
-    font-family: 'Lucida Handwriting', 'Apple Chancery', 'Zapfino', cursive;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #1565c0;
-    position: relative;
-    display: inline-block;
-    letter-spacing: 1px;
-    line-height: 1;
-    text-shadow: 
-        1px 1px 2px rgba(21, 101, 192, 0.2),
-        0 0 1px rgba(21, 101, 192, 0.1);
-}
-
-/* Signature underline with pen pressure variation */
-.logo-elegant-signature::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-size: 200% 100%;
-    border-radius: 1px;
-    animation: underlineFlow 4s linear infinite;
-}
-
-@keyframes underlineFlow {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
 
 /* Hover effect */
 .logo-elegant-signature:hover {
@@ -3640,7 +3625,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px; /* Space between dot and text */
-    font-size: 1.8rem;
+    font-size: 0.5rem;
     font-weight: 700;
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -3651,8 +3636,8 @@ body {
 .logo::before {
     content: '';
     display: inline-block;
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     background-color: #10b981;
     border-radius: 50%;
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
@@ -7664,13 +7649,15 @@ h1, h2, h3, h4 {
             align-items: center;
         }
 
+/* LOGO FONT SIZE */
+
 .logo {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     font-weight: 700;
     background: var(--gradient);
     -webkit-background-clip: text;
     background-clip: text;
-    color: var(--logo-text); /* CHANGE THIS LINE - from 'transparent' to 'var(--logo-text)' */
+    color: var(--logo-text); 
 }
 
      .nav-right {
@@ -9165,7 +9152,7 @@ function initScrollNavigation() {
     const scrollNavigation = document.getElementById('scrollNavigation');
     if (!scrollNavigation) return;
     
-const sections = ['home', 'about', 'projects', 'blog', 'support', 'contact'];
+const sections = ['home', 'about', 'projects', 'blog', 'publications', 'support', 'contact'];
     
     // Update navigation visibility based on scroll position
     function updateNavigationVisibility() {
@@ -10046,14 +10033,14 @@ useEffect(() => {
     };
 
     // Update it to include 'resume':
-const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
+const sections = ['home', 'about', 'projects', 'blog', 'publications', 'support', 'contact'];
 
     return (
         <div className="app">
 <nav className="navbar">
     <div className="container nav-content">
 <div className="logo" onClick={() => handleSectionChange('home')} style={{cursor: 'pointer'}}>
-    <span className="logo-elegant-signature">mudasiribrahim.com</span>
+    <span className="logo-elegant-signature">Ibrahim M. M.</span>
 </div>
 
         <div className="nav-right">
@@ -10097,6 +10084,16 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
         }}
     >
         Blog
+    </a>
+    <a
+        href="#"
+        className={activeSection === 'publications' ? 'active' : ''}
+        onClick={(e) => {
+            e.preventDefault();
+            handleSectionChange('publications');
+        }}
+    >
+        Publications
     </a>
     <a
         href="#"
@@ -10179,6 +10176,16 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
     >
         Blog
     </a>
+        <a
+        href="#"
+        className={activeSection === 'publications' ? 'active' : ''}
+        onClick={(e) => {
+            e.preventDefault();
+            handleSectionChange('publications');
+        }}
+    >
+        Publications
+    </a>
     <a
         href="#"
         className={activeSection === 'support' ? 'active' : ''}
@@ -10230,9 +10237,9 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
     </h2>
     
     <h2 className="colorful-greeting">
-        Hi! I'm Mudasir 
+        Hi! I'm Mudasir Mohammed Ibrahim 
     </h2>
-    <p>I am a registered nurse and I love research, and data analytics! I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers. Thank you for visiting, and I hope you enjoy exploring my projects.</p>
+    <p>I am a registered nurse and I love research, and data analytics! I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers. Thank you for visiting, and I hope you enjoy exploring and benefiting from my projects.</p>
     
     <div className="hero-buttons">
         <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); handleSectionChange('about'); }}>
@@ -10780,60 +10787,71 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
         </div>
 
         {/* Profile Summary Card */}
-               <div className="profile-image-centered-container glass-card" style={{textAlign: 'center', marginBottom: '3rem', padding: '2rem'}}>
-            <div className="profile-image-large" style={{
-                margin: '0 auto 2rem', 
-                width: '350px', 
-                height: '350px',
-                cursor: 'pointer'
-            }}>
-<div style={{
-    width: '100%',
-    height: '100%',
-    borderRadius: '15px', /* Changed from '50%' */
-    overflow: 'hidden',
-    border: '6px solid var(--primary)',
-    boxShadow: '0 20px 60px var(--shadow)',
-    transition: 'transform 0.5s ease, box-shadow 0.5s ease'
-                }} 
-                className="profile-image-zoom"
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 30px 80px rgba(99, 102, 241, 0.4)';
+       <div className="profile-image-centered-container glass-card" style={{textAlign: 'center', marginBottom: '3rem', padding: '2rem'}}>
+    <div className="profile-image-large">
+        <div style={{
+            width: '100%',
+            height: '100%',
+            borderRadius: '15px', /* Changed from '50%' */
+            overflow: 'hidden',
+            transition: 'transform 0.5s ease, box-shadow 0.5s ease'
+        }} 
+        className="profile-image-zoom"
+        onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.05)';
+            e.currentTarget.style.boxShadow = '0 30px 80px rgba(99, 102, 241, 0.4)';
+        }}
+        onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 20px 60px var(--shadow)';
+        }}
+        >
+            <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" 
+                alt="Mudasir Mohammed Ibrahim"
+                onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--gradient); color: white; font-size: 3rem;"><i class="fas fa-user-graduate"></i></div>';
                 }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 20px 60px var(--shadow)';
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'center center',
+                    transition: 'transform 0.5s ease'
                 }}
-                >
-                    <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" 
-                         alt="Mudasir Mohammed Ibrahim"
-                         onError={(e) => {
-                             e.target.onerror = null;
-                             e.target.style.display = 'none';
-                             e.target.parentElement.innerHTML = '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--gradient); color: white; font-size: 3rem;"><i class="fas fa-user-graduate"></i></div>';
-                         }}
-                         style={{
-                             width: '100%',
-                             height: '100%',
-                             objectFit: 'contain',
-                             objectPosition: 'center center',
-                             transition: 'transform 0.5s ease'
-                         }}
-                         className="profile-image-inner"
-                    />
-                </div>
-            </div>
-            <h1 style={{marginBottom: '0.5rem', fontSize: '2.5rem'}}>Mudasir Mohammed Ibrahim</h1>
-            <h2 className="professional-title" style={{
-                color: 'var(--primary)', 
-                fontSize: '1.4rem', 
-                fontWeight: '600',
-                marginBottom: '1rem'
-            }}>
-                Registered Nurse
-            </h2>
+                className="profile-image-inner"
+            />
         </div>
+    </div>
+    <h1 style={{marginBottom: '0.5rem', fontSize: '2.5rem'}}>Mudasir Mohammed Ibrahim</h1>
+    <h2 className="professional-title" style={{
+        color: 'var(--primary)', 
+        fontSize: '1.4rem', 
+        fontWeight: '600',
+        marginBottom: '0.5rem'  /* Reduced margin */
+    }}>
+        Registered Nurse
+    </h2>
+    
+    {/* ADDED LOCATION SECTION HERE */}
+    <div className="location-info" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '0.5rem',
+        marginTop: '0.75rem',
+        marginBottom: '1.5rem',
+        color: 'var(--text-light)',
+        fontSize: '1.1rem'
+    }}>
+        <i className="fas fa-map-marker-alt" style={{
+            color: 'var(--primary)',
+            fontSize: '1.1rem'
+        }}></i>
+        <span>Tamale, Ghana</span>
+    </div>
+</div>
 
         {/* Professional Journey */}
         <div className="professional-journey glass-card">
@@ -10842,7 +10860,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                 My Professional Journey
             </h3>
             <p className="journey-description">
-                Greetings! I’m Mohammed Mudasir Ibrahim, also known as Mudasir Ibrahim, professionally recognized as Mudasir Mohammed Ibrahim. I currently work as a registered nurse at Tamale Teaching Hospital. I have several years of expertise in advanced data analysis, and I develop R Shiny web applications that make complex data analysis simpler, more intuitive, and accessible for healthcare professionals, students, and researchers. My journey began with years of clinical practice and health research experience and has evolved through diverse and challenging roles at the intersection of healthcare and technology. I am passionate about building impactful, web-based statistical applications that drive meaningful change in health research and practice.
+                Greetings! I am Mohammed Mudasir Ibrahim, professionally known as Mudasir Mohammed Ibrahim. You may call me Mudasir Ibrahim for short. I currently work as a Registered Nurse at Tamale Teaching Hospital. I bring several years of experience in advanced data analysis and specialize in developing R Shiny web applications that simplify complex analytical processes and enhance accessibility for healthcare professionals, students, and researchers. My professional journey is rooted in extensive clinical practice and clinical/health research and has evolved through diverse and challenging roles at the intersection of healthcare and technology. I am deeply passionate about building impactful, web-based statistical tools that contribute meaningfully to public health research and evidence-based practice.
             </p>
             
             <div className="journey-timeline">
@@ -10872,7 +10890,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                     </div>
                     <div className="phase-content">
                         <h4>Technology Integration</h4>
-                        <p>Began creating R Shiny web applications to simplify complex data analysis for healthcare professionals and researchers.</p>
+                        <p>Began creating R Shiny web applications to simplify complex data analysis for healthcare professionals, students and researchers.</p>
                     </div>
                 </div>
             </div>
@@ -11134,8 +11152,6 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
             </div>
         </div>
     
-    
-
         {/* Education & Credentials */}
         <div className="education-credentials-section">
             <div className="education-section glass-card">
@@ -11176,13 +11192,31 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                             </p>
                         </div>
                     </div>
+                    {/* ADDED: Senior High School */}
+            <div className="education-card">
+                <div className="education-degree">
+                    <i className="fas fa-school"></i> {/* School icon for SHS */}
+                    <div>
+                        <h4>Senior High School - Business (Cost Accounting)</h4>
+                        <p className="education-institution">Northern School of Business (NOBISCO), Tamale</p>
+                    </div>
+                </div>
+                <div className="education-details">
+                    <span className="education-period">2013 - 2016</span>
+                    <p className="education-description">
+                        Completed Business program with focus in Cost Accounting, 
+                        developing foundational skills in business management, accounting principles, 
+                        and financial analysis.
+                  </p>
                 </div>
             </div>
+        </div>
+    </div>
             
             <div className="credentials-section glass-card">
                 <h3 className="about-content-title">
                     <i className="fas fa-certificate"></i>
-                    Professional Credentials
+                    Professional History
                 </h3>
                 
                 <div className="credentials-list">
@@ -11207,9 +11241,41 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                             <span className="credential-status active">Active</span>
                         </div>
                     </div>
+        {/* Current Employment */}
+        <div className="credential-item">
+            <div className="credential-badge" style={{background: 'linear-gradient(135deg, #F59E0B, #FBBF24)'}}>
+                <i className="fas fa-hospital"></i>
+            </div>
+            <div className="credential-info">
+                <h4>Staff Nurse</h4>
+                <p>Tamale Teaching Hospital</p>
+                <div style={{marginTop: '0.5rem'}}>
+                    <span className="credential-status" style={{
+                        background: 'rgba(245, 158, 11, 0.2)',
+                        color: '#F59E0B',
+                        display: 'inline-block',
+                        marginBottom: '0.5rem'
+                    }}>
+                        2025 - Present
+                    </span>
+                    <div style={{
+                        fontSize: '0.95rem',
+                        color: 'var(--text)',
+                        lineHeight: '1.5',
+                        marginTop: '0.5rem',
+                        padding: '0.75rem',
+                        background: 'rgba(245, 158, 11, 0.08)',
+                        borderRadius: '8px',
+                        borderLeft: '3px solid #F59E0B'
+                    }}>
+                        <strong>Responsibilities:</strong> Providing comprehensive nursing care for patients with acute and chronic conditions, including cancer, hypertension, congestive cardiac failure, chronic liver disease, and chronic kidney disease.
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+</div>
 
         {/* Research Interests */}
         <div className="research-interests-section glass-card">
@@ -11239,75 +11305,366 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                 </span>
             </div>
         </div>
-        {/* Peer Reviewing */}
-        <div className="reviewer-section glass-card">
-    <h3 className="about-content-title">
-        <i className="fas fa-clipboard-check"></i>
-        Academic Reviewer
+ {/* Academic Reviewer - ENHANCED VERSION */}
+<div className="reviewer-section glass-card" style={{
+    marginTop: '3rem',
+    padding: '2.5rem',
+    background: 'var(--bg-card)',
+    border: '1px solid var(--border)',
+    borderRadius: '15px',
+    boxShadow: '0 10px 30px var(--shadow)',
+    position: 'relative',
+    overflow: 'hidden'
+}}>
+{/* Decorative corner accent */}
+    <div style={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: '150px',
+        height: '150px',
+        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%)',
+        borderBottomLeftRadius: '100%',
+        zIndex: 1
+    }}></div>
+    
+    <h3 className="about-content-title" style={{
+        fontSize: '1.8rem',
+        marginBottom: '2rem',
+        color: 'var(--text)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+        position: 'relative',
+        zIndex: 2
+    }}>
+        <div style={{
+            width: '60px',
+            height: '60px',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.8rem',
+            color: 'white',
+            boxShadow: '0 5px 15px rgba(59, 130, 246, 0.3)'
+        }}>
+            <i className="fas fa-clipboard-check"></i>
+        </div>
+        <span>Academic Reviewer</span>
     </h3>
     
-    <p className="journey-description">
-        As an active academic reviewer, I contribute to the peer-review process for several reputable scientific journals. 
-        My reviewing expertise spans healthcare research, nursing science, public health, and statistical methodology.
+    <p style={{
+        fontSize: '1.1rem',
+        lineHeight: '1.7',
+        color: 'var(--text-light)',
+        marginBottom: '2.5rem',
+        position: 'relative',
+        zIndex: 2
+    }}>
+        I serve as an active peer reviewer for leading scientific journals, contributing to the advancement of 
+        healthcare research and nursing science. My reviewing expertise spans healthcare research, nursing science, 
+        public health, and statistical methodology.
     </p>
     
-    <div className="reviewer-highlights">
-        <div className="highlight-item">
-            <i className="fas fa-journal-whills"></i>
-            <div>
-                <strong>Journals Reviewed For</strong>
-                <p>BMC Health Services Research, BMC Nursing, Discover Public Health, Scientific Reports, Discover Health Systems, SSM – Health Systems and more</p>
+    {/* Reviewing Stats Grid */}
+    <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '1.5rem',
+        marginBottom: '2.5rem',
+        position: 'relative',
+        zIndex: 2
+    }}>
+        <div style={{
+            textAlign: 'center',
+            padding: '1.5rem 1rem',
+            background: 'rgba(99, 102, 241, 0.08)',
+            border: '1px solid rgba(99, 102, 241, 0.15)',
+            borderRadius: '12px',
+            transition: 'transform 0.3s ease, border-color 0.3s ease'
+        }} className="reviewer-stat-card">
+            <div style={{
+                fontSize: '2.2rem',
+                fontWeight: '700',
+                background: 'linear-gradient(135deg, #3B82F6, #8B5CF6)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '0.5rem'
+            }}>
+                10+
+            </div>
+            <div style={{
+                fontSize: '0.95rem',
+                color: 'var(--text-light)',
+                fontWeight: '500'
+            }}>
+                Journals Reviewed For
             </div>
         </div>
         
-        <div className="highlight-item">
-            <i className="fas fa-certificate"></i>
-            <div>
-                <strong>Reviewer Certificates</strong>
-                <p>View my reviewer certificates</p>
+        <div style={{
+            textAlign: 'center',
+            padding: '1.5rem 1rem',
+            background: 'rgba(99, 102, 241, 0.08)',
+            border: '1px solid rgba(99, 102, 241, 0.15)',
+            borderRadius: '12px',
+            transition: 'transform 0.3s ease, border-color 0.3s ease'
+        }} className="reviewer-stat-card">
+            <div style={{
+                fontSize: '2.2rem',
+                fontWeight: '700',
+                background: 'linear-gradient(135deg, #10B981, #34D399)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '0.5rem'
+            }}>
+                15+
+            </div>
+            <div style={{
+                fontSize: '0.95rem',
+                color: 'var(--text-light)',
+                fontWeight: '500'
+            }}>
+                Manuscripts Reviewed
+            </div>
+        </div>
+        
+        <div style={{
+            textAlign: 'center',
+            padding: '1.5rem 1rem',
+            background: 'rgba(99, 102, 241, 0.08)',
+            border: '1px solid rgba(99, 102, 241, 0.15)',
+            borderRadius: '12px',
+            transition: 'transform 0.3s ease, border-color 0.3s ease'
+        }} className="reviewer-stat-card">
+            <div style={{
+                fontSize: '2.2rem',
+                fontWeight: '700',
+                background: 'linear-gradient(135deg, #F59E0B, #FBBF24)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '0.5rem'
+            }}>
+                2025
+            </div>
+            <div style={{
+                fontSize: '0.95rem',
+                color: 'var(--text-light)',
+                fontWeight: '500'
+            }}>
+                Started Reviewing
             </div>
         </div>
     </div>
     
-    <div className="reviewer-certificates">
-        <h4 style={{marginBottom: '1.5rem', color: 'var(--text)'}}>
-            <i className="fas fa-award"></i> Reviewer Certificates
+    {/* Hover effects for stat cards */}
+    <style jsx>{`
+        .reviewer-stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
+        }
+    `}</style>
+
+    {/* Featured Journals */}
+    <div style={{
+        marginBottom: '2.5rem',
+        position: 'relative',
+        zIndex: 2
+    }}>
+        <h4 style={{
+            fontSize: '1.3rem',
+            marginBottom: '1.5rem',
+            color: 'var(--text)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem'
+        }}>
+            <i className="fas fa-star" style={{color: '#F59E0B'}}></i>
+            Featured Journals I Review For
         </h4>
         
-        <div className="certificate-links">
+        <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.75rem',
+            justifyContent: 'center'
+        }}>
+            {[
+                'BMC Health Services Research',
+                'BMC Nursing', 
+                'Scientific Reports',
+                'Discover Public Health',
+                'SSM – Health Systems',
+                'Discover Health Systems',
+                'BMC Medical Education',
+                'BMC Pregnancy and Childbirth'
+            ].map((journal, index) => (
+                <span key={index} style={{
+                    padding: '0.6rem 1.25rem',
+                    background: 'rgba(99, 102, 241, 0.1)',
+                    border: '1px solid rgba(99, 102, 241, 0.2)',
+                    borderRadius: '50px',
+                    fontSize: '0.9rem',
+                    color: 'var(--text)',
+                    fontWeight: '500',
+                    transition: 'all 0.3s ease',
+                    cursor: 'default',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                }} className="journal-badge">
+                    <i className="fas fa-book" style={{
+                        fontSize: '0.85rem',
+                        color: 'var(--primary)'
+                    }}></i>
+                    {journal}
+                </span>
+            ))}
+        </div>
+        
+        <style jsx>{`
+            .journal-badge:hover {
+                background: rgba(99, 102, 241, 0.2);
+                transform: translateY(-2px);
+                border-color: var(--primary);
+            }
+        `}</style>
+    </div>
+
+    {/* Reviewer Certificates */}
+    <div style={{
+        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%)',
+        border: '1px solid rgba(99, 102, 241, 0.2)',
+        borderRadius: '12px',
+        padding: '2rem',
+        marginBottom: '2rem',
+        position: 'relative',
+        zIndex: 2
+    }}>
+        <h4 style={{
+            fontSize: '1.3rem',
+            marginBottom: '1rem',
+            color: 'var(--text)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem'
+        }}>
+            <i className="fas fa-award" style={{color: '#8B5CF6'}}></i>
+            Reviewer Certificates
+        </h4>
+        
+        <p style={{
+            color: 'var(--text-light)',
+            marginBottom: '1.5rem',
+            fontSize: '1rem',
+            lineHeight: '1.6'
+        }}>
+            View my collection of official reviewer certificates and recognition letters from leading scientific journals.
+        </p>
+        
+        <div style={{
+            display: 'flex',
+            gap: '1rem',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+        }}>
             <a 
                 href="https://1drv.ms/f/c/3ce355b70d76f4f7/Ejkh6TgFPhtNkgsfwRv6_OgBpu9S58AyaqHR_AMPJsR4Rg?e=jU8KMP" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="btn btn-primary"
                 style={{
-                    display: 'inline-flex', 
-                    alignItems: 'center', 
+                    display: 'inline-flex',
+                    alignItems: 'center',
                     gap: '0.75rem',
-                    padding: '0.9rem 1.75rem'
+                    padding: '0.9rem 1.75rem',
+                    background: 'linear-gradient(135deg, var(--primary), var(--primary-light))',
+                    color: 'white',
+                    borderRadius: '10px',
+                    fontWeight: '600',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 5px 15px rgba(99, 102, 241, 0.3)'
                 }}
+                className="certificate-btn"
             >
                 <i className="fas fa-folder-open"></i>
                 View All Certificates
             </a>
+            
+            <a 
+                href="https://www.webofscience.com/wos/author/record/HPC-2085-2023" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.9rem 1.75rem',
+                    background: 'transparent',
+                    color: 'var(--primary)',
+                    border: '2px solid var(--primary)',
+                    borderRadius: '10px',
+                    fontWeight: '600',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s ease'
+                }}
+                className="certificate-btn secondary"
+            >
+                <i className="fas fa-external-link-alt"></i>
+                Web of Science Profile
+            </a>
         </div>
         
-        <div className="reviewer-note" style={{
-            marginTop: '1.5rem',
-            padding: '1rem',
-            background: 'rgba(245, 158, 11, 0.1)',
-            borderLeft: '4px solid var(--secondary)',
-            borderRadius: '8px',
-            fontSize: '0.95rem',
-            color: 'var(--text)'
+        <style jsx>{`
+            .certificate-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+            }
+            .certificate-btn.secondary:hover {
+                background: var(--primary);
+                color: white;
+                box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+            }
+        `}</style>
+    </div>
+
+    {/* Reviewer Ethos */}
+    <div style={{
+        padding: '1.5rem',
+        background: 'rgba(245, 158, 11, 0.1)',
+        borderLeft: '4px solid var(--secondary)',
+        borderRadius: '8px',
+        fontSize: '1rem',
+        color: 'var(--text)',
+        position: 'relative',
+        zIndex: 2
+    }}>
+        <div style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '1rem'
         }}>
-            <i className="fas fa-info-circle" style={{color: 'var(--secondary)', marginRight: '0.5rem'}}></i>
-            I maintain high ethical standards and confidentiality in all peer-review activities, contributing to the advancement of scientific knowledge.
+            <i className="fas fa-info-circle" style={{
+                color: 'var(--secondary)',
+                fontSize: '1.2rem',
+                marginTop: '0.2rem'
+            }}></i>
+            <div>
+                <strong style={{display: 'block', marginBottom: '0.5rem', fontSize: '1.05rem'}}>
+                    Reviewer Ethos
+                </strong>
+                <p style={{margin: 0, lineHeight: '1.6'}}>
+                    I maintain the highest ethical standards in peer-review, ensuring constructive feedback, 
+                    methodological rigor, and confidentiality while contributing to the advancement of scientific 
+                    knowledge in healthcare and nursing research.
+                </p>
+            </div>
         </div>
     </div>
 </div>
-
-
+ 
         {/* Call to Action */}
         <div className="about-cta-section">
             <div className="cta-content">
@@ -11799,68 +12156,77 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                 <div className="scroll-navigation" id="scrollNavigation">
                     {/* Section progress dots - IN CORRECT ORDER */}
                     <div className="section-progress">
-                        <div className="section-dots">
-                            {/* Home */}
-                            <div
-                                key="home"
-                                className={`section-dot ${activeSection === 'home' ? 'active' : ''} ${['about', 'projects', 'blog', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
-                                data-section="Home"
-                                onClick={() => handleSectionChange('home')}
-                                title="Go to Home"
-                            />
-                            
-                            {/* About */}
-                            <div
-                                key="about"
-                                className={`section-dot ${activeSection === 'about' ? 'active' : ''} ${['projects', 'blog', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
-                                data-section="About"
-                                onClick={() => handleSectionChange('about')}
-                                title="Go to About"
-                            />
-                            
-                            {/* Projects */}
-                            <div
-                                key="projects"
-                                className={`section-dot ${activeSection === 'projects' ? 'active' : ''} ${['blog', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
-                                data-section="Projects"
-                                onClick={() => handleSectionChange('projects')}
-                                title="Go to Projects"
-                            />
-                            
-                            {/* Blog */}
-                            <div
-                                key="blog"
-                                className={`section-dot ${activeSection === 'blog' ? 'active' : ''} ${['support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
-                                data-section="Blog"
-                                onClick={() => handleSectionChange('blog')}
-                                title="Go to Blog"
-                            />
-                            
-                            {/* Support */}
-                            <div
-                                key="support"
-                                className={`section-dot ${activeSection === 'support' ? 'active' : ''} ${['contact'].includes(activeSection) ? 'completed' : ''}`}
-                                data-section="Support"
-                                onClick={() => handleSectionChange('support')}
-                                title="Go to Support"
-                            />
-                            
-                            {/* Contact */}
-                            <div
-                                key="contact"
-                                className={`section-dot ${activeSection === 'contact' ? 'active' : ''}`}
-                                data-section="Contact"
-                                onClick={() => handleSectionChange('contact')}
-                                title="Go to Contact"
-                            />
-                        </div>
+    <div className="section-dots">
+    {/* Home */}
+    <div
+        key="home"
+        className={`section-dot ${activeSection === 'home' ? 'active' : ''} ${['about', 'projects', 'blog', 'publications', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+        data-section="Home"
+        onClick={() => handleSectionChange('home')}
+        title="Go to Home"
+    />
+    
+    {/* About */}
+    <div
+        key="about"
+        className={`section-dot ${activeSection === 'about' ? 'active' : ''} ${['projects', 'blog', 'publications', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+        data-section="About"
+        onClick={() => handleSectionChange('about')}
+        title="Go to About"
+    />
+    
+    {/* Projects */}
+    <div
+        key="projects"
+        className={`section-dot ${activeSection === 'projects' ? 'active' : ''} ${['blog', 'publications', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+        data-section="Projects"
+        onClick={() => handleSectionChange('projects')}
+        title="Go to Projects"
+    />
+    
+    {/* Blog */}
+    <div
+        key="blog"
+        className={`section-dot ${activeSection === 'blog' ? 'active' : ''} ${['publications', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+        data-section="Blog"
+        onClick={() => handleSectionChange('blog')}
+        title="Go to Blog"
+    />
+    
+    {/* Publications */}
+    <div
+        key="publications"
+        className={`section-dot ${activeSection === 'publications' ? 'active' : ''} ${['support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+        data-section="Publications"
+        onClick={() => handleSectionChange('publications')}
+        title="Go to Publications"
+    />
+    
+    {/* Support */}
+    <div
+        key="support"
+        className={`section-dot ${activeSection === 'support' ? 'active' : ''} ${['contact'].includes(activeSection) ? 'completed' : ''}`}
+        data-section="Support"
+        onClick={() => handleSectionChange('support')}
+        title="Go to Support"
+    />
+    
+    {/* Contact */}
+    <div
+        key="contact"
+        className={`section-dot ${activeSection === 'contact' ? 'active' : ''}`}
+        data-section="Contact"
+        onClick={() => handleSectionChange('contact')}
+        title="Go to Contact"
+    />
+</div>
                     </div>
                     
                     {/* Previous section button */}
                     <div 
                         className={`scroll-indicator prev-section ${activeSection !== 'home' ? 'visible' : ''}`}
                         onClick={() => {
-                            const sectionsOrder = ['home', 'about', 'projects', 'blog', 'support', 'contact'];
+    const sectionsOrder = ['home', 'about', 'projects', 'blog', 'publications', 'support', 'contact'];
                             const currentIndex = sectionsOrder.indexOf(activeSection);
                             if (currentIndex > 0) {
                                 handleSectionChange(sectionsOrder[currentIndex - 1]);
@@ -11875,7 +12241,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                     <div 
                         className={`scroll-indicator next-section ${activeSection !== 'contact' ? 'visible' : ''}`}
                         onClick={() => {
-                            const sectionsOrder = ['home', 'about', 'projects', 'blog', 'support', 'contact'];
+                            const sectionsOrder = ['home', 'about', 'projects', 'blog', 'publications', 'support', 'contact'];
                             const currentIndex = sectionsOrder.indexOf(activeSection);
                             if (currentIndex < sectionsOrder.length - 1) {
                                 handleSectionChange(sectionsOrder[currentIndex + 1]);
