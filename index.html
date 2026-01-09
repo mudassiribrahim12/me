@@ -1194,6 +1194,125 @@ body:not(.dark-mode) .footer {
     margin-top: 2rem;
 }
 
+/* Fix for Code Window Container */
+.hero-visual {
+    position: relative;
+    height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Add padding */
+}
+
+.code-window {
+    position: relative;
+    width: 100%; /* Change from 90% to 100% */
+    height: 100%; /* Change from 80% to 100% */
+    background: var(--bg-surface);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.window-header {
+    height: 40px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 0.5rem;
+    flex-shrink: 0; /* Prevent stretching */
+}
+
+.window-content {
+    padding: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    overflow-y: auto; /* Add scroll if needed */
+    flex-grow: 1; /* Take remaining space */
+    white-space: pre-wrap; /* Allow wrapping */
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+/* Fix code line wrapping */
+.code-line {
+    display: block;
+    margin-bottom: 0.25rem;
+    position: relative;
+    padding-left: 1.5rem;
+    white-space: pre-wrap; /* Allow wrapping */
+    word-break: break-all; /* Break long words */
+    overflow-wrap: break-word;
+}
+
+.line-number {
+    position: absolute;
+    left: 0;
+    color: var(--text-light);
+    opacity: 0.6;
+    font-size: 0.9rem;
+    min-width: 1.5rem;
+    text-align: right;
+    user-select: none;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+    .hero-visual {
+        height: 350px;
+        padding: 15px;
+    }
+    
+    .window-content {
+        padding: 1rem;
+        font-size: 0.8rem;
+        line-height: 1.6;
+    }
+    
+    .code-line {
+        padding-left: 1.25rem;
+        font-size: 0.85rem;
+    }
+    
+    .line-number {
+        min-width: 1.25rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-visual {
+        height: 300px;
+        padding: 10px;
+    }
+    
+    .window-content {
+        padding: 0.75rem;
+        font-size: 0.75rem;
+        line-height: 1.5;
+    }
+    
+    .code-line {
+        padding-left: 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .line-number {
+        min-width: 1rem;
+        font-size: 0.7rem;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .profile-hero {
@@ -1551,40 +1670,6 @@ body:not(.dark-mode) .footer {
     }
 }
 
-/* Hero visual - code window */
-.hero-visual {
-    position: relative;
-    height: 400px;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.code-window {
-    position: relative;
-    width: 90%;
-    height: 80%;
-    background: var(--bg-surface);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    z-index: 2;
-}
-
-.window-header {
-    height: 40px;
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-    gap: 0.5rem;
-}
 
 .window-dot {
     width: 12px;
@@ -1596,12 +1681,6 @@ body:not(.dark-mode) .footer {
 .dot-yellow { background: #ffbd2e; }
 .dot-green { background: #28ca42; }
 
-.window-content {
-    padding: 1.5rem;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    line-height: 1.8;
-}
 
 /* Code window colors that work in both themes */
 .code-line { color: var(--text-secondary); }
@@ -1622,10 +1701,13 @@ body:not(.dark-mode) .footer {
     color: #d35400; /* Dark orange - good contrast on light background */
 }
 
-
-/* Updated rotating text animation */
+/* Updated rotating text animation - FIXED */
 @keyframes textInOut {
     0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    10% {
         opacity: 0;
         transform: translateY(20px);
     }
@@ -1633,11 +1715,11 @@ body:not(.dark-mode) .footer {
         opacity: 1;
         transform: translateY(0);
     }
-    70% {
+    30% {
         opacity: 1;
         transform: translateY(0);
     }
-    90% {
+    40% {
         opacity: 0;
         transform: translateY(-20px);
     }
@@ -1653,6 +1735,7 @@ body:not(.dark-mode) .footer {
     display: inline-block;
     vertical-align: middle;
     width: 300px;
+    margin-left: 10px; /* Add some spacing */
 }
 
 .rotating-text {
@@ -1666,13 +1749,23 @@ body:not(.dark-mode) .footer {
     opacity: 0;
     transform: translateY(20px);
     text-align: left;
-    transition: none;
+    white-space: nowrap;
 }
 
-.rotating-text.active {
-    opacity: 1;
-    transform: translateY(0);
-    animation: textInOut 4s ease-in-out forwards;
+/* Different animation delays for each text */
+.rotating-text:nth-child(1) {
+    animation: textInOut 12s infinite;
+    animation-delay: 0s;
+}
+
+.rotating-text:nth-child(2) {
+    animation: textInOut 12s infinite;
+    animation-delay: 4s;
+}
+
+.rotating-text:nth-child(3) {
+    animation: textInOut 12s infinite;
+    animation-delay: 8s;
 }
 
 /* Responsive design */
@@ -3035,24 +3128,6 @@ body {
     overflow-x: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
-}
-
-.code-line {
-    display: flex;
-    margin-bottom: 0.25rem;
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-.line-number {
-    position: absolute;
-    left: 0;
-    color: var(--text-light);
-    opacity: 0.6;
-    font-size: 0.9rem;
-    min-width: 1.5rem;
-    text-align: right;
-    user-select: none;
 }
 
 .code-keyword {
@@ -9334,40 +9409,8 @@ if (totalViewsElement && appViewsData.apps) {
     totalViewsElement.textContent = formatViews(totalViews);
 }
 
-// Add this component after your useState, useEffect import
-function RotatingText() {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    
-    const texts = [
-        "Research. Data. Innovation.",
-        "Building Insightful Applications",
-        "Simplifying Data Analytics",
-    ];
-    
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        }, 4000); // Change text every 4 seconds
-        
-        return () => clearInterval(interval);
-    }, [texts.length]);
-    
-    return (
-        <div className="rotating-text-container">
-            {texts.map((text, index) => (
-                <div 
-                    key={index}
-                    className={`rotating-text ${index === currentIndex ? 'active' : ''}`}
-                >
-                    {text}
-                </div>
-            ))}
-        </div>
-    );
-}
-
 function App() {
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
     const [activeSection, setActiveSection] = useState('home');
     const [formData, setFormData] = useState({
         name: '',
@@ -10128,34 +10171,32 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
 <section id="home" className={`section ${activeSection === 'home' ? 'active' : ''}`}>
     <div className="container">
         <div className="hero">
-            <div className="hero-content">
-                <h1>Building intuitive health analytics tools with <span className="gradient-text">R Shiny</span></h1>
-                <h2>
-                    <div className="rotating-text-container">
-                        <div className="rotating-text active">Healthcare Analytics</div>
-                        <div className="rotating-text">Statistical Tools</div>
-                        <div className="rotating-text">Data Visualization</div>
-                    </div>
-                </h2>
-                
-<h2 class="colorful-greeting">
-    Hi! I'm Mudasir
-</h2>
-<p>I am a registered nurse and I love research, and data analytics! I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers. Thank you for visiting, and I hope you enjoy exploring my projects.</p>
-                
-        <div className="hero-buttons">
-    <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); handleSectionChange('about'); }}>
-        <i className="fas fa-user"></i> Learn More About Me
-    </a>
-    <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); handleSectionChange('projects'); }}>
-        <i className="fas fa-project-diagram"></i> View My Projects
-    </a>
-    <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); handleSectionChange('contact'); }}>
-        <i className="fas fa-paper-plane"></i> Contact Me
-    </a>
+           <div className="hero-content">
+    <h1>Building intuitive health analytics tools with <span className="gradient-text">R Shiny</span></h1>
+    <h2>
+        <div className="rotating-text-container">
+            <div className="rotating-text">Healthcare Analytics</div>
+        </div>
+    </h2>
+    
+    <h2 className="colorful-greeting">
+        Hi! I'm Mudasir
+    </h2>
+    <p>I am a registered nurse and I love research, and data analytics! I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers. Thank you for visiting, and I hope you enjoy exploring my projects.</p>
+    
+    <div className="hero-buttons">
+        <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); handleSectionChange('about'); }}>
+            <i className="fas fa-user"></i> Learn More About Me
+        </a>
+        <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); handleSectionChange('projects'); }}>
+            <i className="fas fa-project-diagram"></i> View My Projects
+        </a>
+        <a href="#" className="btn btn-primary" onClick={(e) => { e.preventDefault(); handleSectionChange('contact'); }}>
+            <i className="fas fa-paper-plane"></i> Contact Me
+        </a>
+    </div>
 </div>
-                    </div>
-            
+           
             <div className="hero-visual">
                 <div className="code-window">
                     <div className="window-header">
