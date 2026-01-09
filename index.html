@@ -145,7 +145,7 @@
 .profile-image-container {
     width: 280px;
     height: 280px;
-    border-radius: 50%;
+    border-radius: 15px; /* Changed from 50% */
     overflow: hidden;
     border: 4px solid var(--primary);
     box-shadow: 0 20px 60px var(--shadow);
@@ -370,6 +370,55 @@
     color: var(--primary);
     font-size: 0.9rem;
 }
+
+/* ========== ELEGANT SIGNATURE ========== */
+.logo-elegant-signature {
+    font-family: 'Lucida Handwriting', 'Apple Chancery', 'Zapfino', cursive;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1565c0;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-shadow: 
+        1px 1px 2px rgba(21, 101, 192, 0.2),
+        0 0 1px rgba(21, 101, 192, 0.1);
+}
+
+/* Signature underline with pen pressure variation */
+.logo-elegant-signature::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-size: 200% 100%;
+    border-radius: 1px;
+    animation: underlineFlow 4s linear infinite;
+}
+
+@keyframes underlineFlow {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Hover effect */
+.logo-elegant-signature:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    color: #0d47a1;
+}
+
+/* Dark mode */
+.dark-mode .logo-elegant-signature {
+    color: #64b5f6;
+    text-shadow: 
+        1px 1px 2px rgba(100, 181, 246, 0.3),
+        0 0 1px rgba(100, 181, 246, 0.2);
+}
+
 
 /* Detailed Skills Section */
 .detailed-skills-section {
@@ -1155,18 +1204,17 @@ body:not(.dark-mode) .footer {
 
 .profile-image-large {
     position: relative;
-    width: 320px;
-    height: 320px;
+    width: auto;
+    max-width: 265px;
+    height: auto;
     margin: 0 auto;
 }
 
 .profile-image-large img {
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--primary);
-    box-shadow: 0 20px 60px var(--shadow);
+    height: auto;
+    border-radius: 15px; /* Changed from 50% to 15px */
+    object-fit: contain;
 }
 
 .profile-intro h1 {
@@ -4649,28 +4697,44 @@ body {
 .profile-image {
     width: 320px;
     height: 320px;
-    border-radius: 50%;
+    border-radius: 15px; /* Changed from 50% */
     overflow: hidden;
     margin: 0 auto;
     border: 4px solid var(--primary);
     box-shadow: 0 20px 60px var(--shadow);
     position: relative;
     background: var(--bg);
-    transform: translateY(-30px); /* Move the image itself up */
+    transform: translateY(-30px);
 }
 
 .profile-image img {
     width: 100%;
-    height: 120%; /* Make the image taller to show when moved up */
+    height: 120%;
     object-fit: cover;
     transition: transform 0.5s;
-    object-position: center 30%; /* Adjust which part of the image is visible */
+    object-position: center 30%;
 }
 
 /* When hovering, show more of the image */
 .profile-image:hover img {
     transform: scale(1.05);
     object-position: center 40%;
+}
+
+/* Add a subtle vignette effect to make the partial image look intentional */
+.profile-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, 
+        transparent 30%, 
+        rgba(0, 0, 0, 0.2) 70%, 
+        rgba(0, 0, 0, 0.4) 100%);
+    border-radius: 15px; /* Changed from 50% */
+    pointer-events: none;
 }
 
 /* Adjust the badges to stay in place */
@@ -4716,11 +4780,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at center, 
-        transparent 30%, 
-        rgba(0, 0, 0, 0.2) 70%, 
-        rgba(0, 0, 0, 0.4) 100%);
-    border-radius: 50%;
+    background: linear-gradient(to bottom, 
+        transparent 20%, 
+        rgba(0, 0, 0, 0.2) 80%);
+    border-radius: 15px; /* Match the image border-radius */
     pointer-events: none;
 }
 
@@ -4733,7 +4796,7 @@ body {
     transform: translateX(-50%);
     width: 340px;
     height: 340px;
-    border-radius: 50%;
+    border-radius: 20px; /* Changed from 50% to 20px */
     background: linear-gradient(45deg, var(--primary), var(--primary-light));
     opacity: 0.1;
     z-index: -1;
@@ -6059,6 +6122,7 @@ body {
 .profile-image-container .profile-image {
     border: 4px solid var(--primary) !important;
     box-shadow: 0 20px 60px var(--shadow) !important;
+    border-radius: 15px !important; /* Changed from 50% */
 }
 
 /* Remove dangling from modal and special cards */
@@ -7658,23 +7722,24 @@ h1, h2, h3, h4 {
 }
 
 .theme-toggle {
-    background: var(--glass);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    background: transparent; /* Changed from var(--glass) */
+    border: none; /* Removed border */
+    border-radius: 0; /* Changed from 50% */
+    width: auto; /* Changed from 40px */
+    height: auto; /* Changed from 40px */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--text);
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Keep this or adjust as needed */
     margin-left: 0.5rem;
+    padding: 0.5rem; /* Add some padding for better click area */
 }
 
 .theme-toggle:hover {
-    background: var(--primary);
-    color: white;
+    background: transparent; /* Remove hover background */
+    color: var(--primary); /* Keep hover color change */
 }
 
 /* Support link styling */
@@ -9419,8 +9484,6 @@ function App() {
         message: ''
     });
     const [showAllApps, setShowAllApps] = useState(false);
-    
-    // ADD THIS LINE - Mobile menu state
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
  // ============================================
@@ -9997,14 +10060,9 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
         <div className="app">
 <nav className="navbar">
     <div className="container nav-content">
-        <div 
-            className="logo" 
-            onClick={() => handleSectionChange('home')} 
-            style={{cursor: 'pointer'}}
-            title="Click to go to Home - Mudasir Mohammed Ibrahim"
-        >
-            mmi.
-        </div>
+<div className="logo" onClick={() => handleSectionChange('home')} style={{cursor: 'pointer'}}>
+    <span className="logo-elegant-signature">mudasiribrahim.com</span>
+</div>
 
         <div className="nav-right">
  <div className="nav-links">
@@ -10180,7 +10238,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
     </h2>
     
     <h2 className="colorful-greeting">
-        Hi! I'm Mudasir
+        Hi! I'm Mudasir 
     </h2>
     <p>I am a registered nurse and I love research, and data analytics! I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis for healthcare professionals, students, and researchers. Thank you for visiting, and I hope you enjoy exploring my projects.</p>
     
@@ -10737,14 +10795,14 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                 height: '350px',
                 cursor: 'pointer'
             }}>
-                <div style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    border: '6px solid var(--primary)',
-                    boxShadow: '0 20px 60px var(--shadow)',
-                    transition: 'transform 0.5s ease, box-shadow 0.5s ease'
+<div style={{
+    width: '100%',
+    height: '100%',
+    borderRadius: '15px', /* Changed from '50%' */
+    overflow: 'hidden',
+    border: '6px solid var(--primary)',
+    boxShadow: '0 20px 60px var(--shadow)',
+    transition: 'transform 0.5s ease, box-shadow 0.5s ease'
                 }} 
                 className="profile-image-zoom"
                 onMouseEnter={(e) => {
@@ -10766,7 +10824,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
                          style={{
                              width: '100%',
                              height: '100%',
-                             objectFit: 'cover',
+                             objectFit: 'contain',
                              objectPosition: 'center center',
                              transition: 'transform 0.5s ease'
                          }}
@@ -11214,7 +11272,7 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
             <i className="fas fa-certificate"></i>
             <div>
                 <strong>Reviewer Certificates</strong>
-                <p>View all my reviewer certificates and credentials</p>
+                <p>View my reviewer certificates</p>
             </div>
         </div>
     </div>
@@ -11814,9 +11872,9 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
             </a>
         </div>
         
-        <div className="footer-bottom">
+    <div className="footer-bottom">
             <p>
-                © 2026 All rights reserved. Built with <i className="fas fa-heart footer-heart"></i> in Ghana. Powered by
+                © {new Date().getFullYear()} All rights reserved. Built with <i className="fas fa-heart footer-heart"></i> in Ghana. Powered by
                 <span 
                     className="author-name"
                     onClick={() => scrollToTopOfActiveSection()}
