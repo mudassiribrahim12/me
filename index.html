@@ -11795,51 +11795,97 @@ const sections = ['home', 'projects', 'blog', 'about', 'support', 'contact'];
           
             </main>
             
-                {/* SCROLL NAVIGATION - ADD THIS HERE */}
-            <div className="scroll-navigation" id="scrollNavigation">
-                {/* Section progress dots */}
-                <div className="section-progress">
-                    <div className="section-dots">
-                        {sections.map((section, index) => (
+                         {/* SCROLL NAVIGATION - Consistent with header order */}
+                <div className="scroll-navigation" id="scrollNavigation">
+                    {/* Section progress dots - IN CORRECT ORDER */}
+                    <div className="section-progress">
+                        <div className="section-dots">
+                            {/* Home */}
                             <div
-                                key={section}
-                                className={`section-dot ${activeSection === section ? 'active' : ''} ${index < sections.indexOf(activeSection) ? 'completed' : ''}`}
-                                data-section={section.charAt(0).toUpperCase() + section.slice(1)}
-                                onClick={() => handleSectionChange(section)}
-                                title={`Go to ${section}`}
+                                key="home"
+                                className={`section-dot ${activeSection === 'home' ? 'active' : ''} ${['about', 'projects', 'blog', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+                                data-section="Home"
+                                onClick={() => handleSectionChange('home')}
+                                title="Go to Home"
                             />
-                        ))}
+                            
+                            {/* About */}
+                            <div
+                                key="about"
+                                className={`section-dot ${activeSection === 'about' ? 'active' : ''} ${['projects', 'blog', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+                                data-section="About"
+                                onClick={() => handleSectionChange('about')}
+                                title="Go to About"
+                            />
+                            
+                            {/* Projects */}
+                            <div
+                                key="projects"
+                                className={`section-dot ${activeSection === 'projects' ? 'active' : ''} ${['blog', 'support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+                                data-section="Projects"
+                                onClick={() => handleSectionChange('projects')}
+                                title="Go to Projects"
+                            />
+                            
+                            {/* Blog */}
+                            <div
+                                key="blog"
+                                className={`section-dot ${activeSection === 'blog' ? 'active' : ''} ${['support', 'contact'].includes(activeSection) ? 'completed' : ''}`}
+                                data-section="Blog"
+                                onClick={() => handleSectionChange('blog')}
+                                title="Go to Blog"
+                            />
+                            
+                            {/* Support */}
+                            <div
+                                key="support"
+                                className={`section-dot ${activeSection === 'support' ? 'active' : ''} ${['contact'].includes(activeSection) ? 'completed' : ''}`}
+                                data-section="Support"
+                                onClick={() => handleSectionChange('support')}
+                                title="Go to Support"
+                            />
+                            
+                            {/* Contact */}
+                            <div
+                                key="contact"
+                                className={`section-dot ${activeSection === 'contact' ? 'active' : ''}`}
+                                data-section="Contact"
+                                onClick={() => handleSectionChange('contact')}
+                                title="Go to Contact"
+                            />
+                        </div>
+                    </div>
+                    
+                    {/* Previous section button */}
+                    <div 
+                        className={`scroll-indicator prev-section ${activeSection !== 'home' ? 'visible' : ''}`}
+                        onClick={() => {
+                            const sectionsOrder = ['home', 'about', 'projects', 'blog', 'support', 'contact'];
+                            const currentIndex = sectionsOrder.indexOf(activeSection);
+                            if (currentIndex > 0) {
+                                handleSectionChange(sectionsOrder[currentIndex - 1]);
+                            }
+                        }}
+                        title="Previous section"
+                    >
+                        <i className="fas fa-chevron-up"></i>
+                    </div>
+                    
+                    {/* Next section button */}
+                    <div 
+                        className={`scroll-indicator next-section ${activeSection !== 'contact' ? 'visible' : ''}`}
+                        onClick={() => {
+                            const sectionsOrder = ['home', 'about', 'projects', 'blog', 'support', 'contact'];
+                            const currentIndex = sectionsOrder.indexOf(activeSection);
+                            if (currentIndex < sectionsOrder.length - 1) {
+                                handleSectionChange(sectionsOrder[currentIndex + 1]);
+                            }
+                        }}
+                        title="Next section"
+                    >
+                        <i className="fas fa-chevron-down"></i>
                     </div>
                 </div>
-                
-                {/* Previous section button */}
-                <div 
-                    className={`scroll-indicator prev-section ${activeSection !== 'home' ? 'visible' : ''}`}
-                    onClick={() => {
-                        const currentIndex = sections.indexOf(activeSection);
-                        if (currentIndex > 0) {
-                            handleSectionChange(sections[currentIndex - 1]);
-                        }
-                    }}
-                    title="Previous section"
-                >
-                    <i className="fas fa-chevron-up"></i>
-                </div>
-                
-                {/* Next section button */}
-                <div 
-                    className={`scroll-indicator next-section ${activeSection !== sections[sections.length - 1] ? 'visible' : ''}`}
-                    onClick={() => {
-                        const currentIndex = sections.indexOf(activeSection);
-                        if (currentIndex < sections.length - 1) {
-                            handleSectionChange(sections[currentIndex + 1]);
-                        }
-                    }}
-                    title="Next section"
-                >
-                    <i className="fas fa-chevron-down"></i>
-                </div>
-            </div>
 
  <footer className="footer">
     <div className="container">
