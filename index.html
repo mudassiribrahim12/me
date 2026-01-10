@@ -10785,55 +10785,134 @@ const sections = ['home', 'about', 'projects', 'blog', 'publications', 'buy-me-a
             <h2 className="section-title">About Me</h2>
         </div>
 
-        {/* Profile Summary Card */}
-       <div className="profile-image-centered-container glass-card" style={{textAlign: 'center', marginBottom: '3rem', padding: '2rem'}}>
-    <div className="profile-image-large">
+{/* Profile Summary Card */}
+<div className="profile-image-centered-container glass-card" style={{textAlign: 'center', marginBottom: '3rem', padding: '2rem'}}>
+    
+    {/* Professional Profile Picture with Light Border Frame */}
+    <div className="profile-image-large" style={{
+        position: 'relative',
+        margin: '0 auto',
+        width: '340px',
+        height: '340px',
+        borderRadius: '20px',
+        background: 'transparent',
+        padding: '8px',
+        boxShadow: '0 10px 30px rgba(99, 102, 241, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3)',
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        marginBottom: '2rem',
+        border: '1px solid rgba(99, 102, 241, 0.2)'
+    }} onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'scale(1.02)';
+        e.currentTarget.style.boxShadow = '0 15px 40px rgba(99, 102, 241, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.4)';
+        e.currentTarget.style.border = '1px solid rgba(99, 102, 241, 0.3)';
+    }} onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'scale(1)';
+        e.currentTarget.style.boxShadow = '0 10px 30px rgba(99, 102, 241, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3)';
+        e.currentTarget.style.border = '1px solid rgba(99, 102, 241, 0.2)';
+    }}>
         <div style={{
             width: '100%',
             height: '100%',
-            borderRadius: '15px', /* Changed from '50%' */
+            borderRadius: '16px',
             overflow: 'hidden',
-            transition: 'transform 0.5s ease, box-shadow 0.5s ease'
-        }} 
-        className="profile-image-zoom"
-        onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.05)';
-            e.currentTarget.style.boxShadow = '0 30px 80px rgba(99, 102, 241, 0.4)';
-        }}
-        onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = '0 20px 60px var(--shadow)';
-        }}
-        >
-            <img src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" 
+            border: '2px solid rgba(255, 255, 255, 0.9)',
+            boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.05)',
+            position: 'relative',
+            background: 'var(--bg-card)'
+        }}>
+            <img 
+                src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" 
                 alt="Mudasir Mohammed Ibrahim"
                 onError={(e) => {
                     e.target.onerror = null;
                     e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--gradient); color: white; font-size: 3rem;"><i class="fas fa-user-graduate"></i></div>';
+                    const parent = e.target.parentElement;
+                    parent.innerHTML = '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; font-size: 3rem; border-radius: 16px;"><i class="fas fa-user-graduate"></i></div>';
                 }}
                 style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'contain',
-                    objectPosition: 'center center',
-                    transition: 'transform 0.5s ease'
+                    objectFit: 'cover',
+                    objectPosition: 'center 30%',
+                    transition: 'transform 0.7s ease',
+                    filter: 'brightness(1.05) saturate(1.1)'
                 }}
-                className="profile-image-inner"
+                onMouseEnter={(e) => {
+                    e.target.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                    e.target.style.transform = 'scale(1)';
+                }}
             />
+            
+            {/* Subtle vignette effect */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.05) 100%)',
+                pointerEvents: 'none'
+            }}></div>
         </div>
+        
+        {/* Minimal corner accents */}
+        <div style={{
+            position: 'absolute',
+            top: '12px',
+            left: '12px',
+            width: '20px',
+            height: '20px',
+            borderTop: '2px solid rgba(99, 102, 241, 0.4)',
+            borderLeft: '2px solid rgba(99, 102, 241, 0.4)',
+            borderTopLeftRadius: '8px'
+        }}></div>
+        <div style={{
+            position: 'absolute',
+            top: '12px',
+            right: '12px',
+            width: '20px',
+            height: '20px',
+            borderTop: '2px solid rgba(99, 102, 241, 0.4)',
+            borderRight: '2px solid rgba(99, 102, 241, 0.4)',
+            borderTopRightRadius: '8px'
+        }}></div>
+        <div style={{
+            position: 'absolute',
+            bottom: '12px',
+            left: '12px',
+            width: '20px',
+            height: '20px',
+            borderBottom: '2px solid rgba(99, 102, 241, 0.4)',
+            borderLeft: '2px solid rgba(99, 102, 241, 0.4)',
+            borderBottomLeftRadius: '8px'
+        }}></div>
+        <div style={{
+            position: 'absolute',
+            bottom: '12px',
+            right: '12px',
+            width: '20px',
+            height: '20px',
+            borderBottom: '2px solid rgba(99, 102, 241, 0.4)',
+            borderRight: '2px solid rgba(99, 102, 241, 0.4)',
+            borderBottomRightRadius: '8px'
+        }}></div>
     </div>
+    {/* Profile picture container CLOSES here */}
+    
+    {/* Name, Profession, Location, and Download Resume BELOW the picture */}
     <h1 style={{marginBottom: '0.5rem', fontSize: '2.5rem'}}>Mudasir Mohammed Ibrahim</h1>
     <h2 className="professional-title" style={{
         color: 'var(--primary)', 
         fontSize: '1.4rem', 
         fontWeight: '600',
-        marginBottom: '0.5rem'  /* Reduced margin */
+        marginBottom: '0.5rem'
     }}>
         Registered Nurse
     </h2>
     
-    {/* ADDED LOCATION SECTION HERE */}
+    {/* Location Section */}
     <div className="location-info" style={{
         display: 'flex',
         alignItems: 'center',
@@ -10850,7 +10929,53 @@ const sections = ['home', 'about', 'projects', 'blog', 'publications', 'buy-me-a
         }}></i>
         <span>Tamale, Ghana</span>
     </div>
+    
+    {/* Download Resume Section */}
+    <div className="cv-download-section" style={{
+        marginTop: '1.5rem',
+        padding: '1rem',
+        background: 'rgba(99, 102, 241, 0.08)',
+        borderRadius: '12px',
+        border: '2px solid rgba(99, 102, 241, 0.2)'
+    }}>
+        <a 
+            href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-download-cv"
+            style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                padding: '0.8rem 1.5rem',
+                background: 'linear-gradient(135deg, var(--primary), var(--primary-light))',
+                color: 'white',
+                borderRadius: '8px',
+                fontWeight: '600',
+                textDecoration: 'none',
+                fontSize: '0.95rem',
+                transition: 'all 0.3s ease',
+                width: '100%',
+                justifyContent: 'center',
+                boxShadow: '0 4px 15px rgba(99, 102, 241, 0.3)'
+            }}
+            onMouseOver={(e) => {
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 6px 20px rgba(99, 102, 241, 0.4)';
+                e.target.style.background = 'linear-gradient(135deg, var(--primary-light), var(--primary))';
+            }}
+            onMouseOut={(e) => {
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)';
+                e.target.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-light))';
+            }}
+        >
+            <i className="fas fa-download"></i>
+            Download Resume
+        </a>
+    </div>
 </div>
+
 
         {/* Professional Journey */}
         <div className="professional-journey glass-card">
