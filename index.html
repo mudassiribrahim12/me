@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>Mudasir Mohammed Ibrahim</title>
+    <title>Mudasir Mohammed Ibrahim - Home</title>
         <meta name="title" content="Mudasir Mohammed Ibrahim">
     <meta name="description" content="Official Portfolio Website of Mudasir Mohammed Ibrahim – Registered Nurse in Tamale, Ghana">
 <meta name="theme-color" content="#1a56db">
@@ -1844,6 +1844,224 @@ body.dark-mode .certificate-link:hover {
                 padding: 15px;
             }
         }
+        
+        /* ========== TABLET/IPAD: NO HAMBURGER, SHOW TABS DIRECTLY (768px - 1024px) ========== */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .full-width-header {
+        height: 70px;
+    }
+    
+    .header-container {
+        padding: 0 25px;
+        height: 70px;
+        gap: 20px;
+        justify-content: space-between;
+    }
+    
+    .logo {
+        height: 70px !important;
+        line-height: 70px !important;
+        font-size: 1.2rem;
+        flex: 0 0 auto;
+    }
+    
+    /* HIDE hamburger button on tablets */
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    /* SHOW the nav-container on tablets */
+    .nav-container {
+        display: flex !important;
+        flex: 1;
+        justify-content: space-between;
+    }
+    
+    /* SHOW tabs container */
+    .tabs-container {
+        display: flex !important;
+        margin-left: 20px;
+    }
+    
+    /* Adjust nav list for tablet */
+    .nav-list {
+        gap: 20px;
+    }
+    
+    .nav-item a {
+        font-size: 1rem;
+    }
+    
+    /* HIDE social icons and dark mode toggle on tablets */
+    .header-right {
+        display: none !important;
+    }
+    
+    /* Adjust content for tablet */
+    .content-container {
+        padding: 40px 30px;
+    }
+    
+    /* Tablet grid adjustments */
+    .shiny-apps-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    /* Hide mobile menu if somehow shown */
+    .nav-container.mobile-open {
+        display: flex !important;
+        position: static;
+        height: auto;
+        width: auto;
+        background-color: transparent;
+        border-top: none;
+        box-shadow: none;
+        animation: none;
+        flex-direction: row;
+        padding: 0;
+    }
+    
+    .nav-container.mobile-open .tabs-container {
+        margin-bottom: 0;
+    }
+    
+    .nav-container.mobile-open .nav-list {
+        flex-direction: row;
+        gap: 20px;
+        height: 70px;
+    }
+    
+    .nav-container.mobile-open .nav-item {
+        width: auto;
+        height: 70px;
+    }
+    
+    .nav-container.mobile-open .nav-item a {
+        height: 70px;
+        line-height: 70px;
+        padding: 0;
+        border-bottom: none;
+        font-size: 1rem;
+        width: auto;
+    }
+    
+    .nav-container.mobile-open .nav-item a::after {
+        display: block;
+    }
+    
+    .nav-container.mobile-open .nav-item a.active {
+        background-color: transparent;
+        border-left: none;
+    }
+}
+
+/* ========== LARGER TABLETS (800px - 1024px) ========== */
+@media (min-width: 800px) and (max-width: 1024px) {
+    .header-container {
+        padding: 0 30px;
+    }
+    
+    .nav-list {
+        gap: 25px;
+    }
+    
+    .nav-item a {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========== DESKTOP: SHOW EVERYTHING (above 1024px) ========== */
+@media (min-width: 1025px) {
+    /* Your existing desktop styles remain */
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .nav-container {
+        display: flex !important;
+    }
+    
+    .header-right {
+        display: flex !important;
+    }
+}
+
+/* ========== PHONES: HAMBURGER WITH EVERYTHING (below 768px) ========== */
+/* Keep your existing phone styles */
+@media (max-width: 767px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .nav-container:not(.mobile-open) {
+        display: none;
+    }
+    
+    .header-right {
+        display: none;
+    }
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: -60px; /* Hidden by default */
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+    border: 2px solid var(--nav-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.visible {
+    bottom: 30px; /* Visible position */
+}
+
+.back-to-top:hover {
+    background-color: var(--nav-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Adjust for tablets */
+@media (max-width: 1024px) {
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        right: 20px;
+    }
+    
+    .back-to-top.visible {
+        bottom: 20px;
+    }
+}
+
+/* Adjust for phones */
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        right: 15px;
+    }
+    
+    .back-to-top.visible {
+        bottom: 15px;
+    }
+}
+        
     </style>
    
 </head>
@@ -1862,6 +2080,7 @@ body.dark-mode .certificate-link:hover {
             const [visiblePosts, setVisiblePosts] = useState(50);
             const [showContactForm, setShowContactForm] = useState(false);
             const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+            const [showBackToTop, setShowBackToTop] = useState(false);
 
             const toggleDarkMode = () => {
                 setDarkMode(!darkMode);
@@ -1954,6 +2173,36 @@ useEffect(() => {
     }
 }, [showContactForm]);
 
+// Function to scroll to top
+const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+};
+
+// Effect to show/hide back to top button
+useEffect(() => {
+    const checkScrollPosition = () => {
+        const footer = document.querySelector('.footer');
+        if (!footer) return;
+        
+        const footerRect = footer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Show button when footer starts appearing in viewport
+        if (footerRect.top < windowHeight - 100) {
+            setShowBackToTop(true);
+        } else {
+            setShowBackToTop(false);
+        }
+    };
+
+    window.addEventListener('scroll', checkScrollPosition);
+    return () => window.removeEventListener('scroll', checkScrollPosition);
+}, []);
+
+
             // Blog loading functions
             useEffect(() => {
                 if (activeSection === 'blog') {
@@ -2030,59 +2279,89 @@ useEffect(() => {
             
             <h1 className="profile-name">Mudasir Mohammed Ibrahim</h1>
             
-      <div className="profile-social-icons">
-    <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="ORCID">
-        <i className="fab fa-orcid"></i>
-    </a>
-    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="Google Scholar">
-        <i className="fas fa-graduation-cap"></i>
-    </a>
-    <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="GitHub">
-        <i className="fab fa-github"></i>
-    </a>
-    <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="LinkedIn">
-        <i className="fab fa-linkedin"></i>
-    </a>
-</div>            
+           <div className="profile-social-icons">
+            <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="ORCID">
+                <i className="fab fa-orcid"></i>
+            </a>
+            <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="Google Scholar">
+                <i className="fas fa-graduation-cap"></i>
+            </a>
+            <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="GitHub">
+                <i className="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="LinkedIn">
+                <i className="fab fa-linkedin"></i>
+            </a>
+            <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="Download CV">
+                <i className="fas fa-file-download"></i>
+            </a>
+        </div>
+        
             <p className="profile-intro">
-                I am a registered nurse and I love research, and data analytics! I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis in R for healthcare professionals, students, and researchers. Thank you for visiting, and I hope you enjoy exploring and benefiting from my R Shiny apps.
+I am a registered nurse, and I love research and data analytics. Aside from conducting research and performing data analysis, I am passionate about creating technology that makes a difference. I develop R Shiny web applications that simplify complex data analysis in R for healthcare professionals, students, and researchers. Thank you for visiting, and I hope you enjoy exploring and benefiting from my R Shiny apps.
             </p>
         </div>
 
-        {/* Education and Societies */}
+              {/* EDUCATION SECTION */}
         <div className="expertise-section">
-            <h2>Education and Professional Associations</h2>
+            <h2>Education</h2>
+            
+            <div className="education-item">
+                <div className="edu-title">Bachelor of Science in Nursing</div>
+                <div className="edu-institution">University of Cape Coast</div>
+                <div className="edu-period">2022 - 2024</div>
+            </div>
+            
+            <div className="education-item">
+                <div className="edu-title">Diploma in General Nursing</div>
+                <div className="edu-institution">Nurses' and Midwives' Training College, Tamale</div>
+                <div className="edu-period">2017 - 2020</div>
+            </div>
+            
+            <div className="education-item">
+                <div className="edu-title">Business (Cost Accounting)</div>
+                <div className="edu-institution">Northern School of Business (NOBISCO), Tamale</div>
+                <div className="edu-period">2013 - 2016</div>
+            </div>
+        </div>
+        
+       {/* Employment History */}
+        <div className="expertise-section">
+            <h2>Employment History</h2>
             
             <div className="professional-item">
-                <div className="professional-title">Bachelor of Science in Nursing</div>
-                <div className="professional-org">University of Cape Coast</div>
-                <div className="professional-period">2022 - 2024</div>
+                <div className="professional-title">Staff Nurse</div>
+                <div className="professional-org">Tamale Teaching Hospital</div>
+                <div className="professional-period">2025 - Present</div>
             </div>
             
             <div className="professional-item">
-                <div className="professional-title">Diploma in General Nursing</div>
-                <div className="professional-org">Nurses' and Midwives' Training College, Tamale</div>
-                <div className="professional-period">2017 - 2020</div>
+                <div className="professional-title">Rotation Nurse</div>
+                <div className="professional-org">Tamale Teaching Hospital</div>
+                <div className="professional-period">2021 - 2022</div>
             </div>
-            
-            <div className="professional-item">
-                <div className="professional-title">Business (Cost Accounting)</div>
-                <div className="professional-org">Northern School of Business (NOBISCO), Tamale</div>
-                <div className="professional-period">2013 - 2016</div>
-            </div>
+        </div>
+
+        {/* PROFESSIONAL ASSOCIATIONS SECTION */}
+        <div className="expertise-section">
+            <h2>Professional Associations</h2>
             
             <div className="professional-item">
                 <div className="professional-title">Registered General Nurse (RGN)</div>
                 <div className="professional-org">Nursing and Midwifery Council of Ghana (NMC)</div>
                 <div className="professional-status">Licensed</div>
+                <div className="professional-period">Registered and licensed to practice nursing in Ghana</div>
             </div>
             
             <div className="professional-item">
                 <div className="professional-title">Active Member</div>
                 <div className="professional-org">Ghana Registered Nurses and Midwives Association (GRNMA)</div>
                 <div className="professional-status">Active</div>
+                <div className="professional-period">Professional membership since 2025</div>
             </div>
         </div>
+        
+        {/* Awards and Recognition SECTION */}
 
 <div className="expertise-section">
     <h2>Awards and Recognition</h2>
@@ -2091,8 +2370,6 @@ useEffect(() => {
         <div className="professional-title">Academic Reviewer Recognition</div>
         <div className="professional-org">Multiple Scientific Journals</div>
         <div className="professional-period">2025-Present</div>
-        <p>Official reviewer certificates and recognition letters from leading scientific journals.</p>
-        
         <a 
             href="https://1drv.ms/f/c/3ce355b70d76f4f7/Ejkh6TgFPhtNkgsfwRv6_OgBpu9S58AyaqHR_AMPJsR4Rg?e=jU8KMP" 
             target="_blank" 
@@ -2105,9 +2382,9 @@ useEffect(() => {
     </div>
 </div>
 
-        {/* Skills and Hobbies */}
+        {/* Skills Section */}
         <div className="expertise-section">
-            <h2>Skills and Hobbies</h2>
+            <h2>Skills</h2>
             
             <div className="expertise-category">
                 <h3>Technical Skills</h3>
@@ -2138,33 +2415,39 @@ useEffect(() => {
                     ))}
                 </div>
             </div>
+        </div>
 
+        {/* Hobbies Section */}
+        <div className="expertise-section">
+            <h2>Hobbies and Personal Interests</h2>
+            
             <div className="expertise-category">
-                <h3>Hobbies and Other Interests</h3>
-                <p style={{marginTop: '1em', color: 'var(--position-color)'}}>
+                <p style={{marginTop: '1em', color: 'var(--position-color)', lineHeight: '1.6'}}>
                     Conducting data analysis, developing R Shiny web applications, academic writing, watching movies, listening to songs of the 80s and 90s.
                 </p>
             </div>
         </div>
-
-              {/* Professional Experience */}
+        
+                {/* Conferences Attended Section */}
         <div className="expertise-section">
-            <h2>Professional Experience</h2>
+            <h2>Conferences Attended</h2>
             
             <div className="professional-item">
-                <div className="professional-title">Staff Nurse</div>
-                <div className="professional-org">Tamale Teaching Hospital</div>
-                <div className="professional-period">2025 - Present</div>
-                <p>Provide comprehensive nursing care for patients with acute and chronic conditions, including cancer, hypertension, heart failure, chronic liver disease, and chronic kidney disease. Responsibilities include patient assessment, medication administration, monitoring clinical outcomes, and patient and family education.</p>
+                <div className="professional-title">Nurses' and Midwives' Training College-Tamale Scientific Session 2024</div>
+                <div className="professional-org">Tamale, Ghana</div>
+                <div className="professional-period">2024</div>
+                <div className="professional-theme">Theme: Bridging the gap between theory and practice: translating research into nursing practice</div>
             </div>
             
             <div className="professional-item">
-                <div className="professional-title">Rotation Nurse</div>
+                <div className="professional-title">Tamale Teaching Hospital Scientific Research Conference</div>
                 <div className="professional-org">Tamale Teaching Hospital</div>
-                <div className="professional-period">2021 - 2022</div>
-                <p>Delivered patient care across Public Health, Internal Medicine, Pediatrics, Emergency, and Oncology units. Supported the Child Welfare Clinic through routine assessments, immunizations, medication administration, and health education for parents and caregivers.</p>
+                <div className="professional-period">2022</div>
+                
+                <div className="professional-theme">Theme: Harnessing the Intellectual Prowess of Researchers for Quality Healthcare Delivery at Tamale Teaching Hospital</div>
             </div>
         </div>
+        
         {/* Contact Form - Only shows when user clicks footer link */}
         {showContactForm && (
             <div id="contact-form" className="expertise-section" style={{marginTop: '3em', animation: 'fadeIn 0.5s ease'}}>
@@ -2854,6 +3137,18 @@ useEffect(() => {
                         {activeSection === 'shiny' && renderShinyApps()}
                         {activeSection === 'blog' && renderBlog()}
                     </div>
+                    
+                    {/* Back to Top Button */}
+        <div 
+            className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
+            onClick={scrollToTop}
+            title="Back to Top"
+        >
+            <i className="fas fa-chevron-up"></i>
+        </div>
+        
+        <div className="footer">
+        </div>
 <div className="footer">
     <div className="footer-content">
         <div className="copyright">
