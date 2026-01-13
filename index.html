@@ -440,6 +440,163 @@ li {
     }
 }
 
+/* Blog Layout with Filter on LEFT */
+.blog-container {
+    display: flex;
+    gap: 40px;
+    margin: 2em 0;
+}
+
+.blog-content {
+    flex: 3;
+    /* Blog posts on right */
+}
+
+.blog-sidebar {
+    flex: 1;
+    min-width: 220px;
+    max-width: 280px;
+    /* Archive filter on left */
+}
+
+/* Archive Filter Styles */
+.archive-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    position: sticky;
+    top: 90px;
+}
+
+.archive-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--header-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.archive-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.archive-item {
+    margin-bottom: 10px;
+}
+
+.archive-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.archive-button:hover {
+    background-color: var(--light-bg);
+    border-color: var(--nav-hover);
+}
+
+.archive-button.active {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    border-color: var(--nav-border);
+}
+
+.archive-month {
+    font-weight: 500;
+}
+
+.archive-year {
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.post-count-badge {
+    background-color: var(--nav-hover);
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    float: right;
+}
+
+.archive-button.active .post-count-badge {
+    background-color: var(--nav-text);
+    color: var(--nav-bg);
+}
+
+.archive-total {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--position-color);
+    text-align: center;
+}
+
+/* Selected month info */
+.selected-month-info {
+    background-color: var(--light-bg);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--nav-hover);
+}
+
+.selected-month-text {
+    font-weight: 600;
+    color: var(--header-color);
+    margin-bottom: 5px;
+}
+
+.show-all-button {
+    display: inline-block;
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    transition: all 0.2s ease;
+}
+
+.show-all-button:hover {
+    background-color: var(--skill-bg);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .blog-container {
+        flex-direction: column;
+    }
+    
+    .blog-sidebar {
+        max-width: 100%;
+        order: -1; /* Filter shows FIRST on mobile */
+        margin-bottom: 30px;
+    }
+    
+    .archive-section {
+        position: static;
+    }
+}
+
     /* Make publication text darker */
 .publication-authors {
     color: #333; /* Darker */
@@ -2081,6 +2238,8 @@ body.dark-mode .certificate-link:hover {
             const [showContactForm, setShowContactForm] = useState(false);
             const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
             const [showBackToTop, setShowBackToTop] = useState(false);
+            const [selectedMonth, setSelectedMonth] = useState(null);
+            const [filteredPosts, setFilteredPosts] = useState([]);
 
             const toggleDarkMode = () => {
                 setDarkMode(!darkMode);
@@ -2210,57 +2369,87 @@ useEffect(() => {
                 }
             }, [activeSection]);
 
-            const loadBlogPosts = async () => {
-                setLoadingBlog(true);
-                setBlogError(false);
-                
-                try {
-                    const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=100';
-                    const proxyUrl = 'https://api.allorigins.win/get?url=';
-                    const fullUrl = proxyUrl + encodeURIComponent(rssFeedUrl);
-                    
-                    const response = await fetch(fullUrl);
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    
-                    const data = await response.json();
-                    const feedData = JSON.parse(data.contents);
-                    const posts = feedData.feed.entry || [];
-                    
-                    if (posts.length === 0) {
-                        setBlogError(true);
-                    } else {
-                        const sortedPosts = posts.sort((a, b) => {
-                            const dateA = new Date(a.published?.$t || 0);
-                            const dateB = new Date(b.published?.$t || 0);
-                            return dateB - dateA;
-                        });
-                        
-                        setBlogPosts(sortedPosts);
-                        setVisiblePosts(50);
-                    }
-                } catch (error) {
-                    console.error('Error fetching blog posts:', error);
-                    setBlogError(true);
-                } finally {
-                    setLoadingBlog(false);
-                }
-            };
+const loadBlogPosts = async () => {
+    setLoadingBlog(true);
+    setBlogError(false);
+    
+    try {
+        const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=100';
+        const proxyUrl = 'https://api.allorigins.win/get?url=';
+        const fullUrl = proxyUrl + encodeURIComponent(rssFeedUrl);
+        
+        const response = await fetch(fullUrl);
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        const data = await response.json();
+        const feedData = JSON.parse(data.contents);
+        const posts = feedData.feed.entry || [];
+        
+        if (posts.length === 0) {
+            setBlogError(true);
+        } else {
+            const sortedPosts = posts.sort((a, b) => {
+                const dateA = new Date(a.published?.$t || 0);
+                const dateB = new Date(b.published?.$t || 0);
+                return dateB - dateA;
+            });
+            
+            setBlogPosts(sortedPosts);
+            setFilteredPosts(sortedPosts); // Initialize filtered posts
+            setVisiblePosts(10);
+            setSelectedMonth(null); // Reset filter
+        }
+    } catch (error) {
+        console.error('Error fetching blog posts:', error);
+        setBlogError(true);
+    } finally {
+        setLoadingBlog(false);
+    }
+};
 
-            const extractExcerpt = (content, maxLength) => {
-                if (!content) return 'No content available';
-                
-                const text = content.replace(/<[^>]*>/g, '');
-                const decoded = text.replace(/&amp;/g, '&')
-                                   .replace(/&lt;/g, '<')
-                                   .replace(/&gt;/g, '>')
-                                   .replace(/&quot;/g, '"')
-                                   .replace(/&#39;/g, "'");
-                
-                if (decoded.length > maxLength) {
-                    return decoded.substring(0, maxLength).trim() + '...';
-                }
-                return decoded.trim();
-            };
+           const extractExcerpt = (content, maxLength) => {
+    if (!content) return 'No content available';
+    
+    // Remove all HTML tags
+    let text = content.replace(/<[^>]*>/g, '');
+    
+    // Decode all HTML entities (including &nbsp; and others)
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    let decoded = textarea.value;
+    
+    // Alternative method if the above doesn't work in all browsers
+    if (decoded === text) {
+        decoded = text
+            .replace(/&nbsp;/g, ' ')  // Replace non-breaking spaces with regular spaces
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/&ldquo;/g, '"')  // Left double quote
+            .replace(/&rdquo;/g, '"')  // Right double quote
+            .replace(/&lsquo;/g, "'")  // Left single quote
+            .replace(/&rsquo;/g, "'")  // Right single quote
+            .replace(/&mdash;/g, '—')  // Em dash
+            .replace(/&ndash;/g, '–')  // En dash
+            .replace(/&hellip;/g, '…') // Ellipsis
+            .replace(/&copy;/g, '©')   // Copyright
+            .replace(/&reg;/g, '®')    // Registered
+            .replace(/&trade;/g, '™')  // Trademark
+            .replace(/&#8217;/g, "'")  // Apostrophe (numeric)
+            .replace(/&#8220;/g, '"')  // Left double quote (numeric)
+            .replace(/&#8221;/g, '"'); // Right double quote (numeric)
+    }
+    
+    // Remove extra whitespace (including leading/trailing spaces from &nbsp;)
+    decoded = decoded.replace(/\s+/g, ' ').trim();
+    
+    if (decoded.length > maxLength) {
+        return decoded.substring(0, maxLength).trim() + '...';
+    }
+    return decoded.trim();
+};
 
             const loadMorePosts = () => {
                 setVisiblePosts(prev => prev + 50);
@@ -2951,75 +3140,243 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
     );
 };
 
-            const renderBlog = () => (
-                <div className="section">
-                    <h2>Blog Posts</h2>
-                    
-                    {loadingBlog ? (
-                        <div className="blog-loading">
-                            <i className="fas fa-spinner fa-spin" style={{fontSize: '2rem', marginBottom: '20px'}}></i>
-                            <p>Loading blog posts...</p>
-                        </div>
-                    ) : blogError ? (
-                        <div className="blog-error">
-                            <i className="fas fa-exclamation-triangle"></i>
-                            <p>Unable to load blog posts from Mudasir-Ibrahim.blogspot.com</p>
-                        </div>
-                    ) : blogPosts.length > 0 ? (
-                        <>
-                            <div className="blog-posts-list">
-                                {blogPosts.slice(0, visiblePosts).map((post, index) => {
-                                    const title = post.title?.$t || 'Untitled Post';
-                                    const content = post.content?.$t || '';
-                                    const published = post.published?.$t || new Date().toISOString();
-                                    const link = post.link?.find(l => l.rel === 'alternate')?.href || '#';
-                                    
-                                    const excerpt = extractExcerpt(content, 250);
-                                    
-                                    const date = new Date(published).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'long',
-                                        day: 'numeric'
-                                    });
+   
+ const renderBlog = () => {
+    // Group posts by month-year and get latest month
+    const groupedPosts = {};
+    let latestMonth = null;
+    let latestDate = null;
+    
+    blogPosts.forEach(post => {
+        const published = post.published?.$t || new Date().toISOString();
+        const date = new Date(published);
+        const year = date.getFullYear();
+        const month = date.toLocaleDateString('en-US', { month: 'long' });
+        const monthYearKey = `${month} ${year}`;
+        const monthNum = date.getMonth();
+        
+        // Track latest month
+        if (!latestDate || date > latestDate) {
+            latestDate = date;
+            latestMonth = monthYearKey;
+        }
+        
+        if (!groupedPosts[monthYearKey]) {
+            groupedPosts[monthYearKey] = {
+                month: month,
+                year: year,
+                monthNum: monthNum,
+                dateObj: date,
+                posts: []
+            };
+        }
+        
+        groupedPosts[monthYearKey].posts.push({
+            title: post.title?.$t || 'Untitled Post',
+            content: post.content?.$t || '',
+            link: post.link?.find(l => l.rel === 'alternate')?.href || '#',
+            date: date,
+            fullDate: published,
+            originalPost: post // Keep reference to original post
+        });
+    });
+
+    // Sort months by date (newest first)
+    const sortedMonths = Object.values(groupedPosts).sort((a, b) => {
+        return b.dateObj - a.dateObj; // Newest first
+    });
+
+    // Function to handle month selection
+    const handleMonthSelect = (monthYear) => {
+        if (selectedMonth === monthYear) {
+            // If same month clicked again, show all
+            setSelectedMonth(null);
+            setFilteredPosts(blogPosts);
+        } else {
+            // Show posts from selected month
+            setSelectedMonth(monthYear);
+            const monthPosts = groupedPosts[monthYear]?.posts.map(p => p.originalPost) || [];
+            setFilteredPosts(monthPosts);
+        }
+        setVisiblePosts(10); // Reset visible posts count
+    };
+
+    // Function to show all posts
+    const handleShowAll = () => {
+        setSelectedMonth(null);
+        setFilteredPosts(blogPosts);
+        setVisiblePosts(10); // Reset visible posts count
+    };
+
+    // Determine which posts to display
+    const postsToDisplay = filteredPosts.length > 0 ? filteredPosts : blogPosts;
+    const hasMorePosts = visiblePosts < postsToDisplay.length;
+
+    return (
+        <div className="section">
+            <h2>Blog Posts</h2>
+            
+            {loadingBlog ? (
+                <div className="blog-loading">
+                    <i className="fas fa-spinner fa-spin" style={{fontSize: '2rem', marginBottom: '20px'}}></i>
+                    <p>Loading blog posts...</p>
+                </div>
+            ) : blogError ? (
+                <div className="blog-error">
+                    <i className="fas fa-exclamation-triangle"></i>
+                    <p>Unable to load blog posts from Mudasir-Ibrahim.blogspot.com</p>
+                </div>
+            ) : blogPosts.length > 0 ? (
+                <div className="blog-container">
+                    {/* LEFT SIDEBAR - MONTH FILTER */}
+                    <div className="blog-sidebar">
+                        <div className="archive-section">
+                            <h3 className="archive-title">
+                                <i className="fas fa-filter" style={{ marginRight: '10px' }}></i>
+                                Filter by Month
+                            </h3>
+                            
+                            <ul className="archive-list">
+                                {/* ALL POSTS button */}
+                                <li className="archive-item">
+                                    <button
+                                        className={`archive-button ${!selectedMonth ? 'active' : ''}`}
+                                        onClick={handleShowAll}
+                                    >
+                                        <span className="archive-month">All Posts</span>
+                                        <span className="post-count-badge">{blogPosts.length}</span>
+                                    </button>
+                                </li>
+                                
+                                {/* Monthly buttons */}
+                                {sortedMonths.map((monthData) => {
+                                    const monthYearKey = `${monthData.month} ${monthData.year}`;
+                                    const isActive = selectedMonth === monthYearKey;
                                     
                                     return (
-                                        <div key={index} className="blog-post-item">
-                                            <div className="blog-post-header">
-                                                <i className="fas fa-blog blog-post-icon"></i>
-                                                <h3 className="blog-post-title">{title}</h3>
-                                                <div className="blog-post-date">
-                                                    <i className="far fa-calendar"></i>
-                                                    <span>{date}</span>
-                                                </div>
-                                            </div>
-                                            <p className="blog-post-excerpt">{excerpt}</p>
-                                            <div className="blog-post-actions">
-                                                <a href={link} target="_blank" rel="noopener noreferrer" className="read-post-btn">
-                                                    <i className="fas fa-external-link-alt"></i> Read Full Post
-                                                </a>
-                                            </div>
-                                        </div>
+                                        <li key={monthYearKey} className="archive-item">
+                                            <button
+                                                className={`archive-button ${isActive ? 'active' : ''}`}
+                                                onClick={() => handleMonthSelect(monthYearKey)}
+                                            >
+                                                <span className="archive-month">{monthData.month}</span>
+                                                {' '}
+                                                <span className="archive-year">{monthData.year}</span>
+                                                <span className="post-count-badge">{monthData.posts.length}</span>
+                                            </button>
+                                        </li>
                                     );
                                 })}
-                            </div>
+                            </ul>
                             
-                            {visiblePosts < blogPosts.length && (
-                                <div className="blog-load-more">
-                                    <button className="load-more-btn" onClick={loadMorePosts}>
-                                        <i className="fas fa-chevron-down"></i>
-                                        Load More Posts ({blogPosts.length - visiblePosts} remaining)
-                                    </button>
-                                </div>
-                            )}
-                        </>
-                    ) : (
-                        <div className="blog-error">
-                            <i className="fas fa-exclamation-triangle"></i>
-                            <p>No blog posts found</p>
+                            <div className="archive-total">
+                                {blogPosts.length} posts across {sortedMonths.length} months
+                            </div>
                         </div>
-                    )}
+                    </div>
+                    
+                    {/* RIGHT SIDE - BLOG POSTS */}
+                    <div className="blog-content">
+                        {/* Show which filter is active */}
+                        {selectedMonth ? (
+                            <div className="selected-month-info">
+                                <div className="selected-month-text">
+                                    Showing posts from: <strong>{selectedMonth}</strong>
+                                    <span style={{marginLeft: '10px', fontSize: '0.9rem', color: 'var(--position-color)'}}>
+                                        ({postsToDisplay.length} posts)
+                                    </span>
+                                </div>
+                                <button 
+                                    className="show-all-button"
+                                    onClick={handleShowAll}
+                                >
+                                    <i className="fas fa-list" style={{marginRight: '5px'}}></i>
+                                    Show All Posts
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="selected-month-info" style={{borderLeftColor: '#2ecc71'}}>
+                                <div className="selected-month-text">
+                                    Showing: <strong>All Posts</strong>
+                                    <span style={{marginLeft: '10px', fontSize: '0.9rem', color: 'var(--position-color)'}}>
+                                        ({postsToDisplay.length} total posts)
+                                    </span>
+                                </div>
+                                {sortedMonths.length > 0 && (
+                                    <div style={{fontSize: '0.9rem', marginTop: '5px', color: 'var(--position-color)'}}>
+                                        Latest: {sortedMonths[0].month} {sortedMonths[0].year}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                        
+                        <div className="blog-posts-list">
+                            {postsToDisplay.slice(0, visiblePosts).map((post, index) => {
+                                const title = post.title?.$t || 'Untitled Post';
+                                const content = post.content?.$t || '';
+                                const published = post.published?.$t || new Date().toISOString();
+                                const link = post.link?.find(l => l.rel === 'alternate')?.href || '#';
+                                
+                                const excerpt = extractExcerpt(content, 250);
+                                
+                                const date = new Date(published).toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                });
+                                
+                                return (
+                                    <div key={index} className="blog-post-item">
+                                        <div className="blog-post-header">
+                                            <i className="fas fa-blog blog-post-icon"></i>
+                                            <h3 className="blog-post-title">{title}</h3>
+                                            <div className="blog-post-date">
+                                                <i className="far fa-calendar"></i>
+                                                <span>{date}</span>
+                                            </div>
+                                        </div>
+                                        <p className="blog-post-excerpt">{excerpt}</p>
+                                        <div className="blog-post-actions">
+                                            <a href={link} target="_blank" rel="noopener noreferrer" className="read-post-btn">
+                                                <i className="fas fa-external-link-alt"></i> Read Full Post
+                                            </a>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        
+                        {hasMorePosts && (
+                            <div className="blog-load-more">
+                                <button className="load-more-btn" onClick={loadMorePosts}>
+                                    <i className="fas fa-chevron-down"></i>
+                                    Load More Posts ({postsToDisplay.length - visiblePosts} remaining)
+                                </button>
+                            </div>
+                        )}
+                        
+                        {!hasMorePosts && postsToDisplay.length > 0 && (
+                            <div style={{
+                                textAlign: 'center',
+                                padding: '20px',
+                                color: 'var(--position-color)',
+                                fontSize: '0.9rem'
+                            }}>
+                                <i className="fas fa-check-circle" style={{marginRight: '8px', color: '#2ecc71'}}></i>
+                                Showing all {postsToDisplay.length} posts
+                            </div>
+                        )}
+                    </div>
                 </div>
-            );
+            ) : (
+                <div className="blog-error">
+                    <i className="fas fa-exclamation-triangle"></i>
+                    <p>No blog posts found</p>
+                </div>
+            )}
+        </div>
+    );
+};
 
             return (
                 <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
