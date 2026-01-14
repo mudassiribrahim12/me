@@ -2319,6 +2319,7 @@ useEffect(() => {
             setIsMobileMenuOpen(false);
         }
     };
+    
 
     // Add event listener for escape key
     const handleEscapeKey = (event) => {
@@ -2425,32 +2426,77 @@ useEffect(() => {
     return () => window.removeEventListener('scroll', checkScrollPosition);
 }, []);
 
+// Update this useEffect in your component
+useEffect(() => {
+    if (activeSection === 'blog') {
+        // Check if we already have posts loaded
+        if (blogPosts.length === 0) {
+            loadBlogPosts();
+        }
+    }
+}, [activeSection]);
 
-            // Blog loading functions
-            useEffect(() => {
-                if (activeSection === 'blog') {
-                    loadBlogPosts();
-                }
-            }, [activeSection]);
-
+// Add this useEffect to pre-load blog posts on initial page load
+useEffect(() => {
+    // Pre-load blog posts when page loads
+    const timer = setTimeout(() => {
+        if (blogPosts.length === 0) {
+            loadBlogPosts();
+        }
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+}, []);
+         
 const loadBlogPosts = async () => {
     setLoadingBlog(true);
     setBlogError(false);
     
     try {
+        // Generate cache-busting timestamp
+        const timestamp = new Date().getTime();
         const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=100';
-        const proxyUrl = 'https://api.allorigins.win/get?url=';
-        const fullUrl = proxyUrl + encodeURIComponent(rssFeedUrl);
         
-        const response = await fetch(fullUrl);
-        if (!response.ok) throw new Error('Network response was not ok');
+        // Use different proxy approach with cache busting
+        const proxyUrl = 'https://api.allorigins.win/get?url=';
+        const fullUrl = proxyUrl + encodeURIComponent(rssFeedUrl) + '&timestamp=' + timestamp;
+        
+        // Set timeout for fetch request
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        
+        const response = await fetch(fullUrl, {
+            signal: controller.signal,
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.status}`);
+        }
         
         const data = await response.json();
+        
+        if (!data.contents) {
+            throw new Error('No content received from server');
+        }
+        
         const feedData = JSON.parse(data.contents);
         const posts = feedData.feed.entry || [];
         
         if (posts.length === 0) {
             setBlogError(true);
+            // Try alternative approach if no posts found
+            setTimeout(() => {
+                if (blogPosts.length === 0) {
+                    loadBlogPostsWithFallback();
+                }
+            }, 2000);
         } else {
             const sortedPosts = posts.sort((a, b) => {
                 const dateA = new Date(a.published?.$t || 0);
@@ -2459,15 +2505,61 @@ const loadBlogPosts = async () => {
             });
             
             setBlogPosts(sortedPosts);
-            setFilteredPosts(sortedPosts); // Initialize filtered posts
+            setFilteredPosts(sortedPosts);
             setVisiblePosts(10);
-            setSelectedMonth(null); // Reset filter
+            setSelectedMonth(null);
         }
     } catch (error) {
         console.error('Error fetching blog posts:', error);
-        setBlogError(true);
+        
+        // Try fallback method
+        setTimeout(() => {
+            if (blogPosts.length === 0) {
+                loadBlogPostsWithFallback();
+            }
+        }, 1000);
     } finally {
         setLoadingBlog(false);
+    }
+};
+
+// Add this fallback function
+const loadBlogPostsWithFallback = async () => {
+    try {
+        console.log('Trying fallback method...');
+        
+        // Alternative proxy service
+        const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=100';
+        const corsProxy = 'https://corsproxy.io/?';
+        const fallbackUrl = corsProxy + encodeURIComponent(rssFeedUrl);
+        
+        const response = await fetch(fallbackUrl, {
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate'
+            }
+        });
+        
+        if (response.ok) {
+            const feedData = await response.json();
+            const posts = feedData.feed.entry || [];
+            
+            if (posts.length > 0) {
+                const sortedPosts = posts.sort((a, b) => {
+                    const dateA = new Date(a.published?.$t || 0);
+                    const dateB = new Date(b.published?.$t || 0);
+                    return dateB - dateA;
+                });
+                
+                setBlogPosts(sortedPosts);
+                setFilteredPosts(sortedPosts);
+                setVisiblePosts(10);
+                setSelectedMonth(null);
+                setBlogError(false);
+            }
+        }
+    } catch (fallbackError) {
+        console.error('Fallback also failed:', fallbackError);
+        setBlogError(true);
     }
 };
 
@@ -2595,6 +2687,7 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
             </div>
         </div>
 
+       
         {/* PROFESSIONAL ASSOCIATIONS SECTION */}
         <div className="expertise-section">
             <h2>Professional Associations</h2>
@@ -2603,7 +2696,7 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
                 <div className="professional-title">Registered General Nurse (RGN)</div>
                 <div className="professional-org">Nursing and Midwifery Council of Ghana (NMC)</div>
                 <div className="professional-status">Licensed</div>
-                <div className="professional-period">Registered and licensed to practice nursing in Ghana</div>
+                <div className="professional-period">Since 2020, registered and licensed to practice nursing in Ghana.</div>
             </div>
             
             <div className="professional-item">
@@ -2611,6 +2704,37 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
                 <div className="professional-org">Ghana Registered Nurses and Midwives Association (GRNMA)</div>
                 <div className="professional-status">Active</div>
                 <div className="professional-period">Professional membership since 2025</div>
+            </div>
+            
+            <div className="professional-item">
+                <div className="professional-title">Active Member</div>
+                <div className="professional-org">BridgeCare Institute for Health Research, Ghana (BIHR-GH)</div>
+                <div className="professional-status">Active</div>
+<div className="professional-period">Secretary since 2026</div>
+                </div>
+            </div>
+        
+                {/* CURRENT ADVISORS SECTION */}
+        <div className="expertise-section">
+            <h2>Current Advisors</h2>
+            
+            <div className="professional-item">
+                <div className="professional-org" style={{marginBottom: '10px', fontStyle: 'normal'}}>
+                    (1) <a href="https://www.researchgate.net/profile/Abubakari-Wuni" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           style={{color: 'inherit', textDecoration: 'none'}}>
+                        Abubakari Wuni
+                    </a> 
+                </div>
+                <div className="professional-org" style={{fontStyle: 'normal'}}>
+                    (2) <a href="https://www.researchgate.net/profile/Iddrisu-Sisala" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           style={{color: 'inherit', textDecoration: 'none'}}>
+                        Iddrisu Mohammed Sisala
+                    </a> 
+                </div>
             </div>
         </div>
         
@@ -2689,7 +2813,7 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
                 <div className="professional-title">Nurses' and Midwives' Training College-Tamale Scientific Session 2024</div>
                 <div className="professional-org">Tamale, Ghana</div>
                 <div className="professional-period">2024</div>
-                <div className="professional-theme">Theme: Bridging the gap between theory and practice: translating research into nursing practice</div>
+                <div className="professional-theme">Theme: Research in Nursing Colleges: A Must for Status Change!</div>
             </div>
             
             <div className="professional-item">
