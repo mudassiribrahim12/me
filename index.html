@@ -1870,6 +1870,69 @@ body.dark-mode .certificate-link:hover {
     }
 }
 
+/* Move theme toggle to footer on mobile and tablet */
+@media (max-width: 1024px) {
+    /* Hide theme toggle from header on mobile/tablet */
+    .header-right .dark-mode-toggle {
+        display: none;
+    }
+    
+    /* Show theme toggle in footer */
+    .footer-theme-toggle {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .footer-theme-toggle button {
+        background-color: var(--card-bg);
+        border: 2px solid var(--border-color);
+        color: var(--text-color);
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 50px;
+        padding: 0 25px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    .footer-theme-toggle button:hover {
+        background-color: var(--light-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .footer-theme-toggle button i {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .footer-theme-toggle button:hover i {
+        transform: rotate(30deg);
+    }
+}
+
+/* For desktop (above 1024px), hide footer toggle */
+@media (min-width: 1025px) {
+    .footer-theme-toggle {
+        display: none !important;
+    }
+}
+
+/* Adjust footer for mobile */
+@media (max-width: 1024px) {
+    .footer {
+        padding-bottom: 25px;
+    }
+}
+
 /* Tablets - show hamburger only below 768px */
 @media (max-width: 767px) {
     .mobile-menu-toggle {
@@ -1881,7 +1944,7 @@ body.dark-mode .certificate-link:hover {
     }
 }
 
-      @media (max-width: 600px) {
+@media (max-width: 600px) {
     .full-width-header {
         height: auto;
         min-height: 100px;
@@ -1889,22 +1952,23 @@ body.dark-mode .certificate-link:hover {
     }
     
     .header-container {
-        flex-direction: column;
+        flex-direction: row; 
         padding: 5px 10px;
         height: auto;
         min-height: 100px;
         gap: 5px;
-        align-items: stretch;
+        align-items: center; 
+        justify-content: space-between; 
     }
     
     .logo {
         height: 40px !important;
         line-height: 40px !important;
         justify-content: center;
-        width: 100%;
+        width: auto; 
         font-size: 1.1rem;
-        text-align: center;
-        margin-bottom: 5px;
+        text-align: left; 
+        margin-bottom: 0; 
     }
     
     .nav-container {
@@ -3504,9 +3568,7 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
             <i className="fas fa-chevron-up"></i>
         </div>
         
-        <div className="footer">
-        </div>
-<div className="footer">
+  <div className="footer">
     <div className="footer-content">
         <div className="copyright">
             © {new Date().getFullYear()} Mudasir Mohammed Ibrahim. All rights reserved
@@ -3545,6 +3607,21 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
                 }}
             >Click here</a>
         </div>
+        
+        {/* Add theme toggle for mobile/tablet */}
+        <div className="footer-theme-toggle">
+            <button 
+                onClick={toggleDarkMode} 
+                title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                style={{
+                    margin: '0 auto'
+                }}
+            >
+                <i className={`fas fa-${darkMode ? 'sun' : 'moon'}`}></i>
+                {darkMode ? ' Light Mode' : ' Dark Mode'}
+            </button>
+        </div>
+        
         {/* Design attribution - subtle */}
         <div className="design-attribution" style={{
             marginTop: '8px',
