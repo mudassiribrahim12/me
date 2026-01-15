@@ -2453,74 +2453,185 @@ const loadBlogPosts = async () => {
     setBlogError(false);
     
     try {
-        // Generate cache-busting timestamp
+        // Use a more reliable approach with multiple fallbacks
+        console.log('Loading blog posts...');
+        
+        // Try multiple proxy URLs with cache busting
         const timestamp = new Date().getTime();
         const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=100';
+        const encodedUrl = encodeURIComponent(rssFeedUrl);
         
-        // Use different proxy approach with cache busting
-        const proxyUrl = 'https://api.allorigins.win/get?url=';
-        const fullUrl = proxyUrl + encodeURIComponent(rssFeedUrl) + '&timestamp=' + timestamp;
+        // List of proxy services to try
+        const proxyUrls = [
+            `https://api.allorigins.win/get?url=${encodedUrl}&timestamp=${timestamp}`,
+            `https://corsproxy.io/?${encodedUrl}&_=${timestamp}`,
+            `https://api.codetabs.com/v1/proxy?quest=${encodedUrl}&t=${timestamp}`,
+            `https://thingproxy.freeboard.io/fetch/${rssFeedUrl}?t=${timestamp}`
+        ];
         
-        // Set timeout for fetch request
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        let success = false;
+        let data = null;
         
-        const response = await fetch(fullUrl, {
-            signal: controller.signal,
-            headers: {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        if (!data.contents) {
-            throw new Error('No content received from server');
-        }
-        
-        const feedData = JSON.parse(data.contents);
-        const posts = feedData.feed.entry || [];
-        
-        if (posts.length === 0) {
-            setBlogError(true);
-            // Try alternative approach if no posts found
-            setTimeout(() => {
-                if (blogPosts.length === 0) {
-                    loadBlogPostsWithFallback();
+        // Try each proxy until one works
+        for (let i = 0; i < proxyUrls.length; i++) {
+            try {
+                console.log(`Trying proxy ${i+1}: ${proxyUrls[i]}`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                
+                const response = await fetch(proxyUrls[i], {
+                    signal: controller.signal,
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache'
+                    }
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    
+                    // Handle different proxy response formats
+                    if (proxyUrls[i].includes('allorigins.win')) {
+                        data = JSON.parse(result.contents);
+                    } else if (proxyUrls[i].includes('corsproxy.io') || proxyUrls[i].includes('codetabs.com') || proxyUrls[i].includes('freeboard.io')) {
+                        data = result;
+                    }
+                    
+                    if (data && data.feed && data.feed.entry) {
+                        success = true;
+                        console.log(`Success with proxy ${i+1}`);
+                        break;
+                    }
                 }
-            }, 2000);
-        } else {
-            const sortedPosts = posts.sort((a, b) => {
-                const dateA = new Date(a.published?.$t || 0);
-                const dateB = new Date(b.published?.$t || 0);
-                return dateB - dateA;
-            });
-            
-            setBlogPosts(sortedPosts);
-            setFilteredPosts(sortedPosts);
-            setVisiblePosts(10);
-            setSelectedMonth(null);
-        }
-    } catch (error) {
-        console.error('Error fetching blog posts:', error);
-        
-        // Try fallback method
-        setTimeout(() => {
-            if (blogPosts.length === 0) {
-                loadBlogPostsWithFallback();
+            } catch (proxyError) {
+                console.log(`Proxy ${i+1} failed:`, proxyError.message);
+                continue;
             }
-        }, 1000);
+        }
+        
+        if (!success || !data) {
+            // Final fallback: try direct JSONP approach
+            console.log('Trying JSONP fallback...');
+            await new Promise((resolve) => {
+                const callbackName = `bloggerCallback_${Date.now()}`;
+                const jsonpUrl = `https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json-in-script&callback=${callbackName}&max-results=50`;
+                
+                window[callbackName] = (jsonpData) => {
+                    data = jsonpData;
+                    delete window[callbackName];
+                    resolve();
+                };
+                
+                const script = document.createElement('script');
+                script.src = jsonpUrl;
+                script.onerror = () => {
+                    delete window[callbackName];
+                    resolve();
+                };
+                
+                document.head.appendChild(script);
+                setTimeout(() => {
+                    if (script.parentNode) {
+                        document.head.removeChild(script);
+                    }
+                    resolve();
+                }, 8000);
+            });
+        }
+        
+        // Process the data if we got it
+        if (data && data.feed && data.feed.entry) {
+            const posts = data.feed.entry;
+            
+            if (posts.length === 0) {
+                setBlogError(true);
+                console.log('No posts found in feed');
+            } else {
+                // Sort posts by date (newest first)
+                const sortedPosts = posts.sort((a, b) => {
+                    const dateA = new Date(a.published?.$t || a.updated?.$t || 0);
+                    const dateB = new Date(b.published?.$t || b.updated?.$t || 0);
+                    return dateB - dateA;
+                });
+                
+                console.log(`Loaded ${sortedPosts.length} posts`);
+                
+                // Update state with posts
+                setBlogPosts(sortedPosts);
+                setFilteredPosts(sortedPosts);
+                setVisiblePosts(10);
+                setSelectedMonth(null);
+                setBlogError(false);
+                
+                // Store in localStorage for faster loading next time
+                try {
+                    localStorage.setItem('bloggerCache', JSON.stringify({
+                        posts: sortedPosts,
+                        timestamp: Date.now()
+                    }));
+                } catch (e) {
+                    console.log('Could not cache posts:', e);
+                }
+            }
+        } else {
+            // Try loading from cache
+            try {
+                const cached = localStorage.getItem('bloggerCache');
+                if (cached) {
+                    const cacheData = JSON.parse(cached);
+                    // Use cache if less than 1 hour old
+                    if (Date.now() - cacheData.timestamp < 3600000) {
+                        setBlogPosts(cacheData.posts);
+                        setFilteredPosts(cacheData.posts);
+                        setVisiblePosts(10);
+                        console.log('Loaded from cache');
+                        setBlogError(false);
+                    } else {
+                        setBlogError(true);
+                    }
+                } else {
+                    setBlogError(true);
+                }
+            } catch (e) {
+                setBlogError(true);
+            }
+        }
+        
+    } catch (error) {
+        console.error('Error loading blog posts:', error);
+        setBlogError(true);
+        
+        // Try to load from cache as last resort
+        try {
+            const cached = localStorage.getItem('bloggerCache');
+            if (cached) {
+                const cacheData = JSON.parse(cached);
+                setBlogPosts(cacheData.posts);
+                setFilteredPosts(cacheData.posts);
+                setVisiblePosts(10);
+                setBlogError(false);
+            }
+        } catch (e) {
+            // Cache failed too
+        }
     } finally {
         setLoadingBlog(false);
     }
+};
+
+// Function to manually refresh blog posts
+const refreshBlogPosts = () => {
+    // Clear cache
+    try {
+        localStorage.removeItem('bloggerCache');
+    } catch (e) {
+        // Ignore
+    }
+    
+    // Reload posts
+    loadBlogPosts();
 };
 
 // Add this fallback function
@@ -3400,9 +3511,142 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
     const postsToDisplay = filteredPosts.length > 0 ? filteredPosts : blogPosts;
     const hasMorePosts = visiblePosts < postsToDisplay.length;
 
-    return (
+   return (
         <div className="section">
             <h2>Blog Posts</h2>
+            
+            {/* Blog Introduction */}
+            <div className="blog-introduction" style={{
+                backgroundColor: 'var(--card-bg)',
+                border: '1px solid var(--border-color)',
+                borderRadius: '8px',
+                padding: '25px',
+                marginBottom: '30px',
+                position: 'relative',
+                overflow: 'hidden'
+            }}>
+                <div style={{
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px',
+                    fontSize: '2.5rem',
+                    color: 'var(--nav-hover)',
+                    opacity: 0.1
+                }}>
+                    <i className="fas fa-blog"></i>
+                </div>
+                
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '20px',
+                    marginBottom: '15px'
+                }}>
+                    <div style={{
+                        backgroundColor: 'var(--nav-bg)',
+                        color: 'var(--nav-text)',
+                        width: '50px',
+                        height: '50px',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '1.5rem'
+                    }}>
+                        <i className="fas fa-pen-nib"></i>
+                    </div>
+                    <h3 style={{
+                        margin: 0,
+                        color: 'var(--header-color)',
+                        fontSize: '1.5rem'
+                    }}>
+                        Welcome to My Blog
+                    </h3>
+                </div>
+                
+                <p style={{
+                    fontSize: '1.1rem',
+                    lineHeight: '1.7',
+                    color: 'var(--text-color)',
+                    marginBottom: '15px',
+                    fontFamily: "'Montserrat', sans-serif"
+                }}>
+                    <i className="fas fa-quote-left" style={{
+                        color: 'var(--nav-hover)',
+                        marginRight: '10px',
+                        opacity: 0.7
+                    }}></i>
+                    I regularly share insights, tutorials, and updates on healthcare research, data analysis, 
+                    my R Shiny apps, and statistical methods.
+                    <i className="fas fa-quote-right" style={{
+                        color: 'var(--nav-hover)',
+                        marginLeft: '10px',
+                        opacity: 0.7
+                    }}></i>
+                </p>
+                
+                <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '10px',
+                    marginTop: '20px',
+                    paddingTop: '15px',
+                    borderTop: '1px solid var(--border-color)'
+                }}>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        fontSize: '0.9rem',
+                        color: 'var(--position-color)'
+                    }}>
+                        <i className="fas fa-stethoscope" style={{color: '#3498db'}}></i>
+                        <span>Healthcare Research</span>
+                    </div>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        fontSize: '0.9rem',
+                        color: 'var(--position-color)'
+                    }}>
+                        <i className="fas fa-chart-line" style={{color: '#2ecc71'}}></i>
+                        <span>Data Analysis</span>
+                    </div>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        fontSize: '0.9rem',
+                        color: 'var(--position-color)'
+                    }}>
+                        <i className="fas fa-cube" style={{color: '#9b59b6'}}></i>
+                        <span>R Shiny Apps</span>
+                    </div>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        fontSize: '0.9rem',
+                        color: 'var(--position-color)'
+                    }}>
+                        <i className="fas fa-calculator" style={{color: '#e74c3c'}}></i>
+                        <span>Statistical Methods</span>
+                    </div>
+                </div>
+                
+                <div style={{
+                    marginTop: '20px',
+                    fontSize: '0.9rem',
+                    color: 'var(--position-color)',
+                    fontStyle: 'italic',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                }}>
+
+                </div>
+            </div>
             
             {loadingBlog ? (
                 <div className="blog-loading">
