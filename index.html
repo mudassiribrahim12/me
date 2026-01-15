@@ -56,6 +56,7 @@
         }
 
    :root {
+    --bg-color: #ffffff; 
     --text-color: #111; /* Darker - was #222 */
     --header-color: #000; /* Pure black */
     --border-color: #ccc; /* Darker border */
@@ -840,6 +841,110 @@ body.dark-mode .nav-item a.active::before {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--text-color);
+}
+
+.testimonial-button-container {
+    margin: 3em 0;
+    text-align: center;
+    padding: 30px;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-button-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #4CAF50, #2196F3, #9C27B0);
+}
+
+.testimonial-icon {
+    font-size: 3rem;
+    color: #4CAF50;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.testimonial-title {
+    font-size: 1.8rem;
+    color: var(--header-color);
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.testimonial-description {
+    max-width: 800px;
+    margin: 0 auto 25px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.testimonial-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.testimonial-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    background: linear-gradient(135deg, #45a049, #1B5E20);
+}
+
+.testimonial-button i {
+    font-size: 1.2rem;
+}
+
+.testimonial-subtext {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--position-color);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .testimonial-button-container {
+        padding: 20px;
+        margin: 2em 0;
+    }
+    
+    .testimonial-title {
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
 }
 
 /* Apps Statistics */
@@ -2305,7 +2410,7 @@ body.dark-mode .certificate-link:hover {
     </style>
    
 </head>
-<body>
+<body style="background-color: var(--bg-color, #ffffff);">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -2321,18 +2426,40 @@ body.dark-mode .certificate-link:hover {
             const [selectedMonth, setSelectedMonth] = useState(null);
             const [filteredPosts, setFilteredPosts] = useState([]);
             
-            const [darkMode, setDarkMode] = useState(() => {
+         const [darkMode, setDarkMode] = useState(() => {
+    // Check localStorage first
     const savedTheme = localStorage.getItem('theme-preference');
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-        return savedTheme === 'dark';
-    }
     
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
         return true;
     }
     
+    if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
+        return false;
+    }
+    
+    // Check system preference if no saved preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark-mode');
+        return true;
+    }
+    
+    // Default to light mode
+    document.body.classList.remove('dark-mode');
     return false;
 });
+
+useEffect(() => {
+    // Ensure the correct theme class is applied on initial render
+    if (darkMode) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+}, []);
+         
 const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 const [showBackToTop, setShowBackToTop] = useState(false);
 const [showThemeOptions, setShowThemeOptions] = useState(false);
@@ -2358,7 +2485,7 @@ const handleThemeChange = (theme) => {
     }
     setShowThemeOptions(false);
 };
-            
+
             // Add this useEffect to close mobile menu when clicking outside
 useEffect(() => {
     const handleClickOutside = (event) => {
@@ -3401,6 +3528,33 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
                     <div className="stat-label">For Research</div>
                 </div>
             </div>
+            
+            <div className="testimonial-button-container">
+    <div className="testimonial-icon">
+        <i className="fas fa-star"></i>
+    </div>
+    
+    <h3 className="testimonial-title">Share Your Experience!</h3>
+    
+    <p className="testimonial-description">
+        Have you used any of my R Shiny apps? Please take a moment 
+        to share your thoughts, suggestions, or testimonial.
+    </p>
+    
+    <a 
+        href="https://forms.gle/PZJtxtf9E3ZMnBYB9" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="testimonial-button"
+    >
+        <i className="fas fa-edit"></i>
+        Fill Testimonial Form
+    </a>
+    
+    <p className="testimonial-subtext">
+        Your feedback is greatly appreciated
+    </p>
+</div>
 
             <div className="shiny-featured">
                 <h3>Featured Application</h3>
