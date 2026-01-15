@@ -429,14 +429,33 @@ li {
             line-height: 1.4;
         }
 
+/* Theme Options Dropdown Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(-10px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.theme-option:hover {
+    background-color: var(--light-bg) !important;
+}
+
+/* Responsive adjustments for theme dropdown */
+@media (max-width: 768px) {
+    .theme-options-dropdown {
+        min-width: 160px !important;
+        font-size: 0.9rem;
+    }
+    
+    .footer-theme-toggle .theme-options-dropdown {
+        bottom: 50px !important;
+        left: 0 !important;
+        transform: none !important;
     }
 }
 
@@ -2294,21 +2313,51 @@ body.dark-mode .certificate-link:hover {
 
         const AcademicPortfolio = () => {
             const [activeSection, setActiveSection] = useState('about');
-            const [darkMode, setDarkMode] = useState(false);
             const [blogPosts, setBlogPosts] = useState([]);
             const [loadingBlog, setLoadingBlog] = useState(true);
             const [blogError, setBlogError] = useState(false);
             const [visiblePosts, setVisiblePosts] = useState(50);
             const [showContactForm, setShowContactForm] = useState(false);
-            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-            const [showBackToTop, setShowBackToTop] = useState(false);
             const [selectedMonth, setSelectedMonth] = useState(null);
             const [filteredPosts, setFilteredPosts] = useState([]);
+            
+            const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('theme-preference');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+        return savedTheme === 'dark';
+    }
+    
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return true;
+    }
+    
+    return false;
+});
+const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+const [showBackToTop, setShowBackToTop] = useState(false);
+const [showThemeOptions, setShowThemeOptions] = useState(false);
 
-            const toggleDarkMode = () => {
-                setDarkMode(!darkMode);
-                document.body.classList.toggle('dark-mode');
-            };
+const handleThemeChange = (theme) => {
+    if (theme === 'light') {
+        setDarkMode(false);
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme-preference', 'light');
+    } else if (theme === 'dark') {
+        setDarkMode(true);
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme-preference', 'dark');
+    } else if (theme === 'device') {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setDarkMode(prefersDark);
+        if (prefersDark) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+        localStorage.removeItem('theme-preference');
+    }
+    setShowThemeOptions(false);
+};
             
             // Add this useEffect to close mobile menu when clicking outside
 useEffect(() => {
@@ -3910,9 +3959,80 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
                     </a>
                 </div>
 
-                <button className="dark-mode-toggle" onClick={toggleDarkMode} title="Toggle Dark Mode">
-                    <i className={`fas fa-${darkMode ? 'sun' : 'moon'}`}></i>
-                </button>
+<div className="theme-toggle-container" style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '70px' }}>
+    <button 
+        className="dark-mode-toggle" 
+        onClick={() => setShowThemeOptions(!showThemeOptions)} 
+        title="Theme Options"
+        style={{ position: 'relative' }}
+    >
+        <i className="fas fa-sun"></i>
+    </button>
+    
+    {showThemeOptions && (
+        <div className="theme-options-dropdown" style={{
+            position: 'absolute',
+            top: '70px',
+            right: '0',
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '8px',
+            padding: '10px',
+            zIndex: 1001,
+            minWidth: '180px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+            animation: 'fadeIn 0.2s ease'
+        }}>
+            <div className="theme-option" style={{
+                padding: '8px 12px',
+                cursor: 'pointer',
+                borderRadius: '4px',
+                marginBottom: '5px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                backgroundColor: !darkMode ? 'rgba(52, 152, 219, 0.1)' : 'transparent',
+                border: !darkMode ? '1px solid rgba(52, 152, 219, 0.3)' : '1px solid transparent'
+            }} onClick={() => handleThemeChange('light')}>
+                <i className="fas fa-sun" style={{ color: !darkMode ? '#f39c12' : 'var(--text-color)' }}></i>
+                <span>Light</span>
+                {!darkMode && <i className="fas fa-check" style={{ marginLeft: 'auto', color: '#3498db' }}></i>}
+            </div>
+            
+            <div className="theme-option" style={{
+                padding: '8px 12px',
+                cursor: 'pointer',
+                borderRadius: '4px',
+                marginBottom: '5px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                backgroundColor: darkMode && localStorage.getItem('theme-preference') === 'dark' ? 'rgba(52, 152, 219, 0.1)' : 'transparent',
+                border: darkMode && localStorage.getItem('theme-preference') === 'dark' ? '1px solid rgba(52, 152, 219, 0.3)' : '1px solid transparent'
+            }} onClick={() => handleThemeChange('dark')}>
+                <i className="fas fa-moon" style={{ color: darkMode && localStorage.getItem('theme-preference') === 'dark' ? '#f39c12' : 'var(--text-color)' }}></i>
+                <span>Dark</span>
+                {darkMode && localStorage.getItem('theme-preference') === 'dark' && <i className="fas fa-check" style={{ marginLeft: 'auto', color: '#3498db' }}></i>}
+            </div>
+            
+            <div className="theme-option" style={{
+                padding: '8px 12px',
+                cursor: 'pointer',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                backgroundColor: !localStorage.getItem('theme-preference') ? 'rgba(52, 152, 219, 0.1)' : 'transparent',
+                border: !localStorage.getItem('theme-preference') ? '1px solid rgba(52, 152, 219, 0.3)' : '1px solid transparent'
+            }} onClick={() => handleThemeChange('device')}>
+                <i className="fas fa-desktop" style={{ color: !localStorage.getItem('theme-preference') ? '#f39c12' : 'var(--text-color)' }}></i>
+                <span>Device Default</span>
+                {!localStorage.getItem('theme-preference') && <i className="fas fa-check" style={{ marginLeft: 'auto', color: '#3498db' }}></i>}
+            </div>
+        </div>
+    )}
+</div>
+
             </div>
         </div>
     </div>
@@ -3977,19 +4097,99 @@ I am a registered nurse, and I love research and data analytics. Aside from cond
         </div>
         
         {/* Add theme toggle for mobile/tablet */}
-        <div className="footer-theme-toggle">
-            <button 
-                onClick={toggleDarkMode} 
-                title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                style={{
-                    margin: '0 auto'
-                }}
-            >
-                <i className={`fas fa-${darkMode ? 'sun' : 'moon'}`}></i>
-                {darkMode ? ' Light Mode' : ' Dark Mode'}
-            </button>
-        </div>
+   <div className="footer-theme-toggle">
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+        <button 
+            onClick={() => setShowThemeOptions(!showThemeOptions)} 
+            title="Theme Options"
+            style={{
+                margin: '0 auto',
+                backgroundColor: 'var(--card-bg)',
+                border: '2px solid var(--border-color)',
+                color: 'var(--text-color)',
+                fontSize: '1rem',
+                fontWeight: '500',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                height: '50px',
+                padding: '0 25px',
+                borderRadius: '25px',
+                transition: 'all 0.3s ease',
+                fontFamily: "'Montserrat', sans-serif"
+            }}
+        >
+            <i className="fas fa-sun"></i>
+            Theme Options
+        </button>
         
+        {showThemeOptions && (
+            <div className="theme-options-dropdown" style={{
+                position: 'absolute',
+                bottom: '60px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                backgroundColor: 'var(--card-bg)',
+                border: '1px solid var(--border-color)',
+                borderRadius: '8px',
+                padding: '10px',
+                zIndex: 1001,
+                minWidth: '180px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                animation: 'fadeIn 0.2s ease'
+            }}>
+                <div className="theme-option" style={{
+                    padding: '8px 12px',
+                    cursor: 'pointer',
+                    borderRadius: '4px',
+                    marginBottom: '5px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    backgroundColor: !darkMode ? 'rgba(52, 152, 219, 0.1)' : 'transparent',
+                    border: !darkMode ? '1px solid rgba(52, 152, 219, 0.3)' : '1px solid transparent'
+                }} onClick={() => handleThemeChange('light')}>
+                    <i className="fas fa-sun" style={{ color: !darkMode ? '#f39c12' : 'var(--text-color)' }}></i>
+                    <span>Light</span>
+                    {!darkMode && <i className="fas fa-check" style={{ marginLeft: 'auto', color: '#3498db' }}></i>}
+                </div>
+                
+                <div className="theme-option" style={{
+                    padding: '8px 12px',
+                    cursor: 'pointer',
+                    borderRadius: '4px',
+                    marginBottom: '5px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    backgroundColor: darkMode && localStorage.getItem('theme-preference') === 'dark' ? 'rgba(52, 152, 219, 0.1)' : 'transparent',
+                    border: darkMode && localStorage.getItem('theme-preference') === 'dark' ? '1px solid rgba(52, 152, 219, 0.3)' : '1px solid transparent'
+                }} onClick={() => handleThemeChange('dark')}>
+                    <i className="fas fa-moon" style={{ color: darkMode && localStorage.getItem('theme-preference') === 'dark' ? '#f39c12' : 'var(--text-color)' }}></i>
+                    <span>Dark</span>
+                    {darkMode && localStorage.getItem('theme-preference') === 'dark' && <i className="fas fa-check" style={{ marginLeft: 'auto', color: '#3498db' }}></i>}
+                </div>
+                
+                <div className="theme-option" style={{
+                    padding: '8px 12px',
+                    cursor: 'pointer',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    backgroundColor: !localStorage.getItem('theme-preference') ? 'rgba(52, 152, 219, 0.1)' : 'transparent',
+                    border: !localStorage.getItem('theme-preference') ? '1px solid rgba(52, 152, 219, 0.3)' : '1px solid transparent'
+                }} onClick={() => handleThemeChange('device')}>
+                    <i className="fas fa-desktop" style={{ color: !localStorage.getItem('theme-preference') ? '#f39c12' : 'var(--text-color)' }}></i>
+                    <span>Device Default</span>
+                    {!localStorage.getItem('theme-preference') && <i className="fas fa-check" style={{ marginLeft: 'auto', color: '#3498db' }}></i>}
+                </div>
+            </div>
+        )}
+    </div>
+</div>
+   
         {/* Design attribution - subtle */}
         <div className="design-attribution" style={{
             marginTop: '8px',
