@@ -2967,7 +2967,7 @@ body.dark-mode .certificate-link:hover {
     text-transform: capitalize;
 }
       
-        /* ========== DROPDOWN STYLES FOR MORE TAB ========== */
+    /* ========== DROPDOWN STYLES FOR MORE TAB - FIXED ========== */
 .dropdown {
     position: relative;
     height: 70px;
@@ -3017,102 +3017,175 @@ body.dark-mode .certificate-link:hover {
     transform: rotate(180deg);
 }
 
+/* DESKTOP: Regular dropdown menu */
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
     background-color: var(--nav-bg);
     border: 1px solid var(--nav-border);
-    border-radius: 6px;
-    min-width: 140px;
-    padding: 0; /* No padding around items */
+    border-radius: 8px;
+    min-width: 180px;
+    padding: 8px 0;
     margin-top: 5px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-8px);
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 1001;
+    overflow: visible !important;
+    pointer-events: none;
 }
 
 .dropdown.active .dropdown-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
+    pointer-events: all;
 }
 
 .dropdown-item {
-    display: block;
-    padding: 8px 16px; /* Reduced vertical padding */
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
     color: var(--nav-text);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 400;
     transition: all 0.2s ease;
-    border-left: 2px solid transparent;
-    line-height: 1.2; /* Reduced line height */
+    border-left: 3px solid transparent;
+    line-height: 1.3;
     white-space: nowrap;
+    gap: 10px;
 }
 
-/* Very subtle separator between items */
+.dropdown-item i {
+    font-size: 0.85rem;
+    width: 16px;
+    text-align: center;
+}
+
 .dropdown-item + .dropdown-item {
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle separator */
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.1);
     border-left-color: var(--nav-hover);
+    padding-left: 24px;
 }
 
-/* Mobile dropdown adjustments */
-@media (max-width: 767px) {
+/* TABLET (iPad 768px and below): Make dropdown full width and reposition */
+@media (max-width: 1024px) {
     .dropdown {
-        height: 60px;
+        height: auto;
+        position: static;
+        width: 100%;
     }
     
     .dropdown-toggle {
         height: 60px;
         line-height: 60px;
+        width: 100%;
+        padding: 0 20px;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .dropdown-toggle::after {
-        bottom: 15px;
-    }
-    
-    .dropdown-menu {
-        position: static;
-        background-color: rgba(0, 0, 0, 0.05);
-        border: none;
-        box-shadow: none;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        padding-left: 20px;
-        margin-top: 0;
         display: none;
-        min-width: auto;
-        border-radius: 0;
     }
     
-    .dropdown.active .dropdown-menu {
+    /* Hide desktop dropdown on tablet/mobile */
+    .dropdown-menu {
+        display: none !important;
+    }
+    
+    /* Show dropdown content as expandable section in mobile menu */
+    .dropdown-content {
+        display: none;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.15);
+        border-left: 4px solid var(--nav-hover);
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+        from {
+            max-height: 0;
+            opacity: 0;
+        }
+        to {
+            max-height: 200px;
+            opacity: 1;
+        }
+    }
+    
+    .dropdown.active .dropdown-content {
+        display: block;
+        max-height: 200px;
+        opacity: 1;
+    }
+    
+    .dropdown-content .dropdown-item {
+        padding: 15px 20px 15px 35px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 1rem;
+        width: 100%;
+        white-space: normal;
+        line-height: 1.4;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .dropdown-content .dropdown-item:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-content .dropdown-item:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        padding-left: 40px;
+    }
+    
+    .dropdown-content .dropdown-item i {
+        font-size: 0.9rem;
+        width: 18px;
+    }
+    
+    /* When mobile menu is open, show the dropdown properly */
+    .nav-container.mobile-open .dropdown {
         display: block;
     }
+}
+
+/* For small mobile screens */
+@media (max-width: 480px) {
+    .dropdown-toggle {
+        padding: 0 15px;
+        font-size: 1rem;
+    }
     
-    .dropdown-item {
-        padding: 10px 20px; 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        border-left: none;
+    .dropdown-content .dropdown-item {
+        padding: 12px 15px 12px 30px;
         font-size: 0.95rem;
     }
     
-    .dropdown-item:hover {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-left: none;
+    .dropdown-content .dropdown-item:hover {
+        padding-left: 35px;
     }
-    
-    .dropdown-item + .dropdown-item {
-        border-top: none;
-    }
+}
+
+/* Ensure dropdown doesn't get cut off on any screen */
+.dropdown,
+.dropdown-menu,
+.dropdown-content {
+    overflow: visible !important;
+    max-height: none !important;
 }
         
         /* ========== PUBLICATION LIST STYLES ========== */
@@ -3678,117 +3751,225 @@ body.dark-mode .certificate-link:hover {
             }
         }
         
-        /* ========== TABLET/IPAD: NO HAMBURGER, SHOW TABS DIRECTLY (768px - 1024px) ========== */
-@media (min-width: 768px) and (max-width: 1024px) {
+  /* ========== ALL MOBILE/TABLET DEVICES (below 1025px): SHOW ONLY LOGO + HAMBURGER ========== */
+@media (max-width: 1024px) {
     .full-width-header {
         height: 70px;
+        min-height: 70px;
+        padding: 0;
     }
     
     .header-container {
-        padding: 0 25px;
+        flex-direction: row;
+        padding: 0 20px;
         height: 70px;
-        gap: 20px;
+        min-height: 70px;
+        gap: 15px;
+        align-items: center;
         justify-content: space-between;
     }
     
     .logo {
         height: 70px !important;
         line-height: 70px !important;
-        font-size: 1.2rem;
-        flex: 0 0 auto;
-    }
-    
-    /* HIDE hamburger button on tablets */
-    .mobile-menu-toggle {
-        display: none !important;
-    }
-    
-    /* SHOW the nav-container on tablets */
-    .nav-container {
-        display: flex !important;
+        font-size: 1.1rem;
+        text-align: left;
+        margin-bottom: 0;
         flex: 1;
-        justify-content: space-between;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
-    /* SHOW tabs container */
-    .tabs-container {
+    /* SHOW hamburger button on all tablets and phones */
+    .mobile-menu-toggle {
         display: flex !important;
-        margin-left: 20px;
+        background: none;
+        border: none;
+        color: var(--nav-text);
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        z-index: 1001;
     }
     
-    /* Adjust nav list for tablet */
-    .nav-list {
-        gap: 20px;
+    /* Hide regular nav on all tablets/phones when menu is closed */
+    .nav-container:not(.mobile-open) {
+        display: none;
     }
     
-    .nav-item a {
-        font-size: 1rem;
-    }
-    
-    /* HIDE social icons and dark mode toggle on tablets */
+    /* Hide header-right on all tablets/phones */
     .header-right {
         display: none !important;
     }
     
     /* Adjust content for tablet */
     .content-container {
-        padding: 40px 30px;
+        padding: 30px 25px;
     }
     
-    /* Tablet grid adjustments */
+    /* When menu is open, show it full screen */
+    .nav-container.mobile-open {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--nav-bg);
+        z-index: 1000;
+        padding: 20px;
+        overflow-y: auto;
+        animation: slideDown 0.3s ease-out;
+        border-top: 1px solid var(--nav-border);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Mobile menu specific styles */
+    .nav-container.mobile-open .tabs-container {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    
+    .nav-container.mobile-open .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        width: 100%;
+        height: auto;
+    }
+    
+    .nav-container.mobile-open .nav-item {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-container.mobile-open .nav-item a {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        padding: 0 15px;
+        border-bottom: 1px solid var(--nav-border);
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    
+    .nav-container.mobile-open .nav-item a::after {
+        display: none;
+    }
+    
+    .nav-container.mobile-open .nav-item a.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid var(--nav-hover);
+    }
+    
+    .nav-container.mobile-open .nav-item a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Mobile header right */
+    .nav-container.mobile-open .header-right {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid var(--nav-border);
+        display: flex !important;
+    }
+    
+    .nav-container.mobile-open .social-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        height: auto;
+    }
+    
+    .nav-container.mobile-open .social-icon {
+        font-size: 1.5rem;
+        height: 50px;
+        line-height: 50px;
+    }
+    
+    .nav-container.mobile-open .dark-mode-toggle {
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    /* Theme dropdown in mobile menu */
+    .nav-container.mobile-open .theme-toggle-container {
+        height: 50px !important;
+        justify-content: center;
+    }
+    
+    .nav-container.mobile-open .theme-options-dropdown {
+        position: absolute;
+        top: 50px !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: none !important;
+    }
+    
+    /* Adjust blog sidebar for tablet */
+    .blog-sidebar {
+        max-width: 100%;
+        order: -1;
+        margin-bottom: 30px;
+    }
+    
+    .archive-section {
+        position: static;
+    }
+    
+    /* Adjust shiny apps grid for tablet */
     .shiny-apps-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 25px;
     }
+}
+
+/* ========== LARGER TABLETS (800px - 1024px) ========== */
+@media (min-width: 800px) and (max-width: 1024px) {
+    .header-container {
+        padding: 0 30px;
+    }
     
-    /* Hide mobile menu if somehow shown */
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    .content-container {
+        padding: 40px 35px;
+    }
+    
+    .shiny-apps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .nav-container.mobile-open {
-        display: flex !important;
-        position: static;
-        height: auto;
-        width: auto;
-        background-color: transparent;
-        border-top: none;
-        box-shadow: none;
-        animation: none;
-        flex-direction: row;
-        padding: 0;
-    }
-    
-    .nav-container.mobile-open .tabs-container {
-        margin-bottom: 0;
-    }
-    
-    .nav-container.mobile-open .nav-list {
-        flex-direction: row;
-        gap: 20px;
-        height: 70px;
-    }
-    
-    .nav-container.mobile-open .nav-item {
-        width: auto;
-        height: 70px;
+        padding: 30px;
     }
     
     .nav-container.mobile-open .nav-item a {
-        height: 70px;
-        line-height: 70px;
-        padding: 0;
-        border-bottom: none;
-        font-size: 1rem;
-        width: auto;
-    }
-    
-    .nav-container.mobile-open .nav-item a::after {
-        display: block;
-    }
-    
-    .nav-container.mobile-open .nav-item a.active {
-        background-color: transparent;
-        border-left: none;
+        font-size: 1.2rem;
+        height: 65px;
+        line-height: 65px;
     }
 }
-
+  
 /* ========== LARGER TABLETS (800px - 1024px) ========== */
 @media (min-width: 800px) and (max-width: 1024px) {
     .header-container {
@@ -5757,7 +5938,7 @@ const renderTeaching = () => (
             }}>
                 <p>
                     <i className="fas fa-envelope" style={{marginRight: '8px'}}></i>
-                    For teaching opportunities in research methodology and/or biostatistics, please click on the <strong>Contact</strong> link in the footer below.
+                    For teaching opportunities in research methodology and/or biostatistics, please click on <strong>Contact</strong> in the footer below.
                 </p>
             </div>
         </div>
@@ -6492,123 +6673,165 @@ const GalleryComponent = () => {
             Mudasir Mohammed Ibrahim
         </div>
         
-        {/* Navigation Links */}
-<div style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: '25px',
-    marginBottom: '40px'
-}}>
-    <a href="#" 
-       onClick={(e) => { 
-           e.preventDefault(); 
-           setActiveSection('about');
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-       }}
-       style={{
-           color: 'var(--nav-text)',
-           textDecoration: 'none',
-           fontSize: '0.95rem',
-           fontWeight: '500',
-           transition: 'color 0.3s ease'
-       }}
-       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-        About Me
-    </a>
-    <a href="#" 
-       onClick={(e) => { 
-           e.preventDefault(); 
-           setActiveSection('publications');
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-       }}
-       style={{
-           color: 'var(--nav-text)',
-           textDecoration: 'none',
-           fontSize: '0.95rem',
-           fontWeight: '500',
-           transition: 'color 0.3s ease'
-       }}
-       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-        Publications
-    </a>
-    <a href="#" 
-       onClick={(e) => { 
-           e.preventDefault(); 
-           setActiveSection('shiny');
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-       }}
-       style={{
-           color: 'var(--nav-text)',
-           textDecoration: 'none',
-           fontSize: '0.95rem',
-           fontWeight: '500',
-           transition: 'color 0.3s ease'
-       }}
-       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-        Software
-    </a>
-    <a href="#" 
-       onClick={(e) => { 
-           e.preventDefault(); 
-           setActiveSection('blog');
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-       }}
-       style={{
-           color: 'var(--nav-text)',
-           textDecoration: 'none',
-           fontSize: '0.95rem',
-           fontWeight: '500',
-           transition: 'color 0.3s ease'
-       }}
-       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-        Blog
-    </a>
-    <a href="#" 
-       onClick={(e) => { 
-           e.preventDefault(); 
-           setActiveSection('teaching');
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-       }}
-       style={{
-           color: 'var(--nav-text)',
-           textDecoration: 'none',
-           fontSize: '0.95rem',
-           fontWeight: '500',
-           transition: 'color 0.3s ease'
-       }}
-       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-        Teaching
-    </a>
-    <a href="#" 
-       onClick={(e) => {
-           e.preventDefault();
-           setShowContactForm(true);
-           setActiveSection('about');
-           setTimeout(() => {
-               const formElement = document.getElementById('contact-form');
-               if (formElement) {
-                   formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-               }
-           }, 100);
-       }}
-       style={{
-           color: 'var(--nav-text)',
-           textDecoration: 'none',
-           fontSize: '0.95rem',
-           fontWeight: '500',
-           transition: 'color 0.3s ease'
-       }}
-       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-        Contact
-    </a>
-</div>
+        {/* Navigation Links - UPDATED WITH GALLERY AND TESTIMONIALS */}
+        <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '25px',
+            marginBottom: '40px'
+        }}>
+            <a href="#" 
+               onClick={(e) => { 
+                   e.preventDefault(); 
+                   setActiveSection('about');
+                   window.scrollTo({ top: 0, behavior: 'smooth' });
+               }}
+               style={{
+                   color: 'var(--nav-text)',
+                   textDecoration: 'none',
+                   fontSize: '0.95rem',
+                   fontWeight: '500',
+                   transition: 'color 0.3s ease'
+               }}
+               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+                About Me
+            </a>
+            <a href="#" 
+               onClick={(e) => { 
+                   e.preventDefault(); 
+                   setActiveSection('publications');
+                   window.scrollTo({ top: 0, behavior: 'smooth' });
+               }}
+               style={{
+                   color: 'var(--nav-text)',
+                   textDecoration: 'none',
+                   fontSize: '0.95rem',
+                   fontWeight: '500',
+                   transition: 'color 0.3s ease'
+               }}
+               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+                Publications
+            </a>
+            <a href="#" 
+               onClick={(e) => { 
+                   e.preventDefault(); 
+                   setActiveSection('shiny');
+                   window.scrollTo({ top: 0, behavior: 'smooth' });
+               }}
+               style={{
+                   color: 'var(--nav-text)',
+                   textDecoration: 'none',
+                   fontSize: '0.95rem',
+                   fontWeight: '500',
+                   transition: 'color 0.3s ease'
+               }}
+               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+                Software
+            </a>
+            <a href="#" 
+               onClick={(e) => { 
+                   e.preventDefault(); 
+                   setActiveSection('blog');
+                   window.scrollTo({ top: 0, behavior: 'smooth' });
+               }}
+               style={{
+                   color: 'var(--nav-text)',
+                   textDecoration: 'none',
+                   fontSize: '0.95rem',
+                   fontWeight: '500',
+                   transition: 'color 0.3s ease'
+               }}
+               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+                Blog
+            </a>
+            <a href="#" 
+               onClick={(e) => { 
+                   e.preventDefault(); 
+                   setActiveSection('teaching');
+                   window.scrollTo({ top: 0, behavior: 'smooth' });
+               }}
+               style={{
+                   color: 'var(--nav-text)',
+                   textDecoration: 'none',
+                   fontSize: '0.95rem',
+                   fontWeight: '500',
+                   transition: 'color 0.3s ease'
+               }}
+               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+                Teaching
+            </a>
+            {/* ADDED GALLERY LINK */}
+            <a href="#" 
+               onClick={(e) => { 
+                   e.preventDefault(); 
+                   setActiveSection('gallery');
+                   window.scrollTo({ top: 0, behavior: 'smooth' });
+               }}
+               style={{
+                   color: 'var(--nav-text)',
+                   textDecoration: 'none',
+                   fontSize: '0.95rem',
+                   fontWeight: '500',
+                   transition: 'color 0.3s ease'
+               }}
+               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+                Gallery
+            </a>
+            {/* ADDED TESTIMONIALS LINK */}
+            <a href="#" 
+               onClick={(e) => {
+                   e.preventDefault();
+                   // Scroll to testimonial section in Software page
+                   setActiveSection('shiny');
+                   setTimeout(() => {
+                       const testimonialElement = document.querySelector('.testimonial-button-container');
+                       if (testimonialElement) {
+                           testimonialElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                       }
+                   }, 100);
+               }}
+               style={{
+                   color: 'var(--nav-text)',
+                   textDecoration: 'none',
+                   fontSize: '0.95rem',
+                   fontWeight: '500',
+                   transition: 'color 0.3s ease'
+               }}
+               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+                Testimonials
+            </a>
+            <a href="#" 
+               onClick={(e) => {
+                   e.preventDefault();
+                   setShowContactForm(true);
+                   setActiveSection('about');
+                   setTimeout(() => {
+                       const formElement = document.getElementById('contact-form');
+                       if (formElement) {
+                           formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                       }
+                   }, 100);
+               }}
+               style={{
+                   color: 'var(--nav-text)',
+                   textDecoration: 'none',
+                   fontSize: '0.95rem',
+                   fontWeight: '500',
+                   transition: 'color 0.3s ease'
+               }}
+               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+                Contact
+            </a>
+        </div>
         
         {/* Social Media Icons */}
         <div style={{
@@ -6715,42 +6938,42 @@ const GalleryComponent = () => {
         </div>
         
         {/* Copyright */}
-<div style={{
-    color: 'var(--nav-text)',
-    fontSize: '0.9rem',
-    paddingTop: '20px',
-    borderTop: '1px solid var(--nav-border)',
-    opacity: 0.8,
-    lineHeight: '1.5'
-}}>
-    <div style={{marginBottom: '5px'}}>
-        Copyright © {new Date().getFullYear()} by Mudasir Mohammed Ibrahim
-    </div>
-    
-    <div style={{
-        fontSize: '0.8rem',
-        opacity: 0.6
-    }}>
-        Website UI inspired by 
-        <a 
-            href="https://profandyfield.com/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{
-                color: 'var(--nav-text)',
-                textDecoration: 'underline',
-                textDecorationStyle: 'dotted',
-                textUnderlineOffset: '2px',
-                marginLeft: '4px',
-                transition: 'color 0.2s ease'
-            }}
-            onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-            onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}
-        >
-            Prof Andy Field
-        </a>
-    </div>
-</div>
+        <div style={{
+            color: 'var(--nav-text)',
+            fontSize: '0.9rem',
+            paddingTop: '20px',
+            borderTop: '1px solid var(--nav-border)',
+            opacity: 0.8,
+            lineHeight: '1.5'
+        }}>
+            <div style={{marginBottom: '5px'}}>
+                Copyright © {new Date().getFullYear()} by Mudasir Mohammed Ibrahim
+            </div>
+            
+            <div style={{
+                fontSize: '0.8rem',
+                opacity: 0.6
+            }}>
+                Website UI inspired by 
+                <a 
+                    href="https://profandyfield.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{
+                        color: 'var(--nav-text)',
+                        textDecoration: 'underline',
+                        textDecorationStyle: 'dotted',
+                        textUnderlineOffset: '2px',
+                        marginLeft: '4px',
+                        transition: 'color 0.2s ease'
+                    }}
+                    onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+                    onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}
+                >
+                    Prof Andy Field
+                </a>
+            </div>
+        </div>
         
         {/* Optional: Back to Top */}
         <div style={{ marginTop: '20px' }}>
