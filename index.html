@@ -58,9 +58,7 @@
         /* Import the font used on Trojan Brands */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-/* ========== INCREASED FONT SIZES ========== */
-
-/* Increase base font size */
+/* Update body font */
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
@@ -73,446 +71,69 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    font-size: 18px; /* INCREASED from 16px */
+    font-size: 16px; /* Similar to Trojan Brands */
 }
 
-/* Increase heading sizes proportionally */
+/* Heading updates */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--header-color);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
 h1 {
-    font-size: 2.4rem; /* INCREASED from 2rem */
+    font-size: 2rem;
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 0.8rem;
 }
 
 h2 {
-    font-size: 1.9rem; /* INCREASED from 1.6rem */
+    font-size: 1.6rem;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 0.3em;
     margin-top: 1.8em;
 }
 
 h3 {
-    font-size: 1.5rem; /* INCREASED from 1.3rem */
+    font-size: 1.3rem;
     margin-top: 1.5em;
     margin-bottom: 0.8em;
 }
 
 h4 {
-    font-size: 1.3rem; /* INCREASED from 1.1rem */
+    font-size: 1.1rem;
     margin-top: 1.2em;
     margin-bottom: 0.6em;
 }
 
-/* Increase paragraph and text sizes */
+/* Paragraph text */
 p {
     margin-bottom: 1.2em;
-    font-size: 1.1rem; /* INCREASED from 1rem */
-    line-height: 1.7; /* Increased line-height for better readability */
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--text-color);
     font-weight: 400;
 }
 
-/* Increase position text */
+/* Position text */
 .position {
-    font-size: 1.2rem; /* INCREASED from 1.1rem */
+    font-size: 1.1rem;
     color: var(--position-color);
     margin-bottom: 2rem;
     font-style: italic;
     font-weight: 400;
 }
 
-/* Increase list items */
+/* List items */
 li {
     margin-bottom: 0.6em;
-    line-height: 1.7; /* Increased from 1.6 */
-    color: var(--text-color);
-    font-weight: 400;
-    font-size: 1.05rem; /* Added font size for list items */
-}
-
-/* Increase navigation font */
-.nav-item a {
-    text-decoration: none;
-    color: var(--nav-text);
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1rem; /* INCREASED from 0.95rem */
-    font-weight: 500;
-    transition: all 0.2s;
-    position: relative;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    height: 70px;
-    line-height: 70px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-}
-
-/* Increase profile intro */
-.profile-intro {
-    max-width: 800px;
-    margin: 0 auto 40px;
-    font-size: 1.2rem; /* INCREASED from 1.1rem */
-    line-height: 1.7;
-    color: var(--text-color);
-    font-weight: 400;
-}
-
-/* Increase shiny description */
-.shiny-description {
-    max-width: 800px;
-    margin: 0 auto;
-    font-size: 1.1rem; /* INCREASED from 1rem */
-    line-height: 1.7;
-    color: var(--text-color);
-    font-weight: 400;
-}
-
-/* Increase blog post excerpt */
-.blog-post-excerpt {
-    color: var(--text-color);
-    line-height: 1.7;
-    margin-bottom: 15px;
-    font-size: 1.05rem; /* INCREASED from 0.95rem */
-    font-weight: 400;
-}
-
-/* Increase publication text */
-.publication-authors {
-    color: #333;
-    font-size: 1.05rem; /* INCREASED from 1rem */
-    margin-bottom: 10px;
     line-height: 1.6;
-    font-weight: 500;
-}
-
-.publication-journal {
-    color: var(--text-color);
-    font-size: 1.05rem; /* INCREASED from 1rem */
-    font-weight: 600;
-    margin-bottom: 8px;
-    font-style: italic;
-}
-
-.publication-details {
-    color: #444;
-    font-size: 1rem; /* INCREASED from 0.95rem */
-    margin-bottom: 8px;
-    font-weight: 400;
-}
-
-/* Increase education text */
-.edu-title {
-    font-weight: 600;
-    font-size: 1.15rem; /* INCREASED from 1.1rem */
-    color: var(--header-color);
-    margin-bottom: 0.3em;
-}
-
-.edu-institution {
-    color: #444;
-    font-style: italic;
-    margin-bottom: 0.3em;
-    font-weight: 500;
-    font-size: 1.05rem; /* Added */
-}
-
-.edu-period {
-    color: #555;
-    font-size: 0.95rem; /* INCREASED from 0.9rem */
-    margin-bottom: 0.5em;
-    font-weight: 500;
-}
-
-/* Increase professional text */
-.professional-title {
-    font-weight: 600;
-    font-size: 1.15rem; /* INCREASED from 1.1rem */
-    color: var(--header-color);
-    margin-bottom: 0.3em;
-}
-
-.professional-org {
-    color: #444;
-    font-style: italic;
-    margin-bottom: 0.3em;
-    font-weight: 500;
-    font-size: 1.05rem; /* Added */
-}
-
-.professional-period {
-    color: #555;
-    font-size: 0.95rem; /* INCREASED from 0.9rem */
-    margin-bottom: 0.5em;
-    font-weight: 500;
-}
-
-/* Increase blog post date */
-.blog-post-date {
-    color: #555;
-    font-size: 0.95rem; /* INCREASED from 0.9rem */
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    font-weight: 500;
-}
-
-/* Increase testimonial text */
-.testimonial-description {
-    max-width: 800px;
-    margin: 0 auto 25px;
-    font-size: 1.15rem; /* INCREASED from 1.1rem */
-    line-height: 1.7;
     color: var(--text-color);
     font-weight: 400;
-}
-
-/* Increase skill tags and other small text */
-.skill-tag {
-    background-color: var(--skill-bg);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.95rem; /* INCREASED from 0.9rem */
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-}
-
-/* Increase dropdown text */
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    color: var(--nav-text);
-    text-decoration: none;
-    font-size: 1rem; /* INCREASED from 0.95rem */
-    font-weight: 400;
-    transition: all 0.2s ease;
-    border-left: 3px solid transparent;
-    line-height: 1.3;
-    white-space: nowrap;
-    gap: 10px;
-}
-
-/* Increase logo size */
-.logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.4rem; /* INCREASED from 1.3rem */
-    font-weight: 500;
-    color: var(--nav-text);
-    text-decoration: none;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    height: 70px;
-    line-height: 70px;
-    padding: 0;
-    margin: 0;
-}
-
-/* Increase profile name */
-.profile-name {
-    font-size: 2.5rem; /* INCREASED from 2.2rem */
-    font-weight: 700;
-    color: var(--header-color);
-    margin-bottom: 15px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* Increase footer name */
-.footer-name {
-    position: absolute;
-    bottom: 15px;
-    left: 20px;
-    font-size: 0.95rem !important; /* INCREASED from 0.85rem */
-    color: var(--nav-text) !important;
-    opacity: 0.7;
-    font-weight: 400;
-    margin: 0;
-    padding: 0;
-    z-index: 2;
-}
-
-/* Increase modal text */
-.modal-description {
-    color: var(--text-color);
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-size: 1.15rem; /* INCREASED from 1.1rem */
-}
-
-/* Increase testimonial title */
-.testimonial-title {
-    font-size: 2rem; /* INCREASED from 1.8rem */
-    color: var(--header-color);
-    margin-bottom: 15px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-}
-
-/* Increase gallery text */
-.gallery-title {
-    font-size: 1.3rem; /* INCREASED from 1.2rem */
-    font-weight: 600;
-    color: var(--header-color);
-    margin-bottom: 10px;
-    line-height: 1.4;
-    min-height: 2.8em;
-}
-
-.gallery-description {
-    font-size: 1rem; /* INCREASED from 0.95rem */
-    color: var(--text-color);
-    line-height: 1.5;
-    margin-bottom: 15px;
-    flex: 1;
-    opacity: 0.9;
-}
-
-/* Increase publication year header */
-.publication-year-header {
-    background-color: var(--light-bg);
-    padding: 12px 20px;
-    border-radius: 8px;
-    margin: 30px 0 20px 0;
-    font-size: 1.4rem; /* INCREASED from 1.3rem */
-    font-weight: 600;
-    color: var(--header-color);
-    border-left: 4px solid #3498db;
-}
-
-/* Increase testimonial button */
-.testimonial-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #4CAF50, #2E7D32);
-    color: white;
-    padding: 15px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.2rem; /* INCREASED from 1.1rem */
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* Increase app titles */
-.app-title {
-    font-size: 1.35rem; /* INCREASED from 1.3rem */
-    font-weight: 600;
-    color: var(--header-color);
-    margin-bottom: 10px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* Increase app description */
-.app-description {
-    flex-grow: 1;
-    color: var(--text-color);
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-size: 1rem; /* INCREASED from 0.95rem */
-    font-weight: 400;
-}
-
-/* ========== RESPONSIVE ADJUSTMENTS WITH INCREASED SIZES ========== */
-@media (max-width: 768px) {
-    body {
-        font-size: 17px; /* INCREASED from 15px */
-    }
-    
-    h1 {
-        font-size: 2.1rem; /* INCREASED from 1.8rem */
-    }
-    
-    h2 {
-        font-size: 1.6rem; /* INCREASED from 1.4rem */
-    }
-    
-    h3 {
-        font-size: 1.4rem; /* INCREASED from 1.2rem */
-    }
-    
-    .profile-name {
-        font-size: 2.1rem; /* INCREASED from 1.9rem */
-    }
-    
-    .logo {
-        font-size: 1.2rem; /* INCREASED from 1.1rem */
-    }
-    
-    .nav-item a {
-        font-size: 1.05rem; /* Increased for mobile */
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        font-size: 16px; /* INCREASED from 14px */
-    }
-    
-    h1 {
-        font-size: 1.9rem; /* INCREASED from 1.6rem */
-    }
-    
-    h2 {
-        font-size: 1.5rem; /* INCREASED from 1.3rem */
-    }
-    
-    .profile-name {
-        font-size: 1.9rem; /* INCREASED from 1.7rem */
-    }
-    
-    .logo {
-        font-size: 1.1rem; /* Increased for small mobile */
-    }
-}
-
-/* For tablet sizes */
-@media (max-width: 1024px) {
-    .logo {
-        font-size: 1.25rem; /* Increased for tablet */
-    }
-    
-    .nav-item a {
-        font-size: 1rem; /* Increased for tablet */
-    }
-}
-
-/* Dark mode adjustment */
-body.dark-mode .footer-name {
-    opacity: 0.6;
-}
-
-/* Make footer container relative for absolute positioning */
-footer {
-    position: relative;
-    min-height: 200px;
-}
-
-/* Adjust footer content positioning */
-.footer-content-container {
-    position: relative;
-    padding-bottom: 50px; /* Make room for the name at bottom */
-}
-
-/* Responsive adjustments for footer name */
-@media (max-width: 768px) {
-    .footer-name {
-        position: static;
-        text-align: center;
-        margin-top: 20px;
-        padding-top: 15px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        bottom: auto;
-        left: auto;
-        width: 100%;
-    }
 }
 
 /* ========== GALLERY SECTION STYLES ========== */
@@ -639,6 +260,23 @@ footer {
     flex-direction: column;
 }
 
+.gallery-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--header-color);
+    margin-bottom: 10px;
+    line-height: 1.4;
+    min-height: 2.8em;
+}
+
+.gallery-description {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex: 1;
+    opacity: 0.9;
+}
 
 .gallery-date {
     font-size: 0.85rem;
@@ -705,6 +343,12 @@ footer {
     margin-bottom: 15px;
 }
 
+.modal-description {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
 
 .modal-close {
     position: absolute;
@@ -1044,6 +688,78 @@ body.dark-mode {
     --position-color: #cccccc;
 }
 
+/* Navigation font */
+.nav-item a {
+    text-decoration: none;
+    color: var(--nav-text);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    position: relative;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    line-height: 70px;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+}
+
+/* Profile intro */
+.profile-intro {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+/* Shiny description */
+.shiny-description {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+/* Blog post excerpt */
+.blog-post-excerpt {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+/* Publication details */
+.publication-authors {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.publication-journal {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.publication-details {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
 /* Education and professional text */
 .edu-institution, .professional-org {
     color: var(--text-color);
@@ -1077,6 +793,46 @@ body.dark-mode {
     font-weight: 700;
 }
 
+/* Responsive font sizes */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    .profile-name {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    .profile-name {
+        font-size: 1.7rem;
+    }
+}
 
 :root {
     --bg-color: #ffffff; 
@@ -1087,10 +843,10 @@ body.dark-mode {
     --card-bg: #fff;
     --skill-bg: #e8e8e8;
     --position-color: #444;
---nav-bg: #0A2342; 
-    --nav-text: #ffffff; 
-    --nav-border: #082338; 
-    --nav-hover: #4dabf7; 
+--nav-bg: #0A2342; /* Deep navy blue similar to Georgetown */
+    --nav-text: #ffffff; /* White text for contrast */
+    --nav-border: #082338; /* Slightly darker border */
+    --nav-hover: #4dabf7; /* Keep your current hover color or adjust */
 }
 
 body.dark-mode {
@@ -1152,7 +908,22 @@ body.dark-mode {
         }
         
 
-      
+        /* Logo - FORCE CENTER ALIGNMENT */
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--nav-text);
+            text-decoration: none;
+            white-space: nowrap;
+            display: flex;
+            align-items: center; /* Vertical center */
+            height: 70px; /* Same as header */
+            line-height: 70px; /* Force text to middle */
+            padding: 0;
+            margin: 0;
+        }
+
         /* Navigation container */
         .nav-container {
             display: flex;
@@ -1307,7 +1078,27 @@ body.dark-mode {
             margin-top: 1em;
         }
 
-      
+        .skill-tag {
+            background-color: var(--skill-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Publication Styles */
+        .publication-year-header {
+            background-color: var(--light-bg);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 30px 0 20px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--header-color);
+            border-left: 4px solid #3498db;
+        }
+
         .publication-item {
             margin-bottom: 2.5em;
             padding-bottom: 2.5em;
@@ -1788,6 +1579,15 @@ body.dark-mode .nav-item a.active::before {
             font-family: 'Montserrat', sans-serif;
         }
 
+.blog-post-date {
+    color: #555; /* Darker */
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    font-weight: 500;
+}
 
        .blog-post-excerpt {
     color: var(--text-color);
@@ -1911,6 +1711,40 @@ body.dark-mode .nav-item a.active::before {
     100% { transform: scale(1); }
 }
 
+.testimonial-title {
+    font-size: 1.8rem;
+    color: var(--header-color);
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.testimonial-description {
+    max-width: 800px;
+    margin: 0 auto 25px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.testimonial-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    font-family: 'Montserrat', sans-serif;
+}
 
 .testimonial-button:hover {
     transform: translateY(-3px);
@@ -2041,6 +1875,13 @@ body.dark-mode .nav-item a.active::before {
     flex-direction: column;
 }
 
+.app-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--header-color);
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
 
 .app-category {
     margin-bottom: 12px;
@@ -2099,6 +1940,14 @@ body.dark-mode .nav-item a.active::before {
     border: 1px solid #607D8B;
 }
 
+.app-description {
+    flex-grow: 1;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
 
 .app-links {
     display: flex;
@@ -2313,7 +2162,14 @@ body.dark-mode .design-attribution a:hover {
     padding: 5px; /* Optional: add padding */
 }
 
-      
+        .profile-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
         .profile-social-icons {
             display: flex;
             justify-content: center;
@@ -2416,7 +2272,55 @@ body.dark-mode .design-attribution a:hover {
             border-bottom: none;
         }
 
+  /* Make education text darker */
+.edu-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--header-color);
+    margin-bottom: 0.3em;
+}
 
+.edu-institution {
+    color: #444; /* Darker */
+    font-style: italic;
+    margin-bottom: 0.3em;
+    font-weight: 500;
+}
+
+.edu-period {
+    color: #555; /* Darker */
+    font-size: 0.9rem;
+    margin-bottom: 0.5em;
+    font-weight: 500;
+}
+  
+        .professional-item {
+            margin-bottom: 1.5em;
+            padding-bottom: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+       .professional-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--header-color);
+    margin-bottom: 0.3em;
+}
+
+.professional-org {
+    color: #444; /* Darker */
+    font-style: italic;
+    margin-bottom: 0.3em;
+    font-weight: 500;
+}
+
+.professional-period {
+    color: #555; /* Darker */
+    font-size: 0.9rem;
+    margin-bottom: 0.5em;
+    font-weight: 500;
+}
+       
         .professional-status {
             display: inline-block;
             padding: 3px 8px;
@@ -2671,7 +2575,6 @@ body.dark-mode .certificate-link:hover {
         visibility: visible;
     }
 }
-
 
 /* Gallery Content - Better spacing */
 .gallery-content {
@@ -3164,6 +3067,20 @@ body.dark-mode .certificate-link:hover {
     pointer-events: all;
 }
 
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--nav-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    line-height: 1.3;
+    white-space: nowrap;
+    gap: 10px;
+}
 
 .dropdown-item i {
     font-size: 0.85rem;
@@ -4225,7 +4142,6 @@ body.dark-mode .certificate-link:hover {
     document.body.classList.remove('dark-mode');
     return false;
 });
-
 
 // Add this useEffect inside your main AcademicPortfolio component, right after your other useEffects
 useEffect(() => {
@@ -6783,18 +6699,25 @@ const GalleryComponent = () => {
     backgroundColor: 'var(--nav-bg)',
     padding: '50px 20px 30px',
     marginTop: '80px',
-    borderTop: '1px solid var(--nav-border)',
-    position: 'relative',
-    minHeight: '200px'
+    borderTop: '1px solid var(--nav-border)'
 }}>
     <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
-        textAlign: 'center',
-        position: 'relative'
+        textAlign: 'center'
     }}>
-        {/* REMOVED: The big name from the top */}
-        {/* Navigation Links - KEEP AS IS */}
+        {/* Logo/Name */}
+        <div style={{
+            fontSize: '1.8rem',
+            fontWeight: '700',
+            color: 'var(--nav-text)',
+            marginBottom: '30px',
+            letterSpacing: '-0.5px'
+        }}>
+            Mudasir Mohammed Ibrahim
+        </div>
+        
+        {/* Navigation Links - UPDATED WITH GALLERY AND TESTIMONIALS */}
         <div style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -6887,6 +6810,7 @@ const GalleryComponent = () => {
                onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
                 Teaching
             </a>
+            {/* ADDED GALLERY LINK */}
             <a href="#" 
                onClick={(e) => { 
                    e.preventDefault(); 
@@ -6904,9 +6828,11 @@ const GalleryComponent = () => {
                onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
                 Gallery
             </a>
+            {/* ADDED TESTIMONIALS LINK */}
             <a href="#" 
                onClick={(e) => {
                    e.preventDefault();
+                   // Scroll to testimonial section in Software page
                    setActiveSection('shiny');
                    setTimeout(() => {
                        const testimonialElement = document.querySelector('.testimonial-button-container');
@@ -6951,7 +6877,7 @@ const GalleryComponent = () => {
             </a>
         </div>
         
-        {/* Social Media Icons - KEEP AS IS */}
+        {/* Social Media Icons */}
         <div style={{
             display: 'flex',
             justifyContent: 'center',
@@ -7055,24 +6981,46 @@ const GalleryComponent = () => {
             </a>
         </div>
         
-        {/* Your Name - MOVED TO BOTTOM LEFT WITH SMALLER SIZE */}
+        {/* Copyright */}
         <div style={{
-            position: 'absolute',
-            bottom: '15px',
-            left: '0',
             color: 'var(--nav-text)',
-            fontSize: '0.85rem',
-            opacity: 0.7,
-            textAlign: 'left',
-            width: '100%',
-            paddingLeft: '20px',
-            boxSizing: 'border-box'
+            fontSize: '0.9rem',
+            paddingTop: '20px',
+            borderTop: '1px solid var(--nav-border)',
+            opacity: 0.8,
+            lineHeight: '1.5'
         }}>
-            Mudasir Mohammed Ibrahim
+            <div style={{marginBottom: '5px'}}>
+                Copyright © {new Date().getFullYear()} 
+            </div>
+            
+            <div style={{
+                fontSize: '0.8rem',
+                opacity: 0.6
+            }}>
+                Website UI inspired by 
+                <a 
+                    href="https://profandyfield.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{
+                        color: 'var(--nav-text)',
+                        textDecoration: 'underline',
+                        textDecorationStyle: 'dotted',
+                        textUnderlineOffset: '2px',
+                        marginLeft: '4px',
+                        transition: 'color 0.2s ease'
+                    }}
+                    onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+                    onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}
+                >
+                    Prof Andy Field
+                </a>
+            </div>
         </div>
         
-        {/* Back to Top Button - KEEP AS IS */}
-        <div style={{ marginTop: '20px', marginBottom: '40px' }}>
+        {/* Optional: Back to Top */}
+        <div style={{ marginTop: '20px' }}>
             <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 style={{
@@ -7100,41 +7048,9 @@ const GalleryComponent = () => {
                 Back to Top
             </button>
         </div>
-        
-        {/* Design Attribution - KEEP AS IS BUT MOVE TO BOTTOM RIGHT */}
-        <div style={{
-            position: 'absolute',
-            bottom: '15px',
-            right: '0',
-            color: 'var(--nav-text)',
-            fontSize: '0.8rem',
-            opacity: 0.6,
-            textAlign: 'right',
-            width: '100%',
-            paddingRight: '20px',
-            boxSizing: 'border-box'
-        }}>
-            Website UI inspired by 
-            <a 
-                href="https://profandyfield.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={{
-                    color: 'var(--nav-text)',
-                    textDecoration: 'underline',
-                    textDecorationStyle: 'dotted',
-                    textUnderlineOffset: '2px',
-                    marginLeft: '4px',
-                    transition: 'color 0.2s ease'
-                }}
-                onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-                onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}
-            >
-                Prof Andy Field
-            </a>
-        </div>
     </div>
 </footer>
+
 </div>
 
             );
