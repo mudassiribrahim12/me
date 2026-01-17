@@ -2554,6 +2554,28 @@ body.dark-mode .certificate-link:hover {
     justify-content: center;
 }
 
+/* For mobile: ensure dropdown appears properly */
+@media (max-width: 1024px) {
+    .dropdown-menu {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        border: none;
+        box-shadow: none;
+        margin-top: 0;
+        padding: 0;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 /* Gallery Content - Better spacing */
 .gallery-content {
     padding: 20px;
@@ -6485,50 +6507,72 @@ const GalleryComponent = () => {
             Teaching
         </a>
     </li>
-    {/* ADD THIS NEW MORE TAB WITH DROPDOWN */}
-    <li className="nav-item dropdown">
+  {/* ADD THIS NEW MORE TAB WITH DROPDOWN */}
+<li className="nav-item dropdown">
+    <a 
+        href="#more" 
+        onClick={(e) => { 
+            e.preventDefault(); 
+            // Toggle dropdown for both desktop and mobile
+            const dropdown = e.target.closest('.dropdown');
+            if (window.innerWidth <= 1024) {
+                // For mobile/tablet: Just toggle the dropdown open/closed
+                dropdown.classList.toggle('active');
+            } else {
+                // For desktop: Toggle dropdown
+                dropdown.classList.toggle('active');
+            }
+        }}
+        className={`dropdown-toggle ${activeSection === 'gallery' || activeSection === 'testimonials' ? 'active' : ''}`}
+    >
+        More <i className="fas fa-chevron-down"></i>
+    </a>
+    <div className="dropdown-menu">
         <a 
-            href="#more" 
+            href="#gallery" 
             onClick={(e) => { 
                 e.preventDefault(); 
-                // Toggle dropdown instead of setting active section
+                setActiveSection('gallery'); 
+                setIsMobileMenuOpen(false);
+                // Close dropdown
                 const dropdown = e.target.closest('.dropdown');
-                dropdown.classList.toggle('active');
+                if (dropdown) dropdown.classList.remove('active');
             }}
-            className={`dropdown-toggle ${activeSection === 'gallery' ? 'active' : ''}`}
+            className="dropdown-item"
         >
-            More <i className="fas fa-chevron-down"></i>
+            <i className="fas fa-images" style={{width: '16px', textAlign: 'center'}}></i>
+            Gallery
         </a>
-        <div className="dropdown-menu">
-            <a 
-                href="#gallery" 
-                onClick={(e) => { 
-                    e.preventDefault(); 
-                    setActiveSection('gallery'); 
-                    setIsMobileMenuOpen(false);
-                    // Close dropdown
-                    e.target.closest('.dropdown').classList.remove('active');
-                }}
-                className="dropdown-item"
-            >
-                Gallery
-            </a>
-            {/* You can add more dropdown items here in the future */}
-            <a 
-                href="#testimonials" 
-                onClick={(e) => { 
-                    e.preventDefault(); 
-                    alert('Testimonials section coming soon!');
-                    e.target.closest('.dropdown').classList.remove('active');
-                }}
-                className="dropdown-item"
-            >
-                Testimonials
-            </a>
-        </div>
-    </li>
-</ul>
-
+        {/* Testimonials link - goes to the testimonial section in Software page */}
+        <a 
+            href="#testimonials" 
+            onClick={(e) => { 
+                e.preventDefault(); 
+                setActiveSection('shiny');
+                setIsMobileMenuOpen(false);
+                // Close dropdown
+                const dropdown = e.target.closest('.dropdown');
+                if (dropdown) dropdown.classList.remove('active');
+                
+                // Scroll to testimonial section after a short delay
+                setTimeout(() => {
+                    const testimonialElement = document.querySelector('.testimonial-button-container');
+                    if (testimonialElement) {
+                        testimonialElement.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                }, 100);
+            }}
+            className="dropdown-item"
+        >
+            <i className="fas fa-star" style={{width: '16px', textAlign: 'center'}}></i>
+            Testimonials
+        </a>
+    </div>
+</li>
+  </ul>
             </div>
             
             <div className="header-right">
