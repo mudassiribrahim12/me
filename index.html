@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>The website of Mudasir Mohammed Ibrahim | Mudasir Ibrahim</title>
+    <title>Mudasir Mohammed Ibrahim - Home</title>
         <meta name="title" content="Mudasir Mohammed Ibrahim">
     <meta name="description" content="Official Portfolio Website of Mudasir Mohammed Ibrahim – Registered Nurse in Tamale, Ghana">
 <meta name="theme-color" content="#1a56db">
@@ -134,6 +134,545 @@ li {
     line-height: 1.6;
     color: var(--text-color);
     font-weight: 400;
+}
+
+/* ========== GALLERY SECTION STYLES ========== */
+
+/* Gallery Container */
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Gallery Grid - IMPROVED for better image fitting */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+/* Gallery Item Card - IMPROVED for perfect image fit */
+.gallery-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--nav-hover);
+}
+
+/* ========== UPDATED GALLERY STYLES FOR LONG IMAGES ========== */
+
+/* Gallery Image Container - FIXED for better image handling */
+.gallery-image-container {
+    width: 100%;
+    height: 250px; /* Fixed height for consistent display */
+    overflow: hidden;
+    position: relative;
+    background-color: var(--light-bg);
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start; /* Changed from center to top */
+    justify-content: center;
+    min-height: 250px;
+}
+
+/* FIX: Gallery Image - Smart fit for different aspect ratios */
+.gallery-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* Changed from cover to contain for long images */
+    object-position: top !important; /* Show top of long images */
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    transition: transform 0.5s ease;
+}
+
+/* Special handling for long images */
+.gallery-item.long-image .gallery-image {
+    object-fit: contain !important;
+    object-position: top !important;
+}
+
+.gallery-item.long-image .gallery-image-container {
+    background-color: var(--light-bg);
+}
+
+/* Hover effect for long images */
+.gallery-item.long-image:hover .gallery-image {
+    transform: scale(1.02) translateY(-10px); /* Slight upward movement on hover */
+}
+
+/* Modal image for long images */
+.gallery-item.long-image .gallery-overlay i {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Gallery Image Overlay */
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay i {
+    color: white;
+    font-size: 2.5rem;
+    background: rgba(52, 152, 219, 0.8);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Gallery Content - Better spacing */
+.gallery-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--header-color);
+    margin-bottom: 10px;
+    line-height: 1.4;
+    min-height: 2.8em;
+}
+
+.gallery-description {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex: 1;
+    opacity: 0.9;
+}
+
+.gallery-date {
+    font-size: 0.85rem;
+    color: var(--position-color);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+}
+
+/* Gallery Modal */
+.gallery-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.gallery-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    animation: scaleUp 0.3s ease;
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-image {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+    padding: 20px;
+    background-color: var(--light-bg);
+}
+
+.modal-info {
+    padding: 25px;
+    background-color: var(--card-bg);
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--header-color);
+    margin-bottom: 15px;
+}
+
+.modal-description {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: rgba(231, 76, 60, 0.9);
+    transform: rotate(90deg);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-nav:hover {
+    background: rgba(52, 152, 219, 0.9);
+}
+
+.modal-prev {
+    left: 20px;
+}
+
+.modal-next {
+    right: 20px;
+}
+
+/* Gallery Controls - FIXED to prevent shaking */
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallery-search {
+    flex: 1;
+    min-width: 250px;
+}
+
+.gallery-search input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    min-width: 250px;
+}
+
+.gallery-search input:focus {
+    outline: none;
+    border-color: var(--nav-hover);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.gallery-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.filter-btn:hover {
+    background-color: var(--skill-bg);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    border-color: var(--nav-border);
+    font-weight: 600;
+}
+
+.gallery-stats {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Gallery Pagination */
+.gallery-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.page-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover {
+    background-color: var(--light-bg);
+    border-color: var(--nav-hover);
+}
+
+.page-btn.active {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    border-color: var(--nav-border);
+}
+
+/* Gallery Empty State */
+.gallery-empty {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin: 40px 0;
+}
+
+.gallery-empty i {
+    font-size: 4rem;
+    color: var(--position-color);
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.gallery-empty h3 {
+    color: var(--header-color);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.gallery-empty p {
+    color: var(--text-color);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Gallery Loading */
+.gallery-loading {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.gallery-loading i {
+    font-size: 2rem;
+    color: var(--nav-hover);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Gallery Button Style */
+.gallery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.gallery-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--nav-hover);
+}
+
+/* Responsive Gallery */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .gallery-controls {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+    
+    .gallery-search {
+        max-width: 100%;
+        min-width: auto;
+    }
+    
+    .gallery-search input {
+        min-width: auto;
+    }
+    
+    .gallery-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    
+    .gallery-stats {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .gallery-image-container {
+        height: 200px;
+    }
+    
+    .modal-content {
+        max-width: 95%;
+        max-height: 95%;
+    }
+    
+    .modal-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .gallery-title {
+        font-size: 1.1rem;
+        min-height: 2.4em;
+    }
+    
+    .gallery-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-image-container {
+        height: 220px;
+    }
+    
+    .gallery-filters {
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        min-width: 80px;
+        padding: 8px 15px;
+        font-size: 0.85rem;
+    }
 }
 
 /* Make text colors darker for better readability like Trojan Brands */
@@ -295,7 +834,7 @@ body.dark-mode {
     }
 }
 
-  :root {
+:root {
     --bg-color: #ffffff; 
     --text-color: #111;
     --header-color: #000;
@@ -305,7 +844,7 @@ body.dark-mode {
     --skill-bg: #e8e8e8;
     --position-color: #444;
     --nav-bg: #2c3e50;
-    --nav-text: rgba(255, 255, 255, 0.8); /* Faded white - 80% opacity */
+    --nav-text: #f8f9fa; /* CHANGED: Light white/off-white */
     --nav-hover: #3498db;
     --nav-border: #34495e;
 }
@@ -367,6 +906,7 @@ body.dark-mode {
             height: 70px; /* Exact same as parent */
             gap: 40px; /* Space between logo and tabs */
         }
+        
 
         /* Logo - FORCE CENTER ALIGNMENT */
         .logo {
@@ -762,6 +1302,157 @@ body.dark-mode {
     
     .archive-section {
         position: static;
+    }
+}
+
+/* Publications Sidebar */
+.publications-container {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.year-map-sidebar {
+    flex: 0 0 200px;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.year-map-container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.year-map-title {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--nav-hover);
+    color: var(--header-color);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.year-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.year-button {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--skill-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.year-button:hover {
+    background-color: var(--light-bg);
+    border-color: var(--nav-hover);
+}
+
+.year-button.active {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    border-color: var(--nav-border);
+    font-weight: 600;
+}
+
+.year-count {
+    background-color: var(--nav-hover);
+    color: white;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    min-width: 30px;
+}
+
+.year-button.active .year-count {
+    background-color: var(--nav-text);
+    color: var(--nav-bg);
+}
+
+.year-summary {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--position-color);
+}
+
+.publications-content {
+    flex: 1;
+}
+
+.publication-year-section {
+    scroll-margin-top: 100px;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .publications-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .year-map-sidebar {
+        position: static;
+        max-height: none;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+    
+    .year-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .year-button {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .year-button {
+        min-width: 100px;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .year-count {
+        font-size: 0.7rem;
+        padding: 1px 6px;
+        min-width: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .year-list {
+        flex-direction: column;
+    }
+    
+    .year-button {
+        min-width: 100%;
     }
 }
 
@@ -1760,37 +2451,691 @@ body.dark-mode .certificate-link:hover {
     background-color: #2980b9;
 }
         
-        
-        /* Add this to your CSS section */
-.publication-list a.doi-link {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    border-bottom: 1px solid transparent;
+      /* ========== GALLERY SECTION STYLES - UPDATED & FIXED ========== */
+
+/* Gallery Container */
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.publication-list a.doi-link:hover {
-    color: #2980b9;
-    border-bottom: 1px solid #2980b9;
+/* Gallery Grid - FIXED for perfect image fitting */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
 }
 
-.publication-list li {
-    margin-bottom: 1em;
-    line-height: 1.6;
-    text-align: justify;
-    color: var(--text-color);
-    font-weight: 400;
+/* Gallery Item Card - FIXED for perfect image fit */
+.gallery-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.publication-year-header {
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--nav-hover);
+}
+
+/* Gallery Image Container - FIXED for perfect fit */
+.gallery-image-container {
+    width: 100%;
+    height: 250px; /* Fixed height for consistent display */
+    overflow: hidden;
+    position: relative;
+    background-color: var(--light-bg);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px; /* Ensures minimum height */
+}
+
+/* FIX: Gallery Image - Perfect fit to container - UPDATED */
+.gallery-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/* Fallback for broken images */
+.gallery-image-container img:not([src]),
+.gallery-image[src=""],
+.gallery-image[src*="undefined"],
+.gallery-image[src*="null"] {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f5f5f5'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='16' text-anchor='middle' fill='%23666'%3EImage not available%3C/text%3E%3C/svg%3E");
+    object-fit: contain !important;
+    padding: 20px;
+}
+
+/* Gallery Image Overlay */
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay i {
+    color: white;
+    font-size: 2.5rem;
+    background: rgba(52, 152, 219, 0.8);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Gallery Content - Better spacing */
+.gallery-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-date {
+    font-size: 0.85rem;
+    color: var(--position-color);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+}
+
+/* Gallery Modal - FIXED */
+.gallery-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.gallery-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    animation: scaleUp 0.3s ease;
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* FIXED: Modal Image - Perfect fit */
+.modal-image {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 70vh !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 auto !important;
+    background-color: var(--light-bg);
+}
+
+/* Modal Info */
+.modal-info {
+    padding: 25px;
+    background-color: var(--card-bg);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--header-color);
-    margin-top: 1.5em;
-    margin-bottom: 0.8em;
-    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
 }
+
+.modal-close:hover {
+    background: rgba(231, 76, 60, 0.9);
+    transform: rotate(90deg);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-nav:hover {
+    background: rgba(52, 152, 219, 0.9);
+}
+
+.modal-prev {
+    left: 20px;
+}
+
+.modal-next {
+    right: 20px;
+}
+
+/* Gallery Controls - FIXED */
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallery-search {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+}
+
+.gallery-search input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    min-width: 250px;
+}
+
+.gallery-search input:focus {
+    outline: none;
+    border-color: var(--nav-hover);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.gallery-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.filter-btn:hover {
+    background-color: var(--skill-bg);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    border-color: var(--nav-border);
+    font-weight: 600;
+}
+
+.gallery-stats {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Search Suggestions */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0 0 8px 8px;
+    margin-top: -1px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-suggestions div {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.search-suggestions div:hover {
+    background-color: var(--light-bg);
+}
+
+.search-suggestions div:last-child {
+    border-bottom: none;
+}
+
+/* Gallery Empty State */
+.gallery-empty {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin: 40px 0;
+}
+
+.gallery-empty i {
+    font-size: 4rem;
+    color: var(--position-color);
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.gallery-empty h3 {
+    color: var(--header-color);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.gallery-empty p {
+    color: var(--text-color);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Gallery Loading */
+.gallery-loading {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.gallery-loading i {
+    font-size: 2rem;
+    color: var(--nav-hover);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Gallery Button */
+.gallery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.gallery-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--nav-hover);
+}
+
+/* Responsive Gallery - UPDATED */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .gallery-controls {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+    
+    .gallery-search {
+        max-width: 100%;
+        min-width: auto;
+    }
+    
+    .gallery-search input {
+        min-width: auto;
+    }
+    
+    .gallery-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    
+    .gallery-stats {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .gallery-image-container {
+        height: 200px;
+        min-height: 200px;
+    }
+    
+    .modal-content {
+        max-width: 95%;
+        max-height: 95%;
+    }
+    
+    .modal-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-image-container {
+        height: 220px;
+        min-height: 220px;
+    }
+    
+    .gallery-filters {
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        min-width: 80px;
+        padding: 8px 15px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Image Counter in Modal */
+.image-counter {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 10;
+}
+
+/* Category Badge */
+.category-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    z-index: 5;
+    text-transform: capitalize;
+}
+      
+        /* ========== DROPDOWN STYLES FOR MORE TAB ========== */
+        .dropdown {
+            position: relative;
+            height: 70px;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            height: 70px;
+            line-height: 70px;
+            padding: 0;
+            margin: 0;
+            color: var(--nav-text);
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .dropdown-toggle::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--nav-hover);
+            transition: width 0.3s ease;
+        }
+
+        .dropdown-toggle:hover::after,
+        .dropdown-toggle.active::after {
+            width: 100%;
+        }
+
+        .dropdown-toggle i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-toggle.active i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            border-radius: 8px;
+            min-width: 200px;
+            padding: 10px 0;
+            margin-top: 5px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--nav-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 3px solid var(--nav-hover);
+            padding-left: 25px;
+        }
+
+        .dropdown-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Mobile dropdown adjustments */
+        @media (max-width: 767px) {
+            .dropdown {
+                height: 60px;
+            }
+            
+            .dropdown-toggle {
+                height: 60px;
+                line-height: 60px;
+            }
+            
+            .dropdown-toggle::after {
+                bottom: 15px;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                background-color: transparent;
+                border: none;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                padding-left: 20px;
+                margin-top: 0;
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+            
+            .dropdown-item {
+                padding: 10px 0;
+                border-bottom: 1px solid var(--nav-border);
+            }
+            
+            .dropdown-item:hover {
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+
+        /* ========== PUBLICATION LIST STYLES ========== */
+        .publication-list a.doi-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .publication-list a.doi-link:hover {
+            color: #2980b9;
+            border-bottom: 1px solid #2980b9;
+        }
+
+        .publication-list li {
+            margin-bottom: 1em;
+            line-height: 1.6;
+            text-align: justify;
+            color: var(--text-color);
+            font-weight: 400;
+        }
+
+        .publication-year-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--header-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            font-family: 'Montserrat', sans-serif;
+        }        
+
 
 /* Mobile Hamburger Menu Styles */
 .mobile-menu-toggle {
@@ -2558,6 +3903,7 @@ body.dark-mode .certificate-link:hover {
             const [showContactForm, setShowContactForm] = useState(false);
             const [selectedMonth, setSelectedMonth] = useState(null);
             const [filteredPosts, setFilteredPosts] = useState([]);
+            const [activeDropdown, setActiveDropdown] = useState(null);
             
          const [darkMode, setDarkMode] = useState(() => {
     // Check localStorage first
@@ -2583,6 +3929,76 @@ body.dark-mode .certificate-link:hover {
     document.body.classList.remove('dark-mode');
     return false;
 });
+
+// Add this useEffect inside your main AcademicPortfolio component, right after your other useEffects
+useEffect(() => {
+    // Pre-load gallery images when page loads
+    const galleryImageUrls = [
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%201.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%202.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%203.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%204.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%205.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%206.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%207.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%208.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Clinical%201.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Clinical%202.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Team%201.JPG",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Team%202.JPG",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Team%203.JPG",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Conference%201.jpg",
+        "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Conference%202.jpg"
+    ];
+    
+    // Pre-load all images silently in background
+    galleryImageUrls.forEach(url => {
+        const img = new Image();
+        img.src = url;
+    });
+    
+    console.log('Gallery images pre-loaded');
+}, []);
+
+// Add this useEffect to close mobile menu AND dropdowns when clicking outside
+useEffect(() => {
+    const handleClickOutside = (event) => {
+        // Close mobile menu
+        if (isMobileMenuOpen && 
+            !event.target.closest('.nav-container') && 
+            !event.target.closest('.mobile-menu-toggle')) {
+            setIsMobileMenuOpen(false);
+        }
+        
+        // Close dropdowns when clicking outside
+        if (!event.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    };
+    
+    // Add event listener for escape key
+    const handleEscapeKey = (event) => {
+        if (isMobileMenuOpen && event.key === 'Escape') {
+            setIsMobileMenuOpen(false);
+        }
+        // Close dropdowns on escape
+        if (event.key === 'Escape') {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+        document.removeEventListener('click', handleClickOutside);
+        document.removeEventListener('keydown', handleEscapeKey);
+    };
+}, [isMobileMenuOpen]);
 
 useEffect(() => {
     // Ensure the correct theme class is applied on initial render
@@ -3063,7 +4479,7 @@ const loadBlogPostsWithFallback = async () => {
         </div>
         
             <p className="profile-intro">
-Hello and welcome! I'm a Registered Nurse who discovered that data tells powerful stories about patient care. My journey has evolved from bedside nursing to developing statistical tools that help healthcare professionals understand complex data. Here, you'll discover my research on health, interactive R Shiny web applications I've created to simplify complex statistical analysis in R, and resources that reflect my dual passion for healthcare delivery and research innovation.
+Hello and welcome! I’m a Registered Nurse who has discovered that data tells powerful stories about patient care. My journey has evolved from bedside nursing to developing statistical tools that help healthcare professionals understand complex data. Here, you’ll discover my research in health, interactive R Shiny web applications I’ve created to simplify complex statistical analyses in R, and resources that reflect my dual passion for healthcare delivery and research innovation. Thank you for visiting, and feel free to browse my work or email me with any questions about my R Shiny tools or anything.
             </p>
         </div>
 
@@ -3346,55 +4762,167 @@ Hello and welcome! I'm a Registered Nurse who discovered that data tells powerfu
            </div>
 );
 
-            const renderPublications = () => (
-    <div className="section">
-        <h2>Publications</h2>
+        const PublicationsComponent = () => {
+    const [selectedYear, setSelectedYear] = useState(null);
+    
+    // Publication data organized by year
+    const publicationsByYear = {
+        "2026": [
+            {id: 1, content: `<strong>Ibrahim, M. M. </strong>, Monne, R., Tawiah, B. C., Adam, H., Abukari, M. S., Salifu, R., Sisala, I. M., & Wuni, A. (2026). Validation and Reliability Study of a Scale to Measure Academic Help-seeking Behaviors Among Nursing Students in Ghana.<em> Journal of Education and Research in Nursing</em>, 23(1), 1-10. doi: <a href="https://doi.org/10.14744/jern.2025.70745" target="_blank" rel="noopener noreferrer" className="doi-link">10.14744/jern.2025.70745</a>`}
+        ],
+        "2025": [
+            {id: 2, content: `Wuni, A., <strong>Ibrahim, M. M.</strong>, Tonlaar, P. S., Sisala, I. M., Awal, I., Nyarko, B. A., Abdulai, A., Mohammed, S., & Salisu, W. J. (2025). Patterns and temporal trends in childhood cancer incidence in northern Ghana: evidence from medical records, 2016 to 2023. <em>BMC Pediatrics</em>, 25(745). doi: <a href="https://doi.org/10.1186/s12887-025-06141-2" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12887-025-06141-2</a>`},
+            {id: 3, content: `<strong>Ibrahim, M. M.</strong>, Abdul-Rahaman, F., Sayibu, M. S., Alhassan, D. N., Awudu, R. T., Mohammed, I. S., Wuni, A., & Abdulai, A. (2025). Assessing the impact of nurses' patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital: The mediating role of leadership and barriers to competency development. <em>BMC Health Services Research</em>, 25(1176), 1-13. doi: <a href="https://doi.org/10.1186/s12913-025-13384-3" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12913-025-13384-3</a>`},
+            {id: 4, content: `Wuni, A., Mohammed, I. S., Salisu, W. J., Abdul-Rahman, R., Seidu, A., Abdul Rahaman, A., Abdulai, A., Zakaria, Y., Buasilenu, H., Nyarko, B. A., & <strong>Ibrahim, M. M.</strong> (2025). Fever in Children under 5 years: Mothers' Knowledge and Home Management Practices in Northern Region of Ghana: A Multi-facility Study. <em>Sage Open Pediatrics</em>, 12, 1-17. doi: <a href="https://doi.org/10.1177/30502225251364932" target="_blank" rel="noopener noreferrer" className="doi-link">10.1177/30502225251364932</a>`},
+            {id: 5, content: `Monne, R., <strong>Ibrahim, M. M.</strong>, Tawiah, B. C., Adam, H., Abukari, M. S., Salifu, R., & Wuni, A. (2025). Assessing Academic Help-Seeking Behavior of Nursing and Midwifery Students in NMTC Tamale, Ghana. <em>Journal of Education and Research in Nursing</em>, 22(1), 39-46. doi: <a href="https://doi.org/10.14744/jern.2025.98150" target="_blank" rel="noopener noreferrer" className="doi-link">10.14744/jern.2025.98150</a>`},
+            {id: 6, content: `Abdulai, A., Mohammed, I. S., Ibrahim, I., Kyiu, C., Fatimata, Y., <strong>Ibrahim, M. M.</strong>, & Wuni, A. (2025). Knowledge, attitudes, and barriers to cervical cancer screening uptake among female healthcare professionals at a Tertiary healthcare facility in the Tamale Metropolis. <em>Women's Health</em>, 21. doi: <a href="https://doi.org/10.1177/17455057251401319" target="_blank" rel="noopener noreferrer" className="doi-link">10.1177/17455057251401319</a>`},
+            {id: 7, content: `Iddrisu, M., Sisala, I. M., <strong>Ibrahim, M. M.</strong>, & Wuni, A. (2025). Predictive Analysis of the Relationship Between Nurses' Attitudes Toward Patient Safety and Missed Nursing Care. <em>BMC Nursing</em>. doi: <a href="https://doi.org/10.1186/s12912-025-04224-0" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12912-025-04224-0</a>`},
+            {id: 8, content: `Mohammed, I. S., Wuni, A., Nyarko, B. A., <strong>Ibrahim, M. M.</strong>, & Chanayireh, L. (2025). Work engagement: the key driver in transforming organizational commitment into enhanced work performance among midwives in Ghana - a structural equation modelling approach. <em>BMC Health Services Research</em>, 25(1), 840. doi: <a href="https://doi.org/10.1186/s12913-025-13062-4" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12913-025-13062-4</a>`},
+            {id: 9, content: `Wuni, A., <strong>Ibrahim, M. M.</strong>, & Diebieri, M. et al. (2025). Perceptions and satisfaction with the quality of clinical training placements among nursing and midwifery students in Northern Ghana. <em>BMC Nursing</em>, 24, 245. doi: <a href="https://doi.org/10.1186/s12912-025-02899-z" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12912-025-02899-z</a>`},
+            {id: 10, content: `Wuni, A., Musah, A., Sisala, I. M., Abdulai, A. M., Chanayireh, L., Nyarko, B. A., Buasilenu, H., <strong>Ibrahim, M. M.</strong>, Musah, S., Azure, D., & Abdulai, N. (2025). "We Are Our Own Worst Enemies": Workplace Bullying Among Nurses and Its Implications on Healthcare Workers and Job Performance: A Multi-Facility Study in the Tamale Metropolis. <em>Nursing Open</em>, 12(7), e70282. doi: <a href="https://doi.org/10.1002/nop2.70282" target="_blank" rel="noopener noreferrer" className="doi-link">10.1002/nop2.70282</a>`},
+            {id: 11, content: `Abdul-Malik, A., Bonmenga, T., Ziblim, L., Galo, V., Abu Iddrisu, O., Iddrisu, R., & <strong>Ibrahim, M. M.</strong> (2025). Parental support on adolescent contraception uptake - a cross-sectional study in Tamale metropolis Ghana. <em>The Evidence</em>, 3(1). doi: <a href="https://doi.org/10.61505/evidence.2025.3.1.133" target="_blank" rel="noopener noreferrer" className="doi-link">10.61505/evidence.2025.3.1.133</a>`}
+        ],
+        "2024": [
+            {id: 12, content: `<strong>Ibrahim, M. M.</strong>, Wuni, A., Salisu, W. J., Abdulai, A. M., Owusua, T., Nyarko, B. A., & Mohammed, I. S. (2024). Determinants and Mitigating Factors of Brain Drain among Ghanaian Nurses: Insights from Nurse Managers in Northern Ghana—A Qualitative Inquiry. <em>Journal of Nursing Management</em>, 2024(1), 8862991. doi: <a href="https://doi.org/10.1155/2024/8862991" target="_blank" rel="noopener noreferrer" className="doi-link">10.1155/2024/8862991</a>`},
+            {id: 13, content: `Sisala Mohammed, I., Abdulai, M. H., <strong>Ibrahim, M. M.</strong>, Buasilenu, H., Baako, I. A., Nyarko, B. A., & Buunaaisie, C. (2024). Prevalence of Workplace-Related Musculoskeletal Disorders Among Nurses and Midwives in a Tertiary Healthcare Facility: A Descriptive Cross-Sectional Survey. <em>Nursing Open</em>, 11(11), e70098. doi: <a href="https://doi.org/10.1002/nop2.70098" target="_blank" rel="noopener noreferrer" className="doi-link">10.1002/nop2.70098</a>`},
+            {id: 14, content: `Wuni, A., Iddrisu, M., Angliengmene, A. A., Salia, S. M., Chanayireh, L., Mohammed, I. S., <strong>Ibrahim, M. M.</strong>, & Doat, A. R. (2024). Knowledge and management practices of infant teething symptoms among mothers in a tertiary facility in Ghana. <em>The Pan African Medical Journal</em>, 47. doi: <a href="https://doi.org/10.11604/pamj.2024.47.65.40792" target="_blank" rel="noopener noreferrer" className="doi-link">10.11604/pamj.2024.47.65.40792</a>`},
+            {id: 15, content: `Monne, R., Iddrisu, M., Kyilleh, J. M., <strong>Ibrahim, M. M.</strong>, Nashiru, A. R., Wuni, A., & Abdulai, A. M. (2024). Male midwifery practice and acceptability: attitudes, beliefs, and associated factors among expectant mothers in Savelugu Municipal Hospital, Northern Region of Ghana. <em>The Pan African Medical Journal</em>, 47, 199. doi: <a href="https://doi.org/10.11604/pamj.2024.47.199.42482" target="_blank" rel="noopener noreferrer" className="doi-link">10.11604/pamj.2024.47.199.42482</a>`},
+            {id: 16, content: `Yakubu, H., <strong>Ibrahim, M. M.</strong>, Dogbe, P., Issah, N., Abosi, K., Osman, A., & Abdulai, A. M. (2024). Knowledge of Maternal Mortality and Its Determinants Among Pregnant Women at Tamale Teaching Hospital in Northern Ghana: A Descriptive Cross-Sectional Study. <em>Women, Midwives and Midwifery</em>, 4(3), 26-40. doi: <a href="https://doi.org/10.36749/wmm.4.3.26-40.2024" target="_blank" rel="noopener noreferrer" className="doi-link">doi.org/10.36749/wmm.4.3.26-40.2024</a>`},
+            {id: 17, content: `Abdul Malik, A., Osman, A. I., Abdul Hakeem, I., Abdul-Khahar, O., Saidatu, A. A., <strong>Ibrahim, M. M.</strong>, & Fasasi, M. (2024). Barriers and facilitators to the uptake of contraceptives among adolescents and young adults in Ghana. <em>The Evidence</em>, 2(2). doi: <a href="https://doi.org/10.61505/evidence.2024.2.2.29" target="_blank" rel="noopener noreferrer" className="doi-link">10.61505/evidence.2024.2.2.29</a>`}
+        ],
+        "2023": [
+            {id: 18, content: `Wuni, A., Abena Nyarko, B., <strong>Ibrahim, M. M.</strong>, Abdulai Baako, I., Mohammed, I. S., & Buunaaisie, C. (2023). Prevalence, Management, and Impact of Dysmenorrhea on the Lives of Nurse and Midwife Trainees in Northern Ghana. <em>Obstetrics and Gynecology International</em>, 2023(1), 8823525. doi: <a href="https://doi.org/10.1155/2023/8823525" target="_blank" rel="noopener noreferrer" className="doi-link">10.1155/2023/8823525</a>`}
+        ],
+        "2020": [
+            {id: 19, content: `Wuni, A., Salia, S. M., <strong>Ibrahim, M. M.</strong>, Iddriss, I., Abena Nyarko, B., Nabila Seini, S., & Mohammed, J. (2020). Evaluating Knowledge, Practices, and Barriers of Paediatric Pain Management among Nurses in a Tertiary Health Facility in the Northern Region of Ghana: A Descriptive Cross-Sectional Study. <em>Pain Research and Management</em>, 2020(1), 8846599. doi: <a href="https://doi.org/10.1155/2020/8846599" target="_blank" rel="noopener noreferrer" className="doi-link">10.1155/2020/8846599</a>`}
+        ]
+    };
+    
+    // Years to show in the year map (sorted descending)
+    const years = Object.keys(publicationsByYear).sort((a, b) => b - a);
+    
+    // Handle clicking on a year
+    const handleYearClick = (year) => {
+        setSelectedYear(year);
+        const element = document.getElementById(`year-${year}`);
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+    
+    // Handle scroll to detect which year is in view
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY + 100;
+            
+            years.forEach(year => {
+                const element = document.getElementById(`year-${year}`);
+                if (element) {
+                    const elementTop = element.offsetTop;
+                    const elementBottom = elementTop + element.offsetHeight;
+                    
+                    if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+                        if (selectedYear !== year) {
+                            setSelectedYear(year);
+                        }
+                    }
+                }
+            });
+        };
         
-        <h3>Journal articles</h3>
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [selectedYear, years]);
+
+    // Set initial selected year
+    useEffect(() => {
+        if (years.length > 0 && !selectedYear) {
+            setSelectedYear(years[0]);
+        }
+    }, [years, selectedYear]);
+
+    return (
+        <div className="section">
+            <h2>Publications</h2>
+            <h3>Journal articles</h3>
+            <h4>Recent</h4>
+            
+            <div className="publications-container">
+                {/* Year Map Sidebar */}
+                <div className="year-map-sidebar">
+                    <div className="year-map-container">
+                        <h4 className="year-map-title">
+                            <i className="fas fa-calendar-alt"></i>
+                            Year Map
+                        </h4>
+                        
+                        <div className="year-list">
+                            {years.map(year => (
+                                <button
+                                    key={year}
+                                    onClick={() => handleYearClick(year)}
+                                    className={`year-button ${selectedYear === year ? 'active' : ''}`}
+                                >
+                                    <span>{year}</span>
+                                    <span className="year-count">
+                                        {publicationsByYear[year].length}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+                        
+                        <div className="year-summary">
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                                <span>Total Publications:</span>
+                                <span style={{ fontWeight: '600' }}>
+                                    {Object.values(publicationsByYear).reduce((total, yearPub) => total + yearPub.length, 0)}
+                                </span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <span>Years:</span>
+                                <span style={{ fontWeight: '600' }}>{years.length}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {/* Publications Content */}
+                <div className="publications-content">
+                    {years.map(year => (
+                        <div 
+                            key={year}
+                            id={`year-${year}`}
+                            className="publication-year-section"
+                        >
+                            <div className="publication-year-header">
+                                {year}
+                                <span style={{
+                                    fontSize: '0.9rem',
+                                    marginLeft: '10px',
+                                    color: 'var(--position-color)',
+                                    fontWeight: 'normal'
+                                }}>
+                                    ({publicationsByYear[year].length} publication{publicationsByYear[year].length !== 1 ? 's' : ''})
+                                </span>
+                            </div>
+                            
+                            <ul className="publication-list">
+                                {publicationsByYear[year].map(publication => (
+                                    <li key={publication.id} dangerouslySetInnerHTML={{ __html: publication.content }} />
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+
+                </div>
+            </div>
+        </div>
+    );
+};
         
-        <h4>Recent</h4>
-        
-                <div className="publication-year-header">2026</div>
-        <ul className="publication-list">
-            <li><strong>Ibrahim, M. M. </strong>, Monne, R., Tawiah, B. C., Adam, H., Abukari, M. S., Salifu, R., Sisala, I. M., & Wuni, A. (2026). Validation and Reliability Study of a Scale to Measure Academic Help-seeking Behaviors Among Nursing Students in Ghana.<em> Journal of Education and Research in Nursing</em>, 23(1), 1-10. doi: <a href="https://doi.org/10.14744/jern.2025.70745" target="_blank" rel="noopener noreferrer" className="doi-link">10.14744/jern.2025.70745</a></li>
-        </ul>
-        
-        <div className="publication-year-header">2025</div>
-        <ul className="publication-list">
-            <li>Wuni, A., <strong>Ibrahim, M. M.</strong>, Tonlaar, P. S., Sisala, I. M., Awal, I., Nyarko, B. A., Abdulai, A., Mohammed, S., & Salisu, W. J. (2025). Patterns and temporal trends in childhood cancer incidence in northern Ghana: evidence from medical records, 2016 to 2023. <em>BMC Pediatrics</em>, 25(745). doi: <a href="https://doi.org/10.1186/s12887-025-06141-2" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12887-025-06141-2</a></li>
-            <li><strong>Ibrahim, M. M.</strong>, Abdul-Rahaman, F., Sayibu, M. S., Alhassan, D. N., Awudu, R. T., Mohammed, I. S., Wuni, A., & Abdulai, A. (2025). Assessing the impact of nurses' patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital: The mediating role of leadership and barriers to competency development. <em>BMC Health Services Research</em>, 25(1176), 1-13. doi: <a href="https://doi.org/10.1186/s12913-025-13384-3" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12913-025-13384-3</a></li>
-            <li>Wuni, A., Mohammed, I. S., Salisu, W. J., Abdul-Rahman, R., Seidu, A., Abdul Rahaman, A., Abdulai, A., Zakaria, Y., Buasilenu, H., Nyarko, B. A., & <strong>Ibrahim, M. M.</strong> (2025). Fever in Children under 5 years: Mothers' Knowledge and Home Management Practices in Northern Region of Ghana: A Multi-facility Study. <em>Sage Open Pediatrics</em>, 12, 1-17. doi: <a href="https://doi.org/10.1177/30502225251364932" target="_blank" rel="noopener noreferrer" className="doi-link">10.1177/30502225251364932</a></li>
-            <li>Monne, R., <strong>Ibrahim, M. M.</strong>, Tawiah, B. C., Adam, H., Abukari, M. S., Salifu, R., & Wuni, A. (2025). Assessing Academic Help-Seeking Behavior of Nursing and Midwifery Students in NMTC Tamale, Ghana. <em>Journal of Education and Research in Nursing</em>, 22(1), 39-46. doi: <a href="https://doi.org/10.14744/jern.2025.98150" target="_blank" rel="noopener noreferrer" className="doi-link">10.14744/jern.2025.98150</a></li>
-            <li>Abdulai, A., Mohammed, I. S., Ibrahim, I., Kyiu, C., Fatimata, Y., <strong>Ibrahim, M. M.</strong>, & Wuni, A. (2025). Knowledge, attitudes, and barriers to cervical cancer screening uptake among female healthcare professionals at a Tertiary healthcare facility in the Tamale Metropolis. <em>Women's Health</em>, 21. doi: <a href="https://doi.org/10.1177/17455057251401319" target="_blank" rel="noopener noreferrer" className="doi-link">10.1177/17455057251401319</a></li>
-            <li>Iddrisu, M., Sisala, I. M., <strong>Ibrahim, M. M.</strong>, & Wuni, A. (2025). Predictive Analysis of the Relationship Between Nurses' Attitudes Toward Patient Safety and Missed Nursing Care. <em>BMC Nursing</em>. doi: <a href="https://doi.org/10.1186/s12912-025-04224-0" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12912-025-04224-0</a></li>
-            <li>Mohammed, I. S., Wuni, A., Nyarko, B. A., <strong>Ibrahim, M. M.</strong>, & Chanayireh, L. (2025). Work engagement: the key driver in transforming organizational commitment into enhanced work performance among midwives in Ghana - a structural equation modelling approach. <em>BMC Health Services Research</em>, 25(1), 840. doi: <a href="https://doi.org/10.1186/s12913-025-13062-4" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12913-025-13062-4</a></li>
-            <li>Wuni, A., <strong>Ibrahim, M. M.</strong>, & Diebieri, M. et al. (2025). Perceptions and satisfaction with the quality of clinical training placements among nursing and midwifery students in Northern Ghana. <em>BMC Nursing</em>, 24, 245. doi: <a href="https://doi.org/10.1186/s12912-025-02899-z" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12912-025-02899-z</a></li>
-            <li>Wuni, A., Musah, A., Sisala, I. M., Abdulai, A. M., Chanayireh, L., Nyarko, B. A., Buasilenu, H., <strong>Ibrahim, M. M.</strong>, Musah, S., Azure, D., & Abdulai, N. (2025). "We Are Our Own Worst Enemies": Workplace Bullying Among Nurses and Its Implications on Healthcare Workers and Job Performance: A Multi-Facility Study in the Tamale Metropolis. <em>Nursing Open</em>, 12(7), e70282. doi: <a href="https://doi.org/10.1002/nop2.70282" target="_blank" rel="noopener noreferrer" className="doi-link">10.1002/nop2.70282</a></li>
-            <li>Abdul-Malik, A., Bonmenga, T., Ziblim, L., Galo, V., Abu Iddrisu, O., Iddrisu, R., & <strong>Ibrahim, M. M.</strong> (2025). Parental support on adolescent contraception uptake - a cross-sectional study in Tamale metropolis Ghana. <em>The Evidence</em>, 3(1). doi: <a href="https://doi.org/10.61505/evidence.2025.3.1.133" target="_blank" rel="noopener noreferrer" className="doi-link">10.61505/evidence.2025.3.1.133</a></li>
-        </ul>
-
-        <div className="publication-year-header">2024</div>
-        <ul className="publication-list">
-                    <li><strong>Ibrahim, M. M.</strong>, Wuni, A., Salisu, W. J., Abdulai, A. M., Owusua, T., Nyarko, B. A., & Mohammed, I. S. (2024). Determinants and Mitigating Factors of Brain Drain among Ghanaian Nurses: Insights from Nurse Managers in Northern Ghana—A Qualitative Inquiry. <em>Journal of Nursing Management</em>, 2024(1), 8862991. doi: <a href="https://doi.org/10.1155/2024/8862991" target="_blank" rel="noopener noreferrer" className="doi-link">10.1155/2024/8862991</a></li>
-            <li>Sisala Mohammed, I., Abdulai, M. H., <strong>Ibrahim, M. M.</strong>, Buasilenu, H., Baako, I. A., Nyarko, B. A., & Buunaaisie, C. (2024). Prevalence of Workplace-Related Musculoskeletal Disorders Among Nurses and Midwives in a Tertiary Healthcare Facility: A Descriptive Cross-Sectional Survey. <em>Nursing Open</em>, 11(11), e70098. doi: <a href="https://doi.org/10.1002/nop2.70098" target="_blank" rel="noopener noreferrer" className="doi-link">10.1002/nop2.70098</a></li>
-            <li>Wuni, A., Iddrisu, M., Angliengmene, A. A., Salia, S. M., Chanayireh, L., Mohammed, I. S., <strong>Ibrahim, M. M.</strong>, & Doat, A. R. (2024). Knowledge and management practices of infant teething symptoms among mothers in a tertiary facility in Ghana. <em>The Pan African Medical Journal</em>, 47. doi: <a href="https://doi.org/10.11604/pamj.2024.47.65.40792" target="_blank" rel="noopener noreferrer" className="doi-link">10.11604/pamj.2024.47.65.40792</a></li>
-            <li>Monne, R., Iddrisu, M., Kyilleh, J. M., <strong>Ibrahim, M. M.</strong>, Nashiru, A. R., Wuni, A., & Abdulai, A. M. (2024). Male midwifery practice and acceptability: attitudes, beliefs, and associated factors among expectant mothers in Savelugu Municipal Hospital, Northern Region of Ghana. <em>The Pan African Medical Journal</em>, 47, 199. doi: <a href="https://doi.org/10.11604/pamj.2024.47.199.42482" target="_blank" rel="noopener noreferrer" className="doi-link">10.11604/pamj.2024.47.199.42482</a></li>
-            <li>Yakubu, H., <strong>Ibrahim, M. M.</strong>, Dogbe, P., Issah, N., Abosi, K., Osman, A., & Abdulai, A. M. (2024). Knowledge of Maternal Mortality and Its Determinants Among Pregnant Women at Tamale Teaching Hospital in Northern Ghana: A Descriptive Cross-Sectional Study. <em>Women, Midwives and Midwifery</em>, 4(3), 26-40. doi: <a href="https://doi.org/10.36749/wmm.4.3.26-40.2024" target="_blank" rel="noopener noreferrer" className="doi-link">doi.org/10.36749/wmm.4.3.26-40.2024</a></li>
-            <li>Abdul Malik, A., Osman, A. I., Abdul Hakeem, I., Abdul-Khahar, O., Saidatu, A. A., <strong>Ibrahim, M. M.</strong>, & Fasasi, M. (2024). Barriers and facilitators to the uptake of contraceptives among adolescents and young adults in Ghana. <em>The Evidence</em>, 2(2). doi: <a href="https://doi.org/10.61505/evidence.2024.2.2.29" target="_blank" rel="noopener noreferrer" className="doi-link">10.61505/evidence.2024.2.2.29</a></li>
-        </ul>
-
-        <div className="publication-year-header">2023</div>
-        <ul className="publication-list">
-            <li>Wuni, A., Abena Nyarko, B., <strong>Ibrahim, M. M.</strong>, Abdulai Baako, I., Mohammed, I. S., & Buunaaisie, C. (2023). Prevalence, Management, and Impact of Dysmenorrhea on the Lives of Nurse and Midwife Trainees in Northern Ghana. <em>Obstetrics and Gynecology International</em>, 2023(1), 8823525. doi: <a href="https://doi.org/10.1155/2023/8823525" target="_blank" rel="noopener noreferrer" className="doi-link">10.1155/2023/8823525</a></li>
-        </ul>
-
-        <div className="publication-year-header">2020</div>
-        <ul className="publication-list">
-            <li>Wuni, A., Salia, S. M., <strong>Ibrahim, M. M.</strong>, Iddriss, I., Abena Nyarko, B., Nabila Seini, S., & Mohammed, J. (2020). Evaluating Knowledge, Practices, and Barriers of Paediatric Pain Management among Nurses in a Tertiary Health Facility in the Northern Region of Ghana: A Descriptive Cross-Sectional Study. <em>Pain Research and Management</em>, 2020(1), 8846599. doi: <a href="https://doi.org/10.1155/2020/8846599" target="_blank" rel="noopener noreferrer" className="doi-link">10.1155/2020/8846599</a></li>
-        </ul>
-    </div>
-);
-
             const renderShinyApps = () => {
     const shinyApps = [
         {
@@ -3635,11 +5163,11 @@ Hello and welcome! I'm a Registered Nurse who discovered that data tells powerfu
 
     return (
         <div className="section">
-            <h2>R Shiny Applications</h2>
+            <h2>Software</h2>
             
             <div className="shiny-intro">
                 <p className="shiny-description">
-                    A collection of interactive R Shiny web applications that I have created to simplify complex statistical analyses in R.
+                    Below is a collection of interactive R Shiny web tools that I have created to make analyses easier in R. Please contact me if you have any questions or encounter any problems. All of my tools are also stored on GitHub.
                 </p>
             </div>
 
@@ -4146,6 +5674,534 @@ Hello and welcome! I'm a Registered Nurse who discovered that data tells powerfu
     );
 };
 
+const renderTeaching = () => (
+    <div className="section" style={{textAlign: 'center', padding: '80px 20px'}}>
+        <div style={{
+            maxWidth: '800px',
+            margin: '0 auto',
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '15px',
+            padding: '60px 40px',
+            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)'
+        }}>
+            <div style={{
+                width: '100px',
+                height: '100px',
+                margin: '0 auto 30px',
+                backgroundColor: 'var(--nav-bg)',
+                color: 'var(--nav-text)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '3rem'
+            }}>
+<i className="fas fa-chalkboard-teacher"></i>
+</div>
+
+<h2 style={{
+    fontSize: '2.5rem',
+    marginBottom: '20px',
+    color: 'var(--header-color)'
+}}>
+    Teaching Portfolio
+</h2>
+
+<div style={{
+    fontSize: '5rem',
+    color: '#ff6b6b',
+    marginBottom: '20px'
+}}>
+    <i className="fas fa-tools"></i>
+</div>
+
+<h3 style={{
+    fontSize: '1.8rem',
+    color: '#ff6b6b',
+    marginBottom: '20px',
+    padding: '10px 20px',
+    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+    borderRadius: '50px',
+    display: 'inline-block'
+}}>
+    Coming Soon
+</h3>
+
+<p style={{
+    fontSize: '1.2rem',
+    lineHeight: '1.8',
+    color: 'var(--text-color)',
+    marginBottom: '30px',
+    maxWidth: '600px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+}}>
+</p>
+            <div style={{
+                marginTop: '40px',
+                paddingTop: '30px',
+                borderTop: '1px solid var(--border-color)',
+                color: 'var(--position-color)',
+                fontSize: '0.9rem'
+            }}>
+                <p>
+                    <i className="fas fa-envelope" style={{marginRight: '8px'}}></i>
+                    For teaching opportunities in research methodology and/or biostatistics, please click on the <strong>Contact</strong> link in the footer below.
+                </p>
+            </div>
+        </div>
+    </div>
+);
+
+const GalleryComponent = () => {
+    // Gallery data with conference category moved
+    const [galleryItems, setGalleryItems] = useState([
+        {
+            id: 1,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%201.jpg",
+            date: "2024-12-12",
+            category: "academic"
+        },
+        {
+            id: 2,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%202.jpg",
+            date: "2024-12-12",
+            category: "academic"
+        },
+        {
+            id: 3,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%203.jpg",
+            date: "2024-12-12",
+            category: "academic"
+        },
+        {
+            id: 4,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%204.jpg",
+            date: "2024-12-12",
+            category: "academic"
+        },
+        {
+            id: 5,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%205.jpg",
+            date: "2024-12-12",
+            category: "academic"
+        },
+        {
+            id: 6,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%206.jpg",
+            date: "2024-12-12",
+            category: "academic"
+        },
+        {
+            id: 7,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%207.jpg",
+            date: "2024-12-12",
+            category: "academic"
+        },
+        {
+            id: 8,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Academic%208.jpg",
+            date: "2024-12-12",
+            category: "academic"
+        },
+        {
+            id: 9,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Clinical%201.jpg",
+            date: "2025-06-19",
+            category: "clinical"
+        },
+        {
+            id: 10,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Clinical%202.jpg",
+            date: "2025-06-20",
+            category: "clinical"
+        },
+        {
+            id: 11,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Team%201.JPG",
+            date: "2023-07-20",
+            category: "team"
+        },
+        {
+            id: 12,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Team%202.JPG",
+            date: "2023-07-20",
+            category: "team"
+        },
+        {
+            id: 13,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Team%203.JPG",
+            date: "2023-07-20",
+            category: "team"
+        },
+        {
+            id: 14,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Conference%201.jpg",
+            date: "2022-12-06",
+            category: "conference"
+        },
+        {
+            id: 15,
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Conference%202.jpg",
+            date: "2022-12-06",
+            category: "conference"
+        }
+    ]);
+    
+    // State to track which images are long
+    const [longImages, setLongImages] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const itemsPerPage = 8;
+
+    // Function to check if an image is long/tall
+    const checkImageAspectRatio = (url) => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                const aspectRatio = img.height / img.width;
+                // Consider an image "long" if height is more than 1.5 times width
+                resolve(aspectRatio > 1.5);
+            };
+            img.onerror = () => resolve(false);
+            img.src = url;
+        });
+    };
+    
+    // Detect long images when component mounts
+    useEffect(() => {
+        const detectLongImages = async () => {
+            setIsLoading(true);
+            const longImageIds = [];
+            for (const item of galleryItems) {
+                try {
+                    const isLong = await checkImageAspectRatio(item.imageUrl);
+                    if (isLong) {
+                        longImageIds.push(item.id);
+                    }
+                } catch (error) {
+                    console.log(`Error checking image ${item.id}:`, error);
+                }
+            }
+            setLongImages(longImageIds);
+            setIsLoading(false);
+        };
+        
+        detectLongImages();
+    }, [galleryItems]);
+    
+    // Function to check if a specific item is a long image
+    const isLongImage = (itemId) => {
+        return longImages.includes(itemId);
+    };
+
+    // Category descriptions - ADDED CONFERENCE
+    const categoryDescriptions = {
+        'all': 'All photos from academic, clinical, team, and conference activities',
+        'academic': 'Academic achievements, publications, and presentations',
+        'clinical': 'Clinical practice and patient care activities',
+        'team': 'Research team collaborations and group work',
+        'conference': 'Conference presentations and scientific events'
+    };
+
+    // Filter gallery items based on category
+    const filteredItems = galleryItems.filter(item => {
+        return selectedCategory === 'all' || item.category === selectedCategory;
+    });
+    
+    // Pagination
+    const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedItems = filteredItems.slice(startIndex, startIndex + itemsPerPage);
+    
+    // Categories for filtering - ADDED CONFERENCE CATEGORY
+    const categories = [
+        { id: 'all', name: 'All Photos', count: galleryItems.length },
+        { id: 'academic', name: 'Academic', count: galleryItems.filter(item => item.category === 'academic').length },
+        { id: 'clinical', name: 'Clinical', count: galleryItems.filter(item => item.category === 'clinical').length },
+        { id: 'team', name: 'Team', count: galleryItems.filter(item => item.category === 'team').length },
+        { id: 'conference', name: 'Conference', count: galleryItems.filter(item => item.category === 'conference').length }
+    ];
+    
+    // Handle image click
+    const handleImageClick = (item) => {
+        setSelectedImage(item);
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    };
+    
+    // Handle modal close
+    const handleCloseModal = () => {
+        setSelectedImage(null);
+        document.body.style.overflow = 'auto';
+    };
+    
+    // Handle next/prev image in modal
+    const handleNextImage = () => {
+        const currentIndex = filteredItems.findIndex(item => item.id === selectedImage.id);
+        const nextIndex = (currentIndex + 1) % filteredItems.length;
+        setSelectedImage(filteredItems[nextIndex]);
+    };
+    
+    const handlePrevImage = () => {
+        const currentIndex = filteredItems.findIndex(item => item.id === selectedImage.id);
+        const prevIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
+        setSelectedImage(filteredItems[prevIndex]);
+    };
+    
+    // Handle keyboard navigation in modal
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (!selectedImage) return;
+            
+            if (e.key === 'Escape') {
+                handleCloseModal();
+            } else if (e.key === 'ArrowRight') {
+                handleNextImage();
+            } else if (e.key === 'ArrowLeft') {
+                handlePrevImage();
+            }
+        };
+        
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedImage]);
+    
+    // Format date
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-US', options);
+    };
+    
+    // Handle image loading errors
+    const handleImageError = (e) => {
+        e.target.src = `https://via.placeholder.com/400x300/cccccc/666666?text=Image+Not+Available`;
+        e.target.style.objectFit = 'contain';
+        e.target.style.padding = '20px';
+    };
+    
+    return (
+        <div className="section">
+            <h2>Gallery</h2>
+            <p className="profile-intro" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 30px' }}>
+                Browse through my gallery. Use the category filters below to view specific types of images.
+            </p>
+            
+            {/* Gallery Controls - REMOVED SEARCH */}
+            <div className="gallery-controls" style={{ justifyContent: 'center', padding: '15px 20px' }}>
+                <div className="gallery-filters">
+                    {categories.map(category => (
+                        <button
+                            key={category.id}
+                            className={`filter-btn ${selectedCategory === category.id ? 'active' : ''}`}
+                            onClick={() => {
+                                setSelectedCategory(category.id);
+                                setCurrentPage(1);
+                            }}
+                            style={{ 
+                                minWidth: '100px',
+                                textAlign: 'center',
+                                whiteSpace: 'nowrap'
+                            }}
+                        >
+                            {category.name} <span style={{ fontSize: '0.8em', opacity: 0.8 }}>({category.count})</span>
+                        </button>
+                    ))}
+                </div>
+                
+                <div className="gallery-stats">
+                    <span>Showing {paginatedItems.length} of {filteredItems.length} photos</span>
+                </div>
+            </div>
+            
+            {/* Category Description */}
+            {selectedCategory && (
+                <div style={{
+                    backgroundColor: 'var(--card-bg)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '8px',
+                    padding: '15px',
+                    marginBottom: '20px',
+                    textAlign: 'center',
+                    fontSize: '0.95rem',
+                    color: 'var(--text-color)',
+                    maxWidth: '800px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                }}>
+                    <i className="fas fa-info-circle" style={{ marginRight: '8px', color: 'var(--nav-hover)' }}></i>
+                    {categoryDescriptions[selectedCategory]}
+                </div>
+            )}
+            
+            {/* Gallery Grid */}
+            {isLoading ? (
+                <div className="gallery-loading">
+                    <i className="fas fa-spinner fa-spin"></i>
+                    <p>Loading images...</p>
+                </div>
+            ) : paginatedItems.length > 0 ? (
+                <>
+                    <div className="gallery-grid">
+                        {paginatedItems.map(item => (
+                            <div key={item.id} 
+                                 className={`gallery-item ${isLongImage(item.id) ? 'long-image' : ''}`} 
+                                 onClick={() => handleImageClick(item)}
+                                 title={isLongImage(item.id) ? "Long image - shows top portion" : ""}>
+                                <div className="gallery-image-container">
+                                    <img
+                                        src={item.imageUrl}
+                                        alt={`Gallery image ${item.id}`}
+                                        className="gallery-image"
+                                        onError={handleImageError}
+                                        loading="lazy"
+                                    />
+                                    <div className="category-badge">
+                                        {item.category}
+                                    </div>
+                                    {isLongImage(item.id) && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '40px',
+                                            left: '15px',
+                                            backgroundColor: 'rgba(52, 152, 219, 0.9)',
+                                            color: 'white',
+                                            padding: '3px 8px',
+                                            borderRadius: '10px',
+                                            fontSize: '0.7rem',
+                                            zIndex: 5
+                                        }}>
+                                            <i className="fas fa-arrow-down" style={{marginRight: '3px'}}></i>
+                                            Tall Image
+                                        </div>
+                                    )}
+                                    <div className="gallery-overlay">
+                                        <i className="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                                <div className="gallery-content">
+                                    <div className="gallery-date">
+                                        <i className="far fa-calendar"></i>
+                                        {formatDate(item.date)}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                        <div className="gallery-pagination">
+                            <button
+                                className="page-btn"
+                                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                            >
+                                <i className="fas fa-chevron-left"></i>
+                            </button>
+                            
+                            {[...Array(totalPages)].map((_, index) => (
+                                <button
+                                    key={index + 1}
+                                    className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                                    onClick={() => setCurrentPage(index + 1)}
+                                >
+                                    {index + 1}
+                                </button>
+                            ))}
+                            
+                            <button
+                                className="page-btn"
+                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                            >
+                                <i className="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    )}
+                </>
+            ) : (
+                <div className="gallery-empty">
+                    <i className="fas fa-images"></i>
+                    <h3>No images found</h3>
+                    <p>
+                        No images found in the "{categories.find(c => c.id === selectedCategory)?.name}" category.
+                    </p>
+                    <button 
+                        className="gallery-btn"
+                        onClick={() => {
+                            setSelectedCategory('all');
+                        }}
+                        style={{ marginTop: '20px' }}
+                    >
+                        <i className="fas fa-eye"></i>
+                        Show All Images
+                    </button>
+                </div>
+            )}
+            
+            {/* Modal for image view */}
+            {selectedImage && (
+                <div className="gallery-modal active">
+                    <div className="modal-content">
+                        <button className="modal-close" onClick={handleCloseModal}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                        
+                        <div className="image-counter">
+                            {filteredItems.findIndex(item => item.id === selectedImage.id) + 1} / {filteredItems.length}
+                        </div>
+                        
+                        <button className="modal-nav modal-prev" onClick={handlePrevImage}>
+                            <i className="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <img 
+                            src={selectedImage.imageUrl} 
+                            alt={`Gallery image ${selectedImage.id}`}
+                            className="modal-image"
+                            onError={(e) => {
+                                e.target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23f5f5f5'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='20' text-anchor='middle' fill='%23666'%3EImage not available%3C/text%3E%3C/svg%3E`;
+                                e.target.style.objectFit = 'contain';
+                            }}
+                        />
+                        
+                        <button className="modal-nav modal-next" onClick={handleNextImage}>
+                            <i className="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <div className="modal-info">
+                            <div className="gallery-date" style={{ justifyContent: 'center' }}>
+                                <i className="far fa-calendar"></i>
+                                {formatDate(selectedImage.date)}
+                                <span style={{ marginLeft: '10px', fontSize: '0.8rem', opacity: 0.7 }}>
+                                    ({selectedImage.category})
+                                </span>
+                                {isLongImage(selectedImage.id) && (
+                                    <span style={{ 
+                                        marginLeft: '10px', 
+                                        fontSize: '0.8rem', 
+                                        color: '#3498db',
+                                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                                        padding: '2px 8px',
+                                        borderRadius: '10px'
+                                    }}>
+                                        <i className="fas fa-arrow-down" style={{marginRight: '3px'}}></i>
+                                        Tall Image
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+
             return (
                 <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
        
@@ -4172,60 +6228,116 @@ Hello and welcome! I'm a Registered Nurse who discovered that data tells powerfu
         {/* Navigation container - will be hidden on mobile when menu is closed */}
         <div className={`nav-container ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
             <div className="tabs-container">
-                <ul className="nav-list">
-                    <li className="nav-item">
-                        <a 
-                            href="#about" 
-                            onClick={(e) => { 
-                                e.preventDefault(); 
-                                setActiveSection('about'); 
-                                setIsMobileMenuOpen(false);
-                            }}
-                            className={activeSection === 'about' ? 'active' : ''}
-                        >
-                            About
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a 
-                            href="#publications" 
-                            onClick={(e) => { 
-                                e.preventDefault(); 
-                                setActiveSection('publications'); 
-                                setIsMobileMenuOpen(false);
-                            }}
-                            className={activeSection === 'publications' ? 'active' : ''}
-                        >
-                            Publications
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a 
-                            href="#shiny" 
-                            onClick={(e) => { 
-                                e.preventDefault(); 
-                                setActiveSection('shiny'); 
-                                setIsMobileMenuOpen(false);
-                            }}
-                            className={activeSection === 'shiny' ? 'active' : ''}
-                        >
-                            R Shiny Apps
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a 
-                            href="#blog" 
-                            onClick={(e) => { 
-                                e.preventDefault(); 
-                                setActiveSection('blog'); 
-                                setIsMobileMenuOpen(false);
-                            }}
-                            className={activeSection === 'blog' ? 'active' : ''}
-                        >
-                            Blog
-                        </a>
-                    </li>
-                </ul>
+<ul className="nav-list">
+    <li className="nav-item">
+        <a 
+            href="#about" 
+            onClick={(e) => { 
+                e.preventDefault(); 
+                setActiveSection('about'); 
+                setIsMobileMenuOpen(false);
+            }}
+            className={activeSection === 'about' ? 'active' : ''}
+        >
+            About Me
+        </a>
+    </li>
+    <li className="nav-item">
+        <a 
+            href="#publications" 
+            onClick={(e) => { 
+                e.preventDefault(); 
+                setActiveSection('publications'); 
+                setIsMobileMenuOpen(false);
+            }}
+            className={activeSection === 'publications' ? 'active' : ''}
+        >
+            Publications
+        </a>
+    </li>
+    <li className="nav-item">
+        <a 
+            href="#shiny" 
+            onClick={(e) => { 
+                e.preventDefault(); 
+                setActiveSection('shiny'); 
+                setIsMobileMenuOpen(false);
+            }}
+            className={activeSection === 'shiny' ? 'active' : ''}
+        >
+            Software
+        </a>
+    </li>
+    <li className="nav-item">
+        <a 
+            href="#blog" 
+            onClick={(e) => { 
+                e.preventDefault(); 
+                setActiveSection('blog'); 
+                setIsMobileMenuOpen(false);
+            }}
+            className={activeSection === 'blog' ? 'active' : ''}
+        >
+            Blog
+        </a>
+    </li>
+    <li className="nav-item">
+        <a 
+            href="#teaching" 
+            onClick={(e) => { 
+                e.preventDefault(); 
+                setActiveSection('teaching'); 
+                setIsMobileMenuOpen(false);
+            }}
+            className={activeSection === 'teaching' ? 'active' : ''}
+        >
+            Teaching
+        </a>
+    </li>
+    {/* ADD THIS NEW MORE TAB WITH DROPDOWN */}
+    <li className="nav-item dropdown">
+        <a 
+            href="#more" 
+            onClick={(e) => { 
+                e.preventDefault(); 
+                // Toggle dropdown instead of setting active section
+                const dropdown = e.target.closest('.dropdown');
+                dropdown.classList.toggle('active');
+            }}
+            className={`dropdown-toggle ${activeSection === 'gallery' ? 'active' : ''}`}
+        >
+            More <i className="fas fa-chevron-down"></i>
+        </a>
+        <div className="dropdown-menu">
+            <a 
+                href="#gallery" 
+                onClick={(e) => { 
+                    e.preventDefault(); 
+                    setActiveSection('gallery'); 
+                    setIsMobileMenuOpen(false);
+                    // Close dropdown
+                    e.target.closest('.dropdown').classList.remove('active');
+                }}
+                className="dropdown-item"
+            >
+                Gallery
+            </a>
+            {/* You can add more dropdown items here in the future */}
+            <a 
+                href="#testimonials" 
+                onClick={(e) => { 
+                    e.preventDefault(); 
+                    alert('Testimonials section coming soon!');
+                    e.target.closest('.dropdown').classList.remove('active');
+                }}
+                className="dropdown-item"
+            >
+                Testimonials
+            </a>
+        </div>
+    </li>
+</ul>
+
             </div>
             
             <div className="header-right">
@@ -4326,14 +6438,17 @@ Hello and welcome! I'm a Registered Nurse who discovered that data tells powerfu
     </div>
 </div>
        
-                    <div className="content-container">
-                        <div className="position"></div>
+<div className="content-container">
+    <div className="position"></div>
+    {activeSection === 'about' && renderAbout()}
+    {activeSection === 'publications' && <PublicationsComponent />}
+    {activeSection === 'shiny' && renderShinyApps()}
+    {activeSection === 'blog' && renderBlog()}
+    {activeSection === 'teaching' && renderTeaching()}
+{activeSection === 'gallery' && <GalleryComponent />}
 
-                        {activeSection === 'about' && renderAbout()}
-                        {activeSection === 'publications' && renderPublications()}
-                        {activeSection === 'shiny' && renderShinyApps()}
-                        {activeSection === 'blog' && renderBlog()}
-                    </div>
+
+</div>
                     
                     {/* Back to Top Button */}
         <div 
@@ -4368,105 +6483,122 @@ Hello and welcome! I'm a Registered Nurse who discovered that data tells powerfu
         </div>
         
         {/* Navigation Links */}
-        <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '25px',
-            marginBottom: '40px'
-        }}>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('about');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                About
-            </a>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('publications');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Publications
-            </a>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('shiny');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                R Shiny Apps
-            </a>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('blog');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Blog
-            </a>
-            <a href="#" 
-               onClick={(e) => {
-                   e.preventDefault();
-                   setShowContactForm(true);
-                   setActiveSection('about');
-                   setTimeout(() => {
-                       const formElement = document.getElementById('contact-form');
-                       if (formElement) {
-                           formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                       }
-                   }, 100);
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Contact
-            </a>
-        </div>
+<div style={{
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '25px',
+    marginBottom: '40px'
+}}>
+    <a href="#" 
+       onClick={(e) => { 
+           e.preventDefault(); 
+           setActiveSection('about');
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+       }}
+       style={{
+           color: 'var(--nav-text)',
+           textDecoration: 'none',
+           fontSize: '0.95rem',
+           fontWeight: '500',
+           transition: 'color 0.3s ease'
+       }}
+       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+        About Me
+    </a>
+    <a href="#" 
+       onClick={(e) => { 
+           e.preventDefault(); 
+           setActiveSection('publications');
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+       }}
+       style={{
+           color: 'var(--nav-text)',
+           textDecoration: 'none',
+           fontSize: '0.95rem',
+           fontWeight: '500',
+           transition: 'color 0.3s ease'
+       }}
+       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+        Publications
+    </a>
+    <a href="#" 
+       onClick={(e) => { 
+           e.preventDefault(); 
+           setActiveSection('shiny');
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+       }}
+       style={{
+           color: 'var(--nav-text)',
+           textDecoration: 'none',
+           fontSize: '0.95rem',
+           fontWeight: '500',
+           transition: 'color 0.3s ease'
+       }}
+       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+        Software
+    </a>
+    <a href="#" 
+       onClick={(e) => { 
+           e.preventDefault(); 
+           setActiveSection('blog');
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+       }}
+       style={{
+           color: 'var(--nav-text)',
+           textDecoration: 'none',
+           fontSize: '0.95rem',
+           fontWeight: '500',
+           transition: 'color 0.3s ease'
+       }}
+       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+        Blog
+    </a>
+    <a href="#" 
+       onClick={(e) => { 
+           e.preventDefault(); 
+           setActiveSection('teaching');
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+       }}
+       style={{
+           color: 'var(--nav-text)',
+           textDecoration: 'none',
+           fontSize: '0.95rem',
+           fontWeight: '500',
+           transition: 'color 0.3s ease'
+       }}
+       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+        Teaching
+    </a>
+    <a href="#" 
+       onClick={(e) => {
+           e.preventDefault();
+           setShowContactForm(true);
+           setActiveSection('about');
+           setTimeout(() => {
+               const formElement = document.getElementById('contact-form');
+               if (formElement) {
+                   formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+               }
+           }, 100);
+       }}
+       style={{
+           color: 'var(--nav-text)',
+           textDecoration: 'none',
+           fontSize: '0.95rem',
+           fontWeight: '500',
+           transition: 'color 0.3s ease'
+       }}
+       onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+       onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
+        Contact
+    </a>
+</div>
         
         {/* Social Media Icons */}
         <div style={{
@@ -4573,15 +6705,42 @@ Hello and welcome! I'm a Registered Nurse who discovered that data tells powerfu
         </div>
         
         {/* Copyright */}
-        <div style={{
-            color: 'var(--nav-text)',
-            fontSize: '0.9rem',
-            paddingTop: '20px',
-            borderTop: '1px solid var(--nav-border)',
-            opacity: 0.8
-        }}>
-            Copyright © {new Date().getFullYear()} by Mudasir Mohammed Ibrahim. All rights reserved.
-        </div>
+<div style={{
+    color: 'var(--nav-text)',
+    fontSize: '0.9rem',
+    paddingTop: '20px',
+    borderTop: '1px solid var(--nav-border)',
+    opacity: 0.8,
+    lineHeight: '1.5'
+}}>
+    <div style={{marginBottom: '5px'}}>
+        Copyright © {new Date().getFullYear()} by Mudasir Mohammed Ibrahim
+    </div>
+    
+    <div style={{
+        fontSize: '0.8rem',
+        opacity: 0.6
+    }}>
+        Website UI inspired by 
+        <a 
+            href="https://profandyfield.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+                color: 'var(--nav-text)',
+                textDecoration: 'underline',
+                textDecorationStyle: 'dotted',
+                textUnderlineOffset: '2px',
+                marginLeft: '4px',
+                transition: 'color 0.2s ease'
+            }}
+            onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+            onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}
+        >
+            Prof Andy Field
+        </a>
+    </div>
+</div>
         
         {/* Optional: Back to Top */}
         <div style={{ marginTop: '20px' }}>
@@ -4619,6 +6778,8 @@ Hello and welcome! I'm a Registered Nurse who discovered that data tells powerfu
 
             );
         };
+        
+        
 
         ReactDOM.render(<AcademicPortfolio />, document.getElementById('root'));
     </script>
