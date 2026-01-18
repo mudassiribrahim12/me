@@ -61,7 +61,7 @@
 /* Update body font */
 body {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--bg-color);
@@ -116,7 +116,7 @@ p {
     font-size: 1rem;
     line-height: 1.6;
     color: var(--text-color);
-    font-weight: 400;
+    font-weight: 500;
 }
 
 /* Position text */
@@ -694,7 +694,7 @@ body.dark-mode {
     color: var(--nav-text);
     font-family: 'Open Sans', sans-serif;
     font-size: 0.95rem;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.2s;
     position: relative;
     white-space: nowrap;
@@ -729,20 +729,20 @@ body.dark-mode {
 
 /* Blog post excerpt */
 .blog-post-excerpt {
-    color: var(--text-color);
+    color: #111; /* Darker */
     line-height: 1.6;
     margin-bottom: 15px;
-    font-size: 0.95rem;
-    font-weight: 400;
+    font-size: 1rem;
+    font-weight: 500; /* Increased from 400 */
 }
 
 /* Publication details */
 .publication-authors {
-    color: var(--text-color);
-    font-size: 0.95rem;
+    color: #000; /* Pure black */
+    font-size: 1rem;
     margin-bottom: 10px;
     line-height: 1.5;
-    font-weight: 400;
+    font-weight: 600; /* Increased from 500 */
 }
 
 .publication-journal {
@@ -754,25 +754,25 @@ body.dark-mode {
 }
 
 .publication-details {
-    color: var(--text-color);
-    font-size: 0.9rem;
+    color: #222; /* Darker */
+    font-size: 0.95rem;
     margin-bottom: 8px;
-    font-weight: 400;
+    font-weight: 500; /* Increased from 400 */
 }
 
 /* Education and professional text */
 .edu-institution, .professional-org {
-    color: var(--text-color);
+    color: #000; /* Pure black */
     font-style: italic;
     margin-bottom: 0.3em;
-    font-weight: 400;
+    font-weight: 600; /* Increased from 400 */
 }
 
 .edu-period, .professional-period {
-    color: var(--position-color);
+    color: #222; /* Darker */
     font-size: 0.9rem;
     margin-bottom: 0.5em;
-    font-weight: 400;
+    font-weight: 600; /* Increased from 500 */
 }
 
 /* Blog post title */
@@ -835,18 +835,17 @@ body.dark-mode {
 }
 
 :root {
-    --bg-color: #ffffff; 
-    --text-color: #111;
-    --header-color: #000;
-    --border-color: #ccc;
+    --text-color: #000000; /* Changed to pure black */
+    --header-color: #000000; /* Pure black */
+    --border-color: #aaa; /* Darker border */
     --light-bg: #f5f5f5;
     --card-bg: #fff;
     --skill-bg: #e8e8e8;
-    --position-color: #444;
---nav-bg: #0A2342; /* Deep navy blue similar to Georgetown */
-    --nav-text: #ffffff; /* White text for contrast */
-    --nav-border: #082338; /* Slightly darker border */
-    --nav-hover: #4dabf7; /* Keep your current hover color or adjust */
+    --position-color: #333; /* Much darker - was #444 */
+    --nav-bg: #2c3e50;
+    --nav-text: #fff; /* White for better contrast */
+    --nav-hover: #3498db;
+    --nav-border: #34495e;
 }
 
 body.dark-mode {
@@ -4692,7 +4691,7 @@ const loadBlogPostsWithFallback = async () => {
         </div>
         
             <p className="profile-intro">
-Hello and welcome! I’m a Registered Nurse who has discovered that data tells powerful stories about patient care. My journey has evolved from bedside nursing to developing statistical tools that help healthcare professionals understand complex data. Here, you’ll discover my research in health, interactive R Shiny web tools I’ve created to simplify complex statistical analyses in R, and resources that reflect my dual passion for healthcare delivery and research innovation. Thank you for visiting, and feel free to browse my work or email me with any questions about my R Shiny tools or anything.
+Hello and welcome! Here, you’ll discover my research in health, interactive R Shiny web tools I’ve created to simplify complex statistical analyses in R, and resources that reflect my dual passion for healthcare delivery and research innovation. Thank you for visiting, and feel free to browse my work or email me with any questions about my R Shiny tools or anything.
             </p>
         </div>
 
@@ -4986,13 +4985,13 @@ Hello and welcome! I’m a Registered Nurse who has discovered that data tells p
         "2025": [
             {id: 2, content: `Wuni, A., <strong>Ibrahim, M. M.</strong>, Tonlaar, P. S., Sisala, I. M., Awal, I., Nyarko, B. A., Abdulai, A., Mohammed, S., & Salisu, W. J. (2025). Patterns and temporal trends in childhood cancer incidence in northern Ghana: evidence from medical records, 2016 to 2023. <em>BMC Pediatrics</em>, 25(745). doi: <a href="https://doi.org/10.1186/s12887-025-06141-2" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12887-025-06141-2</a>`},
             {id: 3, content: `<strong>Ibrahim, M. M.</strong>, Abdul-Rahaman, F., Sayibu, M. S., Alhassan, D. N., Awudu, R. T., Mohammed, I. S., Wuni, A., & Abdulai, A. (2025). Assessing the impact of nurses' patient safety competencies on key performance indicators (KPIs) for patient safety outcomes at Tamale Teaching Hospital: The mediating role of leadership and barriers to competency development. <em>BMC Health Services Research</em>, 25(1176), 1-13. doi: <a href="https://doi.org/10.1186/s12913-025-13384-3" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12913-025-13384-3</a>`},
-            {id: 4, content: `Wuni, A., Mohammed, I. S., Salisu, W. J., Abdul-Rahman, R., Seidu, A., Abdul Rahaman, A., Abdulai, A., Zakaria, Y., Buasilenu, H., Nyarko, B. A., & <strong>Ibrahim, M. M.</strong> (2025). Fever in Children under 5 years: Mothers' Knowledge and Home Management Practices in Northern Region of Ghana: A Multi-facility Study. <em>Sage Open Pediatrics</em>, 12, 1-17. doi: <a href="https://doi.org/10.1177/30502225251364932" target="_blank" rel="noopener noreferrer" className="doi-link">10.1177/30502225251364932</a>`},
-            {id: 5, content: `Monne, R., <strong>Ibrahim, M. M.</strong>, Tawiah, B. C., Adam, H., Abukari, M. S., Salifu, R., & Wuni, A. (2025). Assessing Academic Help-Seeking Behavior of Nursing and Midwifery Students in NMTC Tamale, Ghana. <em>Journal of Education and Research in Nursing</em>, 22(1), 39-46. doi: <a href="https://doi.org/10.14744/jern.2025.98150" target="_blank" rel="noopener noreferrer" className="doi-link">10.14744/jern.2025.98150</a>`},
-            {id: 6, content: `Abdulai, A., Mohammed, I. S., Ibrahim, I., Kyiu, C., Fatimata, Y., <strong>Ibrahim, M. M.</strong>, & Wuni, A. (2025). Knowledge, attitudes, and barriers to cervical cancer screening uptake among female healthcare professionals at a Tertiary healthcare facility in the Tamale Metropolis. <em>Women's Health</em>, 21. doi: <a href="https://doi.org/10.1177/17455057251401319" target="_blank" rel="noopener noreferrer" className="doi-link">10.1177/17455057251401319</a>`},
-            {id: 7, content: `Iddrisu, M., Sisala, I. M., <strong>Ibrahim, M. M.</strong>, & Wuni, A. (2025). Predictive Analysis of the Relationship Between Nurses' Attitudes Toward Patient Safety and Missed Nursing Care. <em>BMC Nursing</em>. doi: <a href="https://doi.org/10.1186/s12912-025-04224-0" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12912-025-04224-0</a>`},
+            {id: 4, content: `Wuni, A., Mohammed, I. S., Salisu, W. J., Abdul-Rahman, R., Seidu, A., Abdul Rahaman, A., Abdulai, A., Zakaria, Y., Buasilenu, H., Nyarko, B. A., & <strong>Ibrahim, M. M.</strong> (2025). Fever in Children Under 5 years: Caregivers’ Knowledge and Home Management Practices in the Northern Region of Ghana – A Multi-Facility Study. <em>Sage Open Pediatrics</em>, 12, 1-17. doi: <a href="https://doi.org/10.1177/30502225251364932" target="_blank" rel="noopener noreferrer" className="doi-link">10.1177/30502225251364932</a>`},
+            {id: 5, content: `Monne, R., <strong>Ibrahim, M. M.</strong>, Tawiah, B. C., Adam, H., Abukari, M. S., Salifu, R., & Wuni, A. (2025). Evaluating Academic Help-Seeking Behavior of Nursing and Midwifery Students in a Nursing Training College. <em>Journal of Education and Research in Nursing</em>, 22(1), 39-46. doi: <a href="https://doi.org/10.14744/jern.2025.98150" target="_blank" rel="noopener noreferrer" className="doi-link">10.14744/jern.2025.98150</a>`},
+            {id: 6, content: `Abdulai, A., Mohammed, I. S., Ibrahim, I., Kyiu, C., Fatimata, Y., <strong>Ibrahim, M. M.</strong>, & Wuni, A. (2025). Knowledge, attitudes, and barriers to cervical cancer screening utilization among female healthcare professionals in the Tamale Metropolis. <em>Women's Health</em>, 21. doi: <a href="https://doi.org/10.1177/17455057251401319" target="_blank" rel="noopener noreferrer" className="doi-link">10.1177/17455057251401319</a>`},
+            {id: 7, content: `Iddrisu, M., Sisala, I. M., <strong>Ibrahim, M. M.</strong>, & Wuni, A. (2025). Predictive analysis of the relationship between nurses’ attitudes toward patient safety and missed nursing care. <em>BMC Nursing</em>. doi: <a href="https://doi.org/10.1186/s12912-025-04224-0" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12912-025-04224-0</a>`},
             {id: 8, content: `Mohammed, I. S., Wuni, A., Nyarko, B. A., <strong>Ibrahim, M. M.</strong>, & Chanayireh, L. (2025). Work engagement: the key driver in transforming organizational commitment into enhanced work performance among midwives in Ghana - a structural equation modelling approach. <em>BMC Health Services Research</em>, 25(1), 840. doi: <a href="https://doi.org/10.1186/s12913-025-13062-4" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12913-025-13062-4</a>`},
             {id: 9, content: `Wuni, A., <strong>Ibrahim, M. M.</strong>, & Diebieri, M. et al. (2025). Perceptions and satisfaction with the quality of clinical training placements among nursing and midwifery students in Northern Ghana. <em>BMC Nursing</em>, 24, 245. doi: <a href="https://doi.org/10.1186/s12912-025-02899-z" target="_blank" rel="noopener noreferrer" className="doi-link">10.1186/s12912-025-02899-z</a>`},
-            {id: 10, content: `Wuni, A., Musah, A., Sisala, I. M., Abdulai, A. M., Chanayireh, L., Nyarko, B. A., Buasilenu, H., <strong>Ibrahim, M. M.</strong>, Musah, S., Azure, D., & Abdulai, N. (2025). "We Are Our Own Worst Enemies": Workplace Bullying Among Nurses and Its Implications on Healthcare Workers and Job Performance: A Multi-Facility Study in the Tamale Metropolis. <em>Nursing Open</em>, 12(7), e70282. doi: <a href="https://doi.org/10.1002/nop2.70282" target="_blank" rel="noopener noreferrer" className="doi-link">10.1002/nop2.70282</a>`},
+            {id: 10, content: `Wuni, A., Musah, A., Sisala, I. M., Abdulai, A. M., Chanayireh, L., Nyarko, B. A., Buasilenu, H., <strong>Ibrahim, M. M.</strong>, Musah, S., Azure, D., & Abdulai, N. (2025). “We Are Our Own Worst Enemies”: Workplace Bullying Among Nurses and Its Implications on Healthcare Workers and Job Performance: A Multi-Facility Study in the Tamale Metropolis. <em>Nursing Open</em>, 12(7), e70282. doi: <a href="https://doi.org/10.1002/nop2.70282" target="_blank" rel="noopener noreferrer" className="doi-link">10.1002/nop2.70282</a>`},
             {id: 11, content: `Abdul-Malik, A., Bonmenga, T., Ziblim, L., Galo, V., Abu Iddrisu, O., Iddrisu, R., & <strong>Ibrahim, M. M.</strong> (2025). Parental support on adolescent contraception uptake - a cross-sectional study in Tamale metropolis Ghana. <em>The Evidence</em>, 3(1). doi: <a href="https://doi.org/10.61505/evidence.2025.3.1.133" target="_blank" rel="noopener noreferrer" className="doi-link">10.61505/evidence.2025.3.1.133</a>`}
         ],
         "2024": [
@@ -6706,7 +6705,7 @@ const GalleryComponent = () => {
         margin: '0 auto',
         textAlign: 'center'
     }}>
-        {/* Logo/Name */}
+        {/* Logo/Name - NAME REMOVED */}
         <div style={{
             fontSize: '1.8rem',
             fontWeight: '700',
@@ -6714,7 +6713,7 @@ const GalleryComponent = () => {
             marginBottom: '30px',
             letterSpacing: '-0.5px'
         }}>
-            Mudasir Mohammed Ibrahim
+            {/* Name removed as requested */}
         </div>
         
         {/* Navigation Links - UPDATED WITH GALLERY AND TESTIMONIALS */}
