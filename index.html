@@ -995,22 +995,248 @@ body.dark-mode {
             height: 70px; /* Same as header */
         }
 
-        .social-icon {
-            color: var(--nav-text);
-            font-size: 1.3rem;
-            transition: all 0.2s;
-            text-decoration: none;
-            display: flex;
-            align-items: center; /* Force vertical center */
-            height: 70px; /* Same as header */
-            line-height: 70px; /* Same as logo */
-            padding: 0 5px;
-        }
+.social-icon {
+    color: var(--nav-text);
+    font-size: 1.3rem;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: flex;
+    align-items: center; /* Force vertical center */
+    height: 70px; /* Same as header */
+    line-height: 70px; /* Same as logo */
+    padding: 0 5px;
+}
 
-        .social-icon:hover {
-            color: var(--nav-hover);
-            transform: translateY(-2px);
-        }
+.social-icon:hover {
+    transform: translateY(-2px);
+}
+
+/* ORCID - Green */
+.social-icon[title="ORCID"]:hover {
+    color: #a6ce39 !important;
+}
+
+/* Google Scholar - Blue */
+.social-icon[title="Google Scholar"]:hover {
+    color: #4285f4 !important;
+}
+
+/* GitHub - White (or purple for dark mode) */
+.social-icon[title="GitHub"]:hover {
+    color: #f0f6fc !important;
+}
+body.dark-mode .social-icon[title="GitHub"]:hover {
+    color: #6e40c9 !important;
+}
+
+/* LinkedIn - Blue */
+.social-icon[title="LinkedIn"]:hover {
+    color: #0077b5 !important;
+}
+
+/* YouTube - Red */
+.social-icon[title="YouTube"]:hover {
+    color: #ff0000 !important;
+}
+
+/* ========== TEACHING PORTFOLIO SECTION ========== */
+.teaching-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 35px 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.teaching-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2c3e50);
+}
+
+.teaching-header {
+    margin-bottom: 25px;
+}
+
+.teaching-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.teaching-title {
+    font-size: 1.8rem;
+    color: var(--header-color);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.teaching-subtitle {
+    color: var(--nav-hover);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0;
+    letter-spacing: 0.5px;
+}
+
+.coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 15px auto 25px;
+    box-shadow: 0 3px 10px rgba(255, 126, 95, 0.2);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.teaching-content {
+    margin-top: 20px;
+}
+
+.teaching-description {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.teaching-contact-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: var(--light-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 25px;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+.contact-icon {
+    color: #3498db;
+    font-size: 1.5rem;
+    background: rgba(52, 152, 219, 0.1);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-details {
+    flex: 1;
+}
+
+.contact-text {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.contact-text strong {
+    color: var(--header-color);
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 6px 15px;
+    border-radius: 20px;
+    background-color: rgba(52, 152, 219, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(52, 152, 219, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .teaching-container {
+        padding: 25px 20px;
+        margin: 0 15px;
+    }
+    
+    .teaching-title {
+        font-size: 1.6rem;
+    }
+    
+    .teaching-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .teaching-contact-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .contact-details {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .teaching-container {
+        padding: 20px 15px;
+    }
+    
+    .teaching-title {
+        font-size: 1.4rem;
+    }
+    
+    .teaching-description {
+        font-size: 0.95rem;
+    }
+    
+    .coming-soon-badge {
+        font-size: 0.85rem;
+        padding: 6px 16px;
+    }
+}
 
         .dark-mode-toggle {
             background: none;
@@ -2449,6 +2675,146 @@ body.dark-mode .certificate-link {
 body.dark-mode .certificate-link:hover {
     background-color: #2980b9;
 }
+
+/* ========== COMPACT TESTIMONIAL SECTION ========== */
+.testimonial-container {
+    margin: 2em 0;
+    text-align: center;
+    padding: 25px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonial-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #2196F3);
+}
+
+.testimonial-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.testimonial-icon {
+    font-size: 1.8rem;
+    color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-title {
+    font-size: 1.4rem;
+    color: var(--header-color);
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.testimonial-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin: 0;
+    max-width: 500px;
+    font-weight: 400;
+}
+
+.testimonial-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(76, 175, 80, 0.2);
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 5px;
+}
+
+.testimonial-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    background: linear-gradient(135deg, #45a049, #1B5E20);
+}
+
+/* Responsive design for testimonial section */
+@media (max-width: 768px) {
+    .testimonial-container {
+        padding: 20px 15px;
+        margin: 1.5em 0;
+    }
+    
+    .testimonial-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .testimonial-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .testimonial-title {
+        font-size: 1.2rem;
+    }
+    
+    .testimonial-description {
+        font-size: 0.95rem;
+    }
+    
+    .testimonial-button {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-container {
+        padding: 15px;
+    }
+    
+    .testimonial-title {
+        font-size: 1.1rem;
+    }
+    
+    .testimonial-description {
+        font-size: 0.9rem;
+    }
+}
         
       /* ========== GALLERY SECTION STYLES - UPDATED & FIXED ========== */
 
@@ -3263,6 +3629,214 @@ body.dark-mode .certificate-link:hover {
     background-color: rgba(255, 255, 255, 0.1);
     transform: scale(1.1);
 }
+
+ /* About Page Styles - Matching the example layout */
+    .page-title {
+        font-size: 36px;
+        font-weight: 300;
+        margin-bottom: 30px;
+        color: var(--header-color);
+    }
+    
+    .content-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-bottom: 60px;
+    }
+    
+    .profile-section {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+ .profile-image {
+    width: 250px;
+    height: 300px;
+    border-radius: 8px; /* Square with slight rounded corners */
+    object-fit: fixed; /* ✅ FIXED: Shows entire image without cropping ✅ */
+    object-position: center; /* ✅ Added: Centers the image */
+    border: 4px solid var(--border-color);
+    margin: 0 auto;
+    background-color: var(--light-bg); /* Optional: add background */
+    padding: 5px; /* Optional: add padding */
+}
+    
+    .contact-info {
+        margin-top: 25px;
+    }
+    
+    .contact-item {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .contact-icon {
+        width: 20px;
+        margin-right: 12px;
+        color: var(--nav-hover);
+    }
+    
+    .bio-section {
+        flex: 2;
+        min-width: 300px;
+    }
+    
+    .bio-text {
+        margin-bottom: 25px;
+        font-size: 17px;
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+    
+    .section-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 30px 0 15px;
+        color: var(--header-color);
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 10px;
+    }
+    
+    /* Experience & Education */
+    .experience-list, .education-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .experience-item, .education-item {
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+    }
+    
+    .experience-item:last-child, .education-item:last-child {
+        border-bottom: none;
+    }
+    
+    .item-title {
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--header-color);
+        margin-bottom: 5px;
+    }
+    
+    .item-subtitle {
+        color: var(--nav-hover);
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    
+    .item-period {
+        color: var(--position-color);
+        font-size: 14px;
+        margin-bottom: 10px;
+        font-style: italic;
+    }
+    
+    .item-description {
+        color: var(--text-color);
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+    
+    /* Skills Section */
+    .skills-section {
+        margin-top: 20px;
+    }
+    
+    .skill-category h3 {
+        font-size: 18px;
+        margin: 15px 0 10px;
+        color: var(--text-color);
+        font-weight: 600;
+    }
+    
+    .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .skill-tag {
+        background-color: var(--skill-bg);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+    }
+    
+    /* Certificate Link */
+    .certificate-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 10px 20px;
+        background-color: #3498db;
+        border: none;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+    
+    .certificate-link:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Responsive Design for About Page */
+    @media (max-width: 768px) {
+        .page-title {
+            font-size: 30px;
+        }
+        
+        .content-wrapper {
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .profile-section, .bio-section {
+            width: 100%;
+        }
+        
+        .profile-image {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .section-title {
+            font-size: 22px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .page-title {
+            font-size: 26px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+        }
+        
+        .item-title {
+            font-size: 16px;
+        }
+        
+        .bio-text {
+            font-size: 16px;
+        }
+    }
 
 /* Mobile menu overlay and animation */
 .nav-container.mobile-open {
@@ -4659,217 +5233,251 @@ const loadBlogPostsWithFallback = async () => {
                 setVisiblePosts(prev => prev + 50);
             };
 
-         const renderAbout = () => (
+   const renderAbout = () => (
     <div className="section">
-        <div className="profile-section">
-            <div className="profile-image-container">
-                <img 
-                    src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg" 
-                    alt="Mudasir Mohammed Ibrahim" 
-                    className="profile-image"
-                />
-            </div>
-            
-            <h1 className="profile-name">Mudasir Mohammed Ibrahim</h1>
-            
-           <div className="profile-social-icons">
-            <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="ORCID">
-                <i className="fab fa-orcid"></i>
-            </a>
-            <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="Google Scholar">
-                <i className="fas fa-graduation-cap"></i>
-            </a>
-            <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="GitHub">
-                <i className="fab fa-github"></i>
-            </a>
-            <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="LinkedIn">
-                <i className="fab fa-linkedin"></i>
-            </a>
-            <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="Download CV">
-                <i className="fas fa-file-download"></i>
-            </a>
-        </div>
-        
-            <p className="profile-intro">
-Hello and welcome! Here, you’ll discover my research in health, interactive R Shiny web tools I’ve created to simplify complex statistical analyses in R, and resources that reflect my dual passion for healthcare delivery and research innovation. Thank you for visiting, and feel free to browse my work or email me with any questions about my R Shiny tools or anything.
-            </p>
-        </div>
+<div className="content-wrapper">
+    <div className="profile-section">
+        <img
+            src="https://raw.githubusercontent.com/mudassiribrahim12/me/main/my%20picture.jpg"
+            alt="Mudasir Mohammed Ibrahim"
+            className="profile-image"
+        />
 
-              {/* EDUCATION SECTION */}
-        <div className="expertise-section">
-            <h2>Education</h2>
-            
-            <div className="education-item">
-                <div className="edu-title">Bachelor of Science in Nursing</div>
-                <div className="edu-institution">University of Cape Coast</div>
-                <div className="edu-period">2022 - 2024</div>
-            </div>
-            
-            <div className="education-item">
-                <div className="edu-title">Diploma in General Nursing</div>
-                <div className="edu-institution">Nurses' and Midwives' Training College, Tamale</div>
-                <div className="edu-period">2017 - 2020</div>
-            </div>
-            
-            <div className="education-item">
-                <div className="edu-title">Business (Cost Accounting)</div>
-                <div className="edu-institution">Northern School of Business (NOBISCO), Tamale</div>
-                <div className="edu-period">2013 - 2016</div>
-            </div>
-        </div>
-        
-       {/* Employment History */}
-        <div className="expertise-section">
-            <h2>Employment History</h2>
-            
-            <div className="professional-item">
-                <div className="professional-title">Staff Nurse</div>
-                <div className="professional-org">Tamale Teaching Hospital</div>
-                <div className="professional-period">2025 - Present</div>
-            </div>
-            
-            <div className="professional-item">
-                <div className="professional-title">Rotation Nurse</div>
-                <div className="professional-org">Tamale Teaching Hospital</div>
-                <div className="professional-period">2021 - 2022</div>
-            </div>
-        </div>
+        <div className="contact-info">
+            <h2 className="section-title">Mudasir Mohammed Ibrahim</h2>
 
-       
-        {/* PROFESSIONAL AFFILIATIONS SECTION */}
-        <div className="expertise-section">
-            <h2>Affiliations</h2>
-            
-            <div className="professional-item">
-                <div className="professional-title">Registered General Nurse (RGN)</div>
-                <div className="professional-org">Nursing and Midwifery Council of Ghana (NMC)</div>
-                <div className="professional-status">Licensed</div>
-                <div className="professional-period">Since 2020, registered and licensed to practice nursing in Ghana.</div>
+            <div className="contact-item">
+                <i className="fas fa-map-marker-alt contact-icon"></i>
+                <span>Tamale, Northern Region, Ghana</span>
+            </div>
+
+            <div className="contact-item">
+                <i className="fas fa-building contact-icon"></i>
+                <span>Tamale Teaching Hospital</span>
             </div>
             
-            <div className="professional-item">
-                <div className="professional-title">Active Member</div>
-                <div className="professional-org">Ghana Registered Nurses and Midwives Association (GRNMA)</div>
-                <div className="professional-status">Active</div>
-                <div className="professional-period">Professional membership since 2025</div>
-            </div>
-            
-            <div className="professional-item">
-                <div className="professional-title">Active Member</div>
-                <div className="professional-org">BridgeCare Institute for Health Research, Ghana (BIHR-GH)</div>
-                <div className="professional-status">Active</div>
-<div className="professional-period">Secretary since 2026</div>
+                    <div className="profile-social-icons" style={{marginTop: '25px', justifyContent: 'flex-start'}}>
+                        <a href="https://orcid.org/0000-0002-9049-8222" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="ORCID">
+                            <i className="fab fa-orcid"></i>
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="Google Scholar">
+                            <i className="fas fa-graduation-cap"></i>
+                        </a>
+                        <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="GitHub">
+                            <i className="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="LinkedIn">
+                            <i className="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="Download CV">
+                            <i className="fas fa-file-download"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        
-                {/* CURRENT ADVISORS SECTION */}
-        <div className="expertise-section">
-            <h2>Current Advisors</h2>
             
-            <div className="professional-item">
-                <div className="professional-org" style={{marginBottom: '10px', fontStyle: 'normal'}}>
-                    (1) <a href="https://www.researchgate.net/profile/Abubakari-Wuni" 
-                           target="_blank" 
-                           rel="noopener noreferrer"
-                           style={{color: 'inherit', textDecoration: 'none'}}>
-                        Abubakari Wuni
-                    </a> 
+            <div className="bio-section">
+                <div className="bio-text">
+                    <p>Hello and welcome! Here, you'll discover my research in health, interactive R Shiny web tools I've created to simplify complex statistical analyses in R, and resources that reflect my dual passion for healthcare delivery and research innovation. Thank you for visiting, and feel free to browse my work or email me with any questions about my R Shiny tools or anything.</p>
+                    
+                    <p>I am a Registered General Nurse at Tamale Teaching Hospital with a strong passion for healthcare research, data analysis, and developing interactive statistical tools. My work focuses on bridging clinical practice with research methodology to improve healthcare outcomes.</p>
+                    
+                    <p>I have published numerous research papers in areas including nursing workforce issues, patient safety, cancer epidemiology, and maternal-child health. My work has been recognized through various academic reviewer certificates and contributions to the scientific community.</p>
                 </div>
-                <div className="professional-org" style={{fontStyle: 'normal'}}>
-                    (2) <a href="https://www.researchgate.net/profile/Iddrisu-Sisala" 
-                           target="_blank" 
-                           rel="noopener noreferrer"
-                           style={{color: 'inherit', textDecoration: 'none'}}>
-                        Iddrisu Mohammed Sisala
-                    </a> 
-                </div>
-            </div>
-        </div>
-        
-        {/* Awards and Recognition SECTION */}
-
-<div className="expertise-section">
-    <h2>Awards and Recognition</h2>
-    
-    <div className="professional-item">
-        <div className="professional-title">Academic Reviewer Recognition</div>
-        <div className="professional-org">Multiple Scientific Journals</div>
-        <div className="professional-period">2025-Present</div>
-        <a 
-            href="https://1drv.ms/f/c/3ce355b70d76f4f7/Ejkh6TgFPhtNkgsfwRv6_OgBpu9S58AyaqHR_AMPJsR4Rg?e=jU8KMP" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="certificate-link"
-        >
-            <i className="fas fa-certificate"></i>
-            View Certificates
-        </a>
-    </div>
-</div>
-
-        {/* Skills Section */}
-        <div className="expertise-section">
-            <h2>Skills</h2>
-            
-            <div className="expertise-category">
-                <h3>Technical Skills</h3>
-                <div className="skills-list" style={{marginTop: '1em'}}>
-                    {["SPSS Statistics", "Stata", "SPSS AMOS", "SmartPLS", "Jamovi", "JASP", "Minitab", 
-                      "R Programming", "SAS JMP", "ATLAS.ti", "NVivo", "QDA Miner", "Zotero", "Mendeley"].map((skill, idx) => (
-                        <div key={idx} className="skill-tag">{skill}</div>
-                    ))}
-                </div>
-            </div>
-
-            <div className="expertise-category">
-                <h3>Clinical Skills</h3>
-                <div className="skills-list" style={{marginTop: '1em'}}>
-                    {["Patient Care", "Medication Administration", "Emergency Response", 
-                      "Clinical Assessment", "Evidence-Based Practice"].map((skill, idx) => (
-                        <div key={idx} className="skill-tag">{skill}</div>
-                    ))}
-                </div>
-            </div>
-
-            <div className="expertise-category">
-                <h3>Research Interests</h3>
-                <div className="skills-list" style={{marginTop: '1em'}}>
-                    {["Cancer Epidemiology", "Maternal and Child Health", "Public Health", 
-                      "Workplace Issues"].map((interest, idx) => (
-                        <div key={idx} className="skill-tag">{interest}</div>
-                    ))}
-                </div>
-            </div>
-        </div>
-
-        {/* Hobbies Section */}
-        <div className="expertise-section">
-            <h2>Hobbies and Personal Interests</h2>
-            
-            <div className="expertise-category">
-                <p style={{marginTop: '1em', color: 'var(--position-color)', lineHeight: '1.6'}}>
-                    Conducting data analysis, developing R Shiny web applications, academic writing, watching movies, listening to songs of the 80s and 90s.
-                </p>
-            </div>
-        </div>
-        
-                {/* Conferences Attended Section */}
-        <div className="expertise-section">
-            <h2>Conferences Attended</h2>
-            
-            <div className="professional-item">
-                <div className="professional-title">Nurses' and Midwives' Training College-Tamale Scientific Session 2024</div>
-                <div className="professional-org">Tamale, Ghana</div>
-                <div className="professional-period">2024</div>
-                <div className="professional-theme">Theme: Research in Nursing Colleges: A Must for Status Change!</div>
-            </div>
-            
-            <div className="professional-item">
-                <div className="professional-title">Tamale Teaching Hospital Scientific Research Conference</div>
-                <div className="professional-org">Tamale Teaching Hospital</div>
-                <div className="professional-period">2022</div>
                 
-                <div className="professional-theme">Theme: Harnessing the Intellectual Prowess of Researchers for Quality Healthcare Delivery at Tamale Teaching Hospital</div>
+                <h2 className="section-title">Employment History</h2>
+                <ul className="experience-list">
+                    <li className="experience-item">
+                        <div className="item-title">Staff Nurse</div>
+                        <div className="item-subtitle">Tamale Teaching Hospital</div>
+                        <div className="item-period">2025 - Present</div>
+                        <div className="item-description">Providing comprehensive nursing care, implementing evidence-based practices, and contributing to quality healthcare delivery in a tertiary healthcare facility.</div>
+                    </li>
+                    <li className="experience-item">
+                        <div className="item-title">Rotation Nurse</div>
+                        <div className="item-subtitle">Tamale Teaching Hospital</div>
+                        <div className="item-period">2021 - 2022</div>
+                        <div className="item-description">Gained clinical experience across multiple departments including medical-surgical, pediatric, and emergency nursing units.</div>
+                    </li>
+                </ul>
+                
+                <h2 className="section-title">Education</h2>
+                <ul className="education-list">
+                    <li className="education-item">
+                        <div className="item-title">Bachelor of Science in Nursing</div>
+                        <div className="item-subtitle">University of Cape Coast</div>
+                        <div className="item-period">2022 - 2024</div>
+                    </li>
+                    <li className="education-item">
+                        <div className="item-title">Diploma in General Nursing</div>
+                        <div className="item-subtitle">Nurses' and Midwives' Training College, Tamale</div>
+                        <div className="item-period">2017 - 2020</div>
+                    </li>
+                    <li className="education-item">
+                        <div className="item-title">Business (Cost Accounting)</div>
+                        <div className="item-subtitle">Northern School of Business (NOBISCO), Tamale</div>
+                        <div className="item-period">2013 - 2016</div>
+                    </li>
+                </ul>
+                
+                <h2 className="section-title">Affiliations</h2>
+                <ul className="education-list">
+                    <li className="education-item">
+                        <div className="item-title">Registered General Nurse (RGN)</div>
+                        <div className="item-subtitle">Nursing and Midwifery Council of Ghana (NMC)</div>
+                        <div className="item-period">2020 - Present</div>
+                        <div className="item-description">Licensed to practice nursing in Ghana</div>
+                    </li>
+                    <li className="education-item">
+                        <div className="item-title">Active Member</div>
+                        <div className="item-subtitle">Ghana Registered Nurses and Midwives Association (GRNMA)</div>
+                        <div className="item-period">2025 - Present</div>
+                        <div className="item-description">Professional membership</div>
+                    </li>
+                    <li className="education-item">
+                        <div className="item-title">Active Member</div>
+                        <div className="item-subtitle">BridgeCare Institute for Health Research, Ghana (BIHR-GH)</div>
+                        <div className="item-period">2026 - Present</div>
+                        <div className="item-description">Secretary since 2026</div>
+                    </li>
+                </ul>
+                
+                <h2 className="section-title">Current Advisors</h2>
+                <ul className="education-list">
+                    <li className="education-item">
+                        <div className="item-title">(1) Abubakari Wuni</div>
+                        <div className="item-subtitle">Academic & Research Advisor</div>
+                        <div className="item-description">
+                            <a href="https://www.researchgate.net/profile/Abubakari-Wuni" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               style={{color: 'var(--nav-hover)', textDecoration: 'none'}}>
+                                View ResearchGate Profile
+                            </a>
+                        </div>
+                    </li>
+                    <li className="education-item">
+                        <div className="item-title">(2) Iddrisu Mohammed Sisala</div>
+                        <div className="item-subtitle">Academic & Research Advisor</div>
+                        <div className="item-description">
+                            <a href="https://www.researchgate.net/profile/Iddrisu-Sisala" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               style={{color: 'var(--nav-hover)', textDecoration: 'none'}}>
+                                View ResearchGate Profile
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                
+                <h2 className="section-title">Awards and Recognition</h2>
+                <ul className="education-list">
+                    <li className="education-item">
+                        <div className="item-title">Academic Reviewer Recognition</div>
+                        <div className="item-subtitle">Multiple Scientific Journals</div>
+                        <div className="item-period">2025 - Present</div>
+                        <div className="item-description">
+                            <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/Ejkh6TgFPhtNkgsfwRv6_OgBpu9S58AyaqHR_AMPJsR4Rg?e=jU8KMP" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               className="certificate-link"
+                               style={{
+                                   display: 'inline-flex',
+                                   alignItems: 'center',
+                                   gap: '8px',
+                                   color: 'white',
+                                   textDecoration: 'none',
+                                   fontWeight: '600',
+                                   padding: '10px 20px',
+                                   backgroundColor: '#3498db',
+                                   border: 'none',
+                                   borderRadius: '5px',
+                                   transition: 'all 0.3s ease',
+                                   marginTop: '10px',
+                                   cursor: 'pointer',
+                                   fontSize: '0.95rem'
+                               }}>
+                                <i className="fas fa-certificate"></i>
+                                View Certificates
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                
+                <h2 className="section-title">Conferences Attended</h2>
+                <ul className="experience-list">
+                    <li className="experience-item">
+                        <div className="item-title">Nurses' and Midwives' Training College-Tamale Scientific Session 2024</div>
+                        <div className="item-subtitle">Tamale, Ghana</div>
+                        <div className="item-period">2024</div>
+                        <div className="item-description">Theme: Research in Nursing Colleges: A Must for Status Change!</div>
+                    </li>
+                    <li className="experience-item">
+                        <div className="item-title">Tamale Teaching Hospital Scientific Research Conference</div>
+                        <div className="item-subtitle">Tamale Teaching Hospital</div>
+                        <div className="item-period">2022</div>
+                        <div className="item-description">Theme: Harnessing the Intellectual Prowess of Researchers for Quality Healthcare Delivery at Tamale Teaching Hospital</div>
+                    </li>
+                </ul>
+                
+                <h2 className="section-title">Skills</h2>
+                <div className="skills-section">
+                    <div className="skill-category">
+                        <h3 style={{fontSize: '18px', margin: '15px 0 10px', color: 'var(--text-color)'}}>Technical Skills</h3>
+                        <div className="skills-list" style={{display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px'}}>
+                            {["SPSS Statistics", "Stata", "SPSS AMOS", "SmartPLS", "Jamovi", "JASP", "Minitab", 
+                              "R Programming", "SAS JMP", "ATLAS.ti", "NVivo", "QDA Miner", "Zotero", "Mendeley"].map((skill, idx) => (
+                                <div key={idx} className="skill-tag" style={{
+                                    backgroundColor: 'var(--skill-bg)',
+                                    padding: '5px 12px',
+                                    borderRadius: '20px',
+                                    fontSize: '0.9rem',
+                                    color: 'var(--text-color)',
+                                    border: '1px solid var(--border-color)'
+                                }}>{skill}</div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="skill-category">
+                        <h3 style={{fontSize: '18px', margin: '15px 0 10px', color: 'var(--text-color)'}}>Clinical Skills</h3>
+                        <div className="skills-list" style={{display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px'}}>
+                            {["Patient Care", "Medication Administration", "Emergency Response", 
+                              "Clinical Assessment", "Evidence-Based Practice"].map((skill, idx) => (
+                                <div key={idx} className="skill-tag" style={{
+                                    backgroundColor: 'var(--skill-bg)',
+                                    padding: '5px 12px',
+                                    borderRadius: '20px',
+                                    fontSize: '0.9rem',
+                                    color: 'var(--text-color)',
+                                    border: '1px solid var(--border-color)'
+                                }}>{skill}</div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="skill-category">
+                        <h3 style={{fontSize: '18px', margin: '15px 0 10px', color: 'var(--text-color)'}}>Research Interests</h3>
+                        <div className="skills-list" style={{display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px'}}>
+                            {["Cancer Epidemiology", "Maternal and Child Health", "Public Health", 
+                              "Workplace Issues"].map((interest, idx) => (
+                                <div key={idx} className="skill-tag" style={{
+                                    backgroundColor: 'var(--skill-bg)',
+                                    padding: '5px 12px',
+                                    borderRadius: '20px',
+                                    fontSize: '0.9rem',
+                                    color: 'var(--text-color)',
+                                    border: '1px solid var(--border-color)'
+                                }}>{interest}</div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                
+                <h2 className="section-title">Hobbies and Personal Interests</h2>
+                <div className="bio-text">
+                    <p>Conducting data analysis, developing R Shiny web applications, academic writing, watching movies, listening to songs of the 80s and 90s.</p>
+                </div>
             </div>
         </div>
         
@@ -4970,8 +5578,7 @@ Hello and welcome! Here, you’ll discover my research in health, interactive R 
                 </p>
             </div>
         )}
-       
-           </div>
+    </div>
 );
 
         const PublicationsComponent = () => {
@@ -5402,31 +6009,27 @@ Hello and welcome! Here, you’ll discover my research in health, interactive R 
                 </div>
             </div>
             
-            <div className="testimonial-button-container">
-    <div className="testimonial-icon">
-        <i className="fas fa-star"></i>
+         <div className="testimonial-container">
+    <div className="testimonial-content">
+        <div className="testimonial-header">
+            <i className="fas fa-comment-dots testimonial-icon"></i>
+            <h3 className="testimonial-title">Share Your Experience</h3>
+        </div>
+        
+        <p className="testimonial-description">
+            Used any of my R Shiny apps? Share your thoughts, suggestions, or testimonial.
+        </p>
+        
+        <a 
+            href="https://forms.gle/PZJtxtf9E3ZMnBYB9" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="testimonial-button"
+        >
+            <i className="fas fa-pen"></i>
+            Submit Feedback
+        </a>
     </div>
-    
-    <h3 className="testimonial-title">Share Your Experience!</h3>
-    
-    <p className="testimonial-description">
-        Have you used any of my R Shiny apps? Please take a moment 
-        to share your thoughts, suggestions, or testimonial.
-    </p>
-    
-    <a 
-        href="https://forms.gle/PZJtxtf9E3ZMnBYB9" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="testimonial-button"
-    >
-        <i className="fas fa-edit"></i>
-        Fill Testimonial Form
-    </a>
-    
-    <p className="testimonial-subtext">
-        Your feedback is greatly appreciated
-    </p>
 </div>
 
             <div className="shiny-featured">
@@ -5887,83 +6490,54 @@ Hello and welcome! Here, you’ll discover my research in health, interactive R 
 };
 
 const renderTeaching = () => (
-    <div className="section" style={{textAlign: 'center', padding: '80px 20px'}}>
-        <div style={{
-            maxWidth: '800px',
-            margin: '0 auto',
-            backgroundColor: 'var(--card-bg)',
-            border: '1px solid var(--border-color)',
-            borderRadius: '15px',
-            padding: '60px 40px',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)'
-        }}>
-            <div style={{
-                width: '100px',
-                height: '100px',
-                margin: '0 auto 30px',
-                backgroundColor: 'var(--nav-bg)',
-                color: 'var(--nav-text)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '3rem'
-            }}>
-<i className="fas fa-chalkboard-teacher"></i>
-</div>
-
-<h2 style={{
-    fontSize: '2.5rem',
-    marginBottom: '20px',
-    color: 'var(--header-color)'
-}}>
-    Teaching Portfolio
-</h2>
-
-<div style={{
-    fontSize: '5rem',
-    color: '#ff6b6b',
-    marginBottom: '20px'
-}}>
-    <i className="fas fa-tools"></i>
-</div>
-
-<h3 style={{
-    fontSize: '1.8rem',
-    color: '#ff6b6b',
-    marginBottom: '20px',
-    padding: '10px 20px',
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
-    borderRadius: '50px',
-    display: 'inline-block'
-}}>
-    Coming Soon
-</h3>
-
-<p style={{
-    fontSize: '1.2rem',
-    lineHeight: '1.8',
-    color: 'var(--text-color)',
-    marginBottom: '30px',
-    maxWidth: '600px',
-    marginLeft: 'auto',
-    marginRight: 'auto'
-}}>
-</p>
-            <div style={{
-                marginTop: '40px',
-                paddingTop: '30px',
-                borderTop: '1px solid var(--border-color)',
-                color: 'var(--position-color)',
-                fontSize: '0.9rem'
-            }}>
-                <p>
-                    <i className="fas fa-envelope" style={{marginRight: '8px'}}></i>
-                    For teaching opportunities in research methodology and/or biostatistics, please click on <strong>Contact</strong> in the footer below.
-                </p>
+<div className="section">
+    <div className="teaching-container">
+        <div className="teaching-header">
+            <div className="teaching-icon-wrapper">
+                <i className="fas fa-chalkboard-teacher teaching-icon"></i>
+            </div>
+            <h2 className="teaching-title">Teaching Portfolio</h2>
+            <p className="teaching-subtitle">Research Methodology & Biostatistics</p>
+        </div>
+        
+        <div className="coming-soon-badge">
+            <i className="fas fa-clock"></i>
+            <span>Coming Soon</span>
+        </div>
+        
+        <div className="teaching-content">
+            <div className="teaching-contact-info">
+                <div className="contact-icon">
+                    <i className="fas fa-envelope-open-text"></i>
+                </div>
+                <div className="contact-details">
+                    <p className="contact-text">
+                        For teaching opportunities in research methodology and/or biostatistics, 
+                        please use the <strong>Contact</strong> link below.
+                    </p>
+                    <a 
+                        href="#" 
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setShowContactForm(true);
+                            setActiveSection('about');
+                            setTimeout(() => {
+                                const formElement = document.getElementById('contact-form');
+                                if (formElement) {
+                                    formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }, 100);
+                        }}
+                        className="contact-link"
+                    >
+                        <i className="fas fa-external-link-alt"></i>
+                        Open Contact Form
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+</div>
 );
 
 const GalleryComponent = () => {
@@ -6990,7 +7564,7 @@ const GalleryComponent = () => {
             lineHeight: '1.5'
         }}>
             <div style={{marginBottom: '5px'}}>
-                Copyright © {new Date().getFullYear()} 
+                Copyright © {new Date().getFullYear()} by Mudasir Mohammed Ibrahim 
             </div>
             
             <div style={{
