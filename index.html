@@ -278,7 +278,6 @@ li {
     border-color: var(--nav-hover);
 }
 
-/* ========== UPDATED GALLERY STYLES FOR LONG IMAGES ========== */
 
 /* Gallery Image Container - FIXED for better image handling */
 .gallery-image-container {
@@ -778,6 +777,44 @@ li {
         padding: 8px 15px;
         font-size: 0.85rem;
     }
+}
+
+/* Simple Box Skills Design */
+.skills-simple-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.skill-box {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.skill-box h3 {
+    color: var(--header-color);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--nav-hover);
+    padding-bottom: 8px;
+}
+
+.skill-tags-simple {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag-simple {
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
 }
 
 /* Make text colors darker for better readability like Trojan Brands */
@@ -3350,7 +3387,7 @@ body.dark-mode .certificate-link:hover {
     }
 }
         
-      /* ========== GALLERY SECTION STYLES - UPDATED & FIXED ========== */
+/* GALLERY SECTION STYLES - UPDATED & FIXED */
 
 /* Gallery Container */
 .gallery-container {
@@ -3390,7 +3427,7 @@ body.dark-mode .certificate-link:hover {
 /* Gallery Image Container - FIXED for perfect fit */
 .gallery-image-container {
     width: 100%;
-    height: 250px; /* Fixed height for consistent display */
+    height: 250px; 
     overflow: hidden;
     position: relative;
     background-color: var(--light-bg);
@@ -5314,6 +5351,61 @@ useEffect(() => {
     }
 }, [activeSection]);
 
+// Add this useEffect for header scroll behavior
+useEffect(() => {
+    let lastScrollTop = 0;
+    const header = document.querySelector('.full-width-header');
+    const headerHeight = header ? header.offsetHeight : 70;
+    
+    if (!header) return;
+    
+    const handleScroll = () => {
+        // Don't hide header if mobile menu is open
+        if (isMobileMenuOpen) {
+            header.style.transform = 'translateY(0)';
+            return;
+        }
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Only hide when scrolling down
+        if (scrollTop > lastScrollTop && scrollTop > 50) {
+            header.style.transform = 'translateY(-100%)';
+            header.style.transition = 'transform 0.3s ease';
+        }
+        
+        // Only show when at the VERY TOP (within 5px of top)
+        if (scrollTop <= 5) {
+            header.style.transform = 'translateY(0)';
+            header.style.transition = 'transform 0.3s ease';
+        }
+        
+        lastScrollTop = scrollTop;
+    };
+
+    // Throttle for performance
+    let ticking = false;
+    const throttledHandleScroll = () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    };
+
+    window.addEventListener('scroll', throttledHandleScroll);
+    
+    // Initial check
+    handleScroll();
+    
+    // Clean up
+    return () => {
+        window.removeEventListener('scroll', throttledHandleScroll);
+    };
+}, [isMobileMenuOpen]);
+
 // Add this useEffect inside your main AcademicPortfolio component, right after your other useEffects
 useEffect(() => {
     // Pre-load gallery images when page loads
@@ -5842,12 +5934,7 @@ const loadBlogPostsWithFallback = async () => {
         />
 
         <div className="contact-info">
-            <h2 className="section-title">Mr. Mudasir M. Ibrahim</h2>
-
-            <div className="contact-item">
-                <i className="fas fa-map-marker-alt contact-icon"></i>
-                <span>Tamale, Northern Region, Ghana</span>
-            </div>
+            <h2 className="section-title">Registered General Nurse</h2>
 
             <div className="contact-item">
                 <i className="fas fa-building contact-icon"></i>
@@ -5865,9 +5952,6 @@ const loadBlogPostsWithFallback = async () => {
     </a>
     <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="LinkedIn">
         <i className="fab fa-linkedin"></i>
-    </a>
-    <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF" target="_blank" rel="noopener noreferrer" className="profile-social-icon" title="Download CV">
-        <i className="fas fa-file-download"></i>
     </a>
 </div>
 </div>
@@ -5915,7 +5999,7 @@ const loadBlogPostsWithFallback = async () => {
                     </li>
                     <li className="education-item">
                         <div className="item-title">Business (Cost Accounting)</div>
-                        <div className="item-subtitle">Northern School of Business (NOBISCO), Tamale (High School)</div>
+                        <div className="item-subtitle">Northern School of Business (NOBISCO) - High School</div>
                         <div className="item-period">2013 - 2016</div>
                     </li>
                 </ul>
@@ -5923,19 +6007,16 @@ const loadBlogPostsWithFallback = async () => {
                 <h2 className="section-title">Affiliations</h2>
                 <ul className="education-list">
                     <li className="education-item">
-                        <div className="item-title">Registered General Nurse (RGN)</div>
                         <div className="item-subtitle">Nursing and Midwifery Council of Ghana (NMC-GH)</div>
                         <div className="item-period">2020 - Present</div>
                         <div className="item-description">Licensed to practice nursing in Ghana</div>
                     </li>
                     <li className="education-item">
-                        <div className="item-title">Active Member</div>
                         <div className="item-subtitle">Ghana Registered Nurses and Midwives Association (GRNMA)</div>
                         <div className="item-period">2025 - Present</div>
                         <div className="item-description">Professional membership</div>
                     </li>
                     <li className="education-item">
-                        <div className="item-title">Active Member</div>
                         <div className="item-subtitle">BridgeCare Institute for Health Research, Ghana (BIHR-GH)</div>
                         <div className="item-period">2026 - Present</div>
                         <div className="item-description">Secretary</div>
@@ -5946,7 +6027,6 @@ const loadBlogPostsWithFallback = async () => {
                 <ul className="education-list">
                     <li className="education-item">
                         <div className="item-title">(1) Abubakari Wuni</div>
-                        <div className="item-subtitle">Academic & Research Advisor</div>
                         <div className="item-description">
                             <a href="https://www.researchgate.net/profile/Abubakari-Wuni" 
                                target="_blank" 
@@ -5958,7 +6038,6 @@ const loadBlogPostsWithFallback = async () => {
                     </li>
                     <li className="education-item">
                         <div className="item-title">(2) Iddrisu Mohammed Sisala</div>
-                        <div className="item-subtitle">Academic & Research Advisor</div>
                         <div className="item-description">
                             <a href="https://www.researchgate.net/profile/Iddrisu-Sisala" 
                                target="_blank" 
@@ -6021,58 +6100,43 @@ const loadBlogPostsWithFallback = async () => {
                 </ul>
                 
                 <h2 className="section-title">Skills</h2>
-                <div className="skills-section">
-                    <div className="skill-category">
-                        <h3 style={{fontSize: '18px', margin: '15px 0 10px', color: 'var(--text-color)'}}>Technical Skills</h3>
-                        <div className="skills-list" style={{display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px'}}>
-                            {["SPSS Statistics", "Stata", "SPSS AMOS", "SmartPLS", "Jamovi", "JASP", "Minitab", 
-                              "R Programming", "SAS JMP", "ATLAS.ti", "NVivo", "QDA Miner", "Zotero", "Mendeley"].map((skill, idx) => (
-                                <div key={idx} className="skill-tag" style={{
-                                    backgroundColor: 'var(--skill-bg)',
-                                    padding: '5px 12px',
-                                    borderRadius: '20px',
-                                    fontSize: '0.9rem',
-                                    color: 'var(--text-color)',
-                                    border: '1px solid var(--border-color)'
-                                }}>{skill}</div>
-                            ))}
-                        </div>
-                    </div>
-                    
-                    <div className="skill-category">
-                        <h3 style={{fontSize: '18px', margin: '15px 0 10px', color: 'var(--text-color)'}}>Clinical Skills</h3>
-                        <div className="skills-list" style={{display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px'}}>
-                            {["Patient Care", "Medication Administration", "Emergency Response", 
-                              "Clinical Assessment", "Evidence-Based Practice"].map((skill, idx) => (
-                                <div key={idx} className="skill-tag" style={{
-                                    backgroundColor: 'var(--skill-bg)',
-                                    padding: '5px 12px',
-                                    borderRadius: '20px',
-                                    fontSize: '0.9rem',
-                                    color: 'var(--text-color)',
-                                    border: '1px solid var(--border-color)'
-                                }}>{skill}</div>
-                            ))}
-                        </div>
-                    </div>
-                    
-                    <div className="skill-category">
-                        <h3 style={{fontSize: '18px', margin: '15px 0 10px', color: 'var(--text-color)'}}>Research Interests</h3>
-                        <div className="skills-list" style={{display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px'}}>
-                            {["Cancer Epidemiology", "Maternal and Child Health", "Public Health", 
-                              "Workplace Issues"].map((interest, idx) => (
-                                <div key={idx} className="skill-tag" style={{
-                                    backgroundColor: 'var(--skill-bg)',
-                                    padding: '5px 12px',
-                                    borderRadius: '20px',
-                                    fontSize: '0.9rem',
-                                    color: 'var(--text-color)',
-                                    border: '1px solid var(--border-color)'
-                                }}>{interest}</div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+            <div className="skills-section">
+    <div className="skills-simple-box">
+        {/* Technical Skills */}
+        <div className="skill-box">
+            <h3>Technical Skills</h3>
+            <div className="skill-tags-simple">
+                {["SPSS Statistics", "Stata", "SPSS AMOS", "SmartPLS", "Jamovi", "JASP", 
+                  "Minitab", "R Programming", "SAS JMP", "ATLAS.ti", "NVivo", "QDA Miner", 
+                  "Zotero", "Mendeley"].map((skill, idx) => (
+                    <div key={idx} className="skill-tag-simple">{skill}</div>
+                ))}
+            </div>
+        </div>
+        
+        {/* Clinical Skills */}
+        <div className="skill-box">
+            <h3>Clinical Skills</h3>
+            <div className="skill-tags-simple">
+                {["Patient Care", "Medication Administration", "Emergency Response", 
+                  "Clinical Assessment", "Evidence-Based Practice"].map((skill, idx) => (
+                    <div key={idx} className="skill-tag-simple">{skill}</div>
+                ))}
+            </div>
+        </div>
+        
+        {/* Research Interests */}
+        <div className="skill-box">
+            <h3>Research Interests</h3>
+            <div className="skill-tags-simple">
+                {["Cancer Epidemiology", "Maternal and Child Health", "Public Health", 
+                  "Workplace Issues"].map((interest, idx) => (
+                    <div key={idx} className="skill-tag-simple">{interest}</div>
+                ))}
+            </div>
+        </div>
+    </div>
+</div>
                 
                 <h2 className="section-title">Hobbies and Personal Interests</h2>
                 <div className="bio-text">
@@ -6594,59 +6658,42 @@ const loadBlogPostsWithFallback = async () => {
                     Below is a collection of interactive R Shiny web tools that I have created to make analyses easier in R. All of my tools are open-source and are also stored on GitHub.
                 </p>
             </div>
-
-            {/* ADD THIS VIEWS COUNTER SECTION */}
-            <div className="views-counter-container">
-                <div className="views-counter-card">
-                    <div className="views-counter-header">
-                        <div className="views-icon">
-                            <i className="fas fa-chart-line"></i>
-                        </div>
-                        <div className="total-views-container">
-                            <div className="total-views-label">Total Application Views</div>
-                            {loadingViews ? (
-                                <div className="views-loading">
-                                    <i className="fas fa-spinner fa-spin"></i>
-                                    <div style={{marginTop: '10px', fontSize: '0.9rem'}}>Loading views...</div>
-                                </div>
-                            ) : (
-                                <>
-                                    <div className="total-views-number">{totalViews.toLocaleString()}</div>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                    
-                    <div className="views-source">
-                        <span>Views sourced from</span>
-                        <a 
-                            href="https://shinyappstore.com/search/user/1732" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="shiny-app-store-link"
-                        >
-                            <i className="fas fa-external-link-alt"></i>
-                            Shiny App Store
-                        </a>
-                    </div>
-                    
-                    {!loadingViews && Object.keys(appViews).length > 0 && (
-                        <div className="individual-views-container">
-                            <div className="individual-views-title">Individual App Views (1-20)</div>
-                            <div className="views-grid">
-                                {Object.entries(appViews)
-                                    .sort(([, viewsA], [, viewsB]) => viewsB - viewsA)
-                                    .map(([appName, views]) => (
-                                        <div key={appName} className="view-item">
-                                            <div className="app-name" title={appName}>{appName}</div>
-                                            <div className="app-view-count">{views.toLocaleString()}</div>
-                                        </div>
-                                    ))}
-                            </div>
-                        </div>
-                    )}
-                </div>
+{/* Total Application Views Section - Simplified */}
+<div className="views-counter-container">
+    <div className="views-counter-card">
+        <div className="views-counter-header">
+            <div className="views-icon">
+                <i className="fas fa-chart-line"></i>
             </div>
+            <div className="total-views-container">
+                <div className="total-views-label">Total Application Views (1-20)</div>
+                {loadingViews ? (
+                    <div className="views-loading">
+                        <i className="fas fa-spinner fa-spin"></i>
+                        <div style={{marginTop: '10px', fontSize: '0.9rem'}}>Loading views...</div>
+                    </div>
+                ) : (
+                    <>
+                        <div className="total-views-number">{totalViews.toLocaleString()}</div>
+                    </>
+                )}
+            </div>
+        </div>
+        
+        <div className="views-source">
+            <span>Views sourced from</span>
+            <a 
+                href="https://shinyappstore.com/search/user/1732" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="shiny-app-store-link"
+            >
+                <i className="fas fa-external-link-alt"></i>
+                Shiny App Store
+            </a>
+        </div>
+    </div>
+</div>
             
             <div className="apps-stats">
                 <div className="stat-card">
@@ -7673,7 +7720,7 @@ const categoryDescriptions = {
             Teaching
         </a>
     </li>
-  {/* ADD THIS NEW MORE TAB WITH DROPDOWN */}
+ 
 <li className="nav-item dropdown">
     <a 
         href="#more" 
@@ -7860,325 +7907,348 @@ const categoryDescriptions = {
             <i className="fas fa-chevron-up"></i>
         </div>
         
-{/* Footer - Matches Header Colors */}
+{/* Footer - Modern Design with Vertical Tabs */}
 <footer style={{
     backgroundColor: 'var(--nav-bg)',
-    padding: '50px 20px 30px',
+    padding: '60px 40px 40px',
     marginTop: '80px',
     borderTop: '1px solid var(--nav-border)'
 }}>
     <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
-        textAlign: 'center'
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '60px',
+        alignItems: 'flex-start'
     }}>
-        {/* Logo/Name - NAME REMOVED */}
-        <div style={{
-            fontSize: '1.8rem',
-            fontWeight: '700',
-            color: 'var(--nav-text)',
-            marginBottom: '30px',
-            letterSpacing: '-0.5px'
-        }}>
-            {/* Name removed as requested */}
+        
+        {/* LEFT COLUMN: Logo and Description */}
+        <div style={{ flex: '1', minWidth: '250px' }}>
+            <div style={{
+                fontSize: '1.6rem',
+                fontWeight: '700',
+                color: 'var(--nav-text)',
+                marginBottom: '20px',
+                letterSpacing: '-0.5px'
+            }}>
+                Mudasir Mohammed Ibrahim
+            </div>
+            <p style={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                fontSize: '0.95rem',
+                lineHeight: '1.6',
+                marginBottom: '25px'
+            }}>
+                Registered Nurse and Health Researcher
+            </p>
+            
+            {/* Social Media Icons - Compact */}
+            <div style={{
+                display: 'flex',
+                gap: '15px',
+                marginTop: '25px'
+            }}>
+                {[
+                    { icon: 'fab fa-orcid', url: 'https://orcid.org/0000-0002-9049-8222', title: 'ORCID' },
+                    { icon: 'fas fa-graduation-cap', url: 'https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en', title: 'Google Scholar' },
+                    { icon: 'fab fa-github', url: 'https://github.com/mudassiribrahim30', title: 'GitHub' },
+                    { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0', title: 'LinkedIn' },
+                    { icon: 'fab fa-youtube', url: 'https://www.youtube.com/@mudasirmohammedibrahim1026', title: 'YouTube' }
+                ].map((social, index) => (
+                    <a key={index}
+                       href={social.url}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       title={social.title}
+                       style={{
+                           color: 'var(--nav-text)',
+                           fontSize: '1.2rem',
+                           width: '40px',
+                           height: '40px',
+                           display: 'flex',
+                           alignItems: 'center',
+                           justifyContent: 'center',
+                           borderRadius: '50%',
+                           backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                           transition: 'all 0.3s ease',
+                           textDecoration: 'none'
+                       }}
+                       onMouseOver={(e) => {
+                           e.target.style.backgroundColor = 'var(--nav-hover)';
+                           e.target.style.transform = 'translateY(-3px)';
+                       }}
+                       onMouseOut={(e) => {
+                           e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                           e.target.style.transform = 'translateY(0)';
+                       }}>
+                        <i className={social.icon}></i>
+                    </a>
+                ))}
+            </div>
         </div>
         
-        {/* Navigation Links - UPDATED WITH GALLERY AND TESTIMONIALS */}
-        <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '25px',
-            marginBottom: '40px'
-        }}>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('about');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                About Me
-            </a>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('publications');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Publications
-            </a>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('shiny');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Software
-            </a>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('blog');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Blog
-            </a>
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('teaching');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Teaching
-            </a>
-            {/* ADDED GALLERY LINK */}
-            <a href="#" 
-               onClick={(e) => { 
-                   e.preventDefault(); 
-                   setActiveSection('gallery');
-                   window.scrollTo({ top: 0, behavior: 'smooth' });
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Gallery
-            </a>
-            {/* ADDED TESTIMONIALS LINK */}
-            <a href="#" 
-               onClick={(e) => {
-                   e.preventDefault();
-                   // Scroll to testimonial section in Software page
-                   setActiveSection('shiny');
-                   setTimeout(() => {
-                       const testimonialElement = document.querySelector('.testimonial-button-container');
-                       if (testimonialElement) {
-                           testimonialElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                       }
-                   }, 100);
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Testimonials
-            </a>
-            <a href="#" 
-               onClick={(e) => {
-                   e.preventDefault();
-                   setShowContactForm(true);
-                   setActiveSection('about');
-                   setTimeout(() => {
-                       const formElement = document.getElementById('contact-form');
-                       if (formElement) {
-                           formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                       }
-                   }, 100);
-               }}
-               style={{
-                   color: 'var(--nav-text)',
-                   textDecoration: 'none',
-                   fontSize: '0.95rem',
-                   fontWeight: '500',
-                   transition: 'color 0.3s ease'
-               }}
-               onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-               onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}>
-                Contact
-            </a>
+        {/* MIDDLE COLUMN: Vertical Tabs */}
+        <div style={{ flex: '1', minWidth: '200px' }}>
+            <h3 style={{
+                color: 'var(--nav-text)',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                marginBottom: '25px',
+                textTransform: 'uppercase',
+                letterSpacing: '1px'
+            }}>
+                Quick Navigation
+            </h3>
+            
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px'
+            }}>
+                {[
+                    { name: 'About Me', section: 'about' },
+                    { name: 'Publications', section: 'publications' },
+                    { name: 'Software', section: 'shiny' },
+                    { name: 'Blog', section: 'blog' },
+                    { name: 'Teaching', section: 'teaching' },
+                    { name: 'Gallery', section: 'gallery' },
+                    { name: 'Testimonials', section: 'shiny', scrollTo: 'testimonials' }
+                ].map((tab, index) => (
+                    <a key={index}
+                       href="#"
+                       onClick={(e) => {
+                           e.preventDefault();
+                           setActiveSection(tab.section);
+                           
+                           if (tab.scrollTo === 'testimonials') {
+                               setTimeout(() => {
+                                   const testimonialElement = document.querySelector('.testimonial-button-container');
+                                   if (testimonialElement) {
+                                       testimonialElement.scrollIntoView({ 
+                                           behavior: 'smooth', 
+                                           block: 'start' 
+                                       });
+                                   }
+                               }, 100);
+                           } else {
+                               window.scrollTo({ top: 0, behavior: 'smooth' });
+                           }
+                       }}
+                       style={{
+                           color: activeSection === tab.section ? 'var(--nav-hover)' : 'var(--nav-text)',
+                           textDecoration: 'none',
+                           fontSize: '0.95rem',
+                           fontWeight: activeSection === tab.section ? '600' : '400',
+                           padding: '10px 0',
+                           borderLeft: activeSection === tab.section ? '3px solid var(--nav-hover)' : '3px solid transparent',
+                           paddingLeft: '15px',
+                           transition: 'all 0.3s ease',
+                           display: 'flex',
+                           alignItems: 'center',
+                           gap: '10px'
+                       }}
+                       onMouseOver={(e) => {
+                           if (activeSection !== tab.section) {
+                               e.target.style.color = 'var(--nav-hover)';
+                               e.target.style.paddingLeft = '18px';
+                           }
+                       }}
+                       onMouseOut={(e) => {
+                           if (activeSection !== tab.section) {
+                               e.target.style.color = 'var(--nav-text)';
+                               e.target.style.paddingLeft = '15px';
+                           }
+                       }}>
+                        {tab.name === 'Testimonials' && <i className="fas fa-star" style={{ fontSize: '0.8rem' }}></i>}
+                        {tab.name === 'Gallery' && <i className="fas fa-images" style={{ fontSize: '0.8rem' }}></i>}
+                        {tab.name === 'Software' && <i className="fas fa-code" style={{ fontSize: '0.8rem' }}></i>}
+                        {tab.name === 'Publications' && <i className="fas fa-file-alt" style={{ fontSize: '0.8rem' }}></i>}
+                        {tab.name === 'Teaching' && <i className="fas fa-chalkboard-teacher" style={{ fontSize: '0.8rem' }}></i>}
+                        {tab.name === 'Blog' && <i className="fas fa-blog" style={{ fontSize: '0.8rem' }}></i>}
+                        {tab.name}
+                    </a>
+                ))}
+            </div>
         </div>
         
- {/* Social Media Icons */}
-<div style={{
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '25px',
-    marginBottom: '40px'
-}}>
-    <a href="https://orcid.org/0000-0002-9049-8222" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       title="ORCID"
-       className="footer-social-icon"
-       style={{
-           color: 'var(--nav-text)',
-           fontSize: '1.4rem',
-           transition: 'all 0.3s ease'
-       }}>
-        <i className="fab fa-orcid"></i>
-    </a>
-    <a href="https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       title="Google Scholar"
-       className="footer-social-icon"
-       style={{
-           color: 'var(--nav-text)',
-           fontSize: '1.4rem',
-           transition: 'all 0.3s ease'
-       }}>
-        <i className="fas fa-graduation-cap"></i>
-    </a>
-    <a href="https://github.com/mudassiribrahim30" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       title="GitHub"
-       className="footer-social-icon"
-       style={{
-           color: 'var(--nav-text)',
-           fontSize: '1.4rem',
-           transition: 'all 0.3s ease'
-       }}>
-        <i className="fab fa-github"></i>
-    </a>
-    <a href="https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       title="LinkedIn"
-       className="footer-social-icon"
-       style={{
-           color: 'var(--nav-text)',
-           fontSize: '1.4rem',
-           transition: 'all 0.3s ease'
-       }}>
-        <i className="fab fa-linkedin"></i>
-    </a>
-    <a href="https://www.youtube.com/@mudasirmohammedibrahim1026" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       title="YouTube"
-       className="footer-social-icon"
-       style={{
-           color: 'var(--nav-text)',
-           fontSize: '1.4rem',
-           transition: 'all 0.3s ease'
-       }}>
-        <i className="fab fa-youtube"></i>
-    </a>
-</div>
- 
+        {/* RIGHT COLUMN: Contact and Additional Links */}
+        <div style={{ flex: '1', minWidth: '250px' }}>
+            <h3 style={{
+                color: 'var(--nav-text)',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                marginBottom: '25px',
+                textTransform: 'uppercase',
+                letterSpacing: '1px'
+            }}>
+                Contact & Links
+            </h3>
+            
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '15px'
+            }}>
+                <a href="#"
+                   onClick={(e) => {
+                       e.preventDefault();
+                       setShowContactForm(true);
+                       setActiveSection('about');
+                       setTimeout(() => {
+                           const formElement = document.getElementById('contact-form');
+                           if (formElement) {
+                               formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                           }
+                       }, 100);
+                   }}
+                   style={{
+                       color: 'var(--nav-text)',
+                       textDecoration: 'none',
+                       fontSize: '0.95rem',
+                       padding: '12px 20px',
+                       backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                       borderRadius: '8px',
+                       transition: 'all 0.3s ease',
+                       display: 'flex',
+                       alignItems: 'center',
+                       gap: '10px'
+                   }}
+                   onMouseOver={(e) => {
+                       e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                       e.target.style.color = 'var(--nav-hover)';
+                   }}
+                   onMouseOut={(e) => {
+                       e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                       e.target.style.color = 'var(--nav-text)';
+                   }}>
+                    <i className="fas fa-envelope"></i>
+                    Contact Form
+                </a>
+                
+                <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style={{
+                       color: 'var(--nav-text)',
+                       textDecoration: 'none',
+                       fontSize: '0.95rem',
+                       padding: '12px 20px',
+                       backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                       borderRadius: '8px',
+                       transition: 'all 0.3s ease',
+                       display: 'flex',
+                       alignItems: 'center',
+                       gap: '10px'
+                   }}
+                   onMouseOver={(e) => {
+                       e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                       e.target.style.color = 'var(--nav-hover)';
+                   }}
+                   onMouseOut={(e) => {
+                       e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                       e.target.style.color = 'var(--nav-text)';
+                   }}>
+                    <i className="fas fa-file-download"></i>
+                    Download CV
+                </a>
+                
+                <div style={{
+                    padding: '15px',
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    borderRadius: '8px',
+                    marginTop: '10px'
+                }}>
+                    <div style={{
+                        color: 'var(--nav-text)',
+                        fontSize: '0.85rem',
+                        opacity: 0.8,
+                        lineHeight: '1.5'
+                    }}>
+                        <div style={{ marginBottom: '5px' }}>
+                            <i className="fas fa-map-marker-alt" style={{ marginRight: '8px' }}></i>
+                            Tamale, Northern Region, Ghana
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {/* Bottom Section: Copyright and Back to Top */}
+    <div style={{
+        maxWidth: '1200px',
+        margin: '50px auto 0',
+        paddingTop: '30px',
+        borderTop: '1px solid var(--nav-border)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '20px'
+    }}>
         {/* Copyright */}
         <div style={{
-            color: 'var(--nav-text)',
+            color: 'rgba(255, 255, 255, 0.7)',
             fontSize: '0.9rem',
-            paddingTop: '20px',
-            borderTop: '1px solid var(--nav-border)',
-            opacity: 0.8,
             lineHeight: '1.5'
         }}>
-            <div style={{marginBottom: '5px'}}>
-                Copyright © 2025-{new Date().getFullYear()} Mudasir Mohammed Ibrahim. All Rights Reserved.  
+            <div style={{ marginBottom: '5px' }}>
+                Copyright © 2025-{new Date().getFullYear()} Mudasir Mohammed Ibrahim. All Rights Reserved.
             </div>
-            
-        <div style={{
-    fontSize: '0.8rem',
-    opacity: 0.6,
-    fontStyle: 'italic'
-}}>
-    <span style={{textDecoration: 'none'}}>Website UI inspired by</span>
-    <a 
-        href="https://profandyfield.com/" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        style={{
-            color: 'var(--nav-text)',
-            textDecoration: 'none',
-            marginLeft: '4px',
-            transition: 'color 0.2s ease',
-            fontStyle: 'italic' 
-        }}
-        onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-        onMouseOut={(e) => e.target.style.color = 'var(--nav-text)'}
-    >
-        Prof Andy Field
-    </a>
-</div>
-                </div>
+            <div style={{
+                fontSize: '0.8rem',
+                opacity: 0.6,
+                fontStyle: 'italic'
+            }}>
+                <span style={{ textDecoration: 'none' }}>Website UI inspired by</span>
+                <a href="https://profandyfield.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style={{
+                       color: 'rgba(255, 255, 255, 0.7)',
+                       textDecoration: 'none',
+                       marginLeft: '4px',
+                       transition: 'color 0.2s ease',
+                       fontStyle: 'italic'
+                   }}
+                   onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
+                   onMouseOut={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>
+                    Prof Andy Field
+                </a>
+            </div>
+        </div>
         
-        {/* Optional: Back to Top */}
-        <div style={{ marginTop: '20px' }}>
-            <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        {/* Back to Top Button */}
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 style={{
                     background: 'rgba(255, 255, 255, 0.1)',
-                    border: `1px solid var(--nav-border)`,
+                    border: '1px solid var(--nav-border)',
                     color: 'var(--nav-text)',
-                    padding: '8px 20px',
-                    borderRadius: '20px',
-                    fontSize: '0.85rem',
+                    padding: '10px 25px',
+                    borderRadius: '25px',
+                    fontSize: '0.9rem',
                     cursor: 'pointer',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
                 }}
                 onMouseOver={(e) => {
-                    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-                    e.target.style.color = 'var(--nav-hover)';
+                    e.target.style.backgroundColor = 'var(--nav-hover)';
                     e.target.style.borderColor = 'var(--nav-hover)';
+                    e.target.style.transform = 'translateY(-2px)';
                 }}
                 onMouseOut={(e) => {
                     e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                    e.target.style.color = 'var(--nav-text)';
                     e.target.style.borderColor = 'var(--nav-border)';
-                }}
-            >
-                <i className="fas fa-arrow-up" style={{ marginRight: '5px' }}></i>
-                Back to Top
-            </button>
-        </div>
+                    e.target.style.transform = 'translateY(0)';
+                }}>
+            <i className="fas fa-arrow-up"></i>
+            Back to Top
+        </button>
     </div>
 </footer>
 
