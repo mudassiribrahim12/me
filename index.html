@@ -779,44 +779,6 @@ li {
     }
 }
 
-/* Simple Box Skills Design */
-.skills-simple-box {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.skill-box {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 20px;
-}
-
-.skill-box h3 {
-    color: var(--header-color);
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    border-bottom: 2px solid var(--nav-hover);
-    padding-bottom: 8px;
-}
-
-.skill-tags-simple {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.skill-tag-simple {
-    background-color: var(--light-bg);
-    color: var(--text-color);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    border: 1px solid var(--border-color);
-}
-
 /* Make text colors darker for better readability like Trojan Brands */
 :root {
     --text-color: #333333; /* Darker gray */
@@ -5934,7 +5896,7 @@ const loadBlogPostsWithFallback = async () => {
         />
 
         <div className="contact-info">
-            <h2 className="section-title">Registered General Nurse</h2>
+            <h2 className="section-title">Mudasir Mohammed Ibrahim</h2>
 
             <div className="contact-item">
                 <i className="fas fa-building contact-icon"></i>
@@ -5959,13 +5921,11 @@ const loadBlogPostsWithFallback = async () => {
             
             <div className="bio-section">
                 <div className="bio-text">
-                    <p>Hello and welcome! I am Mohammed Mudasir Ibrahim, professionally known as Mudasir Mohammed Ibrahim. You may call me Mudasir Ibrahim for short. Here, you'll find my research in health, and interactive R Shiny web tools I've created to simplify statistical analyses in R. Thank you for visiting. Please feel free to browse my work or email me with any questions about my R Shiny tools or anything.</p>
+                    <p>Hello and welcome! I’m Mohammed Mudasir Ibrahim, professionally, that’s Mudasir Mohammed Ibrahim, but “Mudasir Ibrahim” works just fine. Here, you’ll find my research in health and a collection of interactive R Shiny tools I’ve built to make statistical analyses less painful and more fun. Feel free to browse, explore, or email me if you have questions about my apps, anything, or just want to nerd out over data.</p>
                     
-                    <p>I am the original author of <a href="https://newappstesting.shinyapps.io/Data2SPSS/" target="_blank" rel="noopener noreferrer">Data2SPSS</a>, <a href="https://mudassiribrahim2025.shinyapps.io/CalcuStats/" target="_blank" rel="noopener noreferrer">CalcuStats</a>, <a href="https://newappstesting.shinyapps.io/CATrendAnalyzer/" target="_blank" rel="noopener noreferrer">CATrend Analyzer</a>, and <a href="https://mudassiribrahim2025.shinyapps.io/Robustregression/" target="_blank" rel="noopener noreferrer">Robust Regressor</a>, among others (all available in the Software tab). These applications were built using Shiny (web framework).</p>
+                      <p>I am the original author of <a href="https://newappstesting.shinyapps.io/Data2SPSS/" target="_blank" rel="noopener noreferrer">Data2SPSS</a>, <a href="https://mudassiribrahim2025.shinyapps.io/CalcuStats/" target="_blank" rel="noopener noreferrer">CalcuStats</a>, <a href="https://newappstesting.shinyapps.io/CATrendAnalyzer/" target="_blank" rel="noopener noreferrer">CATrend Analyzer</a>, and <a href="https://mudassiribrahim2025.shinyapps.io/Robustregression/" target="_blank" rel="noopener noreferrer">Robust Regressor</a>, among others (all available in the Software tab). I built these using Shiny because I’ve seen firsthand how messy healthcare datasets can be and wanted practical, open-access tools that save time, reduce errors, and maybe even make statistics a little less intimidating. If one of my apps has brightened your day or your workflow, you can <a href="https://buymeacoffee.com/mudasiribrahim30" target="_blank" rel="noopener noreferrer">buy me a coffee</a> (It fuels more coding, not just caffeine addiction. Lol).</p>
                     
-<p>I am a Registered General Nurse at <a href="https://tth.gov.gh" target="_blank" rel="noopener noreferrer">Tamale Teaching Hospital (TTH)</a>. I am dedicated to advancing nursing education and healthcare delivery in Ghana through high-impact research grounded in rigorous methodologies and advanced statistical approaches.</p>
-
-<p>I have published numerous research papers in areas including nursing education, workforce issues, patient safety, cancer epidemiology, and maternal-child health. My work has been recognized through academic reviewer certificates and contributions to the scientific community.</p>
+<p>By day, I’m a Registered General Nurse at <a href="https://tth.gov.gh" target="_blank" rel="noopener noreferrer">Tamale Teaching Hospital (TTH)</a>. I’ve published research on nursing education, workforce issues, patient safety, cancer epidemiology, and maternal-child health. Along the way, I’ve earned academic reviewer certificates and contributed to the broader scientific community. I enjoy turning real-world clinical challenges into actionable research and usable tools.</p>
 
                 </div>
                 
@@ -6099,41 +6059,31 @@ const loadBlogPostsWithFallback = async () => {
                     </li>
                 </ul>
                 
-                <h2 className="section-title">Skills</h2>
-            <div className="skills-section">
+ <h2 className="section-title">Skills</h2>
+<div className="skills-section">
     <div className="skills-simple-box">
         {/* Technical Skills */}
         <div className="skill-box">
             <h3>Technical Skills</h3>
-            <div className="skill-tags-simple">
-                {["SPSS Statistics", "Stata", "SPSS AMOS", "SmartPLS", "Jamovi", "JASP", 
-                  "Minitab", "R Programming", "SAS JMP", "ATLAS.ti", "NVivo", "QDA Miner", 
-                  "Zotero", "Mendeley"].map((skill, idx) => (
-                    <div key={idx} className="skill-tag-simple">{skill}</div>
-                ))}
-            </div>
+            <p style={{color: 'var(--text-color)', lineHeight: '1.6', marginBottom: '15px', fontSize: '1rem'}}>
+                SPSS Statistics, Stata, SPSS AMOS, SmartPLS, Jamovi, JASP, Minitab, R Programming, SAS JMP, ATLAS.ti, NVivo, QDA Miner, Zotero, Mendeley
+            </p>
         </div>
         
         {/* Clinical Skills */}
         <div className="skill-box">
             <h3>Clinical Skills</h3>
-            <div className="skill-tags-simple">
-                {["Patient Care", "Medication Administration", "Emergency Response", 
-                  "Clinical Assessment", "Evidence-Based Practice"].map((skill, idx) => (
-                    <div key={idx} className="skill-tag-simple">{skill}</div>
-                ))}
-            </div>
+            <p style={{color: 'var(--text-color)', lineHeight: '1.6', marginBottom: '15px', fontSize: '1rem'}}>
+                Patient Care, Medication Administration, Emergency Response, Clinical Assessment, Evidence-Based Practice
+            </p>
         </div>
         
         {/* Research Interests */}
         <div className="skill-box">
             <h3>Research Interests</h3>
-            <div className="skill-tags-simple">
-                {["Cancer Epidemiology", "Maternal and Child Health", "Public Health", 
-                  "Workplace Issues"].map((interest, idx) => (
-                    <div key={idx} className="skill-tag-simple">{interest}</div>
-                ))}
-            </div>
+            <p style={{color: 'var(--text-color)', lineHeight: '1.6', marginBottom: '15px', fontSize: '1rem'}}>
+                Cancer Epidemiology, Maternal and Child Health, Public Health, Workplace Issues
+            </p>
         </div>
     </div>
 </div>
