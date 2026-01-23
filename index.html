@@ -5949,7 +5949,7 @@ const loadBlogPostsWithFallback = async () => {
                 <ul className="education-list">
                     <li className="education-item">
                         <div className="item-title">Bachelor of Science in Nursing</div>
-                        <div className="item-subtitle">University of Cape Coast (UCC) - Distance Education (NMTC, Tamale Campus)</div>
+                        <div className="item-subtitle">University of Cape Coast (UCC) (Distance; NMTC, Tamale Campus)</div>
                         <div className="item-period">2022 - 2024</div>
                     </li>
                     <li className="education-item">
@@ -7976,367 +7976,406 @@ const categoryDescriptions = {
             <i className="fas fa-chevron-up"></i>
         </div>
         
-{/* Footer - Modern Design with Vertical Tabs */}
+{/* Footer */}
 <footer style={{
     backgroundColor: 'var(--nav-bg)',
-    padding: '60px 40px 40px',
-    marginTop: '80px',
-    borderTop: '1px solid var(--nav-border)'
+    color: 'white',
+    padding: '60px 0 40px',
+    marginTop: '80px'
 }}>
     <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '60px',
-        alignItems: 'flex-start'
+        padding: '0 20px'
     }}>
-        
-        {/* LEFT COLUMN: Logo and Description */}
-        <div style={{ flex: '1', minWidth: '250px' }}>
-            <div style={{
-                fontSize: '1.5rem',
-                fontWeight: '700',
-                color: 'var(--nav-text)',
-                marginBottom: '20px',
-                letterSpacing: '-0.5px'
-            }}>
-                Mudasir Mohammed Ibrahim
-            </div>
-            <p style={{
-                color: 'rgba(255, 255, 255, 0.7)',
-                fontSize: '0.95rem',
-                lineHeight: '1.6',
-                marginBottom: '25px'
-            }}>
-                Registered Nurse and Health Researcher
-            </p>
+        {/* Main Footer Grid */}
+        <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '40px',
+            marginBottom: '40px'
+        }}>
             
-            {/* Social Media Icons - Compact */}
-            <div style={{
-                display: 'flex',
-                gap: '15px',
-                marginTop: '25px'
-            }}>
-                {[
-                    { icon: 'fab fa-orcid', url: 'https://orcid.org/0000-0002-9049-8222', title: 'ORCID' },
-                    { icon: 'fas fa-graduation-cap', url: 'https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en', title: 'Google Scholar' },
-                    { icon: 'fab fa-github', url: 'https://github.com/mudassiribrahim30', title: 'GitHub' },
-                    { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0', title: 'LinkedIn' },
-                    { icon: 'fab fa-youtube', url: 'https://www.youtube.com/@mudasirmohammedibrahim1026', title: 'YouTube' }
-                ].map((social, index) => (
-                    <a key={index}
-                       href={social.url}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       title={social.title}
+            {/* Column 1: Personal Info */}
+            <div>
+                <h3 style={{
+                    fontSize: '18px',
+                    marginBottom: '20px',
+                    color: 'white',
+                    fontWeight: '600',
+                    fontFamily: "'Open Sans', sans-serif"
+                }}>
+                    Mudasir Mohammed Ibrahim
+                </h3>
+                <p style={{
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    fontSize: '0.95rem',
+                    lineHeight: '1.6',
+                    marginBottom: '15px',
+                    fontFamily: "'Open Sans', sans-serif"
+                }}>
+                    Registered Nurse and Health Researcher
+                </p>
+                <div style={{
+                    display: 'flex',
+                    gap: '15px',
+                    marginTop: '20px'
+                }}>
+                    {[
+                        { icon: 'fab fa-orcid', url: 'https://orcid.org/0000-0002-9049-8222', title: 'ORCID' },
+                        { icon: 'fas fa-graduation-cap', url: 'https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en', title: 'Google Scholar' },
+                        { icon: 'fab fa-github', url: 'https://github.com/mudassiribrahim30', title: 'GitHub' },
+                        { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0', title: 'LinkedIn' },
+                        { icon: 'fab fa-youtube', url: 'https://www.youtube.com/@mudasirmohammedibrahim1026', title: 'YouTube' }
+                    ].map((social, index) => (
+                        <a key={index}
+                           href={social.url}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           title={social.title}
+                           style={{
+                               color: 'var(--nav-text)',
+                               fontSize: '1.2rem',
+                               width: '40px',
+                               height: '40px',
+                               display: 'flex',
+                               alignItems: 'center',
+                               justifyContent: 'center',
+                               borderRadius: '50%',
+                               backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                               transition: 'all 0.3s ease',
+                               textDecoration: 'none'
+                           }}
+                           onMouseOver={(e) => {
+                               e.target.style.backgroundColor = 'var(--nav-hover)';
+                               e.target.style.transform = 'translateY(-3px)';
+                           }}
+                           onMouseOut={(e) => {
+                               e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                               e.target.style.transform = 'translateY(0)';
+                           }}>
+                            <i className={social.icon}></i>
+                        </a>
+                    ))}
+                </div>
+            </div>
+
+            {/* Column 2: Navigation */}
+            <div>
+                <h3 style={{
+                    fontSize: '18px',
+                    marginBottom: '20px',
+                    color: 'white',
+                    fontWeight: '600',
+                    fontFamily: "'Open Sans', sans-serif"
+                }}>
+                    Quick Navigation
+                </h3>
+                <ul style={{
+                    listStyle: 'none',
+                    padding: '0',
+                    margin: '0'
+                }}>
+                    {[
+                        { name: 'About Me', section: 'about' },
+                        { name: 'Publications', section: 'publications' },
+                        { name: 'Software', section: 'shiny' },
+                        { name: 'Blog', section: 'blog' },
+                        { name: 'Teaching', section: 'teaching' },
+                        { name: 'Gallery', section: 'gallery' }
+                    ].map((tab, index) => (
+                        <li key={index} style={{ marginBottom: '10px' }}>
+                            <a href="#"
+                               onClick={(e) => {
+                                   e.preventDefault();
+                                   setActiveSection(tab.section);
+                                   window.scrollTo({ top: 0, behavior: 'smooth' });
+                               }}
+                               style={{
+                                   color: activeSection === tab.section ? 'var(--nav-hover)' : '#ccc',
+                                   textDecoration: 'none',
+                                   fontSize: '0.95rem',
+                                   fontWeight: activeSection === tab.section ? '600' : '400',
+                                   transition: 'color 0.3s ease',
+                                   display: 'flex',
+                                   alignItems: 'center',
+                                   gap: '10px',
+                                   fontFamily: "'Open Sans', sans-serif"
+                               }}
+                               onMouseOver={(e) => {
+                                   if (activeSection !== tab.section) {
+                                       e.target.style.color = 'var(--nav-hover)';
+                                   }
+                               }}
+                               onMouseOut={(e) => {
+                                   if (activeSection !== tab.section) {
+                                       e.target.style.color = '#ccc';
+                                   }
+                               }}>
+                                {tab.name}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Column 3: Contact & Links */}
+            <div>
+                <h3 style={{
+                    fontSize: '18px',
+                    marginBottom: '20px',
+                    color: 'white',
+                    fontWeight: '600',
+                    fontFamily: "'Open Sans', sans-serif"
+                }}>
+                    Contact & Links
+                </h3>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '15px'
+                }}>
+                    <a href="#"
+                       onClick={(e) => {
+                           e.preventDefault();
+                           setShowContactForm(true);
+                           setActiveSection('about');
+                           setTimeout(() => {
+                               const formElement = document.getElementById('contact-form');
+                               if (formElement) {
+                                   formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                               }
+                           }, 100);
+                       }}
                        style={{
                            color: 'var(--nav-text)',
-                           fontSize: '1.2rem',
-                           width: '40px',
-                           height: '40px',
+                           textDecoration: 'none',
+                           fontSize: '0.95rem',
+                           padding: '10px 15px',
+                           backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                           borderRadius: '6px',
+                           transition: 'all 0.3s ease',
                            display: 'flex',
                            alignItems: 'center',
-                           justifyContent: 'center',
-                           borderRadius: '50%',
-                           backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                           transition: 'all 0.3s ease',
-                           textDecoration: 'none'
+                           gap: '10px',
+                           fontFamily: "'Open Sans', sans-serif"
                        }}
                        onMouseOver={(e) => {
-                           e.target.style.backgroundColor = 'var(--nav-hover)';
-                           e.target.style.transform = 'translateY(-3px)';
+                           e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                           e.target.style.color = 'var(--nav-hover)';
                        }}
                        onMouseOut={(e) => {
                            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                           e.target.style.transform = 'translateY(0)';
+                           e.target.style.color = 'var(--nav-text)';
                        }}>
-                        <i className={social.icon}></i>
+                        <i className="fas fa-envelope" style={{ fontSize: '0.9rem' }}></i>
+                        Contact Form
                     </a>
-                ))}
-            </div>
-        </div>
-        
-        {/* MIDDLE COLUMN: Vertical Tabs */}
-        <div style={{ flex: '1', minWidth: '200px' }}>
-            <h3 style={{
-                color: 'var(--nav-text)',
-                fontSize: '1.1rem',
-                fontWeight: '600',
-                marginBottom: '25px',
-                textTransform: 'uppercase',
-                letterSpacing: '1px'
-            }}>
-                Quick Navigation
-            </h3>
-            
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px'
-            }}>
-                {[
-                    { name: 'About Me', section: 'about' },
-                    { name: 'Publications', section: 'publications' },
-                    { name: 'Software', section: 'shiny' },
-                    { name: 'Blog', section: 'blog' },
-                    { name: 'Teaching', section: 'teaching' },
-                    { name: 'Gallery', section: 'gallery' },
-                    { name: 'Testimonials', section: 'shiny', scrollTo: 'testimonials' }
-                ].map((tab, index) => (
-                    <a key={index}
-                       href="#"
-                       onClick={(e) => {
-                           e.preventDefault();
-                           setActiveSection(tab.section);
-                           
-                           if (tab.scrollTo === 'testimonials') {
-                               setTimeout(() => {
-                                   const testimonialElement = document.querySelector('.testimonial-button-container');
-                                   if (testimonialElement) {
-                                       testimonialElement.scrollIntoView({ 
-                                           behavior: 'smooth', 
-                                           block: 'start' 
-                                       });
-                                   }
-                               }, 100);
-                           } else {
-                               window.scrollTo({ top: 0, behavior: 'smooth' });
-                           }
-                       }}
+                    
+                    <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF"
+                       target="_blank"
+                       rel="noopener noreferrer"
                        style={{
-                           color: activeSection === tab.section ? 'var(--nav-hover)' : 'var(--nav-text)',
+                           color: 'var(--nav-text)',
                            textDecoration: 'none',
                            fontSize: '0.95rem',
-                           fontWeight: activeSection === tab.section ? '600' : '400',
-                           padding: '10px 0',
-                           borderLeft: activeSection === tab.section ? '3px solid var(--nav-hover)' : '3px solid transparent',
-                           paddingLeft: '15px',
+                           padding: '10px 15px',
+                           backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                           borderRadius: '6px',
                            transition: 'all 0.3s ease',
                            display: 'flex',
                            alignItems: 'center',
-                           gap: '10px'
+                           gap: '10px',
+                           fontFamily: "'Open Sans', sans-serif"
                        }}
                        onMouseOver={(e) => {
-                           if (activeSection !== tab.section) {
-                               e.target.style.color = 'var(--nav-hover)';
-                               e.target.style.paddingLeft = '18px';
-                           }
+                           e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                           e.target.style.color = 'var(--nav-hover)';
                        }}
                        onMouseOut={(e) => {
-                           if (activeSection !== tab.section) {
-                               e.target.style.color = 'var(--nav-text)';
-                               e.target.style.paddingLeft = '15px';
-                           }
+                           e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                           e.target.style.color = 'var(--nav-text)';
                        }}>
-                        {tab.name === 'Testimonials' && <i className="fas fa-star" style={{ fontSize: '0.8rem' }}></i>}
-                        {tab.name === 'Gallery' && <i className="fas fa-images" style={{ fontSize: '0.8rem' }}></i>}
-                        {tab.name === 'Software' && <i className="fas fa-code" style={{ fontSize: '0.8rem' }}></i>}
-                        {tab.name === 'Publications' && <i className="fas fa-file-alt" style={{ fontSize: '0.8rem' }}></i>}
-                        {tab.name === 'Teaching' && <i className="fas fa-chalkboard-teacher" style={{ fontSize: '0.8rem' }}></i>}
-                        {tab.name === 'Blog' && <i className="fas fa-blog" style={{ fontSize: '0.8rem' }}></i>}
-                        {tab.name}
-                    </a>
-                ))}
-            </div>
-        </div>
-        
-{/* RIGHT COLUMN: Contact and Additional Links */}
-<div style={{ flex: '1', minWidth: '250px' }}>
-    <h3 style={{
-        color: 'var(--nav-text)',
-        fontSize: '1.1rem',
-        fontWeight: '600',
-        marginBottom: '25px',
-        textTransform: 'uppercase',
-        letterSpacing: '1px'
-    }}>
-        Contact & Links
-    </h3>
-    
-    <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '15px'
-    }}>
-        <a href="#"
-           onClick={(e) => {
-               e.preventDefault();
-               setShowContactForm(true);
-               setActiveSection('about');
-               setTimeout(() => {
-                   const formElement = document.getElementById('contact-form');
-                   if (formElement) {
-                       formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                   }
-               }, 100);
-           }}
-           style={{
-               color: 'var(--nav-text)',
-               textDecoration: 'none',
-               fontSize: '0.95rem',
-               padding: '12px 20px',
-               backgroundColor: 'rgba(255, 255, 255, 0.1)',
-               borderRadius: '8px',
-               transition: 'all 0.3s ease',
-               display: 'flex',
-               alignItems: 'center',
-               gap: '10px'
-           }}
-           onMouseOver={(e) => {
-               e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-               e.target.style.color = 'var(--nav-hover)';
-           }}
-           onMouseOut={(e) => {
-               e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-               e.target.style.color = 'var(--nav-text)';
-           }}>
-            <i className="fas fa-envelope"></i>
-            Contact Form
-        </a>
-        
-        <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF"
-           target="_blank"
-           rel="noopener noreferrer"
-           style={{
-               color: 'var(--nav-text)',
-               textDecoration: 'none',
-               fontSize: '0.95rem',
-               padding: '12px 20px',
-               backgroundColor: 'rgba(255, 255, 255, 0.1)',
-               borderRadius: '8px',
-               transition: 'all 0.3s ease',
-               display: 'flex',
-               alignItems: 'center',
-               gap: '10px'
-           }}
-           onMouseOver={(e) => {
-               e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-               e.target.style.color = 'var(--nav-hover)';
-           }}
-           onMouseOut={(e) => {
-               e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-               e.target.style.color = 'var(--nav-text)';
-           }}>
-            <i className="fas fa-file-download"></i>
-            Download CV
-        </a>
-        
-        <div style={{
-            padding: '15px',
-            backgroundColor: 'rgba(0, 0, 0, 0.2)',
-            borderRadius: '8px',
-            marginTop: '10px'
-        }}>
-            <div style={{
-                color: 'var(--nav-text)',
-                fontSize: '0.85rem',
-                opacity: 0.8,
-                lineHeight: '1.5'
-            }}>
-                <div style={{ marginBottom: '5px' }}>
-                    <i className="fas fa-map-marker-alt" style={{ marginRight: '8px' }}></i>
-                    <a 
-                        href="https://www.google.com/maps/place/Tamale,+Northern+Region,+Ghana"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                            color: 'var(--nav-text)',
-                            textDecoration: 'none',
-                            transition: 'color 0.3s ease'
-                        }}
-                        onMouseOver={(e) => {
-                            e.target.style.color = 'var(--nav-hover)';
-                            e.target.style.textDecoration = 'underline';
-                        }}
-                        onMouseOut={(e) => {
-                            e.target.style.color = 'var(--nav-text)';
-                            e.target.style.textDecoration = 'none';
-                        }}
-                    >
-                        Tamale, Northern Region, Ghana
+                        <i className="fas fa-file-download" style={{ fontSize: '0.9rem' }}></i>
+                        Download CV
                     </a>
                 </div>
-                <div>
+                
+                <div style={{
+                    padding: '15px',
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    borderRadius: '8px',
+                    marginTop: '20px'
+                }}>
+                    <div style={{
+                        color: 'var(--nav-text)',
+                        fontSize: '0.85rem',
+                        opacity: 0.8,
+                        lineHeight: '1.5',
+                        fontFamily: "'Open Sans', sans-serif"
+                    }}>
+                        <div style={{ marginBottom: '5px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <i className="fas fa-map-marker-alt"></i>
+                            <a 
+                                href="https://www.google.com/maps/place/Tamale,+Northern+Region,+Ghana"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    color: 'var(--nav-text)',
+                                    textDecoration: 'none',
+                                    transition: 'color 0.3s ease'
+                                }}
+                                onMouseOver={(e) => {
+                                    e.target.style.color = 'var(--nav-hover)';
+                                    e.target.style.textDecoration = 'underline';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.target.style.color = 'var(--nav-text)';
+                                    e.target.style.textDecoration = 'none';
+                                }}
+                            >
+                                Tamale, Northern Region, Ghana
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-</div>
-    
-    {/* Bottom Section: Copyright and Back to Top */}
-    <div style={{
-        maxWidth: '1200px',
-        margin: '50px auto 0',
-        paddingTop: '30px',
-        borderTop: '1px solid var(--nav-border)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '20px'
-    }}>
-        {/* Copyright */}
-        <div style={{
-            color: 'rgba(255, 255, 255, 0.7)',
-            fontSize: '0.9rem',
-            lineHeight: '1.5'
-        }}>
-            <div style={{ marginBottom: '5px' }}>
-                Copyright © 2025-{new Date().getFullYear()} Mudasir Mohammed Ibrahim. All Rights Reserved.
-            </div>
-            <div style={{
-                fontSize: '0.8rem',
-                opacity: 0.6,
-                fontStyle: 'italic'
-            }}>
-                <span style={{ textDecoration: 'none' }}>Website UI inspired by</span>
-                <a href="https://profandyfield.com/"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   style={{
-                       color: 'rgba(255, 255, 255, 0.7)',
-                       textDecoration: 'none',
-                       marginLeft: '4px',
-                       transition: 'color 0.2s ease',
-                       fontStyle: 'italic'
-                   }}
-                   onMouseOver={(e) => e.target.style.color = 'var(--nav-hover)'}
-                   onMouseOut={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>
-                    Prof Andy Field
+
+            {/* Column 4: Testimonials & Feedback */}
+            <div>
+                <h3 style={{
+                    fontSize: '18px',
+                    marginBottom: '20px',
+                    color: 'white',
+                    fontWeight: '600',
+                    fontFamily: "'Open Sans', sans-serif"
+                }}>
+                    Share Feedback
+                </h3>
+                <p style={{
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    fontSize: '0.9rem',
+                    lineHeight: '1.6',
+                    marginBottom: '20px',
+                    fontFamily: "'Open Sans', sans-serif"
+                }}>
+                    Used any of my R Shiny apps? I'd love to hear your feedback or suggestions.
+                </p>
+                <a 
+                    href="https://forms.gle/PZJtxtf9E3ZMnBYB9" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        background: 'linear-gradient(135deg, #4CAF50, #2E7D32)',
+                        color: 'white',
+                        padding: '10px 20px',
+                        borderRadius: '25px',
+                        textDecoration: 'none',
+                        fontWeight: '600',
+                        fontSize: '0.9rem',
+                        transition: 'all 0.3s ease',
+                        fontFamily: "'Open Sans', sans-serif"
+                    }}
+                    onMouseOver={(e) => {
+                        e.target.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = '0 4px 12px rgba(76, 175, 80, 0.3)';
+                    }}
+                    onMouseOut={(e) => {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = 'none';
+                    }}>
+                    <i className="fas fa-pen"></i>
+                    Submit Feedback
                 </a>
             </div>
         </div>
-        
-        {/* Back to Top Button */}
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    border: '1px solid var(--nav-border)',
-                    color: 'var(--nav-text)',
-                    padding: '10px 25px',
-                    borderRadius: '25px',
-                    fontSize: '0.9rem',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px'
-                }}
-                onMouseOver={(e) => {
-                    e.target.style.backgroundColor = 'var(--nav-hover)';
-                    e.target.style.borderColor = 'var(--nav-hover)';
-                    e.target.style.transform = 'translateY(-2px)';
-                }}
-                onMouseOut={(e) => {
-                    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                    e.target.style.borderColor = 'var(--nav-border)';
-                    e.target.style.transform = 'translateY(0)';
+
+        {/* Divider */}
+        <div style={{
+            height: '1px',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            margin: '40px 0 30px'
+        }}></div>
+
+        {/* Bottom Section */}
+        <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '20px'
+        }}>
+            {/* Copyright */}
+            <div style={{
+                color: '#fff',
+                fontSize: '0.9rem',
+                fontFamily: "'Open Sans', sans-serif"
+            }}>
+<p style={{
+    marginBottom: '5px',
+    color: '#ffffff'
+}}>
+    Copyright © 2025-{new Date().getFullYear()} Mudasir Mohammed Ibrahim. All Rights Reserved.
+</p>
+                <div style={{
+                    fontSize: '0.8rem',
+                    color: '#888',
+                    fontStyle: 'italic'
                 }}>
-            <i className="fas fa-arrow-up"></i>
-            Back to Top
-        </button>
+                    <span style={{ textDecoration: 'none' }}>Website UI inspired by </span>
+                    <a href="https://profandyfield.com/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style={{
+                           color: '#aaa',
+                           textDecoration: 'none',
+                           marginLeft: '4px',
+                           transition: 'color 0.2s ease'
+                       }}
+                       onMouseOver={(e) => e.target.style.color = 'white'}
+                       onMouseOut={(e) => e.target.style.color = '#aaa'}>
+                        Prof Andy Field
+                    </a>
+                </div>
+            </div>
+
+            {/* Back to Top Button */}
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px'
+            }}>
+                
+                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.1)',
+                            border: '1px solid rgba(255, 255, 255, 0.3)',
+                            color: 'white',
+                            padding: '8px 20px',
+                            borderRadius: '4px',
+                            fontSize: '0.9rem',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px'
+                        }}
+                        onMouseOver={(e) => {
+                            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                            e.target.style.borderColor = 'white';
+                        }}
+                        onMouseOut={(e) => {
+                            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                            e.target.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                        }}>
+                    <i className="fas fa-arrow-up"></i>
+                    Back to Top
+                </button>
+            </div>
+        </div>
     </div>
 </footer>
 
