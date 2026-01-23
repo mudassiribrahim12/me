@@ -5260,6 +5260,7 @@ const fetchAppViews = async () => {
         // Simulated view data - in production, you'd fetch from your API or Shiny App Store
         // This is a mockup showing how it would work
         const mockViews = {
+            "FactorGuard": 0,
             "CalcuStats": 16660,
             "CATrend Analyzer": 7582,
             "ROC Curve Builder": 15996,
@@ -6721,10 +6722,19 @@ const renderTeaching = () => (
 const ShinyAppsComponent = () => {
     const [searchTerm, setSearchTerm] = useState('');
     
-    // All 20 apps data with view counts
+    // All 21 apps data with view counts
     const shinyApps = [
-        {
+               {
             id: 1,
+            name: "FactorGuard",
+            description: "A factor-retention decision tool for EFA",
+            runUrl: "https://mudassiribrahim2026.shinyapps.io/FactorGuard/",
+            codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FactorGuard.R",
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/FactorGuard.png",
+            views: 0
+        },
+        {
+            id: 2,
             name: "CalcuStats",
             description: "Tool for sample size calculation, power analysis, and descriptive statistics",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/CalcuStats/",
@@ -6733,7 +6743,7 @@ const ShinyAppsComponent = () => {
             views: 16660
         },
         {
-            id: 2,
+            id: 3,
             name: "CATrend Analyzer",
             description: "Cochran-Armitage test for trend tool",
             runUrl: "https://newappstesting.shinyapps.io/CATrendAnalyzer/",
@@ -6742,7 +6752,7 @@ const ShinyAppsComponent = () => {
             views: 7582
         },
         {
-            id: 3,
+            id: 4,
             name: "ROC Curve Builder",
             description: "ROC curve analysis and diagnostic test evaluation",
             runUrl: "https://mudassiribrahim30.shinyapps.io/ROC_CURVE/",
@@ -6751,7 +6761,7 @@ const ShinyAppsComponent = () => {
             views: 15996
         },
         {
-            id: 4,
+            id: 5,
             name: "Data2SPSS",
             description: "Convert datasets in CSV, Excel, Rdata, Stata, or SAS format into SPSS (.sav) files",
             runUrl: "https://newappstesting.shinyapps.io/Data2SPSS/",
@@ -6760,7 +6770,7 @@ const ShinyAppsComponent = () => {
             views: 12834
         },
         {
-            id: 5,
+            id: 6,
             name: "MedModr",
             description: "Mediation and moderation analysis tool for research studies",
             runUrl: "https://mudassiribrahim30.shinyapps.io/MedModr/",
@@ -6769,7 +6779,7 @@ const ShinyAppsComponent = () => {
             views: 16042
         },
         {
-            id: 6,
+            id: 7,
             name: "EpiDem Suite",
             description: "Epidemiological data analysis suite for public health research",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/",
@@ -6778,7 +6788,7 @@ const ShinyAppsComponent = () => {
             views: 17080
         },
         {
-            id: 7,
+            id: 8,
             name: "ggPubPlot",
             description: "Publication-ready ggplot2 visualizations with customization",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/ggPubPlot/",
@@ -6787,7 +6797,7 @@ const ShinyAppsComponent = () => {
             views: 14541
         },
         {
-            id: 8,
+            id: 9,
             name: "APA Table Generator",
             description: "Generate APA formatted tables for research papers and publications",
             runUrl: "https://newappstesting.shinyapps.io/APATableGenerator/",
@@ -6796,7 +6806,7 @@ const ShinyAppsComponent = () => {
             views: 3317
         },
         {
-            id: 9,
+            id: 10,
             name: "SysSampler",
             description: "Systematic sampling tool for research studies with custom random start",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/SysSampler/",
@@ -6805,7 +6815,7 @@ const ShinyAppsComponent = () => {
             views: 3594
         },
         {
-            id: 10,
+            id: 11,
             name: "CMH Analyzer",
             description: "Cochran-Mantel-Haenszel analysis tool for stratified data",
             runUrl: "https://newappstesting.shinyapps.io/CMHAnalyzer/",
@@ -6814,7 +6824,7 @@ const ShinyAppsComponent = () => {
             views: 6843
         },
         {
-            id: 11,
+            id: 12,
             name: "TNMTC DataLab",
             description: "Comprehensive data analysis software",
             runUrl: "https://newappstesting.shinyapps.io/NMTCDataLab/",
@@ -6823,7 +6833,7 @@ const ShinyAppsComponent = () => {
             views: 14391
         },
         {
-            id: 12,
+            id: 13,
             name: "PharmaCalc Pro",
             description: "Pharmaceutical calculations for dosage",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/",
@@ -6832,7 +6842,7 @@ const ShinyAppsComponent = () => {
             views: 15481
         },
         {
-            id: 13,
+            id: 14,
             name: "RegEffect Xplorer",
             description: "Explore regression effects visually with interactive plots",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/",
@@ -6841,7 +6851,7 @@ const ShinyAppsComponent = () => {
             views: 15369
         },
         {
-            id: 14,
+            id: 15,
             name: "Data TransformR",
             description: "Data transformation and preprocessing tool for analytics",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/DataTransformR/",
@@ -6850,7 +6860,7 @@ const ShinyAppsComponent = () => {
             views: 16847
         },
         {
-            id: 15,
+            id: 16,
             name: "CleanMyData",
             description: "Data screening and cleaning tool with visualization",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/CleanMyData/",
@@ -6859,7 +6869,7 @@ const ShinyAppsComponent = () => {
             views: 14654
         },
         {
-            id: 16,
+            id: 17,
             name: "KMPlot Genie",
             description: "Kaplan-Meier survival plot generator for clinical studies",
             runUrl: "https://mudassiribrahim30.shinyapps.io/KMPlotGenie/",
@@ -6868,7 +6878,7 @@ const ShinyAppsComponent = () => {
             views: 16863
         },
         {
-            id: 17,
+            id: 18,
             name: "QuickStatsGen",
             description: "Custom Data Generator for Statistical Practice and Education",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/",
@@ -6877,7 +6887,7 @@ const ShinyAppsComponent = () => {
             views: 15091
         },
         {
-            id: 18,
+            id: 19,
             name: "Robust Regressor",
             description: "Robust regression analysis for outlier-resistant modeling",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/Robustregression/",
@@ -6886,7 +6896,7 @@ const ShinyAppsComponent = () => {
             views: 15560
         },
         {
-            id: 19,
+            id: 20,
             name: "TagSelect",
             description: "Participant selection tool for research studies",
             runUrl: "https://mudassiribrahim30.shinyapps.io/Tagselect/",
@@ -6895,7 +6905,7 @@ const ShinyAppsComponent = () => {
             views: 16706
         },
         {
-            id: 20,
+            id: 21,
             name: "FAnalyzr",
             description: "Factor analysis and dimensionality reduction tool",
             runUrl: "https://mudassiribrahim30.shinyapps.io/fanalyzr/",
@@ -6934,7 +6944,7 @@ const ShinyAppsComponent = () => {
             {/* Stats sections - Now includes total views */}
             <div className="apps-stats">
                 <div className="stat-card">
-                    <div className="stat-number">20</div>
+                    <div className="stat-number">21</div>
                     <div className="stat-label">Applications</div>
                 </div>
                 <div className="stat-card">
@@ -7161,7 +7171,7 @@ const ShinyAppsComponent = () => {
                                 <i className="fas fa-chart-line"></i>
                             </div>
                             <div className="total-views-container">
-                                <div className="total-views-label">Total Application Views (All 20 Apps)</div>
+                                <div className="total-views-label">Total Application Views (All 21 Apps)</div>
                                 <div className="total-views-number">{totalViews.toLocaleString()}</div>
                                 <div className="total-views-update">
                                     <i className="fas fa-sync-alt" style={{ marginRight: '5px' }}></i>
