@@ -1499,7 +1499,8 @@ body.dark-mode .profile-social-icon[title="GitHub"]:hover {
         /* Footer Styles - WHITE BACKGROUND */
         .footer {
             width: 100%;
-            background-color: white; /* WHITE background */
+           background-color: #000000 !important; 
+    color: white !important;
             border-top: 1px solid var(--border-color);
             padding: 20px 0;
             margin-top: auto;
@@ -8316,48 +8317,7 @@ const categoryDescriptions = {
                 }}>
                     Registered Nurse and Health Researcher
                 </p>
-                <div style={{
-                    display: 'flex',
-                    gap: '15px',
-                    marginTop: '20px'
-                }}>
-                    {[
-                        { icon: 'fab fa-orcid', url: 'https://orcid.org/0000-0002-9049-8222', title: 'ORCID' },
-                        { icon: 'fas fa-graduation-cap', url: 'https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en', title: 'Google Scholar' },
-                        { icon: 'fab fa-github', url: 'https://github.com/mudassiribrahim30', title: 'GitHub' },
-                        { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0', title: 'LinkedIn' },
-                        { icon: 'fab fa-youtube', url: 'https://www.youtube.com/@mudasirmohammedibrahim1026', title: 'YouTube' }
-                    ].map((social, index) => (
-                        <a key={index}
-                           href={social.url}
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           title={social.title}
-                           style={{
-                               color: 'var(--nav-text)',
-                               fontSize: '1.2rem',
-                               width: '40px',
-                               height: '40px',
-                               display: 'flex',
-                               alignItems: 'center',
-                               justifyContent: 'center',
-                               borderRadius: '50%',
-                               backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                               transition: 'all 0.3s ease',
-                               textDecoration: 'none'
-                           }}
-                           onMouseOver={(e) => {
-                               e.target.style.backgroundColor = 'var(--nav-hover)';
-                               e.target.style.transform = 'translateY(-3px)';
-                           }}
-                           onMouseOut={(e) => {
-                               e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                               e.target.style.transform = 'translateY(0)';
-                           }}>
-                            <i className={social.icon}></i>
-                        </a>
-                    ))}
-                </div>
+                {/* Social icons removed from here - moved to white footer */}
             </div>
 
             {/* Column 2: Navigation */}
@@ -8392,7 +8352,7 @@ const categoryDescriptions = {
                                    window.scrollTo({ top: 0, behavior: 'smooth' });
                                }}
                                style={{
-                                   color: activeSection === tab.section ? 'var(--nav-hover)' : '#ccc',
+                                   color: activeSection === tab.section ? '#4dabf7' : '#ccc',
                                    textDecoration: 'none',
                                    fontSize: '0.95rem',
                                    fontWeight: activeSection === tab.section ? '600' : '400',
@@ -8404,7 +8364,7 @@ const categoryDescriptions = {
                                }}
                                onMouseOver={(e) => {
                                    if (activeSection !== tab.section) {
-                                       e.target.style.color = 'var(--nav-hover)';
+                                       e.target.style.color = '#4dabf7';
                                    }
                                }}
                                onMouseOut={(e) => {
@@ -8419,179 +8379,95 @@ const categoryDescriptions = {
                 </ul>
             </div>
 
-            {/* Column 3: Contact & Links */}
-            <div>
-                <h3 style={{
-                    fontSize: '18px',
-                    marginBottom: '20px',
-                    color: 'white',
-                    fontWeight: '600',
-                    fontFamily: "'Open Sans', sans-serif"
-                }}>
-                    Contact & Links
-                </h3>
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '15px'
-                }}>
-                    <a href="#"
-                       onClick={(e) => {
-                           e.preventDefault();
-                           setShowContactForm(true);
-                           setActiveSection('about');
-                           setTimeout(() => {
-                               const formElement = document.getElementById('contact-form');
-                               if (formElement) {
-                                   formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                               }
-                           }, 100);
-                       }}
-                       style={{
-                           color: 'var(--nav-text)',
-                           textDecoration: 'none',
-                           fontSize: '0.95rem',
-                           padding: '10px 15px',
-                           backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                           borderRadius: '6px',
-                           transition: 'all 0.3s ease',
-                           display: 'flex',
-                           alignItems: 'center',
-                           gap: '10px',
-                           fontFamily: "'Open Sans', sans-serif"
-                       }}
-                       onMouseOver={(e) => {
-                           e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-                           e.target.style.color = 'var(--nav-hover)';
-                       }}
-                       onMouseOut={(e) => {
-                           e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                           e.target.style.color = 'var(--nav-text)';
-                       }}>
-                        <i className="fas fa-envelope" style={{ fontSize: '0.9rem' }}></i>
-                        Contact Form
-                    </a>
-                    
-                    <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       style={{
-                           color: 'var(--nav-text)',
-                           textDecoration: 'none',
-                           fontSize: '0.95rem',
-                           padding: '10px 15px',
-                           backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                           borderRadius: '6px',
-                           transition: 'all 0.3s ease',
-                           display: 'flex',
-                           alignItems: 'center',
-                           gap: '10px',
-                           fontFamily: "'Open Sans', sans-serif"
-                       }}
-                       onMouseOver={(e) => {
-                           e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-                           e.target.style.color = 'var(--nav-hover)';
-                       }}
-                       onMouseOut={(e) => {
-                           e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                           e.target.style.color = 'var(--nav-text)';
-                       }}>
-                        <i className="fas fa-file-download" style={{ fontSize: '0.9rem' }}></i>
-                        Download CV
-                    </a>
-                </div>
-                
-                <div style={{
-                    padding: '15px',
-                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                    borderRadius: '8px',
-                    marginTop: '20px'
-                }}>
-                    <div style={{
-                        color: 'var(--nav-text)',
-                        fontSize: '0.85rem',
-                        opacity: 0.8,
-                        lineHeight: '1.5',
-                        fontFamily: "'Open Sans', sans-serif"
-                    }}>
-                        <div style={{ marginBottom: '5px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <i className="fas fa-map-marker-alt"></i>
-                            <a 
-                                href="https://www.google.com/maps/place/Tamale,+Northern+Region,+Ghana"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                    color: 'var(--nav-text)',
-                                    textDecoration: 'none',
-                                    transition: 'color 0.3s ease'
-                                }}
-                                onMouseOver={(e) => {
-                                    e.target.style.color = 'var(--nav-hover)';
-                                    e.target.style.textDecoration = 'underline';
-                                }}
-                                onMouseOut={(e) => {
-                                    e.target.style.color = 'var(--nav-text)';
-                                    e.target.style.textDecoration = 'none';
-                                }}
-                            >
-                                Tamale, Northern Region, Ghana
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Column 4: Testimonials & Feedback */}
-            <div>
-                <h3 style={{
-                    fontSize: '18px',
-                    marginBottom: '20px',
-                    color: 'white',
-                    fontWeight: '600',
-                    fontFamily: "'Open Sans', sans-serif"
-                }}>
-                    Share Feedback
-                </h3>
-                <p style={{
-                    color: 'rgba(255, 255, 255, 0.7)',
-                    fontSize: '0.9rem',
-                    lineHeight: '1.6',
-                    marginBottom: '20px',
-                    fontFamily: "'Open Sans', sans-serif"
-                }}>
-                    Used any of my R Shiny apps? I'd love to hear your feedback or suggestions.
-                </p>
-                <a 
-                    href="https://forms.gle/PZJtxtf9E3ZMnBYB9" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        background: 'linear-gradient(135deg, #4CAF50, #2E7D32)',
-                        color: 'white',
-                        padding: '10px 20px',
-                        borderRadius: '25px',
-                        textDecoration: 'none',
-                        fontWeight: '600',
-                        fontSize: '0.9rem',
-                        transition: 'all 0.3s ease',
-                        fontFamily: "'Open Sans', sans-serif"
-                    }}
-                    onMouseOver={(e) => {
-                        e.target.style.transform = 'translateY(-2px)';
-                        e.target.style.boxShadow = '0 4px 12px rgba(76, 175, 80, 0.3)';
-                    }}
-                    onMouseOut={(e) => {
-                        e.target.style.transform = 'translateY(0)';
-                        e.target.style.boxShadow = 'none';
-                    }}>
-                    <i className="fas fa-pen"></i>
-                    Submit Feedback
-                </a>
-            </div>
-        </div>
+   {/* Column 3: Feedback */}
+<div>
+    <h3 style={{
+        fontSize: '18px',
+        marginBottom: '20px',
+        color: 'white',
+        fontWeight: '600',
+        fontFamily: "'Open Sans', sans-serif"
+    }}>
+        Share Feedback
+    </h3>
+    <p style={{
+        color: 'rgba(255, 255, 255, 0.7)',
+        fontSize: '0.9rem',
+        lineHeight: '1.6',
+        marginBottom: '20px',
+        fontFamily: "'Open Sans', sans-serif"
+    }}>
+        Used any of my R Shiny apps? I'd love to hear your feedback or suggestions.
+    </p>
+    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+        <a 
+            href="https://forms.gle/PZJtxtf9E3ZMnBYB9" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'linear-gradient(135deg, #4CAF50, #2E7D32)',
+                color: 'white',
+                padding: '10px 20px',
+                borderRadius: '25px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '0.9rem',
+                transition: 'all 0.3s ease',
+                fontFamily: "'Open Sans', sans-serif"
+            }}
+            onMouseOver={(e) => {
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 4px 12px rgba(76, 175, 80, 0.3)';
+            }}
+            onMouseOut={(e) => {
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = 'none';
+            }}>
+            <i className="fas fa-pen"></i>
+            Submit Feedback
+        </a>
+        
+        {/* NEW: Location Link */}
+        <a 
+            href="https://www.google.com/maps/place/Tamale,+Northern+Region,+Ghana"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                padding: '10px 20px',
+                borderRadius: '25px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '0.9rem',
+                transition: 'all 0.3s ease',
+                fontFamily: "'Open Sans', sans-serif",
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+            }}
+            onMouseOver={(e) => {
+                e.target.style.background = 'rgba(255, 255, 255, 0.15)';
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 4px 12px rgba(255, 255, 255, 0.1)';
+                e.target.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            }}
+            onMouseOut={(e) => {
+                e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = 'none';
+                e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            }}>
+            <i className="fas fa-map-marker-alt"></i>
+            View My Location
+        </a>
+    </div>
+</div>
+</div>
 
         {/* Divider */}
         <div style={{
@@ -8608,24 +8484,33 @@ const categoryDescriptions = {
             flexWrap: 'wrap',
             gap: '20px'
         }}>
-            {/* Copyright */}
-            <div style={{
-                color: '#fff',
-                fontSize: '0.9rem',
-                fontFamily: "'Open Sans', sans-serif"
-            }}>
+        
+        {/* Copyright */}
+<div style={{
+    color: '#ffffff !important',  // Force white color
+    fontSize: '0.9rem',
+    fontFamily: "'Open Sans', sans-serif",
+    textAlign: 'left',  // Explicitly set alignment
+    padding: '10px 0',  // Add some padding
+    opacity: '1 !important',  // Ensure full opacity
+    visibility: 'visible !important'  // Ensure visibility
+}}>
 <p style={{
     marginBottom: '5px',
-    color: '#ffffff'
+    color: '#ffffff',
+    opacity: '1',
+    fontWeight: '500',
+    fontSize: '0.9rem'
 }}>
     Copyright © 2025-{new Date().getFullYear()} Mudasir Mohammed Ibrahim. All Rights Reserved.
 </p>
-                <div style={{
-                    fontSize: '0.8rem',
-                    color: '#888',
-                    fontStyle: 'italic'
-                }}>
-                    <span style={{ textDecoration: 'none' }}>Website UI inspired by </span>
+    <div style={{
+        fontSize: '0.8rem',
+        color: 'rgba(255, 255, 255, 0.85) !important',  // Brighter white
+        fontStyle: 'italic',
+        opacity: '1'
+    }}>
+  <span style={{ textDecoration: 'none' }}>Website UI inspired by </span>
                     <a href="https://profandyfield.com/"
                        target="_blank"
                        rel="noopener noreferrer"
@@ -8639,16 +8524,11 @@ const categoryDescriptions = {
                        onMouseOut={(e) => e.target.style.color = '#aaa'}>
                         Prof Andy Field
                     </a>
-                </div>
-            </div>
+    </div>
+</div>
 
             {/* Back to Top Button */}
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '20px'
-            }}>
-                
+            <div>
                 <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         style={{
                             background: 'rgba(255, 255, 255, 0.1)',
@@ -8678,6 +8558,219 @@ const categoryDescriptions = {
         </div>
     </div>
 </footer>
+
+{/* NEW: White Footer Section for Social Media & Contact Links */}
+<div style={{
+    backgroundColor: '#ffffff',
+    color: '#333333',
+    padding: '30px 0',
+    borderTop: '1px solid #e0e0e0'
+}}>
+    <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 20px'
+    }}>
+        <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '30px'
+        }}>
+            
+            {/* Left: Social Media Icons */}
+            <div>
+                <h4 style={{
+                    fontSize: '16px',
+                    marginBottom: '15px',
+                    color: '#333333',
+                    fontWeight: '600',
+                    fontFamily: "'Open Sans', sans-serif"
+                }}>
+                    <i className="fas fa-share-alt" style={{ marginRight: '10px', color: '#666' }}></i>
+                    Connect With Me
+                </h4>
+                <div style={{
+                    display: 'flex',
+                    gap: '15px',
+                    flexWrap: 'wrap'
+                }}>
+                    {[
+                        { icon: 'fab fa-orcid', url: 'https://orcid.org/0000-0002-9049-8222', title: 'ORCID', color: '#a6ce39' },
+                        { icon: 'fas fa-graduation-cap', url: 'https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en', title: 'Google Scholar', color: '#4285f4' },
+                        { icon: 'fab fa-github', url: 'https://github.com/mudassiribrahim30', title: 'GitHub', color: '#333333' },
+                        { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0', title: 'LinkedIn', color: '#0077b5' },
+                        { icon: 'fab fa-youtube', url: 'https://www.youtube.com/@mudasirmohammedibrahim1026', title: 'YouTube', color: '#ff0000' }
+                    ].map((social, index) => (
+                        <a key={index}
+                           href={social.url}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           title={social.title}
+                           style={{
+                               color: social.color,
+                               fontSize: '1.3rem',
+                               width: '45px',
+                               height: '45px',
+                               display: 'flex',
+                               alignItems: 'center',
+                               justifyContent: 'center',
+                               borderRadius: '50%',
+                               backgroundColor: '#f8f9fa',
+                               transition: 'all 0.3s ease',
+                               textDecoration: 'none',
+                               border: '2px solid #f0f0f0'
+                           }}
+                           onMouseOver={(e) => {
+                               e.target.style.backgroundColor = social.color;
+                               e.target.style.color = '#ffffff';
+                               e.target.style.transform = 'translateY(-3px)';
+                               e.target.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                               e.target.style.borderColor = social.color;
+                           }}
+                           onMouseOut={(e) => {
+                               e.target.style.backgroundColor = '#f8f9fa';
+                               e.target.style.color = social.color;
+                               e.target.style.transform = 'translateY(0)';
+                               e.target.style.boxShadow = 'none';
+                               e.target.style.borderColor = '#f0f0f0';
+                           }}>
+                            <i className={social.icon}></i>
+                        </a>
+                    ))}
+                </div>
+            </div>
+
+            {/* Right: Contact & Links */}
+            <div>
+                <h4 style={{
+                    fontSize: '16px',
+                    marginBottom: '15px',
+                    color: '#333333',
+                    fontWeight: '600',
+                    fontFamily: "'Open Sans', sans-serif"
+                }}>
+                    <i className="fas fa-link" style={{ marginRight: '10px', color: '#666' }}></i>
+                    Quick Links
+                </h4>
+                <div style={{
+                    display: 'flex',
+                    gap: '15px',
+                    flexWrap: 'wrap'
+                }}>
+                    <a href="#"
+                       onClick={(e) => {
+                           e.preventDefault();
+                           setShowContactForm(true);
+                           setActiveSection('about');
+                           setTimeout(() => {
+                               const formElement = document.getElementById('contact-form');
+                               if (formElement) {
+                                   formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                               }
+                           }, 100);
+                       }}
+                       style={{
+                           color: '#333333',
+                           textDecoration: 'none',
+                           fontSize: '0.9rem',
+                           padding: '8px 16px',
+                           backgroundColor: '#f8f9fa',
+                           borderRadius: '25px',
+                           transition: 'all 0.3s ease',
+                           display: 'flex',
+                           alignItems: 'center',
+                           gap: '8px',
+                           fontFamily: "'Open Sans', sans-serif",
+                           border: '1px solid #e0e0e0'
+                       }}
+                       onMouseOver={(e) => {
+                           e.target.style.backgroundColor = '#e9ecef';
+                           e.target.style.color = '#000000';
+                           e.target.style.borderColor = '#3498db';
+                           e.target.style.transform = 'translateY(-2px)';
+                       }}
+                       onMouseOut={(e) => {
+                           e.target.style.backgroundColor = '#f8f9fa';
+                           e.target.style.color = '#333333';
+                           e.target.style.borderColor = '#e0e0e0';
+                           e.target.style.transform = 'translateY(0)';
+                       }}>
+                        <i className="fas fa-envelope" style={{ fontSize: '0.8rem' }}></i>
+                        Contact Form
+                    </a>
+                    
+                    <a href="https://1drv.ms/f/c/3ce355b70d76f4f7/EvOg3kpoGi1JlFokbzBzEIgBDYXASGIRoLVHrXceFZDrJg?e=tF8arF"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style={{
+                           color: '#333333',
+                           textDecoration: 'none',
+                           fontSize: '0.9rem',
+                           padding: '8px 16px',
+                           backgroundColor: '#f8f9fa',
+                           borderRadius: '25px',
+                           transition: 'all 0.3s ease',
+                           display: 'flex',
+                           alignItems: 'center',
+                           gap: '8px',
+                           fontFamily: "'Open Sans', sans-serif",
+                           border: '1px solid #e0e0e0'
+                       }}
+                       onMouseOver={(e) => {
+                           e.target.style.backgroundColor = '#e9ecef';
+                           e.target.style.color = '#000000';
+                           e.target.style.borderColor = '#3498db';
+                           e.target.style.transform = 'translateY(-2px)';
+                       }}
+                       onMouseOut={(e) => {
+                           e.target.style.backgroundColor = '#f8f9fa';
+                           e.target.style.color = '#333333';
+                           e.target.style.borderColor = '#e0e0e0';
+                           e.target.style.transform = 'translateY(0)';
+                       }}>
+                        <i className="fas fa-file-download" style={{ fontSize: '0.8rem' }}></i>
+                        Download CV
+                    </a>
+                    
+                    <a href="https://buymeacoffee.com/mudasiribrahim30"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style={{
+                           color: '#333333',
+                           textDecoration: 'none',
+                           fontSize: '0.9rem',
+                           padding: '8px 16px',
+                           backgroundColor: '#f8f9fa',
+                           borderRadius: '25px',
+                           transition: 'all 0.3s ease',
+                           display: 'flex',
+                           alignItems: 'center',
+                           gap: '8px',
+                           fontFamily: "'Open Sans', sans-serif",
+                           border: '1px solid #e0e0e0'
+                       }}
+                       onMouseOver={(e) => {
+                           e.target.style.backgroundColor = '#e9ecef';
+                           e.target.style.color = '#000000';
+                           e.target.style.borderColor = '#ff6b35';
+                           e.target.style.transform = 'translateY(-2px)';
+                       }}
+                       onMouseOut={(e) => {
+                           e.target.style.backgroundColor = '#f8f9fa';
+                           e.target.style.color = '#333333';
+                           e.target.style.borderColor = '#e0e0e0';
+                           e.target.style.transform = 'translateY(0)';
+                       }}>
+                        <i className="fas fa-coffee" style={{ fontSize: '0.8rem' }}></i>
+                        Donate
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 
