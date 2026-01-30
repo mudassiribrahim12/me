@@ -6089,13 +6089,12 @@ const loadBlogPostsWithFallback = async () => {
             fontWeight: 400,
             fontStyle: 'italic',
             fontFamily: "'Open Sans', sans-serif",
-            marginBottom: '25px'
+            marginBottom: '10px'
         }}>
             Mohammed Mudasir Ibrahim
         </div>
-    </div>
-
-    {/* Contact info section - rest of your code continues here */}
+        
+            {/* Contact info section */}
     <div className="contact-info">
         {/* Rest of your contact info code remains the same */}
         <div className="contact-item">
@@ -6119,6 +6118,79 @@ const loadBlogPostsWithFallback = async () => {
     </div>
 </div>
 </div>
+        
+        {/* Contact Button - Professional Style */}
+        <div style={{
+            marginTop: '25px',
+            marginBottom: '30px',
+            padding: '15px 20px',
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '8px',
+            maxWidth: '400px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+        }}>
+            <p style={{
+                fontSize: '0.9rem',
+                color: 'var(--text-color)',
+                marginBottom: '15px',
+                textAlign: 'center',
+                lineHeight: '1.5'
+            }}>
+                For any research collaboration, job opportunity, or consultation:
+            </p>
+            
+            <button 
+                onClick={() => {
+                    setShowContactForm(true);
+                    // If not already on About page, switch to it
+                    if (activeSection !== 'about') {
+                        setActiveSection('about');
+                    }
+                    // Scroll to form after a short delay
+                    setTimeout(() => {
+                        const formElement = document.getElementById('contact-form');
+                        if (formElement) {
+                            formElement.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }
+                    }, 100);
+                }}
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                    backgroundColor: '#3498db',
+                    color: 'white',
+                    padding: '10px 25px',
+                    border: 'none',
+                    borderRadius: '25px',
+                    fontSize: '0.95rem',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    width: '100%',
+                    margin: '0 auto'
+                }}
+                onMouseOver={(e) => {
+                    e.target.style.backgroundColor = '#2980b9';
+                    e.target.style.transform = 'translateY(-2px)';
+                }}
+                onMouseOut={(e) => {
+                    e.target.style.backgroundColor = '#3498db';
+                    e.target.style.transform = 'translateY(0)';
+                }}
+            >
+                <i className="fas fa-envelope" style={{ fontSize: '0.9rem' }}></i>
+                Contact Me
+            </button>
+        </div>
+    </div>
+
   
             <div className="bio-section">
                 <div className="bio-text">
