@@ -8413,14 +8413,14 @@ const categoryDescriptions = {
     <div className="header-container">
         {/* Logo container with theme toggle */}
         <div className="logo-container">
-            <a href="#" className="logo" onClick={(e) => { 
-                e.preventDefault(); 
-                setActiveSection('about'); 
-                setIsMobileMenuOpen(false); 
-                scrollToTop();
-            }}>
-                Mudasir Mohammed Ibrahim
-            </a>
+<a href="#" className="logo" onClick={(e) => { 
+    e.preventDefault(); 
+    setActiveSection('about'); 
+    setIsMobileMenuOpen(false); 
+    scrollToTop();
+}}>
+    {window.innerWidth <= 1024 ? "Mudasir M. Ibrahim" : "Mudasir Mohammed Ibrahim"}
+</a>
             
 {/* Mobile theme toggle - visible on tablets and phones */}
 <button 
