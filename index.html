@@ -3029,7 +3029,33 @@ body.dark-mode .nav-item a.active::before {
     }
 }
 
-/* Footer design attribution - optional additional styling */
+/* Make Location button match Contact Me button */
+a[href*="google.com/maps"] {
+    background-color: #3498db !important;
+    color: white !important;
+    border: none !important;
+}
+
+a[href*="google.com/maps"]:hover {
+    background-color: #2980b9 !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Make Back to Top button match Contact Me button */
+footer button[onclick*="scrollTo"] {
+    background-color: #3498db !important;
+    border: none !important;
+    color: white !important;
+}
+
+footer button[onclick*="scrollTo"]:hover {
+    background-color: #2980b9 !important;
+    border: none !important;
+    color: white !important;
+}
+
+/* Footer design attribution */
 .design-attribution a {
     font-weight: 500;
 }
@@ -5639,26 +5665,7 @@ body.dark-mode .certificate-link:hover {
     }
 }
 
-/* Back to Top Button */
-.back-to-top {
-    position: fixed;
-    bottom: -60px; /* Hidden by default */
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--nav-bg);
-    color: var(--nav-text);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 999;
-    transition: all 0.3s ease;
-    border: 2px solid var(--nav-border);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+
 
 .back-to-top.visible {
     bottom: 30px; /* Visible position */
@@ -8672,7 +8679,6 @@ const categoryDescriptions = {
                 }}>
                     Registered Nurse and Health Researcher
                 </p>
-                {/* Social icons removed from here - moved to white footer */}
             </div>
 
             {/* Column 2: Navigation */}
@@ -8877,7 +8883,7 @@ const categoryDescriptions = {
                        }}
                        onMouseOver={(e) => e.target.style.color = 'white'}
                        onMouseOut={(e) => e.target.style.color = '#aaa'}>
-                        Prof Andy Field
+                        Prof Andy Field CC BY-SA 4.0
                     </a>
     </div>
 </div>
@@ -8934,7 +8940,7 @@ const categoryDescriptions = {
             gap: '30px'
         }}>
             
-            {/* Left: Social Media Icons */}
+            {/* Left: Social Media Icons - UPDATED WITH REQUESTED ICONS */}
             <div>
                 <h4 style={{
                     fontSize: '16px',
@@ -8952,11 +8958,11 @@ const categoryDescriptions = {
                     flexWrap: 'wrap'
                 }}>
                     {[
-                        { icon: 'fab fa-orcid', url: 'https://orcid.org/0000-0002-9049-8222', title: 'ORCID', color: '#a6ce39' },
-                        { icon: 'fas fa-graduation-cap', url: 'https://scholar.google.com/citations?user=xEFzAvgAAAAJ&hl=en', title: 'Google Scholar', color: '#4285f4' },
-                        { icon: 'fab fa-github', url: 'https://github.com/mudassiribrahim30', title: 'GitHub', color: '#333333' },
                         { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/mudasir-mohammed-ibrahim-16b5141b0', title: 'LinkedIn', color: '#0077b5' },
-                        { icon: 'fab fa-youtube', url: 'https://www.youtube.com/@mudasirmohammedibrahim1026', title: 'YouTube', color: '#ff0000' }
+                        { icon: 'fab fa-instagram', url: 'https://www.instagram.com/mudassiribrahim81', title: 'Instagram', color: '#E4405F' },
+                        { icon: 'fab fa-facebook', url: 'https://www.facebook.com/mudassiribrahim81', title: 'Facebook', color: '#1877F2' },
+                        { icon: 'fab fa-whatsapp', url: 'https://api.whatsapp.com/send?phone=233549343058', title: 'WhatsApp', color: '#25D366' },
+{ icon: 'fab fa-twitter', url: 'https://x.com/WhizMuda', title: 'Twitter (X)', color: '#000000' }
                     ].map((social, index) => (
                         <a key={index}
                            href={social.url}
