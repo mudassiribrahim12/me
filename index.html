@@ -281,8 +281,8 @@ body.dark-mode .slide-toggle.active {
 
 /* ========== MOBILE/TABLET THEME TOGGLE ========== */
 .mobile-theme-toggle {
-    width: 40px !important;
-    height: 20px !important;
+    width: 32px !important; /* Reduced from 40px */
+    height: 18px !important; /* Reduced from 20px */
     background: none !important;
     border: none !important;
     cursor: pointer !important;
@@ -290,12 +290,100 @@ body.dark-mode .slide-toggle.active {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 5px !important;
+    margin: 0 3px !important; /* Reduced from 5px */
     padding: 0 !important;
-    border-radius: 20px !important;
+    border-radius: 18px !important;
     overflow: visible !important;
     flex-shrink: 0 !important;
-    z-index: 1003 !important; /* Changed from 1002 to 1003 */
+    z-index: 1003 !important;
+}
+
+/* Create the slide toggle track */
+.mobile-theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    border-radius: 18px;
+    transition: background 0.3s;
+    z-index: 1;
+}
+
+/* Create the slide toggle knob - smaller */
+.mobile-theme-toggle::after {
+    content: '';
+    position: absolute;
+    width: 14px; /* Reduced from 16px */
+    height: 14px; /* Reduced from 16px */
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+/* Active state */
+.mobile-theme-toggle.active::before {
+    background: #4CAF50;
+}
+
+.mobile-theme-toggle.active::after {
+    transform: translateX(14px); /* Adjusted for smaller width */
+}
+
+/* Dark mode adjustments */
+body.dark-mode .mobile-theme-toggle::before {
+    background: #666;
+}
+
+body.dark-mode .mobile-theme-toggle.active::before {
+    background: #4CAF50;
+}
+
+/* For tablets and phones (below 1025px) */
+@media (max-width: 1024px) {
+    /* Mobile theme toggle button - using slide toggle style */
+    .mobile-theme-toggle {
+        width: 32px !important; /* Reduced from 40px */
+        height: 18px !important; /* Reduced from 20px */
+        margin: 0 5px !important; /* Reduced from 8px */
+    }
+    
+    /* Adjust logo container spacing */
+    .logo-container {
+        gap: 8px; /* Reduced from 10px */
+    }
+    
+    /* Make logo font slightly larger to fill the extra space */
+    .logo {
+        font-size: 1.15rem !important; /* Increased from 1.1rem */
+    }
+}
+
+/* For very small phones */
+@media (max-width: 480px) {
+    .mobile-theme-toggle {
+        margin: 0 3px !important; /* Reduced from 5px */
+    }
+    
+    .logo {
+        font-size: 1.05rem !important; /* Increased from 1rem */
+        max-width: calc(100% - 50px); /* Allow more space for logo */
+    }
+}
+
+/* For larger tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .mobile-theme-toggle {
+        margin: 0 8px !important; /* Reduced from 10px */
+    }
+    
+    .logo {
+        font-size: 1.25rem !important; /* Increased from 1.2rem */
+    }
 }
 
 /* Backdrop when mobile menu is open */
