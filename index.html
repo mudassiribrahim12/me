@@ -142,6 +142,27 @@
     </script>
     
 <meta name="google-site-verification" content="PGq_oDNzKGPvdcDK-DzNc2VYrCckkJxWLyiqq7OdHq0"/>
+
+<script>
+  // Load Tally script
+  (function() {
+    var script = document.createElement('script');
+    script.src = 'https://tally.so/widgets/embed.js';
+    script.defer = true;
+    script.onload = function() {
+      console.log('Tally script loaded successfully');
+      
+      // Initialize Tally forms when document is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.Tally) {
+          console.log('Tally is ready');
+        }
+      });
+    };
+    document.head.appendChild(script);
+  })();
+</script>
+
     
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -1456,6 +1477,178 @@ body.dark-mode .profile-social-icon[title="GitHub"]:hover {
 .profile-social-icon:hover {
     border-width: 1px;
     border-style: solid;
+}
+
+/* ========== FLOATING TALLY FORM BUTTON ========== */
+.tally-floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #FF6B6B, #FF5252);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+    z-index: 10000;
+    transition: all 0.3s ease;
+    border: none;
+    animation: slideInFromBottom 0.5s ease-out 0.5s both;
+}
+
+.tally-floating-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(255, 107, 107, 0.6);
+}
+
+.tally-floating-button.pulse {
+    animation: pulseAnimation 1.5s ease-in-out infinite;
+}
+
+.tally-floating-button.hidden {
+    transform: translateY(100px) scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tally-floating-button .notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    animation: badgePulse 2s infinite;
+}
+
+.tally-floating-tooltip {
+    position: absolute;
+    right: 70px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.tally-floating-button:hover .tally-floating-tooltip {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseAnimation {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(255, 107, 107, 0.7);
+    }
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Auto-popup timer indicator */
+.tally-floating-button::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #4CAF50;
+    animation: spin 15s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Close button for auto-popup */
+.tally-close-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 25px;
+    height: 25px;
+    background: #333;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+    z-index: 10001;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tally-floating-button:hover .tally-close-btn {
+    opacity: 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .tally-floating-button {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tally-floating-button {
+        bottom: 15px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
 }
 
 /* ========== TEACHING PORTFOLIO SECTION ========== */
@@ -5725,6 +5918,138 @@ body.dark-mode .certificate-link:hover {
             const [filteredPosts, setFilteredPosts] = useState([]);
             const [activeDropdown, setActiveDropdown] = useState(null);
             
+            const FloatingTallyButton = () => {
+    const [showButton, setShowButton] = useState(true);
+    const [showTooltip, setShowTooltip] = useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false);
+    const [showAutoPopup, setShowAutoPopup] = useState(false);
+    const [autoPopupTimer, setAutoPopupTimer] = useState(15);
+    const timerRef = useRef(null);
+
+    // Function to open Tally form
+    const openTallyForm = () => {
+        if (window.Tally) {
+            window.Tally.openPopup('lbrlWB', {
+                layout: 'modal',
+                width: 700,
+                emoji: {
+                    text: "👋",
+                    animation: "wave"
+                },
+                autoClose: 5000,
+                onOpen: () => {
+                    console.log('Tally form opened from floating button');
+                    setHasInteracted(true);
+                    // Stop auto-popup if user manually opened
+                    if (timerRef.current) {
+                        clearInterval(timerRef.current);
+                    }
+                },
+                onSubmit: (payload) => {
+                    console.log('Form submitted:', payload);
+                    setShowButton(false); // Hide button after submission
+                    setTimeout(() => setShowButton(true), 30000); // Show again after 30 seconds
+                }
+            });
+        }
+    };
+
+    // Auto-popup after 15 seconds
+    useEffect(() => {
+        const startAutoPopupTimer = () => {
+            let secondsLeft = 15;
+            
+            timerRef.current = setInterval(() => {
+                secondsLeft -= 1;
+                setAutoPopupTimer(secondsLeft);
+                
+                if (secondsLeft <= 0) {
+                    clearInterval(timerRef.current);
+                    if (!hasInteracted) {
+                        setShowAutoPopup(true);
+                        openTallyForm();
+                    }
+                }
+            }, 1000);
+        };
+
+        // Start timer after 2 seconds of page load
+        const initialTimer = setTimeout(() => {
+            startAutoPopupTimer();
+        }, 2000);
+
+        return () => {
+            clearTimeout(initialTimer);
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+            }
+        };
+    }, [hasInteracted]);
+
+    // Manual close function
+    const closeAutoPopup = (e) => {
+        e.stopPropagation();
+        setShowAutoPopup(false);
+        setHasInteracted(true);
+        if (timerRef.current) {
+            clearInterval(timerRef.current);
+        }
+    };
+
+    // Handle button click
+    const handleButtonClick = () => {
+        openTallyForm();
+        setHasInteracted(true);
+        if (timerRef.current) {
+            clearInterval(timerRef.current);
+        }
+    };
+
+    if (!showButton) return null;
+
+    return (
+        <button 
+            className={`tally-floating-button ${showAutoPopup ? 'pulse' : ''}`}
+            onClick={handleButtonClick}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            title="Quick Feedback Form"
+            aria-label="Open feedback form"
+        >
+            {/* Notification badge showing countdown */}
+            {showAutoPopup && !hasInteracted && (
+                <div className="notification-badge">
+                    {autoPopupTimer}
+                </div>
+            )}
+            
+            {/* Close button for auto-popup */}
+            {showAutoPopup && !hasInteracted && (
+                <div 
+                    className="tally-close-btn"
+                    onClick={closeAutoPopup}
+                    title="Close auto-popup"
+                >
+                    ×
+                </div>
+            )}
+            
+            {/* Tooltip */}
+            {showTooltip && (
+                <div className="tally-floating-tooltip">
+                    {showAutoPopup ? `Auto-opens in ${autoPopupTimer}s` : 'Quick Feedback Form'}
+                    <div style={{ fontSize: '0.8rem', opacity: 0.8, marginTop: '5px' }}>
+                        Click to open now
+                    </div>
+                </div>
+            )}
+            
+            {/* Icon */}
+            <i className="fas fa-comment-alt"></i>
+        </button>
+    );
+};
+            
             // view counts
     const [appViews, setAppViews] = useState({});
     const [totalViews, setTotalViews] = useState(0);
@@ -5763,27 +6088,27 @@ const fetchAppViews = async () => {
         // Simulated view data - in production, you'd fetch from your API or Shiny App Store
         // This is a mockup showing how it would work
         const mockViews = {
-            "FactorGuard": 0,
-            "CalcuStats": 16660,
-            "CATrend Analyzer": 7582,
-            "ROC Curve Builder": 15996,
-            "Data2SPSS": 12834,
-            "MedModr": 16042,
-            "EpiDem Suite": 17080,
-            "ggPubPlot": 14541,
-            "APA Table Generator": 3317,
-            "SysSampler": 3594,
-            "CMH Analyzer": 6843,
-            "TNMTC DataLab": 14391,
-            "PharmaCalc Pro": 15481,
-            "RegEffect Xplorer": 15369,
-            "Data TransformR": 16847,
-            "CleanMyData": 14654,
-            "KMPlot Genie": 16863,
-            "QuickStatsGen": 15091,
-            "Robust Regressor": 15560,
-            "TagSelect": 16706,
-            "FAnalyzr": 16867
+            "FactorGuard": 16,
+            "CalcuStats": 16677,
+            "CATrend Analyzer": 7598,
+            "ROC Curve Builder": 16010,
+            "Data2SPSS": 12849,
+            "MedModr": 16068,
+            "EpiDem Suite": 17089,
+            "ggPubPlot": 14552,
+            "APA Table Generator": 3329,
+            "SysSampler": 3609,
+            "CMH Analyzer": 6853,
+            "TNMTC DataLab": 14408,
+            "PharmaCalc Pro": 15510,
+            "RegEffect Xplorer": 15381,
+            "Data TransformR": 16859,
+            "CleanMyData": 14660,
+            "KMPlot Genie": 16874,
+            "QuickStatsGen": 15106,
+            "Robust Regressor": 15586,
+            "TagSelect": 16725,
+            "FAnalyzr": 16885
         };
         
         // Calculate total views
@@ -5807,13 +6132,6 @@ const fetchAppViews = async () => {
         setLoadingViews(false);
     }
 };
-
-// Fetch views when component mounts or when activeSection changes to shiny
-useEffect(() => {
-    if (activeSection === 'shiny') {
-        fetchAppViews();
-    }
-}, [activeSection]);
 
 // Add this useEffect for header scroll behavior
 useEffect(() => {
@@ -6899,6 +7217,7 @@ const loadBlogPostsWithFallback = async () => {
     </div>
 );
 
+
         const PublicationsComponent = () => {
     const [selectedYear, setSelectedYear] = useState(null);
     
@@ -7423,17 +7742,68 @@ const renderTeaching = () => (
 
 const ShinyAppsComponent = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [appViews, setAppViews] = useState({});
+    const [loadingViews, setLoadingViews] = useState(false);
+    const [totalViews, setTotalViews] = useState(0);
     
-    // All 21 apps data with view counts
+    // Fetch app views when component mounts
+    useEffect(() => {
+        const fetchAppViews = async () => {
+            try {
+                setLoadingViews(true);
+                
+                // Use your mockViews data
+                const mockViews = {
+                    "FactorGuard": 16,
+                    "CalcuStats": 16677,
+                    "CATrend Analyzer": 7598,
+                    "ROC Curve Builder": 16010,
+                    "Data2SPSS": 12849,
+                    "MedModr": 16068,
+                    "EpiDem Suite": 17089,
+                    "ggPubPlot": 14552,
+                    "APA Table Generator": 3329,
+                    "SysSampler": 3609,
+                    "CMH Analyzer": 6853,
+                    "TNMTC DataLab": 14408,
+                    "PharmaCalc Pro": 15510,
+                    "RegEffect Xplorer": 15381,
+                    "Data TransformR": 16859,
+                    "CleanMyData": 14660,
+                    "KMPlot Genie": 16874,
+                    "QuickStatsGen": 15106,
+                    "Robust Regressor": 15586,
+                    "TagSelect": 16725,
+                    "FAnalyzr": 16885
+                };
+                
+                // Calculate total views
+                const total = Object.values(mockViews).reduce((sum, views) => sum + views, 0);
+                
+                setAppViews(mockViews);
+                setTotalViews(total);
+                
+            } catch (error) {
+                console.error('Error fetching app views:', error);
+                setAppViews({});
+                setTotalViews(0);
+            } finally {
+                setLoadingViews(false);
+            }
+        };
+        
+        fetchAppViews();
+    }, []);
+    
+    // All apps data WITHOUT views property
     const shinyApps = [
-               {
+        {
             id: 1,
             name: "FactorGuard",
             description: "A factor-retention decision tool for EFA",
             runUrl: "https://mudassiribrahim2026.shinyapps.io/FactorGuard/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FactorGuard.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/FactorGuard.png",
-            views: 0
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/FactorGuard.png"
         },
         {
             id: 2,
@@ -7441,8 +7811,7 @@ const ShinyAppsComponent = () => {
             description: "Tool for sample size calculation, power analysis, and descriptive statistics",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/CalcuStats/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png",
-            views: 16660
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png"
         },
         {
             id: 3,
@@ -7450,8 +7819,7 @@ const ShinyAppsComponent = () => {
             description: "Cochran-Armitage test for trend tool",
             runUrl: "https://newappstesting.shinyapps.io/CATrendAnalyzer/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CATrendAnalyzer.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png",
-            views: 7582
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png"
         },
         {
             id: 4,
@@ -7459,8 +7827,7 @@ const ShinyAppsComponent = () => {
             description: "ROC curve analysis and diagnostic test evaluation",
             runUrl: "https://mudassiribrahim30.shinyapps.io/ROC_CURVE/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ROC%20Curve%20Builder.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png",
-            views: 15996
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png"
         },
         {
             id: 5,
@@ -7468,8 +7835,7 @@ const ShinyAppsComponent = () => {
             description: "Convert datasets in CSV, Excel, Rdata, Stata, or SAS format into SPSS (.sav) files",
             runUrl: "https://newappstesting.shinyapps.io/Data2SPSS/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png",
-            views: 12834
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png"
         },
         {
             id: 6,
@@ -7477,8 +7843,7 @@ const ShinyAppsComponent = () => {
             description: "Mediation and moderation analysis tool for research studies",
             runUrl: "https://mudassiribrahim30.shinyapps.io/MedModr/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png",
-            views: 16042
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png"
         },
         {
             id: 7,
@@ -7486,8 +7851,7 @@ const ShinyAppsComponent = () => {
             description: "Epidemiological data analysis suite for public health research",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png",
-            views: 17080
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png"
         },
         {
             id: 8,
@@ -7495,8 +7859,7 @@ const ShinyAppsComponent = () => {
             description: "Publication-ready ggplot2 visualizations with customization",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/ggPubPlot/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png",
-            views: 14541
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png"
         },
         {
             id: 9,
@@ -7504,8 +7867,7 @@ const ShinyAppsComponent = () => {
             description: "Generate APA formatted tables for research papers and publications",
             runUrl: "https://newappstesting.shinyapps.io/APATableGenerator/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA%20logo.png",
-            views: 3317
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA%20logo.png"
         },
         {
             id: 10,
@@ -7513,8 +7875,7 @@ const ShinyAppsComponent = () => {
             description: "Systematic sampling tool for research studies with custom random start",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/SysSampler/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys%20Sampler.png",
-            views: 3594
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys%20Sampler.png"
         },
         {
             id: 11,
@@ -7522,8 +7883,7 @@ const ShinyAppsComponent = () => {
             description: "Cochran-Mantel-Haenszel analysis tool for stratified data",
             runUrl: "https://newappstesting.shinyapps.io/CMHAnalyzer/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png",
-            views: 6843
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png"
         },
         {
             id: 12,
@@ -7531,8 +7891,7 @@ const ShinyAppsComponent = () => {
             description: "Comprehensive data analysis software",
             runUrl: "https://newappstesting.shinyapps.io/NMTCDataLab/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/NMTC%20APP.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TNMTC.png",
-            views: 14391
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TNMTC.png"
         },
         {
             id: 13,
@@ -7540,8 +7899,7 @@ const ShinyAppsComponent = () => {
             description: "Pharmaceutical calculations for dosage",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png",
-            views: 15481
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png"
         },
         {
             id: 14,
@@ -7549,8 +7907,7 @@ const ShinyAppsComponent = () => {
             description: "Explore regression effects visually with interactive plots",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png",
-            views: 15369
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png"
         },
         {
             id: 15,
@@ -7558,8 +7915,7 @@ const ShinyAppsComponent = () => {
             description: "Data transformation and preprocessing tool for analytics",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/DataTransformR/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png",
-            views: 16847
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png"
         },
         {
             id: 16,
@@ -7567,8 +7923,7 @@ const ShinyAppsComponent = () => {
             description: "Data screening and cleaning tool with visualization",
             runUrl: "https://mudassiribrahim2025b.shinyapps.io/CleanMyData/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png",
-            views: 14654
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png"
         },
         {
             id: 17,
@@ -7576,8 +7931,7 @@ const ShinyAppsComponent = () => {
             description: "Kaplan-Meier survival plot generator for clinical studies",
             runUrl: "https://mudassiribrahim30.shinyapps.io/KMPlotGenie/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png",
-            views: 16863
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png"
         },
         {
             id: 18,
@@ -7585,8 +7939,7 @@ const ShinyAppsComponent = () => {
             description: "Custom Data Generator for Statistical Practice and Education",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png",
-            views: 15091
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png"
         },
         {
             id: 19,
@@ -7594,8 +7947,7 @@ const ShinyAppsComponent = () => {
             description: "Robust regression analysis for outlier-resistant modeling",
             runUrl: "https://mudassiribrahim2025.shinyapps.io/Robustregression/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png",
-            views: 15560
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png"
         },
         {
             id: 20,
@@ -7603,8 +7955,7 @@ const ShinyAppsComponent = () => {
             description: "Participant selection tool for research studies",
             runUrl: "https://mudassiribrahim30.shinyapps.io/Tagselect/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TagSelect.png",
-            views: 16706
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/TagSelect.png"
         },
         {
             id: 21,
@@ -7612,23 +7963,25 @@ const ShinyAppsComponent = () => {
             description: "Factor analysis and dimensionality reduction tool",
             runUrl: "https://mudassiribrahim30.shinyapps.io/fanalyzr/",
             codeUrl: "https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R",
-            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png",
-            views: 16867
+            imageUrl: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png"
         }
     ];
     
-    // Calculate total views automatically
-    const totalViews = shinyApps.reduce((sum, app) => sum + app.views, 0);
+    // Combine app data with views from mockViews
+    const appsWithViews = shinyApps.map(app => ({
+        ...app,
+        views: appViews[app.name] || 0
+    }));
     
     // Get top viewed apps for display
-    const topViewedApps = [...shinyApps]
+    const topViewedApps = [...appsWithViews]
         .sort((a, b) => b.views - a.views)
-        .slice(0, 8); // Get top 8 apps
+        .slice(0, 8);
     
     // Filter apps based on search
     const filteredApps = searchTerm.trim() === '' 
-        ? shinyApps 
-        : shinyApps.filter(app => 
+        ? appsWithViews 
+        : appsWithViews.filter(app => 
             app.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             app.description.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -7643,14 +7996,14 @@ const ShinyAppsComponent = () => {
                 </p>
             </div>
 
-            {/* Stats sections - Now includes total views */}
+            {/* Stats sections - Now uses totalViews from state */}
             <div className="apps-stats">
                 <div className="stat-card">
-                    <div className="stat-number">21</div>
+                    <div className="stat-number">{shinyApps.length}</div>
                     <div className="stat-label">Applications</div>
                 </div>
                 <div className="stat-card">
-                    <div className="stat-number">{totalViews.toLocaleString()}</div>
+                    <div className="stat-number">{loadingViews ? '...' : totalViews.toLocaleString()}</div>
                     <div className="stat-label">Total Views</div>
                 </div>
                 <div className="stat-card">
@@ -7662,7 +8015,7 @@ const ShinyAppsComponent = () => {
                     <div className="stat-label">For Research</div>
                 </div>
             </div>
-            
+
             <div className="shiny-featured">
                 <h3>Featured Application</h3>
                 <div className="featured-app">
@@ -7866,21 +8219,23 @@ const ShinyAppsComponent = () => {
                 </h3>
 
                 {/* Views Counter - Now calculates total automatically */}
-                <div className="views-counter-container">
-                    <div className="views-counter-card">
-                        <div className="views-counter-header">
-                            <div className="views-icon">
-                                <i className="fas fa-chart-line"></i>
+                          <div className="views-counter-container">
+                <div className="views-counter-card">
+                    <div className="views-counter-header">
+                        <div className="views-icon">
+                            <i className="fas fa-chart-line"></i>
+                        </div>
+                        <div className="total-views-container">
+                            <div className="total-views-label">Total Application Views (All {shinyApps.length} Apps)</div>
+                            <div className="total-views-number">
+                                {loadingViews ? 'Loading...' : totalViews.toLocaleString()}
                             </div>
-                            <div className="total-views-container">
-                                <div className="total-views-label">Total Application Views (All 21 Apps)</div>
-                                <div className="total-views-number">{totalViews.toLocaleString()}</div>
-                                <div className="total-views-update">
-                                    <i className="fas fa-sync-alt" style={{ marginRight: '5px' }}></i>
-                                    Automatically calculated from individual app views
-                                </div>
+                            <div className="total-views-update">
+                                <i className="fas fa-sync-alt" style={{ marginRight: '5px' }}></i>
+                                Calculated from individual app views
                             </div>
                         </div>
+                    </div>
                         
                         <div className="views-source">
                             <span>Views sourced from</span>
@@ -8749,7 +9104,7 @@ const categoryDescriptions = {
         fontWeight: '600',
         fontFamily: "'Open Sans', sans-serif"
     }}>
-        Share Feedback
+        Measure Your Academic Help-Seeking Behavior
     </h3>
     <p style={{
         color: 'rgba(255, 255, 255, 0.7)',
@@ -8758,11 +9113,11 @@ const categoryDescriptions = {
         marginBottom: '20px',
         fontFamily: "'Open Sans', sans-serif"
     }}>
-        Used any of my R Shiny apps? I'd love to hear your feedback or suggestions.
+        Curious about your academic help-seeking habits as a nursing student? Click below to complete the assessment on our website and learn more about your habits.
     </p>
     <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
         <a 
-            href="https://forms.gle/PZJtxtf9E3ZMnBYB9" 
+            href="https://ahsbq-ns.mudasiribrahim.com/" 
             target="_blank" 
             rel="noopener noreferrer" 
             style={{
@@ -8788,7 +9143,7 @@ const categoryDescriptions = {
                 e.target.style.boxShadow = 'none';
             }}>
             <i className="fas fa-pen"></i>
-            Submit Feedback
+            Go to Assessment
         </a>
         
         {/* NEW: Location Link */}
@@ -9109,5 +9464,871 @@ const categoryDescriptions = {
 
         ReactDOM.render(<AcademicPortfolio />, document.getElementById('root'));
     </script>
+    <script>
+// Floating Tally Form Tab with Auto-Open Feature
+class FloatingTallyFormTab {
+    constructor() {
+        this.hasInteracted = false;
+        this.autoPopupTimer = null;
+        this.secondsLeft = 15;
+        this.isFormOpen = false;
+        this.formClosedByUser = false;
+        this.autoOpenMode = false;
+        this.userInteractedWithForm = false;
+        
+        this.init();
+    }
+    
+    init() {
+        // Create the floating tab container
+        this.createFloatingTab();
+        
+        // Start the auto-open timer
+        this.startAutoOpenTimer();
+        
+        // Set up event listeners
+        this.setupEventListeners();
+    }
+    
+    createFloatingTab() {
+        // Create main floating tab container
+        this.floatingTab = document.createElement('div');
+        this.floatingTab.id = 'floating-tally-tab';
+        this.floatingTab.innerHTML = `
+            <!-- Floating button (always visible) -->
+            <div class="tally-floating-button" id="tally-floating-button">
+                <i class="fas fa-comment-alt"></i>
+                <div class="tally-notification-badge">15</div>
+                <div class="tally-tooltip">Quick Feedback Form<br><small>Form auto-opens on page load</small></div>
+            </div>
+        `;
+        
+        document.body.appendChild(this.floatingTab);
+        
+        // Add styles
+        this.addStyles();
+    }
+    
+    addStyles() {
+        const styles = `
+            #floating-tally-tab {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                z-index: 10001;
+                font-family: 'Open Sans', sans-serif;
+            }
+            
+            /* Floating button styles - BLUE COLOR matching Contact Me button */
+            .tally-floating-button {
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                cursor: pointer;
+                box-shadow: 0 4px 20px rgba(52, 152, 219, 0.4);
+                transition: all 0.3s ease;
+                position: relative;
+                z-index: 10002;
+            }
+            
+            .tally-floating-button:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 25px rgba(52, 152, 219, 0.6);
+            }
+            
+            .tally-floating-button .tally-notification-badge {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background-color: #2ecc71;
+                color: white;
+                font-size: 0.7rem;
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                animation: badgePulse 2s infinite;
+            }
+            
+            .tally-floating-button .tally-tooltip {
+                position: absolute;
+                right: 70px;
+                background: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 10px 15px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                opacity: 0;
+                transform: translateX(10px);
+                transition: all 0.3s ease;
+                pointer-events: none;
+                text-align: center;
+                z-index: 10003;
+            }
+            
+            .tally-floating-button .tally-tooltip small {
+                font-size: 0.7rem;
+                opacity: 0.8;
+                display: block;
+                margin-top: 3px;
+            }
+            
+            .tally-floating-button:hover .tally-tooltip {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            
+            /* Tally form overlay */
+            .tally-form-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .tally-form-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            /* Tally form container - ALWAYS WHITE even in dark mode */
+            .tally-form-container {
+                position: relative;
+                width: 90%;
+                max-width: 500px;
+                max-height: 80vh;
+                background: #ffffff !important; /* Force white background */
+                border-radius: 12px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                transform: translateY(20px) scale(0.95);
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                overflow: hidden;
+            }
+            
+            .tally-form-overlay.active .tally-form-container {
+                transform: translateY(0) scale(1);
+            }
+            
+            /* Override dark mode for form container */
+            body.dark-mode .tally-form-container {
+                background: #ffffff !important; /* Force white in dark mode */
+                border: 2px solid rgba(52, 152, 219, 0.3); /* Add blue border for visibility */
+            }
+            
+            /* Form header - BLUE COLOR matching button */
+            .tally-form-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                color: white;
+                position: relative;
+            }
+            
+            .tally-form-header h3 {
+                margin: 0;
+                font-size: 1.2rem;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .tally-form-close {
+                background: rgba(255, 255, 255, 0.2);
+                border: none;
+                color: white;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 1rem;
+            }
+            
+            .tally-form-close:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: rotate(90deg);
+            }
+            
+            /* Timer indicator - only shown in auto-open mode */
+            .tally-timer-indicator {
+                height: 4px;
+                background: #e0e0e0;
+                width: 100%;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .tally-timer-progress {
+                height: 100%;
+                background: linear-gradient(90deg, #3498db, #2ecc71);
+                width: 100%;
+                transition: width 1s linear;
+            }
+            
+            /* Timer mode indicator */
+            .timer-mode-indicator {
+                font-size: 0.75rem;
+                opacity: 0.9;
+                margin-left: 10px;
+                font-weight: 500;
+                background: rgba(255, 255, 255, 0.2);
+                padding: 2px 8px;
+                border-radius: 12px;
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+            }
+            
+            .timer-mode-indicator.manual-mode {
+                background: rgba(46, 204, 113, 0.3);
+            }
+            
+            /* Tally iframe container - ALWAYS WHITE BACKGROUND for form */
+            .tally-iframe-container {
+                width: 100%;
+                height: 450px;
+                overflow: hidden;
+                background: #ffffff !important; /* Force white background for form */
+                position: relative;
+            }
+            
+            .tally-iframe-container iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+                display: block;
+            }
+            
+            /* Override dark mode for iframe container */
+            body.dark-mode .tally-iframe-container {
+                background: #ffffff !important; /* Force white in dark mode */
+            }
+            
+            /* Interactive overlay to detect clicks inside iframe */
+            .iframe-interactive-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                cursor: default;
+            }
+            
+            /* Form subtitle */
+            .form-subtitle {
+                font-size: 0.9rem;
+                opacity: 0.9;
+                margin-top: 5px;
+                font-weight: 400;
+                color: white;
+            }
+            
+            /* Ensure text inside form container is dark for readability on white background */
+            .tally-form-container *:not(.tally-form-header):not(.tally-form-header *):not(.tally-form-close):not(.tally-form-close *) {
+                color: #333333 !important;
+            }
+            
+            /* Animation for notification badge */
+            @keyframes badgePulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.2); }
+            }
+            
+            /* Slide in animation for button */
+            @keyframes slideInFromBottom {
+                from {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+            
+            .tally-floating-button {
+                animation: slideInFromBottom 0.5s ease-out 0.5s both;
+            }
+            
+            /* Mobile responsiveness */
+            @media (max-width: 768px) {
+                #floating-tally-tab {
+                    bottom: 20px;
+                    right: 20px;
+                }
+                
+                .tally-floating-button {
+                    width: 55px;
+                    height: 55px;
+                    font-size: 1.3rem;
+                }
+                
+                .tally-form-container {
+                    width: 95%;
+                    margin: 10px;
+                }
+                
+                .tally-iframe-container {
+                    height: 400px;
+                }
+                
+                .tally-form-header h3 {
+                    font-size: 1.1rem;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                #floating-tally-tab {
+                    bottom: 15px;
+                    right: 15px;
+                }
+                
+                .tally-floating-button {
+                    width: 50px;
+                    height: 50px;
+                    font-size: 1.2rem;
+                }
+                
+                .tally-form-container {
+                    width: 100%;
+                    height: 100%;
+                    max-height: 100vh;
+                    border-radius: 0;
+                    margin: 0;
+                }
+                
+                .tally-form-overlay {
+                    padding: 0;
+                }
+                
+                .tally-iframe-container {
+                    height: calc(100vh - 70px);
+                }
+                
+                .tally-form-header {
+                    padding: 12px 15px;
+                }
+                
+                .tally-form-header h3 {
+                    font-size: 1rem;
+                }
+            }
+            
+            /* Ensure Tally form loads with white theme */
+            .tally-form-overlay {
+                /* Add these to ensure Tally form sees white background */
+                --tally-background: #ffffff !important;
+                --tally-text-color: #333333 !important;
+            }
+            
+            /* Force white theme for Tally iframe */
+            #tally-iframe {
+                background: #ffffff !important;
+            }
+        `;
+        
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = styles;
+        document.head.appendChild(styleSheet);
+    }
+    
+    startAutoOpenTimer() {
+        // Wait for page to load completely
+        window.addEventListener('load', () => {
+            // Wait 1.5 seconds after page load, then auto-open
+            setTimeout(() => {
+                if (!this.formClosedByUser) {
+                    this.autoOpenMode = true;
+                    this.openTallyForm();
+                    this.startCountdown();
+                }
+            }, 1500);
+        });
+    }
+    
+    startCountdown() {
+        // Only start countdown in auto-open mode
+        if (!this.autoOpenMode) return;
+        
+        const badge = this.floatingTab.querySelector('.tally-notification-badge');
+        const timerProgress = this.floatingTab.querySelector('.tally-timer-progress');
+        const timerModeIndicator = this.floatingTab.querySelector('.timer-mode-indicator');
+        
+        this.secondsLeft = 15;
+        
+        // Update timer display
+        if (timerModeIndicator) {
+            timerModeIndicator.textContent = `⏱️ Auto-closes in ${this.secondsLeft}s`;
+            timerModeIndicator.classList.remove('manual-mode');
+        }
+        
+        this.autoPopupTimer = setInterval(() => {
+            // Stop timer if user has interacted with form
+            if (this.userInteractedWithForm) {
+                clearInterval(this.autoPopupTimer);
+                
+                // Update indicator to manual mode
+                if (timerModeIndicator) {
+                    timerModeIndicator.textContent = '✓ Manual close';
+                    timerModeIndicator.classList.add('manual-mode');
+                }
+                
+                // Hide timer progress bar
+                const timerIndicator = this.floatingTab.querySelector('.tally-timer-indicator');
+                if (timerIndicator) {
+                    timerIndicator.style.opacity = '0.5';
+                    timerIndicator.style.height = '2px';
+                }
+                
+                // Update badge
+                if (badge) {
+                    badge.innerHTML = '✓';
+                    badge.style.backgroundColor = '#2ecc71';
+                    badge.style.animation = 'none';
+                }
+                
+                return;
+            }
+            
+            this.secondsLeft--;
+            
+            // Update badge
+            if (badge) {
+                badge.textContent = this.secondsLeft;
+                
+                // Update badge color as time runs out
+                if (this.secondsLeft <= 5) {
+                    badge.style.backgroundColor = '#e74c3c';
+                    badge.style.animation = 'badgePulse 0.5s infinite';
+                } else if (this.secondsLeft <= 10) {
+                    badge.style.backgroundColor = '#f39c12';
+                }
+            }
+            
+            // Update timer progress
+            if (timerProgress) {
+                const progressPercent = (this.secondsLeft / 15) * 100;
+                timerProgress.style.width = `${progressPercent}%`;
+                
+                // Change progress bar color as time runs out
+                if (this.secondsLeft <= 5) {
+                    timerProgress.style.background = 'linear-gradient(90deg, #e74c3c, #c0392b)';
+                } else if (this.secondsLeft <= 10) {
+                    timerProgress.style.background = 'linear-gradient(90deg, #f39c12, #e67e22)';
+                }
+            }
+            
+            // Update timer text
+            if (timerModeIndicator) {
+                timerModeIndicator.textContent = `⏱️ Auto-closes in ${this.secondsLeft}s`;
+            }
+            
+            // Auto-close when time is up
+            if (this.secondsLeft <= 0) {
+                this.closeTallyForm();
+                clearInterval(this.autoPopupTimer);
+                
+                // Update badge
+                if (badge) {
+                    badge.innerHTML = '<i class="fas fa-redo"></i>';
+                    badge.style.backgroundColor = '#3498db';
+                    badge.style.animation = 'none';
+                    badge.title = 'Click to reopen form';
+                    
+                    // Reset after 3 seconds
+                    setTimeout(() => {
+                        badge.textContent = '✓';
+                        badge.style.backgroundColor = '#2ecc71';
+                    }, 3000);
+                }
+                
+                // Update tooltip
+                const tooltip = this.floatingTab.querySelector('.tally-tooltip');
+                if (tooltip) {
+                    tooltip.innerHTML = 'Quick Feedback Form<br><small>Click to reopen the form</small>';
+                }
+            }
+        }, 1000);
+    }
+    
+    openTallyForm() {
+        if (this.isFormOpen) return;
+        
+        // Reset interaction tracking
+        this.userInteractedWithForm = false;
+        
+        // Create overlay and form container
+        this.createFormOverlay();
+        
+        // Load Tally form
+        this.loadTallyForm();
+        
+        // Mark as open
+        this.isFormOpen = true;
+        this.hasInteracted = true;
+        
+        // Update button appearance
+        const floatingButton = this.floatingTab.querySelector('.tally-floating-button');
+        floatingButton.style.transform = 'scale(1.1)';
+        floatingButton.style.boxShadow = '0 6px 25px rgba(52, 152, 219, 0.6)';
+        
+        // Update tooltip
+        const tooltip = this.floatingTab.querySelector('.tally-tooltip');
+        if (tooltip) {
+            if (this.autoOpenMode) {
+                tooltip.innerHTML = 'Quick Feedback Form<br><small>Form auto-opened - 15s timer active</small>';
+            } else {
+                tooltip.innerHTML = 'Quick Feedback Form<br><small>Form opened manually</small>';
+            }
+        }
+    }
+    
+    createFormOverlay() {
+        // Remove existing overlay if any
+        const existingOverlay = document.querySelector('.tally-form-overlay');
+        if (existingOverlay) {
+            existingOverlay.remove();
+        }
+        
+        // Determine header content based on mode
+        let timerIndicatorHtml = '';
+        if (this.autoOpenMode) {
+            timerIndicatorHtml = `<span class="timer-mode-indicator">⏱️ Auto-closes in 15s</span>`;
+        } else {
+            timerIndicatorHtml = `<span class="timer-mode-indicator manual-mode">✓ Manual close</span>`;
+        }
+        
+        // Create new overlay with proper title
+        const overlay = document.createElement('div');
+        overlay.className = 'tally-form-overlay';
+        overlay.innerHTML = `
+            <div class="tally-form-container">
+                <div class="tally-form-header">
+                    <div style="flex: 1;">
+                        <h3>
+                            <i class="fas fa-comment-dots"></i>
+                            Quick Feedback Form
+                            ${timerIndicatorHtml}
+                        </h3>
+                        <div class="form-subtitle">Share your feedback or suggestions</div>
+                    </div>
+                    <button class="tally-form-close" id="tally-form-close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                ${this.autoOpenMode ? '<div class="tally-timer-indicator"><div class="tally-timer-progress" style="width: 100%"></div></div>' : ''}
+                <div class="tally-iframe-container" id="tally-iframe-container">
+                    <!-- Interactive overlay to detect clicks -->
+                    <div class="iframe-interactive-overlay" id="iframe-interactive-overlay"></div>
+                    <!-- Tally form will be loaded here -->
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(overlay);
+        
+        // Show overlay with animation
+        setTimeout(() => {
+            overlay.classList.add('active');
+        }, 10);
+        
+        // Store reference
+        this.overlay = overlay;
+    }
+    
+    loadTallyForm() {
+        const iframeContainer = document.getElementById('tally-iframe-container');
+        if (!iframeContainer) return;
+        
+        // Create iframe with your Tally form - force white theme
+        const iframe = document.createElement('iframe');
+        // Add transparentBackground=1 and theme=light to ensure white background
+        iframe.src = 'https://tally.so/embed/lbrlWB?alignLeft=1&transparentBackground=1&theme=light';
+        iframe.title = 'Quick Feedback Form';
+        iframe.allowTransparency = true;
+        iframe.id = 'tally-iframe';
+        
+        // Clear and append iframe
+        iframeContainer.innerHTML = '';
+        iframeContainer.appendChild(iframe);
+        
+        // Add interactive overlay
+        const interactiveOverlay = document.createElement('div');
+        interactiveOverlay.className = 'iframe-interactive-overlay';
+        interactiveOverlay.id = 'iframe-interactive-overlay';
+        iframeContainer.appendChild(interactiveOverlay);
+        
+        // Set up click detection on the overlay
+        setTimeout(() => {
+            this.setupFormInteractionDetection();
+        }, 1000); // Wait for iframe to load
+        
+        // Load Tally script if not already loaded
+        if (!window.Tally) {
+            const script = document.createElement('script');
+            script.src = 'https://tally.so/widgets/embed.js';
+            script.async = true;
+            document.head.appendChild(script);
+        }
+    }
+    
+    setupFormInteractionDetection() {
+        const interactiveOverlay = document.getElementById('iframe-interactive-overlay');
+        const iframe = document.getElementById('tally-iframe');
+        
+        if (!interactiveOverlay || !iframe) return;
+        
+        // Remove overlay after a short delay to allow clicks to pass through
+        setTimeout(() => {
+            if (interactiveOverlay && interactiveOverlay.parentNode) {
+                interactiveOverlay.style.pointerEvents = 'none';
+            }
+        }, 1000);
+        
+        // Track clicks on the overlay (initial protection layer)
+        interactiveOverlay.addEventListener('click', () => {
+            this.handleFormInteraction();
+        });
+        
+        // Track clicks on the form container (fallback)
+        const formContainer = document.querySelector('.tally-form-container');
+        if (formContainer) {
+            formContainer.addEventListener('click', (e) => {
+                // Only track clicks inside the iframe area
+                const iframeContainer = document.querySelector('.tally-iframe-container');
+                if (iframeContainer && iframeContainer.contains(e.target)) {
+                    this.handleFormInteraction();
+                }
+            });
+        }
+        
+        // Track focus events on the iframe
+        iframe.addEventListener('load', () => {
+            try {
+                // Try to access iframe content to set up event listeners
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                // Track focus events
+                iframeDoc.addEventListener('focusin', () => {
+                    this.handleFormInteraction();
+                });
+                
+                // Track clicks inside iframe
+                iframeDoc.addEventListener('click', () => {
+                    this.handleFormInteraction();
+                });
+                
+                // Track keyboard interactions
+                iframeDoc.addEventListener('keydown', () => {
+                    this.handleFormInteraction();
+                });
+            } catch (e) {
+                // Cross-origin restrictions may prevent this, but we have other methods
+                console.log('Form interaction tracking enabled');
+            }
+        });
+        
+        // Track mouse enter on iframe container
+        const iframeContainer = document.querySelector('.tally-iframe-container');
+        if (iframeContainer) {
+            iframeContainer.addEventListener('mouseenter', () => {
+                // Mark interaction if mouse enters the form area (user is likely to interact)
+                setTimeout(() => {
+                    this.handleFormInteraction();
+                }, 500);
+            });
+        }
+    }
+    
+    handleFormInteraction() {
+        // Only relevant for auto-open mode with timer
+        if (!this.autoOpenMode || this.userInteractedWithForm) return;
+        
+        this.userInteractedWithForm = true;
+        
+        // Stop the auto-close timer
+        if (this.autoPopupTimer) {
+            clearInterval(this.autoPopupTimer);
+        }
+        
+        // Update UI to show manual mode
+        const timerModeIndicator = document.querySelector('.timer-mode-indicator');
+        if (timerModeIndicator) {
+            timerModeIndicator.textContent = '✓ Manual close';
+            timerModeIndicator.classList.add('manual-mode');
+        }
+        
+        // Update timer progress bar
+        const timerIndicator = document.querySelector('.tally-timer-indicator');
+        if (timerIndicator) {
+            timerIndicator.style.opacity = '0.5';
+            timerIndicator.style.height = '2px';
+        }
+        
+        // Update badge
+        const badge = this.floatingTab.querySelector('.tally-notification-badge');
+        if (badge) {
+            badge.innerHTML = '✓';
+            badge.style.backgroundColor = '#2ecc71';
+            badge.style.animation = 'none';
+        }
+        
+        // Update tooltip
+        const tooltip = this.floatingTab.querySelector('.tally-tooltip');
+        if (tooltip) {
+            tooltip.innerHTML = 'Quick Feedback Form<br><small>Manual close required</small>';
+        }
+    }
+    
+    closeTallyForm() {
+        if (!this.isFormOpen) return;
+        
+        const overlay = this.overlay;
+        if (overlay) {
+            overlay.classList.remove('active');
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (overlay.parentNode) {
+                    overlay.remove();
+                }
+            }, 300);
+        }
+        
+        this.isFormOpen = false;
+        
+        // Reset button appearance
+        const floatingButton = this.floatingTab.querySelector('.tally-floating-button');
+        if (floatingButton) {
+            floatingButton.style.transform = 'scale(1)';
+            floatingButton.style.boxShadow = '0 4px 20px rgba(52, 152, 219, 0.4)';
+        }
+        
+        // Clear timer
+        if (this.autoPopupTimer) {
+            clearInterval(this.autoPopupTimer);
+        }
+        
+        // Mark as closed by auto-timer (not user)
+        if (this.secondsLeft <= 0) {
+            this.formClosedByUser = false;
+        }
+        
+        // Reset auto-open mode for next opening
+        this.autoOpenMode = false;
+        this.userInteractedWithForm = false;
+    }
+    
+    setupEventListeners() {
+        const floatingButton = this.floatingTab.querySelector('.tally-floating-button');
+        
+        // Open form on button click (manual open - no timer)
+        floatingButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            if (this.isFormOpen) {
+                this.closeTallyForm();
+                this.formClosedByUser = true;
+            } else {
+                // Manual open - no auto-close timer
+                this.autoOpenMode = false;
+                this.openTallyForm();
+                this.formClosedByUser = false;
+            }
+        });
+        
+        // Close form when clicking overlay (outside form)
+        document.addEventListener('click', (e) => {
+            const overlay = this.overlay;
+            if (this.isFormOpen && overlay && e.target === overlay) {
+                this.closeTallyForm();
+                this.formClosedByUser = true;
+            }
+        });
+        
+        // Close form on escape key
+        document.addEventListener('keydown', (e) => {
+            if (this.isFormOpen && e.key === 'Escape') {
+                this.closeTallyForm();
+                this.formClosedByUser = true;
+            }
+        });
+        
+        // Handle form close button (delegated since it's dynamically created)
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('#tally-form-close-btn')) {
+                this.closeTallyForm();
+                this.formClosedByUser = true;
+            }
+        });
+        
+        // Listen for form submissions
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'tally.formSubmitted') {
+                // Form was submitted
+                this.closeTallyForm();
+                
+                // Update badge to show success
+                const badge = this.floatingTab.querySelector('.tally-notification-badge');
+                if (badge) {
+                    badge.innerHTML = '<i class="fas fa-check"></i>';
+                    badge.style.backgroundColor = '#2ecc71';
+                    badge.style.animation = 'none';
+                    
+                    // Keep checkmark for 5 seconds
+                    setTimeout(() => {
+                        badge.textContent = '✓';
+                        badge.title = 'Form submitted successfully';
+                    }, 5000);
+                }
+                
+                // Update tooltip
+                const tooltip = this.floatingTab.querySelector('.tally-tooltip');
+                if (tooltip) {
+                    tooltip.innerHTML = 'Quick Feedback Form<br><small>Thank you for your feedback!</small>';
+                }
+            }
+        });
+    }
+}
+
+// Initialize the floating Tally form tab when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Remove any existing Tally floating button
+    const existingButton = document.querySelector('.tally-floating-button');
+    if (existingButton && existingButton.parentNode) {
+        existingButton.parentNode.remove();
+    }
+    
+    // Create new floating tab
+    new FloatingTallyFormTab();
+});
+</script>
 </body>
 </html>
