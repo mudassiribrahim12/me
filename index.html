@@ -9002,15 +9002,6 @@ const categoryDescriptions = {
 
 
 </div>
-                    
-                    {/* Back to Top Button */}
-        <div 
-            className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
-            onClick={scrollToTop}
-            title="Back to Top"
-        >
-            <i className="fas fa-chevron-up"></i>
-        </div>
         
 {/* Footer */}
 <footer style={{
@@ -9165,40 +9156,76 @@ const categoryDescriptions = {
         </a>
         
         {/* NEW: Location Link */}
-        <a 
-            href="https://www.google.com/maps/place/Tamale,+Northern+Region,+Ghana"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: 'rgba(255, 255, 255, 0.1)',
-                color: 'white',
-                padding: '10px 20px',
-                borderRadius: '25px',
-                textDecoration: 'none',
-                fontWeight: '600',
-                fontSize: '0.9rem',
-                transition: 'all 0.3s ease',
-                fontFamily: "'Open Sans', sans-serif",
-                border: '1px solid rgba(255, 255, 255, 0.2)'
-            }}
-            onMouseOver={(e) => {
-                e.target.style.background = 'rgba(255, 255, 255, 0.15)';
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 4px 12px rgba(255, 255, 255, 0.1)';
-                e.target.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-            }}
-            onMouseOut={(e) => {
-                e.target.style.background = 'rgba(255, 255, 255, 0.1)';
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = 'none';
-                e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-            }}>
-            <i className="fas fa-map-marker-alt"></i>
-            View My Location
-        </a>
+     <a 
+    href="https://www.google.com/maps/place/Tamale,+Northern+Region,+Ghana"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '8px',
+        background: 'rgba(255, 255, 255, 0.1)',
+        color: 'white',
+        padding: '10px 20px',
+        borderRadius: '25px',
+        textDecoration: 'none',
+        fontWeight: '600',
+        fontSize: '0.9rem',
+        transition: 'all 0.3s ease',
+        fontFamily: "'Open Sans', sans-serif",
+        border: '1px solid rgba(255, 255, 255, 0.2)'
+    }}
+    onMouseOver={(e) => {
+        e.target.style.background = 'rgba(255, 255, 255, 0.15)';
+        e.target.style.transform = 'translateY(-2px)';
+        e.target.style.boxShadow = '0 4px 12px rgba(255, 255, 255, 0.1)';
+        e.target.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+    }}
+    onMouseOut={(e) => {
+        e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+        e.target.style.transform = 'translateY(0)';
+        e.target.style.boxShadow = 'none';
+        e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+    }}>
+    <i className="fas fa-map-marker-alt"></i>
+    View My Location
+</a>
+
+{/* NEW: Other HTML Web Apps Button - WITH BLUE COLOR */}
+<a 
+    href="https://apps.mudasiribrahim.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '8px',
+        background: '#3498db',  /* Changed to solid blue */
+        color: 'white',
+        padding: '10px 20px',
+        borderRadius: '25px',
+        textDecoration: 'none',
+        fontWeight: '600',
+        fontSize: '0.9rem',
+        transition: 'all 0.3s ease',
+        fontFamily: "'Open Sans', sans-serif",
+        border: '1px solid #2980b9'  /* Changed to darker blue border */
+    }}
+    onMouseOver={(e) => {
+        e.target.style.background = '#2980b9';  /* Darker blue on hover */
+        e.target.style.transform = 'translateY(-2px)';
+        e.target.style.boxShadow = '0 4px 12px rgba(52, 152, 219, 0.3)';
+        e.target.style.borderColor = '#1c6ea4';
+    }}
+    onMouseOut={(e) => {
+        e.target.style.background = '#3498db';
+        e.target.style.transform = 'translateY(0)';
+        e.target.style.boxShadow = 'none';
+        e.target.style.borderColor = '#2980b9';
+    }}>
+    <i className="fas fa-code"></i>
+    Other HTML Web Apps
+</a>
     </div>
 </div>
 </div>
