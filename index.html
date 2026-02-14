@@ -1929,6 +1929,58 @@ body.dark-mode .profile-social-icon[title="GitHub"]:hover {
             color: var(--text-color);
             border: 1px solid var(--border-color);
         }
+        
+        /* Target ONLY DOI links - they will stay blue regardless of click/visit status */
+a[href*="doi.org"],
+a[href*="dx.doi"],
+a[href*="doi/"],
+.publication-doi a,
+.publication-list a[href*="10."],
+.publication-list a[href*="doi"] {
+    color: #3498db !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+
+/* Keep the same blue for all states (link, visited, hover, active) */
+a[href*="doi.org"]:link,
+a[href*="doi.org"]:visited,
+a[href*="doi.org"]:hover,
+a[href*="doi.org"]:active,
+a[href*="dx.doi"]:link,
+a[href*="dx.doi"]:visited,
+a[href*="dx.doi"]:hover,
+a[href*="dx.doi"]:active,
+.publication-doi a:link,
+.publication-doi a:visited,
+.publication-doi a:hover,
+.publication-doi a:active,
+.publication-list a[href*="10."]:link,
+.publication-list a[href*="10."]:visited,
+.publication-list a[href*="10."]:hover,
+.publication-list a[href*="10."]:active {
+    color: #3498db !important; /* Stay blue */
+}
+
+/* Only change on hover (slightly darker blue) */
+a[href*="doi.org"]:hover,
+a[href*="dx.doi"]:hover,
+.publication-doi a:hover,
+.publication-list a[href*="10."]:hover {
+    color: #2980b9 !important;
+    border-bottom: 1px solid #2980b9;
+}
+
+/* Ensure no purple color appears for visited DOIs */
+a[href*="doi.org"]:visited,
+a[href*="dx.doi"]:visited,
+.publication-doi a:visited,
+.publication-list a[href*="10."]:visited {
+    color: #3498db !important; /* Still blue, not purple */
+    opacity: 1;
+}
 
         /* Publication Styles */
         .publication-year-header {
